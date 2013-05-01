@@ -1,5 +1,5 @@
 
-Domeo Web Annotation Tool](http://www.annotationframework.org/) 
+[Domeo Web Annotation Tool](http://www.annotationframework.org/) 
 ================================================================
 
 This is the GWT annotator component of the Domeo Web Annotation
