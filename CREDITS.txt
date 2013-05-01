@@ -1,0 +1,55 @@
+Code
+----
+The Domeo code as on July 9th 2012 has been written by 
+Dr. Paolo Ciccarese http://paolo.ciccarese.info
+
+Icons
+-----
+favicon.ico - Author Paolo Ciccarese 
+domeo16x16.png - Author Paolo Ciccarese
+settings24x24 - http://iconlet.com/info/27724_24-settings-blue_24x24
+user-bw24x24 - http://iconlet.com/info/80732_kuser_24x24
+plugins24x24.png - http://iconlet.com/info/80752_blockdevice_24x24
+user-color24x24.png - http://iconlet.com/info/14203_user_male_22x22
+preferences24x24.png - http://iconlet.com/info/76910_gnome-settings_24x24
+question48x48.png - http://iconlet.com/info/78623_gtk-dialog-question_48x48
+export16x16.gif - http://iconlet.com/info/20919_export_wiz_16x16
+send16x16.png - http://iconlet.com/info/34589_send_16x16
+check16x16.png - http://iconlet.com/info/27696_16-em-check_16x16
+add16x16.png - http://iconlet.com/info/8299_add_16x16
+plugins16x16.gif - http://iconlet.com/info/19129_plugins_16x16
+left-arrow16x16.png - http://iconlet.com/info/34699_1leftarrow_16x16
+show16x16.png - http://iconlet.com/info/33787_amarok_search_16x16
+little_delete.gif - http://iconlet.com/info/19672_delete_edit_16x16
+link16x16 - http://iconlet.com/info/17079_convertlinks_wiz_16x16
+world16x16.png - http://www.freeiconsweb.com/Free-Downloads.asp?id=1431
+personal16x16.png - http://iconlet.com/info/6974_personal_16x16
+group16x16.png - http://iconlet.com/info/7184_kuser_16x16
+lock16x16.png - http://iconlet.com/info/27527_16-security-lock_16x16
+custom16x16.png - http://iconlet.com/info/71601_kuser_16x16
+save16x16.png - http://iconlet.com/info/34833_amarok_save_16x16
+link16x16.gif - http://iconlet.com/info/20009_link_obj_16x16
+squareadd16x16blue.png - http://iconlet.com/info/95594_add-document_16x17
+computer16x16.png - http://iconlet.com/info/3988_computer_16x16
+text16x16.gif - http://iconlet.com/info/21106_text_16x16
+text16x16.png - http://iconlet.com/info/12531_text_left_16x16
+image16x16.png - http://iconlet.com/info/91530_image_16x16
+clip24x24.png - http://www.iconlet.com/info/94339_clip_32x32
+pen - http://www.iconlet.com/info/62950_pencil_16x16
+clear - http://www.iconlet.com/info/16705_clear_16x16
+import16x16.gif - http://www.iconlet.com/info/20931_import_wiz_16x16
+browse16x16.png - http://iconlet.com/info/83867_icontexto-search-10_16x16
+external16x16 - http://www.iconlet.com/info/88655_external_16x16
+comment16x16.png - http://www.iconlet.com/info/27665_16-comment_16x16
+add16x16.png - http://www.iconlet.com/info/27847_16-square-blue-add_16x16
+zoom16x16.gif - http://www.iconlet.com/info/87241_magnifier-zoom-in_16x16
+users-color16x16.png - http://iconlet.com/info/89174_users_16x16
+little_trash16x16.png - http://www.iconlet.com/info/12772_14_layer_deletelayer_16x16
+book_add16x16.png - http://www.iconlet.com/info/92052_address-book--plus_16x16
+task_add16x16.gif - http://www.iconlet.com/info/19459_addtsk_tsk_16x16
+warning16x16.png - http://iconlet.com/info/50833_messagebox_warning_16x16
+comments_add16x16.png - http://iconlet.com/info/8836_comments_add_16x16
+comment_add16x16.png - http://iconlet.com/info/8900_comment_add_16x16
+arrow-split16x16.png - http://iconlet.com/info/91049_arrow-split_16x16
+arrow-right.gif - http://iconlet.com/info/61828_arrow-right_16x16
+tag-blue.png - http://iconlet.com/info/8091_tag_blue_16x16

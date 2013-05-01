@@ -1,0 +1,67 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+	.outer {
+	    padding-left: 4px;
+	    padding-top: 2px;
+	    padding-bottom:16px;
+	    height: 450px;	
+	    font-size: 11px;
+	}
+	
+  	.close {
+		cursor: pointer;
+    	cursor: hand;
+  	}
+  	
+  	.tab { 
+  		height: 100%;
+        cursor: pointer;
+        text-shadow: rgba(255, 255, 255, 1) 0 1px 1px;
+        font-size: 1em;
+        font-weight: bold;
+        color: #000;
+        vertical-align: middle;
+    }
+    
+    .inner {
+    	border: solid 1px #ddd;
+    	height:410px;	
+		width: 100%;
+    }
+  	
+  	.tabToolsPanel {}
+  	
+  	.tabLayoutPanel {
+  		height:430px;		
+  	}
+  	
+  	.itemPanelContainer {
+  		padding: 5px;
+  	}
+  	
+  	.itemPanel {
+  		width: 260px;
+  		padding-bottom: 4px;
+  	}
+  	
+  	.itemLabel {
+  		display: inline;	
+  		padding-right: 10px;
+  		padding-left: 4px;
+  	}
+  	
+  	.itemContent {
+  		display: inline;
+  		text-align: right;	
+  	}
+  	
+</ui:style>
+
+	<g:FlowPanel styleName='{style.inner}'>
+		<g:FlowPanel ui:field='pluginsPanel' styleName='{style.itemPanelContainer}'>
+		</g:FlowPanel>
+	</g:FlowPanel>
+</ui:UiBinder>

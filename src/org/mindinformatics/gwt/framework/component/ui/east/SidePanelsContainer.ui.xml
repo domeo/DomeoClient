@@ -1,0 +1,50 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:c='urn:import:com.google.gwt.canvas.client'>
+
+	<ui:style>
+		.outer {
+		
+			width: 15px;
+			height: 100%;
+		}
+		
+		.contentPanel {
+			height: 100%;
+		}
+		
+		.sidebarPlaceholder {
+			width: 14px;
+			height: 100%;
+			background-color: #eee;	
+			border-left: 1px solid #ddd;
+			/*
+			height: 158px;
+			
+			background-color: red;	
+			*/
+		}
+		
+		.heatmap {
+			width: 100%;
+			min-width: 20px;
+			background-color: #fff;
+			padding: 0px;
+			height: 100%
+		}
+		
+	</ui:style>
+
+  	<g:HorizontalPanel ui:field='sidePanel' styleName='{style.outer}'>
+  		<g:cell>
+  			<g:VerticalPanel ui:field='contentPanel' styleName='{style.contentPanel}'/> 
+  		</g:cell>
+  		<g:cell>
+  			<g:SimplePanel styleName='{style.sidebarPlaceholder}'/>
+  		</g:cell>
+  		<g:cell width="20px">
+		  	<g:SimplePanel ui:field='heatMap' styleName='{style.heatmap}'/>
+	  	</g:cell>
+  	</g:HorizontalPanel>
+</ui:UiBinder>

@@ -1,0 +1,26 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.editableLabel {
+			cursor: pointer;
+			cursor: hand;
+			width: 98%;
+		}
+		
+		.deckPanel {
+			width: 98%;	
+		}
+		
+		.editableBox {
+			height: 26px;
+			padding: 0px;
+		}
+	</ui:style>
+	<g:FocusPanel ui:field="focusPanel">
+		<g:DeckPanel styleName="{style.deckPanel}"  ui:field="deckPanel">
+			<g:Label styleName="{style.editableLabel}" ui:field="editLabel" />
+			<g:TextArea styleName="{style.editableBox}" ui:field="editBox" />
+		</g:DeckPanel>
+	</g:FocusPanel>
+</ui:UiBinder>

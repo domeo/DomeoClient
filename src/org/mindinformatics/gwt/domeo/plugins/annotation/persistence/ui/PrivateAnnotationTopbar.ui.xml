@@ -1,0 +1,20 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style>	
+		.body {
+			width: 100%;
+			padding: 0px;
+			border: 1px solid #fff;
+		}
+	</ui:style>
+	
+	<ui:with field='res' type='org.mindinformatics.gwt.domeo.client.Resources'/>
+	
+	<g:HorizontalPanel styleName='{style.body}' ui:field='body'>
+		<g:CheckBox ui:field='selectAll'>Select All</g:CheckBox>
+	</g:HorizontalPanel>
+
+</ui:UiBinder>

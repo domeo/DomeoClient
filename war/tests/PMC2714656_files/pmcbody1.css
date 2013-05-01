@@ -1,0 +1,156 @@
+/* $Id: pmcbody1.css,v 1.26 2011/01/11 15:14:12 lebedand Exp $ */
+
+.fm-vol-iss-date, .fm-citation, .fm-permissions
+{font-size: 85%;
+text-align: left}
+
+.fm-citation-ids
+{font-size: 85%;}
+
+.fm-citation  .fm-vol-iss-date
+{font-size: 100%;}
+
+.pubnote
+{font-size: 90%;
+font-weight: bold}
+
+.pubnote-hilite
+{background-color: #ebebeb;
+font-size: 85%}
+
+.fm-dochead
+{font-size: 90%;
+font-weight: bold}
+
+.fm-doctopic, .fm-docsubject
+{font-size: 90%}
+
+.fm-ser-title, .fm-supp-title
+{font-size: 90%;
+font-weight: bold}
+
+.fm-title
+{font-size: 125%;
+font-weight: bold}
+
+.fm-subtitle
+{font-weight: bold}
+
+.fm-trans-title
+{font-size: 120%;}
+
+.fm-trans-subtitle
+{font-size: 105%;}
+
+.fm-author
+{font-size: 110%;}
+
+
+/* 'fm-role' is embedded in an 'fm-author' <div> in the html, so it uses the font size specified for 'fm-author' */
+
+.fm-role
+{font-style: italic}
+
+.fm-affl, .fm-pubdate,
+.fm-footnote, .fm-editor
+{font-size: 77%}
+
+.fm-author .fm-footnote .fm-affl,
+.fm-editor .fm-footnote .fm-affl,
+.fm-editor .fm-footnote
+{font-size: 100%;}
+
+.fm-copyright, dt.fm-copyright-license
+{font-size: 85%}
+
+/* styles for article body */
+.abs-head2
+{}
+.abs-head2, .kwd-label
+{font-weight: bold;}
+
+.abs-head3
+{}
+
+.head2
+{font-weight: bold}
+
+.head3
+{font-style: italic}
+
+.head4
+{text-decoration: underline}
+
+.head5
+{}
+
+.kwd-text
+{font-size: 85%}
+
+.eqn-image
+{text-align: center}
+
+.eqn-id
+{font-weight: bold;
+text-align: right}
+
+.box
+{background-color: #e1e1e1;
+border: 1px #60cfff solid;
+overflow:auto;}
+
+.boxhead1
+{font-family: Arial, sans-serif;
+font-size: 105%;
+font-weight: bold}
+
+.boxhead2
+{font-weight: bold}
+
+.fig-table-link, a.cite-reflink
+{color: #0050a0;
+text-decoration: none}
+
+a.int-reflink, a.ext-reflink
+{color: #0050a0}
+
+
+/* styles for Figure and Table windows */
+
+.figwind-cite
+{font-family: Arial, sans-serif;
+font-size: 75%}
+
+.figwind-copyrt
+{font-family: Arial, sans-serif;
+font-size: 75%}
+
+.product-source
+{font-style: italic}
+
+.signature-group
+{
+ font-weight: bold;
+ margin-left: 2em;
+ font-style: italic;}
+
+tr[content-type="shaded"], td[content-type="shaded"]
+{
+    background-color: #cccccc;
+}
+
+
+tr[content-type="shaded-medium"], td[content-type="shaded-medium"]
+{
+    background-color: #cccccc;
+}
+
+tr[content-type="shaded-light"], td[content-type="shaded-light"]
+{
+    background-color: #e2e2e2;
+}
+
+tr[content-type="shaded-dark"], td[content-type="shaded-dark"]
+{
+    background-color: #aaaaaa;
+}

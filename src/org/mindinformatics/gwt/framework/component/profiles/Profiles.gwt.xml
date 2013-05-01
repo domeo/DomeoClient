@@ -1,0 +1,8 @@
+<module>
+  	<inherits name="com.google.gwt.core.Core"/>
+	<inherits name="com.google.gwt.i18n.I18N"/>	
+	
+	<source path="service"/>
+	<source path="src"/>
+	<source path="model"/>
+</module>

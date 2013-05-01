@@ -1,0 +1,256 @@
+/*---------------------------------------------------------------------------*/
+
+/*
+
+    Module:    print.css
+
+    Author:    Francois Schiettecatte (FS Consulting, LLC.)
+
+    Creation Date:    2 June 201
+
+    Purpose:    This is the CSS for printing.
+
+*/
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Basic features
+*/
+
+* {    
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    display: block;
+    background-color: white;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Grande', Arial, Helvetica, Verdana, Geneva, sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+div {
+}
+
+table
+{
+    width: 100%;
+    table-layout: auto;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Body features
+*/
+
+div#body {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Menu features (part of body)
+*/
+
+div#menu {
+    display: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Margin features (part of body)
+*/
+
+div#margin {
+    margin: 10px;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Home features (part of body/margin)
+*/
+
+div#home {
+    display: none;
+}
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Search features (part of body/margin)
+*/
+
+div#search {
+    display: none;
+}
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Content features (part of body/margin)
+*/
+
+div#content {
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Message features (part of body/margin/content)
+*/
+
+div#message {
+    font-size: 14px;
+    line-height: 1.6em;
+    margin-bottom: 10px; 
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Results features (part of body/margin/content)
+*/
+
+div#results {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+div#results td.results-links {
+    display: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Navigation features (part of body/margin/content)
+*/
+
+div#navigation {
+    display: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Form features (part of body/margin/content)
+*/
+
+div#form {
+    display: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Footer features (part of body)
+*/
+
+div#footer {
+    border-top: 4px solid #CDCDCD;
+    font-size: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Table features
+*/
+
+.editors-table .toggle:visited {
+    color: black;
+}
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Text features
+*/
+
+.icd-number-screen {
+    display: none;
+}
+
+.icd-number-print {
+    float: right;
+    font-size: 12px; 
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Floating menu (part of body/content)
+*/
+
+
+.floating-menu {
+    display: none;
+}
+
+.accordion {
+    display: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Highlighting
+*/
+
+strong {
+    font-weight: inherit;
+}
+
+strong.highlighted {
+    background-color: inherit;
+}
+
+
+/*---------------------------------------------------------------------------*/
+

@@ -1,0 +1,225 @@
+/* ----------------------------------------------
+ * ct.css
+ */
+
+
+
+/* ----------------------------------------------
+ * White background for page + standard body font
+ */
+
+body {
+  background-color:#ffffff;
+  font-family:Sans-Serif;
+  font-size:small;
+  font-weight:normal;
+}
+
+
+
+/* ----------------------------------------------
+ * Skip nav style
+ */
+
+.skip {
+  position:absolute;
+  left:-100px;
+  top:-100px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+
+
+/* ----------------------------------------------
+ * Site colors
+ */
+
+/* Banner colors */
+.banner_color { background-color:#dde2ff; }
+.pale_banner_color { background-color:#eeeeff; }
+
+.search_banner_color { background-color:#dde2ff; }
+.results_banner_color { background-color:#dde2ff; }
+.show_banner_color { background-color:#dde2ff; }
+
+/* Message colors */
+.urgent_color { background-color:#ffddcc; }
+.alert_color { background-color:#eeffee; }
+.missing_color { background-color:#ffeee4; }
+.red_fore_color { color:#cc0000; }
+
+/* Tab colors */
+.fore_tab_color { background-color:#ffffff; }
+.back_tab_color { background-color:#ffffee; }
+.grayed_fore_color { color:#777777; }
+
+/* Page header (behind tabs) */
+.search_back_color { background-color:#445588; }
+.results_back_color { background-color:#9999aa; }
+.show_back_color { background-color:#6677aa; }
+.test_back_color { background-color:#449955; }
+
+/* Study results table colors */
+.bold_participant_color { background-color:#ddffdd; }
+.pale_participant_color { background-color:#f3fff3; }
+.note_participant_color { color:#339900; }
+
+.bold_baseline_color { background-color:#d7eaff; }
+.pale_baseline_color { background-color:#f3f9ff; }
+.note_baseline_color { color:#0033cc; }
+
+.bold_outcome_color { background-color:#ddddff; }
+.pale_outcome_color { background-color:#f5f5ff; }
+.note_outcome_color { color:#000077; }
+
+.bold_events_color { background-color:#e4dcf7; }
+.pale_events_color { background-color:#f8f3fd; }
+.note_events_color { color:#550077; }
+
+.bold_more_info_color { background-color:#dddddd; }
+.pale_more_info_color { background-color:#f7f7f7; }
+.note_more_info_color { color:#000000; }
+
+/* Links always blue */
+a:link { color:#0000cc; }
+a:visited { color:#0000cc; }
+a:active { color:#0000cc; }
+
+
+
+/* ----------------------------------------------
+ * Hit highlighting styles
+ */
+
+.hit_org {
+  font-weight:bold;
+  background-color:#ffeedd;
+}
+
+.hit_inf {
+  font-weight:bold;
+  background-color:#ffeedd;
+}
+
+.hit_syn {
+  font-weight:bold;
+  background-color:#ffffdd;
+}
+
+.hit_tpc {
+  font-weight:bold;
+  background-color:#ffffdd;
+}
+
+
+
+/* ----------------------------------------------
+ * Indents
+ */
+
+.indent1 {
+  margin-left:1em;
+  margin-right:1em;
+}
+
+.indent2 {
+  margin-left:2em;
+  margin-right:2em;
+}
+
+.indent3 {
+  margin-left:3em;
+  margin-right:3em;
+}
+
+.indent4 {
+  margin-left:4em;
+  margin-right:4em;
+}
+
+.indent5 {
+  margin-left:5em;
+  margin-right:5em;
+}
+
+
+
+/* ----------------------------------------------
+ * Standard header font styles
+ */
+
+.header1 {
+  font-family:Sans-Serif;
+  font-size:large;
+  font-weight:bolder;
+}
+
+.header2 {
+  font-family:Sans-Serif;
+  font-size:medium;
+  font-weight:bolder;
+}
+
+.header3 {
+  font-family:Sans-Serif;
+  font-size:small;
+  font-weight:bolder;
+}
+
+/* ----------------------------------------------
+ * Standard body font styles
+ */
+
+.body2 {
+  font-family:Sans-Serif;
+  font-size:medium;
+  font-weight:normal;
+}
+
+.body3 {
+  font-family:Sans-Serif;
+  font-size:small;
+  font-weight:normal;
+}
+
+/* ----------------------------------------------
+ * <pre> font style
+ */
+
+.fixed {
+  font-family:Monospace;
+  font-size:medium;
+  font-weight:bolder;
+}
+
+/* ----------------------------------------------
+ * Footer font style
+ */
+
+.footer {
+  font-family:sans-serif;
+  font-size:x-small;
+  font-weight:normal;
+}
+
+
+
+
+/* ----------------------------------------------
+ * Cell borders for messy Study Results tables
+ */
+
+.br {
+   border-right:2px ridge;
+   padding:5px 5px
+}
+
+.brt {
+   border-right:2px ridge;
+   border-top:2px ridge;
+   padding:5px 5px
+}
+
+

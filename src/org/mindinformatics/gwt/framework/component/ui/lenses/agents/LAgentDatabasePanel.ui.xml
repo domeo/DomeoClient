@@ -1,0 +1,61 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style>	
+		.body {
+			width: 100%;
+			height: 80px;
+			padding: 3px;
+		}
+		
+		.label {
+			font-weight: bold;	
+		}
+		
+		.editableDeckPanel {
+			width: 98%;	
+		}
+		
+		.editableLabel {
+			cursor: pointer;
+			cursor: hand;
+		}
+		
+		.title {
+			border-top: 1px solid #ccc;	
+			border-bottom: 1px solid #ddd;	
+			background-color: #eee;
+		}
+	</ui:style>
+	
+	<g:VerticalPanel styleName='{style.body}' ui:field='body'>	
+		<!-- 
+		<g:cell height="20" horizontalAlignment='ALIGN_CENTER'>
+			<g:HTMLPanel  ui:field="title" styleName='{style.title}'>Resource</g:HTMLPanel>
+		</g:cell>
+	 	-->
+		<g:cell height="20">
+			<g:Label styleName='{style.label}'> URL</g:Label>
+		</g:cell>
+		<g:cell height="25px">
+			<g:Label ui:field='uriField'/>
+		</g:cell>
+		<g:cell height="20px">
+			<g:Label styleName='{style.label}'>Title</g:Label>
+		</g:cell>
+		<g:cell height="20px">
+			<!-- g:Label ui:field='labelField'>Actual title</g:Label  -->
+			<g:Label ui:field='labelField'/>
+		</g:cell>	
+		<g:cell height="20px">
+			<g:Label styleName='{style.label}'>Homepage</g:Label>
+		</g:cell>
+		<g:cell height="20px">
+			<!-- g:Label ui:field='labelField'>Actual title</g:Label  -->
+			<g:Label ui:field='homepageField'/>
+		</g:cell>		
+		<g:HTMLPanel></g:HTMLPanel>	
+	</g:VerticalPanel>
+</ui:UiBinder>

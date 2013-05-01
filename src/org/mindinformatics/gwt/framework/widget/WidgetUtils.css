@@ -1,0 +1,84 @@
+.fw_TableOddRow {
+	background-color: #EEEEFF;
+}
+
+.fw_TableEvenRow {
+	background-color:  #fff;
+}
+
+.fw_curationButtons {
+	padding: 1px;
+	background-color: #fff;	
+	width: 100%;
+	cursor: pointer;
+	cursor: hand;
+	border: 0;
+}
+
+.fw_curationButtonsBold {
+	padding: 1px;
+	background-color: #fff;	
+	width: 100%;
+	cursor: pointer;
+	cursor: hand;
+	border: 0;
+	font-weight: bold;
+}
+
+.fw_curationButtonsRed {
+	padding: 1px;
+	background-color: #fff;	
+	width: 100%;
+	cursor: pointer;
+	cursor: hand;
+	border: 0;
+	color: white;
+	background: #FF6666;
+	border: 1px solid red;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.fw_curationButtonsBoldRed {
+	padding: 1px;
+	background-color: #fff;	
+	width: 100%;
+	cursor: pointer;
+	cursor: hand;
+	border: 0;
+	font-weight: bold;
+	color: white;
+	background: #FF6666;
+	border: 1px solid red;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.fw_curationButtonsGreen {
+	padding: 1px;
+	background-color: #fff;	
+	width: 100%;
+	cursor: pointer;
+	cursor: hand;
+	border: 0;
+	color: black;
+	background: #99FF99;
+	border: 1px solid #009933;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.fw_curationButtonsBoldGreen {
+	padding: 1px;
+	background-color: #fff;	
+	width: 100%;
+	cursor: pointer;
+	cursor: hand;
+	border: 0;
+	font-weight: bold;
+	color: black;
+	background: #99FF99;
+	border: 1px solid #009933;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}

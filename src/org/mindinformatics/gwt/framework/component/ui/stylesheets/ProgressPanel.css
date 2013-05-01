@@ -1,0 +1,14 @@
+.domeo_panel {
+	padding: 5px;
+ 	width: 100%;
+ 	height: 20px;
+ 	z-index: 1000;
+ 	position: absolute;
+ 	left: 0px;
+ 	bottom: 20px;
+ 	background-color: #fff;	
+ 	border: 1px #999 solid;
+ 	border-left: 0px;
+	opacity:0.9;
+	filter:alpha(opacity=90); /* For IE8 and earlier */	
+}

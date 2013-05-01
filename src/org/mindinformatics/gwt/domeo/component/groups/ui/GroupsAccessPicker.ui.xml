@@ -1,0 +1,29 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  
+    <ui:style>
+	  	.outer {
+		    height: 100%;
+		    padding-top: 5px;
+	 	}
+	 	
+	 	.inner {
+	
+		}
+	 	
+	 	.footer {
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	 </ui:style>
+  
+  	<g:VerticalPanel styleName='{style.outer}'>
+  		<g:VerticalPanel ui:field="groupsList" styleName='{style.inner}'></g:VerticalPanel>  		
+  		<g:HorizontalPanel ui:field='footerPanel' width="800px" styleName='{style.footer}'>
+			<g:cell horizontalAlignment='ALIGN_LEFT' width='140px'>
+				<g:Button ui:field='annotateButton'>Apply</g:Button>
+			</g:cell>
+		</g:HorizontalPanel>
+  	</g:VerticalPanel>
+</ui:UiBinder>

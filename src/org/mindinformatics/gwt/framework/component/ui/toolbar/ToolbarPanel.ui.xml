@@ -1,0 +1,32 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.toolbar {
+			background-color: #eee;
+			/*background-color: #6D98AB;*/
+			height: 16px;
+			width: 100%;
+			border-bottom: 2px #eee solid;
+		}
+		
+		.leftPanel {
+		}
+		
+		.rightPanel {
+			padding-right: 2px;
+		}
+	</ui:style>
+
+  	<g:HorizontalPanel ui:field='toolbarPanel' styleName='{style.toolbar}'>
+  		<g:cell>
+	  		<g:HorizontalPanel ui:field='leftPanel' styleName='{style.leftPanel}'>
+	  		</g:HorizontalPanel>
+  		</g:cell>
+  		<g:cell>
+	  		<g:HorizontalPanel ui:field='rightPanel' styleName='{style.rightPanel}'>
+	  		</g:HorizontalPanel>
+	  	</g:cell>
+  	</g:HorizontalPanel>
+</ui:UiBinder>

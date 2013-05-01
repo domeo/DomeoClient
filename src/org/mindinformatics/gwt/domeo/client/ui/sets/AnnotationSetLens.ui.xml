@@ -1,0 +1,149 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style type='org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationSetLens.SetsLensStyle'>	
+		.body {
+			width: 100%;
+			padding: 0px;
+			border-left: 3px #628cd5 solid;
+		}
+		 
+		.row {
+			width: 100%;
+			height: 16px;
+		}
+		
+		.adaptiveRow {
+			height: 16px;
+		}
+		
+		.activeIcon {
+			cursor: pointer;
+			cursor: hand;			
+		}
+		
+		.label {
+			padding-right: 4px;	
+			font-size: 80%;
+			text-transform:uppercase;
+			vertical-align: bottom;
+		}
+		
+		.spacedContent {
+			padding-right: 4px;	
+		}
+		
+		.provenance {
+			width: 98%;
+			padding-left: 5px;
+			padding-right: 10px;
+			padding-bottom: 2px;
+			background: #eee;	
+			border-top-right-radius: 10px;	
+			-moz-border-radius-topright: 10px;
+			border-bottom: 1px solid #ddd;
+		}
+		
+		.content {
+			width: 100%;
+			padding: 5px;	
+		}
+		
+		.bold {
+			font-weight: bold;	
+		}
+		
+		.description {
+			border-left: 2px solid #ddd;	
+			padding-left: 5px;
+		}
+		
+		.footer {
+			border-top: 0px #ddd solid;
+			padding-top: 2px;
+			padding-left: 5px;
+			width: 458px;
+		}
+		
+		.spacedLabel {
+			padding-right: 10px;
+		}
+		
+		.subtitle {
+			font-weight: bold;
+			padding-left: 5px;	
+		}
+		
+		.boldUnderlined {
+			padding-left: 4px;
+			font-weight: bold;	
+			text-decoration: underline;
+			cursor: pointer;
+			pointer: hand;
+		}
+	</ui:style>
+	
+	<g:VerticalPanel styleName='{style.body}' ui:field='body'>	
+		<g:cell width="100%">
+			<g:VerticalPanel styleName='{style.provenance}' ui:field='provenance'>
+				<g:cell height="10px">
+					<my:EditableLabel ui:field='nameField' styleName='{style.bold}' />
+				</g:cell>
+				<g:cell height="10px">
+					<g:HorizontalPanel styleName='{style.adaptiveRow}'>
+						<g:cell verticalAlignment='ALIGN_BOTTOM'>
+							<g:Label styleName='{style.label}'>Created by</g:Label>
+						</g:cell>
+						<g:Label styleName='{style.spacedContent}' ui:field='createdByField'/>
+						<g:cell verticalAlignment='ALIGN_BOTTOM'>
+							<g:Label styleName='{style.label}'>on</g:Label>
+						</g:cell>
+						<g:Label ui:field='createdOnField'/>
+					</g:HorizontalPanel>
+				</g:cell>
+				<g:cell height="10px">
+					<g:HorizontalPanel styleName='{style.adaptiveRow}'>
+						<g:cell verticalAlignment='ALIGN_BOTTOM'>
+							<g:Label styleName='{style.label}'>Last Saved On</g:Label>
+						</g:cell>
+						<g:Label styleName='{style.spacedContent}' ui:field='savedOnField'/>
+						<g:cell verticalAlignment='ALIGN_BOTTOM'>
+							<g:Label styleName='{style.label}'>with version</g:Label>
+						</g:cell>
+						<g:Label ui:field='versionField'/>
+					</g:HorizontalPanel>
+				</g:cell>
+			</g:VerticalPanel>
+		</g:cell>
+		
+		<g:cell height="10px" width="100%">
+			<g:HorizontalPanel styleName='{style.footer}' ui:field='sharedWithField'> 
+				<g:cell width="50%" horizontalAlignment='ALIGN_LEFT'>
+					<g:HorizontalPanel  ui:field='footerLeftSide'/>
+				</g:cell>
+				<g:cell width="50%" horizontalAlignment='ALIGN_RIGHT'>
+					<g:HorizontalPanel  ui:field='footerRightSide'/>
+				</g:cell>
+			</g:HorizontalPanel>
+		</g:cell>
+		<g:cell width="100%">
+			<g:VerticalPanel styleName='{style.content}' ui:field='content'>
+				<my:EditableLabel ui:field='descriptionField' styleName='{style.description}'/>
+			</g:VerticalPanel>
+		</g:cell>
+		<g:cell width="100%">
+			<g:VerticalPanel styleName='{style.content}' ui:field='display'/>
+		</g:cell>
+		<g:cell width="100%">
+			<g:VerticalPanel styleName='{style.content}' ui:field='filter'/>
+		</g:cell>
+		<g:cell width="100%">
+			<g:SimplePanel styleName='{style.boldUnderlined}' ui:field='items'/>
+		</g:cell>
+		<g:cell width="100%">
+			<g:VerticalPanel styleName='{style.content}' ui:field='access'/>
+		</g:cell>
+	</g:VerticalPanel>
+</ui:UiBinder>

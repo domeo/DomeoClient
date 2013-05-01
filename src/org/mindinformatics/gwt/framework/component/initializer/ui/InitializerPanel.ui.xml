@@ -1,0 +1,27 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.outer {
+		    padding: 2px;
+		    width: 640px;
+		}
+		
+		.label {
+			padding-left: 8px;	
+		}
+	</ui:style>
+
+	<g:VerticalPanel>
+	  	<g:HorizontalPanel ui:field='initializerPanel' styleName='{style.outer}'>
+	  		<g:cell horizontalAlign="CENTER">
+	  			<g:Image ui:field='spinningIcon'></g:Image>
+	  		</g:cell>
+	  		<g:cell horizontalAlign="CENTER" width="600px">
+	  			<g:Label ui:field='initMessage' styleName=""></g:Label>
+	  		</g:cell>
+	  	</g:HorizontalPanel>
+	  	<g:VerticalPanel ui:field='messages' />
+  	</g:VerticalPanel>
+</ui:UiBinder>

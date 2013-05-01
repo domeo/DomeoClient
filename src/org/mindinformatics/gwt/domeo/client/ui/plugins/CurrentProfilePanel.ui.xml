@@ -1,0 +1,90 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+
+    .inner {
+    	border: solid 1px #ddd;
+    	height:410px;	
+		width: 100%;
+    }
+  	
+  	.itemPanelContainer {
+  		padding: 5px;
+  	}
+  	
+  	.descriptionPanel {
+		padding: 5px;
+		max-height: 20px;
+	}
+  	
+  	.scrollPanelContainer {
+		max-height: 310px;
+		height: 280px;
+		width: 810px;
+	}
+  	
+  	.label {
+		
+	}
+	
+	.labelWithPadding {
+		padding-left: 5px;
+	}
+	
+	.value {
+		font-weight: bold;
+	}
+	
+	.footer {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+  	
+</ui:style>
+
+	<g:FlowPanel styleName='{style.inner}'>
+		<g:HorizontalPanel ui:field='titlePanel' width="800px" styleName='{style.itemPanelContainer}'>
+			<g:cell horizontalAlignment='ALIGN_LEFT'>
+				<g:Label styleName='{style.value}' ui:field='profileName'></g:Label>
+			</g:cell>
+			<g:cell horizontalAlignment='ALIGN_RIGHT'>
+				<g:HorizontalPanel>
+					<g:cell horizontalAlignment='ALIGN_LEFT' width="60px">
+						<g:Label styleName='{style.label}'>Saved on</g:Label>
+					</g:cell>
+					<g:cell horizontalAlignment='ALIGN_LEFT'>
+						<g:Label styleName='{style.value}' ui:field='profileDate'></g:Label>
+					</g:cell>
+					<g:cell horizontalAlignment='ALIGN_LEFT' width="22px">
+						<g:Label styleName='{style.labelWithPadding}'>by</g:Label>
+					</g:cell>
+					<g:cell horizontalAlignment='ALIGN_LEFT'>
+						<g:Label styleName='{style.value}' ui:field='profileCreator'></g:Label>
+					</g:cell>
+				</g:HorizontalPanel>
+			</g:cell>
+		</g:HorizontalPanel>
+		<g:ScrollPanel ui:field='descriptionPanel' width="800px" styleName='{style.descriptionPanel}'>
+			<g:Label ui:field='profileDescription'/>
+		</g:ScrollPanel>
+		<g:ScrollPanel ui:field='pluginsPanel' styleName='{style.scrollPanelContainer}'>
+		</g:ScrollPanel>
+		<g:HorizontalPanel ui:field='footerPanel' width="800px" styleName='{style.footer}'>
+			<g:Label ui:field='footerMessage'></g:Label>
+			<g:cell horizontalAlignment='ALIGN_RIGHT' width='20px'>
+				<g:SimplePanel ui:field='progressIconPanel'/>
+			</g:cell>
+			<g:cell horizontalAlignment='ALIGN_RIGHT' width='78px'>
+				<g:Button ui:field='saveButton'>Save</g:Button>
+			</g:cell>
+			<g:cell horizontalAlignment='ALIGN_RIGHT' width='78px'>
+				<g:Button ui:field='saveAsButton'>Save As</g:Button>
+			</g:cell>
+			<g:cell horizontalAlignment='ALIGN_RIGHT' width='140px'>
+				<g:Button ui:field='loadButton'>Available Profiles</g:Button>
+			</g:cell>
+		</g:HorizontalPanel>
+	</g:FlowPanel>
+</ui:UiBinder>

@@ -1,0 +1,57 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+	.outer {
+	    padding-left: 4px;
+	    padding-top: 20px;
+	    padding-bottom:16px;
+	    min-height: 400px;
+	    min-width: 500px;
+	    font-size: 11px;
+	}
+	
+	.message {
+		padding-left: 4px;	
+		font-size: 16px;
+		text-align: left;
+	}
+	
+	.buttonsPanel {
+		padding-top: 30px;	
+		text-align: right;
+	}
+	
+	.button {
+		border: 1px solid #aaa;	
+		background-color: #ddd;
+		color: #666;
+		font-weight: bold;
+		cursor: pointer;
+		pointer: hand;
+	}
+	
+	.main {
+		padding-left: 5px;
+		padding-right: 8px;
+		min-width: 600px;
+		border-left: 5px solid #ddd;	
+		border-right: 5px solid #ddd;	
+	}
+</ui:style>
+  		<g:VerticalPanel styleName='{style.outer}' >
+		<g:cell  horizontalAlignment="ALIGN_CENTER">
+		  	<g:HorizontalPanel ui:field='main' styleName='{style.main}' >
+		  		<g:cell width="60px;" horizontalAlignment="ALIGN_LEFT"><g:Image ui:field="icon"></g:Image></g:cell>
+		  	
+		  		<g:VerticalPanel>
+				 	<g:HTML ui:field='firstLineMessagePanel' styleName='{style.message}'></g:HTML>
+				 	<g:HTML ui:field='secondLineMessagePanel' styleName='{style.message}'></g:HTML>
+				 	<g:FlowPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
+				 	</g:FlowPanel>
+				</g:VerticalPanel>
+			</g:HorizontalPanel>
+		</g:cell>
+  	</g:VerticalPanel>
+</ui:UiBinder>

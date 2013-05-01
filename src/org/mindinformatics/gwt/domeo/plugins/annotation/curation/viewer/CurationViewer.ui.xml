@@ -1,0 +1,117 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:h='org.mindinformatics.gwt.annotator.client.ui.annotation.panels.viewer.history'>
+
+	<ui:style>
+	
+	  	.mainPanel {
+
+	  	}
+	  	
+	  	.leftPanel {
+	  		width: 720px;
+	  	}
+	  	
+	  	
+	  	.rightPanel {}
+	  	
+	  	.contextContainer {
+			padding-top: 5px;
+			padding-bottom: 10px;
+			width: 100%;
+		}
+	  	
+	  	.contextPanel {
+	  		border: 1px solid #eee;
+			background-color: #fafafa;
+			padding: 4px;
+			max-width: 720px;
+	  	}
+	  	
+	  	.curationPanel {
+	  		padding-top: 10px;
+	  		width: 100%;
+	  	}
+	  	
+	  	.curationCommands {
+	  		background-color: #eee;
+	  		width: 100%;
+	  		border-top: 1px solid #aaa;
+	  		border-left: 1px solid #aaa;
+	  		border-right: 1px solid #aaa;
+  			-moz-border-radius-topright: 5px 5px;
+			-moz-border-radius-topleft: 5px 5px;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+	  	}
+	  	
+	  	.curationComment {	
+	  		width: 100%;	
+	  	}
+	  	
+	  	.curationActions {
+	  		float: right;	
+	  	}
+	  	
+	  	.annotationItemPanel {
+	  		padding-top: 10px;
+	  		width: 100%;
+	  	}
+	  	
+	  	.existingCurationPanel {
+	  		padding-top: 10px;
+	  	}
+	  	
+	  	.existingCurationLabel {
+	  		font-weight: bold;
+	  	}
+	  	
+	  	.prefixText {
+	  		color: #666;
+	  		display: inline;
+	  	}
+	  	
+	  	.matchText {
+	  		font-weight: bold;
+	  		display: inline;
+	  	}
+	  	
+	  	.suffixText {
+	  		color: #666;
+	  		display: inline;
+	  	}
+	  	
+	  	.menuPanel {
+	  		padding-top: 8px;
+	  		max-width: 500px;	
+	  	}
+	
+	</ui:style>
+	
+	<g:HorizontalPanel ui:field='mainPanel' styleName='{style.mainPanel}'>
+		<g:VerticalPanel ui:field='menuPanel' styleName='{style.menuPanel}'>
+		
+		</g:VerticalPanel>
+		<g:VerticalPanel ui:field='leftPanel' styleName='{style.leftPanel}'>
+			<g:VerticalPanel ui:field='contextContainer' styleName='{style.contextContainer}'>
+				<g:HTMLPanel ui:field='contextPanel' styleName='{style.contextPanel}'>
+					<g:HTMLPanel ui:field='prefixText' styleName='{style.prefixText}' tag="span"></g:HTMLPanel>
+					<g:HTMLPanel ui:field='matchText' styleName='{style.matchText}' tag="span"></g:HTMLPanel>
+					<g:HTMLPanel ui:field='suffixText' styleName='{style.suffixText}' tag="span"></g:HTMLPanel>
+				</g:HTMLPanel>
+				<g:VerticalPanel ui:field='annotationItemPanel' styleName='{style.annotationItemPanel}'></g:VerticalPanel>
+				<g:VerticalPanel ui:field='curationPanel' styleName='{style.curationPanel}'>
+					<g:HorizontalPanel ui:field='curationCommands' styleName='{style.curationCommands}'></g:HorizontalPanel>
+					<g:TextArea  ui:field='curationComment' styleName='{style.curationComment}'></g:TextArea>
+					<g:HorizontalPanel ui:field='curationActions' styleName='{style.curationActions}'></g:HorizontalPanel>
+				</g:VerticalPanel>
+				<g:VerticalPanel ui:field='existingCurationPanel' styleName='{style.existingCurationPanel}'>
+					<g:Label ui:field='existingCurationLabel'  styleName='{style.existingCurationLabel}'>Pre-existing Curation</g:Label>
+					<g:SimplePanel ui:field='existingCurationTablePanel' ></g:SimplePanel>
+				</g:VerticalPanel>
+			</g:VerticalPanel>
+		</g:VerticalPanel>
+	</g:HorizontalPanel>
+	
+</ui:UiBinder>

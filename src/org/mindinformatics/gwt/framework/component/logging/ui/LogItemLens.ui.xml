@@ -1,0 +1,50 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+  	.logItemPanel {
+  		font-size: 12px;
+  		v-align: bottom;
+  	}
+  	
+  	.icon {
+  	}
+  	
+  	.user {
+  		color: gray;
+  		font-style: italic;
+  	}
+  	
+  	.date {
+  		color: #0000CC;
+  	}
+  	
+  	.className {
+  		color: #CC0000;
+  	}
+  	
+  	.type {
+  		font-weight: bold;
+  		font-style: italic;
+  	}
+  	
+  	.levelPanel {
+  		display: inline;	
+  	}
+  	
+  	.message {
+  			
+  	}
+</ui:style>
+
+	<g:HTMLPanel ui:field='logItemPanel' styleName='{style.logItemPanel}'>
+		<!--  <g:Image ui:field='icon' styleName='{style.icon}'/> -->
+		<span ui:field='levelPanel' style='{style.levelPanel}'></span>
+		<span ui:field='user' class='{style.user}'></span>
+		<span ui:field='date' class='{style.date}'></span>
+		<span ui:field='className' class='{style.className}'></span>
+		<span ui:field='type' class='{style.type}'></span>
+		<span ui:field='message' class='{style.message}'></span>
+	</g:HTMLPanel>
+</ui:UiBinder>

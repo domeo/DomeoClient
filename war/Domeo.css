@@ -1,0 +1,42 @@
+.gwt-SuggestBoxPopup
+{
+    text-align                   :    left;
+    cursor                       :    pointer;
+    cursor                       :    hand;
+    border                       :    0;
+    border-top                   :    0;
+    background-color             :    #fff;
+
+}
+.gwt-SuggestBoxPopup .item
+{
+    border                       :    0px dotted #aaa;
+    width                        :    398px;
+}
+
+/*
+.gwt-SuggestBoxPopup .item:hover
+{
+    background-color             :    #eee;
+}
+
+.gwt-SuggestBoxPopup .item-selected
+{
+    background-color             :    #eee;
+}
+*/
+
+.domeo-tmp-rightpanel {
+	border-left: 2px solid #ddd;	
+	width: 304px;
+}
+
+.sidebarPlaceholder {
+	background-color: #222;	
+}
+
+.cs-Frame {
+	background-color: #FFF;
+	border: 1px solid #ddd;
+	height: 100%;
+}

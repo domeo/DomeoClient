@@ -1,0 +1,9 @@
+.fw_Button {
+	cursor: pointer;
+    cursor: hand;
+    padding-top: 0px;
+}
+
+.fw_Inline {
+	display:inline;	
+}

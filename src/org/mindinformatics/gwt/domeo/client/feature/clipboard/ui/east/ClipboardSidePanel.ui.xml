@@ -1,0 +1,29 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>	
+		.body {
+			width: 100%;
+			border-left: 2px solid #ddd;
+		}
+		.topbar {
+			width: 100%;
+		}
+		.container {
+			max-height: 800px;	
+		}
+		.content {
+			width: 100%;	
+		}
+	</ui:style>
+	
+	<g:VerticalPanel styleName='{style.body}' ui:field='body'>
+		<g:cell height="30px;">
+			<g:SimplePanel styleName='{style.topbar}' ui:field='topbarPanel'/>
+		</g:cell>
+		<g:ScrollPanel styleName='{style.container}' ui:field='container'>
+			<g:VerticalPanel ui:field='content' styleName='{style.content}'/>
+		</g:ScrollPanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

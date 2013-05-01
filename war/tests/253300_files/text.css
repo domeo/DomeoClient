@@ -1,0 +1,594 @@
+/*---------------------------------------------------------------------------*/
+
+/*
+
+    Module:    text.css
+
+    Author:    Francois Schiettecatte (FS Consulting, LLC.)
+
+    Creation Date:    2 June 201
+
+    Purpose:    This is the CSS for the text tables and text.
+
+*/
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Table features
+*/
+
+.entry-table,
+.entry-results-table,
+.clinical-synopsis-table,
+.clinical-synopsis-results-table,
+.references-table,
+.entry-statistics-table,
+.gene-map-statistics-table,
+.update-statistics-table,
+.update-table,
+.history-table,
+.contact-table,
+.downloads-table,
+.api-table,
+.help-table,
+.login-table,
+{
+    line-height: 1.6em;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+
+.allelic-variant-table,
+.gene-map-table,
+.gene-map-result-table,
+.phenotype-map-table {
+    line-height: 1.2em;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+
+.editors-table {
+    line-height: 1.6em;
+    margin-bottom: 10px;
+    position: relative;
+    text-decoration: none;
+}
+
+.editors-table .toggle:hover,
+.editors-table .toggle:focus,
+.editors-table .toggle:active {
+    text-decoration: underline;
+}
+
+/* This this overriden in print.css */
+.editors-table .toggle:visited {
+    color: #004EC5;
+}
+
+.editors-table {
+    border-collapse: collapse;
+}    
+
+.editors-table .label {
+    width: 200px;
+}
+
+.editors-table th {
+    text-align: left;
+    font-weight: normal;
+}
+
+.editors-table th.value {
+    ',
+    '
+}
+
+.editors-table td {
+    border-bottom: 1px solid #CDCDCD;
+}
+
+
+.border {
+    -moz-border-radius: 0.7em;
+    -moz-box-shadow: 0 0 2px #CDCDCD;
+    -webkit-border-radius: 0.7em;
+    -webkit-box-shadow: 0 0 2px #CDCDCD;
+    border: 1px solid #CDCDCD;
+    padding: 4px 4px 2px 4px;
+}
+    
+.label-border {
+    border-bottom: 2px solid #CDCDCD;
+    border-right: 1px solid #CDCDCD;
+}
+    
+.label-border-bottom {
+    border-bottom: 2px solid #CDCDCD;
+}
+    
+.label-border-right {
+    border-right: 1px solid #CDCDCD;
+}
+    
+.value-border {
+    border-bottom: 1px solid #CDCDCD;
+    border-right: 1px solid #CDCDCD;
+}
+    
+.value-border-bottom {
+    border-bottom: 1px solid #CDCDCD;
+}
+    
+.value-border-right {
+    border-right: 1px solid #CDCDCD;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Font features
+*/
+
+
+.text-font {
+    font-family: 'Palatino Linotype', 'Palatino', Georgia, 'Times New Roman', Times, serif;
+}
+
+.label-font {
+    font-family: 'Lucida Sans', 'Lucida Grande', Arial, Helvetica, Verdana, Geneva, sans-serif;
+}
+
+.code-font {
+    font-family: 'monospace';
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Text features
+*/
+
+
+.prefix {
+    color: #FF4500;
+    font-weight: bold;
+}
+
+
+.results-counter {
+    font-size: 12px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.results-headline {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+
+.results-byline {
+    font-size: 12px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+}
+
+
+.results-links {
+    float: right;
+    font-size: 12px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+}
+
+
+.mim-number,
+.preferred-title {
+    font-size: 22px;
+    line-height: 1.7em;
+    padding: 2px;
+}
+
+.included-title-label {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.included-title-first-entry {
+    font-size: 22px;
+    line-height: 1.7em;
+    padding: 2px;
+}
+
+.included-title-other-entries {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.alternative-title-label {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.alternative-title {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+/* in screen.css
+.icd-number-screen {
+    float: right;
+    font-size: 12px; 
+}
+    
+.icd-number-print {
+    display: none;
+}
+*/
+    
+/* in print.css
+.icd-number-screen {
+    display: none;
+}
+
+.icd-number-print {
+    float: right;
+    font-size: 12px; 
+}
+*/
+    
+.approved-gene-symbol-label,
+.approved-gene-symbol {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.cytogenetic-location,
+.genomic-coordinates {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+}
+
+.clinical-synopsis-link,
+.phenotypic-series-link {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.section-text {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    text-align: justify;
+    /* text-align: left; */
+}
+
+.av-table-view-link {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.av-number,
+.av-name {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.av-alternative-name,
+.av-mutations,
+.av-status {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.av-text {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    text-align: justify;
+    /* text-align: left; */
+}
+
+.see-also-label {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.see-also {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.references-label {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.reference-number {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    vertical-align: top;
+}
+
+.reference-text {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    text-align: justify;
+    /* text-align: left; */
+}
+
+.reference-authors,
+.reference-source,
+.reference-links {
+}
+
+.reference-title {
+    font-weight: bold;
+}
+
+.editors-label,
+.editors-value {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+
+.allelic-variant-mim-number {
+    font-size: 22px;
+    line-height: 1.7em;
+    padding: 2px;
+}
+
+.allelic-variant-preferred-title {
+    font-size: 18px;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.allelic-variant-title {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.key-phenotype-map-title {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 2px;
+}
+
+.gene-map-title,
+.phenotype-map-title,
+.history-title {
+    font-weight: bold;
+    /*font-style: italic;*/
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.allelic-variant-label,
+.gene-map-label,
+.phenotype-map-label,
+.history-label {
+    font-size: 12px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.allelic-variant-value,
+.gene-map-value,
+.phenotype-map-value,
+.history-value {
+    font-size: 12px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+    vertical-align: top;
+}
+
+
+.clinical-synopsis-category-label,
+.clinical-synopsis-subcategory-label,
+.clinical-synopsis-feature-label {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+}
+
+
+.clinical-synopsis-category-value,
+.clinical-synopsis-subcategory-value,
+.clinical-synopsis-feature-value {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    vertical-align: top;
+}
+
+
+.small-print,
+.attribution-link {
+    font-size: 8px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+}
+
+
+
+.statistics-title {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+}
+
+.statistics-date {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+}
+
+.statistics-label {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.statistics-value {
+    font-size: 16px;
+    line-height: 1.5em;
+    vertical-align: top;
+    padding: 0 2px 0 2px;
+}
+
+
+
+.contact-title,
+.downloads-title,
+.api-title,
+.login-title {
+    font-size: 22px;
+    line-height: 1.7em;
+    padding: 2px;
+}
+
+.contact-label,
+.downloads-label,
+.api-label,
+.login-label {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.contact-value,
+.downloads-value,
+.api-value,
+.login-value {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+
+.help-title {
+    font-size: 22px;
+    line-height: 1.7em;
+    padding: 2px;
+}
+
+.help-section-title {
+    font-size: 18px;
+    line-height: 1.7em;
+    padding: 2px;
+}
+
+.help-label {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+}
+
+.help-value {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+}
+
+.help-example {
+    font-size: 15px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    margin-left: 2em;
+}
+
+
+.help-field-label {
+    font-size: 12px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+    white-space: nowrap;
+}
+
+.help-field-value {
+    font-size: 12px;
+    line-height: 1.2em;
+    padding: 0 2px 0 2px;
+}
+
+.help-field-example {
+    font-size: 12px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    margin-left: 2em;
+}
+
+
+
+.divider {
+    line-height: 1.6em;
+}
+    
+.spacer {
+    line-height: 0em;
+}
+
+.highlight {
+    /*background-color: #CEEBC4;*/
+    background-color: #FFFFC0;
+}
+
+
+/*---------------------------------------------------------------------------*/

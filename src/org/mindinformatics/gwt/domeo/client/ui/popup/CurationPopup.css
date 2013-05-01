@@ -1,0 +1,22 @@
+.fw_PopupPanel {
+	border: 3px solid #6D98AB;
+	padding: 0px;
+	background: white;
+	/*
+	opacity:0.8;
+	filter:alpha(opacity=80); *//* For IE8 and earlier */
+	max-width: 500px;
+	z-index: 100000000;
+}
+
+.fw_ScrollPanel {
+	max-height: 300px;
+}
+
+.fw_CurationPopup  a, a:visited, a:hover {
+	color:#0050A0;
+}
+.fw_containerPanelWithPadding {
+	padding-left: 5px;
+	padding-right: 5px;
+}

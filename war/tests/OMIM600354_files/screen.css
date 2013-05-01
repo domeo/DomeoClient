@@ -1,0 +1,1016 @@
+/*---------------------------------------------------------------------------*/
+
+/*
+
+    Module:    screen.css
+
+    Author:    Francois Schiettecatte (FS Consulting, LLC.)
+
+    Creation Date:    2 June 201
+
+    Purpose:    This is the CSS for the screen.
+
+*/
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Basic features
+*/
+
+* {    
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    display: block;
+    background-color: #FEFFFF;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Grande', Arial, Helvetica, Verdana, Geneva, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #004EC5;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #7E2D96;
+}
+
+div {
+}
+
+table {
+    width: 100%;
+    table-layout: auto;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Body features
+*/
+
+div#body {
+    float: none;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Menu features (part of body)
+*/
+
+div#menu {
+    background: #FDFDFD;
+    border-bottom: 2px solid #97CE80;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 6px 4px;
+    text-align: left;
+}
+
+div#menu ul,
+div#menu ul li {
+    display: inline;
+}
+
+div#menu .dropdown {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+div#menu .dropdown li {
+    display: inline;
+    list-style: none;
+    position: relative;
+    z-index: 2;
+}
+
+div#menu ul li a {
+    padding: 5px;
+}
+
+div#menu .dropdown li:hover a,
+div#menu .dropdown li.hover a {
+    background: #CDCDCD;
+}
+
+div#menu .dropdown li ul.drop_nav {
+    background: #FDFDFD;
+    border: 1px solid #CDCDCD;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 18px;
+}
+
+div#menu .dropdown li:hover ul.drop_nav,
+div#menu .dropdown li.hover ul.drop_nav {
+    display: block;
+}
+
+div#menu .dropdown li ul.drop_nav li {
+    display: block;
+    white-space: nowrap;
+}
+
+div#menu .dropdown li ul.drop_nav li a {
+    background: #FDFDFD;
+    display: block;
+    line-height: 1;
+}
+
+div#menu .dropdown li ul.drop_nav li a:hover {
+    background: #CDCDCD;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Margin features (part of body)
+*/
+
+div#margin {
+    padding: 10px;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Home features (part of body/margin)
+*/
+
+div#home {
+    font-size: 12px;
+    line-height: 1.6em;
+    margin: 100px auto 100px auto;
+    text-align: center;
+    width: 480px;
+}
+
+div#home h2 {
+    font-family: 'Palatino Linotype', 'Palatino', Georgia, 'Times New Roman', Times, serif;
+    font-size: 48px;
+    line-height: 1;
+    padding: 24px 0 0 0;
+}
+
+div#home h2 sup {
+    top: -.5em;
+    font-size: .4em;
+    position: relative;
+}
+
+div#home form {
+    padding: 0 0 10px 0;
+}
+
+div#home form #entrySearch {
+    -moz-border-radius: 0.7em;
+    -webkit-border-radius: 0.7em;
+    border: 1px solid #CDCDCD;
+    font-size: 16px;
+    padding: 5px;
+    vertical-align: middle;
+    width: 300px;
+}
+
+div#home form .advanced {
+    text-align: left;
+    padding: 10px 0;
+}
+
+div#homeLogos {
+    overflow: auto;
+    padding: 0px;
+    text-align: center;
+}
+
+div#homeLogos img.first {
+    margin: 0px 100px 0px 0px;
+}
+
+div#homeLogos img.second {
+    margin: 0px 0px 0px 100px;
+}
+
+div#homeSocialLinks {
+    overflow: auto;
+    padding: 0px;
+    text-align: right;
+}
+    
+div#homeSocialLinks {
+    overflow: auto;
+    padding: 0px;
+    text-align: right;
+}
+
+
+div#homeMirrorSite {
+    font-size: 12px;
+    line-height: 1.5em;
+    padding: 0 2px 0 2px;
+    text-align: center;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Search features (part of body/margin)
+*/
+
+div#search {
+    margin: 4px;
+}
+
+div#search table.search {
+    -moz-border-radius: 0.7em;
+    -moz-box-shadow: 0 0 3px #97CE80;
+    -webkit-border-radius: 0.7em;
+    -webkit-box-shadow: 0 0 3px #97CE80;
+    border: 2px solid #97CE80;
+    padding: 10px 10px 5px 10px;
+}
+
+div#search table.search td {
+    padding: 0 10px 10px 0;
+    text-align: start;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+div#search table.search td.search input {
+    font-size: 14px;
+}
+
+div#search table.search td.advanced {
+    font-size: 10px;
+}
+
+div#search table.search td.padding {
+    white-space: nowrap;
+    width: 100%;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Advanced Search Forms
+*/
+
+div#search form.advanced {
+    -moz-border-radius: 0.7em;
+    -moz-box-shadow: 0 0 3px #97CE80;
+    -webkit-border-radius: 0.7em;
+    -webkit-box-shadow: 0 0 3px #97CE80;
+    border: 2px solid #97CE80;
+    font-size: 14px;
+    margin: 20px;
+    padding: 30px;
+}
+
+div#search form.advanced input {
+    font-size: 14px;
+}
+
+div#search form.advanced table {
+    -moz-border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-border-radius: 0;
+    -webkit-box-shadow: none;
+    border-collapse: collapse;
+    border: none;
+    margin: 10px 0;
+    table-layout: auto;
+    width: auto;
+}
+
+div#search form.advanced table td {
+    padding: 10px;
+    vertical-align: top;
+    border: 1px solid #CCC;
+}
+
+div#search form.advanced .text,
+div#search form.advanced .radio,
+div#search form.advanced .select,
+div#search form.advanced .submit {
+    margin: 10px 0;
+}
+
+div#search form.advanced .group {
+    overflow: auto;
+}
+
+div#search form.advanced .checkbox label {
+    background: #F3F3F3;
+    padding: 5px 10px;
+    margin: 0 0 4px 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div#search form.advanced .checkbox input {
+    vertical-align: middle;
+}
+
+div#search form.advanced .checkbox label input {
+    margin: 0 4px 0 0;
+}
+
+div#search form.clinical_synopsis .checkbox,
+div#search form.advanced .prefix {
+    overflow: auto;
+}
+
+div#search form.clinical_synopsis .group .checkbox {
+    margin: 10px 0;
+}
+
+div#search form.clinical_synopsis .group .checkbox {
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+div#search form.advanced .group .checkbox {
+    float: left;
+}
+
+div#search form.advanced table .checkbox label,
+div#search form.clinical_synopsis .checkbox label,
+div#search form.advanced .prefix label {
+    float: left;
+    clear: left;
+    display: block;
+    text-align: left;
+    margin-right: 20px;
+}
+
+div#search form.advanced table .chromosomes label {
+    padding: 0;
+    float: none;
+    clear: none;
+    width: 40px;
+    height: 40px;
+    margin-right: 0;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+}
+
+div#search form.advanced .group .chromosomes label {
+    float: none;
+    clear: none;
+    margin-right: 0;
+    text-align: center;
+    display: inline-block;
+}
+
+div#search form.advanced .chromosomes label input {
+    margin: 0;
+}
+
+div#search form.advanced .checkbox label.active {
+    color: #111;
+    background: #BDF;
+}
+
+div#search form.advanced .checkbox .auto label {
+    width: auto;
+    padding: 0 10px;
+}
+
+div#search form.advanced .thesaurus label {
+    font-size: 12px;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Content features (part of body/margin)
+*/
+
+div#content {
+    margin: 10px 20px; 
+    padding: 0 0 0 0;
+}
+
+
+div#content-with-floating-menu {
+    margin: 10px 20px; 
+    padding: 0 250px 0 0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Message features (part of body/margin/content)
+*/
+
+div#message {
+    font-size: 14px;
+    line-height: 1.6em;
+    margin-bottom: 10px; 
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Results features (part of body/margin/content)
+*/
+
+div#results {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Navigation features (part of body/margin/content)
+*/
+
+div#navigation {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Form features (part of body/margin/content)
+*/
+
+div#form {
+    -moz-border-radius: 0.7em;
+    -webkit-border-radius: 0.7em;
+    background: #FDFDFD;
+    border-radius: 0.7em;
+    border: 1px solid #CDCDCD;
+    margin-bottom: 10px; 
+    padding: 4px 4px 2px 4px;
+}
+
+div#form table {
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+div#form td.title {
+    color: white;
+    background: #CDCDCD;
+    font-size: 18px;
+    padding: 4px 4px 2px 4px;
+}
+
+div#form td.hidden {
+    display: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Footer features (part of body)
+*/
+
+div#footer {
+    border-top: 2px solid #97CE80;
+    font-size: 10px;
+    line-height: 1.6em;
+    padding: 10px;
+    text-align: center;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Text features
+*/
+
+
+.icd-number-screen {
+    float: right;
+    font-size: 12px; 
+}
+    
+.icd-number-print {
+    display: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Floating menu (part of body/content)
+*/
+
+
+.floating-menu {
+    position: fixed;
+    right: 20px;
+    right: 80px !ie;    /* IE7 hack! */
+    top: 150px;
+    width: 240px;
+}
+
+.floating-menu form {
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+.floating-menu input {
+    display: none;
+}
+.floating-menu label:hover {
+    font-weight: bold;
+}
+
+
+.accordion {
+    -moz-border-radius: 0.7em 0.7em 0.7em 0.7em;
+    -moz-box-shadow: 0 0 3px #CDCDCD;
+    -webkit-border-radius: 0.7em 0.7em 0.7em 0.7em;
+    -webkit-box-shadow: 0 0 3px #CDCDCD;
+    background: #FDFDFD;
+    border-radius: 0.7em;
+    border: 1px solid #CDCDCD;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+
+.accordion a {
+    text-decoration: none;
+}
+
+.accordion a:hover {
+    text-decoration: underline;
+}
+
+.accordion h3 a:visited {
+    color: #004EC5;
+}
+
+.accordion .ui-icon {
+    color: #004EC5;
+    cursor: pointer;
+}
+
+.accordion h3 {
+    padding: 6px;
+    font-size: 12px;
+    font-weight: normal;
+    border-bottom: 1px solid #CDCDCD;
+}
+
+.accordion h3.toc {
+    -moz-border-radius: 0.7em 0.7em 0 0;
+    -webkit-border-radius: 0.7em 0.7em 0 0;
+}
+
+.accordion h3.last {
+    border: none;
+}
+
+.accordion div.last {
+    border: none;
+    border-top: 1px solid #CDCDCD;
+}
+
+.accordion h3.ui-state-active {
+    background: #BDF;
+}
+
+.accordion div {
+    border-bottom: 1px solid #CDCDCD;
+}
+
+.accordion div a {
+    padding: 0 6px;
+}
+
+.accordion table {
+    border-collapse: collapse;
+}
+
+.accordion ul {
+    list-style: none;
+}
+
+.accordion ul li {
+    margin: 0 0 0 0.5em;
+    line-height: 1.2em;
+}
+
+.accordion ul li a {
+    font-size: 12px;
+}
+
+.drawer {
+    -moz-border-radius: 0.7em 0 0 0.7em;
+    -webkit-border-radius: 0.7em 0 0 0.7em;
+    background: #FDFDFD;
+    border: 1px solid #CDCDCD;
+    display: none;
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    top: 30px;
+    width: 180px;
+    z-index: 0;
+}
+
+.drawer a {
+    padding: 0 6px;
+    display: block;
+    text-decoration: none;
+    border-bottom: 1px solid #CDCDCD;
+}
+
+.drawer a:hover,
+.drawer a:focus,
+.drawer a:active {
+    outline: none;
+    text-decoration: underline;
+}
+
+.drawer ul {
+    list-style: none;
+    text-align: right;
+}
+
+.drawer ul li {
+    line-height: 1.2em;
+}
+
+.drawer ul li a {
+    font-size: 12px;
+}
+
+.active {
+    color: #FFF;
+    background: #000;
+}
+
+.active:visited {
+    color: #FFF;
+}
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** TipTip CSS - Version 1.2
+*/
+
+.definition {
+/*
+    padding: 0 18px 0 0;
+    background: url("../static/tooltip.gif") 100% 100% no-repeat;
+*/
+}
+
+#tiptip_holder {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+}
+
+#tiptip_holder.tip_top {
+    padding-bottom: 5px;
+}
+
+#tiptip_holder.tip_bottom {
+    padding-top: 5px;
+}
+
+#tiptip_holder.tip_right {
+    padding-left: 5px;
+}
+
+#tiptip_holder.tip_left {
+    padding-right: 5px;
+}
+
+#tiptip_content {
+    -moz-border-radius: 3px;
+    -moz-box-shadow: 0 0 2px #CDCDCD;
+    -webkit-border-radius: 3px;
+    -webkit-box-shadow: 0 0 2px #CDCDCD;
+    background: #f3f3f3;
+    border-radius: 3px;
+    border: 1px solid #999;
+    color: #111;
+    font-size: 11px;
+    padding: 4px 8px;
+}
+
+#tiptip_arrow, #tiptip_arrow_inner {
+    border-color: transparent;
+    border-style: solid;
+    border-width: 6px;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+
+#tiptip_holder.tip_top #tiptip_arrow {
+    border-top-color: #999;
+}
+
+#tiptip_holder.tip_bottom #tiptip_arrow {
+    border-bottom-color: #999;
+}
+
+#tiptip_holder.tip_right #tiptip_arrow {
+    border-right-color: #999;
+}
+
+#tiptip_holder.tip_left #tiptip_arrow {
+    border-left-color: #999;
+}
+
+#tiptip_holder.tip_top #tiptip_arrow_inner {
+    margin-top: -7px;
+    margin-left: -6px;
+    border-top-color: #EEE;
+}
+
+#tiptip_holder.tip_bottom #tiptip_arrow_inner {
+    margin-top: -5px;
+    margin-left: -6px;
+    border-bottom-color: #EEE;
+}
+
+#tiptip_holder.tip_right #tiptip_arrow_inner {
+    margin-top: -6px;
+    margin-left: -5px;
+    border-right-color: #EEE;
+}
+
+#tiptip_holder.tip_left #tiptip_arrow_inner {
+    margin-top: -6px;
+    margin-left: -7px;
+    border-left-color: #EEE;
+}
+
+/* Webkit Hacks */
+@media screen and (-webkit-min-device-pixel-ratio:0) {    
+    #tiptip_content {
+        padding: 4px 8px 5px 8px;
+        background-color: #f3f3f3;
+    }
+    #tiptip_holder.tip_bottom #tiptip_arrow_inner { 
+        border-bottom-color: #eee;
+    }
+    #tiptip_holder.tip_top #tiptip_arrow_inner { 
+        border-top-color: #eee;
+    }
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** jQuery UI Dialog
+*/
+
+.ui-dialog {
+    background: #FFF;
+    float: right;
+    margin: 0;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    -moz-border-radius: 0.7em 0.7em 0 0;
+    -moz-box-shadow: 0 0 3px #97CE80;
+    -webkit-border-radius: 0.7em 0.7em 0 0;
+    -webkit-box-shadow: 0 0 3px #97CE80;
+    background: #98CF81;
+    cursor: move;
+    font-size: 12px;
+    overflow: auto;
+    padding: 5px;
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    float: left;
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
+    color: #FFF;
+    float: right;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:hover {
+    color: white;
+}
+
+.ui-dialog .ui-dialog-content {
+    font-size: 12px;
+    position: relative;
+}
+
+.ui-dialog {
+    background-color: transparent;
+}
+.ui-dialog .ui-dialog-titlebar {
+    width: 184px;
+}
+.ui-dialog .ui-dialog-content ul {
+    -moz-border-radius: 0 0 0.7em 0.7em;
+    -moz-box-shadow: 0 0 3px #97CE80;
+    -webkit-border-radius: 0 0 0.7em 0.7em;
+    -webkit-box-shadow: 0 0 3px #97CE80;
+    background: #FFF;
+    border: 1px solid #CDCDCD;
+    margin: 0;
+    padding: 10px 0;
+    position: absolute;
+    width: 192px;
+    z-index: 200;
+}
+
+.ui-dialog .ui-dialog-content ul ul,
+.ui-dialog .ui-dialog-content .drawer ul {
+    -moz-border-radius: none;
+    -moz-box-shadow: none;
+    -webkit-border-radius: none;
+    -webkit-box-shadow: none;
+    background: none;
+    border: none;
+    padding: 0;
+    position: static;
+    width: auto;
+}
+
+.ui-dialog .ui-dialog-content li {
+    list-style: none;
+    margin: 0 0 0 1em;
+    padding: 0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Contact/Download Form
+*/
+
+label.required {
+    font-weight: bold;
+}
+
+label.error {
+    color: red;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+
+/*
+** Autocomplete
+**    http://code.google.com/p/jquery-autocomplete/ - with mods
+*/
+
+/*
+.acInput {
+    width: 200px;
+}
+*/
+
+.acResults {
+    padding: 0px;
+    border: 1px solid WindowFrame;
+    background-color: Window;
+    overflow: hidden;
+}
+
+.acResults ul {
+    width: 100%;
+    list-style-position: outside;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.acResults li {
+    margin: 0px;
+    padding: 2px 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font: menu;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.acLoading {
+    background : url('/static/indicator.gif') right center no-repeat;
+}
+
+.acSelect {
+    background-color: Highlight;
+    color: HighlightText;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Button
+*/
+
+.activeButton {
+    -moz-border-radius: 0.5em;
+    -moz-box-shadow: 0 0 2px #97CE80;
+    -webkit-border-radius: 0.5em;
+    -webkit-box-shadow: 0 0 2px #97CE80;
+    background : url('/static/gray-grad.png');
+    border: 1px solid #97CE80;
+    color: #004EC5;
+    font-size: 12px;
+    padding : 2px 3px;
+}
+
+.inactiveButton {
+    -moz-border-radius: 0.5em;
+    -moz-box-shadow: 0 0 2px #97CE80;
+    -webkit-border-radius: 0.5em;
+    -webkit-box-shadow: 0 0 2px #97CE80;
+    background : url('/static/gray-grad.png');
+    border: 1px solid #97CE80;
+    color: black;
+    font-size: 12px;
+    padding : 2px 3px;
+}
+
+.activeButton:hover {
+    background : url('/static/dark-gray-grad.png');
+    text-decoration: none;
+}
+
+.activeButton:visited {
+    color: #004EC5;
+    text-decoration: none;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
+/*
+** Highlighting
+*/
+
+strong {
+    font-weight: inherit;
+}
+
+strong.highlighted {
+    background-color: #FFFFC0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+

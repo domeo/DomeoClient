@@ -1,0 +1,19 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>	
+		.body {
+			width: 100%;
+			border-left: 2px solid #ddd;
+		}
+		
+		.topbar {
+			width: 100%;
+		}
+	</ui:style>
+	<g:VerticalPanel styleName='{style.body}'>
+		<g:VerticalPanel ui:field='topbar' styleName='{style.topbar}'/>
+		<g:VerticalPanel ui:field='body'/>
+	</g:VerticalPanel>
+</ui:UiBinder>

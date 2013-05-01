@@ -1,0 +1,9 @@
+package org.mindinformatics.gwt.framework.component.profiles.src.testing;
+
+import java.util.HashMap;
+
+public interface IUpdateProfileCallback {
+
+	public void updateCurrentProfile();
+	public HashMap<String, String> getPluginsStatus();
+}

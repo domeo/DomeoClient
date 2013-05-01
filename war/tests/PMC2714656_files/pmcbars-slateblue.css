@@ -1,0 +1,80 @@
+/* Created using Style Master from Western Civilisation NS4.0
+
+NS6
+
+IE4.0
+
+IE5 { -26 -4 534 818 } */
+
+/* styles for TOC and Archive pages */
+
+.doc-group1
+{background-color: #0072a8;
+color: white;
+font-family: Verdana, sans-serif;
+font-size: 110%;
+font-weight: bold}
+
+.doc-group2
+{background-color: #cccccc;
+color: #004080;
+font-family: Arial, sans-serif;
+font-weight: bold;
+text-align: center}
+
+.doc-group3
+{background-color: #cccccc;
+color: #000000;
+font-family: Arial, sans-serif;
+font-weight: bold;
+text-align: center}
+
+.doc-group4
+{}
+
+.toc-supp-link
+{color: #e64a00;
+font-family: Arial, sans-serif;
+font-size: 75%;
+text-decoration: none}
+
+.toc-highlight1
+{background-color: #ffffd0}
+
+.toc-highlight2
+{background-color: #ace4ff}
+
+.toc-hl-inaugural     
+{color: #e64a00}
+
+/* styles for Abstract, Full text, Corrections pages */
+
+.head1
+{background-color: #0072a8;
+border: 1pt solid #0072a8;
+color: white;
+font-family: Verdana, sans-serif;
+font-size: 110%;
+font-weight: bold;
+text-align: center}
+
+.head1A
+{background-color: #cccccc;
+color: #004080;
+font-family: Arial, sans-serif;
+font-weight: bold}
+
+.append-head1
+{font-family: Arial, sans-serif;
+font-weight: bold;
+text-align: center}
+
+.colorbar-link
+{color: #ffffff}
+
+.head1 a:link {  color: white; }
+.head1 a:visited {  color: white; }
+
+.head1A a:link {  color: white; }
+.head1A a:visited {  color: white; }
+

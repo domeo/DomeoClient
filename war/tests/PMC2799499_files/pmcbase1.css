@@ -1,0 +1,1143 @@
+/* $Id: pmcbase1.css,v 1.193 2011/05/10 20:19:49 lebedand Exp $ */
+/*                      */
+/* base styles for all  */
+/*                      */
+
+body
+{background-color: #f8f8f8}
+
+.small-caps
+{font-size: 80%;
+font-variant: small-caps;
+}
+
+.monospace
+{font-family: monospace}
+
+.pmctop-bg
+{background-color: #fffeee}
+
+a.pmctop
+{color: #004080;
+font-family: Arial, sans-serif;
+font-size: 12px;
+text-decoration: none}
+
+.pmc-body A:active, .pmc-body A:hover,
+.pmc-body-table A:active, .pmc-body-table A:hover,
+.pmc-body-figure A:active, .pmc-body-figure A:hover
+, .pmc-body A:hover
+{text-decoration: underline}
+
+.pmc-body A:hover, .pmc-body-table A:hover, .pmc-body-figure A:hover
+{}
+
+hr
+{color: #0072a8}
+
+hr.tfs
+{height: 1ex;
+border-style: none;
+border-top: 1px dashed #0072a8;}
+
+.base-highlight1
+{background-color: #ebebeb}
+
+.base-highlight2
+{background-color: #cccccc}
+
+
+.valign-top
+{vertical-align: top}
+
+.valign-bottom
+{vertical-align: bottom}
+
+.controls
+{color: #000000;
+font-family: Verdana, Arial, sans-serif;
+font-size: 75%;
+font-weight: bold;
+text-decoration: none}
+
+.formtext
+{font-family: Arial, sans-serif;
+font-size: 80%}
+
+.link
+{color: #0055aa;
+text-decoration: none}
+
+.footer-link
+{font-family: Arial, sans-serif;
+font-size: 80%;
+text-align: center;
+}
+
+.side-head {
+	font-family: Arial, sans-serif;
+	font-size: 90%;
+	font-weight: bold;
+	}
+
+.side-subhead {
+	font-family: Arial, sans-serif;
+	font-size: 75%;
+	font-weight: bold;
+	margin-top: 10px;
+	}
+
+.side-item, .side-curr-item {
+	font-family: Arial, sans-serif;
+	font-size: 75%;
+	margin: 2px 1px 2px 4px;
+	padding-bottom: 2px;
+	border-bottom: 1px solid #c0c0c0;
+	}
+
+.side-item a {
+	color: #0055aa;
+	text-decoration: none;
+	}
+
+.side-curr-item {
+	color: #808080;
+	}
+
+/* styles for TOC and Archive pages */
+
+.toc-header-vid
+{font-family: Arial, sans-serif;
+font-size: 120%;
+font-weight: bold;
+margin-top: 1.1em;
+margin-bottom: 1.1em;
+line-height: 1.1em;}
+
+.more-iss-text
+{font-family: Arial, sans-serif;
+font-weight: bold;
+margin-top: 1.35em;
+margin-bottom: 1.35em;}
+
+.more-iss-link
+{color: #0055aa;
+text-decoration: none}
+
+.arc-issue
+{color: #004080;
+font-family: Arial, sans-serif;
+font-size: 80%;
+text-align: center;
+text-decoration: none}
+
+.toc-entry, .portal-tocentry
+{line-height: 1.125em;}
+
+.toc-comment
+{font-family: Arial, sans-serif;
+font-size: 70%}
+
+/* styles for TOC article entries */
+
+.toc-title
+{font-family: Arial, sans-serif;
+font-size: 80%;
+font-weight: bold}
+
+.toc-author
+{font-family: Arial, sans-serif;
+font-size: 75%}
+
+.toc-cit-ver
+{color: #666666;
+font-family: Arial, sans-serif;
+font-size: 75%;}
+
+.toc-cit-jour
+{color: #666666;
+font-family: Arial, sans-serif;
+font-size: 75%;
+font-style: italic}
+
+.toc-cit-vol
+{color: #666666;
+font-family: Arial, sans-serif;
+font-size: 75%}
+
+.toc-cit-page
+{color: #666666;
+font-family: Arial, sans-serif;
+font-size: 75%;
+font-weight: bold}
+
+.toc-cit-date, .toc-pmcid
+{color: #666666;
+font-family: Arial, sans-serif;
+font-size: 75%;
+white-space :nowrap;
+}
+
+
+.toc-link
+{font-family: Arial, sans-serif;
+font-size: 75%;
+text-decoration: none}
+
+a.toc-link
+{color: #004080;}
+
+.toc-divider
+{font-family: Arial, sans-serif;
+font-size: 75%;
+text-decoration: none}
+
+.toc-corrected-citation
+{margin-left: 1em;}
+
+.toc-corrected-prefix,
+.toc-corrected-1st-author-etal,
+.toc-corrected-citation-title
+{font-family: Arial, sans-serif;
+	font-size: 75%;}
+
+.toc-corrected-prefix
+{
+	font-weight: 600;
+}
+
+.toc-corrected-citation-info
+{
+	font-family: Arial, sans-serif;
+	font-size: 75%;
+}
+
+.toc-corrected-citation-info .citation-abbreviation
+{
+	font-style: italic;
+}
+
+.toc-entry-abstract-toc
+{
+	font-family: Arial, san-serif;
+	font-size: 75%;
+	padding: 0 2em;
+	color: #333;
+}
+
+.cited-article-fm
+{
+	background-color: #ebebeb;
+	border-width: 1px;
+	border-style: solid;
+	margin-left: 0px;
+	padding-right: 8px;
+	padding-left: 8px;
+}
+
+.citing-article-fm
+{
+	margin-left: 0px;
+	padding-right: 8px;
+	padding-left: 8px;
+}
+/* styles for Abstract, Full text & Corrections pages */
+
+.sidefm-pmchead, .sidefm-pmhead
+{color: #0055aa;
+font-family: Verdana, Arial, sans-serif;
+font-size: 85%;
+font-weight: bold;
+text-decoration: none}
+
+.sidefm-pmsubhead
+{
+color: #000000;
+font-family: Arial, sans-serif;
+font-size: 75%;
+font-weight: bold;
+margin-top: 10px;
+}
+
+.sidefm-pmclink, .sidefm-pmart, .side-section, .side-caption
+{color: #004080;
+text-decoration: none;}
+
+.sidefm-pmclink, .sidefm-pmart, .side-section
+{font-family: Arial, sans-serif;
+font-size: 75%;}
+
+select.sidefm-pmart
+{width: 145px;}
+
+.figure-table-caption-in-article, .side-caption
+{line-height: 1.4;
+font-size: 87.5%;}
+
+.figure-table-caption-in-article
+{color: #5e5e5e;}
+
+.sidefm-pmclink-item
+{
+    padding-left: 10px;
+}
+.sidefm-pmclink-item a, .sidefm-pmccurrent-item a, .sidefm-pmclink-item a:hover, .sidefm-pmccurrent-item a:hover
+{
+border-bottom: 1px dotted #c0c0c0;
+text-decoration: none;
+display: block;
+padding-bottom: 2px;
+padding-left: 5px;
+line-height: 1.5em;
+}
+
+.sidefm-pmclink-item a
+{
+color: #004080;
+}
+
+
+.sidefm-pmclink-item a:hover, .sidefm-pmccurrent-item a:hover
+{background-color: #b8c8d8;
+}
+
+.sidefm-pmccurrent-item a,
+.sidefm-pmccurrent-item a:hover
+{
+color: #808080;
+cursor: default;
+}
+
+.sidefm-pmccurrent-item a:hover
+{
+background-color: #dcdcdc;
+}
+
+
+.side-section-curr
+{color: #808080;
+font-family: Arial, sans-serif;
+font-size: 75%;
+text-decoration: none}
+
+.sidebar-cell .sidefm-supplink,
+.sidebar-cell .side-supplink
+{
+	font-size: 75%;
+	font-family: Arial, sans-serif;
+}
+
+a.sidefm-supplink, a.side-supplink
+{color: #b55a00;
+text-decoration: none}
+
+.side-section-group
+{border-top: 1px #0077aa solid;
+text-decoration: none;
+padding-left: 3px;
+padding-right: 3px;
+line-height: 	100%;
+}
+
+.head-separate {margin-bottom: 0.3125em;}
+
+.links-box {
+padding: 5px;
+margin-top: 1em;
+margin-bottom: 1em;
+margin-left: 0;
+margin-right: 0;
+border: 1px solid #666699;
+border-top: 1px solid #ccd8e4;
+border-right: 1px solid #ccd8e4;
+}
+
+:target {
+  border: 1px dotted #336699;
+}
+
+.main-table-content, .main-figure-content {
+    margin-left: 9px;
+}
+
+div.fm-author
+{
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+}
+
+.fm-affl,
+.fm-footnote,
+.fm-editor
+{
+    font-weight: normal;
+    color: #3e3e3e !important;
+}
+
+div.fm-affl,
+div.fm-footnote
+{
+    margin: 0 !important;
+}
+
+.fm-footnote .fm-affl,
+.fm-footnote .fm-footnote,
+.fm-affl .fm-affl
+{
+    font-size: 1em;
+}
+
+div.fm-copyright,
+div.fm-pubdate
+{
+    margin-bottom: 12px !important;
+    margin-top: 12px !important;
+}
+
+div.fm-citation
+{
+    margin-top: 0 !important;
+}
+
+.fm-citation-from
+{margin-right: 0.5em;}
+
+.fm-citation-ids
+{
+    text-align: right;
+    font-size: 85%;
+    font-family: Arial,sans-serif;
+    white-space :nowrap;
+    padding-left: 1em;
+}
+
+.fm-citation-ids-label
+{color: #666;}
+
+
+.fm-citation-pmcid
+{
+}
+
+.fm-citation-manuscriptid
+{
+}
+
+.fm-citation-other-versions-label
+{
+    color:#0050A0;
+    cursor: pointer;
+    .cursor: hand;
+}
+
+.fm-citation-this-version-label
+{color: #666666;}
+
+.fm-citation-versions
+{
+    position: relative;
+}
+
+
+.fm-citation-versions .fm-citation-verions-list-canvas
+{
+    display: none;
+    border: 0.5em solid #F8F8F8;
+    position: absolute;
+    right: 0;
+    top: 1.1em;
+
+    background-color: #444;
+    background-color: rgba(0,0,0,0.7);
+    .background-color: #444; /* for IE7/8, because rgba does not work there to make borderder around image transparent */
+    padding: 0.5em;
+    border: 1em  transparent solid;
+    .border: 1em  #444 solid;
+
+}
+
+.fm-citation-versions:hover .fm-citation-verions-list-canvas,
+.show-hover .fm-citation-verions-list-canvas
+{
+    display: block;
+}
+
+
+.fm-citation-versions .fm-citation-verions-list
+{
+    padding: 0.5em;
+    background-color: #F8F8F8;
+    border: #639ACE 3px solid;
+    text-align: left;
+}
+
+.fm-citation-verions-list .version
+{margin-left: 15px;}
+
+.fm-copyright
+{margin-top: 6px}
+
+dl.fm-copyright-license
+{margin: 0}
+
+.fm-permissions
+{float: right;
+margin-left: 1em;}
+
+.fm-reuse
+{margin-left: 15px}
+
+.links-box .fm-footnote
+{
+    margin: 0;
+}
+
+.tocentry, .toc-entry-alt-lang
+{
+    margin-top: 1.125em;
+    margin-bottom: 1.125em;
+}
+
+.toc-entry-alt-lang
+{
+    margin-left: 2.5em;
+}
+
+.toc-entry-alt-lang-msg
+{
+    font-size: 75%;
+    font-family: Arial, sans-serif;
+}
+.portal-tocentry
+{
+    margin-top: 1.6ex;
+    margin-bottom: 2ex;
+    margin-right: 1em;
+}
+
+.button-elsevierwt
+{
+    border: 0;
+}
+
+.elsevierwt-sponsored-label
+{
+    color: #f8f8f8;
+    font-weight: 600;
+}
+
+.banner-journal-publisher-over-image-elsevierwt
+{
+    position: relative;
+    margin-left: 20px;
+    top: -30px;
+    color: #9A7947;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    line-height: 1.5em;
+    margin-right: 145px;
+    overflow:hidden;
+    height: 75px;
+}
+
+.banner-journal-name-elsevierwt
+{
+    font-weight: 600;
+    font-size: 1.2em;
+    margin-left: 1em;
+    color: #954A4A;
+}
+
+a.elsevierwt-button-link
+{
+    position: relative;
+    left: 360px;
+    top: 40px;
+}
+
+a.elsevierwt-button-link:hover
+{
+    background-color: #F1E8CE;
+}
+
+.fm-elsevierwt-disclaimer
+{
+    font-family: Arial, sans-serif;
+    font-size: .6875em;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+ul.back-ref-list-1st-line-shifted
+{
+    padding: 0;
+}
+
+.ref-cit-blk,
+.back-ref-list-1st-line-shifted li,
+.back-ref-list li
+{
+    margin-top: 1.4em;
+    line-height: 1.4em;
+}
+
+
+div.ref-label
+{
+    width: 45px;
+    text-align: right;
+    float:left;
+    border: 1px solid #F8F8F8;
+}
+
+div.ref-cit
+{
+    margin-left: 55px;
+}
+
+span.ref-label
+{font-style: italic;}
+
+span.ref-cit
+{}
+
+
+.back-ref-list-1st-line-shifted li
+{
+    list-style-type:none;
+    margin-left:2em;
+    /*padding-left:1.5em;*/
+    text-indent:-1.5em;
+}
+
+.array-table, .array-table-inline
+{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #f4f4f4;
+    line-height: 1.3125em;
+    width: 100%;
+
+}
+
+.array-table td
+{
+    padding: 0em 0.5em;
+}
+
+.array-table-inline
+{
+    display: inline;
+}
+
+.list-item-w-pw
+{
+    border: #f8f8f8 1px solid;
+}
+
+.list-item-w-pw-prefix-word
+{
+    display:inline-block; /*this line is here for opera specificaly*/
+    position:relative;
+    text-align: right;
+}
+
+.list-item-w-pw-content
+{
+    position:relative;
+    top: -1.35em;
+}
+
+.list-item-p-question
+{
+	font-weight: bold;
+}
+
+span.underline
+{
+    border-bottom: 1px solid black;
+}
+
+span.double-underline
+{
+    border-bottom: 3px double black;
+}
+
+span.bold-double-underline
+{
+    border-bottom: 3px double black;
+}
+
+.verse-group
+{
+    margin: 1.3125em 2em;
+    font-family: "Monotype Corsiva", "Apple Chancery", "URW Chancery L", cursive;
+    font-size: 1.125em;
+    line-height: 1.1666em;
+}
+
+.internal-control
+{
+ 	margin: 1.5em auto;
+	background-color: #f0f0f0;
+	font-weight: bold;
+	width: 95%;
+	padding: 0.5em;
+}
+
+.sidebar-menu-square-image-holder
+{
+vertical-align:middle;
+line-height: inherit;
+/*float: left;*/
+padding-right: 0.35em;
+_padding-top: 0.35em; /*for ie6*/
+}
+
+.figure-role
+{
+    margin: 1em 0;
+    display: block;
+}
+
+div.signature
+{margin: 1.8em 0;
+font-family: "Monotype Corsiva", "Apple Chancery", "URW Chancery L", cursive;}
+
+div.simple-list-item-w-label
+{
+    text-indent: -2em;
+    float: left;
+}
+
+.selective-deposit-msg
+{
+    background-color: #f4f4f4;
+    border:0.5em solid #F4F4F4;
+    font-family: Arial,sans-serif;
+    font-size: 80%;
+}
+
+.fm-title, .fm-trans-title
+{
+    margin-top: 16px;
+}
+
+.ukpmc-tocentry-icon,
+.holding-tocentry-icon
+{
+    border:                0;
+    vertical-align:        text-bottom;
+    margin-right:          0.25em;
+}
+
+.i18n-debug,
+.i18n-debug *
+{
+  background-color: #FFF0DF;
+}
+
+.i18n-debug .i18n-debug,
+.i18n-debug .i18n-debug *
+{
+  background-color: #FFE2BF;
+}
+
+.i18n-debug .i18n-debug .i18n-debug,
+.i18n-debug .i18n-debug .i18n-debug *
+{
+  background-color: #FFD39F;
+}
+
+.i18n-debug .i18n-debug .i18n-debug .i18n-debug,
+.i18n-debug .i18n-debug .i18n-debug .i18n-debug *
+{
+  background-color: #FFC47F;
+}
+
+a.i18n-switcher,
+a.i18n-switcher:hover
+
+{
+  font-family: Arial, sans-serif;
+  font-size: 0.75em;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.i18n-switcher-current,
+a.i18n-switcher-current:hover
+{
+  font-family: Arial, sans-serif;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+img.i18n-switcher
+{
+  width: 11px;
+  height: 8px;
+  border: none;
+  vertical-align: super;
+  margin-right: 2px;
+}
+
+td.content-cell
+{padding-left: 0.5em;}
+
+td.thumb-cell
+{width: 110px;}
+
+td.caption-cell
+{text-align: left;}
+
+.list .list-title
+{font-weight: bold;
+padding-left: 40px;
+margin: 1em 0;}
+
+div.fn-group
+{margin-top: 0.5em !important}
+
+.fn-group .title,
+.fn-group .label
+{font-weight: 600}
+
+.unsupported-lang-box
+{margin: 1em 0;
+border-color: #CCD8E4 #CCD8E4 #666699 #666699;
+border-style: solid;
+border-width: 1px;
+padding: 5px;
+/*background-color: white;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;*/}
+
+.el-exception-journal-title
+{margin: 0 0 0.5em 0;
+font-size: 125%}
+
+.print-obj img
+{max-width: 100%;}
+
+.compound-graphic-canvas
+{text-align:center;
+margin:0.5em}
+
+.compound-lt
+{background-color:#CCDDEE;
+padding:0 0.5em}
+
+
+/* figpopup related definitions ==================== */
+a.icon-reflink
+{display: block;}
+
+div.thumb-ph,
+div.caption-ph
+{padding: 0.5em;}
+
+div.thumb-ph
+{padding-right: 0;}
+
+a.fig-table-link:hover
+{z-index: 10; /*critical to keep popup over all other elements*/
+color: #444;}
+
+/* figpopup related definitions ==================== */
+.figpopup,
+.in-progress,
+.inline-block
+{display:  -moz-inline-box !important; /* for FireFox 2.* */
+display:  inline-block !important;
+zoom:     1 !important;/* this and next line for IE6/7 to treat div as an inline element*/
+*display: inline !important;/* this and previuos line for IE6/7 to treat div as an inline element*/}
+
+.figpopup
+{cursor: pointer;
+.cursor: hand;
+}
+
+.figpopup:hover
+{background-color: rgba(0,0,0, 0.05);
+-moz-box-shadow: 0px 0px 5px 2px rgba(0,100,200, 0.25);
+-webkit-box-shadow: 0px 0px 5px 2px rgba(0,100,200, 0.25);
+box-shadhow: 0px 0px 5px 2px rgba(0,100,200, 0.25);
+}
+
+.large-thumb-canvas,
+.co
+{z-index: 10000;
+display: none;
+position: absolute;
+}
+
+.large-thumb-canvas,
+.co-default
+{
+color: #444;
+border: 10px #444 solid;
+border-color: rgba(0,0,0,0.7);
+.border-color: #444;
+.border-width: 10px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+margin: 3mm;
+-moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0, 0.3);
+-webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0, 0.3);
+box-shadhow: 0px 0px 10px 3px rgba(0,0,0, 0.3);
+}
+
+.large-thumb-canvas-1,
+.co-inner
+{display: block;
+background-color: #fff;
+overflow: hidden;
+padding: 0.25em;
+}
+
+.in-progress {
+background-color: #444;
+background-image: url('../pmcgifs/loading-in-progress.gif');
+background-repeat:no-repeat;
+background-position:center;
+width:35px;
+height:35px;
+border: 1px silver solid;
+margin: 2px;
+}
+
+.large-thumb
+{border: 1px solid #444;
+display: none;
+margin: 2px;
+}
+
+.small-thumb-canvas
+{border: 1px solid #444;
+max-width: 104px;
+white-space: normal;
+word-wrap: break-word;
+.width: 104px;}
+
+.small-thumb-canvas-1
+{border: transparent 1px solid;
+*border: 1px solid white; /*IE6 Fix*/}
+
+.small-thumb
+{width: 100px;
+border: 1px solid #444;}
+
+.figpopup-sensitive-area
+{cursor: pointer;
+.cursor: hand;
+text-decoration: none;
+position: absolute;
+top: 0;
+opacity: 0;
+filter: alpha(opacity=0);
+color: transparent;
+background-color: transparent;
+}
+
+.canvas-figure-ref-outer,
+.canvas-figure-group-ref-outer,
+.canvas-table-ref-outer,
+.canvas-media-ref-outer
+{margin: 1.3125em 0.5em;
+border: 1px solid #999999;
+border-left: 1px solid #AAAAAA;
+border-bottom: 1px solid #AAAAAA;
+background-color: #f8f8f8;}
+
+.canvas-figure-group-ref-outer .canvas-figure-ref-outer,
+.box .canvas-figure-ref-outer
+{margin: 0.5em 0}
+
+.canvas-figure-group-ref-inner
+{padding: 0 0.5em}
+
+.canvas-figure-ref-inner,
+.canvas-figure-group-ref-inner,
+.canvas-table-ref-inner,
+.canvas-media-ref-inner
+{border: 3px solid #F0F0F0;}
+
+.fig-label
+{padding: 0 5px;
+word-wrap: inherit;
+white-space: inherit;}
+
+.fig-group
+{margin: 0.5em 0}
+
+.caption .title
+{font-weight: bold}
+
+/* end of figpopup related definitions ====================*/
+
+/* flowplayer definitions */
+
+.canvas-media-player-outer
+{padding: 2px;
+border: 2px solid #4a4a4a;
+margin:auto;}
+
+.canvas-media-player-inner
+{background-color:#4a4a4a;
+text-align:center;
+padding:0;
+border: 2px solid #4a4a4a;
+}
+
+.canvas-player-screen
+{position: relative;
+cursor:pointer;
+.cursor:hand;
+display:block;
+text-align:center;
+text-decoration:none;
+margin:auto;
+background-color:#4a4a4a;}
+
+.splash-ph
+{height: 100%;
+margin: auto;
+max-width: 100%;}
+
+.player-play-btn
+{position: relative;
+vertical-align: middle;}
+
+img.player-splash
+{position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;}
+
+/* end of flowplayer definitions */
+
+.supplementary-material-media-label-caption
+{background-color: #f4f4f4;
+padding: 0.5em;}
+
+/* ================== Tileshop related image panel properties starts */
+div.tileshop-panel-canvas
+{display: 	block;
+max-width: 	100%;
+margin: 	auto;
+border: 	solid 1px gray;
+zoom: 		1; /*do not remove, it needs to calculate clientWidth property for IE6*/
+*width:		expression( (this._w = this.clientWidth), (this._max_width && this._w > this._max_width ? this.style.width = this._max_width + 'px' : 0), "auto"); /*special case, which emulates max-width 100% and does not expand upto 100% if the width of the image (stored in @_max_width) narrower then 100% of parent element; fix for IE6*/
+}
+
+.tileshop-panel-canvas a
+{display: 	block;
+zoom: 		1; /*do not remove, it needs to calculate clientWidth property for IE6*/
+}
+
+.tileshop-panel-bar
+{background-color: #ECF0F4;
+line-height: 	2em;
+text-align: 	center;
+margin: 	auto;
+max-width:	100%;
+margin: 	auto;
+}
+
+img.tileshop-image
+{max-width: 	100%;
+zoom:   	1; /*do not remove, it needs to calculate clientWidth property for IE6*/
+border: 	none;
+cursor: 	pointer;
+cursor: 	hand;
+cursor: 	url(http://www.ncbi.nlm.nih.gov/corehtml/jsutils/cur/zoomin.cur), pointer;
+*width:		expression( (this._w = this.clientWidth), (this._w > this.parentNode.clientWidth ? this.style.width = this.parentNode.clientWidth + 'px' : this._w > 0 ? this.style.width = this._w + 'px' : 0), "auto" ); /*emulates max-width: 100% for IE6*/
+}
+/* ================== Tileshop related image panel properties ends */
+
+/* ================== Journal List autocomplete properties starts */
+ul.ui-ncbiautocomplete-options
+{
+	background-color: #F6F8FC;
+	border: 1px solid #336699;
+	font: arial,helvetica,sans-serif;
+	font-size: 12px;
+	max-height: 218px;
+	height: auto;
+	min-height: 1em;
+}
+ul.ui-ncbiautocomplete-options li span
+{
+	color: #FF6D30;
+	font-weight: bolder;
+}
+div.ui-ncbiautocomplete-holder
+{
+	max-height: 218px;
+	height: auto;
+	min-height: 1em;
+}
+/* ================== Journal List autocomplete properties ends */
+
+/* ================== standard_report_css pmc added special area starts */
+.rprt {font: 75%/1.5em Arial,Helvetica,sans-serif}
+.rprt .abstract-type-toc
+{padding: 0 2em}
+
+/* ================== standard_report_css pmc added special area ends */
+
+/* ================== standard_report_css NCBI part starts */
+/* taken from http://www.ncbi.nlm.nih.gov/portal/portal3rc.fcgi/entrez/css/standard_report_css */
+.rprt { overflow: hidden; _overflow: none; margin: 0.5em 0 1.5em 0; padding: 0; *margin-bottom: 0.9em; zoom: 1; display: block; clear: both; min-height: 40px; height: auto !important; height:40px; }
+
+.rprt .rprtnum { display: inline; float: left; overflow: visible; }
+.rprt .rprtnum * { display: block; }
+.rprt .rprtnum input { float: none; margin-left: 0; }
+.rprt .rprtnum span { clear: both; font-size: .833em; margin-right: 5px; margin-left: 1px; *margin-left: 4px; }
+
+.rprt .rslt { margin-left: 28px; *height: 1%; *margin-left: 0;}
+
+.rprt .rsltimg { float: left; }
+.rprt .rsltimg img { width: 100px;border: #666 solid 1px; padding: 1px; }
+.rprt .rsltcont { padding-left: 120px; }
+
+.rprt .title { font-size: 1.2em; margin:0; }
+.rprt .title a { color: #2222cc; }
+.rprt .title a:visited { color: #642a8f; }
+
+.rprt .supp { margin: .1425em 0; }
+.rprt .supp * { margin: 0; }
+.rprt .supp .desc { font-size: 1.1667em; display: block; }
+.rprt .supp .details { font-size: 1em !important; display: block; }
+
+.rprt dl { margin: 0; _margin-left: -.5em; }
+.rprt dl * { display: inline; padding: 0; margin: 0; }
+.rprt dl dt { margin-left: .5em !important; }
+.rprt dl dt:first-child { margin-left: 0 !important; }
+.rprt dl.details { _margin-left: -.5em !important; } /* Resets above line in IE, which can't handle pseudoclasses */
+.rprt dl dd, .rprt dl dt { white-space: nowrap; }
+
+.rprt .aux .status_icon, .rprt .aux .links a { white-space: nowrap; }
+
+.rprt .aux, .rprt .aux p, .rprt .aux dl { font-size: 1em; margin-top: 0; margin-bottom: 0; line-height: 1.4em; /* need to edit line height when we pair the docsum styles with the new standard_base_css, 2.x branch styles */}
+
+.rprt .aux .resc { color: #575757; }
+.rprt .aux .status_icon { color: #985735; font-weight: bold; }
+.rprt .aux .src { margin-right: 15px; display: inline; }
+.rprt .aux .rprtid { color: #575757; display: inline; margin-right: 15px; }
+
+.rprt .aux .links a { text-decoration: underline; cursor: pointer; margin-right: 15px; color: #6666AA; white-space: nowrap; }
+.rprt .aux .links a:visited { color: }
+.rprt .aux .links .in_clip { margin-right: .5em; color: #D2692B; white-space: nowrap; }
+.rprt .aux .links .rem_clip { margin-right: .5em; color: #D2692B; text-decoration: none; border-bottom: 1px dotted #D2692B; white-space: nowrap; }
+
+.rprt .dblinks { font-size: 1em; margin-top: 0em; margin-bottom: 0em; line-height: 1.334em; }
+.rprt .dblinks a { text-decoration: none; cursor: pointer; font-size: 1em; white-space: nowrap; color: #6666AA; }
+.rprt .dblinks a:hover { text-decoration: underline; }
+
+.rprt p.title a { _position: relative; _left: -.15em; }
+/* ================== standard_report_css NCBI part ends */

@@ -1,0 +1,79 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:p='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style>
+		.outer {
+			width: 100%;
+			height: 29px;
+			border-bottom: 0px solid black;
+			background-color: #ddd;
+			padding-left:1px;
+			padding-right:1px;
+		}
+		.addSetPanel {
+			padding: 5px;
+			padding-top: 7px;
+			padding-bottom: 1px;
+			cursor: pointer;
+			pointer: hand;
+		}
+		.creatorFilter {	
+			width: 200px;
+			
+			/*
+			//height: 30px;
+			//padding-top:4px;
+			//padding-bottom:2px;
+			*/
+		}
+		.searchButton {
+			height: 25px;	
+			border: 1px solid #999;
+			pointer:hand;
+			cursor:pointer;
+		}
+		.searchButtonPanel {
+			padding-top: 2px;	
+		}
+	</ui:style>
+	
+	<ui:with field="res" type="org.mindinformatics.gwt.framework.src.ApplicationResources" />
+
+  	<g:HorizontalPanel ui:field='sidePanelTopbar' styleName='{style.outer}'>
+  		<!--
+  		<g:cell horizontalAlignment='ALIGN_RIGHT'>
+  			<g:SimplePanel styleName='{style.searchButtonPanel}'>
+  				<g:Button ui:field='addSet' styleName='{style.searchButton}'>Add Set</g:Button>
+  				 p:ButtonWithIcon text="Set" heightIcon="16" resource="{res.addLittleIcon}"></p:ButtonWithIcon 
+  			</g:SimplePanel>
+  		</g:cell>
+  		-->
+  		<g:cell horizontalAlignment='ALIGN_RIGHT' width='61px'>
+  			<g:HorizontalPanel ui:field='addSetPanel' styleName='{style.addSetPanel}'></g:HorizontalPanel>
+  		</g:cell>
+  		<!--
+  		<g:cell horizontalAlignment='ALIGN_RIGHT' width='61px'>
+  			<g:SimplePanel styleName='{style.searchButtonPanel}'>
+  				<p:ButtonWithIcon text="Set" heightIcon="16" resource="{res.addLittleIcon}"></p:ButtonWithIcon>
+  			</g:SimplePanel>
+  		</g:cell>
+  		-->
+  		<g:cell verticalAlignment='ALIGN_MIDDLE'>
+  			<g:ListBox ui:field='accessFilter' styleName='{style.creatorFilter}'>
+  			</g:ListBox>
+  		</g:cell>
+  		<g:cell horizontalAlignment='ALIGN_RIGHT' width='61px'>
+  			<g:HorizontalPanel ui:field='retrieveSetsPanel' styleName='{style.addSetPanel}'></g:HorizontalPanel>
+  		</g:cell>
+  		<!--
+  		<g:cell horizontalAlignment='ALIGN_RIGHT'>
+  			<g:SimplePanel styleName='{style.searchButtonPanel}'>
+  				<p:ButtonWithIcon text="Retrieve Sets" resource="{res.browseLittleIcon}"></p:ButtonWithIcon>
+  				<g:Button ui:field='searchSets' styleName='{style.searchButton}'>Retrieve Sets</g:Button>
+  			</g:SimplePanel>
+  		</g:cell>
+  		-->
+  	</g:HorizontalPanel>
+</ui:UiBinder>

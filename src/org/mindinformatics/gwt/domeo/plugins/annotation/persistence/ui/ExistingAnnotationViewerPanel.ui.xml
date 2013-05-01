@@ -1,0 +1,26 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+	.outer {
+	    padding-left: 4px;
+	    padding-top: 2px;
+	    padding-bottom:16px;
+	    height: 500px;	
+	    font-size: 11px;
+	}
+	
+	.message {
+		padding-left: 5px;
+	}
+  	
+</ui:style>
+
+
+
+  	<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
+  		<g:TabLayoutPanel barHeight="40" barUnit="PX" ui:field="tabToolsPanel" height="480px">
+	    </g:TabLayoutPanel>  		
+  	</g:VerticalPanel>
+</ui:UiBinder>

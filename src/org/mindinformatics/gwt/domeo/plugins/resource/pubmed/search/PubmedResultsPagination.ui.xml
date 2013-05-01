@@ -1,0 +1,37 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <ui:image field='rightSideImage' src='right-search-bar-opaque.gif' />
+
+  <ui:style>
+  	.outer {
+	    height: 28x;
+	    padding-left: 4px;
+	    padding-top: 2px;
+	    padding-right: 4px;
+	    background-color: #eee;
+	    width: 100%;
+  	}
+  	
+  	.goToPage {
+		width: 30px;
+	}
+	
+	.button {
+		padding: 1px 7px;
+		height: 22px;
+	}
+  </ui:style>
+
+  <g:HorizontalPanel styleName='{style.outer}' ui:field='main'>
+  	<g:cell verticalAlignment="ALIGN_MIDDLE" width='100%'>
+  		<g:SimplePanel ui:field='paginationInfoPanel'></g:SimplePanel>
+  	</g:cell>
+  	<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT">
+  		<g:Button ui:field='previousPage' styleName='{style.button}'>Previous</g:Button>
+  		<g:TextBox ui:field='goToPage' styleName='{style.goToPage}'></g:TextBox>
+  		<g:Button ui:field='nextPage' styleName='{style.button}'>Next</g:Button>
+  	</g:HorizontalPanel>
+  </g:HorizontalPanel>
+</ui:UiBinder>

@@ -1,0 +1,71 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style>	
+		.body {
+			width: 100%;
+			padding: 0px;
+			border-bottom: 1px #ddd solid;
+		}
+		
+		.bold {
+			padding-left:2px;
+			font-weight: bold;	
+		}
+		
+		.boldUnderlined {
+			font-weight: bold;	
+		}
+		
+		.firstline {
+			width: 458px;
+			height: 24px;
+		}
+		
+		.secondline {
+			width: 458px;
+		}
+		
+		.provenance {
+			
+		}
+	</ui:style>
+	
+	<g:VerticalPanel styleName='{style.body}' ui:field='body'>	
+		<g:cell>
+			<g:HorizontalPanel styleName='{style.firstline}'>
+				<g:cell horizontalAlignment='ALIGN_LEFT'>
+					<g:Label ui:field='nameEditableField' styleName='{style.bold}' />
+				</g:cell>
+				<g:cell horizontalAlignment='ALIGN_RIGHT'>
+					<g:SimplePanel ui:field='itemsNumberLabel' styleName='{style.boldUnderlined}'/>
+				</g:cell>
+			</g:HorizontalPanel>
+		</g:cell>
+		<g:cell>
+			<g:HorizontalPanel styleName='{style.secondline}'>
+				<g:cell horizontalAlignment='ALIGN_LEFT'>
+					<g:HorizontalPanel>
+						<g:cell width="22px" horizontalAlignment='ALIGN_LEFT'>
+							<g:SimplePanel ui:field='emphasizeCheckBox'/>
+						</g:cell>
+						<g:cell width="22px" horizontalAlignment='ALIGN_LEFT'>
+							<g:SimplePanel ui:field='visibilityPolicy'/>
+						</g:cell>
+						<g:cell width="22px" horizontalAlignment='ALIGN_LEFT'>
+							<g:SimplePanel ui:field='accessPolicy'/>
+						</g:cell>
+						<g:cell width="22px" horizontalAlignment='ALIGN_LEFT'>
+							<g:SimplePanel ui:field='lockingPolicy'/>
+						</g:cell>
+					</g:HorizontalPanel>
+				</g:cell>
+				<g:cell horizontalAlignment='ALIGN_RIGHT'>
+					<g:HorizontalPanel ui:field='provenanceLabel' styleName='{style.provenance}'/>
+				</g:cell>
+			</g:HorizontalPanel>
+		</g:cell>
+	</g:VerticalPanel>
+</ui:UiBinder>

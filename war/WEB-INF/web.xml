@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>usersServlet</servlet-name>
+    <servlet-class>org.mindinformatics.gwt.services.users.src.UsersServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>usersServlet</servlet-name>
+    <url-pattern>/domeo/users/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>agentsServlet</servlet-name>
+    <servlet-class>org.mindinformatics.gwt.services.agents.src.AgentsServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>agentsServlet</servlet-name>
+    <url-pattern>/domeo/agents/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>profilesServlet</servlet-name>
+    <servlet-class>org.mindinformatics.gwt.services.profiles.src.ProfilesServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>profilesServlet</servlet-name>
+    <url-pattern>/domeo/profiles/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>profileServlet</servlet-name>
+    <servlet-class>org.mindinformatics.gwt.services.profiles.src.JsonProfilesServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>profileServlet</servlet-name>
+    <url-pattern>/domeo/profile/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>reportingServlet</servlet-name>
+    <servlet-class>org.mindinformatics.gwt.services.reporting.src.JsonReportingServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>reportingServlet</servlet-name>
+    <url-pattern>/domeo/reporting/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>persistenceServlet</servlet-name>
+    <servlet-class>org.mindinformatics.gwt.services.persistence.src.JsonPersistenceServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>persistenceServlet</servlet-name>
+    <url-pattern>/domeo/persistence/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Domeo.html</welcome-file>
+    <welcome-file>Explorer.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

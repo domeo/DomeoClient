@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='domeo'>
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name="com.google.gwt.json.JSON" />
+  <!-- <inherits name='com.google.gwt.visualization.Visualization'/> -->
+
+  <!-- Inherit the default GWT style sheet.  You can change       -->
+  <!-- the theme of your GWT application by uncommenting          -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.clean.Clean'/>
+  <inherits name='com.google.gwt.canvas.Canvas'/>
+  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+  
+  <inherits name="org.mindinformatics.gwt.framework.Framework"/> 
+  
+  
+  <!-- Components -->
+  <inherits name="org.mindinformatics.gwt.domeo.component.bibliography.Bibliography"/>
+  <inherits name="org.mindinformatics.gwt.domeo.component.cache.images.CacheImages"/>
+  <inherits name="org.mindinformatics.gwt.domeo.component.linkeddata.LinkedData"/>
+  <inherits name="org.mindinformatics.gwt.domeo.component.textmining.TextMining"/>
+  <inherits name="org.mindinformatics.gwt.domeo.component.groups.Groups"/>
+  
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.persistence.Persistence"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.persistence.json.JsonPersistence"/>
+  
+  <!-- Highlight  -->
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.ContentAsRdf"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.curation.Curation"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.highlight.Highlight"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.selection.Selection"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.postit.PostIt"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.Qualifier"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.comment.Commentaries"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.Antibodies"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.relationship.Relationship"/>
+  
+  <!-- Extractors  -->
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.omim.OmimResourcePlugin"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.pubmed.PubMedResourcePlugin"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral.PubMedCentralResourcePlugin"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.opentrials.OpenTrialsResourcePlugin"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.document.GenericDocumentResourcePlugin"/> 
+
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.bioportal.BioPortalResourcePlugin"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.nif.NifResourcePlugin"/>
+
+  <!-- Other module inherits                                      -->
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='org.mindinformatics.gwt.domeo.client.Domeo'/>
+
+  <!-- Specify the paths for translatable code                    -->
+  <source path='component'/>
+  <source path='services'/>
+  <source path='client'/>
+  <source path='model'/>
+</module>

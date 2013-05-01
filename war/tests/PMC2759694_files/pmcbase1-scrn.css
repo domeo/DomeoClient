@@ -1,0 +1,11 @@
+/*									*/
+/* styles for screens							*/
+/* to suppress print							*/
+/* style on screen							*/
+/* $Id: pmcbase1-scrn.css,v 1.4 2011/01/13 17:54:58 lebedand Exp $ 	*/
+
+.screen-view 
+{
+}
+.print-view 
+{display: none}

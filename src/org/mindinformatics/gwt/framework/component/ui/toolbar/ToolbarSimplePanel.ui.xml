@@ -1,0 +1,13 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.outer {
+		    padding-top: 2px;
+		    width: 20px;
+		}
+	</ui:style>
+
+  	<g:SimplePanel ui:field='toolbarSimpleButtonPanel' styleName='{style.outer}'/>
+</ui:UiBinder>

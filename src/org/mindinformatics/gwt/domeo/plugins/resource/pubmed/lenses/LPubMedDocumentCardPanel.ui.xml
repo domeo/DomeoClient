@@ -1,0 +1,180 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style type='org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.LPubMedDocumentCardPanel.LocalCss'>	
+		.body {
+			width: 100%;
+			height: 80px;
+			padding: 0px;
+		}
+		
+		.label {
+			padding-top: 5px;
+			font-weight: bold;	
+			display: inline;
+			border-bottom: 1px #ddd solid;
+		}
+		
+		.editableDeckPanel {
+			width: 98%;	
+		}
+		
+		.activeIcon {
+			height: 16px;
+			width: 16px;
+			cursor: pointer;	
+			display: inline;	
+		}
+		
+		.title {
+			border-top: 1px solid #ccc;	
+			border-bottom: 1px solid #ddd;	
+			background-color: #eee;
+		}
+		
+		.inline {
+			display: inline;	
+		}
+		
+		.inlineWithBottom {
+			display: inline;	
+			padding-bottom: 8px;
+		}
+		
+		.outer {
+		    padding-bottom:16px;
+		    width: 100%;
+		    font-size: 11px;
+		}
+		
+		.content {
+			padding: 0;	
+			margin: 0;
+			height: 100%;
+		}
+		
+		.scrollContent {
+			padding: 0;	
+			margin: 0;
+		}
+	
+		.provenanceInline {
+			display: inline;	
+			padding-right: 4px;
+		}
+		.provenance {	
+			padding-right: 4px;
+		}
+		
+		.infoBarRight {
+			color: #aaa;
+			text-align: right;
+			border-top: 3px solid #ddd;	
+			padding-right: 3px;
+		}
+		
+		.tabLayoutPanel {
+			padding: 1px;	
+		}
+		
+		.contentPanel {
+			width: 100%;	
+			padding: 0px;
+		}
+	</ui:style>
+	<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
+		<g:TabLayoutPanel barHeight="32" barUnit="PX" ui:field="tabToolsPanel" height="580px" >
+	        <g:tab>
+	        	 <g:header>
+	                <div>
+	                    <span>PubMed</span>
+	                </div>
+	            </g:header>
+	            <g:FlowPanel ui:field='body' styleName=''>
+					<g:VerticalPanel styleName='{style.body}'  spacing="3">	
+						<g:VerticalPanel ui:field='pubMedToolbarPanel'/>
+						<g:cell height="18px">
+							<g:FlowPanel>
+								<g:Label styleName='{style.label}'> URL</g:Label>
+								<g:Image ui:field='urlImage' styleName='{style.activeIcon}'/>
+							</g:FlowPanel>
+						</g:cell>
+						<g:cell height="20px">
+							<my:EditableLabel ui:field='uriField'/>
+						</g:cell>
+						<!--  
+						<g:cell height="18px">
+							<g:Label styleName='{style.label}'>Source</g:Label>
+						</g:cell>
+						<g:cell height="20px">
+							<g:FlowPanel ui:field='sourceField' styleName='{style.inline}'/>
+						</g:cell>	
+						-->
+						<g:cell height="18px">
+							<g:Label styleName='{style.label}'>CITATION</g:Label>
+						</g:cell>
+						<g:cell height="25px">
+							<g:FlowPanel>
+								<g:FlowPanel ui:field='citationField' styleName='{style.inlineWithBottom}'/>
+							</g:FlowPanel>
+						</g:cell>	
+						<g:cell height="18px">
+							<g:Label styleName='{style.label}'>IDENTIFIERS</g:Label>
+						</g:cell>
+						<g:cell height="25px">
+							<g:FlowPanel ui:field='identifiersField' styleName='{style.inlineWithBottom}'/>
+						</g:cell>	
+						<g:HTMLPanel></g:HTMLPanel>	
+					</g:VerticalPanel>
+					<g:FlowPanel styleName='{style.infoBarRight}'>
+						<g:HTML ui:field='extractionSourceDetails' styleName='{style.provenance}'/>
+						<g:Label ui:field='extractorProvenanceDetails' styleName='{style.provenanceInline}'/>
+						<g:Image ui:field='extractionProvenanceImage' styleName='{style.activeIcon}'/>
+						<g:Label ui:field='extractionDateDetails' styleName='{style.provenance}'/>
+					</g:FlowPanel>
+				</g:FlowPanel>
+			</g:tab>
+			<g:tab>
+	        	<g:header>
+	                <div>
+	                    <span>Bibliography</span>
+	                </div>
+	            </g:header>
+	            <g:VerticalPanel width="100%">
+		            <g:VerticalPanel ui:field='bibliographyToolbarPanel' styleName='{style.contentPanel}'/>
+		            <g:ScrollPanel ui:field='referencesPanel' styleName='{style.scrollContent}'>
+		            	<g:HTML>No references available</g:HTML>
+		            </g:ScrollPanel>
+	            </g:VerticalPanel>
+	        </g:tab>
+	        <g:tab>
+	        	 <g:header>
+	                <div>
+	                    <span>Images</span>
+	                </div>
+	            </g:header>
+	            <g:VerticalPanel width="100%">
+		            <!--   g:VerticalPanel ui:field='ImageCacheToolbarPanel' styleName='{style.contentPanel}'/ -->
+		            <g:ScrollPanel ui:field='imagesPanel' styleName='{style.scrollContent}'>
+		            	<g:HTML>No images available</g:HTML>
+		            </g:ScrollPanel>
+	            </g:VerticalPanel>
+	        </g:tab>
+			<g:tab>
+	        	 <g:header>
+	                <div>
+	                    <span>General</span>
+	                </div>
+	            </g:header>
+	            <g:VerticalPanel>
+	            	<g:cell height="16px;">
+		           	 	<g:VerticalPanel ui:field='generalToolbarPanel'/>
+		            </g:cell>
+		            <g:SimplePanel ui:field='contentPanel' styleName='{style.content}'/>
+	            </g:VerticalPanel>
+	        </g:tab>
+		</g:TabLayoutPanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

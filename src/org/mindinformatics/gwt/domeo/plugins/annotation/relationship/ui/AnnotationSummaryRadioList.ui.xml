@@ -1,0 +1,22 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.body {
+			padding: 0px;
+			width: 100%;
+			max-height: 800px;
+		}
+		
+		.content {
+			padding-left: 0px;
+			width: 100%; 
+		}
+	</ui:style>
+
+  	<g:ScrollPanel styleName='{style.body}' ui:field='body'>
+	        <g:VerticalPanel styleName='{style.content}' ui:field='content'/>
+	</g:ScrollPanel>
+
+</ui:UiBinder>

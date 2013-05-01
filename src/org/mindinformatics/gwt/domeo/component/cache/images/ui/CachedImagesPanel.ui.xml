@@ -1,0 +1,35 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style type='org.mindinformatics.gwt.domeo.component.cache.images.ui.CachedImagesPanel.LocalCss'>  	
+  	.container {
+		padding: 0px;
+		width: 100%;
+	}
+	
+	.indexOdd {
+		border-bottom: 2px solid #aaa;
+		border-right: 4px solid #EEEEFF;
+		border-top: 8px solid #fff;
+		padding-bottom: 2px;
+	}
+	.indexEven {
+		border-bottom: 2px solid #aaa;
+		border-right: 4px solid #fff;
+		border-top: 8px solid #fff;
+		padding-bottom: 2px;
+	}
+	.imageWrap {
+		padding-left:1px;
+		padding-right:5px;
+	}
+	.centerText {
+		text-align: center;
+	}
+  	
+</ui:style>
+	<g:VerticalPanel styleName='{style.container}' ui:field='container'>
+		
+	</g:VerticalPanel>
+</ui:UiBinder>

@@ -1,0 +1,36 @@
+.fw-Panel {
+	padding-top:3px;
+	padding-left:2px;
+	padding-right:4px;
+	background-color: inherit;	
+	height: 21px;
+}
+
+.fw-Button {
+	cursor: pointer;
+    cursor: hand;
+    padding-top: 0px;
+}
+
+.fw-AddressTextfield {
+	/*-moz-border-radius-topleft: 4px 4px;
+	border-top-left-radius: 4px;*/
+	border-left: 0px;
+	border-right: 0px;
+	background-color: #fff;	
+	border-top: 2px solid transparent;
+	border-bottom: 1px solid transparent;
+	/*border-top: 1px solid transparent;*/	
+	/*border-bottom: 0px;*/
+	height: 17px;
+	padding-top: 1px;
+	font-size: 12px;
+}
+
+.fw-AddressTextfield:focus
+{
+	outline: 0 none; /*to get rid of that input:focus blue 'border' or 'outline' that happens in safari browsers*/
+}
+
+
+

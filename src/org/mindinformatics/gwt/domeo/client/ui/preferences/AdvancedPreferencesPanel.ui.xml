@@ -1,0 +1,123 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+	.outer {
+	    padding-left: 4px;
+	    padding-top: 2px;
+	    padding-bottom:16px;
+	    height: 450px;	
+	    font-size: 11px;
+	}
+	
+  	.close {
+		cursor: pointer;
+    	cursor: hand;
+  	}
+  	
+  	.tab { 
+  		height: 100%;
+        cursor: pointer;
+        text-shadow: rgba(255, 255, 255, 1) 0 1px 1px;
+        font-size: 1em;
+        font-weight: bold;
+        color: #000;
+        vertical-align: middle;
+    }
+    
+    .inner {
+    	border: solid 1px #ddd;
+    	height:410px;	
+		width: 100%;
+		padding: 5px;
+    }
+  	
+  	.tabToolsPanel {}
+  	
+  	.tabLayoutPanel {
+  		height:430px;		
+  	}
+  	
+  	.itemPanelContainer {
+  		width: 260px;
+  		padding: 5px;
+  		border: 1px solid #eee;
+  	}
+  	
+  	.itemPanel {
+  		width: 260px;
+  		padding-bottom: 4px;
+  	}
+  	
+  	.itemLabel {
+  		display: inline;	
+  		padding-right: 10px;
+  		padding-left: 4px;
+  	}
+  	
+  	.itemContent {
+  		display: inline;
+  		text-align: right;	
+  	}
+  	
+  	.container {
+		padding: 5px;
+	}
+  	
+</ui:style>
+
+	<g:FlowPanel styleName='{style.inner}'>
+		<g:VerticalPanel styleName='{style.container}'>
+			<g:Label styleName='{style.itemLabel}'>Logging</g:Label>
+			<g:FlowPanel styleName='{style.itemPanelContainer}'>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Display level</g:Label>
+					<g:SimplePanel ui:field="loggingLevelPanel" styleName='{style.itemContent}'></g:SimplePanel>
+				</g:FlowPanel>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Report sending</g:Label>
+					<g:SimplePanel ui:field="loggingReportPanel" styleName='{style.itemContent}'></g:SimplePanel>
+				</g:FlowPanel>
+			</g:FlowPanel>
+			<g:Label styleName='{style.itemLabel}'>Provenance</g:Label>
+			<g:FlowPanel styleName='{style.itemPanelContainer}'>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Display provenance</g:Label>
+					<g:CheckBox ui:field="provenanceDisplayCheckBox"
+						styleName='{style.itemContent}' />
+				</g:FlowPanel>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Display user's provenance</g:Label>
+					<g:CheckBox ui:field="provenanceHideUsersProvenanceCheckBox"
+						styleName='{style.itemContent}' />
+				</g:FlowPanel>
+			</g:FlowPanel>
+			<g:Label styleName='{style.itemLabel}'>Local storage</g:Label>
+			<g:FlowPanel styleName='{style.itemPanelContainer}'>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Browser support</g:Label>
+					<g:Label ui:field="localStorageDetectionPanel" styleName='{style.itemContent}' />
+				</g:FlowPanel>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Persistent storage</g:Label>
+					<g:SimplePanel ui:field="localStoragePanel" styleName='{style.itemContent}'></g:SimplePanel>
+				</g:FlowPanel>
+			</g:FlowPanel>
+			<g:Label styleName='{style.itemLabel}'>Reporting</g:Label>
+			<g:FlowPanel styleName='{style.itemPanelContainer}'>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Automatically report issues</g:Label>
+					<g:CheckBox ui:field="automaticReportCheckBox" styleName='{style.itemContent}' />
+				</g:FlowPanel>
+			</g:FlowPanel>
+			<g:Label styleName='{style.itemLabel}'>Features</g:Label>
+			<g:FlowPanel styleName='{style.itemPanelContainer}'>
+				<g:FlowPanel styleName='{style.itemPanel}'>
+					<g:Label styleName='{style.itemLabel}'>Annotation of multiple targets</g:Label>
+					<g:CheckBox ui:field="multipleTargetsCheckBox" styleName='{style.itemContent}' />
+				</g:FlowPanel>
+			</g:FlowPanel>
+		</g:VerticalPanel>
+	</g:FlowPanel>
+</ui:UiBinder>

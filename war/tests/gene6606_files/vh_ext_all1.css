@@ -1,0 +1,67 @@
+em {font-style: italic;}
+.title em {font-weight:bold;}
+
+em {font-style: italic;}
+strong {font-weight: bold;}
+
+.SeqViewerApp em {font-style: normal;}
+.SeqViewerApp strong {font-weight: normal;}
+
+/*==============genomic product section==============*/
+.generefbl-link {margin-left:0; padding-left:1.5em;*padding-left:2em;}
+.rprt ol li {padding:0;}
+
+.gene-bibliography div.generefbl-link p.see-all-pm {margin-left: 0;}
+
+ol.generef-link {
+    list-style-position: outside;
+    margin-bottom:2em;
+}
+ol.generef-link li {line-height:1.7em;}
+
+/*==============geneRIF==============*/
+div.generif-pubmed {
+    padding:0;
+}
+.gene-bibliography .generif {padding-left:2.5em;}
+.generif .generef-link {margin-top:1em; margin-left:1.5em;*margin-left:2em;}
+.submit-genrif {padding-top:0;margin-left:1.5em;}
+.generif h3 {
+ 
+}
+/*.gene-bibliography .rprt-section-body {padding-left:0;margin-left: -2em;}*/
+
+/*==============phonotype section==============*/
+ p,  h3 {
+    margin-top:1em;
+    margin-bottom:1em;
+}
+
+/*==============infopathway section==============*/
+ul.geneinfo-subsec  li {
+    line-height: 1.7em;
+}
+.gene-proteinInfo dl dt {
+    margin-top:1em;
+}
+.gene-proteinInfo dl dd {
+    text-indent: 2em;
+}
+
+.gene-refseq ol li {
+   list-style-position: outside; 
+}
+
+.linkout ul li {
+    line-height:1.7em;
+}
+
+ .see-all-pm + .see-all-pm {margin-top: 0;}
+ 
+ 
+ .gene-table ul li {
+     margin-left: 1.5em;
+ }
+ 
+ .SeqViewerApp th, .SeqViewerApp td {border:none;}
+ .SeqViewerApp table {margin:0;}

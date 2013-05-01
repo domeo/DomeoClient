@@ -1,0 +1,109 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  	<ui:style>
+	  	.outer {
+		    height: 30px;
+		    padding-left: 14px;
+		    padding-top: 12px;
+		    width: 100%;
+	 	}
+	 	
+	 	.buttonsPanel {
+			position: absolute;
+			right: 20px;
+	  		float:right;
+	  		padding-top:4px;
+	  		padding-right: 0px;
+	  		height: 0px;
+	  		max-height: 20px;
+	  		display: block;
+	  	}
+	  	
+	  	.setPanel {
+	  		padding-right: 5px;	
+	  	}
+	  	
+	  	.rightColumn {
+	  		padding-left:5px;
+	  		padding-top: 24px;
+	  		width: 100%;
+	  		min-width: 598px;	
+	  		height: 300px;
+	  	}
+	  	
+	  	.leftColumn {
+	  		width: 464px;	
+	  		vertical-align: top;
+	  	}
+	  	
+	  	.panel {
+	  		width: 100%;
+	  		vertical-align: top;
+	  		padding: 5px;
+	  	}
+	  	
+	  	.provenance {
+	 		backgorund-color: gray;
+	 		padding-top: 3px;
+	 		padding-left: 10px;
+	 		cursor: pointer;
+    		cursor: hand;
+	 	}
+	 	
+	 	.types {
+	  		padding-bottom: 2px;
+	  	}
+	  	
+	  	.typesLabel {
+	  		padding-top: 2px;
+	  		padding-right: 4px;
+	  	}
+	  	
+	  	.elementType {
+	  		padding-right: 2px;
+	  	}
+	  	
+	  	.annotationText {
+	  		padding-top: 3px;
+	  		padding-left: 3px;
+	  		color: #333;
+	  		font-style: normal;
+	  		width: 460px;
+	  		height: 140px;
+	  		font-size: 12px;
+	  	}
+  	</ui:style>
+  	
+  	<!--  
+  	<ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' /> 
+	-->
+
+  	<g:VerticalPanel styleName='{style.outer}'>
+  		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
+  			<g:SimplePanel styleName='{style.setPanel}'>
+  		    	<g:ListBox ui:field='annotationSet'></g:ListBox>
+  		    </g:SimplePanel>
+	  	</g:HorizontalPanel>
+	  	<g:HorizontalPanel styleName='{style.panel}'>
+			<g:cell width="466px">
+	  			<g:VerticalPanel styleName='{style.leftColumn}'>
+	  				<g:HorizontalPanel ui:field='header' styleName='{style.provenance}'>
+			  			<g:Label ui:field="createdBy" />
+			  			<g:Label ui:field="createdOn" />
+				  	</g:HorizontalPanel>
+				  	<g:HorizontalPanel ui:field='deTypes' styleName='{style.types}'>
+				  		<g:Label styleName='{style.typesLabel}'>Type</g:Label>
+				  		<g:ListBox ui:field="postitTypes"></g:ListBox>
+				  	</g:HorizontalPanel>
+	  				<g:TextArea ui:field='annotationBody' styleName='{style.annotationText}'></g:TextArea>
+	  			</g:VerticalPanel>
+	  		</g:cell>
+	  		<g:cell>
+			  	<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+			  	</g:VerticalPanel>
+		  	</g:cell>
+  		</g:HorizontalPanel>
+  	</g:VerticalPanel>
+</ui:UiBinder>

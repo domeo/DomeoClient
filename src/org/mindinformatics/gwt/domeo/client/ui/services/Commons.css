@@ -1,0 +1,31 @@
+.FlexTable_OddRow {
+  background-color: #eef;
+}
+
+.FlexTable_EvenRow {
+  background-color:  #fff;
+}
+
+@external .Tail_EmptyMessage;
+.Tail_EmptyMessage {
+	padding-left: 5px;	
+	padding-top: 5px;
+}
+
+.actionIcon {
+	font-style: italic;
+	cursor: pointer;
+    cursor: hand;
+}
+
+.actionIconSpacedVertically {
+	font-style: italic;
+	cursor: pointer;
+    cursor: hand;
+    padding-bottom: 3px;
+}
+
+.acceptedItem {
+	padding-left: 7px;
+	float: left;
+}

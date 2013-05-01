@@ -1,0 +1,53 @@
+.fw_Button {
+	cursor: pointer;
+    cursor: hand;
+    padding-top: 0px;
+}
+
+.fw_disabledButton {
+    padding-top: 0px;
+}
+
+/* This is for 16x16 icons */
+.fw_spinningButton {
+    padding-top: 4px;
+}
+
+.fw_Label {
+	cursor: pointer;
+    cursor: hand;
+    padding-top: 2px;
+}
+
+.fw_disabledLabel {
+    padding-top: 2px;
+}
+
+.fw_selectedLabel {
+	cursor: pointer;
+    cursor: hand;
+    color: green;
+    padding-top: 2px;
+    text-decoration: underline;
+    border-bottom: 2px solid green;
+}
+
+.fw_noWrapText {
+	white-space:nowrap;
+}
+
+.fw_noWrapActionText {
+	color: #06C;
+	white-space:nowrap;
+	cursor: pointer;
+    cursor: hand;
+}
+
+.fw_noWrapActionText:hover {
+   text-decoration: underline;
+} 
+
+.fw_actionIcon {
+	cursor: pointer;
+	cursor: hand;
+}

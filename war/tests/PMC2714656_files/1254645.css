@@ -1,0 +1,1813 @@
+div#depsel-form h3 {
+  color: white;
+}
+
+div.depsel-body {
+  margin-left: 1em;
+}
+
+div#depsel-form div {
+  margin-bottom: .5em;
+}
+
+div#depsel-form a {
+  color:white;
+}
+div#depsel-form a:hover {
+  background-color: #666;
+}
+
+/* 
+  Styles for the sidecontent.  These were adapted from the jQuery sidecontent
+  plugin documentation:  http://www.stevefenton.co.uk/Content/Jquery-Side-Content/  
+*/
+    
+.depotselectorpullout {
+  background-color: #663854;
+  color: white;
+  padding: 4px 3px;
+  -moz-border-radius-bottomleft: 1em;
+  -moz-border-radius-topleft: 1em;
+  -webkit-border-bottom-left-radius: 1em;
+  -webkit-border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  border-top-left-radius: 1em;
+}
+    
+.depotselectorpullout:hover {
+  background-color: #8A496B;
+  color: white;
+}
+    
+.depotselector {
+  background-color: black;
+  color: white;
+  -moz-border-radius-bottomleft: 1em;
+  -webkit-border-bottom-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  z-index: 1000;
+}
+    
+.depotselector > div > div {
+  padding-left: 10px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+}
+
+.depotselector, .depotselectorpullout { position: fixed !important; }
+
+
+body {
+/*
+background-color: #F8F8F8;
+margin: 3px;
+border: 0;
+font-family: Arial, Verdana, Sans-Serif;
+font-size: 62.5%;*/
+}
+
+#pagewrap {
+width: 960px;
+margin: auto;
+xborder: solid 1px red;
+}
+
+/*#page, #footer {*/
+#page {
+margin: 1em;
+font-size: 11pt; /* Mandated by HHS */
+}
+
+
+#footer {
+font-size: 70%;
+/*text-align: center;*/
+clear: both;
+/*border-top: solid 1px #a0c0e0;*/
+padding-top: 1em;
+min-width:  800px;
+}
+
+#NCBIFooter_dynamic {
+  font-size: 1.12em; 
+} 
+
+#pmc-home-hdr {
+  height: 73px;
+}
+
+#pmc-home-hdr #homelink {
+float: left;
+}
+
+#pmc-home-hdr #homelink img {
+border: none;
+}
+
+#pmc-home-hdr h1,
+#pmc-home-hdr ul {
+background-color: #3c78bc;
+font-family: Arial, Verdana, Sans-Serif;
+margin:0 0 0 144px;
+position: relative;
+top: 1px;
+*top: -1px;/*IEfix*/
+zoom: 1;
+}
+
+#pmc-home-hdr h1 {
+text-align: right;
+color: white;
+font-size: 2em;
+line-height: 50px;
+*line-height: 52px;/*IEfix*/
+padding-right: 2em;
+border-top: solid 2px transparent;
+}
+
+#pmc-home-hdr ul {
+height: 18px;
+background-color: #a0c0e0;
+border-bottom: solid 3px #3c78bc;
+border-right: solid 1px #3c78bc;
+}
+
+#pmc-home-hdr ul li {
+margin:0;
+padding:0;
+list-style: none;
+font-size: 1.3em;
+display: inline;
+line-height: 18px;
+padding: 0 40px;
+}
+
+#pmc-home-hdr ul li a{
+text-decoration: none;
+padding: 2px 10px;
+}
+
+#pmc-home-hdr ul li a:hover {
+text-decoration: underline;
+}
+
+a:visited {
+color: #7119b4;
+}
+
+#pmc-home-hdr ul li.sel a,
+#pmc-home-hdr ul li.sel a:visited,
+#pmc-home-hdr ul li.sel a:hover {
+color: white;
+background-color: #3c78bc;
+font-weight: bold;
+text-decoration: none;
+cursor: arrow;
+}
+
+
+.footer-section {
+    margin-bottom: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 0;
+    text-align: center;
+}
+
+
+/* FIXME: Temporary fix for content1 and content2 alignment problem */
+/* Change color to see "cols" container */
+body #cols {
+border: solid 1px transparent;
+}
+
+/*
+  PPMCPrint_CSS
+*/
+
+@media print { 
+  .footer
+  {
+    display: none;
+  }
+/* 
+  Get rid of the watermark table cell for printed
+  version.  It doesn't show up anyway so won't matter.
+*/
+  td.pmc-watermark {
+    width: 0;
+    min-width: 0;
+  }
+
+/*
+  Add visible borders to the table cells in journal archive pages.
+*/
+  .issue-block {
+    border-collapse: collapse;
+  }
+  .iss-cell,
+  .vol-cell
+  {
+      border: 1px solid black;
+  }
+}
+
+
+.nopagesectioncontent {display: none;}
+.port {font-size: 1em;}
+
+/* ### from ext-all ### */
+.port, .port div, .port dl, .port dt, .port dd, .port ul, .port ol, .port li, .port h1, .port h2, .port h3, .port h4, .port h5, .port h6, .port pre, .port form, .port fieldset, .port input, .port p, .port blockquote, .port th, .port td{margin:0;padding:0;}
+.port img{border:0;}
+.port ol, .port ul{list-style:none;}
+
+.x-unselectable,.x-unselectable *{-moz-user-select:none;-khtml-user-select:none;}
+
+.x-panel{border-style:solid;border-color:#99bbe8;border-width:0;}
+.x-panel-header{overflow:hidden;zoom:1;color:#15428b;font:bold 11px tahoma,arial,verdana,sans-serif;padding:5px 3px 4px 5px;border:1px solid #99bbe8;line-height:15px;background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/white-top-bottom.gif) repeat-x 0 -1px;}
+.x-panel-body{border:1px solid #99bbe8;border-top:0 none;overflow:hidden;background:white;position:relative;}
+.x-panel-bbar .x-toolbar{border:1px solid #99bbe8;border-top:0 none;overflow:hidden;padding:2px;}
+.x-panel-tbar .x-toolbar{border:1px solid #99bbe8;border-top:0 none;overflow:hidden;padding:2px;}
+.x-panel-tbar-noheader .x-toolbar,.x-panel-mc .x-panel-tbar .x-toolbar{border-top:1px solid #99bbe8;border-bottom:0 none;}
+.x-panel-body-noheader,.x-panel-mc .x-panel-body{border-top:1px solid #99bbe8;}
+.x-panel-header{overflow:hidden;zoom:1;}
+.x-panel-tl .x-panel-header{color:#15428b;font:bold 11px tahoma,arial,verdana,sans-serif;padding:5px 0 4px 0;border:0 none;background:transparent;}
+.x-panel-tl .x-panel-icon,.x-window-tl .x-panel-icon{padding-left:20px!important;background-repeat:no-repeat;background-position:0 4px;zoom:1;}
+.x-panel-inline-icon{width:16px;height:16px;background-repeat:no-repeat;background-position:0 0;vertical-align:middle;margin-right:4px;margin-top:-1px;margin-bottom:-1px;}
+.x-panel-tc{background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/top-bottom.gif) repeat-x 0 0;overflow:hidden;}
+.ext-strict .ext-ie7 .x-panel-tc{overflow:visible;}
+.x-panel-tl{background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/corners-sprite.gif) no-repeat 0 0;padding-left:6px;zoom:1;border-bottom:1px solid #99bbe8;}
+.x-panel-tr{background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/corners-sprite.gif) no-repeat right 0;zoom:1;padding-right:6px;}
+.x-panel-bc{background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/top-bottom.gif) repeat-x 0 bottom;zoom:1;}
+.x-panel-bc .x-panel-footer{zoom:1;}
+.x-panel-bl{background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/corners-sprite.gif) no-repeat 0 bottom;padding-left:6px;zoom:1;}
+.x-panel-br{background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/corners-sprite.gif) no-repeat right bottom;padding-right:6px;zoom:1;}
+.x-panel-mc{border:0 none;padding:0;margin:0;font:normal 11px tahoma,arial,helvetica,sans-serif;padding-top:6px;background:#dfe8f6;}
+.x-panel-mc .x-panel-body{background:transparent;border:0 none;}
+.x-panel-ml{background:#fff url(/core/extjs/ext-2.1/resources/images/default/panel/left-right.gif) repeat-y 0 0;padding-left:6px;zoom:1;}
+.x-panel-mr{background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/left-right.gif) repeat-y right 0;padding-right:6px;zoom:1;}
+.x-panel-bc .x-panel-footer{padding-bottom:6px;}
+.x-panel-nofooter .x-panel-bc,.x-panel-nofooter .x-window-bc{height:6px;font-size:0;line-height:0;}
+.x-panel-bwrap{overflow:hidden;zoom:1;}
+.x-panel-body{overflow:hidden;zoom:1;}
+.x-panel-collapsed .x-resizable-handle{display:none;}
+.ext-gecko .x-panel-animated div{overflow:hidden!important;}
+.x-plain-body{overflow:hidden;}
+.x-plain-bbar .x-toolbar{overflow:hidden;padding:2px;}
+.x-plain-tbar .x-toolbar{overflow:hidden;padding:2px;}
+.x-plain-bwrap{overflow:hidden;zoom:1;}
+.x-plain{overflow:hidden;}
+.x-tool{overflow:hidden;width:15px;height:15px;float:right;cursor:pointer;background:transparent url(/core/extjs/ext-2.1/resources/images/default/panel/tool-sprites.gif) no-repeat;margin-left:2px;}
+.x-tool-toggle{background-position:0 -60px;}
+.x-tool-toggle-over{background-position:-15px -60px;}
+.x-panel-collapsed .x-tool-toggle{background-position:0 -75px;}
+.x-panel-collapsed .x-tool-toggle-over{background-position:-15px -75px;}
+.x-tool-close{background-position:0 -0;}
+.x-tool-close-over{background-position:-15px 0;}
+.x-tool-minimize{background-position:0 -15px;}
+.x-tool-minimize-over{background-position: -15px;}
+.x-tool-maximize{background-position:0 -30px;}
+.x-tool-maximize-over{background-position:-15px -30px;}
+.x-tool-restore{background-position:0 -45px;}
+.x-tool-restore-over{background-position:-15px -45px;}
+.x-tool-gear{background-position:0 -90px;}
+.x-tool-gear-over{background-position:-15px -90px;}
+.x-tool-pin{background-position:0 -135px;}
+.x-tool-pin-over{background-position:-15px -135px;}
+.x-tool-unpin{background-position:0 -150px;}
+.x-tool-unpin-over{background-position:-15px -150px;}
+.x-tool-right{background-position:0 -165px;}
+.x-tool-right-over{background-position:-15px -165px;}
+.x-tool-left{background-position:0 -180px;}
+.x-tool-left-over{background-position:-15px -180px;}
+.x-tool-up{background-position:0 -210px;}
+.x-tool-up-over{background-position:-15px -210px;}
+.x-tool-down{background-position:0 -195px;}
+.x-tool-down-over{background-position:-15px -195px;}
+.x-tool-refresh{background-position:0 -225px;}
+.x-tool-refresh-over{background-position:-15px -225px;}
+.x-tool-minus{background-position:0 -255px;}
+.x-tool-minus-over{background-position:-15px -255px;}
+.x-tool-plus{background-position:0 -240px;}
+.x-tool-plus-over{background-position:-15px -240px;}
+.x-tool-search{background-position:0 -270px;}
+.x-tool-search-over{background-position:-15px -270px;}
+.x-tool-save{background-position:0 -285px;}
+.x-tool-save-over{background-position:-15px -285px;}
+.x-tool-help{background-position:0 -300px;}
+.x-tool-help-over{background-position:-15px -300px;}
+.x-tool-print{background-position:0 -315px;}
+.x-tool-print-over{background-position:-15px -315px;}
+.x-panel-ghost{background:#cbddf3;z-index:12000;overflow:hidden;position:absolute;left:0;top:0;opacity:.65;-moz-opacity:.65;filter:alpha(opacity=65);}
+.x-panel-ghost ul{margin:0;padding:0;overflow:hidden;font-size:0;line-height:0;border:1px solid #99bbe8;border-top:0 none;display:block;}
+.x-panel-ghost *{cursor:move!important;}
+.x-panel-dd-spacer{border:2px dashed #99bbe8;}
+.x-panel-btns-ct{padding:5px;}
+.x-panel-btns-ct .x-btn{float:right;clear:none;}
+.x-panel-btns-ct .x-panel-btns td{border:0;padding:0;}
+.x-panel-btns-ct .x-panel-btns-right table{float:right;clear:none;}
+.x-panel-btns-ct .x-panel-btns-left table{float:left;clear:none;}
+.x-panel-btns-ct .x-panel-btns-center{text-align:center;}
+.x-panel-btns-ct .x-panel-btns-center table{margin:0 auto;}
+.x-panel-btns-ct table td.x-panel-btn-td{padding:3px;}
+.x-panel-btns-ct .x-btn-focus .x-btn-left{background-position:0 -147px;}
+.x-panel-btns-ct .x-btn-focus .x-btn-right{background-position:0 -168px;}
+.x-panel-btns-ct .x-btn-focus .x-btn-center{background-position:0 -189px;}
+.x-panel-btns-ct .x-btn-over .x-btn-left{background-position:0 -63px;}
+.x-panel-btns-ct .x-btn-over .x-btn-right{background-position:0 -84px;}
+.x-panel-btns-ct .x-btn-over .x-btn-center{background-position:0 -105px;}
+.x-panel-btns-ct .x-btn-click .x-btn-center{background-position:0 -126px;}
+.x-panel-btns-ct .x-btn-click .x-btn-right{background-position:0 -84px;}
+.x-panel-btns-ct .x-btn-click .x-btn-left{background-position:0 -63px;}
+
+/* ### end from ext.all ### */
+
+
+.x-btn-menu-wrap {
+    width:0 !important;
+}
+.x-menu {
+    background:#F0F0F0 none repeat scroll 0 0 !important;
+}
+.x-menu-list-item img {
+    display:none;
+}
+.x-menu-list-item a.x-menu-item {
+    padding-left:8px;
+}
+.port h1.x-panel-header-text, .port h2.x-panel-header-text, .port h3.x-panel-header-text, .port h4.x-panel-header-text, .port h5.x-panel-header-text, .port h6.x-panel-header-text {
+    font-size:100%;
+    margin:0;
+    padding:0;
+}
+div.x-panel-body {
+    padding:5px;
+}
+.port .x-panel-header { /* to override setting padding to 0 */
+    padding:5px 3px 4px 5px;
+}
+
+
+
+
+/*
+ * Ext JS Library 2.1
+ * Copyright(c) 2006-2008, Ext JS, LLC.
+ * licensing@extjs.com
+ * 
+ * http://extjs.com/license
+ * Derived from "gray" theme.
+
+ */
+
+.x-panel {
+    border-style: solid;
+    border-color: #d0d0d0;
+}
+.x-panel-header {
+    color:#333;
+    border:1px solid #d0d0d0;
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/white-top-bottom.gif);
+}
+
+.x-panel-body {
+    border-color:#d0d0d0;
+}
+
+.x-panel-bbar .x-toolbar {
+    border-color:#d0d0d0;
+}
+
+.x-panel-tbar .x-toolbar {
+    border-color:#d0d0d0;
+}
+
+.x-panel-tbar-noheader .x-toolbar, .x-panel-mc .x-panel-tbar .x-toolbar {
+    border-color:#d0d0d0;
+}
+.x-panel-body-noheader, .x-panel-mc .x-panel-body {
+    border-color:#d0d0d0;
+}
+.x-panel-tl .x-panel-header {
+    color:#333;
+}
+.x-panel-tc {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/top-bottom.gif);
+}
+.x-panel-tl {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/corners-sprite.gif);
+    border-color:#d0d0d0;
+}
+.x-panel-tr {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/corners-sprite.gif);
+}
+.x-panel-bc {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/top-bottom.gif);
+}
+.x-panel-bl {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/corners-sprite.gif);
+}
+.x-panel-br {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/corners-sprite.gif);
+}
+.x-panel-mc {
+    background:#f1f1f1;
+}
+.x-panel-mc .x-panel-body {
+    background:transparent;
+    border: 0 none;
+}
+.x-panel-ml {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/left-right.gif);
+}
+.x-panel-mr {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/left-right.gif);
+}
+
+/* Tools */
+.x-tool {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/tool-sprites.gif);
+}
+
+/* Ghosting */
+.x-panel-ghost {
+    background:#e0e0e0;
+}
+
+.x-panel-ghost ul {
+    border-color:#b0b0b0;
+}
+
+.x-grid-panel .x-panel-mc .x-panel-body {
+    border:1px solid #d0d0d0;
+}
+
+/* Buttons */
+
+.x-btn-left{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/button/btn-sprite.gif);
+}
+.x-btn-right{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/button/btn-sprite.gif);
+}
+.x-btn-center{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/button/btn-sprite.gif);
+}
+
+/* Layout classes */
+
+.x-border-layout-ct {
+    background:#f0f0f0;
+}
+
+.x-accordion-hd {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/panel/light-hd.gif);
+}
+
+.x-layout-collapsed{
+    background-color:#eee;
+    border-color:#e0e0e0;
+}
+.x-layout-collapsed-over{
+     background-color:#fbfbfb;
+}
+
+
+/* qtips */
+.x-tip .x-tip-top {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+.x-tip .x-tip-top-left {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+.x-tip .x-tip-top-right {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+.x-tip .x-tip-ft {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+.x-tip .x-tip-ft-left {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+.x-tip .x-tip-ft-right {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+.x-tip .x-tip-bd-left {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+.x-tip .x-tip-bd-right {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/qtip/tip-sprite.gif);
+}
+
+/* Toolbars */
+
+.x-toolbar{
+    border-color:#d0d0d0;
+    background:#f0f4f5 url(/core/ext.ncbi/1/img/oldentrez/toolbar/bg.gif) repeat-x top left;
+}
+.x-toolbar button {
+    color:#444;
+}
+.x-toolbar .x-btn-menu-arrow-wrap .x-btn-center button {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/btn-arrow.gif);
+}
+.x-toolbar .x-btn-text-icon .x-btn-menu-arrow-wrap .x-btn-center button {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/btn-arrow.gif);
+}
+.x-toolbar .x-btn-over .x-btn-left{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/tb-btn-sprite.gif);
+}
+.x-toolbar .x-btn-over .x-btn-right{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/tb-btn-sprite.gif);
+}
+.x-toolbar .x-btn-over .x-btn-center{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/tb-btn-sprite.gif);
+}
+.x-toolbar .x-btn-over button {
+    color:#111;
+}
+.x-toolbar .x-btn-click .x-btn-left, .x-toolbar .x-btn-pressed .x-btn-left, .x-toolbar .x-btn-menu-active .x-btn-left{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/tb-btn-sprite.gif);
+}
+.x-toolbar .x-btn-click .x-btn-right, .x-toolbar .x-btn-pressed .x-btn-right, .x-toolbar .x-btn-menu-active .x-btn-right{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/tb-btn-sprite.gif);
+}
+
+.x-toolbar .x-btn-click .x-btn-center, .x-toolbar .x-btn-pressed .x-btn-center, .x-toolbar .x-btn-menu-active .x-btn-center{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/toolbar/tb-btn-sprite.gif);
+}
+.x-toolbar .ytb-sep {
+    background-image: url(/core/extjs/ext-2.1/resources/images/default/grid/grid-split.gif);
+}
+
+/* Tabs */
+
+.x-tab-panel-header, .x-tab-panel-footer {
+    background: #EAEAEA;
+    border-color:#d0d0d0;
+}
+
+
+.x-tab-panel-header {
+    border-color:#d0d0d0;
+}
+
+.x-tab-panel-footer {
+    border-color:#d0d0d0;
+}
+
+ul.x-tab-strip-top{
+    background:#dbdbdb url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-strip-bg.gif) repeat-x left top;
+    border-color:#d0d0d0;
+    padding-top: 2px;
+}
+
+ul.x-tab-strip-bottom{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-strip-btm-bg.gif);
+    border-color:#d0d0d0;
+}
+
+.x-tab-strip span.x-tab-strip-text {
+    color:#333;
+}
+.x-tab-strip-over span.x-tab-strip-text {
+    color:#111;
+}
+
+.x-tab-strip-active span.x-tab-strip-text {
+    color:#333;
+}
+
+.x-tab-strip-disabled .x-tabs-text {
+    color:#aaaaaa;
+}
+
+.x-tab-strip-top .x-tab-right {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tabs-sprite.gif);
+}
+
+.x-tab-strip-top .x-tab-left {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tabs-sprite.gif);
+}
+.x-tab-strip-top .x-tab-strip-inner {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tabs-sprite.gif);
+}
+
+.x-tab-strip-bottom .x-tab-right {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-btm-inactive-right-bg.gif);
+}
+
+.x-tab-strip-bottom .x-tab-left {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-btm-inactive-left-bg.gif);
+}
+
+.x-tab-strip-bottom .x-tab-strip-active .x-tab-right {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-btm-right-bg.gif);
+}
+
+.x-tab-strip-bottom .x-tab-strip-active .x-tab-left {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-btm-left-bg.gif);
+}
+
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-close.gif);
+}
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close:hover{
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/tabs/tab-close.gif);
+}
+
+.x-tab-panel-body {
+    border-color:#d0d0d0;
+    background:#fff;
+}
+.x-tab-panel-bbar .x-toolbar {
+    border-color: #d0d0d0;
+}
+
+.x-tab-panel-tbar .x-toolbar {
+    border-color: #d0d0d0;
+}
+
+.x-tab-panel-header-plain .x-tab-strip-spacer {
+    border-color:#d0d0d0;
+    background: #eaeaea;
+}
+
+.x-tab-scroller-left {
+    background-image: url(/core/ext.ncbi/1/img/oldentrez/tabs/scroll-left.gif);
+    border-color:#aeaeae;
+}
+.x-tab-scroller-right {
+    background-image: url(/core/ext.ncbi/1/img/oldentrez/tabs/scroll-right.gif);
+    border-color:#aeaeae;
+}
+
+/* Window */
+
+.x-window-proxy {
+    background:#e0e0e0;
+    border-color:#b0b0b0;
+}
+
+.x-window-tl .x-window-header {
+    color:#555;
+}
+.x-window-tc {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/top-bottom.png);
+}
+.x-window-tl {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/left-corners.png);
+}
+.x-window-tr {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/right-corners.png);
+}
+.x-window-bc {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/top-bottom.png);
+}
+.x-window-bl {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/left-corners.png);
+}
+.x-window-br {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/right-corners.png);
+}
+.x-window-mc {
+    border:1px solid #d0d0d0;
+    background:#e8e8e8;
+}
+
+.x-window-ml {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/left-right.png);
+}
+.x-window-mr {
+    background-image:url(/core/ext.ncbi/1/img/oldentrez/window/left-right.png);
+}
+.x-panel-ghost .x-window-tl {
+    border-color:#d0d0d0;
+}
+.x-panel-collapsed .x-window-tl {
+    border-color:#d0d0d0;
+}
+
+.x-window-plain .x-window-mc {
+    background: #e8e8e8;
+    border-right:1px solid #eee;
+    border-bottom:1px solid #eee;
+    border-top:1px solid #d0d0d0;
+    border-left:1px solid #d0d0d0;
+}
+
+.x-window-plain .x-window-body {
+    border-left:1px solid #eee;
+    border-top:1px solid #eee;
+    border-bottom:1px solid #d0d0d0;
+    border-right:1px solid #d0d0d0;
+    background:transparent !important;
+}
+
+body.x-body-masked .x-window-mc, body.x-body-masked .x-window-plain .x-window-mc {
+    background-color: #e4e4e4;
+}
+
+
+/* misc */
+.x-html-editor-wrap {
+    border-color:#d0d0d0;
+}
+
+/* Borders go last for specificity */
+.x-panel-noborder .x-panel-body-noborder {
+    border-width:0;
+}
+
+.x-panel-noborder .x-panel-header-noborder {
+    border-width:0;
+    border-bottom:1px solid #d0d0d0;
+}
+
+.x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
+    border-width:0;
+    border-bottom:1px solid #d0d0d0;
+}
+
+.x-panel-noborder .x-panel-bbar-noborder .x-toolbar {
+    border-width:0;
+    border-top:1px solid #d0d0d0;
+}
+
+.x-window-noborder .x-window-mc {
+    border-width:0;
+}
+.x-window-plain .x-window-body-noborder {
+    border-width:0;
+}
+
+.x-tab-panel-noborder .x-tab-panel-body-noborder {
+    border-width:0;
+}
+
+.x-tab-panel-noborder .x-tab-panel-header-noborder {
+    border-top-width:0;
+    border-left-width:0;
+    border-right-width:0;
+}
+
+.x-tab-panel-noborder .x-tab-panel-footer-noborder {
+    border-bottom-width:0;
+    border-left-width:0;
+    border-right-width:0;
+}
+
+
+.x-tab-panel-bbar-noborder .x-toolbar {
+    border-width:0;
+    border-top:1px solid #d0d0d0;
+}
+
+.x-tab-panel-tbar-noborder .x-toolbar {
+    border-width:0;
+    border-bottom:1px solid #d0d0d0;
+}
+
+/* Changes from gray */
+
+.x-panel-header {
+    font-family: Arial, Verdana, Sans-Serif;
+    font-size: 90%;
+    xbackground: none;
+    background-color: #e3e3e3;
+}
+
+div.port.section {
+    font-family: Arial,Helvetica,Sans-Serif;
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+}
+
+div.x-panel-body div.port.section {
+    margin-top: 0;
+    padding-top: 0;  
+}
+
+div.port.section div.window{
+    margin-bottom: 0.5em;
+    padding-left: 0.5em;
+}
+div.port li.item em.linklist.error{
+    color:#CC0000;
+    font-size: 1.2em;
+    background-color:#EAEBC8;
+}
+
+div.port.norender {
+    font-family: Arial,Lucida Sans,Trebuchet,Sans-Serif;
+}
+div.brieflink {
+    margin-top:0.5em;
+    padding-top:0.5em;
+    font-family: Arial, Lucida Sans, Trebuchet, Sans-Serif;
+}
+
+div.brieflink h2 {
+    color:#000000;
+    font-size: .8em;
+    font-weight: bold;
+    padding-bottom: 0.3em;
+    margin-left: 0.2em;
+}
+
+div.brieflink div{
+    border-top: 1px solid #BDBDBD;
+}
+
+div.brieflink ul {
+    font-size: .8em;
+    color: #212121;
+}
+
+div.brieflink ul li.item{
+    background-image: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/29089);
+    background-position: 0 0.35em;
+    background-repeat: no-repeat;
+    margin: 0.5em 0 0;
+    *margin-top: 0.25em; /* IE7, IE6 */
+    max-height: 2.5em;
+    min-height: 1.25em;
+    line-height: 1.25em;
+    overflow: hidden; 
+    padding-left: 1.2em;
+    padding-top: 0.1em;
+    zoom: 1;
+    /* _height: 2.5em;*/ /* IE6 hack to control height to 2 lines. If we ever have portlets
+    that have links that go beyond 2 lines and doesn't have Note and we want to limit the
+    height, then we need to put this back or have derived portlet add such restriction .
+    If Note is present, Note rectricts height to 2 lines */
+    /* position: relative used so inner objects can be absolutely positioned within */
+    position: relative;
+}
+
+/* when p.note is present inside li, adjust height to always show two lines */
+div.brieflink ul li.item.note{
+    height: 2.5em;
+}
+
+div.brieflink ul li.more{
+    border-bottom: none;
+    text-align: right;
+    white-space: nowrap;
+    margin-top: 0.5em;
+    padding-top: 0.1em;
+}
+
+div.brieflink ul li.item a{
+    color: #212121;
+    border-bottom: none;
+    max-height: 2.5em;
+    float: left; 
+    overflow: hidden;
+    text-decoration:none;
+}
+
+div.brieflink ul li.more a{
+     color: #212121;
+     border-bottom: none;
+     text-decoration:none;
+}
+
+div.brieflink ul li a:hover{
+    text-decoration: underline;
+    _border-bottom: none;
+}
+
+div.brieflink li.item p.desc {
+    position: relative;
+    left: 1000px;
+    bottom: 1000px;
+    height: 0;
+    line-height: 0;
+}
+
+div.brieflink ul li.item p.note{
+    color: #666666;
+    display: inline;
+    position: absolute;
+    right: 0;
+    top: 1.3em;
+    background-color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 0.2em;
+}
+
+div.brieflink li.footer {
+    color: #666666;
+    font-size: .9em; 
+    text-align: right;
+    border-top: 1px solid #BDBDBD;
+    margin-top: 0.4em;
+    margin-left: 1.5em;
+    line-height: 1.5em;
+}
+
+
+
+/* Mark any text to be popped as "poptext". This text is always hidden. */
+.poptext {
+display: none;
+}
+
+/* By default, a popper is hidden */
+.popper, .pop-getxy {
+position: absolute;
+display: none;
+margin:0;
+width: 300px;
+z-index: 1000;
+zoom:1;
+}
+
+/* Trying without success to fix IE, yet again. */
+.port {
+zoom: 1 !important;
+}
+
+/* Put popper off the page when getting its size */
+/* When popping something to get its dimensions, keep it invisible */
+.pop-getxy {
+visibility: hidden;
+}
+
+/* But add "popped" class to it, and it unhides */
+.popper.popped {
+display: block;
+background-color: #fff;
+}
+
+/* To add arrows, set margin on div.popperInnerDiv.
+   Arrows are background-images on .popper, within margin around .popperInnerDiv.
+   Margin size should be arrow size in that dimension.
+   The following rules override margin, setting it to zero for
+   all directions except the one for the arrow.
+ */
+
+/* Pop left */
+div.popper.popped.pop-left div.popperInnerDiv {
+margin-left:0;
+margin-top:0;
+margin-bottom:0;
+}
+
+/* Pop right */
+div.popper.popped.pop-right div.popperInnerDiv {
+margin-right:0;
+margin-top:0;
+margin-bottom:0;
+}
+
+/* Pop above */
+div.popper.popped.pop-above div.popperInnerDiv {
+margin-right:0;
+margin-left:0;
+margin-top:0;
+}
+
+/* Pop-below */
+div.popper.popped.pop-below div.popperInnerDiv {
+margin-right:0;
+margin-left:0;
+margin-bottom:0;
+}
+
+
+/* Standard popper style. Override these styles in the cascade to customize locally. */
+.popper {
+width:30em; /* Popper does not always work correctly if size is not fixed on at least one dimension. */
+font-size: .8em;
+color: #222;
+font-family: Arial, Lucida Sans, Trebuchet, Sans-Serif;
+}
+
+.popper.popped {
+xbackground: transparent url(http://iwebdev/staff/mjohnson/proj/components/popper/pop2.png) no-repeat center center;
+background: transparent url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/29062) no-repeat center center;
+}
+
+.popper.popped div.popperInnerDiv {
+background-color: #F0F8FF; /*#def;*/
+padding: 0.5em;
+border: solid 1px #369;
+margin: 15px;
+}
+
+div#popContent div.popperInnerDiv {
+background-color:#F0F8FF;
+color:#444444;
+font-family:Verdana, Arial, sans-serif;
+font-size:80%;
+opacity:1;
+z-index:5;
+padding: 0.5em;
+}
+
+/* Pop left */
+div.popper.popped.pop-left {
+background-position: 100% -12px;
+}
+/* Pop right */
+div.popper.popped.pop-right {
+background-position: 0 -12px;
+}
+/* Pop above */
+div.popper.popped.pop-above {
+background-position: -12px 100%;
+}
+/* Pop-below */
+div.popper.popped.pop-below {
+background-position: -12px 0;
+}
+
+
+/* override style from BriefLink */
+div.section div.brieflink.window {
+    margin-top: 0;
+    *margin-top: 0.75em; /* for IE6, 7 */
+    padding-top: 0;
+}
+
+div.brieflink.window ul li.item{
+    height: auto;
+}
+/******************************************/
+/* historyportletCSS */
+/******************************************/
+div#HTDisplay {
+    font-family:Arial,sans-serif;   
+}
+
+div#HTDisplay a {
+    color:#232323;
+    text-decoration:underline;
+    border:none;
+}
+
+div#HTDisplay ul{    
+    list-style: none;
+    font-size: 80%;    
+    margin: 1.3em 0em 1em 0em;
+    padding: 0;
+    _padding-top: 1.3em; /* IE6 handles margin differently */
+}
+
+
+div#HTDisplay ul li{
+    margin: 0.8em 0.3em 0.8em 0.7em;    
+    padding-left: 1.8em;
+    padding-right: 0.2em;
+    height: auto;    
+    max-height:2.6em;
+    overflow: hidden;
+    color:#232323;
+    position:relative;
+}
+
+div#HTDisplay ul li.query{   
+    min-height: 15px; 
+    background: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/29088) no-repeat 0 0;   
+}
+
+div#HTDisplay ul li.query div.textwrapper{   /* wrap when text overlap w/ db logo */ 
+    max-width: 85%;  
+}
+
+div#HTDisplay ul li.record{
+    line-height:1.3;     
+    background: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/29132) no-repeat scroll 0 20%; 
+}
+
+div#HTDisplay ul li.bottomline {
+    padding-bottom: 0.3em;
+    border-bottom: 1.0px solid #999999;
+}
+
+div#HTDisplay ul li a.hidden {
+    display:none;
+}
+
+div#HTDisplay ul li.record a {
+    text-decoration:none;
+}
+
+div#HTDisplay ul li.record a:hover {
+    text-decoration:underline;
+}
+
+div#HTDisplay ul .count{
+    position:relative;
+    top:1px;
+    left:0.3em;    
+}
+
+div#HTDisplay div.action {    
+    overflow:hidden;
+}
+
+div#HTDisplay div.action a {
+    margin: 0em .5em .25em .5em;
+    font-size: 75%;
+    float: right;    
+}
+
+div#HTDisplay p {
+    clear: both;
+    font-size:85%;
+    margin: 1.2em 0em 0.6em 0.5em;
+}
+
+div#HTDisplay ul li .thumb {
+    position:absolute; 
+    right:0px;
+    padding-top:0.4em;
+    _padding-right:0.4em; /* IE6 does not handle position:absolute right. Seems it takes an upper level parent w/ position:relavite as the context */
+    background-color:white; /* since the new thumbnails have transparent background */
+}
+
+/*************************************************
+* show and hide messages and Turn on/off links
+*
+**************************************************/
+div#HTDisplay p, div#HTDisplay .action a.HTOff, div#HTDisplay.HTOff .action a.HTOn {
+    display:none;
+}
+
+div#HTDisplay.HTOff p.HTOff, div#HTDisplay.HTOn p.HTOn {
+    display:block;
+}
+
+div#HTDisplay.HTOff .action a.HTOff, div#HTDisplay.HTOn .action a.HTOn {
+    display:block;
+}
+
+div#HTDisplay ul.hide {
+    display:none;
+}
+
+/*------------------------------------  Popup History Window -------------------------------------------*/
+/*  eddie  */
+/* want to make this image a gif, but... don't have access to corehtml  */
+img.htbpoparrow {
+zoom: 1;
+background: transparent url(/corehtml/query/PubMed/right.jpg) no-repeat top right;
+float: right;
+position: relative;
+top: -7px;
+left: 22px;
+_left: 25px;
+z-index: 4;
+/* IE fix */
+
+}
+
+div#htbpopper {
+zoom: 1;
+display: block;
+position: absolute;
+width: 32em;
+z-index: 5;
+padding: 0.5em;
+font-family: Verdana;
+font-size: 80%;
+color: #444;
+border: solid 1px #369;
+background-color: #f0f8ff;
+opacity: 100;
+}
+
+div.popper p {
+/*margin-top: 0;
+margin-bottom: .25em;*/
+margin: 0 0 0.25em 0;
+}
+/*---*/
+
+p#htbpcit,
+p.pmid {
+font-size: 85%;
+display: block;
+}
+
+p#htbpcit {
+font-style: italic;
+}
+
+#htbpopper.hidden {
+display: none;
+}
+
+div#HTDisplay ul li span.thumb {
+  background-color: #F8F8F8;
+}
+#content ul.DiscoverySection, .content ul.DiscoverySectionc{
+}
+
+#content li.DiscoverySectionTitle, .content li.DiscoverySectionTitle{
+    color:#1356D8;;
+    font-weight:bold;
+    border-bottom:1px solid #CCCCCC;
+    padding-top: 1em;
+    padding-bottom: 0.2em;
+}
+
+#content li.DiscoveryItem, .content li.DiscoveryItem {
+   background: url(/portal:img/ra_red) no-repeat top left;
+   padding-left: 1.2em;
+   padding-bottom: 0.3em; 
+   font-size:0.9em;
+}
+
+#content li.DiscoveryItem a, .content li.DiscoveryItem a {
+    color:#232323;
+    border-bottom: none;
+}
+
+#content li.DiscoveryItem a: hover, .content li.DiscoveryItem a: hover {
+    text-decoration: underline;
+}
+
+#content li.DiscoveryAllLinks, .content li.DiscoveryAllLinks {
+    text-align:right;
+    font-size:0.9em;
+    border-bottom:1px solid #CCCCCC;
+    padding-bottom: 0.3em; 
+}
+
+#content li.DiscoveryAllLinks a, .content li.DiscoveryAllLinks a {
+    color: #CC0000;
+    text-decoration: underline;
+}
+div.popper em.cit{
+    font-style:italic;
+    font-size: .85em;
+    display:block;
+    margin-top: 0.5em;
+}
+
+div.popper em.author{ 
+    font-style:normal;
+    font-size: .85em;
+    display:block;
+    margin-top: 0.5em;
+    margin-bottom: -0.3em;
+}
+
+div.Pubmed_Discovery_RA span.reviewflag {
+    float:left;
+    margin-right:0.5em;
+    margin-top:-0.1em;
+    padding:0 0.3em 0 0.2em;
+    *padding:0 0.1em 0 0.2em;
+    background-color:#A81B0E;
+    color:white;
+    vertical-align:middle;
+    font-weight:500;
+    font-style:italic; 
+    font-size: 0.9em;
+}
+
+/* hide the review label in popper*/
+div.popper span.reviewflag {
+    display:none;
+}
+
+
+/*
+  This css overrides and copies the styling from Pubmed_Discovery_RA_CSS, just
+  changing the class name to be specific to PPMCPubmedRA.
+*/
+
+div.PPMCPubmedRA span.invert {
+    float:left;
+    margin-right:0.5em;
+    margin-top:-0.1em;
+    padding:0 0.3em 0 0.2em;
+    *padding:0 0.1em 0 0.2em;
+    background-color:#A81B0E;
+    color:white;
+    vertical-align:middle;
+    font-weight:500;
+    font-style:italic; 
+    font-size: 0.9em;
+}
+
+/* hide the review label in popper*/
+div.popper span.invert {
+    display:none;
+}
+
+/*
+  PPMCArticlePageCSS
+*/
+
+body #col1, 
+body #col2, 
+body #subheader, 
+body #subfooter { 
+  border: solid 1px #00c; 
+}
+
+body #subfooter { 
+  text-align: center; 
+}
+
+#Table2 {
+	width: 100%;
+	background-color:#ECF0F4; }
+
+/* 
+  We originally removed the style for td.pmc-watermark { width: 25px; }
+  and put it in the backend.  Now, I'm adding this min-width to address
+  PMC-5971.
+*/
+td.pmc-watermark {
+  min-width: 20px;
+  min-height: 300px;
+  *min-height: auto;
+}
+
+
+td.format-menu {
+	font-size: 80%;
+	padding: 0 0 0 .75em; 
+}
+
+td.format-menu ul {
+	display: inline;
+	padding: 0 0 0 .25em;
+	margin: 0 0 0 .2em; 
+}
+
+td.format-menu h2 {
+	color: #000;
+	font-size: 1em;
+	display: inline;
+	font-weight: bold; 
+}
+
+td.format-menu ul li {
+	display: inline;
+	margin: 0;
+	margin-right: .1em; 
+}
+
+td.format-menu ul li a { 
+  color: #000000; 
+}
+
+td.format-menu ul li.selected { 
+  color: #5E5E5E; 
+}
+
+/*
+  PMC-7199
+  I changed this to make it more specific, at AK's suggestion.
+  This fixes the scanned page thumbs in IE6.  Hopefully it doesn't
+  break something else.
+*/
+td.content-cell > div 
+td.content-cell > div > div
+{ 
+  zoom: 1; 
+}
+
+td.sidebar-cell {
+  min-width: 250px;
+  max-width: 350px; 
+  width: 350px;
+}
+
+@media screen {
+  td.message-cell {
+    width: 570px; 
+    max-width: 570px;
+  }
+}
+
+body.pmc-body #Table3 div.navlink-box {
+  width: auto; /* need this rule to override pmcstatic.css, otherwise IE will stretch table too far */
+  font-weight: normal;
+  border-bottom: 1px solid #5E5E5E; 
+}
+
+
+div.cited-ref {
+  margin: .3em .75em;
+  position: absolute;
+  max-width: 350px;
+  min-width: 250px; 
+  width: 350px;
+}
+
+/*
+  Fix the width for the main column, even when there are long sequence
+  strings in the main text.  See PMC-6960.
+*/
+@media screen {
+  div.section-content > div.p {
+    width: 550px;
+    word-wrap: break-word;
+  }
+}
+
+/* PMC-7597 - Per Andrei K's request.  Updated for PMC-11773. */
+img {
+  max-width: 100%;
+}
+/* PMC-11932 - Fix images in IE.  Also AK's suggestion.  */
+a img {
+  max-width: none
+}
+
+/*
+  PMC-7323 - The width should be automatic in video captions.
+*/
+div.section-content div.figure-table-caption-in-article div.p {
+    width: auto;
+}
+
+/********************************************************************************** 
+  CFM:
+  Many changes here related to the list of Pubmed links which gets inserted into
+  the bottom of the page (invisibly).
+  Question:  should these be moved to the PMCAjaxPubmedRefs portlet? 
+  These styles were adapted from Pubmed_Discovery_RA_CSS@1.3.
+  
+  Added By Aaron:
+  Edited selectors so that they apply to the cloned nodes in the reference portlets too
+*/
+
+div.ArticleRefDocsums { 
+}
+
+div.pmlinks ul.links, 
+div.cited-ref ul 
+{
+	display: block;
+	font-family:Arial,Helvetica,sans-serif;
+	border-top: 1px solid #CCCCCC;
+	padding-bottom: 0.5em;
+	padding-left: 0.1em;
+	list-style: none;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin: 0 0 0;
+	padding: 0; 
+}
+
+div.pmlinks ul.links li.ovfl, 
+div.cited-ref li.ovfl 
+{
+	margin: 0.75em 0.2em 0 0;
+	font-size: 80%;
+	line-height: 1.2em;
+	background: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/29089) no-repeat top left;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	zoom :1;
+	width: 100%; 
+}
+
+div.pmlinks ul.links li.ovfl a.pl, 
+div.cited-ref li.ovfl a.pl 
+{
+	padding-left: 1.5em;
+	color: rgb(35, 35, 35);
+	text-decoration: none;
+	display: block;
+	height: 2.4em;
+	overflow: hidden;
+}
+
+div.pmlinks ul.links li.ovfl a.pl:hover, 
+div.cited-ref li.ovfl a.pl:hover 
+{ 
+  text-decoration: underline; 
+}
+
+div.pmlinks ul.links li.ovfl span.pub, 
+div.cited-ref li.ovfl span.pub 
+{
+	color: #666;
+	display: inline;
+	background-color: #F8F8F8;
+	bottom: -0.2em;
+	display: block;
+	font-family: Verdana,Arial,Sans-Serif;
+	letter-spacing: -1px;
+	overflow: hidden;
+	padding: 0 0.5em 2px;
+	margin-top: .2em;
+	position: absolute;
+	right: 0;
+	white-space: nowrap;
+	z-index: 4;
+	zoom: 1; 
+}
+
+div.pmlinks ul.links li.ovfl span.flag, 
+div.cited-ref li.ovfl span.flag 
+{
+	margin-right:0.5em;
+	margin-top:-0.1em;
+	padding:0 0.3em 0 0.2em;
+	background-color:#A81B0E;
+	color:white;
+	vertical-align:middle;
+	font-weight:500;
+	font-style:italic; 
+}
+
+p.desc { 
+  display: none; 
+}
+
+/* 
+  Override the white background of the <p class='note'> in the Pubmed Related
+  Articles portlet.  We have to be very specific, because the styling that
+  comes with the Pubmed_Discovery_RA portlet is very specific. 
+*/
+div.brieflink div.PPMCPubmedRA ul li.item p.note { 
+  background-color: #F8F8F8; 
+}
+
+/****************************************************************************/
+/* right align see more link in ref portlets, but left align everything else */
+div.cited-ref {
+	text-align: right;
+	left: -1000px; /* must be NOT set to display: none, or script won't be able to get initial, base dimensions */ 
+}
+
+div.cited-ref ul {
+	text-align: left;
+	*padding-top: .55em; /* for some reason, IE6,7 doesn't respect li.ovfl top margin */ 
+}
+
+div.cited-ref a.all-articles {
+	display: block;
+	margin-top: .5em;
+	font-size: 80%;
+	color: rgb(35, 35, 35);
+	text-decoration: none; 
+}
+
+div.cited-ref a.all-articles:hover { 
+  text-decoration: underline; 
+}
+
+/*
+  CFM:  Give the discovery portlets a small left margin:
+*/
+div.port {
+  margin-left: 0.75em;
+  max-width: 350px;
+  min-width: 250px;
+  width: 350px;
+}
+
+/* 
+  CFM:  Added this to override the white background which the discovery portlets
+  get by default in NCBIPageSectionCss (line 13).  See PMC-5588.
+*/
+div.x-panel-body {
+  background-color: transparent;
+}
+
+div.sameauthor-seemore {
+	text-align: right;
+	font-size: 75%; 
+}
+
+div.x-panel-body span.separator-bar {
+	color: #CCC;
+	margin: 0 .5em; 
+}
+
+span.review {
+	background-color: #A81B0E;
+	font-size: 85%;
+	font-style: italic;
+	color: #fff;
+	padding: .1em; 
+}
+
+/*
+  Tweak the Entrez_MessagesStyle a little.  See PMC-8693.
+*/
+div.messagearea ul.messages li {
+  font-size: 80%;
+  /*border-bottom: 1px solid #5E5E5E;*/
+  background-position: 0.1em 0.2em;
+}
+
+@media print { 
+
+  html body.pmc-body
+  {
+    min-width: 0;
+  }
+  
+  td.sidebar-cell div.port, 
+  #ArticleRefDocsums, 
+  .format-menu,
+  .other-sections
+  {
+    display: none;
+  }
+  
+  td.content-cell
+  {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
+  div.section-content > div.p {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
+  div.sec {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
+  #Table3 td.sidebar-cell
+  {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
+  td.content-cell {
+    padding-left: 0;
+  }
+  
+  /* PMC-7790 - Make video splash and play button invisible */
+  .canvas-media-player-outer .splash-ph {
+    display: none;
+  }
+}
+.mb, .mb ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 1;
+}
+.mb a  {
+    display: block;
+    width: 10em;
+    outline: none;
+    text-decoration: underline;
+    cursor: hand;
+    cursor: pointer;
+}
+.mb li {
+    float: left;
+    width: 10em;
+}
+.mb a.first-link {
+    color: #336699;
+    text-decoration: none;
+}
+
+ul.mb li span.delta {
+    color: #336699;
+}
+.mb li ul.submenu {
+    position: absolute;
+    width: 10em;
+    left: -999em;
+}
+
+
+.mb li ul ul {
+    margin: -1em 0 0 10em;
+}
+
+
+ul.mb li.submenu-item ul {
+    position: absolute;
+    left:-999em;
+    border: 1px solid red;
+}
+ul.mb li.active-item ul {
+    left: 3px;
+}
+ ul.mb li ul.opened {
+    left: auto;
+    border: 1px solid #FFFFFF !important;
+    border-left: 1px solid #336699;
+    border-bottom: 1px solid #336699;
+    border-right: 1px solid #0000CC;
+    border-top: 1px solid #336699;
+    background-color: #FFFFFF;
+    padding:2px;
+    margin-top: 4px;
+    
+}
+
+ul.mb li ul.opened li {
+   margin-bottom: 3px; 
+}
+
+ul.mb li ul.opened li.active-item {
+    background: #336699;
+    padding:0;     
+}
+ul.opened li.active-item a {
+    color: #FFFFFF;
+}
+ul.mb li ul a {
+    text-decoration: none;
+    color: #222222;
+    margin: 0 3px;
+    padding: 2px 0;
+}
+
+
+div.messagearea {
+    margin:0; 
+    padding: 0; 
+    border-bottom: solid 1px #888; 
+    clear:both;
+} 
+#messagearea.empty {border: none; clear:both;} 
+ul.messages {
+    font-family: Arial;
+    margin: 0; 
+    padding: 0; 
+    list-style-type:none;
+    list-style-image:none;
+}
+ul.messages li {
+    font-size: 1em;
+    margin:0.22em 0 0.22em;
+    padding: 0.25em 0.25em 0.25em 28px;
+    background-position: 0.5em 0.3em;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+ul.messages li.success {
+    background-image: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/24965);
+    background-color: #dfd;
+    border: solid 1px #8c8;;
+}
+ul.messages li.error {
+    background-image: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/1724);
+    background-color: #fcc;
+    border: solid 1px #c88;
+}
+ul.messages li.warn {
+    background-image: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/25968);
+    background-color:#ffc;
+    border: solid 1px #cc8;
+}
+ul.messages li.info {
+    background-image: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/9186);
+}
+ul.messages li.suggest {
+    background-image: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/26044);
+}
+ul.messages li.hi_warn {
+    background-image: url(http://static.pubmed.gov/portal/portal3rc.fcgi/3347739/img/25968);
+    background-color:transparent;
+    border: none;
+    font-weight: bold;
+}
+div#messagearea ul.messages li.hi_warn { margin: 2.5em 0; }
+ul.messages li.hi_warn em.detail{
+    font-weight: normal;
+    font-style: normal;
+    padding-left: 0.5em;
+}
+@media screen {
+  
+  td.content-cell {
+    width: 550px;
+    min-width: 550px;
+  }
+
+  #Table3 {
+    *table-layout: fixed;
+  }
+  .col-watermark {
+    *width: 20px;
+    *min-width: 20px;
+  }
+  .col-content {
+    *width: 570px;
+    *min-width: 570px;
+  }
+  .col-sidebar {
+    *width: 370px;
+    *min-width: 370px;
+  }
+
+}

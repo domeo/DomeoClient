@@ -1,0 +1,23 @@
+<module>
+  	<inherits name="com.google.gwt.core.Core"/>
+	<inherits name="com.google.gwt.i18n.I18N"/>	
+	
+	<inherits name="org.mindinformatics.gwt.utils.Utils"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.ui.UI"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.users.Users"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.styles.Styles"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.pipelines.Pipes"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.profiles.Profiles"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.resources.Resources"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.reporting.Reporting"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.logging.Logging"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.initializer.Initializer"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.preferences.Preferences"/>
+	<inherits name="org.mindinformatics.gwt.framework.component.qualifiers.Qualifiers"/>
+	
+	<source path="icons"/>
+	<source path="src"/>
+	<source path="component"/>
+	<source path="widget"/>
+	<source path="model"/>
+</module>

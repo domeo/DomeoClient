@@ -1,0 +1,16 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.outer {
+			width: 100%;
+			height: 20px;
+			border-bottom: 1px solid black;
+			background-color: #669966;
+		}
+	</ui:style>
+
+  	<g:HorizontalPanel ui:field='sidePanelTopbar' styleName='{style.outer}'>
+  	</g:HorizontalPanel>
+</ui:UiBinder>

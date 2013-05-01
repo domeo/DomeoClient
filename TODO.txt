@@ -1,0 +1,78 @@
+- Evaluate Scheduler
+- Split stages in the initialization pipeline
+
+- MOVE THE Y FROM ANNOTATION TO THE SELECTOR
+
+ - deletion of annotation sets
+ - analytics for detecting browsers/OS
+ - set panel: when changing the filtering, the selected set info might change. Now when moving from my sets to others, the info of one of my set still displays
+
+ 
+ - disable references toolbar when no references are found (like PubMed)?
+ 
+ 
+ - update tab label with set name
+ - logging of the reference definition process
+ - create dynamically a side panel tab
+ - display of the annotation details for a set
+
+ - cleanup LPubMedDocumentCardPanel
+ - display of references the icons and the text should never be split in two lines
+ - mark already saved items as deleted??
+ - when deleting items, the sets summary does not get updated
+ - add exploration of the set from the set panel, where a glass panel pops up on top of the side panel showing all the annotation items
+ - annotation sets show/hide optimization (too many cycles right now)
+ - add a right panel for displaying mashups information
+
+ - annotation edit
+
+ - tune cards for citations (hiding when? - action buttons?)
+ - links to citations (make them work) - fix stylesheet (pointer cursor) and cleanup Painter
+ - working on pubmed central citations prefix/suffix
+ - new methods in preferencesManager
+ - annotation types in preferences
+ - parameters of text mining (list of stopwords defualt and personal)
+ - loggin annotation set commands
+ - extract references from omim
+
+ - fix overlapping highlights
+ - manage access control of sets
+ - display details in the annotation set panel through an editable lens
+ 
+ 
+ - better architect annotation deletion (Two sources, annotations panel and popup).
+ - CitationReferencesPanel and PublicationResultsListPanel should both use WidgetUtils for odd and even rows
+ - finish PubmedSearchWidget
+ - Links pruning
+ - Popup should not overflow on the right of the screen
+ - simplify the construction of LLinkCard (too many panels)
+ - Are tiles components?
+ - Better strategy for detecting Y location in Wrapper.
+ - highlight default color in preferences
+ - Redesign the persistence manager splitting framework and domeo
+ - More robust provenance display in lens (if provenance is null should not crash). see OmimExtractMeta without createdOn and creator
+ - Add provenance in each item of the customized tab
+ - Date format now spread out in different classes like MAnnotation and MDocumentResource
+ - Refactor 'Resource' lenses to deal with provenance in a uniform way!
+ - Finish citations extractor for PMC
+ - When logging an exception, signal the problem in the status bar
+ - When content has been saved, signal the completion in the status bar
+ 
+ Major
+ - Consider the option of drawing on a document through a layer.
+ - Generating a PDF with the document and the related 
+ 
+ Done
+  - complete filtering by set in the annotation side panel
+  - sets panel filtering by editor (mine, others...)
+  - show/hide reference/citations
+  - manual annotation and highlight mode are now in two places (now only in toolbar with facade in Domeo)
+  - fix: when editing the item creating a new set something goes wrong and no set is created
+  - logging of the change of set
+  - in FPostItForm create a function that understands if the content changed
+  - in FPostItForm create a validation function and point to it in the Apply clickhandlers
+  - Refresh only the annotation panels (added refresh for only the annotation related panels)
+  - Verify vertical size of panel in OMIM and PubMed resource (the resize was missing)
+  - Refactor using 'identity' as package for the plugins data 
+  - When loading a generic page after a known one the tabs are not updating correctly (notify end generic pipeline was missing)
+  - logging panel not resizing correctly

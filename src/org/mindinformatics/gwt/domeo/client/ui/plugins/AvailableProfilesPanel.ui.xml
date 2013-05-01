@@ -1,0 +1,60 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+
+    .inner {
+    	border: solid 1px #ddd;
+    	height:410px;	
+		width: 100%;
+    }
+  	
+  	.itemPanelContainer {
+  		padding: 5px;
+  	}
+  	
+  	.scrollPanelContainer {
+		max-height: 310px;
+		height: 310px;
+		width: 310px;
+	}
+  	
+  	.label {
+		
+	}
+	
+	.labelWithPadding {
+		padding-left: 5px;
+	}
+	
+	.value {
+		font-weight: bold;
+	}
+	
+	.footer {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	
+	.pluginInfoPanel {
+
+	}
+  	
+</ui:style>
+
+	<g:FlowPanel styleName='{style.inner}'>
+		<g:HorizontalPanel width="820px">
+			<g:cell width='310px'>
+				<g:ScrollPanel ui:field='pluginsPanel' styleName='{style.scrollPanelContainer}'/>
+			</g:cell>
+				<g:VerticalPanel ui:field='pluginInfoPanel' styleName='{style.pluginInfoPanel}'/>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel ui:field='footerPanel' width="800px" styleName='{style.footer}'>
+			<g:Label ui:field='footerMessage'></g:Label>
+			<g:cell horizontalAlignment='ALIGN_RIGHT' width='140px'>
+				<g:Button ui:field='loadButton'>Load Profile</g:Button>
+			</g:cell>
+		</g:HorizontalPanel>
+	</g:FlowPanel>
+</ui:UiBinder>

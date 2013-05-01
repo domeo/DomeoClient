@@ -1,0 +1,6 @@
+.gcomp-GlassPanel {
+    background-color: black;
+    filter: alpha(opacity=50);
+    opacity: .50;
+    z-index: 1000;
+}

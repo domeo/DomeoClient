@@ -1,0 +1,8 @@
+<module>
+  	<inherits name="com.google.gwt.core.Core"/>
+	<inherits name="com.google.gwt.i18n.I18N"/>	
+	
+	<source path="model"/>
+	<source path="management"/>
+	<source path="serialization"/>
+</module>

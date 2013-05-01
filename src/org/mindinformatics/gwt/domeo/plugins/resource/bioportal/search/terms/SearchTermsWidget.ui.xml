@@ -1,0 +1,18 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  
+    <ui:style>
+	  	.outer {
+		    height: 100%;
+		    width: 100%;
+		    border-top: 1px solid #CCC;
+		    border-left: 1px solid #CCC;
+		    border-right: 1px solid #CCC;
+		   	border-bottom: 1px solid #CCC;
+	 	}
+	 </ui:style>
+  
+  	<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
+  	</g:VerticalPanel>
+</ui:UiBinder>

@@ -1,0 +1,77 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.main {
+			width: 100%;
+			padding-left: 6px;
+			padding-bottom: 2px;
+			background-color: #ddd;
+		}
+		.outer {
+			width: 100%;
+			height: 29px;
+			border-bottom: 0px solid black;
+			
+		}
+		.byLabelPanel {
+			padding-left: 2px;	
+		}
+		.creatorFilterLabel {
+			padding-top:4px;
+			padding-right:2px;	
+			padding-left:1px;	
+		}
+		.creatorFilter {
+			height: 24px;
+			width: 225px;
+		}
+		.setFilter {
+			width: 220px;
+		}
+		.searchBox {
+			height: 17px;
+			width: 176px;
+			/*width: 194px;	*/
+		}
+		.searchButton {
+			height: 25px;	
+			border: 1px solid #999;
+			pointer:hand;
+			cursor:pointer;
+		}
+		.searchButtonPanel {
+			padding-top: 2px;	
+		}
+		.searchBoxPanel {
+			padding-top: 2px;	
+		}
+	</ui:style>
+
+	<g:VerticalPanel styleName='{style.main}'>
+	  	<g:HorizontalPanel ui:field='sidePanelTopbar' styleName='{style.outer}'>
+	  		<g:cell verticalAlignment='ALIGN_MIDDLE' width="232px">
+	  			<g:ListBox ui:field='accessFilter' styleName='{style.creatorFilter}'></g:ListBox>
+	  		</g:cell>
+	  		<g:cell verticalAlignment='ALIGN_MIDDLE'>
+	  			<g:ListBox ui:field='setFilter' styleName='{style.setFilter}'></g:ListBox>
+	  		</g:cell>
+	  	</g:HorizontalPanel>
+	  	<g:HorizontalPanel ui:field='sidePanelTopbar2' styleName='{style.outer}'>
+	  		<g:cell verticalAlignment='ALIGN_MIDDLE' width="232px">
+	  			<g:ListBox ui:field='typeFilter' styleName='{style.creatorFilter}'></g:ListBox>
+	  		</g:cell>
+	  		<g:cell horizontalAlignment='ALIGN_LEFT' width="180px">
+	  			<g:SimplePanel styleName='{style.searchBoxPanel}'>
+	  				<g:TextBox ui:field='searchBox' styleName='{style.searchBox}'></g:TextBox>
+	  			</g:SimplePanel>
+	  		</g:cell>
+	  		<g:cell  horizontalAlignment='ALIGN_LEFT' >
+		  		<g:SimplePanel styleName='{style.searchButtonPanel}'>
+		  			<g:Button ui:field='searchButton' styleName='{style.searchButton}'>Go</g:Button>
+		  		</g:SimplePanel>
+	  		</g:cell>
+	  	</g:HorizontalPanel>
+  	</g:VerticalPanel>
+</ui:UiBinder>

@@ -1,0 +1,91 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <ui:image field='rightSideImage' src='right-search-bar2.gif' />
+
+  <ui:style>
+  	.outer {
+	    height: 30px;
+	    padding-left: 4px;
+	    padding-top: 2px;
+	    background-color: #eee;
+	    width: 100%;
+	    border-top: 1px solid #CCC;
+	    border-bottom: 1px solid #CCC;
+  	}
+  
+  	.inner {
+	  	border: 0;
+	  	padding: 0px;
+	  	border-top: 1px solid #eee;	
+	    background-color: #eee;
+  	}
+
+  	.leftSide {
+  		border:0;
+  		padding:0;
+  		background-color: inherit;
+  	}
+  	
+  	.searchBox {
+  		border-left: 0px;
+		border-right: 0px;
+		background-color: #ffffff;	
+		border-top: 1px solid #fff;	
+		border-bottom: 0px;
+		height: 18px;
+		padding-top: 2px;
+		padding-left: 3px;
+		font-size: 13px;
+		width: 200px;
+  	}
+  	
+  	.searchBox:focus {
+  		outline: 0 none; /*to get rid of that input:focus blue 'border' or 'outline' that happens in safari browsers*/
+  	}
+  	
+  	.rightSide {
+  		border:0;
+  		padding:0;
+  		cursor: pointer;
+    	cursor: hand;
+  	}
+  	
+  	.numberResults {
+  		padding-top: 3px;
+  		padding-left: 16px;
+  		color: #333;
+  		background-color: #eee;
+  		height: 20px;
+  		font-style: italic;
+  	}
+  	
+  	.filter {
+  		padding-left: 30px;
+  		background-color: #eee;
+  		text-align: right;
+  	}
+  	
+  	.filterLabel {
+  		padding-top: 3px;
+  		height: 20px;
+  		padding-left: 10px;
+  		padding-right:3px;
+  	}
+  
+  </ui:style>
+
+  <g:HorizontalPanel styleName='{style.outer}' >
+  	<g:HorizontalPanel styleName='{style.inner}'>
+  		<!-- g:Image ui:field='leftSide' resource='{leftSideImage}' styleName='{style.leftSide}'></g:Image -->
+	  	<g:TextBox ui:field='searchBox' styleName='{style.searchBox}'></g:TextBox>
+	  	<g:Image ui:field='rightSide' resource='{rightSideImage}'  styleName='{style.rightSide}'></g:Image>
+	  	<g:Label ui:field='numberResults' styleName='{style.numberResults}'></g:Label>
+	  	<g:HorizontalPanel styleName='{style.filter}'>
+	  		<g:Label ui:field='filterLabel' styleName='{style.filterLabel}'>Display: </g:Label>
+	  		<g:ListBox ui:field='sourcesLabels'></g:ListBox>
+	  	</g:HorizontalPanel>
+    </g:HorizontalPanel>
+  </g:HorizontalPanel>
+</ui:UiBinder>

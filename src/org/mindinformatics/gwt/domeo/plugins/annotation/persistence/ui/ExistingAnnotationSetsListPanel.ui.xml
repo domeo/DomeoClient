@@ -1,0 +1,71 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>	
+		.main {
+			height: 400px;
+		}
+	
+		.body {
+			width: 300px;
+		}
+		
+		.toolbar {
+			width: 100%;
+		}
+		
+		.bottombar {
+			width: 100%;
+			padding-top: 10px;
+			padding-right: 30px;
+		}
+		 
+		.list {
+			width: 460px;
+			border-top: 0px solid #ddd;
+			border-left: 0px solid #ddd;
+			border-right: 0px solid #ddd;
+			border-bottom: 0px solid #ddd;
+		}
+		
+		.info {
+			width: 100%;
+			padding-left:10px;
+			padding-top: 5px;	
+		}
+		
+		.setsScroller {
+			max-height: 326px;
+			width: 480px;	
+		}
+	</ui:style>
+	
+	<ui:with field='res' type='org.mindinformatics.gwt.domeo.client.Resources'/>
+	
+	<g:HorizontalPanel styleName='{style.main}'>
+		<g:VerticalPanel styleName='{style.body}' ui:field='body'>
+			<g:cell height="1%" verticalAlignment="ALIGN_TOP">
+				<g:SimplePanel styleName='{style.toolbar}' ui:field='toolbar'/>
+			</g:cell>
+			<g:cell height="340px">
+			<g:ScrollPanel styleName='{style.setsScroller}' ui:field='setsListScroller'>
+				<g:VerticalPanel styleName='{style.list}' ui:field='setsList'/>
+			</g:ScrollPanel>
+			</g:cell>
+			<g:cell height="0px">
+				<g:HorizontalPanel styleName='{style.bottombar}' ui:field='bottombar' horizontalAlignment='ALIGN_RIGHT'>
+					<g:Button ui:field='importButton'>Import</g:Button>
+					<g:cell width="136px">
+						<g:Button>Import And Close</g:Button>
+					</g:cell>
+				</g:HorizontalPanel>
+			</g:cell>
+		</g:VerticalPanel>
+		<g:VerticalPanel>
+			<g:cell verticalAlignment='ALIGN_TOP'>
+				<g:VerticalPanel styleName='{style.info}' ui:field='info' verticalAlignment='ALIGN_TOP'/>
+			</g:cell>
+		</g:VerticalPanel>
+	</g:HorizontalPanel>
+</ui:UiBinder>

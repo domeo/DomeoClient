@@ -1,0 +1,24 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.outer {
+			position: absolute;
+			top: 100px;
+			right: 20px;
+			height: 120px;
+			z-index:100000;
+			padding:0px;
+			/*opacity:.90;*/
+			/*filter: alpha(opacity=60); for Internet Explorer 6/7*/
+			/*filter: “alpha(opacity=60)”; for Internet Explorer 8*/ 
+		}
+		
+		
+	</ui:style>
+
+	<g:VerticalPanel ui:field='sideBar' styleName='{style.outer}'>
+	  	</g:VerticalPanel>
+
+</ui:UiBinder>

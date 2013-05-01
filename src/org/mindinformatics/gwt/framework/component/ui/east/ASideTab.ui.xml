@@ -1,0 +1,80 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style type='org.mindinformatics.gwt.framework.component.ui.east.ASideTab.SideTabStyle'>
+		.outerNotSelected {
+			position: absolute;
+			right: 20px;
+		    
+		    padding-right: 4px;
+		    padding-top: 8px;
+		    width: 18px;
+		    /*
+		    background-color: #eee;
+		    color:#333;
+		    */
+		    
+		    color: #fff;
+		    background-color: #669966;
+			border-top: 2px #669966 solid;
+			border-bottom: 2px #669966 solid;
+			border-left: 2px #669966 solid;
+			z-index:1000000;
+			
+		}
+		
+		.outerSelected {
+			 
+			position: absolute;
+		    padding: 2px;
+		    right: 20px;
+		    padding-top: 8px;
+		    width: 22px;
+		    background-color: #fff;
+			border-top: 2px #669966 solid;
+			border-bottom: 2px #669966 solid;
+			border-left: 2px #669966 solid;
+			border-right: 0px #fff solid;
+			z-index:1000000;
+			color:#333;
+		}
+		
+		.outerSelected:hover {
+			color: #000;
+			background-color:  #D5E2FF;
+		}
+		
+		.outerNotSelected:hover {
+			color: #000;
+			background-color:  #D5E2FF;
+			border-right: 2px #aaa solid;
+		}
+		
+		.css-vertical-text {
+			writing-mode:tb-rl;
+			-webkit-transform:rotate(90deg);
+			-moz-transform:rotate(90deg);
+			-o-transform: rotate(90deg);
+			white-space:nowrap;
+			display:block;
+			bottom:0;
+			width:20px;
+			height:20px;
+			font-family: ‘Trebuchet MS’, Helvetica, sans-serif;
+			font-size:14px;
+			font-weight:normal;
+			text-align: center;
+		}
+		
+		.css-vertical-text:hover {
+			background-color:  transparent;
+			cursor: pointer;
+			pointer: hand;
+		}
+	</ui:style>
+
+  	<g:SimplePanel ui:field='sideTab' styleName='{style.outerNotSelected}'>
+  		<g:Label ui:field='sideBarLabel' styleName='{style.css-vertical-text}'/>
+  	</g:SimplePanel>
+</ui:UiBinder>

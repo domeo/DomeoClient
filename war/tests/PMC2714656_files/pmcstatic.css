@@ -1,0 +1,526 @@
+body.pmc-body {
+    margin: 1px;
+}
+
+body.pmc-body-table, body.pmc-body-figure {
+    margin: auto auto auto 1px;
+}
+
+.span-content
+{
+    /*it has been added to have a content of the table cell in the same style as the rest of the text*/
+}
+
+.search-reference-note-section
+{
+	width: 675px;
+	margin: 8px 0 8px 0;
+
+}
+.search-reference
+{
+	background-color: #e8e8c0; 
+	font-family: arial, sans-serif; 
+	font-size: 80%;	
+	line-height: 1.75em;
+}
+.front-matter-section, .section-content, .section-title, .toc-section-title, .back-matter-section, .footer-section
+{width:650px}
+
+.section-content .back-matter-section, .section-content .front-matter-section, .section-content .footer-section, .section-content .section-content
+{.width: auto; width:inherit}
+
+.front-matter-section, .section-content, .section-title, .toc-section-title, .back-matter-section, .footer-section
+{
+    margin-top:         0em;
+    margin-bottom:      0.9090em;
+    word-wrap:          break-word;
+}
+
+.front-matter-section, .section-content, .back-matter-section, .footer-section
+{
+   margin-bottom: 1.2em;
+}
+
+
+.back-matter-section
+{
+    font-size:          80%;
+}
+
+.section-content
+{
+    margin-top:         0;
+    line-height:	    1.3125em;
+}
+
+.section-title, .toc-section-title
+{
+    padding-bottom: 0.1em;
+    padding-top: 0.1em;
+}
+
+/***************************/
+
+.banner-color1 {
+background-color: #3c78bc;
+}
+
+.banner-color2 {
+background-color: #a0c0e0;
+}
+
+.banner-text
+{color: #ffffff;
+font-size: 135%;
+font-style: italic;
+font-weight: bold;
+text-align: right;
+padding-right: 0.3em;}
+
+.banner-text-sans
+{color: #ffffff;
+font-family: sans-serif;
+font-size: 120%;
+font-weight: bold;
+text-align: right}
+
+.banner-generic-logo-background {
+background-image:url(../pmcgifs/logo-generic.png);
+background-repeat:no-repeat;
+width: 500px;
+height: 75px;
+background-color: silver;
+}
+
+.banner-journal-publisher-over-image
+{margin-left: 84px;
+margin-right: 10px;}
+
+.banner-journal-name
+{color: white;
+font-weight: bold;
+font-family:  Calibri, "Trebushet MS", Arial, sans-serif;
+text-align: left;
+padding-top: 5px;
+font-size: 20px;
+height: 48px;}
+
+.banner-publisher-name
+{color:#a11;
+font-weight: bold;
+font-size: 0.8em;
+text-align: right;
+font-family:  Calibri, "Trebushet MS", Arial, sans-serif;}
+
+.banner-logo-with-journal-title-over
+{height: 75px;}
+
+.banner-logo-with-journal-title-over-placeholder
+{font-size:20px;
+left:105px;
+position:relative;
+top:-75px;
+width:390px;
+z-index:1000;}
+
+.banner-logo-with-journal-title-over-placeholder-content
+{font-family:  Calibri, "Trebushet MS", Arial, sans-serif;
+font-weight:bold;
+text-align:center;
+height:48px;
+padding-top:5px;
+color: black;}
+
+.over-logo-journal-title-sageopen
+{color: #0055A5;}
+
+.over-logo-journal-title-sfesd
+{color: #FFFFFF;}
+
+.over-logo-journal-title-acssd
+{color: #1E73B3;}
+
+.over-logo-journal-title-apasd
+{color: #1E73B3;}
+
+.over-logo-journal-title-esesd,
+.over-logo-journal-title-srfsd
+{line-height: 45px;}
+
+.over-logo-journal-title-tea
+{color: #861316;
+text-align: right;}
+
+.over-logo-journal-title-hogrefesd
+{padding-top:25px;}
+
+.over-logo-journal-title-rcpsychsd
+{color: #44448A;}
+
+.over-logo-journal-title-npgopen
+{color: #FFFFFF;}
+
+.over-logo-journal-title-springeropen
+{color: #F0F0F0;font-weight: normal;}
+
+.over-logo-journal-title-maneyopen
+{color: #ffffff;
+padding-top:25px;}
+
+.over-logo-journal-title-nihpa-wiley
+{color: #ffffff}
+
+.over-logo-journal-title-rsmsd
+{color: #ffffff;
+text-align: left;}
+
+.menu-link, A.menu-link:visited
+{color: #0000c0;
+font-family: Verdana, Arial, sans-serif;
+font-size: 13px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;}
+
+.menu-curr-page
+{color: #ffffff;
+font-family: Verdana, Arial, sans-serif;
+font-size: 13px;
+font-weight: bold;
+text-align: center}
+
+A.menu-link:hover
+{color: #ffffff; text-decoration: none;}
+
+.header-link
+{color: #0055aa;
+font-family: Arial, sans-serif;
+font-size: 110%;
+font-weight: bold}
+
+.inpage-link
+{color: #004080}
+
+.sans75
+{font-family: Arial, sans-serif;
+font-size: 75%}
+
+.sans80
+{font-family: Arial, sans-serif;
+font-size: 80%;
+}
+
+.sans80b
+{font-family: Arial, sans-serif;
+font-size: 80%;
+font-weight: bold}
+
+.sans90
+{font-family: Arial, sans-serif;
+font-size: 90%;}
+
+.sans90b
+{font-family: Arial, sans-serif;
+font-size: 90%;
+font-weight: bold}
+
+.sans
+{font-family: Arial, sans-serif;
+}
+
+.sans105b
+{font-family: Arial, sans-serif;
+font-size: 105%;
+font-weight: bold}
+
+.sans125b
+{font-family: Arial, sans-serif;
+font-size: 125%;
+font-weight: bold}
+
+.msg-error
+{
+    color:			red;
+    font-weight:		bold;
+    background:			yellow;
+}
+
+.msg-warning
+{
+    color:			brown;
+    background:			yellow;
+    font-weight:		bold;
+}
+
+.eqn-image
+{
+    margin:	5px;
+}
+/* navigation menu right below banner and before horizontal bar */
+
+a.navlink
+{color: #0055aa;
+text-decoration: none;}
+
+a.navlink:hover
+{text-decoration: underline;}
+
+.navlink-box
+{font-family: tahoma, verdana, Arial, sans-serif;
+font-size: 80%;
+font-weight: bold;
+border-bottom: solid #cccccc 6px;
+padding-top: 2px;
+padding-bottom: 2px;
+width: 683px;
+}
+
+.navlink-box-black {border-bottom: solid 6px #000000;}
+.navlink-box-brtblue {border-bottom: solid 6px #649afc;}
+.navlink-box-dkgreen {border-bottom: solid 6px #006666;}
+.navlink-box-gray {border-bottom: solid 6px #cccecc;}
+.navlink-box-green {border-bottom: solid 6px #dce6e4;}
+.navlink-box-ltblue {border-bottom: solid 6px #9ccefc;}
+.navlink-box-slateblue {border-bottom: solid 6px #6c9acc;}
+.navlink-box-teal {border-bottom: solid 6px #9ccecc;}
+.navlink-box-navy {border-bottom: solid 6px #003399;;}
+.navlink-box-bcwm-combo-blue {border-bottom: solid 3px #639ACE;}
+
+
+
+.fm-related-articles {
+padding: 5px;
+margin-left: 10px;
+margin-right: 15px;
+border: 1px solid #666699;
+border-top: 1px solid #ccd8e4;
+border-right: 1px solid #ccd8e4;
+line-height: 140%;
+}
+
+.nihms-highlight {
+    float:left;
+    width: 4em;
+    margin:0 0.2em 0 0;
+    font-weight: bold;
+    color: #990000;
+    text-align:center;
+    font-size: 0.8em;
+    background: yellow;
+}
+
+.retraction-notice {
+-moz-border-radius: 0.5em;
+-webkit-border-radius: 0.5em;
+border-radius: 0.5em;
+background-color:#F4F8D0;
+border:thin solid orange;
+font-size:1.4em;
+padding:0.25em 0.5em;
+margin: 0.5em 0;
+text-align:center;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-weight: lighter;
+line-height: 1.25em;
+letter-spacing: 0.025em;
+color: #e33;
+}
+
+div.retraction-notice a{
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted #e33;
+}
+
+div.retraction-notice a:hover{
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid #e33;
+}
+
+tr[content-type="shaded"], td[content-type="shaded"]
+{
+    background-color: #cccccc;
+}
+tr[content-type="shaded-medium"], td[content-type="shaded-medium"]
+{
+    background-color: #cccccc;
+}
+
+tr[content-type="shaded-light"],
+td[content-type="shaded-light"]
+{
+    background-color: #e2e2e2;
+}
+
+tr[content-type="shaded-dark"],
+td[content-type="shaded-dark"]
+{
+    background-color: #aaaaaa;
+}
+
+tr[content-type="nowrap"],
+td[content-type="nowrap"]
+{
+    white-space: nowrap;
+}
+
+.print-view table.rendered
+{font-size: 80%;
+width: 100%;
+margin: auto}
+
+table.rendered td,
+table.rendered th
+{
+    padding: 0.2em;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+table.rendered td
+{
+    vertical-align: top;
+}
+
+table.rendered td[valign="top"]
+{
+    vertical-align: top;
+}
+
+table.rendered td[valign="middle"]
+{
+    vertical-align: middle;
+}
+
+table.rendered td[valign="bottom"]
+{
+    vertical-align: bottom;
+}
+
+/* The common features of the heads suppose to be here. Individual properties are in pmcbod*.css files*/
+.head1
+{font-size: 120%;}
+
+.head2
+{font-size: 110%;}
+
+.head3
+{font-size: 105%;}
+
+.head4
+{font-size: 99%;}
+
+.head5
+{font-size: 90%;}
+
+.acknowledgment-journal-title
+{
+    font-style: italic;
+}
+
+div.exception-box
+{
+    border:1px silver dashed;
+    padding: 0.3em;
+    margin-bottom: 1.3125em;
+    font-size: 0.875em;
+}
+
+div.exception-box .front-matter-section
+{
+    font-size: 1.1428em;
+}
+
+.exception-book-link-block .book-link
+{
+}
+
+.exception-book-link-block .book-thumb
+{
+	vertical-align: middle; 
+	margin-right: 0.5em; 
+	border: none;
+}
+
+.exception-book-link-block .book-title
+{
+	
+}
+
+.box
+{padding: 0 0.5em;text-align: center}
+
+.box-inner 
+{text-align: left}
+
+div.p, div.p-first, div.p-last, div.p-first-last,
+div.sec, div.sec-first, div.sec-last, div.sec-first-last,
+.box
+{
+    margin-top: .3125em;
+    margin-bottom: 1em;
+    word-wrap: break-word;
+    .width:	auto; /* for IE6/7, which are not supporting inherit for width */
+    width: inherit;
+}
+
+div.p-first, div.sec-first
+{
+    margin-top: 0;
+}
+div.p-last, div.sec-last
+{
+    margin-bottom: 0;
+}
+div.p-first-last, div.sec-first-last
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+sup,
+sub
+{
+    font-size: .8em;
+    line-height: 0.8em;
+    /*white-space :nowrap;*/ /*commented due to the problem with FF2 see /pmc/articles/PMC2762813/table/d20e711/ */
+}
+
+.footnote-char,
+.footnote-char-irp,
+.footnote-char-ec
+{
+    margin: 0 0.1em;
+    width: 1em;
+    height: 1em;
+}
+
+.footnote-char-irp
+{
+    width: 1.5em;
+    height: 1.1em;
+}
+
+.tocentry .footnote-char-irp
+{
+    width: 1.5em;
+    height: 1.1em;
+}
+
+.footnote-char-ec
+{
+    width: 1.5em;
+    height: 1.1em;
+}
+.tocentry .footnote-char-ec
+{
+    width: 1.5em;
+    height: 1.3em;
+}
+.banner-pmc-logo
+{height: 75px;}
+
+.exception-label
+{font-weight: bold;}

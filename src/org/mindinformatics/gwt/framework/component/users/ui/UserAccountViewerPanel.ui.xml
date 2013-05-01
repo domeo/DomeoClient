@@ -1,0 +1,213 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+	.outer {
+	    padding-left: 4px;
+	    padding-top: 2px;
+	    padding-bottom:6px;
+	    height: 480px;	
+	    font-size: 11px;
+	}
+	
+  	.close {
+		cursor: pointer;
+    	cursor: hand;
+  	}
+  	
+  	.tab { 
+  		height: 100%;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        color: #000;
+        vertical-align: middle;
+    }
+    
+    .inner {
+    	border: solid 0px #ddd;
+    	height:460px;	
+    	width: 260px;
+    }
+  	
+  	.tabToolsPanel {}
+  	
+  	.itemPanelContainerWithBorder {
+  		width: 260px;
+  		padding: 5px;
+  		border: 1px solid #eee;
+  	}
+  	
+  	.itemPanelContainer {
+  		width: 260px;
+  		padding: 5px;
+  	}
+  	
+  	.itemPanel {
+  		width: 260px;
+  		padding-bottom: 4px;
+  	}
+  	
+  	.itemLabel {
+  		display: inline;	
+  		padding-right: 10px;
+  		padding-left: 4px;
+  	}
+  	
+  	.itemContentLabel {
+  		width: 100px;
+  		display: inline;
+  	}
+  	
+  	.itemContent {
+  		padding-left: 4px;
+  		display: inline;
+  		text-align: right;	
+  		font-weight: bold;
+  	}
+  	
+    .pictureContent {
+  		padding-left: 4px;
+  		display: inline;
+  		float: left;
+  		font-weight: bold;
+  	}
+  	
+  	.fullItemContent {
+  		display: inline;
+  		text-align: right;	
+  		font-weight: bold;
+  	}
+  	
+  	.groups {
+    	border: solid 0px #ddd;
+    	height:460px;	
+    	width: 260px;
+    }
+    
+    .groupsTitle {
+    	height: 24px;	
+    	line-height: 24px;	
+    }
+    
+    .fullLink {
+    	display: inline;
+  		text-align: right;	
+  		font-weight: bold;
+  		pointer: hand;
+  		cursor: pointer;
+    }
+    
+    .centeredItemPanel {
+    	text-align: center;	
+    	width: 260px;
+    }
+    
+    .groupPanelDetailsContainer {
+    	padding-top: 5px;	
+    }
+    
+    .groupMembers {
+    	border: solid 0px #ddd;
+    	height:460px;	
+    	width: 260px;
+    }
+    
+    .userInfoPanel {
+		width: 460px;
+	}
+  	
+</ui:style>
+
+  	<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
+  		<g:TabLayoutPanel barHeight="40" barUnit="PX" ui:field="tabToolsPanel" height="490px">
+	        <g:tab>
+	        	<g:header>
+	                <div class="{style.tab}">
+	                    <span>Info</span>
+	                </div>
+	            </g:header>
+	            <g:HorizontalPanel>
+		            <g:FlowPanel styleName='{style.inner}'>
+		            	<g:FlowPanel styleName='{style.itemPanelContainer}'>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+				            	<g:SimplePanel ui:field="picturePanel"  styleName='{style.pictureContent}'></g:SimplePanel>
+			            	</g:FlowPanel>
+			            </g:FlowPanel>
+			            <g:FlowPanel styleName='{style.itemPanelContainer}'>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+		            			<g:HTML styleName='{style.itemContentLabel}'>Title:</g:HTML>
+				            	<g:Label ui:field="titlePanel" styleName='{style.itemContent}'/>
+			            	</g:FlowPanel>
+		            		<g:FlowPanel styleName='{style.itemPanel}'>
+		            			<g:HTML styleName='{style.itemContentLabel}'>First name:</g:HTML>
+				            	<g:Label ui:field="firstnamePanel" styleName='{style.itemContent}'/>
+			            	</g:FlowPanel>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+		            			<g:Label styleName='{style.itemContentLabel}'>Middle name:</g:Label>
+				            	<g:Label ui:field="middlenamePanel" styleName='{style.itemContent}'/>
+			            	</g:FlowPanel>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+		            			<g:Label styleName='{style.itemContentLabel}'>Last name:</g:Label>
+				            	<g:Label ui:field="lastnamePanel" styleName='{style.itemContent}'/>
+			            	</g:FlowPanel>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+		            			<g:Label styleName='{style.itemContentLabel}'>Email:</g:Label>
+				            	<g:Label ui:field="emailPanel" styleName='{style.itemContent}'/>
+			            	</g:FlowPanel>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+				            	<g:Anchor ui:field="userLink" styleName='{style.fullLink}'/>
+			            	</g:FlowPanel>
+		            	</g:FlowPanel>
+				  	</g:FlowPanel>
+				  	<g:FlowPanel styleName='{style.userInfoPanel}' ui:field="infoPanel">
+				  	</g:FlowPanel>
+			  	</g:HorizontalPanel>
+	        </g:tab>
+	        <g:tab>
+	        	<g:header>
+	                <div class="{style.tab}">
+	                    <span>Groups Management</span>
+	                </div>
+	            </g:header>
+	            <g:HorizontalPanel>
+	            	<g:FlowPanel styleName='{style.groups}'>
+				  		<g:HorizontalPanel styleName='{style.groupsTitle}'><g:HTML><b>My Groups:</b></g:HTML></g:HorizontalPanel>
+				  		<g:FlowPanel ui:field="groupsPanel"/>
+				  		<g:FlowPanel styleName='{style.groupPanelDetailsContainer}' ui:field="groupDetails" >
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+		            			<g:HTML styleName='{style.itemContentLabel}'>Group:</g:HTML>
+				            	<g:Label ui:field="namePanel" styleName='{style.itemContent}'/>
+			            	</g:FlowPanel>
+		            		<g:FlowPanel styleName='{style.itemPanel}'>
+				            	<g:Label ui:field="descriptionPanel" styleName='{style.fullItemContent}'/>
+			            	</g:FlowPanel>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+				            	<g:Label ui:field="rolePanel" styleName='{style.fullItemContent}'/>
+			            	</g:FlowPanel>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+				            	<g:Label ui:field="permissionPanel" styleName='{style.fullItemContent}'/>
+			            	</g:FlowPanel>
+			            	<g:FlowPanel styleName='{style.itemPanel}'>
+				            	<g:Anchor ui:field="groupLink" styleName='{style.fullLink}'/>
+			            	</g:FlowPanel>
+		            	</g:FlowPanel>
+				  	</g:FlowPanel>
+				  	<g:FlowPanel styleName='{style.groupMembers}' >
+				  	</g:FlowPanel>
+	            </g:HorizontalPanel>
+	        </g:tab>
+	         <g:tab>
+	        	<g:header>
+	                <div class="{style.tab}">
+	                    <span>Tools</span>
+	                </div>
+	            </g:header>
+	            <g:FlowPanel styleName='{style.inner}'>
+	            </g:FlowPanel>
+	        </g:tab>
+	    </g:TabLayoutPanel>  	
+	    <g:HorizontalPanel ui:field="footerPanel"></g:HorizontalPanel>	
+  	</g:VerticalPanel>
+</ui:UiBinder>

@@ -1,0 +1,72 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.outer {
+		    //padding-left: 4px;
+		    //padding-top: 6px;
+		    padding-bottom:0px;
+		    width: 100%;
+		    height: 500px;
+		}
+		
+	  	.footer {
+	  		min-height: 0px;
+	  	}
+	  	
+	  	.footerSpan {
+	  		background-color: red;
+	  		color: white;	
+	  	}
+	  	
+	  	.imageContainer {
+	  		background-color: #cccccc;
+	  		border-radius: 5px;
+	  		padding: 5px;
+	  	}
+	  	.annContainer {
+	  		min-height: 478px;
+	  		max-height: 478px;
+	  		min-width: 480px;
+	  	}
+	  	.tabToolsPanelContainer {
+	  		min-height: 478px;
+	  		max-height: 478px;
+	  		min-width: 480px;
+	  	}
+	  	.leftColumn {
+	  		padding-top: 14px;	
+	  		padding-right: 4px;
+	  	}
+	</ui:style>
+	
+	<g:HorizontalPanel width="100%">
+		<g:cell width="480px">
+			<g:VerticalPanel width="100%" styleName='{style.leftColumn}'>
+				<g:Label>Selected Subjects</g:Label>
+				<g:ScrollPanel ui:field='annotationContainer'  styleName='{style.annContainer}'>
+				</g:ScrollPanel>
+			</g:VerticalPanel>
+		</g:cell>
+		<g:cell>
+		  	<g:FlowPanel ui:field='main' styleName='{style.outer}'>
+		  		<g:HorizontalPanel width="100%">
+		  			<g:VerticalPanel>
+		  				<g:Label>Possible Predicate</g:Label>
+			  			<g:ScrollPanel ui:field='relationshipsContainer'  styleName='{style.annContainer}'>
+						</g:ScrollPanel>
+					</g:VerticalPanel>
+					<g:VerticalPanel>
+		  				<g:Label>Possible Objects</g:Label>
+						<g:ScrollPanel ui:field='objectsContainer'  styleName='{style.annContainer}'>
+						</g:ScrollPanel>
+					</g:VerticalPanel>
+		  		</g:HorizontalPanel>
+		  		<g:HTMLPanel styleName='{style.footer}'>
+		  			<span ui:field='footerSpan' class='{style.footerSpan}'/>
+		  		</g:HTMLPanel>
+		  	</g:FlowPanel>
+	  	</g:cell>
+  	</g:HorizontalPanel>
+</ui:UiBinder>

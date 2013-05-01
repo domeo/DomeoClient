@@ -1,0 +1,5 @@
+.fw_GlassPanel {
+    background-color: black;
+    opacity: .20;
+    z-index: 99;
+}

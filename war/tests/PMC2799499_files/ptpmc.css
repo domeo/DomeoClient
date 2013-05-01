@@ -1,0 +1,63 @@
+/* overwrites for modular version of PMC */
+.front-matter-section,
+.section-content,
+.section-title,
+.toc-section-title,
+.back-matter-section,
+.footer-section,
+.navlink-box
+{
+    .width:	auto; /* for IE6/7, which are not supporting inherit for width */
+    width:	inherit;
+}
+
+.watermark-block
+{
+    height: 300px;
+}
+
+.sidebar-cell ul
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidefm-pmccurrent-item
+{
+    padding-left: 10px;
+}
+
+.head1 {
+    border-width: 0pt;
+} /* for right alignment of the submenu with section title */
+
+/* article navigation toc on titles bars ends */
+a:visited {
+    color:#7119B4;
+}
+
+html body.pmc-body {
+    background-color:#F8F8F8;
+    color:#212121;
+    font-family:Arial,sans-serif;
+    font-size:0.95em;
+    font-weight:normal;
+    margin:0;
+    margin-right:0.5em;
+    min-width:800px;
+}
+
+td.pmc-watermark {
+    width:20px;
+}
+
+.section-content {
+    line-height:150%;
+}
+
+div.fm-citation-pmcid,
+div.fm-citation-manuscriptid,
+span.fm-citation-ids-label {
+    color:#333333;
+}

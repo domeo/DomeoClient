@@ -1,0 +1,262 @@
+@media print {
+.SeqViewerApp .hidden_for_print { display: none; }
+.SeqViewerApp div.x-panel-tbar { display: none; }
+.SeqViewerApp div.x-box-item { position: static; }
+.SeqViewerApp div.x-tool { display: none; }
+}
+.xsv-fasta-table{font-family:courier,monospace;background-color:#fff;margin:0;}
+.xsv-fasta-table {font-size:12px;line-height:100%;}
+.xsv-fasta-table td em{color:#999;font-style:normal;}
+.xsv-fasta-table td em span{color:#f99;font-style:normal;display:inline;}
+.xsv-fasta-table td span.feat-gene{background-color:#cfc;}
+.xsv-fasta-table td span.feat-gene{background-color:#cfc;}
+.xsv-fasta-table td span.feat-cds{background-color:#fcc;}
+.xsv-fasta-table td span.feat-exon-a{background-color:#eee;}
+.xsv-fasta-table td span.feat-exon-b{background-color:#cfcfcf;}
+.xsv-fasta-table td span.feat-mrna {background-color:#ccf;}
+.xsv-fasta-table td span.feat-trna {background-color:#ccf;}
+.xsv-fasta-table td span.feat-rrna {background-color:#ccf;}
+.xsv-fasta-table td span.feat-snorna {background-color:#ccf;}
+.xsv-ttu1 {border-top:2px red solid;}
+.xsv-ttu2 {}
+.xsv-ttu3 {border-top:2px blue solid; color:blue;background-color:#F6F9ED;}
+.xsv-ttu4 {color:blue;background-color:#F6F9ED;}
+.xsv-ttu5 {border-top:2px green solid; color:green;background-color:#F6F9ED;}
+.xsv-ttu6 {color:green;background-color:#F6F9ED;}
+.xsv-ttu7 {border-top:2px green solid; color:green;background-color:#F6F9ED;}
+.xsv-ttu8 {color:green;background-color:#F6F9ED;}
+.xsv-seqtrans_trans_row {padding-top:1px;color:blue;}
+.xsv-seqtrans_prot_row {padding-top:1px;color:blue;}
+.xsv-seqtrans_trans {color:red;margin:0px;padding-top:1px;}
+.xsv-seqtrans_prot {color:red;margin:0px;padding-top:1px;}
+.xsv-seq_pos_highlight{color:red;}
+.SeqViewerApp .help-text{display:none;margin-left:1em;}
+#app_name{float:right;white-space:normal;border:0px solid red;height:35px;margin:0;padding:0 5px 0 10px;}
+#app_name h1#app_name_h1{border:0px solid red;color:#a3d9dd;font-family:Verdana,sans-serif;font-size:122%;font-weight:700;margin-top:8px;margin-right:5px;height:23px;padding:0;}
+#app_name p{margin:0;}
+#app_name a#seqviewer-help{border:0px solid red;white-space:nowrap;text-decoration:none;text-indent:10em;float:left;overflow:hidden;background:transparent url(../images/icons_misc.png) no-repeat scroll 0 100%;background-position:0px 0px;width:35px;height:36px;}
+#app_name h1{border:0 solid green;color:#2A5683;font-family:Verdana,sans-serif;font-size:153.9%;font-weight:400;margin-bottom:9px;margin-top:1px;}
+#app-frontpage{padding-left:1em;max-width:60em;display:none;}
+#app-frontpage h1{font-family:Verdana,sans-serif;font-size:153.9%;font-weight:400;margin-bottom:9px;margin-top:1px;}
+#app-frontpage a,
+#app-frontpage a:visited{color:#369;}
+#app-frontpage dd{padding:0 0 1em 0;}
+#app-frontpage ul{list-style-type: inherit;list-style-image:inherit;list-style-position:inside;}
+#app-frontpage li{font-style:italic;}
+#SeqViewerFrame {padding:10px;}
+#SeqViewerControls {float:right;font-size:10pt;}
+#SeqViewerJS {margin-top:5px;}
+#SeqViewerTitle {font-weight:700;font-size:120%;}
+.SeqViewerApp .graphical_div {overflow:hidden;height:0px;background-repeat:no-repeat;background-position:0px 0px; }
+.SeqViewerApp .alignment_div {overflow:hidden;height:0px;background-repeat:no-repeat;background-position:0px 0px;}
+.SeqViewerApp .accession_label {margin-top: 3px; font-family:arial,helvetica,clean,sans-serif; font-size:14px;}
+.SeqViewerApp .accession_example {font-family:tahoma,arial,helvetica,sans-serif;font-size:11px;}
+.SeqViewerApp .color_rect_000000{background-color:#000000;}
+.SeqViewerApp .color_rect_993300{background-color:#993300;}
+.SeqViewerApp .color_rect_333300{background-color:#333300;}
+.SeqViewerApp .color_rect_003300{background-color:#003300;}
+.SeqViewerApp .color_rect_003366{background-color:#003366;}
+.SeqViewerApp .color_rect_000080{background-color:#000080;}
+.SeqViewerApp .color_rect_333399{background-color:#333399;}
+.SeqViewerApp .color_rect_333333{background-color:#333333;}
+.SeqViewerApp .color_rect_800000{background-color:#800000;}
+.SeqViewerApp .color_rect_FF6600{background-color:#FF6600;}
+.SeqViewerApp .color_rect_808000{background-color:#808000;}
+.SeqViewerApp .color_rect_008000{background-color:#008000;}
+.SeqViewerApp .color_rect_008080{background-color:#008080;}
+.SeqViewerApp .color_rect_0000FF{background-color:#0000FF;}
+.SeqViewerApp .color_rect_666699{background-color:#666699;}
+.SeqViewerApp .color_rect_808080{background-color:#808080;}
+.SeqViewerApp .color_rect_FF0000{background-color:#FF0000;}
+.SeqViewerApp .color_rect_FF9900{background-color:#FF9900;}
+.SeqViewerApp .color_rect_99CC00{background-color:#99CC00;}
+.SeqViewerApp .color_rect_339966{background-color:#339966;}
+.SeqViewerApp .color_rect_33CCCC{background-color:#33CCCC;}
+.SeqViewerApp .color_rect_3366FF{background-color:#3366FF;}
+.SeqViewerApp .color_rect_800080{background-color:#800080;}
+.SeqViewerApp .color_rect_969696{background-color:#969696;}
+.SeqViewerApp .color_rect_FF00FF{background-color:#FF00FF;}
+.SeqViewerApp .color_rect_FFCC00{background-color:#FFCC00;}
+.SeqViewerApp .color_rect_FFFF00{background-color:#FFFF00;}
+.SeqViewerApp .color_rect_00FF00{background-color:#00FF00;}
+.SeqViewerApp .color_rect_00FFFF{background-color:#00FFFF;}
+.SeqViewerApp .color_rect_00CCFF{background-color:#00CCFF;}
+.SeqViewerApp .color_rect_993366{background-color:#993366;}
+.SeqViewerApp .color_rect_C0C0C0{background-color:#C0C0C0;}
+.SeqViewerApp .color_rect_FF99CC{background-color:#FF99CC;}
+.SeqViewerApp .color_rect_FFCC99{background-color:#FFCC99;}
+.SeqViewerApp .color_rect_FFFF99{background-color:#FFFF99;}
+.SeqViewerApp .color_rect_CCFFCC{background-color:#CCFFCC;}
+.SeqViewerApp .color_rect_CCFFFF{background-color:#CCFFFF;}
+.SeqViewerApp .color_rect_99CCFF{background-color:#99CCFF;}
+.SeqViewerApp .color_rect_CC99FF{background-color:#CC99FF;}
+.SeqViewerApp .color_rect_FFFFFF{background-color:#FFFFFF;}
+.SeqViewerApp .view_color_rect{ background-color:red; border:1px solid #000; width:14px; height:14px; }
+#string_ruler_unit{ visibility: hidden; white-space: nowrap; }
+.SeqViewerApp .sv-transparent {opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);}
+.SeqViewerApp .sv-opaque3 {opacity:0.3;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";filter:alpha(opacity=30);}
+.SeqViewerApp .sv-opaque5 {opacity:0.5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter:alpha(opacity=50);}
+.SeqViewerApp .sv-opaque67 {opacity:0.67;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=67)";filter:alpha(opacity=67);}
+.SeqViewerApp .sv-marker {cursor:pointer;position:absolute;background-repeat:no-repeat;z-index:1;}
+.SeqViewerApp .marker_line {position:absolute;top:16px;left:8px;width:1px;height:0px;}
+.SeqViewerApp .marker_label_back {position:absolute;top:0px;width:100px;height:16px;left:8px;padding-right:3px;padding-top:0px;}
+.SeqViewerApp .marker_label {position:absolute;top:0px;height:16px;left:8px;white-space:nowrap;color:white;filter:alpha(opacity=100);opacity:1.0;-moz-opacity:1.0;font-weight:bold;padding-right:3px;padding-top:0px;}
+.SeqViewerApp .sv-marker_base {top:2px;height:32px;width:16px;}
+.SeqViewerApp .marker_ball {cursor: pointer;position:absolute;top:2px;width:16px;left:120px;height:16px;background-repeat:no-repeat;background-image:url('../images/ball_pink.png');}
+.SeqViewerApp .marker_ball.red_f {background-image:url('../images/ball_red.png');}
+.SeqViewerApp .marker_ball.blue_f {background-image:url('../images/ball_blue.png');}
+.SeqViewerApp .marker_ball.cyan_f {background-image:url('../images/ball_cyan.png');}
+.SeqViewerApp .marker_ball.yellow_f {background-image:url('../images/ball_yellow.png');}
+.SeqViewerApp .marker_ball.FF00FF_f {background-image:url('../images/ball_pink.png');}
+.SeqViewerApp .marker_ball.green_f {background-image:url('../images/ball_green.png');}
+.SeqViewerApp .marker_ball.black_f {background-image:url('../images/ball_black.png');}
+.xsv-text_marker {cursor: pointer;position:absolute;top:2px;width:16px;left:120px;height:12px;width:9px;border-width:3px;border-style:solid;}
+.SeqViewerApp .marker_locked_ov {position:absolute;left:4px;top:2px;width:9px;height:12px;background-image:url('../images/lock.png');}
+.SeqViewerApp .sv-marker_half_base {width:8px;}
+.SeqViewerApp .marker_half_ball {cursor: pointer;position:absolute;top:2px;width:16px;left:120px;height:16px;background-repeat:no-repeat;background-image:url('../images/ball_pink_half.png');}
+.SeqViewerApp .marker_half_ball.red_h {background-image:url('../images/ball_red_half.png');}
+.SeqViewerApp .marker_half_ball.blue_h {background-image:url('../images/ball_blue_half.png');}
+.SeqViewerApp .marker_half_ball.cyan_h {background-image:url('../images/ball_cyan.png');}
+.SeqViewerApp .marker_half_ball.yellow_h {background-image:url('../images/ball_yellow.png');}
+.SeqViewerApp .marker_half_ball.FF00FF_h {background-image:url('../images/ball_pink_half.png');}
+.SeqViewerApp .marker_half_ball.green_h {background-image:url('../images/ball_green_half.png');}
+.SeqViewerApp .marker_half_ball.black_h {background-image:url('../images/ball_black_half.png');}
+.xsv-ext_data_load {background-image:url('../images/ext_data_load.png') !important;}
+.xsv-ext_data_clear {background-image:url('../images/ext_data_clear.png') !important;}
+.xsv-ext_data {background-image:url('../images/ext_data.gif') !important;}
+.SeqViewerApp .printer {background-image:url('../images/printer.png') !important;}
+.SeqViewerApp .link_to_page {background-image:url('../images/link_to_page.png') !important;}
+.xsv-origin {background-image:url('../images/origin.png') !important;}
+.SeqViewerApp .goto_marker {background-image:url('../images/goto_marker.gif') !important;}
+.xsv-clear_markers {background-image:url('../images/clear_markers.gif') !important;}
+.xsv-new_view {background-image:url('../images/new_view.png') !important;}
+.xsv-new_fasta {background-image:url('../images/new_fasta.png') !important;}
+.xsv-zoom_seq {background-image:url('../images/zoom_seq.png') !important;}
+.xsv-zoom_plus {background-image:url('../images/zoom_plus.png') !important;}
+.xsv-zoom_minus {background-image:url('../images/zoom_minus.png') !important;}
+.xsv-zoom_range {background-image:url('../images/zoom_range.png') !important;}
+.xsv-configure {background-image:url('../images/configure.png') !important;}
+.xsv-full_view {background-image:url('../images/properties.png') !important;}
+.xsv-question {background-image:url('../images/question.gif') !important;}
+.xsv-goto_position {background-image:url('../images/goto_position.png') !important;}
+.SeqViewerApp .connect {background-image:url('../images/connect.png') !important;}
+.xsv-show_translation {background-image:url('../images/translation.png') !important;}
+.SeqViewerApp .expand_all {background-image:url('../images/expand.png') !important;}
+.SeqViewerApp .collapse_all {background-image:url('../images/collapse.png') !important;}
+.SeqViewerApp .feed_add {background-image:url('../images/feed_add.png') !important;}
+.xsv-marker-add {background-image:url('../images/add.png') !important;}
+.xsv-marker-remove {background-image:url('../images/delete.png') !important;}
+.xsv-marker_remove_link {float:right;padding-right:3px;}
+.xsv-next {background-image:url('../images/next.png') !important;}
+.xsv-prev {background-image:url('../images/prev.png') !important;}
+.SeqViewerApp .back {background-image:url('../images/back.png') !important;}
+.SeqViewerApp .pan-left {background-image:url('../images/pan_left.png') !important;}
+.SeqViewerApp .pan-right {background-image:url('../images/pan_right.png') !important;}
+.SeqViewerApp .tb-close {background-image:url('../images/close-sprite.png') !important;}
+.xsv-markers {background-image:url('../images/markers.png') !important;}
+.xsv-flip-strands {background-image:url('../images/flip-strands.png') !important;}
+.xsv-load-accession {background-image:url('../images/load-accession.png') !important;}
+.xsv-views_tools {background-image:url('../images/views_tools.png') !important;}
+.xsv-properties {background-image:url('../images/properties.png') !important;}
+.xsv-show_gap {background-image:url('../images/show_gap.png') !important;}
+.xsv-markerinfo{border-width:1px;border-spacing:0px;border-style:none;border-color:gray;border-collapse:collapse;margin:5px;margin-bottom:1px;background-color:#fff;}
+.xsv-markerinfo th{border-width:1px;padding:1px;border-color:gray;border-style:inset;background-color:#D3D3D3;}
+.xsv-markerinfo td{border-width:1px;padding:3px;border-color:gray;border-style:inset;white-space:nowrap;}
+.SeqViewerApp .tooltip_highlight {border:1px solid red;}
+.SeqViewerApp .selection_highlight-edit{position:absolute;top:0px;left:0px;width:0px;height:0px;background-color:#ccc;opacity:0.7;filter:alpha(opacity=70);border:4px dotted red; border-top-style: solid; cursor:pointer;}
+.SeqViewerApp .selection_highlight{position:absolute;top:0px;left:0px;width:0px;height:0px;background-color:#ccc;opacity:0.5;filter:alpha(opacity=50);border:2px solid red;cursor:pointer;}
+.SeqViewerApp .over_selection  {position:absolute;top:0px;left:0px;width:0px;height:0px;background-color:#ccc;opacity:0.5;filter:alpha(opacity=50);border:1px solid blue;cursor:pointer;}
+.SeqViewerApp .over_noselection{position:absolute;top:0px;left:0px;width:0px;height:0px;background-color:#ccc;opacity:0.05;filter:alpha(opacity=5);border:0px;cursor:pointer;}
+.SeqViewerApp .range_selection{position:absolute;top:0px;left:0px;width:0px;height:0px;background-color:#99cc66;opacity:0.3;filter:alpha(opacity=30);border-top:none;border-bottom:none;border-left:1px solid red;border-right:1px solid red;}
+.SeqViewerApp .reflection{position:absolute;top:20px;left:0px;width:0px;height:5px;background-color:red;opacity:0.7;filter:alpha(opacity=70);cursor:pointer;}
+.SeqViewerApp .panorama_div {height:0px;background-repeat:no-repeat;background-position:0px 19px; }
+.SeqViewerApp .pan-holder {clear:both;width:100%;background:#F8F8FF;height:18px;}
+.SeqViewerApp .pan-bar{border-color:gray gray -moz-use-text-color;border-style:solid solid none;border-width:1px 1px 0;cursor:col-resize;height:17px;left:0;opacity:0.9;position:absolute;top:0;width:24px;}
+.SeqViewerApp .the_map_control {position:absolute;z-index:500;left:10px;top:43px;width:58px;height:172px;background-repeat:no-repeat;background-image:url('../images/mapcontrols.png');}
+.SeqViewerApp .map_ctrl_left {position:absolute;left:0px;top:0px;width:18px;height:18px;cursor:pointer;}
+.SeqViewerApp .map_ctrl_drag {position:absolute;left:20px;top:0px;width:18px;height:18px;cursor:pointer;}
+.SeqViewerApp .map_ctrl_right {position:absolute;left:40px;top:0px;width:18px;height:18px;cursor:pointer;}
+.SeqViewerApp .map_ctrl_zoomin {position:absolute;left:20px;top:20px;width:18px;height:18px;cursor:pointer;}
+.SeqViewerApp .map_ctrl_zoomout {position:absolute;left:20px;top:153px;width:18px;height:18px;cursor:pointer;}
+.SeqViewerApp .map_ctrl_bar {position:absolute;left:20px;top:40px;width:15px;height:110px;cursor:pointer;}
+.SeqViewerApp .map_ctrl_slider {position:absolute;left:20px;top:45px;width:17px;height:9px;cursor:pointer;background-repeat:no-repeat;background-image:url('../images/map_slider.png');}
+.SeqViewerApp .left-resizer {position:absolute;top:1px;height:11px;width:9px;left:1px;background:blue url(../images/icons_misc.png) no-repeat scroll -61px -39px;}
+.SeqViewerApp .right-resizer {position:absolute;top:1px;height:11px;width:9px;right:-1px;background:blue url(../images/icons_misc.png) no-repeat scroll -40px -39px;}
+.SeqViewerApp .left-resizer:hover {cursor: w-resize;}
+.SeqViewerApp .right-resizer:hover {cursor: e-resize;}
+.SeqViewerApp .locator_rect {position:absolute;top:0px;width:100%;opacity:0.35;filter:alpha(opacity=35);background-color:#dcdcdc;border:1px solid blue;}
+.x-combo-list-item span {display:block;float:left;width:300px;}
+.SeqViewerApp .ideogram_div {height:0px;padding:5px; }
+.SeqViewerApp .ideogram_chromosome {top:0px;float:left;border:1px solid white;}
+.SeqViewerApp .ideogram_spacer {top:0px;width:20px;float:left;}
+.SeqViewerApp .ideogram_label {margin-top:122px;text-align:center;}
+.SeqViewerApp .ideogram_chromosome_over {background-color:#ccc;opacity:0.5;filter:alpha(opacity=50);border:1px solid blue;cursor:pointer;}
+.SeqViewerApp .app_help{font-family:verdana,helvetica,clean,sans-serif;font-size:12px;padding:1em;background-color:#FFF;}
+.SeqViewerApp .app_help p {margin-top:10px;margin-bottom:10px;}
+.SeqViewerApp ol { list-style-position: inside; list-style-type:decimal;}
+.SeqViewerApp ol li { padding-left:30px; }
+.SeqViewerApp ol li ul li { padding-left:30px; list-style-type:disc;list-style-position: inside;}
+.SeqViewerApp ol li ul li ol li { padding-left:30px; list-style-type:decimal;list-style-position: inside;}
+.SeqViewerApp div.figure{border:1px solid #ccc;float:left;padding:4px;width:95%;text-align:center;margin-top:10px;}
+.SeqViewerApp div.figure span{color:navy;font-family:Verdana,sans-serif;font-size:.8em;margin-left:3em;margin-bottom:10px;}
+.SeqViewerApp table.icons_description {text-align:center;font-family:Verdana;font-weight:normal;font-size:11px;color:#404040;border:1px #6699CC solid;border-spacing: 0px;border-collapse:collapse; }
+.SeqViewerApp table.icons_description td {padding:3px;text-align:left;}
+.SeqViewerApp td.icon {text-align:center;width:25px;}
+.SeqViewerApp .pagenav { clear:both; border-top: 1px solid #eee; padding-top: 12px; margin-bottom:0; list-style-type:none; }
+.SeqViewerApp .pagenav ul { background:none;padding:5px;display:inline; }
+.SeqViewerApp .pagenav li.arrow-prev a { float: left; background: url(../help/img/arrow_left.gif) no-repeat 0 50%; padding-left: 20px; }
+.SeqViewerApp .pagenav li.arrow-next a { float: right; background: url(../help/img/arrow_right.gif) no-repeat 100% 50%; padding-right: 20px; }
+.SeqViewerApp .sv-trackcofig-panel .x-border-layout-ct { background-color:#FFFFFF;  background: #FFFFFF; }
+.SeqViewerApp .sv-trackconfig-grid .x-grid3-row-over { background-color:#FFFFFF;  background: #FFFFFF; }
+.SeqViewerApp .sv-trackconfig-grid .x-grid3-hd-row { display:none; }
+.SeqViewerApp .sv-trackconfig-grid .x-grid3-td-2 { font-size: 13px; font-weight: bold; }
+.SeqViewerApp .sv-trackconfig-grid .x-form-item-label { font-size: 11px; }
+.SeqViewerApp .sv-trackconfig-grid .x-form-text { font-size: 11px; }
+.SeqViewerApp .sv-trackcofig-cc .x-form-item-label { font-weight: bold; font-size: 13px; }
+.SeqViewerApp .sv-trackcofig-cc .x-form-item-text { font-size: 13px; }
+.SeqViewerApp .sv-trackcofig-cc .x-combo-list-item { font-size: 13px; }
+.SeqViewerApp .sv-trackcofig-cc .x-form-field-wrap { font-size: 13px; }
+.SeqViewerApp .sv-trackcofig-cc .x-form-field { font-size: 13px; }
+.SeqViewerApp .sv-tmgr-grid .x-grid3-row { border: 0px; }
+.xsv-search-loading { background-image:url(/core/extjs/ext-3.4.0/resources/images/default/grid/loading.gif) !important; background-repeat: no-repeat ;}
+.xsv-search-results { background-image:url(../images/tick.png) !important; background-repeat: no-repeat; }
+.SeqViewerApp .search-empty { background-image:none; background-repeat: no-repeat; }
+.x-tool-magnify {     background:transparent url(../images/tool-more.gif) no-repeat;     background-position:0 -0; }
+.x-tool-magnify-over {     background:transparent url(../images/tool-more.gif) no-repeat;     background-position:-15px 0; }
+.x-tool-property {     background:transparent url(../images/tool-more.gif) no-repeat;     background-position:0 -15px; }
+.x-tool-property-over {     background:transparent url(../images/tool-more.gif) no-repeat;     background-position:-15px -15px; }
+.x-tool-info {     background:transparent url(../images/tool-more.gif) no-repeat;     background-position:0 -30px; }
+.x-tool-info-over {     background:transparent url(../images/tool-more.gif) no-repeat;     background-position:-15px -30px; }
+.xsv-left-align {     float: left; }
+.x-selectable,
+.x-selectable * {     -moz-user-select: text!important;     -khtml-user-select: text!important; }
+.SeqViewerApp .sv-rowgroup td { border-top-width: medium !important; }
+.xsv-blast {background-image:url('../images/seqsearch-red.png') !important;}
+.xsv-primer {background-image:url('../images/primer.png') !important;}
+.SeqViewerApp xcheckbox-wrap {    line-height: 18px;    padding-top:2px; }
+.xcheckbox-wrap a {     display:block;     width:16px;     height:16px;     float:left; }
+.x-toolbar .xcheckbox-wrap {      padding: 0 0 2px 0; }
+.xcheckbox-on {     background:transparent url(/core/extjs/ext-3.4.0/resources/images/default/menu/checked.gif) no-repeat 0 0; }
+.xcheckbox-off {     background:transparent url(/core/extjs/ext-3.4.0/resources/images/default/menu/unchecked.gif) no-repeat 0 0; }
+.xcheckbox-disabled {     opacity: 0.5;     -moz-opacity: 0.5;     filter: alpha(opacity=50);     cursor:default; }
+.SeqViewerApp .green-color .x-btn-text {          font-weight:bold; }
+.x-window-dlg .ext-mb-download {     background:transparent url(../images/download.gif) no-repeat top left;     height:46px; }
+.SeqViewerApp td.sv-bintrack-bullet {vertical-align:top;}
+.SeqViewerApp td.sv-bintrack-tag {vertical-align:top;text-align:right;font-weight:bold;white-space:nowrap;padding-right:5px}
+.SeqViewerApp td.sv-bintrack-value {vertical-align:top;}
+.SeqViewerApp td.sv-bintrack {vertical-align:top; margin: 0;	padding: 0;	border: 0;	font-size: 100%; font: inherit;	vertical-align: baseline;}
+.SeqViewerApp tr.sv-bintrack { margin: 0;	padding: 0;	border: 0;	font-size: 100%; font: inherit;	vertical-align: baseline;}
+.SeqViewerApp table.sv-bintrack { margin: 0;	padding: 0;	border: 0;	font-size: 100%; font: inherit;	vertical-align: baseline; border-collapse: collapse; border-spacing: 0;}
+.SeqViewerApp a.sv-bintrack { margin: 0;	padding: 0;	border: 0;	font-size: 100%; font: inherit;	vertical-align: baseline;}
+.SeqViewerApp img.sv-bintrack { margin: 0;	padding: 0;	border: 0;	font-size: 100%; font: inherit;	vertical-align: baseline;}
+.SeqViewerApp h1.sv-bintrack {font-size:120%}
+.SeqViewerApp h2.sv-bintrack {font-size:108%}
+.x-tot2ivn-vr-tab-panel {		 	background: #DBDBDB;	 	border-color: #D0D0D0 !important; }
+.x-tot2ivn-vr-tab-panel-header { 	float: left;	 }
+.x-tot2ivn-vr-tab-panel .x-tot2ivn-vr-tab-strip-spacer { visibility: hidden; }
+.x-tot2ivn-vr-tab-panel ul.x-tot2ivn-vr-tab-strip-top { border-bottom: 0; }
+.x-tot2ivn-vr-tab-strip-wrap{ 	 	border-bottom: 1px solid #D0D0D0; }
+.x-tot2ivn-vr-tab-panel-bwrap { 	border-left: 1px solid #D0D0D0; 	float: right; 	background: #fff;	 }
+.x-tot2ivn-vr-tab-panel li.x-tot2ivn-vr-tab-strip-title { 	display: inline-block; 	float: left; 	width: 100%; 	overflow: hidden; 	white-space: nowrap;		 }
+.x-tab-strip span.x-tot2ivn-vr-tab-strip-text,
+.x-tab-strip-active .x-tab-right span.x-tot2ivn-vr-tab-strip-text{ 	padding-top: 7px !important; 	padding-bottom: 7px !important;	 }

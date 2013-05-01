@@ -1,0 +1,15 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <ui:style>
+    .componentsPanel {
+    	border: solid 1px #ddd;
+    	height:410px;	
+		width: 100%;
+    }
+  </ui:style>
+
+	<g:FlowPanel ui:field='componentsPanel' styleName='{style.componentsPanel}'>
+	</g:FlowPanel>
+</ui:UiBinder>

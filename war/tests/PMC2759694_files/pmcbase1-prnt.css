@@ -1,0 +1,37 @@
+/*			*/                                                                                                                                                          
+/* styles for printers 	*/                                                                                                                                                          
+/*			*/
+/* $Id: pmcbase1-prnt.css,v 1.9 2011/01/20 19:46:56 lebedand Exp $ */
+
+html body.pmc-body,
+html body
+{font-size: 10pt !important}
+
+.screen-view,
+.tileshop-panel-bar,
+.sidebar-cell
+{display: none}
+
+div.thumb-ph 
+{float: left;
+padding-right: 0.5em}
+
+.print-view .print-obj
+{page-break-before:always}
+
+.print-obj:first-child
+{page-break-before:auto}
+
+.print-view .head1
+{page-break-before:always}
+
+.figpopup-sensitive-area
+{display: none}
+
+a 
+{text-decoration: none;
+color: black !important;}
+
+.head1 
+{border-width: 1pt}
+    

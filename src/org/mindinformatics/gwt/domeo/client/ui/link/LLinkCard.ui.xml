@@ -1,0 +1,16 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  	<ui:style>
+	  	.body {
+		    height: 25px;
+		    padding-left: 0px;
+		    padding-top: 3px;
+		    width: 100%;
+	 	}
+  	</ui:style>
+
+  	<g:VerticalPanel styleName='{style.body}' ui:field='body'>
+  	</g:VerticalPanel>
+</ui:UiBinder>

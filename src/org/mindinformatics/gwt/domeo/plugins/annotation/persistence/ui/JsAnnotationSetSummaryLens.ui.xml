@@ -1,0 +1,92 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style>	
+		.body {
+			width: 300px;
+			padding: 0px;
+			border-bottom: 1px #ddd solid;
+			border-top: 1px #ddd solid;
+			border-right: 1px #ddd solid;
+			border-left: 1px #ddd solid;
+		}
+		
+		.bold {
+			font-weight: bold;	
+		}
+		
+		.boldUnderlined {
+			font-weight: bold;	
+			text-decoration: underline;
+			cursor: pointer;
+			pointer: hand;
+		}
+		
+		.firstline {
+			width: 458px;
+			height: 24px;
+			padding-right: 5px;
+		}
+		
+		.secondline {
+			width: 458px;
+		}
+		
+		.descriptionField {
+			padding-left:4px;
+		}
+		.arrow {
+			background-color: #fff;
+			padding-top: 4px;
+			padding-left: 2px;
+			pointer: hand;
+			cursor: pointer;
+		}
+		
+		.provenance {
+			padding-left: 4px;
+		}
+		
+		
+	</ui:style>
+	
+	<ui:with field='res' type='org.mindinformatics.gwt.domeo.client.Resources'/>
+	
+	<g:FocusPanel ui:field='wrapper'>
+		<g:HorizontalPanel>
+			<g:VerticalPanel styleName='{style.body}' ui:field='body'>	
+				<g:cell height="16px">
+					<g:HorizontalPanel styleName='{style.firstline}'>
+						<g:cell width="16px" horizontalAlignment='ALIGN_LEFT'>
+							<g:CheckBox ui:field='selectionButton' name='selectionButton'/>
+						</g:cell>
+						<g:cell horizontalAlignment='ALIGN_LEFT'>
+							<g:SimplePanel ui:field='nameEditableField' styleName='{style.bold}' />
+						</g:cell>
+						<g:cell horizontalAlignment='ALIGN_RIGHT'>
+							<g:SimplePanel ui:field='itemsNumberLabel' styleName='{style.boldUnderlined}'/>
+						</g:cell>
+					</g:HorizontalPanel>
+				</g:cell>
+				<g:cell>
+					<g:HorizontalPanel styleName='{style.secondline}'>
+						<g:cell horizontalAlignment='ALIGN_RIGHT'>
+							<g:HorizontalPanel >
+								<g:SimplePanel ui:field='typeField' width='18px'/>
+							</g:HorizontalPanel>
+						</g:cell>
+						<g:cell horizontalAlignment='ALIGN_LEFT'>
+							<g:HorizontalPanel ui:field='provenanceLabel' styleName='{style.provenance}'/>
+						</g:cell>
+						<g:cell verticalAlignment='ALIGN_MIDDLE' width='20px'>
+							<g:SimplePanel ui:field='arrow' styleName='{style.arrow}'><g:Image resource='{res.browseLittleIcon}' title='Explore set'/></g:SimplePanel>
+						</g:cell>
+					</g:HorizontalPanel>
+				</g:cell>
+			</g:VerticalPanel>
+			
+		</g:HorizontalPanel>
+	</g:FocusPanel>
+</ui:UiBinder>

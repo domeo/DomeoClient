@@ -1,0 +1,45 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.main {
+			width: 100%;
+			padding-left: 2px;
+			padding-right: 2px;
+			padding-bottom: 0px;
+			background-color: #ddd;
+		}
+		
+		.title {
+			font-weight: bold;
+			text-decoration: underline;	
+		}
+		
+		.iconAction {
+			padding-top: 2px;	
+			cursor: pointer;
+			cursor: hand;
+		}
+		
+		.actionPanel {
+			padding-left:4px;	
+		}
+	</ui:style>
+
+	<g:HorizontalPanel styleName='{style.main}'>
+		<g:Label ui:field='titleLabel' styleName='{style.title}'></g:Label>
+		<g:cell width="18px" horizontalAlignment="ALIGN_RIGHT">
+			<g:HorizontalPanel>
+				<g:SimplePanel ui:field='explorePanel' styleName='{style.iconAction}'></g:SimplePanel>
+				<g:Label ui:field='exploreLabel' styleName='{style.iconAction}'>Explore</g:Label>
+			</g:HorizontalPanel>
+		</g:cell>
+		<g:cell width="18px" horizontalAlignment="ALIGN_RIGHT">
+			<g:HorizontalPanel styleName='{style.actionPanel}'>
+				<g:SimplePanel ui:field='closePanel' styleName='{style.iconAction}'></g:SimplePanel>
+				<g:Label></g:Label>
+			</g:HorizontalPanel>
+		</g:cell>
+  	</g:HorizontalPanel>
+</ui:UiBinder>

@@ -1,0 +1,78 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.outer {
+		    padding-left: 4px;
+		    padding-top: 6px;
+		    padding-bottom:16px;
+		    width: 100%;
+		}
+		
+		.header {
+			width: 100%;
+		}
+		
+		.highlightPanel {
+	  		padding-top: 6px;
+	  		padding-bottom: 6px;
+	  	}
+	  	
+	  	.sideText {
+	  		color: #aaa;
+	  	}
+	  	
+	  	.matchText {
+	  		font-style: italic;
+	  		font-weight: bold;
+	  		background-color: #AFDCEC;
+	  	}
+	  	
+	  	.arrow {
+	  		cursor: pointer;
+	  		pointer: hand;	
+	  		border: 1px solid #fff;
+	  	}
+	  	
+	  	.footer {
+	  		min-height: 20px;
+	  	}
+	  	
+	  	.footerSpan {
+	  		background-color: red;
+	  		color: white;	
+	  	}
+	</ui:style>
+	
+	<ui:image field='leftArrow' src='leftarrow.png'/>
+	<ui:image field='rightArrow' src='rightarrow.png'/>
+
+  	<g:FlowPanel ui:field='main' styleName='{style.outer}'>
+  		<g:HorizontalPanel styleName='{style.header}' ui:field='header'>
+	  		<g:HorizontalPanel ui:field='highlightPanel' styleName='{style.highlightPanel}'>
+	  			<g:cell verticalAlignment='ALIGN_MIDDLE'>
+	  				<g:Image ui:field='leftBottomSide' resource='{leftArrow}' styleName='{style.arrow}'></g:Image>
+	  			</g:cell>
+	  			<g:cell verticalAlignment='ALIGN_MIDDLE'>
+	  				<g:Image ui:field='rightBottomSide' resource='{rightArrow}' styleName='{style.arrow}'></g:Image>
+	  			</g:cell>
+	  			<g:HTMLPanel>
+		  			<span ui:field='prefixText'/>
+		  			<span ui:field='matchText' class='{style.matchText}'/>
+		  			<span ui:field='suffixText'/>
+	  			</g:HTMLPanel>
+				<g:cell verticalAlignment='ALIGN_MIDDLE'>
+	  				<g:Image ui:field='leftTopSide' resource='{leftArrow}' styleName='{style.arrow}'></g:Image>
+	  			</g:cell>
+	  			<g:cell verticalAlignment='ALIGN_MIDDLE'>
+	  				<g:Image ui:field='rightTopSide' resource='{rightArrow}' styleName='{style.arrow}'></g:Image>
+	  			</g:cell>
+	  		</g:HorizontalPanel>
+  		</g:HorizontalPanel>
+  		<g:TabLayoutPanel ui:field='tabToolsPanel' barUnit="PX" barHeight="40"></g:TabLayoutPanel>
+  		<g:HTMLPanel styleName='{style.footer}'>
+  			<span ui:field='footerSpan' class='{style.footerSpan}'/>
+  		</g:HTMLPanel>
+  	</g:FlowPanel>
+</ui:UiBinder>

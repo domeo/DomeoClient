@@ -1,0 +1,82 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
+
+	<ui:style>	
+		.body {
+			width: 300px;
+			padding: 0px;
+			border-bottom: 1px #ddd solid;
+			border-top: 1px #ddd solid;
+			border-right: 1px #ddd solid;
+			border-left: 1px #ddd solid;
+		}
+		
+		.bold {
+			font-weight: bold;	
+		}
+		
+		.boldUnderlined {
+			font-weight: bold;	
+			text-decoration: underline;
+			cursor: pointer;
+			pointer: hand;
+		}
+		
+		.firstline {
+			width: 300px;
+			height: 24px;
+			padding-right: 5px;
+		}
+		
+		.secondline {
+			width: 300px;
+		}
+		
+		.descriptionField {
+			padding-left:4px;
+		}
+		.arrow {
+			background-color: #fff;
+			padding-top: 4px;
+			padding-left: 2px;
+			pointer: hand;
+			cursor: pointer;
+		}
+		
+		.provenance {
+			padding-left: 4px;
+		}
+	</ui:style>
+	
+	<ui:with field='res' type='org.mindinformatics.gwt.domeo.client.Resources'/>
+	
+	<g:FocusPanel ui:field='wrapper'>
+		<g:HorizontalPanel>
+			<g:VerticalPanel styleName='{style.body}' ui:field='body'>	
+				<g:cell height="16px">
+					<g:HorizontalPanel styleName='{style.firstline}'>
+						<g:cell width="16px" horizontalAlignment='ALIGN_LEFT'>
+							<g:RadioButton ui:field='selectionButton' name='selectionProfileButton'/>
+						</g:cell>
+						<g:cell horizontalAlignment='ALIGN_LEFT'>
+							<g:SimplePanel ui:field='nameLabel' styleName='{style.bold}' />
+						</g:cell>
+						<g:cell horizontalAlignment='ALIGN_RIGHT'>
+							<g:SimplePanel ui:field='itemsNumberLabel' styleName='{style.boldUnderlined}'/>
+						</g:cell>
+					</g:HorizontalPanel>
+				</g:cell>
+				<g:cell>
+					<g:HorizontalPanel styleName='{style.secondline}'>
+						<g:cell horizontalAlignment='ALIGN_LEFT'>
+							<g:SimplePanel ui:field='provenanceLabel' styleName='{style.provenance}'/>
+						</g:cell>
+					</g:HorizontalPanel>
+				</g:cell>
+			</g:VerticalPanel>
+			
+		</g:HorizontalPanel>
+	</g:FocusPanel>
+</ui:UiBinder>
