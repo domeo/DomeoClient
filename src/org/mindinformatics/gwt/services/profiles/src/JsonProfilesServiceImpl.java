@@ -96,6 +96,25 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("      }");
 					out.println("    ],");
 					out.println("    \"statusplugins\": [");
+					
+					out.println("       {");
+					out.print("         \"uuid\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier");
+					out.println("\",");
+					out.print("         \"status\": \"");
+					out.print("enabled");
+					out.println("\"");
+					out.println("       },");
+					
+					out.println("       {");
+					out.print("         \"uuid\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies");
+					out.println("\",");
+					out.print("         \"status\": \"");
+					out.print("enabled");
+					out.println("\"");
+					out.println("       },");
+					
 					out.println("       {");
 					out.print("         \"uuid\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmed");
@@ -172,6 +191,25 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("      }");
 					out.println("    ],");
 					out.println("    \"statusplugins\": [");
+					
+					out.println("       {");
+					out.print("         \"uuid\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier");
+					out.println("\",");
+					out.print("         \"status\": \"");
+					out.print("enabled");
+					out.println("\"");
+					out.println("       },");
+					
+					out.println("       {");
+					out.print("         \"uuid\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies");
+					out.println("\",");
+					out.print("         \"status\": \"");
+					out.print("enabled");
+					out.println("\"");
+					out.println("       },");
+					
 					out.println("       {");
 					out.print("         \"uuid\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmed");
@@ -290,6 +328,8 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 		person.setUuid("maurizio.mosca");
 		profile.setLastSavedBy(person);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.opentrials", MProfile.PLUGIN_ENABLED);
+		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier", MProfile.PLUGIN_ENABLED);
+		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.omim", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmed", MProfile.PLUGIN_ENABLED);

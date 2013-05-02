@@ -1,3 +1,23 @@
+/*
+ * Copyright 2013 Massachusetts General Hospital
+ * 
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package org.mindinformatics.gwt.domeo.client;
 
 import java.util.ArrayList;
@@ -396,27 +416,33 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		
 		// Qualifier
 		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
-		annotationFormsManager.registerAnnotationForm(MQualifierAnnotation.class.getName(),
-				new QualifierFormProvider(this));
-		annotationTailsManager.registerAnnotationTile(MQualifierAnnotation.class.getName(), 
-				new QualifierTileProvider(this));
-		annotationCardsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
-				new QualifierCardProvider(this));
-		searchComponentsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
-				new QualifierSearchComponent(this));
-		annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
-				new HQualifierHelper());
+		if(_profileManager.getUserCurrentProfile().isPluginEnabled(QualifierPlugin.getInstance().getPluginName())) {		
+			pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
+			annotationFormsManager.registerAnnotationForm(MQualifierAnnotation.class.getName(),
+					new QualifierFormProvider(this));
+			annotationTailsManager.registerAnnotationTile(MQualifierAnnotation.class.getName(), 
+					new QualifierTileProvider(this));
+			annotationCardsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
+					new QualifierCardProvider(this));
+			searchComponentsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
+					new QualifierSearchComponent(this));
+			annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
+					new HQualifierHelper());
+		}
 		
 		// Antibody
 		pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true);
-		annotationFormsManager.registerAnnotationForm(MAntibodyAnnotation.class.getName(),
-				new AntibodyFormProvider(this));
-		annotationTailsManager.registerAnnotationTile(MAntibodyAnnotation.class.getName(), 
-				new AntibodyTileProvider(this));
-		annotationCardsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
-				new AntibodyCardProvider(this));
-		searchComponentsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
-				new AntibodySearchComponent(this));
+		if(_profileManager.getUserCurrentProfile().isPluginEnabled(AntibodyPlugin.getInstance().getPluginName())) {	
+			pluginsManager.enablePlugin(AntibodyPlugin.getInstance(), true);
+			annotationFormsManager.registerAnnotationForm(MAntibodyAnnotation.class.getName(),
+					new AntibodyFormProvider(this));
+			annotationTailsManager.registerAnnotationTile(MAntibodyAnnotation.class.getName(), 
+					new AntibodyTileProvider(this));
+			annotationCardsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
+					new AntibodyCardProvider(this));
+			searchComponentsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
+					new AntibodySearchComponent(this));
+		}
 		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 

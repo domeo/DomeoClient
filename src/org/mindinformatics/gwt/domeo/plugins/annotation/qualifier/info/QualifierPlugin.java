@@ -11,7 +11,7 @@ public class QualifierPlugin extends APlugin {
 	public static final String TYPE = "Annotation";
 	public static final String SUB_TYPE = "Qualifier";
 	public static final String PLUGIN = QualifierPlugin.class.getName().substring(0, QualifierPlugin.class.getName().indexOf(".info"));
-	
+		
 	private static QualifierPlugin instance;
 	private QualifierPlugin() {}
 	

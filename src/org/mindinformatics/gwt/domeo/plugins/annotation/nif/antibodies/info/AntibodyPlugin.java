@@ -37,7 +37,7 @@ public class AntibodyPlugin extends APlugin {
 
 	@Override
 	public Boolean getMandatory() {
-		return true;
+		return false;
 	}
 
 	@Override

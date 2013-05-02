@@ -166,16 +166,17 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 			final Node node, ArrayList<MAnnotation> existingAnnotationInTheTextSpan) {
 		_domeo = domeo;
 		_title = TITLE;
-				
+
 		// Buffer the potential highlighted text
 		highlightBuffer = new HighlightedTextBuffer(exact, prefix, suffix, node);
-		
+
 		// Create layout
 		initWidget(binder.createAndBindUi(this)); 
+
 		this.setWidth((Window.getClientWidth() - 140) + "px");
-		
+
 		refreshHighlightedText();
-		
+
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
 		tabToolsPanel.setHeight("500px");
 
@@ -185,6 +186,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 			AFormComponent form = it.next().getForm(this);
 			tabToolsPanel.add(form, form.getTitle());
 		}		
+
 		leftBottomSide.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -202,6 +204,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 				refreshHighlightedText();
 			}
 		});
+		_domeo.getLogger().debug(this, "5");
 		rightBottomSide.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
