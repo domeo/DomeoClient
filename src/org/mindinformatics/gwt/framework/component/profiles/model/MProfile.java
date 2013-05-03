@@ -42,7 +42,12 @@ public class MProfile implements IProfile, Serializable, IsSerializable {
 	 * @return True if the plugin is enabled
 	 */
 	public boolean isPluginEnabled(String pluginName) {
+		if(pluginName.equals("")) return true;
 		return (pluginsMap.get(pluginName)!=null && pluginsMap.get(pluginName).equals(PLUGIN_ENABLED));
+	}
+	
+	public boolean isPluginDisabled(String pluginName) {
+		return (pluginsMap.get(pluginName)!=null && pluginsMap.get(pluginName).equals(PLUGIN_DISABLED));
 	}
 	
 	public HashMap<String, String> getPlugins() {
