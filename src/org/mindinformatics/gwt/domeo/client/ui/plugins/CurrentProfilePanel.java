@@ -120,10 +120,15 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 				}
 			}
 		});
+		saveAsCurrentButton.setEnabled(false);
 		saveAsCurrentButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				_parent.selectTab(1);
+				progressIconPanel.add(new Image(Domeo.resources.littleProgressIcon()));
+				MProfile newProfile = new MProfile();
+				newProfile.setName(_domeo.getProfileManager().getUserCurrentProfile().getName());
+				newProfile.setUuid(_domeo.getProfileManager().getUserCurrentProfile().getUuid());
+				_domeo.getProfileManager().saveCurrentProfile(newProfile, _this);
 			}
 		});
 		refresh(false);
@@ -166,23 +171,31 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 				return pluginCard.subType;
 			}
 		};
-		Column<PluginCard, Boolean> selectColumn = new Column<PluginCard, Boolean>(new CheckboxCell()) {
-	        @Override
-	        public Boolean getValue(PluginCard object) {
-	        	//if(object.mandatory) return true; 
-	            return object.selected;
-	        }
-	    };
-		selectColumn.setFieldUpdater(new FieldUpdater<PluginCard, Boolean>() {
-			public void update(int index, PluginCard object, Boolean value) {
-				// Called when the user clicks on a checkbox.
-				//selectionModel.setSelected(object, value);
-				object.selected = value;
-				if(!value) _domeo.getProfileManager().getUserCurrentProfile().addPluginPreference(object.name, MProfile.PLUGIN_DISABLED);
-				else _domeo.getProfileManager().getUserCurrentProfile().addPluginPreference(object.name, MProfile.PLUGIN_ENABLED);
-				refreshMessagePanel(true);
+		
+		TextColumn<PluginCard> selectColumn = new TextColumn<PluginCard>() {
+			@Override
+			public String getValue(PluginCard pluginCard) {
+				return pluginCard.selected? "Y":"-";
 			}
-		});
+		};
+		
+//		Column<PluginCard, Boolean> selectColumn = new Column<PluginCard, Boolean>(new CheckboxCell()) {
+//	        @Override
+//	        public Boolean getValue(PluginCard object) {
+//	        	//if(object.mandatory) return true; 
+//	            return object.selected;
+//	        }
+//	    };
+//		selectColumn.setFieldUpdater(new FieldUpdater<PluginCard, Boolean>() {
+//			public void update(int index, PluginCard object, Boolean value) {
+//				// Called when the user clicks on a checkbox.
+//				//selectionModel.setSelected(object, value);
+//				object.selected = value;
+//				if(!value) _domeo.getProfileManager().getUserCurrentProfile().addPluginPreference(object.name, MProfile.PLUGIN_DISABLED);
+//				else _domeo.getProfileManager().getUserCurrentProfile().addPluginPreference(object.name, MProfile.PLUGIN_ENABLED);
+//				refreshMessagePanel(true);
+//			}
+//		});
 		selectColumn.setSortable(true);
 		table.addColumn(selectColumn, "Enabled");
 		
