@@ -8,6 +8,7 @@ import org.mindinformatics.gwt.domeo.client.ui.popup.CurationPopup;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 
@@ -76,8 +77,8 @@ public class CAntibodyCard extends ACardComponent {
 	@Override
 	public void refresh() {
 		try {
-			if (_index>-1) createProvenanceBar(_index, provenance, _annotation);
-			else createProvenanceBar(provenance, _annotation);
+			if (_index>-1) createProvenanceBar(AntibodyPlugin.getInstance().getPluginName(), _index, provenance, _annotation);
+			else createProvenanceBar(AntibodyPlugin.getInstance().getPluginName(), provenance, _annotation);
 			type.setText("Antibody:");
 			text.setText(_annotation.getAntibodyUsage().getAntibody().getLabel());
 			
@@ -93,7 +94,7 @@ public class CAntibodyCard extends ACardComponent {
 				content.add(hp);
 			}
 			
-			injectButtons(content, _annotation);
+			injectButtons(AntibodyPlugin.getInstance().getPluginName(), content, _annotation);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());
 		}

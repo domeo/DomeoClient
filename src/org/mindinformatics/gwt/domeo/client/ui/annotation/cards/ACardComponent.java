@@ -20,6 +20,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.src.CurationUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 import org.mindinformatics.gwt.framework.component.styles.src.StylesManager;
 import org.mindinformatics.gwt.framework.widget.CustomButton;
@@ -57,7 +58,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 	
 	public abstract MAnnotation getAnnotation();
 	
-	public void injectButtons(FlowPanel content, final MAnnotation annotation) {
+	public void injectButtons(String plugin, FlowPanel content, final MAnnotation annotation) {
 		try {
 			if(!((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE)).getValue() ||
 					!(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_USER_PROVENANCE)).getValue())) {
@@ -81,14 +82,16 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 				
 				Image editIcon = new Image(resource.editLittleIcon());
 				editIcon.setTitle("Edit Item");
-				editIcon.setStyleName(ATileComponent.tileResources.css().button());
-				editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, annotation));
-				editIcon.addClickHandler(new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						_curationPopup.hide();
-					}
-				});
+				if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(plugin)) {
+					editIcon.setStyleName(ATileComponent.tileResources.css().button());
+					editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, annotation));
+					editIcon.addClickHandler(new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							_curationPopup.hide();
+						}
+					});
+				}
 	
 				Image deleteIcon = new Image(resource.deleteLittleIcon());
 				deleteIcon.setTitle("Delete Item");
@@ -114,7 +117,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 		}
 	}
 	
-	public void createProvenanceBar(int index, HorizontalPanel provenance, final MAnnotation annotation) {
+	public void createProvenanceBar(String plugin, int index, HorizontalPanel provenance, final MAnnotation annotation) {
 		try {
 			Resources resource = Domeo.resources;
 
@@ -135,14 +138,16 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 			
 			Image editIcon = new Image(resource.editLittleIcon());
 			editIcon.setTitle("Edit Item");
-			editIcon.setStyleName(ATileComponent.tileResources.css().button());
-			editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, annotation));
-			editIcon.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-					_curationPopup.hide();
-				}
-			});
+			if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(plugin)) {
+				editIcon.setStyleName(ATileComponent.tileResources.css().button());
+				editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, annotation));
+				editIcon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						_curationPopup.hide();
+					}
+				});
+			}
 
 			Image deleteIcon = new Image(resource.deleteLittleIcon());
 			deleteIcon.setTitle("Delete Item");
@@ -227,7 +232,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 		}
 	}
 	
-	public void createProvenanceBar(HorizontalPanel provenance, final MAnnotation annotation) {
+	public void createProvenanceBar(String plugin, HorizontalPanel provenance, final MAnnotation annotation) {
 		try {
 			Resources resource = Domeo.resources;
 			
@@ -248,14 +253,16 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 			
 			Image editIcon = new Image(resource.editLittleIcon());
 			editIcon.setTitle("Edit Item");
-			editIcon.setStyleName(ATileComponent.tileResources.css().button());
-			editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, annotation));
-			editIcon.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-					_curationPopup.hide();
-				}
-			});
+			if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(plugin)) {
+				editIcon.setStyleName(ATileComponent.tileResources.css().button());
+				editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, annotation));
+				editIcon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						_curationPopup.hide();
+					}
+				});
+			}
 
 			Image deleteIcon = new Image(resource.deleteLittleIcon());
 			deleteIcon.setTitle("Delete Item");

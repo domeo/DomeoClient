@@ -109,7 +109,7 @@ public class TCommentViewerTile extends ATileComponent implements ITileComponent
 				}
 			});
 			
-			injectButtons(content, _annotation);
+			injectButtons("", content, _annotation);
 			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());

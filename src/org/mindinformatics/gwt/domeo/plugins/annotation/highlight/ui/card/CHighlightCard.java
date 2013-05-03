@@ -76,8 +76,8 @@ public class CHighlightCard extends ACardComponent {
 	@Override
 	public void refresh() {
 		try {
-			if (_index>-1) createProvenanceBar(_index, provenance, _annotation);
-			else createProvenanceBar(provenance, _annotation);
+			if (_index>-1) createProvenanceBar("", _index, provenance, _annotation);
+			else createProvenanceBar("", provenance, _annotation);
 			type.setText("Highlight:");
 			text.setText(SelectorUtils.getMatch(_annotation.getSelector()));
 			
@@ -93,7 +93,7 @@ public class CHighlightCard extends ACardComponent {
 				content.add(hp);
 			}
 			
-			injectButtons(content, _annotation);
+			injectButtons("", content, _annotation);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());
 		}

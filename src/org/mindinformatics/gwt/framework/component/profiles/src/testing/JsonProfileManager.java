@@ -177,10 +177,13 @@ public class JsonProfileManager extends AProfileManager {
 		postData.append("\",");
 		postData.append("    \"createdby\": [");
 		postData.append("      {");
-		postData.append("        \"uuid\": \"");
-		postData.append(_application.getAgentManager().getUserPerson().getUuid());
+		postData.append("        \"@id\": \"");
+		postData.append(_application.getAgentManager().getUserPerson().getUri());
 		postData.append("\",");
-		postData.append("        \"name\": \"");
+		postData.append("        \"@type\": \"");
+		postData.append("foafx:Person");
+		postData.append("\",");
+		postData.append("        \"foafx:name\": \"");
 		postData.append(_application.getAgentManager().getUserPerson().getName());
 		postData.append("\"");
 		postData.append("      }");
@@ -244,5 +247,14 @@ public class JsonProfileManager extends AProfileManager {
 			_application.getInitializer().addException("Couldn't retrieve User Profile JSON");
 		}
 		return newProfile;
+	}
+
+	@Override
+	public MProfile saveCurrentProfile(MProfile currentProfile,
+			IUpdateProfileCallback callback) {
+		// TODO Auto-generated method stub
+		
+		//sss
+		return null;
 	}
 }

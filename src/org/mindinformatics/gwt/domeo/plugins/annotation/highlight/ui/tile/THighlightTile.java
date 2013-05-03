@@ -68,7 +68,7 @@ public class THighlightTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(provenance, _annotation);
+			createProvenanceBar("", provenance, _annotation);
 
 			type.setText("Highlight:");
 			text.setText(SelectorUtils.getMatch(_annotation.getSelector()));
@@ -91,7 +91,7 @@ public class THighlightTile extends ATileComponent implements ITileComponent {
 				content.add(hp);
 			}
 			
-			injectButtons(content, _annotation);
+			injectButtons("", content, _annotation);
 			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());

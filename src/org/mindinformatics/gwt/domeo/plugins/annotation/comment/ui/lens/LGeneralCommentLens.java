@@ -65,7 +65,7 @@ public class LGeneralCommentLens extends ATileComponent implements ITileComponen
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(provenance, _annotation);
+			createProvenanceBar("", provenance, _annotation);
 			
 			/*
 			MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_annotation.getLocalId());
@@ -84,7 +84,7 @@ public class LGeneralCommentLens extends ATileComponent implements ITileComponen
 				}
 			});
 			
-			injectButtons(content, _annotation);
+			injectButtons("", content, _annotation);
 			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());

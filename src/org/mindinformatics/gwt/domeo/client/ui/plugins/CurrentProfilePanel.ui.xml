@@ -76,14 +76,14 @@
 			<g:cell horizontalAlignment='ALIGN_RIGHT' width='20px'>
 				<g:SimplePanel ui:field='progressIconPanel'/>
 			</g:cell>
+			<g:cell horizontalAlignment='ALIGN_RIGHT' width='140px'>
+				<g:Button ui:field='saveAsCurrentButton'>Save as current</g:Button>
+			</g:cell>
 			<g:cell horizontalAlignment='ALIGN_RIGHT' width='78px'>
 				<g:Button ui:field='saveButton'>Save</g:Button>
 			</g:cell>
 			<g:cell horizontalAlignment='ALIGN_RIGHT' width='78px'>
 				<g:Button ui:field='saveAsButton'>Save As</g:Button>
-			</g:cell>
-			<g:cell horizontalAlignment='ALIGN_RIGHT' width='140px'>
-				<g:Button ui:field='loadButton'>Available Profiles</g:Button>
 			</g:cell>
 		</g:HorizontalPanel>
 	</g:FlowPanel>

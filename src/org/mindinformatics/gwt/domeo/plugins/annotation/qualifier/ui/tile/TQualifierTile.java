@@ -10,6 +10,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.ITrustedResourceDigester;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 
 import com.google.gwt.core.client.GWT;
@@ -68,7 +69,7 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(provenance, _annotation);
+			createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, _annotation);
 			
 			StringBuffer sb = new StringBuffer();
 			for(int j=0; j<_annotation.getTerms().size(); j++) {
@@ -116,7 +117,7 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 			});
 			*/
 			
-			injectButtons(content, _annotation);
+			injectButtons(QualifierPlugin.getInstance().getPluginName(), content, _annotation);
 			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());

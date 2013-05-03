@@ -415,34 +415,34 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			new PostItSearchComponent(this));
 		
 		// Qualifier
-		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
-		if(_profileManager.getUserCurrentProfile().isPluginEnabled(QualifierPlugin.getInstance().getPluginName())) {		
-			pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
+		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);	
+		pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
+		if(_profileManager.getUserCurrentProfile().isPluginEnabled(QualifierPlugin.getInstance().getPluginName())) {
 			annotationFormsManager.registerAnnotationForm(MQualifierAnnotation.class.getName(),
 					new QualifierFormProvider(this));
-			annotationTailsManager.registerAnnotationTile(MQualifierAnnotation.class.getName(), 
-					new QualifierTileProvider(this));
-			annotationCardsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
-					new QualifierCardProvider(this));
-			searchComponentsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
-					new QualifierSearchComponent(this));
-			annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
-					new HQualifierHelper());
 		}
+		annotationTailsManager.registerAnnotationTile(MQualifierAnnotation.class.getName(), 
+				new QualifierTileProvider(this));
+		annotationCardsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
+				new QualifierCardProvider(this));
+		searchComponentsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
+				new QualifierSearchComponent(this));
+		annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
+				new HQualifierHelper());
 		
 		// Antibody
 		pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true);
+		pluginsManager.enablePlugin(AntibodyPlugin.getInstance(), true);
 		if(_profileManager.getUserCurrentProfile().isPluginEnabled(AntibodyPlugin.getInstance().getPluginName())) {	
-			pluginsManager.enablePlugin(AntibodyPlugin.getInstance(), true);
 			annotationFormsManager.registerAnnotationForm(MAntibodyAnnotation.class.getName(),
 					new AntibodyFormProvider(this));
-			annotationTailsManager.registerAnnotationTile(MAntibodyAnnotation.class.getName(), 
-					new AntibodyTileProvider(this));
-			annotationCardsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
-					new AntibodyCardProvider(this));
-			searchComponentsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
-					new AntibodySearchComponent(this));
 		}
+		annotationTailsManager.registerAnnotationTile(MAntibodyAnnotation.class.getName(), 
+				new AntibodyTileProvider(this));
+		annotationCardsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
+				new AntibodyCardProvider(this));
+		searchComponentsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
+				new AntibodySearchComponent(this));
 		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 

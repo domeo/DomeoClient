@@ -77,8 +77,8 @@ public class CPostItCard extends ACardComponent {
 	@Override
 	public void refresh() {
 		try {
-			if (_index>-1) createProvenanceBar(_index, provenance, _annotation);
-			else createProvenanceBar(provenance, _annotation);
+			if (_index>-1) createProvenanceBar("",_index, provenance, _annotation);
+			else createProvenanceBar("", provenance, _annotation);
 			type.setText(_annotation.getType().getName()+":");
 			text.setText(_annotation.getText());
 			
@@ -96,7 +96,7 @@ public class CPostItCard extends ACardComponent {
 			
 			createSocialBar(socialPanel, _annotation);
 
-			injectButtons(content, _annotation);
+			injectButtons("", content, _annotation);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());
 		}

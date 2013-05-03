@@ -64,7 +64,7 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 	@UiField Label footerMessage;
 	@UiField Button saveButton;
 	@UiField Button saveAsButton;
-	@UiField Button loadButton;
+	@UiField Button saveAsCurrentButton;
 	@UiField SimplePanel progressIconPanel;
 	
 	public void setContainer(IContainerPanel containerPanel) {
@@ -93,7 +93,6 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 		// Create layout
 		initWidget(binder.createAndBindUi(this)); 
 		this.setWidth((Window.getClientWidth() - 140) + "px");
-		
 		final IUpdateProfileCallback _this = this;
 		saveButton.setEnabled(false);
 		saveButton.addClickHandler(new ClickHandler() {
@@ -106,7 +105,7 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 				_domeo.getProfileManager().saveUserProfile(newProfile, _this);
 			}
 		});
-		
+
 		saveAsButton.setEnabled(false);
 		saveAsButton.addClickHandler(new ClickHandler() {
 			@Override
@@ -121,21 +120,22 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 				}
 			}
 		});
-		
-		loadButton.addClickHandler(new ClickHandler() {
+		saveAsCurrentButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				_parent.selectTab(1);
 			}
 		});
-		
 		refresh(false);
 	}
 	
 	public void refresh(boolean change) {
 		
-		if(change) refreshMessagePanel(true);
-		
+		if(change) {
+			refreshMessagePanel(true);
+			saveAsCurrentButton.setEnabled(true);
+		}
+
 		 // Create a CellTable.
 	    final CellTable<PluginCard> table = new CellTable<PluginCard>();
 	    
@@ -166,7 +166,6 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 				return pluginCard.subType;
 			}
 		};
-		
 		Column<PluginCard, Boolean> selectColumn = new Column<PluginCard, Boolean>(new CheckboxCell()) {
 	        @Override
 	        public Boolean getValue(PluginCard object) {
@@ -174,7 +173,6 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 	            return object.selected;
 	        }
 	    };
-
 		selectColumn.setFieldUpdater(new FieldUpdater<PluginCard, Boolean>() {
 			public void update(int index, PluginCard object, Boolean value) {
 				// Called when the user clicks on a checkbox.
@@ -195,7 +193,6 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 				return pluginCard.version;
 			}
 		};
-
 
 	    // Add the columns.
 	    table.addColumn(typeColumn, "Type");
@@ -224,12 +221,15 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 		    	list.add(pluginCard);
 	    	}
 	    }
-	    
+
 	    profileName.setText(_domeo.getProfileManager().getUserCurrentProfile().getName());
 	    profileDescription.setText(_domeo.getProfileManager().getUserCurrentProfile().getDescription());
 	    DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yy h:mma");
 	    profileDate.setText(fmt.format(_domeo.getProfileManager().getUserCurrentProfile().getLastSavedOn()));
-	    profileCreator.setText(_domeo.getProfileManager().getUserCurrentProfile().getLastSavedBy().getName());
+
+	    if(_domeo.getProfileManager().getUserCurrentProfile().getLastSavedBy()!=null) 
+	    	profileCreator.setText(_domeo.getProfileManager().getUserCurrentProfile().getLastSavedBy().getName());
+	    	
 	    
 	    ListHandler<PluginCard> nameColumnSortHandler = new ListHandler<PluginCard>(list);
 	    nameColumnSortHandler.setComparator(nameColumn,
@@ -264,7 +264,7 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 	          }
 	        });
 	    table.addColumnSortHandler(typeColumnSortHandler);
-	    
+	    _domeo.getLogger().debug(this, "1p");
 	    ListHandler<PluginCard> selectColumnSortHandler = new ListHandler<PluginCard>(list);
 		selectColumnSortHandler.setComparator(selectColumn,
 	        new Comparator<PluginCard>() {
@@ -275,12 +275,13 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 
 	            // Compare the name columns.
 	            if (o1 != null) {
-	              return (o2 != null) ? (o1.mandatory && !(o2.mandatory))? -1:1 : 1;
-	            }
+	              return (o2 != null) ? ((o1.mandatory && !(o2.mandatory))? -1:1) : 1;
+	            } 
 	            return -1;
 	          }
 	        });
 		table.addColumnSortHandler(selectColumnSortHandler);
+		
 		pluginsPanel.clear();
 		pluginsPanel.add(table);
 	}
@@ -303,6 +304,7 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 			if(_domeo.getProfileManager().getUserCurrentProfile().isChanged()) {
 				footerMessage.setText("*The profile has to be saved to be effective");
 	
+				saveAsCurrentButton.setEnabled(false);
 				saveButton.setEnabled(true);
 				saveAsButton.setEnabled(true);
 			}
@@ -310,6 +312,11 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 			if(_domeo.getProfileManager().getUserCurrentProfile().isChanged()) {
 				footerMessage.setText("*Changes will be made available at the next Domeo reload.");
 	
+				// TODO Check if same user of original profile. If not just SaveAs
+				Window.alert(_domeo.getProfileManager().getUserCurrentProfile().getLastSavedBy().getUri());
+				Window.alert(_domeo.getAgentManager().getUserPerson().getUri());
+				
+				saveAsCurrentButton.setEnabled(false);
 				saveButton.setEnabled(true);
 				saveAsButton.setEnabled(true);
 			} else {

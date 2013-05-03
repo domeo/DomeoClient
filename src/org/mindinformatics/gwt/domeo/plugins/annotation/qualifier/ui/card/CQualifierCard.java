@@ -8,6 +8,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.cards.ACardComponent;
 import org.mindinformatics.gwt.domeo.client.ui.popup.CurationPopup;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.ITrustedResourceDigester;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.framework.model.agents.ISoftware;
 
@@ -80,8 +81,8 @@ public class CQualifierCard extends ACardComponent {
 	@Override
 	public void refresh() {
 		try {
-			if (_index>-1) createProvenanceBar(_index, provenance, _annotation);
-			else createProvenanceBar(provenance, _annotation);
+			if (_index>-1) createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), _index, provenance, _annotation);
+			else createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, _annotation);
 			//label.setText(_annotation.getTerm().getLabel()+",");
 			
 			StringBuffer sb = new StringBuffer();
@@ -110,7 +111,7 @@ public class CQualifierCard extends ACardComponent {
 			if(_domeo.isHostedMode() || _annotation.getCreator() instanceof ISoftware)
 				createCurationBar(socialPanel, _annotation);
 
-			injectButtons(content, _annotation);
+			injectButtons(QualifierPlugin.getInstance().getPluginName(),content, _annotation);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());
 		}

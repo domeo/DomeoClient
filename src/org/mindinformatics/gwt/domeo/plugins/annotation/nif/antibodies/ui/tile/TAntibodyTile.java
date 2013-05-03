@@ -11,6 +11,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
@@ -76,7 +77,7 @@ public class TAntibodyTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(provenance, _annotation);
+			createProvenanceBar(AntibodyPlugin.getInstance().getPluginName(), provenance, _annotation);
 
 			type.setText("Antibody:");
 			text.setText(_annotation.getAntibodyUsage().getAntibody().getLabel());
@@ -116,7 +117,7 @@ public class TAntibodyTile extends ATileComponent implements ITileComponent {
 				content.add(hp);
 			}
 			
-			injectButtons(content, _annotation);
+			injectButtons(AntibodyPlugin.getInstance().getPluginName(), content, _annotation);
 			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());

@@ -12,6 +12,7 @@ import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 
 import com.google.gwt.core.client.GWT;
@@ -44,7 +45,7 @@ public abstract class ATileComponent extends Composite {
 	
 	public abstract MAnnotation getAnnotation();
 	
-	public void injectButtons(FlowPanel content, final MAnnotation annotation) {
+	public void injectButtons(String plugin, FlowPanel content, final MAnnotation annotation) {
 		if(!((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE)).getValue() ||
 				!(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_USER_PROVENANCE)).getValue())) {
 			
@@ -52,13 +53,15 @@ public abstract class ATileComponent extends Composite {
 			
 			Image editIcon = new Image(resource.editLittleIcon());
 			editIcon.setTitle("Edit Item");
-			editIcon.setStyleName(ATileComponent.tileResources.css().button());
-			editIcon.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-					Window.alert("Edit item not implmented yet! id:" + annotation.getLocalId());
-				}
-			});
+			if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(plugin)) {
+				editIcon.setStyleName(ATileComponent.tileResources.css().button());
+				editIcon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						Window.alert("Edit item not implmented yet! id:" + annotation.getLocalId());
+					}
+				});
+			}
 			
 			Image showIcon = new Image(resource.showLittleIcon());
 			showIcon.setTitle("Show Item in Context");
@@ -76,14 +79,16 @@ public abstract class ATileComponent extends Composite {
 		}
 	}
 	
-	public void createProvenanceBar(HorizontalPanel provenance, final MAnnotation annotation) {
+	public void createProvenanceBar(String plugin, HorizontalPanel provenance, final MAnnotation annotation) {
 		int step = 0;
 		try {
 			Resources resource = Domeo.resources;
 			Image editIcon = new Image(resource.editLittleIcon());
 			editIcon.setTitle("Edit Item");
-			editIcon.setStyleName(ATileComponent.tileResources.css().button());
-			editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, _listener, getAnnotation()));
+			if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(plugin)) {
+				editIcon.setStyleName(ATileComponent.tileResources.css().button());
+				editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, _listener, getAnnotation()));
+			}
 			step=1;
 			
 			Image showIcon = new Image(resource.showLittleIcon());

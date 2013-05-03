@@ -62,7 +62,7 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(provenance, _annotation);
+			createProvenanceBar("", provenance, _annotation);
 			
 			/*
 			MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_annotation.getLocalId());
@@ -82,7 +82,7 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 				}
 			});
 			
-			injectButtons(content, _annotation);
+			injectButtons("", content, _annotation);
 			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());
