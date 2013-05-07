@@ -79,10 +79,10 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print("    \"description\": \""); 
 					out.print(profile.getDescription());
 					out.println("\",");
-					out.print("    \"createdon\": \"");
+					out.print("    \"createdOn\": \"");
 					out.print(dayTime.format(profile.getLastSavedOn()));
 					out.println("\",");
-					out.println("    \"createdby\": [");
+					out.println("    \"createdBy\": [");
 					out.println("      {");
 					out.print("        \"uuid\": \"");
 					out.print(profile.getLastSavedBy().getUuid());
@@ -95,10 +95,10 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("      }");
 					out.println("    ],");
-					out.println("    \"statusplugins\": [");
+					out.println("    \"plugins\": [");
 					
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -107,7 +107,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("       },");
 					
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -116,7 +116,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("       },");
 					
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmed");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -124,7 +124,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -132,7 +132,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.omim");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -140,7 +140,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.bioportal");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -148,7 +148,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.client.component.clipboard");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -174,10 +174,10 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print("    \"description\": \""); 
 					out.print(profile.getDescription());
 					out.println("\",");
-					out.print("    \"createdon\": \"");
+					out.print("    \"createdOn\": \"");
 					out.print(dayTime.format(profile.getLastSavedOn()));
 					out.println("\",");
-					out.println("    \"createdby\": [");
+					out.println("    \"createdBy\": [");
 					out.println("      {");
 					out.print("        \"@id\": \"");
 					out.print(profile.getLastSavedBy().getUuid());
@@ -193,7 +193,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("    \"statusplugins\": [");
 					
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -202,7 +202,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("       },");
 					
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -211,7 +211,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("       },");
 					
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmed");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -219,7 +219,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -227,7 +227,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.omim");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -243,7 +243,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.client.component.clipboard");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -262,10 +262,10 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print("    \"description\": \""); 
 					out.print(profile2.getDescription());
 					out.println("\",");
-					out.print("    \"createdon\": \"");
+					out.print("    \"createdOn\": \"");
 					out.print(dayTime.format(profile2.getLastSavedOn()));
 					out.println("\",");
-					out.println("    \"createdby\": [");
+					out.println("    \"createdBy\": [");
 					out.println("      {");
 					out.print("        \"@id\": \"");
 					out.print(profile2.getLastSavedBy().getUuid());
@@ -280,7 +280,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("    ],");
 					out.println("    \"statusplugins\": [");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmed");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -288,7 +288,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -296,7 +296,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("\"");
 					out.println("       },");
 					out.println("       {");
-					out.print("         \"uuid\": \"");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.bioportal");
 					out.println("\",");
 					out.print("         \"status\": \"");
