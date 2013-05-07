@@ -14,6 +14,6 @@ public interface IProfileManager {
 	
 	public void setCurrentProfile(MProfile currentProfile);
 	
-	public MProfile saveCurrentProfile(MProfile currentProfile, IUpdateProfileCallback callback);
+	public void saveCurrentProfile(MProfile currentProfile, IUpdateProfileCallback callback);
 	public MProfile saveUserProfile(MProfile newProfile, IUpdateProfileCallback callback);
 }

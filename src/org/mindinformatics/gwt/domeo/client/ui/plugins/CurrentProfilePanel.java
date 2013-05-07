@@ -125,10 +125,7 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 			@Override
 			public void onClick(ClickEvent event) {
 				progressIconPanel.add(new Image(Domeo.resources.littleProgressIcon()));
-				MProfile newProfile = new MProfile();
-				newProfile.setName(_domeo.getProfileManager().getUserCurrentProfile().getName());
-				newProfile.setUuid(_domeo.getProfileManager().getUserCurrentProfile().getUuid());
-				_domeo.getProfileManager().saveCurrentProfile(newProfile, _this);
+				_domeo.getProfileManager().saveCurrentProfile(_domeo.getProfileManager().getUserCurrentProfile(), _this);
 			}
 		});
 		refresh(false);
@@ -320,6 +317,8 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 				saveAsCurrentButton.setEnabled(false);
 				saveButton.setEnabled(true);
 				saveAsButton.setEnabled(true);
+			} else {
+				footerMessage.setText("*If saved, changes will be made available at the next Domeo reload.");
 			}
 		} else {
 			if(_domeo.getProfileManager().getUserCurrentProfile().isChanged()) {
@@ -350,7 +349,8 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 		progressIconPanel.clear();
   	  	saveButton.setEnabled(false);
   	  	saveAsButton.setEnabled(false);
-		footerMessage.setText("Profile saved!");
+  	    saveAsCurrentButton.setEnabled(false);
+		footerMessage.setText("Profile saved! Changes will be made available at the next Domeo reload.");
 		Timer t = new Timer() {
 			public void run() {
 				refreshMessagePanel(false);

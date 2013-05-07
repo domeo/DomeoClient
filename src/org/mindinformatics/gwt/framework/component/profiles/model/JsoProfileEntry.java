@@ -6,6 +6,6 @@ public class JsoProfileEntry extends JavaScriptObject {
 
 	protected JsoProfileEntry() {}
 	
-	public final native String getUuid() /*-{ return this.uuid; }-*/;
+	public final native String getName() /*-{ return this.name; }-*/;
 	public final native String getStatus() /*-{ return this.status; }-*/;
 }

@@ -77,10 +77,9 @@ public class StandaloneProfileManager extends AProfileManager {
 	}
 
 	@Override
-	public MProfile saveCurrentProfile(MProfile currentProfile,
+	public void saveCurrentProfile(MProfile currentProfile,
 			IUpdateProfileCallback callback) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 
