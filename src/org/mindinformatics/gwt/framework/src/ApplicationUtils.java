@@ -93,4 +93,10 @@ public class ApplicationUtils {
 		var re = new RegExp('^(?:f|ht)tp(?:s)?\://([^/]+)', 'im');
 		return url.match(re)[1].toString();
 	}-*/;
+	
+	public static native String getUrlParameter(String name)
+	/*-{
+		return decodeURI((new RegExp('[?|&]' + name + '=' + 
+			'([^&;]+?)(&|#|;|$)').exec($wnd.location)||[,""])[1].replace(/\+/g, '%20'));
+	}-*/;
 }
