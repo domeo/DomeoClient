@@ -22,6 +22,7 @@ package org.mindinformatics.gwt.domeo.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.mindinformatics.gwt.domeo.client.feature.clipboard.ClipboardManager;
 import org.mindinformatics.gwt.domeo.client.feature.clipboard.ui.east.ClipboardSidePanel;
@@ -157,7 +158,6 @@ import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
@@ -908,15 +908,22 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			uuids.add(ApplicationUtils.getUrlParameter("setId"));
 			((DialogGlassPanel)_dialogPanel).hide();
 			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
-
-			//((ProgressMessagePanel)((DialogGlassPanel)_dialogPanel).getPanel()).setMessage("Retrieving requested annotation");
 			((DialogGlassPanel)_dialogPanel).hideSoon();
 			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
-			ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
-			//History.newItem(ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url")), false);
+			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
+		} else if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("setIds").isEmpty()) {
+			List<String> uuids = new ArrayList<String>();
+			String[] st = ApplicationUtils.getUrlParameter("setIds").split(",");
+			for(int i = 0; i<st.length; i++) {
+				uuids.add(st[i]);
+			}
+			((DialogGlassPanel)_dialogPanel).hide();
+			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
+			((DialogGlassPanel)_dialogPanel).hideSoon();
+			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
+			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
 		} else {
-			//History.newItem(ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url")), false);
-			ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
+			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(this.getPersistenceManager().getCurrentResourceUrl());
 			checkForExistingAnnotationSets();
 		}
 		
