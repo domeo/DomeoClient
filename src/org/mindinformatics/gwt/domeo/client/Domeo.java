@@ -901,6 +901,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 
 		if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("lineage").isEmpty()) {
 			Window.alert("Attempting retrieving existing annotation with lineageId " + ApplicationUtils.getUrlParameter("lineage"));
+			Window.alert("Feature not yet implemented");
 			((ProgressMessagePanel)((DialogGlassPanel)_dialogPanel).getPanel()).setMessage("Attempting retrieving existing annotation");
 			_dialogPanel.hide();
 		} else if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("setId").isEmpty()) {
