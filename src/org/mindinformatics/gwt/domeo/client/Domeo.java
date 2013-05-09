@@ -157,6 +157,7 @@ import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
@@ -526,10 +527,26 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		extractorsManager = new ContentExtractorsManager(this);
 		componentsManager.addComponent(extractorsManager);
 		
+		/*
+		if(!ApplicationUtils.getUrlParameter("url").isEmpty())
+			Window.alert("Url: " + ApplicationUtils.getUrlParameter("url"));
+		if(!ApplicationUtils.getUrlParameter("setId").isEmpty())
+			Window.alert("Url: " + ApplicationUtils.getUrlParameter("setId"));
+		if(!ApplicationUtils.getUrlParameter("setIds").isEmpty())
+			Window.alert("Url: " + ApplicationUtils.getUrlParameter("setIds"));
+		*/
+		
+		if(!ApplicationUtils.getUrlParameter("url").isEmpty()) {
+			domeoToolbarPanel.getAddressBarPanel().setAddress(ApplicationUtils.getUrlParameter("url"));
+			this.attemptContentLoading(ApplicationUtils.getUrlParameter("url"));
+		}
+		
+		/*
 		if(ApplicationUtils.getDocumentUrl()!=null && ApplicationUtils.getDocumentUrl().trim().length()>13) {
 			domeoToolbarPanel.getAddressBarPanel().setAddress(ApplicationUtils.getDocumentUrl());
 			this.attemptContentLoading(ApplicationUtils.getDocumentUrl());
 		}
+		*/
 	}
 	
 	/* Should provide the right user manager */
@@ -879,9 +896,31 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		
 		this.getLogger().debug(this, "AFTER DOCUMENT", "Completed Execution of endExtraction() in " + (System.currentTimeMillis()-documentPipelineTimer)+ "ms");
-		this.getLogger().debug(this, "AFTER DOCUMENT", "Document url: " + ApplicationUtils.getDocumentUrl());
-		this.getLogger().debug(this, "AFTER DOCUMENT", "Annotation id: " + ApplicationUtils.getAnnotationId());
+		this.getLogger().debug(this, "AFTER DOCUMENT", "Document url: " + ApplicationUtils.getUrlParameter("url"));
+		this.getLogger().debug(this, "AFTER DOCUMENT", "Annotation set id: " + ApplicationUtils.getUrlParameter("setId"));
+
+		if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("lineage").isEmpty()) {
+			Window.alert("Attempting retrieving existing annotation with lineageId " + ApplicationUtils.getUrlParameter("lineage"));
+			((ProgressMessagePanel)((DialogGlassPanel)_dialogPanel).getPanel()).setMessage("Attempting retrieving existing annotation");
+			_dialogPanel.hide();
+		} else if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("setId").isEmpty()) {
+			List<String> uuids = new ArrayList<String>();
+			uuids.add(ApplicationUtils.getUrlParameter("setId"));
+			((DialogGlassPanel)_dialogPanel).hide();
+			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
+
+			//((ProgressMessagePanel)((DialogGlassPanel)_dialogPanel).getPanel()).setMessage("Retrieving requested annotation");
+			((DialogGlassPanel)_dialogPanel).hideSoon();
+			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
+			ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
+			//History.newItem(ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url")), false);
+		} else {
+			//History.newItem(ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url")), false);
+			ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
+			checkForExistingAnnotationSets();
+		}
 		
+		/*
 		if(ApplicationUtils.getDocumentUrl()!=null && ApplicationUtils.getDocumentUrl().trim().length()>13 && ApplicationUtils.getLineageId()!=null && ApplicationUtils.getLineageId().trim().length()>0) {
 			Window.alert("Attempting retrieving existing annotation with lineageId " + ApplicationUtils.getLineageId());
 			((ProgressMessagePanel)((DialogGlassPanel)_dialogPanel).getPanel()).setMessage("Attempting retrieving existing annotation");
@@ -899,6 +938,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		} else {
 			checkForExistingAnnotationSets();
 		}
+		*/
 	}
 	
 	public void checkForExistingAnnotationSets() {

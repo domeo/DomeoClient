@@ -99,4 +99,13 @@ public class ApplicationUtils {
 		return decodeURI((new RegExp('[?|&]' + name + '=' + 
 			'([^&;]+?)(&|#|;|$)').exec($wnd.location)||[,""])[1].replace(/\+/g, '%20'));
 	}-*/;
+	
+	public static native void updateUrl(String url)
+	/*-{
+		var base = $wnd.location.toString();
+		var index = $wnd.location.toString().indexOf("?");
+		if(index>0) base = base.substring(0, $wnd.location.toString().indexOf("?"));
+		//return base;
+		$wnd.history.pushState("", "Domeo Annotator", base + "?url=" + url);
+	}-*/;
 }
