@@ -537,8 +537,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		*/
 		
 		if(!ApplicationUtils.getUrlParameter("url").isEmpty()) {
-			domeoToolbarPanel.getAddressBarPanel().setAddress(ApplicationUtils.getUrlParameter("url"));
-			this.attemptContentLoading(ApplicationUtils.getUrlParameter("url"));
+			domeoToolbarPanel.getAddressBarPanel().setAddress(ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("url")));
+			this.attemptContentLoading(ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("url")));
 		}
 		
 		/*
@@ -906,25 +906,27 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			_dialogPanel.hide();
 		} else if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("setId").isEmpty()) {
 			List<String> uuids = new ArrayList<String>();
-			uuids.add(ApplicationUtils.getUrlParameter("setId"));
+			uuids.add(ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("setId")));
 			((DialogGlassPanel)_dialogPanel).hide();
 			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
 			((DialogGlassPanel)_dialogPanel).hideSoon();
 			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
-			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
+			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.encodeUrlComponent(ApplicationUtils.getUrlParameter("url")));
 		} else if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("setIds").isEmpty()) {
 			List<String> uuids = new ArrayList<String>();
-			String[] st = ApplicationUtils.getUrlParameter("setIds").split(",");
+			String[] st = ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("setIds")).split(",");
 			for(int i = 0; i<st.length; i++) {
 				uuids.add(st[i]);
+				this.getLogger().debug(this, "Queuing annotation set with id: " + st[i]);
 			}
+			
 			((DialogGlassPanel)_dialogPanel).hide();
 			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
 			((DialogGlassPanel)_dialogPanel).hideSoon();
 			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
-			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.getUrlParameter("url"));
+			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.encodeUrlComponent(ApplicationUtils.getUrlParameter("url")));
 		} else {
-			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(this.getPersistenceManager().getCurrentResourceUrl());
+			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.encodeUrlComponent(this.getPersistenceManager().getCurrentResourceUrl()));
 			checkForExistingAnnotationSets();
 		}
 		

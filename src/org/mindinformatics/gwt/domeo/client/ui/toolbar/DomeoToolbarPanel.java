@@ -6,6 +6,7 @@ import org.mindinformatics.gwt.domeo.client.Resources;
 import org.mindinformatics.gwt.domeo.client.ui.plugins.PluginsViewerPanel;
 import org.mindinformatics.gwt.domeo.client.ui.preferences.PreferencesViewerPanel;
 import org.mindinformatics.gwt.domeo.client.ui.toolbar.addressbar.AddressBarPanel;
+import org.mindinformatics.gwt.domeo.component.sharing.ui.SharingOptionsViewer;
 import org.mindinformatics.gwt.domeo.component.textmining.ui.TextMiningServicePicker;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
@@ -58,6 +59,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 	private ToolbarHorizontalTogglePanel highlightButtonPanel;
 	
 	private ToolbarHorizontalTogglePanel analyzeButtonPanel;
+	private ToolbarSimplePanel shareButton;
 	
 	public DomeoToolbarPanel(IDomeo application) {
 		_domeo = application;
@@ -232,6 +234,27 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 				}, _applicationResources.runLittleIcon(),
 				_applicationResources.spinningIcon2(), "Analyze", "Analyze");
 		
+		shareButton = new ToolbarSimplePanel(
+			_domeo, new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					ToolbarPopup popup = new ToolbarPopup(_domeo, "Share", Domeo.resources.shareIcon().getSafeUri().asString());
+					popup.setWidth(POPUP_WIDTH + "px");
+					popup.setPopupPosition(Window.getClientWidth()-(Integer.parseInt(POPUP_WIDTH)+48), -6); //25
+					popup.setAnimationEnabled(false);
+					popup.addButtonPanel(_applicationResources.allLinkIcon().getSafeUri().asString(), "Current Workspace", new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							if(!_domeo.isLocalResources() && !_domeo.isHostedMode() && _domeo.getPersistenceManager().isResourceLoaded()) {
+								SharingOptionsViewer lwp = new SharingOptionsViewer(_domeo);
+								new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), false, false, false);
+							}
+						}
+					});
+					popup.show();
+				}
+			}, _applicationResources.shareIcon().getSafeUri().asString(), "Sharing");		
+		
 		ToolbarSimplePanel settingsButton = new ToolbarSimplePanel(
 			_domeo, new ClickHandler() {
 				@Override
@@ -333,6 +356,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 		sp.setWidth("100px");
 		
 		toolbar.addToRightPanel(sp);
+		toolbar.addToRightPanel(shareButton);
 		toolbar.addToRightPanel(settingsButton);
 		toolbar.addToRightPanel(helpButton);
 		

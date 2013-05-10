@@ -53,3 +53,4 @@ comment_add16x16.png - http://iconlet.com/info/8900_comment_add_16x16
 arrow-split16x16.png - http://iconlet.com/info/91049_arrow-split_16x16
 arrow-right.gif - http://iconlet.com/info/61828_arrow-right_16x16
 tag-blue.png - http://iconlet.com/info/8091_tag_blue_16x16
+folder_link.png - http://www.iconlet.com/info/7951_folder_link_16x16

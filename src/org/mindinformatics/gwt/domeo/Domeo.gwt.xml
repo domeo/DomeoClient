@@ -22,6 +22,7 @@
   <inherits name="org.mindinformatics.gwt.domeo.component.cache.images.CacheImages"/>
   <inherits name="org.mindinformatics.gwt.domeo.component.linkeddata.LinkedData"/>
   <inherits name="org.mindinformatics.gwt.domeo.component.textmining.TextMining"/>
+  <inherits name="org.mindinformatics.gwt.domeo.component.sharing.Sharing"/>
   <inherits name="org.mindinformatics.gwt.domeo.component.groups.Groups"/>
   
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.persistence.Persistence"/>

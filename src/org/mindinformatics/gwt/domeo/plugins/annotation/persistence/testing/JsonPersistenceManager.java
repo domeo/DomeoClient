@@ -378,7 +378,10 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 									MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getAnnotationSetByLocalId(summary.getLocalId());
 									if(set!=null) {
 										_application.getLogger().info(this, "Updating set " + summary.getLocalId());
+										
+										// TODO verify if newId is really necessary
 										if(summary.getNewId()!=null && !summary.getNewId().equals("undefined")) {
+											_application.getLogger().info(this, "Updating id to " + summary.getNewId());
 											set.setIndividualUri(summary.getNewId());
 										}
 										set.setLineageUri(summary.getLineageUri());

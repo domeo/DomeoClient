@@ -4,6 +4,7 @@ import org.mindinformatics.gwt.framework.component.logging.ui.LogResources;
 
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.ClientBundle.Source;
 import com.google.gwt.resources.client.CssResource.NotStrict;
 import com.google.gwt.resources.client.ImageResource;
 
@@ -142,4 +143,10 @@ public interface ApplicationResources extends ClientBundle,
 	
 	@Source("org/mindinformatics/gwt/framework/icons/users-color16x16.png")
 	ImageResource usersIcon();
+	
+	@Source("org/mindinformatics/gwt/framework/icons/block_share.png")
+	ImageResource shareIcon();
+	
+	@Source("org/mindinformatics/gwt/framework/icons/folder_link.png")
+	ImageResource allLinkIcon();
 }
