@@ -247,7 +247,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 						public void onClick(ClickEvent event) {
 							if(!_domeo.isLocalResources() && !_domeo.isHostedMode() && _domeo.getPersistenceManager().isResourceLoaded()) {
 								SharingOptionsViewer lwp = new SharingOptionsViewer(_domeo);
-								new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), false, false, false);
+								new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), 440, false, false, false);
 							}
 						}
 					});
