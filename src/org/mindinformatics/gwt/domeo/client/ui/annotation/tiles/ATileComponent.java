@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.domeo.client.ui.annotation.tiles;
 
+import java.util.Date;
+
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
@@ -12,7 +14,6 @@ import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
-import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 
 import com.google.gwt.core.client.GWT;
@@ -79,7 +80,7 @@ public abstract class ATileComponent extends Composite {
 		}
 	}
 	
-	public void createProvenanceBar(String plugin, HorizontalPanel provenance, final MAnnotation annotation) {
+	public void createProvenanceBar(String plugin, HorizontalPanel provenance, String prefix, final MAnnotation annotation) {
 		int step = 0;
 		try {
 			Resources resource = Domeo.resources;
@@ -143,7 +144,7 @@ public abstract class ATileComponent extends Composite {
 						}
 						step=5;
 						
-						provenance.add(new Label("By Me on " + annotation.getFormattedCreationDate()));
+						provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>" + prefix + " by Me</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
 						if(!(annotation.getSelector() instanceof MTargetSelector) && !(annotation.getSelector() instanceof MAnnotationSelector)) {
 							provenance.add(showIcon);
 							provenance.setCellWidth(showIcon, "22px");
@@ -177,7 +178,8 @@ public abstract class ATileComponent extends Composite {
 					}
 					
 					step=9;
-					provenance.add(new Label("By " + annotation.getCreator().getName() + " on " + annotation.getFormattedCreationDate()));
+					provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>" + prefix + " by " + annotation.getCreator().getName() + "</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
+					//provenance.add(new Label("By " + annotation.getCreator().getName() + " on " + annotation.getFormattedCreationDate()));
 					 
 					provenance.add(showIcon);
 					provenance.add(editIcon);
@@ -190,4 +192,28 @@ public abstract class ATileComponent extends Composite {
 			_domeo.getLogger().exception(this, "Provenance bar generation exception @" + step + " " + e.getMessage());
 		}
 	}
+	
+	public native String elaspedTime(Long ms) /*-{
+	    var secs = ms / 1000;
+	    ms = Math.floor(ms % 1000);
+	    var minutes = secs / 60;
+	    secs = Math.floor(secs % 60);
+	    var hours = minutes / 60;
+	    minutes = Math.floor(minutes % 60);
+	    hours = Math.floor(hours % 24);
+	    var days = hours / 24;
+	    hours =  Math.floor(hours % 24);
+	    minutes = Math.floor(minutes % 60);
+	    hours = Math.floor(hours % 24);
+	    
+	    if(days==0) {
+		    if(hours==0) {
+		    	if(minutes==0) {
+		    		return  secs + " seconds";
+		    	} else return minutes + " minutes";
+		    } else return hours + " hours";
+	    } else return days + " days";
+	    
+	    return hours + ":" + minutes + ":" + secs + "." + ms;  
+	}-*/;
 }

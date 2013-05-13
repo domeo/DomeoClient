@@ -10,6 +10,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 
 import com.google.gwt.core.client.GWT;
@@ -41,6 +42,7 @@ public class TPostItTile extends ATileComponent implements ITileComponent {
 	@UiField VerticalPanel body;
 	@UiField HorizontalPanel provenance;
 	@UiField FlowPanel content;
+	@UiField HTML icon;
 	@UiField Label type;
 	@UiField Label text;
 	
@@ -73,9 +75,12 @@ public class TPostItTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar("", provenance, _annotation);
+			createProvenanceBar("", provenance, _annotation.getType().getName(), _annotation);
 
-			type.setText(_annotation.getType().getName()+":");
+			if(_annotation.getType() == PostitType.COMMENT_TYPE)
+				icon.setHTML("<img src='" + Domeo.resources.littleCommentIcon().getSafeUri().asString() + "'/>");
+			
+			//type.setText(_annotation.getType().getName()+":");
 			text.setText(_annotation.getText());
 			text.addClickHandler(new ClickHandler() {
 				@Override

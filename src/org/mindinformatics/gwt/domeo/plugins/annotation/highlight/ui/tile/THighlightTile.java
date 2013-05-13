@@ -41,7 +41,6 @@ public class THighlightTile extends ATileComponent implements ITileComponent {
 	@UiField VerticalPanel body;
 	@UiField HorizontalPanel provenance;
 	@UiField FlowPanel content;
-	@UiField Label type;
 	@UiField Label text;
 	
 	public THighlightTile(IDomeo domeo, IAnnotationEditListener listener) {
@@ -68,10 +67,10 @@ public class THighlightTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar("", provenance, _annotation);
+			createProvenanceBar("", provenance, "Highlight", _annotation);
 
-			type.setText("Highlight:");
-			text.setText(SelectorUtils.getMatch(_annotation.getSelector()));
+			//type.setText("Highlight:");
+			text.setText("'" + SelectorUtils.getMatch(_annotation.getSelector()) + "'");
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {

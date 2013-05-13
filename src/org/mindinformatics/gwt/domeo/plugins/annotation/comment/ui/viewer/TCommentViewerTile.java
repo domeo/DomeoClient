@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.viewer;
 
+import java.util.Date;
+
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
@@ -28,6 +30,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -264,7 +267,7 @@ public class TCommentViewerTile extends ATileComponent implements ITileComponent
 						}
 						step=7;
 						
-						provenance.add(new Label("By Me on " + annotation.getFormattedCreationDate()));
+						provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>By Me</span>  <span style='padding-left:5px' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
 						if(!(annotation.getSelector() instanceof MTargetSelector) && !(annotation.getSelector() instanceof MAnnotationSelector)) {
 							provenance.add(showIcon);
 							provenance.setCellWidth(showIcon, "22px");
@@ -300,7 +303,7 @@ public class TCommentViewerTile extends ATileComponent implements ITileComponent
 					}
 					
 					step=9;
-					provenance.add(new Label("By " + annotation.getCreator().getName() + " on " + annotation.getFormattedCreationDate()));
+					provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>By " + annotation.getCreator().getName() + "</span>  <span style='padding-left:5px' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
 					 
 					provenance.add(showIcon);
 					provenance.add(editIcon);

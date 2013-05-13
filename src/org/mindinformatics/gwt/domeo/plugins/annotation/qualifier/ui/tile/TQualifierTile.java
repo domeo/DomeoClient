@@ -38,6 +38,7 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 	@UiField VerticalPanel body;
 	@UiField HorizontalPanel provenance;
 	@UiField FlowPanel content;
+	@UiField HTML icon;
 	@UiField HTML description;
 	
 	public TQualifierTile(IDomeo domeo, IAnnotationEditListener listener) {
@@ -69,9 +70,10 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, _annotation);
+			createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, "Qualifier", _annotation);
 			
 			StringBuffer sb = new StringBuffer();
+			
 			for(int j=0; j<_annotation.getTerms().size(); j++) {
 				sb.append("<img src='" + Domeo.resources.tagIcon().getSafeUri().asString() + "'/>" +  "<b>" + _annotation.getTerms().get(j).getLabel()+"</b> from <a target=\"_blank\"href=\""+ _annotation.getTerms().get(j).getSource().getUrl() +"\">"+
 						_annotation.getTerms().get(j).getSource().getLabel()+"</a>");

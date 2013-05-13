@@ -27,6 +27,8 @@
 			font-weight: bold;
 			display:inline;	
 			padding-right: 4px;
+			width: 16px;
+			background-color: #F0F8FF;	
 		}
 		.contentFrame {
 			padding: 0px 1px 4px 0px;	
@@ -52,6 +54,7 @@
 		</g:SimplePanel>
 		<g:SimplePanel styleName='{style.contentFrame}'>
 			<g:FlowPanel styleName='{style.content}' ui:field='content'>
+				<g:HTML ui:field='icon' styleName='{style.contentItemType}'></g:HTML>
 				<g:HTML ui:field='description' styleName='{style.contentItem}'></g:HTML>
 			</g:FlowPanel>
 		</g:SimplePanel>

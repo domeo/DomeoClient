@@ -4,11 +4,13 @@
 
 	<ui:style>	
 		.body {
+			border-top: 4px solid #FFF380;
 			width: 100%;
 			padding-top: 4px;
 		}
 		.content {
-			background-color: #FFF380;	
+	 		
+			background-color: #FAFAFA;	
 			/*
 			-moz-border-radius: 15px;
 			border-radius: 15px;

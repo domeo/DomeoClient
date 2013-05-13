@@ -65,7 +65,7 @@ public class LGeneralCommentLens extends ATileComponent implements ITileComponen
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar("", provenance, _annotation);
+			createProvenanceBar("", provenance, "", _annotation);
 			
 			/*
 			MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_annotation.getLocalId());

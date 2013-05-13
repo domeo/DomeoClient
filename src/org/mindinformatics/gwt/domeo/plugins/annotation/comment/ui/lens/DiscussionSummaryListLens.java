@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens;
 
+import java.util.Date;
+
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationRightsPopup;
@@ -115,6 +117,8 @@ public class DiscussionSummaryListLens extends Composite implements ILensRefresh
 			// Provenence
 			// ----------
 			provenanceLabel.clear();
+			//provenance.add(new HTML("<span style='font-weight: bold'>By " + _set.getCreator().getName() + "</span>  <span style='padding-left:5px' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
+
 			provenanceLabel.add(new HTML("By " + _set.getCreatedBy().getName() + " on " + _set.getFormattedCreationDate()));
 			
 			// Access control

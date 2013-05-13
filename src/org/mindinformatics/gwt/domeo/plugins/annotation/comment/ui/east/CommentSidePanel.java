@@ -4,14 +4,12 @@ import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.viewer.CommentsViewerPanel;
 import org.mindinformatics.gwt.framework.component.ICommentsRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.ui.east.ASidePanel;
 import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
 import org.mindinformatics.gwt.framework.component.ui.east.SidePanelsFacade;
-import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

@@ -29,6 +29,7 @@
 		}
 		.contentItem {
 			display:inline;	
+			font-size: 14px;
 		}
 		.contentItemType {
 			font-weight: bold;
@@ -37,12 +38,13 @@
 		}
 		.provenance {
 			width: 100%;
-			background-color: #EEE;	
+			background-color: #fff;	
 			border-top-right-radius: 10px;	
 			-moz-border-radius-topright: 10px;
 			border-bottom-right-radius: 10px;
 			-moz-border-radius-bottomright: 10px;
 			padding:3px 5px 3px 3px;
+			border-top: 1px #ccc dotted;
 		}
 		.provenanceFrame {
 			padding: 0px 1px 0px 0px;	

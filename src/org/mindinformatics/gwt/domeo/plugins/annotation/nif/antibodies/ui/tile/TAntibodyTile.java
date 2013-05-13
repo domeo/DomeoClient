@@ -46,7 +46,7 @@ public class TAntibodyTile extends ATileComponent implements ITileComponent {
 	@UiField VerticalPanel body;
 	@UiField HorizontalPanel provenance;
 	@UiField FlowPanel content;
-	@UiField Label type;
+	//@UiField Label type;
 	@UiField Label text;
 	@UiField HTML method;
 	@UiField HTML subject;
@@ -77,9 +77,9 @@ public class TAntibodyTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(AntibodyPlugin.getInstance().getPluginName(), provenance, _annotation);
+			createProvenanceBar(AntibodyPlugin.getInstance().getPluginName(), provenance, "Antibody", _annotation);
 
-			type.setText("Antibody:");
+			//type.setText("Antibody:");
 			text.setText(_annotation.getAntibodyUsage().getAntibody().getLabel());
 			
 			int counter = 0;

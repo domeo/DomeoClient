@@ -114,7 +114,7 @@ public class CommentSidePanelTopbar  extends Composite
 		secondLineTopbar.clear();
 
 		if(numberComments>0 && numberUsers>0) {
-			
+			threadsCounter++;
 			Label l = new Label(threadsCounter + ((threadsCounter==1) ? " Thread": " Threads"));
 			l.addClickHandler(new ClickHandler() {
 				@Override
