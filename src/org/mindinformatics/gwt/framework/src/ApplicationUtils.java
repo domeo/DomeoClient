@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.framework.src;
 
+import org.mindinformatics.gwt.domeo.client.IDomeo;
+
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.regexp.shared.RegExp;
 
@@ -8,8 +10,8 @@ public class ApplicationUtils {
 	public static DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy h:mma");
 	public static DateTimeFormat day = DateTimeFormat.getFormat("MM/dd/yyyy Z");
 	
-	public static String getAnnotationToolLink(String url, String link) {
-		String absoluteLink = getAbsoluteLink(url, link);
+	public static String getAnnotationToolLink(IDomeo domeo, String url, String link) {
+		String absoluteLink = getAbsoluteLink(domeo, url, link);
 		return cleanUrl(getUrlString())+"?url=" + absoluteLink;
 	}
 	
@@ -17,10 +19,10 @@ public class ApplicationUtils {
 		return cleanUrl(getUrlString())+"?url=" + link;
 	}
 	
-	public static String getAbsoluteLink(String url, String link) {
+	public static String getAbsoluteLink(IDomeo domeo, String url, String link) {
 		if(!link.startsWith("http")) { 
 			if(!link.startsWith("/")) {
-				String base = url.substring(0, getDocumentUrl().lastIndexOf('/'));
+				String base = url.substring(0, domeo.getPersistenceManager().getCurrentResourceUrl().lastIndexOf('/'));
 				return (base + link);
 			} else if(link.startsWith("/")) {
 				String base = getUrlBase(url).substring(0, getUrlBase(url).length()-1);
@@ -54,17 +56,18 @@ public class ApplicationUtils {
 	    window.open (url,"mywindow");
 	}-*/;
 	
-	public native static String getDocumentUrl() /*-{
-		return $wnd.documentUrl;
-	}-*/;
-	
-	public native static String getLineageId() /*-{
-		return $wnd.lineageId;
-	}-*/;
-	
-	public native static String getAnnotationId() /*-{
-		return $wnd.annotationId;
-	}-*/;
+//  Deprecated
+//	public native static String getDocumentUrl() /*-{
+//		return $wnd.documentUrl;
+//	}-*/;
+//	
+//	public native static String getLineageId() /*-{
+//		return $wnd.lineageId;
+//	}-*/;
+//	
+//	public native static String getAnnotationId() /*-{
+//		return $wnd.annotationId;
+//	}-*/;
 	
 	public static native String getUrlString() /*-{
 		return $wnd.location.toString();

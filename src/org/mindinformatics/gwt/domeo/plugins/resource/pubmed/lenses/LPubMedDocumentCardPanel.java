@@ -156,7 +156,7 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 		boolean isBibliographicSetEmpty = ((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().size()==0;
 		boolean isBibliographicSetVirtual = _domeo.getAnnotationPersistenceManager().getBibliographicSet().isVirtual();
 		
-		try {
+		//try {
 			init();
 			uriField.setValue(_resource.getUrl());
 		
@@ -170,8 +170,6 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 						_resource.getSource().getHomepage() + "' target='_blank'> <img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> "+_resource.getSource().getName()+ "</a>");
 				extractionDateDetails.setText("On " + _resource.getFormattedCreationDate());
 				citationField.add(PubMedCitationPainter.getCitation((MPublicationArticleReference)_resource.getSelfReference().getReference()));
-				identifiersField.add(PubMedCitationPainter.getIdentifiers((MPublicationArticleReference)_resource.getSelfReference().getReference(), _domeo));
-			
 			} else {
 				ClickHandler addCitationClickHandler = new ClickHandler() {
 					@Override
@@ -199,11 +197,11 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 			} else {
 				urlImage.setVisible(false);
 			}
-		} catch(Exception e) {
-			_domeo.getLogger().exception(this, "Exception while rendering PubMed resource info " + e.getMessage());
-			body.clear();
-			body.add(new HTML("<img src='" + _resources.crossLittleIcon().getSafeUri().asString() + "'/> Exception while rendering PubMed resource info " + e.getMessage()));
-		}
+//		} catch(Exception e) {
+//			_domeo.getLogger().exception(this, "Exception while rendering PubMed resource info " + e.getMessage());
+//			body.clear();
+//			body.add(new HTML("<img src='" + _resources.crossLittleIcon().getSafeUri().asString() + "'/> Exception while rendering PubMed resource info " + e.getMessage()));
+//		}
 		
 		// PubMed bibliography panel
 		// -------------------------
