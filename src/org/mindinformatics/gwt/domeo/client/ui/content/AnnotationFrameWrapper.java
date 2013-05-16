@@ -1254,12 +1254,16 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		//_application.displayBubble(Integer.parseInt(x), Integer.parseInt(y), link, element);
 	}
 	
-	public void annotateImage(String src, com.google.gwt.dom.client.Element element) {
-		if(_domeo.isManualAnnotationEnabled()) {
-			//Window.alert(HtmlUtils.getElementXPath(element));
-			ImageAnnotationFormsPanel afp = new ImageAnnotationFormsPanel(_domeo, src, element.getAttribute("title"), element.getAttribute("imageid"), (Element) element, null);
-			_domeo.getComponentsManager().addComponent(afp);
-			new EnhancedGlassPanel(_domeo, afp, afp.getTitle(), false, false, false);
+	public void annotateImage(String src, String displayUrl, com.google.gwt.dom.client.Element element) {
+		try {
+			if(_domeo.isManualAnnotationEnabled()) {
+				//Window.alert(HtmlUtils.getElementXPath(element));
+				ImageAnnotationFormsPanel afp = new ImageAnnotationFormsPanel(_domeo, src, displayUrl, element.getAttribute("title"), element.getAttribute("imageid"), (Element) element, null);
+				_domeo.getComponentsManager().addComponent(afp);
+				new EnhancedGlassPanel(_domeo, afp, afp.getTitle(), false, false, false);
+			}
+		} catch(Exception e) {
+			Window.alert("AnnotationFrameWrapper::annotateImage " + e.getMessage());
 		}
 	}
 	
@@ -1289,7 +1293,9 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 						var images = iframe.contentDocument.getElementsByTagName('img');
 						var imagesLength = images.length;
 						for(var i=0;i<imagesLength;++i) {
+							var originalSrc = images[i].getAttribute('src');
 							images[i].setAttribute('imageid', 'domeo_img_'+i);
+							
 							
 							var frameBaseWithProxy = $doc.getElementById("domeoframe").contentWindow.document.location;
 							//alert('frameBaseWithProxy ' + frameBaseWithProxy)
@@ -1311,19 +1317,38 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 							if(images[i].src.substring(0,appBaseUrl.length) == appBaseUrl) {
 								src = src.replace(appBaseUrl, frameBaseUrl);
 							} 
+							
+							if(originalSrc.substring(0,appBaseUrl.length) == appBaseUrl) {
+								originalSrc = originalSrc.replace(appBaseUrl, frameBaseUrl);
+							} else if(originalSrc.indexOf("/", 0) === 0) {
+								if(frameBaseUrl.charAt(frameBaseUrl.length-1)=="/") {
+									frameBaseUrl = frameBaseUrl.substring(0, frameBaseUrl.length-1);
+								}  
+								originalSrc = frameBaseUrl + originalSrc;
+							}
+							images[i].setAttribute('domeoOriginalSrc', originalSrc);
 							//foo.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::addImage(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(src, ''+images[i].width, ''+images[i].height, images[i].alt, images[i]);
 							
 							images[i].onclick=(function(e, element) {
 								
 								return function(){
 									try {
-										//alert('appBase ' + appBaseUrl);
+										//var src = (element.src);
 										var src = new String(e);
+										var src2 = element.src;
 										if(src.substring(0,appBaseUrl.length) == appBaseUrl) {
+											if(frameBaseUrl.charAt(frameBaseUrl.length-1)!="/" && appBaseUrl.charAt(appBaseUrl.length-1)=="/")
+												frameBaseUrl = frameBaseUrl + "/";
 											src = src.replace(appBaseUrl, frameBaseUrl);
 										} 
-										
-										foo.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::annotateImage(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(src, element);
+										//alert('appBase ' + src + ' - ' + src2);
+										if(src2.substring(0,appBaseUrl.length) == appBaseUrl) {
+											if(frameBaseUrl.charAt(frameBaseUrl.length-1)!="/" && appBaseUrl.charAt(appBaseUrl.length-1)=="/")
+												frameBaseUrl = frameBaseUrl + "/";
+											src2 = src2.replace(appBaseUrl, frameBaseUrl);
+										} 										
+										//alert('appBase ' + src + ' - ' + src2);
+										foo.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::annotateImage(Ljava/lang/String;Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(src, src2, element);
 										return false;
 									} catch(e) {
 										alert('images[i].onclick: ' +e);

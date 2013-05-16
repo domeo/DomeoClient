@@ -8,7 +8,10 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
+import org.mindinformatics.gwt.domeo.model.MOnlineImage;
+import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.widget.WidgetUtilsResources;
 
 import com.google.gwt.core.client.GWT;
@@ -74,7 +77,7 @@ public class CachedImagesPanel extends Composite {
 				
 				boolean small = false;
 				boolean reduced = false;
-				Image img = new Image(image.getSrc());
+				Image img = new Image(image.getDisplayUrl());
 				if(img.getWidth()>440) {
 					img.setWidth("430px");  
 					reduced = true;
@@ -104,7 +107,7 @@ public class CachedImagesPanel extends Composite {
 					ClickHandler exploreHandler = new ClickHandler() {
 						@Override
 						public void onClick(ClickEvent event) {
-							Window.alert("Exploration of image not yet implemented (wip) " + _image.getSrc());
+							Window.alert("Exploration of image not yet implemented (wip) " + _image.getOriginalUrl());
 						}
 					};
 					
@@ -123,7 +126,10 @@ public class CachedImagesPanel extends Composite {
 						hp.add(exploreLabel);
 //					}
 					
-					ArrayList<MAnnotation> annotations = _domeo.getAnnotationPersistenceManager().annotationsForImage(_image.getSrc());
+					_domeo.getLogger().info(this, "cache lookup image;;;" + _image.getOriginalUrl());
+					
+					// Make the lin absolute
+					ArrayList<MAnnotation> annotations = _domeo.getAnnotationPersistenceManager().annotationsForImage(_image.getOriginalUrl());
 //					if(annotations!=null && annotations.size()>0) {
 //						ClickHandler annotationsHandler = new ClickHandler() {
 //							@Override
@@ -202,7 +208,7 @@ public class CachedImagesPanel extends Composite {
 					ClickHandler exploreHandler = new ClickHandler() {
 						@Override
 						public void onClick(ClickEvent event) {
-							Window.alert("Exploration of image not yet implemented (wip) " + _image.getSrc());
+							Window.alert("Exploration of image not yet implemented (wip) " + _image.getOriginalUrl());
 						}
 					};
 					
@@ -220,7 +226,7 @@ public class CachedImagesPanel extends Composite {
 						exploreLabel.addClickHandler(exploreHandler);
 						hp.add(exploreLabel);
 //					}
-					ArrayList<MAnnotation> annotations = _domeo.getAnnotationPersistenceManager().annotationsForImage(_image.getSrc());
+					ArrayList<MAnnotation> annotations = _domeo.getAnnotationPersistenceManager().annotationsForImage(_image.getOriginalUrl());
 //					if(annotations!=null && annotations.size()>0) {
 //						ClickHandler annotationsHandler = new ClickHandler() {
 //							@Override

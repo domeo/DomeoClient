@@ -23,13 +23,13 @@ public class ImagesCache implements IInitializableComponent {
 	}
 	
 	public void cacheImage(ImageProxy image) {
-		_domeo.getLogger().debug(this, "Caching image " + image.getSrc());
-		if(cache.containsKey(image.getSrc())) {
-			cache.get(image.getSrc()).add(image);
+		_domeo.getLogger().debug(this, "Caching image " + image.getOriginalUrl());
+		if(cache.containsKey(image.getOriginalUrl())) {
+			cache.get(image.getOriginalUrl()).add(image);
 		} else {
 			ArrayList<ImageProxy> images = new ArrayList<ImageProxy>();
 			images.add(image);
-			cache.put(image.getSrc(), images);
+			cache.put(image.getOriginalUrl(), images);
 		}
 	}
 	

@@ -17,9 +17,9 @@ import com.google.gwt.user.client.Element;
 */
 public class GenericDocumentExtractImagesCommand implements ICommand {
 
-	IDomeo _domeo;
-	IContentExtractorCallback _callback;
-	ICommandCompleted _completionCallback;
+	protected IDomeo _domeo;
+	protected IContentExtractorCallback _callback;
+	protected ICommandCompleted _completionCallback;
 	
 	public GenericDocumentExtractImagesCommand(IDomeo domeo, IContentExtractorCallback callback,  
 			ICommandCompleted completionCallback) {
@@ -53,26 +53,26 @@ public class GenericDocumentExtractImagesCommand implements ICommand {
 
 				// Detect base url
 				var frameBaseUrl = $wnd.getBaseUrl(new String(frameBaseWithProxy));
-				//alert('frameBase ' + frameBaseUrl);
+				
 				var appBaseUrl = $wnd.getHostUrl(new String($doc.location));
 				
 				var src = images[i].src;
 				if(images[i].src.substring(0,appBaseUrl.length) == appBaseUrl) {
 					src = src.replace(appBaseUrl, frameBaseUrl);
 				} 
-				foo.@org.mindinformatics.gwt.domeo.plugins.resource.document.extractor.GenericDocumentExtractImagesCommand::addImage(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(src, ''+images[i].width, ''+images[i].height, images[i].alt, images[i]);
+				foo.@org.mindinformatics.gwt.domeo.plugins.resource.document.extractor.GenericDocumentExtractImagesCommand::addImage(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(src, src, ''+images[i].width, ''+images[i].height, images[i].alt, images[i]);
 			}
 		}
 	}-*/;
 	
-	private void addImage(String src, String width, String height, String title, com.google.gwt.dom.client.Element image) {
+	private void addImage(String originalUrl, String displayUrl, String width, String height, String title, com.google.gwt.dom.client.Element image) {
 		
 		int MIN_WIDTH = 90;
 		int MIN_HEIGHT = 50;
 		if(new Integer(width)>MIN_WIDTH && new Integer(height)>MIN_HEIGHT)
-			_domeo.getImagesCache().cacheImage(new ImageProxy(src, width, height, title, image));
+			_domeo.getImagesCache().cacheImage(new ImageProxy(originalUrl, displayUrl, width, height, title, image));
 		else
-			_domeo.getLogger().debug(this, "Image rejected because of size " + src);
+			_domeo.getLogger().debug(this, "Image rejected because of size " + originalUrl);
 	}
 	
 }

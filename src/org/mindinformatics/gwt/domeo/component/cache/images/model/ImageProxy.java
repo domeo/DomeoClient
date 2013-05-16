@@ -7,23 +7,29 @@ import com.google.gwt.dom.client.Element;
  */
 public class ImageProxy {
 
-	private String src;
+	private String originalUrl;
+	private String displayUrl;
 	private String width;
 	private String height;
 	private String xpath;
 	private String title;
 	private Element image;
 	
-	public ImageProxy(String src, String width, String height, String title, Element image) {
-		this.src = src;
+	public ImageProxy(String originalUrl, String displayUrl, String width, String height, String title, Element image) {
+		this.originalUrl = originalUrl;
+		this.displayUrl = displayUrl;
 		this.width = width;
 		this.height = height;
 		this.image = image;
 		this.title = title;
 	}
 
-	public String getSrc() {
-		return src;
+	public String getOriginalUrl() {
+		return originalUrl;
+	}
+	
+	public String getDisplayUrl() {
+		return displayUrl;
 	}
 
 	public String getWidth() {

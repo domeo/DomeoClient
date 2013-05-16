@@ -8,6 +8,7 @@ public class MOnlineImage extends MOnlineResource {
 
 	private String xPath;
 	
+	transient private String displayUrl;
 	transient private String localId;
 	transient private Element image;
 	
@@ -33,5 +34,13 @@ public class MOnlineImage extends MOnlineResource {
 
 	public void setLocalId(String localId) {
 		this.localId = localId;
+	}
+
+	public String getDisplayUrl() {
+		return displayUrl;
+	}
+
+	public void setDisplayUrl(String displayUrl) {
+		this.displayUrl = displayUrl;
 	}
 }

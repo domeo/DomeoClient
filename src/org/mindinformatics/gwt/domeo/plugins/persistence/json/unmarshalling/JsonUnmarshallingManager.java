@@ -616,6 +616,7 @@ public class JsonUnmarshallingManager {
 												HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
 									} else if(ann.getSelectors().get(z) instanceof MImageInDocumentSelector) {
 										// Place the annotation???
+										_domeo.getLogger().info(this, "image;;;" + ((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl());
 										Element image = HtmlUtils.getImage(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 
 												((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl(), 
 												((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getXPath());
@@ -624,9 +625,11 @@ public class JsonUnmarshallingManager {
 											((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).setImage((com.google.gwt.user.client.Element) image);
 											_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(ann, 
 													((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget(), (com.google.gwt.user.client.Element) image);
+											_domeo.getLogger().info(this, "caching annotation for image;;;" + ((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl());
+											_domeo.getAnnotationPersistenceManager().cacheAnnotationOfImage(((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl(), ann);
+										} else {
+											_domeo.getLogger().exception(this, "Image element not found!");
 										}
-										
-										_domeo.getAnnotationPersistenceManager().cacheAnnotationOfImage(((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl(), ann);
 	
 										// TODO add to the image cache
 										

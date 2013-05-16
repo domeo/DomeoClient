@@ -508,8 +508,9 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	public ArrayList<MAnnotation> getAllAnnotationsForResource(String url) {
 		ArrayList<MAnnotation> anns = new ArrayList<MAnnotation>();
 		for(MAnnotation annotation: annotationsByLocalIdCache.values()) {
-			if(annotation.getSelector().getTarget().getUrl().equals(url)) 
+			if(annotation.getSelector()!=null && annotation.getSelector().getTarget().getUrl().equals(url)) {
 				anns.add(annotation); 
+			}
 		}
 		return anns;
 	}
@@ -618,7 +619,13 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	
 	public ArrayList<MAnnotation> annotationsForImage(String src) {
 		_application.getLogger().debug(this, "Looking for " + src);
-		return annotationsOfImages.get(src);
+		Set<String> urls = annotationsOfImages.keySet();
+		for(String url: urls) {
+			_application.getLogger().info(this, "annotationsForImage: " + src + " - " + url);
+			if(url.endsWith(src) || url.equals(src)) return annotationsOfImages.get(url);
+		}
+		
+		return new ArrayList<MAnnotation>();
 	}
 	
 	public void uncacheAnnotationOfImage(String src, MAnnotation annotation) {

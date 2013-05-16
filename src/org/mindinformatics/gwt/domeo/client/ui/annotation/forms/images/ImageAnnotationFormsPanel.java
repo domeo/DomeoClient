@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
@@ -106,27 +107,25 @@ public class ImageAnnotationFormsPanel extends AFormsManager implements IContent
 	//  CREATION OF ANNOTATIONS OF VARIOUS KIND
 	// ------------------------------------------------------------------------
 	public ImageAnnotationFormsPanel(IDomeo domeo,
-			final String imageUrl, String imageTitle, String localId, final Element element, ArrayList<MAnnotation> existingAnnotationInTheTextSpan) {
+			final String imageUrl, String displayUrl, String imageTitle, String localId, final Element element, ArrayList<MAnnotation> existingAnnotationInTheTextSpan) {
 		_domeo = domeo;
 		_element = element;
 		_title = TITLE;
-		
+
 		// Buffer the annotated resource
 		_imageResource = new MOnlineImage();
 		_imageResource.setUrl(imageUrl);
+		_imageResource.setDisplayUrl(displayUrl);
 		_imageResource.setLocalId(localId);
 		_imageResource.setLabel(imageTitle);
 		_imageResource.setImage(element);
 		_imageResource.setXPath(HtmlUtils.getElementXPath(element));
-		
+
 		// Create layout
 		initWidget(binder.createAndBindUi(this)); 
 		this.setWidth((Window.getClientWidth() - 340) + "px");
-		
 		refreshImage(_imageResource);
 		refreshAnnotationForImage();
-		
-		//tabToolsPanel.setWidth((Window.getClientWidth() - 840) + "px");
 		tabToolsPanel.setHeight("590px");
 		
 		initializeForms();
@@ -148,7 +147,6 @@ public class ImageAnnotationFormsPanel extends AFormsManager implements IContent
 	
 	public void initializeForms() {
 		tabToolsPanel.clear();
-		
 		Collection<IFormGenerator> formGenerators = _domeo.getAnnotationFormsManager().getAnnotationFormGenerators();
 		Iterator<IFormGenerator> it = formGenerators.iterator();
 		while(it.hasNext()) {
@@ -163,13 +161,12 @@ public class ImageAnnotationFormsPanel extends AFormsManager implements IContent
 		annotationContainer.clear();
 		AnnotationSummaryTable table = new AnnotationSummaryTable(_domeo, this);
 		table.init();
-		table.refreshPanel(_domeo.getAnnotationPersistenceManager().getAllAnnotationsForResource(_imageResource.getUrl()));
+		table.refreshPanel(_domeo.getAnnotationPersistenceManager().annotationsForImage(_imageResource.getUrl()));
 		annotationContainer.add(table);
 	}
 	
 	public void refreshAnnotationForImage(MAnnotation annotation) {
 		annotationContainer.clear();
-		
 		List<MAnnotation> annotations = new ArrayList<MAnnotation>();
 		annotations.add(annotation);
 		AnnotationSummaryTable table = new AnnotationSummaryTable(_domeo, this);
@@ -179,13 +176,14 @@ public class ImageAnnotationFormsPanel extends AFormsManager implements IContent
 	}
 	
 	public void refreshImage(MOnlineImage image) {
-		imageBuffer = new Image(image.getUrl());
+		imageBuffer = new Image(image.getDisplayUrl());
 		if(imageBuffer.getHeight()>=imageBuffer.getWidth()) {
 			if(imageBuffer.getHeight()>200) imageBuffer.setHeight(200+"px");
 		} else {
 			if(imageBuffer.getWidth()>400) imageBuffer.setWidth(400+"px");
 		}
 		imageContainer.add(imageBuffer);
+		//imageContainer.add(new Label(image.getDisplayUrl()));
 		if(!image.getLabel().equals("undefined") && !image.getLabel().equals("null")) 
 			imageContainer.add(new HTML(image.getLabel()));
 	}

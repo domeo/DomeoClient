@@ -43,6 +43,14 @@ public class HtmlUtils {
 		if(node!=null) return getNodeProperty(node, IMAGE_ID);
 		else return "-1";
 	};
+	public static String getImageOriginalSourceAttribute(Element node) {
+		if(node!=null) return getNodeProperty(node, "domeoOriginalSrc");
+		else return "-1";
+	};
+	public static String getImageSourceAttribute(Element node) {
+		if(node!=null) return getNodeProperty(node, "src");
+		else return "-1";
+	};
 	
 	/*
 	 * Given a node it returns the attribute 'annotationPart'
@@ -67,6 +75,13 @@ public class HtmlUtils {
 	 */
 	private static native String getNodeProperty(Element node, String attribute) /*-{
 	    return node.getAttribute(attribute);
+	}-*/;
+	
+	/**
+	 * Given a node it is returning the requested attribute.
+	 */
+	private static native String getNodeSrc(Element node) /*-{
+	    return node.src;
 	}-*/;
 	
 	/**
@@ -819,7 +834,7 @@ public class HtmlUtils {
 		e.setId("annotated_" + id);
 		return e;
 	}
-	
+
 	public static Element getImage(Element frameElement,String url, String xPath) {
 		IFrameElement iframe = IFrameElement.as(frameElement);
 		final Document frameDocument = iframe.getContentDocument();
@@ -827,8 +842,14 @@ public class HtmlUtils {
 		Element toReturn = null;
 		NodeList<Element> images = frameDocument.getElementsByTagName("img");
 		for(int i=0; i<images.getLength(); i++) {
-			if(((Element)images.getItem(i)).getPropertyString("src").equals(url)) {
+			if(getImageOriginalSourceAttribute((Element)images.getItem(i)).equals(url)) {
 				toReturn =  (Element)images.getItem(i);
+				break;
+			} else {
+				if(getNodeSrc((Element)images.getItem(i)).equals(url)) {
+					toReturn =  (Element)images.getItem(i);
+					break;
+				}
 			}
 		}
 		return toReturn;
