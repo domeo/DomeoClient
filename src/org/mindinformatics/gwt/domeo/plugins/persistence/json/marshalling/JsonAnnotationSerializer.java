@@ -7,11 +7,15 @@ import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
+import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
+import org.mindinformatics.gwt.framework.model.agents.IAgent;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.json.client.JSONValue;
 
 /**
  * This class provides the serialization basis for all Annotation Set in JSON format.
@@ -20,6 +24,19 @@ import com.google.gwt.json.client.JSONString;
  */
 public class JsonAnnotationSerializer extends ASerializer implements ISerializer {
 
+	private JSONValue serializeAgent(JsonSerializerManager manager, IAgent agent) {
+		if(agent instanceof MAgentPerson) {
+			MAgentPerson person = (MAgentPerson) agent;
+			JSONValue json = manager.serialize(person);
+			if(json!=null) return json;
+		} else if(agent instanceof MAgentSoftware) {
+			MAgentSoftware software = (MAgentSoftware) agent;
+			JSONValue json = manager.serialize(software);
+			if(json!=null) return json;
+		}
+		return new JSONString("");
+	}
+	
 	/**
 	 * Allows to initialize the generic properties of every Annotation. This method is
 	 * used by all the extensions of Annotation.
@@ -33,11 +50,15 @@ public class JsonAnnotationSerializer extends ASerializer implements ISerializer
 		
 		jsonAnnotation.put(IRdfsOntology.id, nonNullable(ann.getIndividualUri()));
 		jsonAnnotation.put(IDomeoOntology.transientLocalId, nonNullable(ann.getLocalId()));
+		
 		jsonAnnotation.put(IPavOntology.createdBy, new JSONString(ann.getCreator()!=null?ann.getCreator().getUri():""));
+		//jsonAnnotation.put(IPavOntology.createdBy, serializeAgent(manager, ann.getCreator()));
 		if(ann.getCreator()!=null) manager.addAgentToSerialize(ann.getCreator());
+		
 		jsonAnnotation.put(IPavOntology.createdOn, nonNullable(ann.getCreatedOn()));
 		
 		jsonAnnotation.put(IPavOntology.createdWith, new JSONString(ann.getTool()!=null?ann.getTool().getUri():""));
+		//jsonAnnotation.put(IPavOntology.createdWith, serializeAgent(manager, ann.getTool()));
 		if(ann.getTool()!=null) manager.addAgentToSerialize(ann.getTool());
 			
 		jsonAnnotation.put(IPavOntology.lastSavedOn, nullable(ann.getLastSavedOn()));

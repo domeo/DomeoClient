@@ -8,12 +8,14 @@ import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
+import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
+import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
+import org.mindinformatics.gwt.framework.model.agents.IAgent;
 
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONValue;
-import com.google.gwt.user.client.Window;
 
 /**
  * This class serializes the Annotation Set in JSON format.
@@ -44,6 +46,7 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		if(annotationSet.getCreatedBy()!=null) {
 			manager.addAgentToSerialize(annotationSet.getCreatedBy());
 			annotationSetJson.put(IPavOntology.createdBy, new JSONString(annotationSet.getCreatedBy().getUri()));
+			//annotationSetJson.put(IPavOntology.createdBy, serializeAgent(manager, annotationSet.getCreatedBy()));
 		} else {
 			// Warning/Exception?
 		}
@@ -56,6 +59,7 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		if(annotationSet.getCreatedWith()!=null) {
 			manager.addAgentToSerialize(annotationSet.getCreatedWith());
 			annotationSetJson.put(IPavOntology.createdWith, new JSONString(annotationSet.getCreatedWith().getUri()));
+			//annotationSetJson.put(IPavOntology.createdWith, serializeAgent(manager, annotationSet.getCreatedWith()));
 		} else {
 			// Warning/Exception?
 		}
@@ -69,10 +73,12 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		if(annotationSet.getImportedFrom()!=null) {
 			manager.addAgentToSerialize(annotationSet.getImportedFrom());
 			annotationSetJson.put(IPavOntology.importedFrom, new JSONString(annotationSet.getImportedFrom().getUri()));
+			//annotationSetJson.put(IPavOntology.importedFrom, serializeAgent(manager, annotationSet.getImportedFrom()));
 		}
 		if(annotationSet.getImportedBy()!=null) {
 			manager.addAgentToSerialize(annotationSet.getImportedBy());
 			annotationSetJson.put(IPavOntology.importedBy, new JSONString(annotationSet.getImportedBy().getUri()));
+			//annotationSetJson.put(IPavOntology.importedBy, serializeAgent(manager, annotationSet.getImportedBy()));
 		}
 		if(annotationSet.getImportedOn()!=null) {
 			annotationSetJson.put(IPavOntology.importedOn, new JSONString(dateFormatter.format(annotationSet.getImportedOn())));
@@ -85,6 +91,19 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		annotationSetJson.put(IPavOntology.previousVersion, nullable(annotationSet.getPreviousVersion()));
 		
 		return annotationSetJson;
+	}
+	
+	private JSONValue serializeAgent(JsonSerializerManager manager, IAgent agent) {
+		if(agent instanceof MAgentPerson) {
+			MAgentPerson person = (MAgentPerson) agent;
+			JSONValue json = manager.serialize(person);
+			if(json!=null) return json;
+		} else if(agent instanceof MAgentSoftware) {
+			MAgentSoftware software = (MAgentSoftware) agent;
+			JSONValue json = manager.serialize(software);
+			if(json!=null) return json;
+		}
+		return new JSONString("");
 	}
 	
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {
