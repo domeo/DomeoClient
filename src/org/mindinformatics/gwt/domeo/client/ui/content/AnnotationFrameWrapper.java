@@ -603,6 +603,8 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 			
 			_domeo.getLogger().debug(AnnotationFrameWrapper.class.getName(), 
 				"Registered Highlight Handlers");
+			
+			_domeo.getLogger().info(this, "Content type: " + content(frameDocument));
 						
 		} catch (Exception e) {
 			Window.alert(e.getMessage());
@@ -610,6 +612,11 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				"Problems in registering highlight handlers " + e.getMessage());
 		}
 	}
+	
+	public static native String content(Object frame) /*-{
+		var contentType = frame.contentType || frame.mimeType;
+	    return contentType;
+	}-*/;
 	
 	private boolean isWeakSelection(String message, String prefix, String match, String suffix) {
 		if((matchText.length()<20 && prefix.length()+matchText.length()+suffix.length()<50) ||
