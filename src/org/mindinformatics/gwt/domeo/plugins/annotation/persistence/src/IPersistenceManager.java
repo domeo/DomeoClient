@@ -63,6 +63,7 @@ public interface IPersistenceManager {
 	public boolean isResourceLoaded();
 	public void setResourceLoaded(boolean resourceLoaded);
 	public boolean isDocumentAlreadyLoaded(String newDocument);
+	public boolean isWorskspaceUnsaved();
 	
 	public String getCurrentResourceUrl();
 	public MGenericResource getCurrentResource();

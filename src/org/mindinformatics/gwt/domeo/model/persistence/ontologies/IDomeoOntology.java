@@ -39,6 +39,7 @@ public interface IDomeoOntology {
 
 	public static final String context = "domeo:inContext";
 	public static final String xpath = "domeo:xPath";
+	public static final String displaySource = "domeo:displaySource";
 	
 	// Annotation ontology
 	public static final String annotates = "ao:annotatesResource";

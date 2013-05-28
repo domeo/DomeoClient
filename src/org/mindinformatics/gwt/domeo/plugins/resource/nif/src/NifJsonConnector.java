@@ -207,7 +207,7 @@ public class NifJsonConnector implements INifConnector {
     			_application.getLogger().exception(this, "Couldn't retrieve NIF data JSON");
     			completionCallback.reportException();
     		}	
-	   } else if(resource.equals("nlx_144509-1")) {
+	   } else if(resource.equals("nlx_144509-1") || resource.equals("nif-0000-08137-1")) {
 	       String url = GWT.getModuleBaseURL() + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type);
            if(!_application.isHostedMode())
                url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type);

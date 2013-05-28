@@ -12,9 +12,14 @@
 			width: 400px;
 			height: 100px;
 		}
+		
+		.alertMessage {
+			color:red;
+		}
 	 </ui:style>
   
   	<g:VerticalPanel styleName='{style.outer}'>
+  		<g:Label ui:field="unsavedMessage" styleName='{style.alertMessage}'>The workspace has not been saved! Only the saved changes will be shared.</g:Label>
   		<g:Label>You can use this URL to share current workspace</g:Label>
   		<g:TextArea ui:field="shareAllBox" styleName='{style.shareAllBox}'></g:TextArea>
   	</g:VerticalPanel>

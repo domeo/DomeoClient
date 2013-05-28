@@ -11,6 +11,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -27,6 +28,7 @@ public class SharingOptionsViewer  extends Composite implements IContentPanel {
 	private IContainerPanel _container;
 	
 	@UiField TextArea shareAllBox;
+	@UiField Label unsavedMessage;
 	
 
 	public SharingOptionsViewer(IDomeo domeo) {
@@ -47,6 +49,9 @@ public class SharingOptionsViewer  extends Composite implements IContentPanel {
 		}
 		
 		shareAllBox.setText(sb.toString());
+		
+		if(_domeo.getPersistenceManager().isWorskspaceUnsaved()) unsavedMessage.setVisible(true);
+		else unsavedMessage.setVisible(false);
 	}
 	
 	public static native String getBaseUrl()

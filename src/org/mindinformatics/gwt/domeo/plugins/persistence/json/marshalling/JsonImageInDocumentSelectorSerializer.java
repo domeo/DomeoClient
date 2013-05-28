@@ -21,6 +21,7 @@ public class JsonImageInDocumentSelectorSerializer extends JsonSelectorSerialize
 		JSONValue selector = initializeSelector(sel);
 		((JSONObject)selector).put(IDomeoOntology.xpath,  new JSONString(((MOnlineImage)sel.getTarget()).getXPath()));
 		JSONObject specificTarget = (JSONObject) initializeSpecificTarget(sel);
+		specificTarget.put(IDomeoOntology.displaySource, new JSONString(((MOnlineImage)sel.getTarget()).getDisplayUrl()));
 		specificTarget.put(IDomeoOntology.context, new JSONString(sel.getContext().getUrl()));
 		specificTarget.put(IDomeoOntology.selector, selector);
 		return specificTarget;

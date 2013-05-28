@@ -84,7 +84,7 @@ public class NifResourcesSearch extends Composite implements ITermsSearch {
         
         HashMap<String, String> map = new HashMap<String, String>();
         sourcesLabels.addItem("NIF Registry", "nlx_144509-1");
-        //sourcesLabels.addItem("NIF integrated animal view", "nif-0000-08137-1");
+        sourcesLabels.addItem("NIF integrated animal view", "nif-0000-08137-1");
         Set<String> keys = map.keySet();
         for (String key : keys) {
             sourcesLabels.addItem(map.get(key), key);
@@ -130,7 +130,7 @@ public class NifResourcesSearch extends Composite implements ITermsSearch {
 		
 		HashMap<String, String> map = _widget.getSearchTermsResultSources();
         sourcesLabels.addItem("NIF Registry", "nlx_144509-1");
-        //sourcesLabels.addItem("NIF integrated animal view", "nif-0000-08137-1");
+        sourcesLabels.addItem("NIF integrated animal view", "nif-0000-08137-1");
         Set<String> keys = map.keySet();
         for (String key : keys) {
             sourcesLabels.addItem(map.get(key), key);

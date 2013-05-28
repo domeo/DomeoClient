@@ -134,6 +134,13 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		((IDomeo)_application).refreshAnnotationComponents();
 	}
 	
+	public boolean isWorskspaceUnsaved() {
+		boolean unsaved = false;
+		for(MAnnotationSet set: ((IDomeo)_application).getAnnotationPersistenceManager().getAllUserSets()) {
+			if(set.getHasChanged() && set.getAnnotations().size()>0) unsaved = true;
+		}
+		return unsaved;
+	}
 	
 	// ANNOTATIONS SETS CACHE
 	// ----------------------	
