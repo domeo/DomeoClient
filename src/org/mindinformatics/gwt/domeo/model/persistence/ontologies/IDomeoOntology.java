@@ -15,6 +15,7 @@ public interface IDomeoOntology {
 	public static final String mongoUuid = "domeo:mongoUuid";
 
 	public static final String annotationSet = "ao:AnnotationSet";
+	public static final String belongToSet = "domeo:belongsToSet";
 	public static final String discussionSet = "domeo:DiscussionSet";
 	public static final String bibliographySet = "domeo:BibliographicSet";
 	public static final String extractionLevel = "domeo:extractionLevel";
