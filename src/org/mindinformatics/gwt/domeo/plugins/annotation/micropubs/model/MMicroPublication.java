@@ -20,9 +20,19 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model;
 
+import java.util.ArrayList;
+
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class MMicroPublication {
-
+public class MMicroPublication implements IMpSupportingElement {
+	
+	private ArrayList<IMpSupportingElement> supportedBy = new ArrayList<IMpSupportingElement>();
+	String statement;
+	
+	public MMicroPublication(String statement) {
+		this.statement = statement;
+	}
+	
+	
 }

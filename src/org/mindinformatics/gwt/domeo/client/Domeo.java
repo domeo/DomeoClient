@@ -22,7 +22,6 @@ package org.mindinformatics.gwt.domeo.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.mindinformatics.gwt.domeo.client.feature.clipboard.ClipboardManager;
 import org.mindinformatics.gwt.domeo.client.feature.clipboard.ui.east.ClipboardSidePanel;
@@ -67,6 +66,9 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlig
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.search.HighligthSearchComponent;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.card.HighlightCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.tile.HighlightTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.info.MicroPublicationsPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form.MicroPublicationFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.search.AntibodySearchComponent;
@@ -443,6 +445,14 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				new AntibodyCardProvider(this));
 		searchComponentsManager.registerAnnotationCard(MAntibodyAnnotation.class.getName(), 
 				new AntibodySearchComponent(this));
+		
+		// Micropublications
+		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
+		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), true);
+		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
+			annotationFormsManager.registerAnnotationForm(MMicroPublicationAnnotation.class.getName(),
+					new MicroPublicationFormProvider(this));
+		}
 		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 

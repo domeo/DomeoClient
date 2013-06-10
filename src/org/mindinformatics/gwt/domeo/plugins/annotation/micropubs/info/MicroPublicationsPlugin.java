@@ -5,18 +5,18 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.plugins.APlugin;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class MicropublicationPlugin extends APlugin {
+public class MicroPublicationsPlugin extends APlugin {
 	
 	public static final String VERSION = "0.1";
 	public static final String TYPE = "Annotation";
 	public static final String SUB_TYPE = "Micropublications";
-	public static final String PLUGIN = MicropublicationPlugin.class.getName().substring(0, MicropublicationPlugin.class.getName().indexOf(".info"));
+	public static final String PLUGIN = MicroPublicationsPlugin.class.getName().substring(0, MicroPublicationsPlugin.class.getName().indexOf(".info"));
 
-	private static MicropublicationPlugin instance;
-	private MicropublicationPlugin() {}
+	private static MicroPublicationsPlugin instance;
+	private MicroPublicationsPlugin() {}
 	
-	public static MicropublicationPlugin getInstance() {
-		if(instance==null) instance = new MicropublicationPlugin();
+	public static MicroPublicationsPlugin getInstance() {
+		if(instance==null) instance = new MicroPublicationsPlugin();
 		return instance;
 	}
 	

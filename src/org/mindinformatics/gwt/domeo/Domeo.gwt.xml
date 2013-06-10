@@ -38,6 +38,7 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.comment.Commentaries"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.Antibodies"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.relationship.Relationship"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.MicroPublications"/>
   
   <!-- Extractors  -->
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.omim.OmimResourcePlugin"/>

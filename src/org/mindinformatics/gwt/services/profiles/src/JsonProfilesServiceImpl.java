@@ -117,6 +117,15 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					
 					out.println("       {");
 					out.print("         \"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.micropubs");
+					out.println("\",");
+					out.print("         \"status\": \"");
+					out.print("enabled");
+					out.println("\"");
+					out.println("       },");
+					
+					out.println("       {");
+					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmed");
 					out.println("\",");
 					out.print("         \"status\": \"");
@@ -204,6 +213,15 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.println("       {");
 					out.print("         \"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies");
+					out.println("\",");
+					out.print("         \"status\": \"");
+					out.print("enabled");
+					out.println("\"");
+					out.println("       },");
+					
+					out.println("       {");
+					out.print("         \"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.micropubs");
 					out.println("\",");
 					out.print("         \"status\": \"");
 					out.print("enabled");
