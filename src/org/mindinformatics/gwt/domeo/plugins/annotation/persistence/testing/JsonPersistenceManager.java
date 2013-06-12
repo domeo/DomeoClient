@@ -383,6 +383,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 										if(summary.getNewId()!=null && !summary.getNewId().equals("undefined")) {
 											_application.getLogger().info(this, "Updating id to " + summary.getNewId());
 											set.setIndividualUri(summary.getNewId());
+											_application.getLogger().info(this, "Set " + set.getLabel() + " new id " + set.getIndividualUri());
 										}
 										set.setLineageUri(summary.getLineageUri());
 										set.setPreviousVersion(summary.getPreviousVersion());

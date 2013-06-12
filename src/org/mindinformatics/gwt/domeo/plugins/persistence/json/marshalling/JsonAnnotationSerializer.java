@@ -11,7 +11,6 @@ import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
@@ -71,7 +70,7 @@ public class JsonAnnotationSerializer extends ASerializer implements ISerializer
 		jsonAnnotation.put(IPavOntology.lineageUri, nullable(ann.getLineageUri()));
 		jsonAnnotation.put(IPavOntology.versionNumber, nullable(ann.getVersionNumber()));
 		jsonAnnotation.put(IPavOntology.previousVersion, nullable(ann.getPreviousVersion()));
-	
+		
 		jsonAnnotation.put(IDomeoOntology.transientHasChanged, new JSONString(Boolean.toString(ann.getHasChanged())));
 		jsonAnnotation.put(IDomeoOntology.transientNewVersion, new JSONString(Boolean.toString(ann.getNewVersion())));
 		jsonAnnotation.put(IDomeoOntology.transientHasChanged, new JSONString(ann.getHasChanged()+"")); //???
