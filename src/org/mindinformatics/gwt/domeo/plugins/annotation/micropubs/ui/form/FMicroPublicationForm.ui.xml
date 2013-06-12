@@ -20,6 +20,8 @@
 	  		height: 0px;
 	  		max-height: 20px;
 	  		display: block;
+	  		top: 0px;
+	  		z-index: 10000;
 	  	}
 	  	
 	  	.setPanel {
@@ -27,7 +29,7 @@
 	  	}
 	  	
 	  	.rightColumn {
-	  		padding-top: 22px;
+	  		padding-top: 0px;
 	  	}
 	  	
 	  	.rightColumnContent {
@@ -88,7 +90,7 @@
 	 	.inner2 {
 	 		padding-top: 3px;
 	 		padding-bottom: 3px;
-			padding-left: 3px;
+			padding-left: 0px;
 	 	}
 	 	
 	 	.qualifiersLabel {
@@ -108,8 +110,8 @@
 	  		padding-left: 3px;
 	  		color: #333;
 	  		font-style: normal;
-	  		width: 452px;
-	  		height: 100px;
+	  		width: 440px;
+	  		height: 130px;
 	  		font-size: 12px;
 	  	}
 	  	
@@ -185,6 +187,11 @@
 		.centerText {
 			text-align: left;
 		}
+		
+		 .tabPanelExample1
+        {
+            margin-left: 2px;
+        }
   	</ui:style>
   	
   	 
@@ -207,12 +214,27 @@
   		<g:HorizontalPanel styleName='{style.panel}'>
   			<g:cell width="466px">
   				<g:VerticalPanel styleName='{style.leftColumn}'>
+  					<g:TabLayoutPanel addStyleNames="{style.tabPanelExample1}" ui:field="tabPanel" barUnit="PX" barHeight="30" width="456px" height="180px">
+					      <g:tab>
+					          <g:header>
+					             Statement
+					          </g:header>
+								<g:VerticalPanel styleName='{style.inner2}'>
+						  			<g:TextArea ui:field='statementBody' styleName='{style.statementBody}'></g:TextArea>
+						  		</g:VerticalPanel>
+					      </g:tab>
+					      <g:tab>
+					          <g:header>
+					             Reference
+					          </g:header>
+					          <g:HTML><h2>Hello tab 2</h2></g:HTML>
+					      </g:tab>
+					  </g:TabLayoutPanel>
+			  		
 			  		<g:VerticalPanel styleName='{style.inner2}'>
-			  			<g:Label ui:field="statementLabel" styleName='{style.qualifiersLabel}'>Statement:</g:Label>
-			  			<g:TextArea ui:field='statementBody' styleName='{style.statementBody}'></g:TextArea>
-			  		</g:VerticalPanel>
-			  		<g:VerticalPanel styleName='{style.inner2}'>
+			  		<!-- 
 			  			<g:VerticalPanel ui:field='citations' styleName='{style.citations}'>
+			  				
 				  			<g:HorizontalPanel styleName='{style.titlebar}'>
 				  				<g:Label styleName='{style.titleLeft}'>Supported by:</g:Label>
 				  				<g:HorizontalPanel styleName='{style.titleRight1}'>
@@ -222,8 +244,31 @@
 				  					<g:Image ui:field="addDataImage" styleName='{style.actionIcon}'  resource='{resources.addLittleIcon}'></g:Image>
 				  				</g:HorizontalPanel>
 				  			</g:HorizontalPanel>
-				  			<g:ScrollPanel ui:field='supportPanel' styleName='{style.evidencePanel}'></g:ScrollPanel>
+				  			-->
+				  			
+				  			<g:TabLayoutPanel addStyleNames="{style.tabPanelExample1}" ui:field="evidenceTabs" barUnit="PX" barHeight="30" width="456px" height="288px">
+						      <g:tab>
+						          <g:header>
+						             Supported By
+						          </g:header>
+									<g:ScrollPanel ui:field='supportPanel' styleName='{style.evidencePanel}'></g:ScrollPanel>
+						      </g:tab>
+						      <g:tab>
+						          <g:header>
+						             Challenged By
+						          </g:header>
+						          <g:HTML><h2>Hello tab 2</h2></g:HTML>
+						      </g:tab>
+						      <g:tab>
+						          <g:header>
+						             Qualified By
+						          </g:header>
+						          <g:HTML><h2>Hello tab 2</h2></g:HTML>
+						      </g:tab>
+						  </g:TabLayoutPanel>
+						  <!-- 
 				  		</g:VerticalPanel>
+				  		-->
 			  		</g:VerticalPanel>
   				</g:VerticalPanel>
   			</g:cell>

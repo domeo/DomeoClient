@@ -1,29 +1,58 @@
+/*
+ * Copyright 2013 Massachusetts General Hospital
+ * 
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form;
 
 import java.util.ArrayList;
 
+import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormsManager;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.ATextFormsManager;
+import org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker.IReferencesListPickerContainer;
+import org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker.ReferencesListPickerWidget;
 import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.listpicker.IImagesListPickerContainer;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.listpicker.ImagesListPickerWidget;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.ISelectionProvider;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.IPubmedSearchObjectContainer;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedSearchWidget;
+import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.WidgetUtilsResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -32,6 +61,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TabBar;
+import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -39,7 +69,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class FMicroPublicationForm extends AFormComponent implements IResizable, ISelectionProvider, IImagesListPickerContainer /*, IAntibodiesSearchContainer, IAntibodySelectionConsumer*/ {
+public class FMicroPublicationForm extends AFormComponent implements IResizable, ISelectionProvider, IPubmedSearchObjectContainer, IImagesListPickerContainer, IReferencesListPickerContainer {
 
 	public static final String LABEL = "Micro Publication";
 	public static final String LABEL_EDIT = "Edit Micro Publication";
@@ -75,13 +105,18 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	@UiField TabBar tabBar;
 	@UiField ScrollPanel supportPanel;
 	
-	@UiField Image addDataImage;
+	//@UiField Image addDataImage;
 	
 	@UiField TextArea statementBody;
 	
+	@UiField TabLayoutPanel tabPanel;
+	@UiField TabLayoutPanel evidenceTabs;
+	
 	private ImagesListPickerWidget imagesListPickerWidget;
+	private ReferencesListPickerWidget referencesListPickerWidget;
 	
 	private ArrayList<ImageProxy> images = new ArrayList<ImageProxy>();
+	private ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
 	
 	//private AntibodiesSearchWidget antibodiesSearchWidget;
 
@@ -94,14 +129,14 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		refreshAnnotationSetFilter(annotationSet, null);
 		statementBody.setText(getTextContent());
 		
-		addDataImage.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-//				searchDataCitationWidget = new DataCitationSearchWidget(
-//						_annotator, _this, _resources, true);
-//				rightColumn.clear();
-//				rightColumn.add(searchDataCitationWidget);
-			}
-		});
+//		addDataImage.addClickHandler(new ClickHandler() {
+//			public void onClick(ClickEvent event) {
+////				searchDataCitationWidget = new DataCitationSearchWidget(
+////						_annotator, _this, _resources, true);
+////				rightColumn.clear();
+////				rightColumn.add(searchDataCitationWidget);
+//			}
+//		});
 
 //		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
 //		yesButton.setWidth("78px");
@@ -205,6 +240,23 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		tabs.add(imagesListPickerWidget);
 		tabBar.addTab("Image Picker");
 		
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MPubMedDocument) {
+			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
+			tabs.add(referencesListPickerWidget);
+			tabBar.addTab("References Picker");
+		}
+		
+		PubmedSearchWidget pubmedSearchWidget = new PubmedSearchWidget(_domeo, this, false);
+		tabs.add(pubmedSearchWidget);
+		tabBar.addTab("PubMed Search");
+		
+		tabBar.addSelectionHandler(new SelectionHandler<Integer>() {
+			public void onSelection(SelectionEvent<Integer> event) {
+				rightColumn.clear();
+				rightColumn.add(tabs.get(event.getSelectedItem()));
+			}
+	    });
+		
 		rightColumn.add(tabs.get(0));
 		
 		/*
@@ -217,12 +269,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 //		tabBar.addTab("Search for Antibodies");
 //		tabBar.addTab("Recently Used");
-//		tabBar.addSelectionHandler(new SelectionHandler<Integer>() {
-//			public void onSelection(SelectionEvent<Integer> event) {
-//				rightColumn.clear();
-//				rightColumn.add(tabs.get(event.getSelectedItem()));
-//			}
-//	    });
+
 //		
 //		rightColumn.add(tabs.get(0));
 	
@@ -365,6 +412,9 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			//if(tab instanceof IResizable) ((IResizable)tab).resized();
 			tab.setWidth((Window.getClientWidth() - 615) + "px");
 		}
+		
+		evidenceTabs.setHeight((Window.getClientHeight() - 490) + "px");
+		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
 	}
 
 //	@Override
@@ -479,32 +529,37 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			}
 			
 			if(!small) {
+				
+				HorizontalPanel main = new HorizontalPanel();
+				VerticalPanel left = new VerticalPanel();
+				
 				SimplePanel imageWrap = new SimplePanel();
 				imageWrap.setStyleName(style.imageWrap());
 				imageWrap.add(img);
 				imageWrap.setStyleName(style.centerText());
-				hp1.add(imageWrap);
-				hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_LEFT);
+				left.add(imageWrap);
+				left.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_LEFT);
 				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
 					HTML title = new HTML("<b>"+image.getTitle()+"</b>");
-					hp1.add(title);
-					hp1.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+					left.add(title);
+					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
 				} else {
 					HTML title = new HTML("<b>Title</b>");
-					hp1.add(title);
-					hp1.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+					left.add(title);
+					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
 				}
+				main.add(left);	
 				
-				final Button box = new Button("Remove");
-				final ImageProxy _image = image;
-				box.addClickHandler(new ClickHandler() {
+				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+				removeIcon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
 						//box.setEnabled(false);
 						//_container.addImageAsData(_image);
 					}
 				});					
-				hp1.add(box);
+				main.add(removeIcon);
+				hp1.add(main);	
 				
 				if(counter%2 == 1) {
 					hp1.addStyleName(style.indexOdd());
@@ -534,19 +589,20 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 					right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
 				}
 				
-				final Button box = new Button("Remove");
-				final ImageProxy _image = image;
-				box.addClickHandler(new ClickHandler() {
+				main.add(right);
+				main.setCellWidth(right, "100%");
+				
+				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+				removeIcon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
 						//box.setEnabled(false);
 						//_container.addImageAsData(_image);
 					}
 				});					
-				right.add(box);
+				main.add(removeIcon);
 				
-				main.add(right);
-				main.setCellWidth(right, "100%");
+				
 				hp1.add(main);	
 
 				if(counter%2 == 1) {
@@ -558,6 +614,31 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			}				
 			vp.add(hp1);
 		}
+		for(MPublicationArticleReference reference: references) {
+			HorizontalPanel hp1 = new HorizontalPanel();
+			hp1.add(PubMedCitationPainter.getFullCitation(reference, _domeo));
+			
+			//final Button box = new Button("Remove");
+			final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+			removeIcon.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					//box.setEnabled(false);
+					//_container.addImageAsData(_image);
+				}
+			});					
+			hp1.add(removeIcon);
+			
+			if(counter%2 == 1) {
+				hp1.addStyleName(style.indexOdd());
+			} else {
+				hp1.addStyleName(style.indexEven());
+			}
+			counter++;
+			vp.add(hp1);
+		}
+		
+		
 		supportPanel.add(vp);
 	}
 
@@ -565,5 +646,23 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	public void addImageAsData(ImageProxy image) {
 		images.add(image);	
 		refreshSupport();
+	}
+
+	@Override
+	public void addBibliographicObject(MPublicationArticleReference reference) {
+		references.add(reference);
+		refreshSupport();
+	}
+
+	@Override
+	public ArrayList<MPublicationArticleReference> getBibliographicObjects() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<MAnnotationReference> getBibliographicObjectAnnotations() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
