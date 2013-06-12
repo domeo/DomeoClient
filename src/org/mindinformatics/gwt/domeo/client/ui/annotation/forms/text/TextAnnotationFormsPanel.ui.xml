@@ -43,6 +43,7 @@
 	  		background-color: red;
 	  		color: white;	
 	  	}
+	  	
 	</ui:style>
 	
 	<ui:image field='leftArrow' src='leftarrow.png'/>
@@ -70,7 +71,7 @@
 	  			</g:cell>
 	  		</g:HorizontalPanel>
   		</g:HorizontalPanel>
-  		<g:TabLayoutPanel ui:field='tabToolsPanel' barUnit="PX" barHeight="40"></g:TabLayoutPanel>
+  		<g:TabLayoutPanel ui:field='tabToolsPanel' barUnit="PX" barHeight="40" width="456px" height="288px"></g:TabLayoutPanel>
   		<g:HTMLPanel styleName='{style.footer}'>
   			<span ui:field='footerSpan' class='{style.footerSpan}'/>
   		</g:HTMLPanel>

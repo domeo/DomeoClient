@@ -77,7 +77,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 		refreshHighlightedText();
 		
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
-		tabToolsPanel.setHeight("500px");
+		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
 		
 		IFormGenerator formGenerator = _domeo.getAnnotationFormsManager().getAnnotationForm(annotation.getClass().getName());
 		
@@ -178,7 +178,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 		refreshHighlightedText();
 
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
-		tabToolsPanel.setHeight("500px");
+		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
 
 		Collection<IFormGenerator> formGenerators = _domeo.getAnnotationFormsManager().getAnnotationFormGenerators();
 		Iterator<IFormGenerator> it = formGenerators.iterator();
@@ -299,6 +299,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 	@Override
 	public void resized() {
 		this.setWidth((Window.getClientWidth() - 140) + "px");
+		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
 	}
 
