@@ -40,6 +40,8 @@ import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitati
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.IPubmedSearchObjectContainer;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedSearchWidget;
+import org.mindinformatics.gwt.framework.model.references.IReferences;
+import org.mindinformatics.gwt.framework.model.references.ISelfReference;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.WidgetUtilsResources;
@@ -111,6 +113,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	@UiField TabLayoutPanel tabPanel;
 	@UiField TabLayoutPanel evidenceTabs;
+	
+	@UiField VerticalPanel referencePanel;
 	
 	private ImagesListPickerWidget imagesListPickerWidget;
 	private ReferencesListPickerWidget referencesListPickerWidget;
@@ -258,6 +262,10 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	    });
 		
 		rightColumn.add(tabs.get(0));
+		
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof ISelfReference && ((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()!=null) {
+			referencePanel.add(PubMedCitationPainter.getCitation((MPublicationArticleReference)(((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()).getReference()));
+		}
 		
 		/*
 		antibodiesSearchWidget = new AntibodiesSearchWidget(_domeo, this, Domeo.resources, false);
@@ -512,7 +520,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		int counter = 0;
 		for(ImageProxy image: images) {
 			VerticalPanel hp1 = new VerticalPanel();
-			hp1.setWidth("100%");
+			hp1.setWidth("99%");
 			
 			boolean small = false;
 			boolean reduced = false;

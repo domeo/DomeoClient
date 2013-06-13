@@ -1,4 +1,4 @@
-package org.mindinformatics.gwt.domeo.component.cache.images.ui.listpicker;
+package org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,38 +6,33 @@ import java.util.HashMap;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
-import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.IExceptionReporter;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.model.references.IReferences;
 import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.WidgetUtilsResources;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class ImagesListPickerWidget extends Composite implements IResizable, IExceptionReporter {
+public class ReferencesListPickerWidget extends Composite implements IExceptionReporter, IResizable {
 	
-	interface Binder extends UiBinder<VerticalPanel, ImagesListPickerWidget> {}
+	interface Binder extends UiBinder<VerticalPanel, ReferencesListPickerWidget> {}
 	private static final Binder binder = GWT.create(Binder.class);
 
 	public static final WidgetUtilsResources widgetUtilsResources = 
@@ -55,7 +50,7 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 	// By contract 
 	protected IDomeo _domeo;
 	protected Resources _resources;
-	private IImagesListPickerContainer _container;
+	private IReferencesListPickerContainer _container;
 	
 	// Main panel: for this widget no other graphic element
 	// has been defined in the xml
@@ -68,14 +63,7 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 	protected ArrayList<MLinkedResource> searchTermsResult; 
 	//private SelectedTerms selectedTerms;
 	
-	@Override
-	public void resized() {
-		resultsContainerPanel.setHeight((Window.getClientHeight() - 220) + "px");
-		panel.setHeight((Window.getClientHeight() - 341) + "px");
-	    panel.setWidth((Window.getClientWidth() - 620) + "px");
-	}
-	
-	public ImagesListPickerWidget(IDomeo annotator, IImagesListPickerContainer container, boolean showTitle) {
+	public ReferencesListPickerWidget(IDomeo annotator, IReferencesListPickerContainer container, boolean showTitle) {
 		_domeo = annotator;
 		_resources = Domeo.resources;
 		_container = container;
@@ -87,9 +75,8 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 		if(showTitle) main.add(new Label(getWidgetTitle()));	
 		
         resultsContainerPanel = new FlowPanel();
-
+       
         resultsContainerPanel.add(new HTML("No results to display"));
-
         
         main.clear();
         panel = new ScrollPanel();
@@ -144,116 +131,40 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 		widgetUtilsResources.widgetCss().ensureInjected();
 		
 		int counter = 0;
-		for(String key:_domeo.getImagesCache().getKeys()) {
-			ArrayList<ImageProxy> list = _domeo.getImagesCache().getValue(key);
-			for(ImageProxy image: list) {
-				HorizontalPanel hp = new HorizontalPanel();
-				
-				VerticalPanel hp1 = new VerticalPanel();
-				hp1.setWidth("100%");
-				
-				boolean small = false;
-				boolean reduced = false;
-				
-				
-				Image img = new Image(image.getDisplayUrl());
-				if(img.getWidth()>440) {
-					img.setWidth("430px");  
-					reduced = true;
-				} else if(img.getWidth()<220) {
-					small = true;
-					//img.setWidth("200px"); 
-				}
-				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-					img.setTitle(image.getTitle());
-				}
-				
-				if(!small) {
-					SimplePanel imageWrap = new SimplePanel();
-					imageWrap.setStyleName(style.imageWrap());
-					imageWrap.add(img);
-					imageWrap.setStyleName(style.centerText());
-					hp1.add(imageWrap);
-					hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_LEFT);
-					if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-						HTML title = new HTML("<b>"+image.getTitle()+"</b>");
-						hp1.add(title);
-						hp1.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-					} 
-					
-					final CheckBox box = new CheckBox("Add as data");
-					final ImageProxy _image = image;
-					box.addClickHandler(new ClickHandler() {
-						@Override
-						public void onClick(ClickEvent event) {
-							box.setEnabled(false);
-							_container.addImageAsData(_image);
-						}
-					});					
-					hp1.add(box);
-					
-					if(counter%2 == 1) {
-						hp1.addStyleName(style.indexOdd());
-					} else {
-						hp1.addStyleName(style.indexEven());
-					}
-					counter++;
-				} else {
-					HorizontalPanel main = new HorizontalPanel();
-					
-					SimplePanel imageWrap = new SimplePanel();
-					imageWrap.setStyleName(style.imageWrap());
-					imageWrap.add(img);
-					main.add(imageWrap);
-					//hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_CENTER);
-					
-					VerticalPanel right = new VerticalPanel();
-					right.setWidth("100%");
-					
-					if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-						HTML title = new HTML("<b>"+image.getTitle()+"</b>");
-						right.add(title);
-						right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-					} 
-					
-					final CheckBox box = new CheckBox("Add as data");
-					final ImageProxy _image = image;
-					box.addClickHandler(new ClickHandler() {
-						@Override
-						public void onClick(ClickEvent event) {
-							box.setEnabled(false);
-							_container.addImageAsData(_image);
-						}
-					});					
-					right.add(box);
-					
-					main.add(right);
-					main.setCellWidth(right, "100%");
-					hp1.add(main);	
-
-					if(counter%2 == 1) {
-						hp1.addStyleName(style.indexOdd());
-					} else {
-						hp1.addStyleName(style.indexEven());
-					}
-					counter++;
-				}		
-				
-				final CheckBox box = new CheckBox();
-				final ImageProxy _image = image;
-				box.addClickHandler(new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						box.setEnabled(false);
-						_container.addImageAsData(_image);
-					}
-				});				
-				
-				hp.add(box);
-				hp.add(hp1);
-				resultsContainerPanel.add(hp);
-			}
+		FlowPanel fp = new FlowPanel();
+		for(int i=0; i<((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().size(); i++) {
+			HorizontalPanel hp = new HorizontalPanel();
+			if(i%2 == 1) hp.setStyleName(widgetUtilsResources.widgetCss().tableOddRow());
+//			FlowPanel fp2 = new FlowPanel();
+//			HTML leftHtml = new HTML(""+(((MAnnotationCitationReference)((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().get(i)).getReferenceIndex().intValue()+1));
+//			if(i%2 == 1)  leftHtml.setStyleName(style.indexOdd());
+//			else leftHtml.setStyleName(style.indexEven());
+//			fp2.add(leftHtml);
+//			if(((MPublicationArticleReference)((MAnnotationCitationReference)((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().get(i)).getReference()).getUnrecognized()!=null) {
+//				final int index = i;
+//				SimpleIconButtonPanel bu = new SimpleIconButtonPanel(_domeo, new ClickHandler() {
+//							@Override
+//							public void onClick(ClickEvent event) {
+//								_domeo.getLogger().command(this, "Open panel for adding a citation for reference #" + index);
+//								PubmedReferenceSearchPanel afp = new PubmedReferenceSearchPanel(_domeo, index, 800);
+//								new EnhancedGlassPanel(_domeo, afp, afp.getTitle(), 800, false, false, false);
+//							}},
+//						Domeo.resources.littleBookAddIcon().getSafeUri().asString(), "Add reference metadata");
+//				
+//				fp2.add(bu);
+//			} else {
+//				/*
+//				Image icon = new Image(Domeo.resources.editLittleIcon());
+//				icon.setStyleName(ATileComponent.tileResources.css().button());
+//				fp2.add(icon);
+//				*/
+//			}
+//			hp.add(fp2);
+//			hp.setCellWidth(fp2, "18px");
+			hp.add(PubMedCitationPainter.getCitationAnnotationWithIds(((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().get(i), _domeo));
+			fp.add(hp);
 		}
+		resultsContainerPanel.add(fp);
 	}
 
     public String getWidgetTitle() {
@@ -269,5 +180,13 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 	public void reportException(String message) {
 		resultsContainerPanel.clear();
 		resultsContainerPanel.add(new HTML("Exception while performing search. " + message + " See logs for details."));
+	}
+
+
+	@Override
+	public void resized() {
+		resultsContainerPanel.setHeight((Window.getClientHeight() - 220) + "px");
+		panel.setHeight((Window.getClientHeight() - 341) + "px");
+	    panel.setWidth((Window.getClientWidth() - 620) + "px");
 	}
 }

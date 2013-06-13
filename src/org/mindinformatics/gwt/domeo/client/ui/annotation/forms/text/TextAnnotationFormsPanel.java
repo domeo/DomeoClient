@@ -177,7 +177,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 
 		refreshHighlightedText();
 
-		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
+		tabToolsPanel.setWidth((Window.getClientWidth() - 180) + "px");
 		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
 
 		Collection<IFormGenerator> formGenerators = _domeo.getAnnotationFormsManager().getAnnotationFormGenerators();

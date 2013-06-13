@@ -225,9 +225,9 @@
 					      </g:tab>
 					      <g:tab>
 					          <g:header>
-					             Reference
+					             Source
 					          </g:header>
-					          <g:HTML><h2>Hello tab 2</h2></g:HTML>
+					          <g:VerticalPanel ui:field='referencePanel' styleName='{style.inner2}'></g:VerticalPanel>
 					      </g:tab>
 					  </g:TabLayoutPanel>
 			  		
