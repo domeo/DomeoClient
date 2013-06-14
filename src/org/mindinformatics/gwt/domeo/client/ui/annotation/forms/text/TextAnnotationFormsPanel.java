@@ -183,8 +183,15 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 		Collection<IFormGenerator> formGenerators = _domeo.getAnnotationFormsManager().getAnnotationFormGenerators();
 		Iterator<IFormGenerator> it = formGenerators.iterator();
 		while(it.hasNext()) {
-			AFormComponent form = it.next().getForm(this);
-			tabToolsPanel.add(form, form.getTitle());
+			String pluginName="";
+			try {
+				IFormGenerator g = it.next();
+				pluginName = g.getClass().getName();
+				AFormComponent form = g.getForm(this);
+				tabToolsPanel.add(form, form.getTitle());
+			} catch (Exception e) {
+				_domeo.getLogger().info(this, "Exception while loading form: " + pluginName);
+			}
 		}		
 
 		leftBottomSide.addClickHandler(new ClickHandler() {

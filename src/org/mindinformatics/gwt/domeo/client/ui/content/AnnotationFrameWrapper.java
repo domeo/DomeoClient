@@ -736,8 +736,9 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				new EnhancedGlassPanel(_domeo, afp, afp.getTitle(), false, false, false);
 			} catch(Exception e) {
 				_domeo.getLogger().exception(LOG_CATEGORY_TEXT_ANNOTATION, this, 
+						"Annotation could not be completed, problem with annotation forms plugins while annotating: " + 
 						prefix + " $ " + matchText + " $ " + suffix + " $$$$ " + e.getMessage());
-				Window.alert("FIXME: annotation could not be completed: " + prefix + matchText + suffix);
+				Window.alert("Annotation could not be completed, problem with annotation forms plugins: " + prefix + matchText + suffix);
 			}
 		} else if(_domeo.isManualClipAnnotationEnabled()) {
 			try {
