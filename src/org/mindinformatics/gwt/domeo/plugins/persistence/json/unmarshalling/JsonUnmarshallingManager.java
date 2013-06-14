@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.component.linkeddata.model.JsoLinkedDataResource;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
@@ -312,12 +313,18 @@ public class JsonUnmarshallingManager {
 	public void unmarshall(JsArray<JavaScriptObject> responseOnSets, int expectedSize) {
 		annotationSelectorsLazyBinding.clear();
 		creatorAgentsLazyBinding.clear();
+		
+		if(Domeo.verbose) _domeo.getLogger().debug(this, "Before performing unmarshalling");
 		try {
 			for(int i=0; i<responseOnSets.length(); i++) {
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set get");
 				JsAnnotationSet jsonSet = (JsAnnotationSet) responseOnSets.get(i);
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set unmarshall");
 				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.LOAD_VALIDATION);
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set loading");
 				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 				
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling agents");
 				// Unmarshalling agents
 				JsArray<JsoAgent> jsonAgents = jsonSet.getAgents();
 				for(int j=0; j<jsonAgents.length(); j++) {
@@ -330,6 +337,7 @@ public class JsonUnmarshallingManager {
 					}
 				}
 				
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling permissions");
 				// Unmarshalling permissions
 				if(jsonSet.getPermissions().isLocked().equals("true")) set.setIsLocked(true);
 				else set.setIsLocked(false);
@@ -346,10 +354,13 @@ public class JsonUnmarshallingManager {
 					if(groups.size()>0) _domeo.getAnnotationAccessManager().setAnnotationSetGroups(set, groups);
 				}
 				
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling annotations");
 				// Unmarshalling annotations
 				JsArray<JavaScriptObject> jsonAnnotations = jsonSet.getAnnotation();
 				for(int j=0; j<jsonAnnotations.length(); j++) {
 					boolean isGeneral = false;
+					
+					if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling annotation selector (" + j + ")");
 					// Selectors
 					ArrayList<MSelector> selectors = new ArrayList<MSelector>();
 					JsArray<JsAnnotationTarget> targets = getTargets(jsonAnnotations.get(j));
@@ -389,6 +400,7 @@ public class JsonUnmarshallingManager {
 						}
 					}
 					
+					if(Domeo.verbose) _domeo.getLogger().debug(this, "Detect annotation type (" + j + ")");
 					// Detect annotation type
 					HashSet<String> typesSet = new HashSet<String>();
 					if(hasMultipleTypes(jsonAnnotations.get(j))) {
@@ -400,6 +412,7 @@ public class JsonUnmarshallingManager {
 						typesSet.add(getObjectType(jsonAnnotations.get(j)));
 					}
 					
+					if(Domeo.verbose) _domeo.getLogger().debug(this, "Detected annotation of type (" + typesSet.size() + ")");
 					// Post it detected
 					MAnnotation ann = null;
 					if(typesSet.contains(MHighlightAnnotation.TYPE)) {
@@ -605,6 +618,7 @@ public class JsonUnmarshallingManager {
 //							}
 						}
 					
+						if(Domeo.verbose) _domeo.getLogger().debug(this, "Lazy binding (" + j + ")");
 						if(ann!=null) {
 							for(int z=0; z<ann.getSelectors().size(); z++) {
 								try {

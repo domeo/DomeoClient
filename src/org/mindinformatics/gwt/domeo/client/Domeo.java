@@ -172,6 +172,8 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetrieveExistingBibliographySetHandler,*/ IRetrieveExistingAnnotationSetHandler, IRetrieveExistingAnnotationSetListHandler {
 	
+	public static final boolean verbose = true;
+	
 	public static String APP_NAME = "Domeo";
 	public static String APP_VERSION = "b5";
 	public static String APP_VERSION_LABEL = "build 5";
@@ -1075,6 +1077,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	}
 	@Override
 	public void loadExistingAnnotationSetList(JsArray responseOnSets, int size) {
+		if(Domeo.verbose) this.getLogger().debug(this, "Beginning of Domeo.loadExistingAnnotationSetList()");
 		if(responseOnSets.length()!=size) {
 			this.getProgressPanelContainer().setErrorMessage("Something went terribly wrong while retrieving the annotation." +
 					"Only " + responseOnSets.length() + " sets out of " + size + " have been retrieved.");
@@ -1084,10 +1087,13 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		
 		JsonUnmarshallingManager manager = this.getUnmarshaller();
+		if(Domeo.verbose) this.getLogger().debug(this, "Beginning of unmarshalling");
 		manager.unmarshall(responseOnSets, size);
 
+		if(Domeo.verbose) this.getLogger().debug(this, "Unmarshalling completed");
 		//this.getDialogPanel().hide();
-		this.getProgressPanelContainer().setCompletionMessage("Annotation loaded (#sets: " + size + ")!");
+		if(this.getProgressPanelContainer()!=null) 
+			this.getProgressPanelContainer().setCompletionMessage("Annotation loaded (#sets: " + size + ")!");
 		this.refreshAllComponents();
 	}
 	

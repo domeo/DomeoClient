@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
@@ -464,7 +465,8 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 	public void retrieveExistingAnnotationSets(final List<String> ids, final IRetrieveExistingAnnotationSetHandler handler) {
 		
 		_application.getLogger().debug(this, "Beginning retrieving annotation sets...");
-		_application.getProgressPanelContainer().setProgressMessage("Retrieving existing annotation...");
+		if(_application.getProgressPanelContainer()!=null) 
+			_application.getProgressPanelContainer().setProgressMessage("Retrieving existing annotation...");
 
 		if(_application.isHostedMode()) {
 			//AnnotationPersistenceServiceFacade f = new AnnotationPersistenceServiceFacade();
@@ -498,21 +500,27 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 				public void onError(Request request, Throwable exception) {
 					if(exception instanceof RequestTimeoutException) {
 						_application.getLogger().exception(this, "Could not retrieve the annotation (timeout)");
-						_application.getProgressPanelContainer().setErrorMessage("Annotation not retrieved (timeout)!");
+						if(_application.getProgressPanelContainer()!=null) 
+							_application.getProgressPanelContainer().setErrorMessage("Annotation not retrieved (timeout)!");
 					} else {
 						_application.getLogger().exception(this, "Could not retrieve the annotation " + exception.getMessage());
-						_application.getProgressPanelContainer().setErrorMessage("Annotation not retrieved!");
+						if(_application.getProgressPanelContainer()!=null) 
+							_application.getProgressPanelContainer().setErrorMessage("Annotation not retrieved!");
 					}
 				}
 
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						try {
+							if(Domeo.verbose) _application.getLogger().debug(this, "Received: " +response.getText() );
 							JsArray responseOnSets = (JsArray) parseJson(response.getText());
+							if(Domeo.verbose) _application.getLogger().debug(this, "Message parsed");
 							handler.loadExistingAnnotationSetList(responseOnSets, ids.size());
+							if(Domeo.verbose) _application.getLogger().debug(this, "Response parsing done!");
 						} catch(Exception e) {
 							_application.getLogger().exception(this, "Couldn't complete annotation retrieval process (" + response.getText() + ")");
-							_application.getProgressPanelContainer().setErrorMessage("Couldn't complete annotation retrieval process ("+ response.getText() + ")");
+							if(_application.getProgressPanelContainer()!=null) 
+								_application.getProgressPanelContainer().setErrorMessage("Couldn't complete annotation retrieval process ("+ response.getText() + ")");
 						}
 					} else {
 						_application.getLogger().exception(this, "Couldn't complete annotation retrieval process ("
@@ -525,7 +533,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 			});
 			builder.send();
 		} catch (RequestException e) {
-			_application.getLogger().exception(this, "Couldn't save annotation");
+			_application.getLogger().exception(this, "Couldn't load the annotation");
 		}
 	}
 	
