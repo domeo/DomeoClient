@@ -51,7 +51,13 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 	}
 	
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-	  	return eval(jsonStr);
+		
+		try {
+			var obj = eval(jsonStr);
+		  	return obj;
+		} catch (e) {
+			alert(e);
+		}
 	}-*/;
 	
 	public void saveBibliography() {
