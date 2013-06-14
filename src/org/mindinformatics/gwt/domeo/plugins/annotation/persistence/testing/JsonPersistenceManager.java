@@ -53,10 +53,18 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
 		
 		try {
-			var obj = eval(jsonStr);
-		  	return obj;
+			var jsonStr = jsonStr      
+        		.replace(/[\\]/g, '\\\\')
+        		.replace(/[\/]/g, '\\/')
+        		.replace(/[\b]/g, '\\b')
+        		.replace(/[\f]/g, '\\f')
+        		.replace(/[\n]/g, '\\n')
+        		.replace(/[\r]/g, '\\r')
+        		.replace(/[\t]/g, '\\t')
+        		.replace(/\\'/g, "\\'");
+		  	return eval(jsonStr);
 		} catch (e) {
-			alert(e);
+			alert("Error while parsing the JSON message: " + e);
 		}
 	}-*/;
 	
