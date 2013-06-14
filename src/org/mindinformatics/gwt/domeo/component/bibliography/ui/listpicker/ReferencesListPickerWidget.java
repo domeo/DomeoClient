@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
+import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.IExceptionReporter;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
@@ -14,10 +15,13 @@ import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.WidgetUtilsResources;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -87,7 +91,7 @@ public class ReferencesListPickerWidget extends Composite implements IExceptionR
         main.add(panel);
         
         resized();
-        displayImages();
+        displayReferences();
 	}
 
 	
@@ -125,7 +129,7 @@ public class ReferencesListPickerWidget extends Composite implements IExceptionR
 		return map;
 	}
 	
-	protected void displayImages() {
+	protected void displayReferences() {
 		resultsContainerPanel.clear();
 		
 		widgetUtilsResources.widgetCss().ensureInjected();
@@ -161,6 +165,17 @@ public class ReferencesListPickerWidget extends Composite implements IExceptionR
 //			}
 //			hp.add(fp2);
 //			hp.setCellWidth(fp2, "18px");
+			
+			final CheckBox box = new CheckBox();
+			box.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					box.setEnabled(false);
+					//_container.addImageAsData(_image);
+				}
+			});			
+			hp.add(box);
+			
 			hp.add(PubMedCitationPainter.getCitationAnnotationWithIds(((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().get(i), _domeo));
 			fp.add(hp);
 		}

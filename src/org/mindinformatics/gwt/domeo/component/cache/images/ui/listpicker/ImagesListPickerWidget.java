@@ -80,6 +80,8 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 		_resources = Domeo.resources;
 		_container = container;
 		
+		widgetUtilsResources.widgetCss().ensureInjected();
+		
 
 		initWidget(binder.createAndBindUi(this)); // Necessary for initializing Composite 
 		//initMapOfAlreadyAssociatedTerms(container.getItems());
@@ -148,6 +150,7 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 			ArrayList<ImageProxy> list = _domeo.getImagesCache().getValue(key);
 			for(ImageProxy image: list) {
 				HorizontalPanel hp = new HorizontalPanel();
+				hp.setWidth("100%");
 				
 				VerticalPanel hp1 = new VerticalPanel();
 				hp1.setWidth("100%");
@@ -193,9 +196,11 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 					hp1.add(box);
 					
 					if(counter%2 == 1) {
-						hp1.addStyleName(style.indexOdd());
+						//hp1.addStyleName(style.indexOdd());
+						hp1.addStyleName(widgetUtilsResources.widgetCss().tableOddRow());
 					} else {
-						hp1.addStyleName(style.indexEven());
+						//hp1.addStyleName(style.indexEven());
+						hp1.addStyleName(widgetUtilsResources.widgetCss().tableEvenRow());
 					}
 					counter++;
 				} else {
@@ -232,9 +237,11 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 					hp1.add(main);	
 
 					if(counter%2 == 1) {
-						hp1.addStyleName(style.indexOdd());
+						//hp1.addStyleName(style.indexOdd());
+						hp1.addStyleName(widgetUtilsResources.widgetCss().tableOddRow());
 					} else {
-						hp1.addStyleName(style.indexEven());
+						//hp1.addStyleName(style.indexEven());
+						hp1.addStyleName(widgetUtilsResources.widgetCss().tableEvenRow());
 					}
 					counter++;
 				}		
@@ -250,6 +257,7 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 				});				
 				
 				hp.add(box);
+				hp.setCellWidth(box, "20px");
 				hp.add(hp1);
 				resultsContainerPanel.add(hp);
 			}

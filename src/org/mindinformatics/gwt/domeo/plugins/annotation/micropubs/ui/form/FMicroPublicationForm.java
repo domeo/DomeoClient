@@ -242,12 +242,12 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 		imagesListPickerWidget = new ImagesListPickerWidget(_domeo, this, false);
 		tabs.add(imagesListPickerWidget);
-		tabBar.addTab("Image Picker");
+		tabBar.addTab("Images");
 		
 		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MPubMedDocument) {
 			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
 			tabs.add(referencesListPickerWidget);
-			tabBar.addTab("References Picker");
+			tabBar.addTab("References");
 		}
 		
 		PubmedSearchWidget pubmedSearchWidget = new PubmedSearchWidget(_domeo, this, false);
