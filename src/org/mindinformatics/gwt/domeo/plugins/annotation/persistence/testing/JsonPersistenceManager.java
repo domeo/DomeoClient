@@ -513,11 +513,16 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 					if (200 == response.getStatusCode()) {
 						try {
 							if(Domeo.verbose) _application.getLogger().debug(this, "Received: " +response.getText() );
+							parseJson(response.getText());
+							if(Domeo.verbose) _application.getLogger().debug(this, "Message parsed I");
+							
+							
 							JsArray responseOnSets = (JsArray) parseJson(response.getText());
-							if(Domeo.verbose) _application.getLogger().debug(this, "Message parsed");
+							if(Domeo.verbose) _application.getLogger().debug(this, "Message parsed II");
 							handler.loadExistingAnnotationSetList(responseOnSets, ids.size());
 							if(Domeo.verbose) _application.getLogger().debug(this, "Response parsing done!");
 						} catch(Exception e) {
+							_application.getLogger().exception(this, e.getMessage());
 							_application.getLogger().exception(this, "Couldn't complete annotation retrieval process (" + response.getText() + ")");
 							if(_application.getProgressPanelContainer()!=null) 
 								_application.getProgressPanelContainer().setErrorMessage("Couldn't complete annotation retrieval process ("+ response.getText() + ")");
