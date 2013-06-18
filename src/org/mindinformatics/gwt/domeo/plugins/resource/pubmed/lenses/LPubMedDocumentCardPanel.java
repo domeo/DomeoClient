@@ -31,7 +31,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -170,6 +169,7 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 						_resource.getSource().getHomepage() + "' target='_blank'> <img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> "+_resource.getSource().getName()+ "</a>");
 				extractionDateDetails.setText("On " + _resource.getFormattedCreationDate());
 				citationField.add(PubMedCitationPainter.getCitation((MPublicationArticleReference)_resource.getSelfReference().getReference()));
+				identifiersField.add(PubMedCitationPainter.getIdentifiers((MPublicationArticleReference)_resource.getSelfReference().getReference(), _domeo));
 			} else {
 				ClickHandler addCitationClickHandler = new ClickHandler() {
 					@Override
