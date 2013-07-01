@@ -158,10 +158,13 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -172,7 +175,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetrieveExistingBibliographySetHandler,*/ IRetrieveExistingAnnotationSetHandler, IRetrieveExistingAnnotationSetListHandler {
 	
-	public static final boolean verbose = true;
+	public static final boolean verbose = false;
 	
 	public static String APP_NAME = "Domeo";
 	public static String APP_VERSION = "b5";
@@ -285,6 +288,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		return discussionSideTab;
 	}
 	
+	public Domeo _this;
+	
 	/**
 	 * This is the entry point method. The bulk of the application is 
 	 * initialized through an asynchronous pipeline. When the pipeline
@@ -292,16 +297,35 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	 */
 	public void onModuleLoad() {
 		this.logger.info(this, "Creating Domeo " + getStartingMode());
+		_this=this;
+		Window.addWindowClosingHandler(new Window.ClosingHandler() {
 
+            @Override
+            public void onWindowClosing(ClosingEvent event) {
+            	
+            	if(_this.getAnnotationPersistenceManager().isWorskspaceUnsaved()) {
+            		Window.alert("The workspace contains unsaved annotation. By closing the window, the unsaved annotations will be lost.");
+            		event.setMessage("The workspace contains unsaved annotation.");
+            	}
+            }
+        });
+		
+//		 Window.addCloseHandler(new CloseHandler<Window>() {
+//
+//	            @Override
+//	            public void onClose(CloseEvent<Window> event) {
+//	            	 Window.alert("2 Closing");
+//	            	 
+//	            }
+//	        });
+		
 		initApplication();
 		
 		resources.generalCss().ensureInjected();		
 	}
 	
 	public  void completeInitialization() {
-		
-		//Window.prompt("", "");
-		
+
 		// Preferences
 		Preferences preferences = new Preferences(this);
 		componentsManager.addComponent(preferences);
@@ -450,7 +474,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		
 		// Micropublications
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
-		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), true);
+		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), false);
 		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
 			annotationFormsManager.registerAnnotationForm(MMicroPublicationAnnotation.class.getName(),
 					new MicroPublicationFormProvider(this));
@@ -978,7 +1002,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		//_dialogPanel.hide();
 		this.getLogger().debug(this, "Completed Execution of checkForExistingAnnotationSets() in " + (System.currentTimeMillis()-documentPipelineTimer)+ "ms");
 
-		if(responseOnSets.length()==0) {
+		if(responseOnSets==null || responseOnSets.length()==0) {
 			// TODO message no annotation found
 			this.getProgressPanelContainer().setCompletionMessage("No annotation exist for this document");
 		} else {
