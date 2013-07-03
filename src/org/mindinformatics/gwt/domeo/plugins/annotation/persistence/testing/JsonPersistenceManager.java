@@ -564,6 +564,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		if(_application.isHostedMode()) {
 			AnnotationPersistenceServiceFacade f = new AnnotationPersistenceServiceFacade();
 			handler.setExistingAnnotationSetList(f.retrieveAnnotationByDocumentUrl(((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()));
+			return;
 		}
 		
 		JsonSerializerManager jsonSerializerManager = JsonSerializerManager.getInstance(((IDomeo)_application));

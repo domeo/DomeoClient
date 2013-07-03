@@ -11,7 +11,6 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsoAnn
 import org.mindinformatics.gwt.framework.component.IAnnotationRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
-import org.mindinformatics.gwt.framework.component.ui.dialog.ProgressMessagePanel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
@@ -19,7 +18,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
@@ -182,7 +181,7 @@ public class ExistingAnnotationSetsListPanel extends Composite implements IIniti
 	@Override
 	public void setExistingAnnotationSetList(JsArray responseOnSets) {
 		// TODO Improve the hiding as it flickers 
-		if(responseOnSets.length()==0) {
+		if(responseOnSets==null || responseOnSets.length()==0) {
 			_existingAnnotationViewerPanel.hide();
 			return;
 		}
