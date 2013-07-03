@@ -27,24 +27,37 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormsManager;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.ATextFormsManager;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.TextAnnotationFormsPanel;
 import org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker.IReferencesListPickerContainer;
 import org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker.ReferencesListPickerWidget;
 import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.listpicker.IImagesListPickerContainer;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.listpicker.ImagesListPickerWidget;
+import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
+import org.mindinformatics.gwt.domeo.model.MOnlineImage;
+import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
+import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpData;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationsResources;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.ISelectionProvider;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.IPubmedSearchObjectContainer;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedSearchWidget;
-import org.mindinformatics.gwt.framework.model.references.IReferences;
 import org.mindinformatics.gwt.framework.model.references.ISelfReference;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.src.IResizable;
+import org.mindinformatics.gwt.framework.widget.ButtonWithIcon;
 import org.mindinformatics.gwt.framework.widget.WidgetUtilsResources;
+import org.mindinformatics.gwt.utils.src.HtmlUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -54,6 +67,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -85,9 +99,13 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	public static final WidgetUtilsResources widgetUtilsResources = 
 			GWT.create(WidgetUtilsResources.class);
 	
+	public static final MicroPublicationsResources localResources = GWT.create(MicroPublicationsResources.class);
+	
 	interface LocalCss extends CssResource {
+		String link();
 		String indexOdd();
 		String indexEven();
+		String indexWrapper();
 		String imageWrap();
 		String centerText();
 	}
@@ -116,11 +134,14 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	@UiField VerticalPanel referencePanel;
 	
+	private MMicroPublication _item;
 	private ImagesListPickerWidget imagesListPickerWidget;
 	private ReferencesListPickerWidget referencesListPickerWidget;
 	
 	private ArrayList<ImageProxy> images = new ArrayList<ImageProxy>();
 	private ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
+	
+	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
 	
 	//private AntibodiesSearchWidget antibodiesSearchWidget;
 
@@ -132,112 +153,43 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 		refreshAnnotationSetFilter(annotationSet, null);
 		statementBody.setText(getTextContent());
-		
-//		addDataImage.addClickHandler(new ClickHandler() {
-//			public void onClick(ClickEvent event) {
-////				searchDataCitationWidget = new DataCitationSearchWidget(
-////						_annotator, _this, _resources, true);
-////				rightColumn.clear();
-////				rightColumn.add(searchDataCitationWidget);
-//			}
-//		});
 
-//		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
-//		yesButton.setWidth("78px");
-//		yesButton.setHeight("22px");
-//		yesButton.setResource(Domeo.resources.acceptLittleIcon());
-//		yesButton.setText("Apply");
-//		yesButton.addClickHandler(new ClickHandler() {
-//			public void onClick(ClickEvent event) {
-//				if(isContentInvalid()) return;
-//			
-////				try { 
-////					if(_item == null) {
-////						if(_manager instanceof TextAnnotationFormsPanel) {
-////							MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(
-////									_domeo.getAgentManager().getUserPerson(), 
-////									_domeo.getPersistenceManager().getCurrentResource(), ((TextAnnotationFormsPanel)_manager).getHighlight().getExact(), 
-////									((TextAnnotationFormsPanel)_manager).getHighlight().getPrefix(), ((TextAnnotationFormsPanel)_manager).getHighlight().getSuffix());
-////							
-////							
-//////							// TODO Register coordinate of the selection.
-//////							MAntibodyAnnotation annotation = NifAntibodyFactory.createAntibody(
-//////									((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
-//////									_domeo.getAgentManager().getUserPerson(), _domeo.getAgentManager().getSoftware(),
-//////									_manager.getResource(), selector);
-//////							// TODO Register coordinate of highlight.
-//////							
-//////							MAntibodyUsage antibodyUsage = NifAntibodyFactory.createAntibodyUsage();
-//////							annotation.setAntibodyUsage(antibodyUsage);
-//////								
-//////							MAntibody normalizedAntibody = (MAntibody) _domeo.getResourcesManager().cacheResource(currentAntibody);
-//////							annotation.getAntibodyUsage().setAntibody(normalizedAntibody);
-//////							_domeo.getLogger().command(getLogCategoryCreate(), this, " with term " + currentAntibody.getLabel());
-//////	
-//////							annotation.setComment(statementBody.getText());
-//////							annotation.getProtocols().clear();
-//////								
-//////							if(getSelectedSet(annotationSet)==null) {
-//////								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
-//////							} else {
-//////								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, getSelectedSet(annotationSet));
-//////							}
-//////							_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(annotation, ((TextAnnotationFormsPanel)_manager).getHighlight());
-//////							_manager.hideContainer();
-////							
-////						} else if(_manager instanceof ImageAnnotationFormsPanel) {
-////							MAntibodyAnnotation annotation = NifAntibodyFactory.createAntibody(_domeo,
-////									((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
-////									_domeo.getAgentManager().getUserPerson(), _domeo.getAgentManager().getSoftware(),
-////									_manager.getResource());
-////	//						annotation.setY((((ImageAnnotationFormsPanel)_manager).getImageY()));
-////							
-//////							MAntibodyUsage antibodyUsage = NifAntibodyFactory.createAntibodyUsage();
-//////							annotation.setAntibodyUsage(antibodyUsage);
-//////								
-//////							MAntibody normalizedAntibody = (MAntibody) _domeo.getResourcesManager().cacheResource(currentAntibody);
-//////							annotation.getAntibodyUsage().setAntibody(normalizedAntibody);
-//////							_domeo.getLogger().command(getLogCategoryCreate(), this, " with term " + currentAntibody.getLabel());
-//////	
-//////							annotation.setComment(statementBody.getText());
-//////							annotation.getProtocols().clear();
-//////							
-//////	//						Iterator<MLinkedDataResource> termsIterator = terms.iterator();
-//////	//						while(termsIterator.hasNext()) {
-//////	//							MLinkedDataResource term = termsIterator.next();
-//////	//							MLinkedDataResource normalizedTerm = (MLinkedDataResource) _domeo.getResourcesManager().cacheResource(term);
-//////	//							annotation.addTerm(normalizedTerm);
-//////	//							_domeo.getLogger().command(getLogCategoryCreate(), this, " with term " + term.getLabel());
-//////	//						}
-//////							
-//////							if(getSelectedSet(annotationSet)==null) {
-//////								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
-//////							} else {
-//////								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, getSelectedSet(annotationSet));
-//////							}
-//////							//TODO Display annotation for an image is present somehow
-//////							_domeo.getAnnotationPersistenceManager().cacheAnnotationOfImage(_manager.getResource().getUrl(), annotation);
-//////							_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(annotation, _manager.getResource(), ((ImageAnnotationFormsPanel) _manager).getSelectedElement());
-//////							((ImageAnnotationFormsPanel) _manager).initializeForms();
-//////							
-//////							// Display cached images
-//////							Object w = _domeo.getResourcePanelsManager().getResourcePanel(
-//////									_domeo.getPersistenceManager().getCurrentResource().getClass().getName());
-//////							if(w instanceof ICachedImages) {
-//////								((ICachedImages)w).createVisualization();
-//////							}
-////						}
-////					} else {
-////						//_item.setType(PostitType.findByName(postitTypes.getItemText(postitTypes.getSelectedIndex())));
-////						//_item.setText(getPostItBody());
-////					}
-////				} catch (Exception e) {
-////					_domeo.getLogger().exception(this, e.getMessage());
-////				}
-//			}
-//		});
-//		buttonsPanel.add(yesButton);
-//		
+		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
+		yesButton.setWidth("78px");
+		yesButton.setHeight("26px");
+		yesButton.setResource(Domeo.resources.acceptLittleIcon());
+		yesButton.setText("Apply");
+		yesButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				if(_item == null) {
+					if(_manager instanceof TextAnnotationFormsPanel) {
+						MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(
+							_domeo.getAgentManager().getUserPerson(), 
+							_domeo.getPersistenceManager().getCurrentResource(), ((TextAnnotationFormsPanel)_manager).getHighlight().getExact(), 
+							((TextAnnotationFormsPanel)_manager).getHighlight().getPrefix(), ((TextAnnotationFormsPanel)_manager).getHighlight().getSuffix());
+						
+						MMicroPublication micropublication = MicroPublicationFactory.createMicroPublication((MTextQuoteSelector) selector);
+						
+						MMicroPublicationAnnotation annotation = MicroPublicationFactory.createMicroPublicationAnnotation(
+							((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
+							_domeo.getAgentManager().getUserPerson(), 
+							_domeo.getAgentManager().getSoftware(),
+							_manager.getResource(), selector, 
+							micropublication);
+						
+						if(getSelectedSet(annotationSet)==null) {
+							_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
+						} else {
+							_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, getSelectedSet(annotationSet));
+						}
+						_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(annotation, ((TextAnnotationFormsPanel)_manager).getHighlight());
+						_manager.hideContainer();
+					}
+				}
+			}
+		});
+		buttonsPanel.add(yesButton);
+		
 		this.setHeight("100px");
 		
 		imagesListPickerWidget = new ImagesListPickerWidget(_domeo, this, false);
@@ -266,22 +218,6 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		if(_domeo.getPersistenceManager().getCurrentResource() instanceof ISelfReference && ((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()!=null) {
 			referencePanel.add(PubMedCitationPainter.getCitation((MPublicationArticleReference)(((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()).getReference()));
 		}
-		
-		/*
-		antibodiesSearchWidget = new AntibodiesSearchWidget(_domeo, this, Domeo.resources, false);
-		// TODO If border is needed, there is a need for a wrapper. SearchTermWidget is one
-		//AntibodiesSelectionList termsList = new AntibodiesSelectionList(_domeo, this, getAntibodiesList(), new HashMap<String, MLinkedDataResource>(0));
-		tabs.add(antibodiesSearchWidget);
-		*/
-		//tabs.add(termsList);		
-		
-//		tabBar.addTab("Search for Antibodies");
-//		tabBar.addTab("Recently Used");
-
-//		
-//		rightColumn.add(tabs.get(0));
-	
-		//refreshAssociatedAntibodies();
 		resized();
 	}
 	
@@ -422,89 +358,9 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		}
 		
 		evidenceTabs.setHeight((Window.getClientHeight() - 490) + "px");
+		supportPanel.setHeight((Window.getClientHeight() - 520) + "px");
 		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
 	}
-
-//	@Override
-//	public String getTextContent() {
-//		// TODO Auto-generated method stub
-//		if(_manager instanceof ATextFormsManager)
-//			return ((ATextFormsManager)_manager).getHighlight().getExact();
-//		return "";
-//	}
-	/*
-	public void addAssociatedAntibody(MAntibody antibody) {
-		currentAntibody = antibody;
-		refreshAssociatedAntibodies();
-	}
-	
-	
-	public void refreshAssociatedAntibodies() {
-		if(currentAntibody!=null) 
-			displayAssociatedAntibodies(currentAntibody);
-		else {
-			newQualifiers.clear();
-			HTML h = new HTML("<em>no antibody selected</em>.");
-			newQualifiers.add(h);
-		}
-		//refreshTabTitle();
-	}
-	
-	private void displayAssociatedAntibodies(MAntibody antibody) {
-		newQualifiers.clear();
-		//for(MAntibody antibody: antibodies) {
-			final MAntibody _antibody = antibody;
-			HorizontalPanel sp = new HorizontalPanel();
-			sp.setStyleName("cs-acceptedQualifier");
-			HTML a = new HTML("<a target='_blank' href='" + antibody.getUrl() + "'>" + antibody.getLabel() + "</a> (" + antibody.getVendor() + ")");
-			a.setStyleName("cs-acceptedQualifierLabel");
-			a.setTitle(antibody.getLabel() + ": " + antibody.getDescription()); // + " - SOURCE: " + term.getSource().getLabel());
-			sp.add(a);
-			Image i = new Image(Domeo.resources.deleteLittleIcon());
-			i.setStyleName("cs-rejectQualifier");
-			i.setTitle("Remove " + antibody.getLabel());
-			i.addClickHandler(new ClickHandler() {
-				public void onClick(ClickEvent event) {
-					currentAntibody = null;
-					antibodiesSearchWidget.removeAntibody(_antibody);
-					refreshAssociatedAntibodies();
-				}
-			});
-			sp.add(i);
-			newQualifiers.add(sp);
-		//}
-	}
-	*/
-
-	/*
-	@Override
-	public ArrayList<MAntibody> getAntibodies() {
-		// TODO Auto-generated method stub
-		return new ArrayList<MAntibody>();
-	}
-	*/
-
-	/*
-	@Override
-	public String getFilterValue() {
-		// No filtering for this
-		return "";
-	}
-	*/
-
-	/*
-	@Override
-	public void addAntibody(MAntibody antibody) {
-		addAssociatedAntibody(antibody);
-	}
-	*/
-/*
-	@Override
-	public ArrayList<MAntibody> getAntibodiesList() {
-		//return _domeo.getAnnotationPersistenceManager().getAllTerms();
-		return new ArrayList<MAntibody>();
-	}
-	*/
 	
 	@Override
 	public String getTextContent() {
@@ -516,112 +372,179 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	public void refreshSupport() {
 		supportPanel.clear();
+		
+		Integer counter = 0;
 		VerticalPanel vp = new VerticalPanel();
-		int counter = 0;
-		for(ImageProxy image: images) {
-			VerticalPanel hp1 = new VerticalPanel();
-			hp1.setWidth("99%");
-			
-			boolean small = false;
-			boolean reduced = false;
-			Image img = new Image(image.getDisplayUrl());
-			if(img.getWidth()>440) {
-				img.setWidth("430px");  
-				reduced = true;
-			} else if(img.getWidth()<220) {
-				small = true;
-				//img.setWidth("200px"); 
+		
+		for(MMpRelationship ev: evidence) {
+			if(ev.getObjectElement() instanceof MMpData) {
+				if(ev.getObjectElement().getSelector() instanceof MImageInDocumentSelector) {
+					//String imgUrl = ((MImageInDocumentSelector)ev.getObjectElement().getSelector()).getTarget().getUrl();
+					//Window.alert(imgUrl);
+					displayImageInEvidence(vp, counter++, (MOnlineImage)((MImageInDocumentSelector)ev.getObjectElement().getSelector()).getTarget());
+				}
 			}
-			if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-				img.setTitle(image.getTitle());
-			}
-			
-			if(!small) {
-				
-				HorizontalPanel main = new HorizontalPanel();
-				VerticalPanel left = new VerticalPanel();
-				
-				SimplePanel imageWrap = new SimplePanel();
-				imageWrap.setStyleName(style.imageWrap());
-				imageWrap.add(img);
-				imageWrap.setStyleName(style.centerText());
-				left.add(imageWrap);
-				left.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_LEFT);
-				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-					HTML title = new HTML("<b>"+image.getTitle()+"</b>");
-					left.add(title);
-					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-				} else {
-					HTML title = new HTML("<b>Title</b>");
-					left.add(title);
-					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-				}
-				main.add(left);	
-				
-				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
-				removeIcon.addClickHandler(new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						//box.setEnabled(false);
-						//_container.addImageAsData(_image);
-					}
-				});					
-				main.add(removeIcon);
-				hp1.add(main);	
-				
-				if(counter%2 == 1) {
-					hp1.addStyleName(style.indexOdd());
-				} else {
-					hp1.addStyleName(style.indexEven());
-				}
-				counter++;
-			} else {
-				HorizontalPanel main = new HorizontalPanel();
-				
-				SimplePanel imageWrap = new SimplePanel();
-				imageWrap.setStyleName(style.imageWrap());
-				imageWrap.add(img);
-				main.add(imageWrap);
-				hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_CENTER);
-				
-				VerticalPanel right = new VerticalPanel();
-				right.setWidth("100%");
-				
-				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-					HTML title = new HTML("title: <b>"+image.getTitle()+"</b>");
-					right.add(title);
-					right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-				} else {					
-					HTML title = new HTML("title: <b>Title</b>");
-					right.add(title);
-					right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-				}
-				
-				main.add(right);
-				main.setCellWidth(right, "100%");
-				
-				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
-				removeIcon.addClickHandler(new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						//box.setEnabled(false);
-						//_container.addImageAsData(_image);
-					}
-				});					
-				main.add(removeIcon);
-				
-				
-				hp1.add(main);	
-
-				if(counter%2 == 1) {
-					hp1.addStyleName(style.indexOdd());
-				} else {
-					hp1.addStyleName(style.indexEven());
-				}
-				counter++;
-			}				
-			vp.add(hp1);
 		}
+		
+//		//int counter = 0;
+//		for(ImageProxy image: images) {
+//			VerticalPanel hp1 = new VerticalPanel();
+//			hp1.setWidth("432px");
+//			
+//			boolean small = false;
+//			boolean reduced = false;
+//			Image img = new Image(image.getDisplayUrl());
+//			if(img.getWidth()>380) {
+//				img.setWidth("380px");  
+//				reduced = true;
+//			} else if(img.getWidth()<220) {
+//				small = true;
+//				//img.setWidth("200px"); 
+//			}
+//			if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
+//				img.setTitle(image.getTitle());
+//			}
+//			
+//			if(!small) {
+//				
+//				HorizontalPanel main = new HorizontalPanel();
+//				
+//				VerticalPanel actionsPanel = new VerticalPanel();
+//				actionsPanel.setHeight("100%");
+//				
+//			
+//				final Image supportedByIcon = new Image(localResources.supportedBy());
+//				supportedByIcon.setTitle("Supported By");
+//				supportedByIcon.setStyleName(style.link());
+//				supportedByIcon.addClickHandler(new ClickHandler() {
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						//box.setEnabled(false);
+//						//_container.addImageAsData(_image);
+//					}
+//				});					
+//				actionsPanel.add(supportedByIcon);
+//				actionsPanel.setCellHeight(supportedByIcon, "50%");
+//				actionsPanel.setCellWidth(supportedByIcon, "22px");
+//				
+//				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+//				removeIcon.setStyleName(style.link());
+//				removeIcon.addClickHandler(new ClickHandler() {
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						//box.setEnabled(false);
+//						//_container.addImageAsData(_image);
+//					}
+//				});					
+//				actionsPanel.add(removeIcon);
+//				actionsPanel.setCellHeight(removeIcon, "50%");
+//				actionsPanel.setCellWidth(removeIcon, "22px");
+//				actionsPanel.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_LEFT);
+//				
+//				main.add(actionsPanel);		
+//				main.setCellHeight(actionsPanel, "100%");
+//				
+//				VerticalPanel left = new VerticalPanel();
+//				
+//				SimplePanel imageWrap = new SimplePanel();
+//				imageWrap.setStyleName(style.imageWrap());
+//				imageWrap.add(img);
+//				imageWrap.setStyleName(style.centerText());
+//				left.add(imageWrap);
+//				left.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_LEFT);
+//				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
+//					HTML title = new HTML("<b>"+image.getTitle()+"</b>");
+//					left.add(title);
+//					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+//				} /* else {
+//					HTML title = new HTML("<b>Title</b>");
+//					left.add(title);
+//					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+//				} */
+//				main.add(left);	
+//				
+//				
+//				hp1.add(main);	
+//				
+//				if(counter%2 == 1) {
+//					hp1.addStyleName(style.indexOdd());
+//				} else {
+//					hp1.addStyleName(style.indexEven());
+//				}
+//				counter++;
+//			} else {
+//				HorizontalPanel main = new HorizontalPanel();
+//				
+//				VerticalPanel actionsPanel = new VerticalPanel();
+//				actionsPanel.setHeight("100%");
+//				
+//				final Image supportedByIcon = new Image(localResources.supportedBy());
+//				supportedByIcon.setTitle("Supported By");
+//				supportedByIcon.setStyleName(style.link());
+//				supportedByIcon.addClickHandler(new ClickHandler() {
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						//box.setEnabled(false);
+//						//_container.addImageAsData(_image);
+//					}
+//				});					
+//				actionsPanel.add(supportedByIcon);
+//				actionsPanel.setCellHeight(supportedByIcon, "50%");
+//				actionsPanel.setCellWidth(supportedByIcon, "22px");
+//				
+//				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+//				removeIcon.setStyleName(style.link());
+//				removeIcon.addClickHandler(new ClickHandler() {
+//					@Override
+//					public void onClick(ClickEvent event) {
+//						//box.setEnabled(false);
+//						//_container.addImageAsData(_image);
+//					}
+//				});					
+//				actionsPanel.add(removeIcon);
+//				actionsPanel.setCellHeight(removeIcon, "50%");
+//				actionsPanel.setCellWidth(removeIcon, "22px");
+//				actionsPanel.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_LEFT);
+//				
+//				main.add(actionsPanel);
+//				main.setCellHeight(actionsPanel, "100%");
+//				
+//				SimplePanel imageWrap = new SimplePanel();
+//				imageWrap.setStyleName(style.imageWrap());
+//				imageWrap.add(img);
+//				main.add(imageWrap);
+//				
+//				//hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_CENTER);
+//				
+//				VerticalPanel right = new VerticalPanel();
+//				right.setWidth("100%");
+//				
+//				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
+//					HTML title = new HTML("<b>"+image.getTitle()+"</b>");
+//					right.add(title);
+//					right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+//				} /*else {					
+//					HTML title = new HTML("title: <b>Title</b>");
+//					right.add(title);
+//					right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+//				}*/
+//				
+//				main.add(right);
+//				main.setCellWidth(right, "100%");
+//				
+//
+//				
+//				hp1.add(main);	
+//
+//				if(counter%2 == 1) {
+//					hp1.addStyleName(style.indexOdd());
+//				} else {
+//					hp1.addStyleName(style.indexEven());
+//				}
+//				counter++;
+//			}				
+//			vp.add(hp1);
+//		}
 		for(MPublicationArticleReference reference: references) {
 			HorizontalPanel hp1 = new HorizontalPanel();
 			hp1.add(PubMedCitationPainter.getFullCitation(reference, _domeo));
@@ -651,8 +574,21 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	}
 
 	@Override
-	public void addImageAsData(ImageProxy image) {
-		images.add(image);	
+	public void addImageAsData(ImageProxy image) {	
+		
+		MOnlineImage _imageResource = new MOnlineImage();
+		_imageResource.setUrl(image.getOriginalUrl());
+		_imageResource.setDisplayUrl(image.getDisplayUrl());
+		_imageResource.setLocalId(((Element) image.getImage()).getAttribute("imageid"));
+		_imageResource.setLabel(image.getTitle());
+		_imageResource.setImage((Element) image.getImage());
+		_imageResource.setXPath(HtmlUtils.getElementXPath((Element) image.getImage()));
+		
+		MImageInDocumentSelector imgSelector = AnnotationFactory.createImageSelector(_domeo, _domeo.getAgentManager().getUserPerson(), _imageResource);
+		MMpData imageData = new MMpData(imgSelector);
+		MMpRelationship suportedBy = new MMpRelationship(imageData, IMicroPublicationsOntology.supportedBy);
+		evidence.add(suportedBy);
+		//images.add(image);	
 		refreshSupport();
 	}
 
@@ -672,5 +608,154 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	public ArrayList<MAnnotationReference> getBibliographicObjectAnnotations() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private void displayImageInEvidence(VerticalPanel vp, Integer counter, MOnlineImage image) {
+
+		VerticalPanel hp1 = new VerticalPanel();
+		hp1.setWidth("432px");
+		
+		boolean small = false;
+		boolean reduced = false;
+		Image img = new Image(image.getDisplayUrl());
+		if(img.getWidth()>380) {
+			img.setWidth("380px");  
+			reduced = true;
+		} else if(img.getWidth()<220) {
+			small = true;
+			//img.setWidth("200px"); 
+		}
+		if(image.getLabel()!=null && image.getLabel().trim().length()>0) {
+			img.setTitle(image.getLabel());
+		}
+		
+		if(!small) {
+			
+			HorizontalPanel main = new HorizontalPanel();
+			
+			//VerticalPanel actionsPanel = new VerticalPanel();
+			//actionsPanel.setHeight("100%");
+			
+		
+			final Image supportedByIcon = new Image(localResources.supportedBy());
+			supportedByIcon.setTitle("Supported By");
+			supportedByIcon.setStyleName(style.link());
+			supportedByIcon.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					//box.setEnabled(false);
+					//_container.addImageAsData(_image);
+				}
+			});					
+			main.add(supportedByIcon);
+			main.setCellWidth(supportedByIcon, "22px");
+			
+			
+			VerticalPanel left = new VerticalPanel();
+			
+			SimplePanel imageWrap = new SimplePanel();
+			imageWrap.setStyleName(style.imageWrap());
+			imageWrap.add(img);
+			imageWrap.setStyleName(style.centerText());
+			left.add(imageWrap);
+			left.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_LEFT);
+			if(image.getLabel()!=null && image.getLabel().trim().length()>0) {
+				HTML title = new HTML("<b>"+image.getLabel()+"</b>");
+				left.add(title);
+				left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+			} /* else {
+				HTML title = new HTML("<b>Title</b>");
+				left.add(title);
+				left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+			} */
+			main.add(left);	
+			main.setStyleName(style.indexWrapper());
+			
+			if(counter%2 == 1) {
+				left.addStyleName(style.indexOdd());
+			} else {
+				left.addStyleName(style.indexEven());
+			}
+			
+			final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+			removeIcon.setStyleName(style.link());
+			removeIcon.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					//box.setEnabled(false);
+					//_container.addImageAsData(_image);
+				}
+			});					
+			main.add(removeIcon);
+			main.setCellWidth(removeIcon, "22px");
+			main.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+			
+			
+			hp1.add(main);	
+		} else {
+			HorizontalPanel main = new HorizontalPanel();
+			main.setStyleName(style.indexWrapper());
+			
+			final Image supportedByIcon = new Image(localResources.supportedBy());
+			supportedByIcon.setTitle("Supported By");
+			supportedByIcon.setStyleName(style.link());
+			supportedByIcon.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					//box.setEnabled(false);
+					//_container.addImageAsData(_image);
+				}
+			});					
+			main.add(supportedByIcon);
+			main.setCellWidth(supportedByIcon, "22px");
+			
+			SimplePanel imageWrap = new SimplePanel();
+			imageWrap.setStyleName(style.imageWrap());
+			imageWrap.add(img);
+			main.add(imageWrap);
+			
+			//hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_CENTER);
+			
+			VerticalPanel right = new VerticalPanel();
+			right.setWidth("100%");
+			
+			if(image.getLabel()!=null && image.getLabel().trim().length()>0) {
+				HTML title = new HTML("<b>"+image.getLabel()+"</b>");
+				right.add(title);
+				right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+			} /*else {					
+				HTML title = new HTML("title: <b>Title</b>");
+				right.add(title);
+				right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
+			}*/
+			
+			main.add(right);
+			main.setCellWidth(right, "100%");
+			
+			final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+			removeIcon.setStyleName(style.link());
+			removeIcon.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					//box.setEnabled(false);
+					//_container.addImageAsData(_image);
+				}
+			});					
+			main.add(removeIcon);
+			main.setCellWidth(removeIcon, "22px");
+			main.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+			
+
+			
+			hp1.add(main);	
+
+			if(counter%2 == 1) {
+				right.addStyleName(style.indexOdd());
+			} else {
+				right.addStyleName(style.indexEven());
+			}
+		}				
+		vp.add(hp1);
+	
 	}
 }

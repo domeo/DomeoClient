@@ -183,24 +183,13 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 						hp1.add(title);
 						hp1.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
 					} 
-					
-					final CheckBox box = new CheckBox("Add as data");
-					final ImageProxy _image = image;
-					box.addClickHandler(new ClickHandler() {
-						@Override
-						public void onClick(ClickEvent event) {
-							box.setEnabled(false);
-							_container.addImageAsData(_image);
-						}
-					});					
-					hp1.add(box);
-					
+
 					if(counter%2 == 1) {
 						//hp1.addStyleName(style.indexOdd());
-						hp1.addStyleName(widgetUtilsResources.widgetCss().tableOddRow());
+						hp1.addStyleName(style.indexOdd());
 					} else {
 						//hp1.addStyleName(style.indexEven());
-						hp1.addStyleName(widgetUtilsResources.widgetCss().tableEvenRow());
+						hp1.addStyleName(style.indexEven());
 					}
 					counter++;
 				} else {
@@ -221,27 +210,16 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 						right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
 					} 
 					
-					final CheckBox box = new CheckBox("Add as data");
-					final ImageProxy _image = image;
-					box.addClickHandler(new ClickHandler() {
-						@Override
-						public void onClick(ClickEvent event) {
-							box.setEnabled(false);
-							_container.addImageAsData(_image);
-						}
-					});					
-					right.add(box);
-					
 					main.add(right);
 					main.setCellWidth(right, "100%");
 					hp1.add(main);	
 
 					if(counter%2 == 1) {
 						//hp1.addStyleName(style.indexOdd());
-						hp1.addStyleName(widgetUtilsResources.widgetCss().tableOddRow());
+						hp1.addStyleName(style.indexOdd());
 					} else {
 						//hp1.addStyleName(style.indexEven());
-						hp1.addStyleName(widgetUtilsResources.widgetCss().tableEvenRow());
+						hp1.addStyleName(style.indexEven());
 					}
 					counter++;
 				}		

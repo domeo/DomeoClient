@@ -159,7 +159,7 @@
 	  	
 	  	.evidencePanel {
 			max-height:286px;
-			font-size: 11px;
+			font-size: 11px; 
 		}
 		
 		.citations {
@@ -168,17 +168,21 @@
 	  	}
 	  	
 	  	.indexOdd {
-			border-left: 6px solid #ddd;
 			padding-bottom: 5px;
 			padding-left: 5px;
 			padding-top: 8px;
 		}
 		.indexEven {
-			border-top: 1px solid #ddd;
-			border-left: 6px solid green;
+			background-color: #EEEEFF;
 			padding-bottom: 5px;
 			padding-left: 5px;
-			padding-top: 8px;		
+			padding-top: 8px;	
+			
+		}
+		.indexWrapper{
+			padding-top: 2px;
+			border-bottom: 1px solid #ddd;	
+			padding-bottom: 2px;
 		}
 		.imageWrap {
 			padding-left:1px;
@@ -188,10 +192,14 @@
 			text-align: left;
 		}
 		
-		 .tabPanelExample1
+		.tabPanelExample1
         {
-            margin-left: 2px;
+            margin-left: 0px;
         }
+        
+        .link {
+			cursor: pointer;
+		}
   	</ui:style>
   	
   	 
@@ -246,24 +254,18 @@
 				  			</g:HorizontalPanel>
 				  			-->
 				  			
-				  			<g:TabLayoutPanel addStyleNames="{style.tabPanelExample1}" ui:field="evidenceTabs" barUnit="PX" barHeight="30" width="456px" height="288px">
+				  			<g:TabLayoutPanel addStyleNames="{style.tabPanelExample1}" ui:field="evidenceTabs" barUnit="PX" barHeight="30" width="456px" >
 						      <g:tab>
 						          <g:header>
-						             Supported By
+						             Supported By/Challenged By
 						          </g:header>
 									<g:ScrollPanel ui:field='supportPanel' styleName='{style.evidencePanel}'></g:ScrollPanel>
 						      </g:tab>
 						      <g:tab>
 						          <g:header>
-						             Challenged By
-						          </g:header>
-						          <g:HTML><h2>Hello tab 2</h2></g:HTML>
-						      </g:tab>
-						      <g:tab>
-						          <g:header>
 						             Qualified By
 						          </g:header>
-						          <g:HTML><h2>Hello tab 2</h2></g:HTML>
+						          <g:HTML><h2>Qualifiers</h2></g:HTML>
 						      </g:tab>
 						  </g:TabLayoutPanel>
 						  <!-- 

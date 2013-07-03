@@ -20,27 +20,36 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model;
 
-import java.util.ArrayList;
-
 import org.mindinformatics.gwt.domeo.model.buffers.HighlightedTextBuffer;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class MMicroPublication implements IMpSupportingElement {
+public class MMpStatement extends MMpElement {
 	
-	String id;
+	private HighlightedTextBuffer buffer;
+	private String text;
 	
-	private MMpStatement argues;
-	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
+	public MMpStatement() {}
 	
-	public MMicroPublication(HighlightedTextBuffer buffer) {
-		argues = new MMpStatement(buffer);
+	public MMpStatement(HighlightedTextBuffer buffer) {
+		this.buffer = buffer;
 	}
 	
-	public MMicroPublication(MTextQuoteSelector selector) {
-		argues = new MMpStatement(selector);
+	public MMpStatement(MTextQuoteSelector selector) {
+		this.setSelector(selector);
+	}
+	
+	public HighlightedTextBuffer getBuffer() {
+		return buffer;
 	}
 
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
 }

@@ -20,27 +20,20 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model;
 
-import java.util.ArrayList;
-
-import org.mindinformatics.gwt.domeo.model.buffers.HighlightedTextBuffer;
-import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
+import org.mindinformatics.gwt.framework.model.relationships.MRelationship;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class MMicroPublication implements IMpSupportingElement {
-	
-	String id;
-	
-	private MMpStatement argues;
-	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
-	
-	public MMicroPublication(HighlightedTextBuffer buffer) {
-		argues = new MMpStatement(buffer);
-	}
-	
-	public MMicroPublication(MTextQuoteSelector selector) {
-		argues = new MMpStatement(selector);
-	}
+@SuppressWarnings("serial")
+public class MMpRelationship extends MRelationship {
 
+	public MMpRelationship(MMpElement object, String name) {
+		super.setObject(object);
+		super.setName(name);
+	}
+	
+	public MMpElement getObjectElement() {
+		return (MMpElement) object;
+	}
 }

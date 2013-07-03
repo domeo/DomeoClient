@@ -89,6 +89,8 @@ public class PubMedCitationPainter  {
 				SimpleIconButtonPanel showReferenceIcon = new SimpleIconButtonPanel(domeo, ActionShowAnnotation.getClickHandler(domeo, ""+reference.getLocalId()),
 						Domeo.resources.showLittleIcon().getSafeUri().asString(), "Show reference in context");
 				hp.add(showReferenceIcon);
+				hp.setCellWidth(showReferenceIcon, "100%");
+				hp.setCellHorizontalAlignment(showReferenceIcon, HasHorizontalAlignment.ALIGN_LEFT);
 				
 				if(citationSelectors.size()>0)  {
 					hp.add(new HTML("&nbsp;Citations:&nbsp;"));

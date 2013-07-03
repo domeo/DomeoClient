@@ -20,27 +20,14 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model;
 
-import java.util.ArrayList;
-
-import org.mindinformatics.gwt.domeo.model.buffers.HighlightedTextBuffer;
-import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
-
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class MMicroPublication implements IMpSupportingElement {
-	
-	String id;
-	
-	private MMpStatement argues;
-	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
-	
-	public MMicroPublication(HighlightedTextBuffer buffer) {
-		argues = new MMpStatement(buffer);
-	}
-	
-	public MMicroPublication(MTextQuoteSelector selector) {
-		argues = new MMpStatement(selector);
-	}
+public interface IMicroPublicationsOntology {
 
+	public final String Prefix = "micro-publications";
+	public final String NS = "http://purl.org/swan/2.0/discourse-relationships/";
+	
+	public final String supportedBy = NS + "supportedBy";
+	public final String challengedBy = NS + "challengedBy";
 }

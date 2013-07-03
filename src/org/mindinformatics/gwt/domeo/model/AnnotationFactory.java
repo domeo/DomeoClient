@@ -38,7 +38,6 @@ public class AnnotationFactory implements IInitializableComponent {
 
 	private static final String DOMEO_URN_PREFIX = "urn:domeoclient:uuid:";
 	private static final String NEW_SET_LABEL = "New set";
-	private static final String NEW_SET_DESCRIPTION = "New set";
 	
 	private static Long localIdsCounter = 0L;
 	private static Long newSetsCounter = 0L;
@@ -682,10 +681,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		return ann;
 	}
 	
-	public static MQualifierAnnotation createQualifier(IDomeo domeo,
-			MAnnotationSet set, IAgent creator, ISoftware tool, 
-			MGenericResource target) 
-	{
+	public static MImageInDocumentSelector createImageSelector(IDomeo domeo, IAgent creator, MGenericResource target) {
 		MImageInDocumentSelector selector = new MImageInDocumentSelector();
 		selector.setCreator(creator);
 		selector.setCreatedOn(new Date());
@@ -694,6 +690,24 @@ public class AnnotationFactory implements IInitializableComponent {
 		selector.setUuid(getUuid());
 		selector.setUri(getUrn(selector.getUuid()));
 		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
+		return selector;
+	}
+	
+	public static MQualifierAnnotation createQualifier(IDomeo domeo,
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			MGenericResource target) 
+	{
+		
+		MImageInDocumentSelector selector = createImageSelector(domeo, creator, target);
+		
+//		MImageInDocumentSelector selector = new MImageInDocumentSelector();
+//		selector.setCreator(creator);
+//		selector.setCreatedOn(new Date());
+//		selector.setTarget(target);
+//		selector.setLocalId(getLocalId());
+//		selector.setUuid(getUuid());
+//		selector.setUri(getUrn(selector.getUuid()));
+//		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
 		
 		MQualifierAnnotation ann = new MQualifierAnnotation();
 		ann.setLocalId(getLocalId());
