@@ -179,20 +179,24 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 
 		tabToolsPanel.setWidth((Window.getClientWidth() - 180) + "px");
 		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
-
-		Collection<IFormGenerator> formGenerators = _domeo.getAnnotationFormsManager().getAnnotationFormGenerators();
-		Iterator<IFormGenerator> it = formGenerators.iterator();
-		while(it.hasNext()) {
-			String pluginName="";
-			try {
-				IFormGenerator g = it.next();
-				pluginName = g.getClass().getName();
-				AFormComponent form = g.getForm(this);
-				tabToolsPanel.add(form, form.getTitle());
-			} catch (Exception e) {
-				_domeo.getLogger().info(this, "Exception while loading form: " + pluginName);
-			}
-		}		
+		try {
+			Collection<IFormGenerator> formGenerators = _domeo.getAnnotationFormsManager().getAnnotationFormGenerators();
+			Iterator<IFormGenerator> it = formGenerators.iterator();
+			while(it.hasNext()) {
+				String pluginName="";
+				try {
+					IFormGenerator g = it.next();
+					pluginName = g.getClass().getName();
+					AFormComponent form = g.getForm(this);
+					tabToolsPanel.add(form, form.getTitle());
+				} catch (Exception e) {
+					_domeo.getLogger().exception(this, "Exception while loading form: " + pluginName);
+				}
+			}	
+		} catch (Exception e) {
+			_domeo.getLogger().exception(this, "Exception while loading form generators.");
+			throw new RuntimeException (e);
+		}	
 
 		leftBottomSide.addClickHandler(new ClickHandler() {
 			@Override
