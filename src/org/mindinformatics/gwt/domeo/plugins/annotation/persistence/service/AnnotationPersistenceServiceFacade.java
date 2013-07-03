@@ -7,6 +7,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsoAnn
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -24,7 +25,7 @@ public class AnnotationPersistenceServiceFacade {
 	}-*/;
 	
 	private final native JsArray<JsoAnnotationSetSummary> asArrayOfAnnotationSetSummaries2(String json) /*-{
-	    return eval(json);
+	    return JSON.parse(json);
 	}-*/;
 	
 	private final native JsArray<JsDocumentAnnotationSummary> asArrayOfDocumentAnnotationSummaries(String json) /*-{
@@ -103,7 +104,7 @@ public class AnnotationPersistenceServiceFacade {
 	}
 	
 	public JsArray<JsoAnnotationSetSummary> retrieveAnnotationByDocumentUrl(String url) {
-		String json = "{}";
+		String json = "";
 		if(url.equals("http://www.ncbi.nlm.nih.gov/pubmed/10679938")) {
 			json =
 			    "{" +
