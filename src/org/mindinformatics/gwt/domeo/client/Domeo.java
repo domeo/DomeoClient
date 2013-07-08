@@ -304,7 +304,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
             public void onWindowClosing(ClosingEvent event) {
             	
             	if(_this.getAnnotationPersistenceManager().isWorskspaceUnsaved()) {
-            		Window.alert("The workspace contains unsaved annotation. By closing the window, the unsaved annotations will be lost.");
+            		Window.alert("The workspace contains unsaved annotation.\n\n" +
+            			"By selecting 'Leaving the Page', the unsaved annotations will be lost.\n\n" +
+            			"By selecting 'Stay on Page', you will have the chance to save the annotation.\n\n");
             		event.setMessage("The workspace contains unsaved annotation.");
             	}
             }
