@@ -1,0 +1,6 @@
+.af-curationPopup {
+	z-index: 1000;
+	background-color: #FFF;
+	border: 1px solid #ddd;
+	padding: 5px;
+}

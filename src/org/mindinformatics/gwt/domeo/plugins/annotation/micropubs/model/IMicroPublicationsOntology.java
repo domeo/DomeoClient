@@ -26,7 +26,7 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model;
 public interface IMicroPublicationsOntology {
 
 	public final String Prefix = "micro-publications";
-	public final String NS = "http://purl.org/swan/2.0/discourse-relationships/";
+	public final String NS = "mp:";
 	
 	public final String supportedBy = NS + "supportedBy";
 	public final String challengedBy = NS + "challengedBy";

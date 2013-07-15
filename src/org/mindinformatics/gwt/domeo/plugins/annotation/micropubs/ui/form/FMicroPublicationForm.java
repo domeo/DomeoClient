@@ -44,6 +44,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPu
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpData;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationsResources;
@@ -85,7 +86,8 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class FMicroPublicationForm extends AFormComponent implements IResizable, ISelectionProvider, IPubmedSearchObjectContainer, IImagesListPickerContainer, IReferencesListPickerContainer {
+public class FMicroPublicationForm extends AFormComponent implements IResizable, ISelectionProvider, 
+	IPubmedSearchObjectContainer, IImagesListPickerContainer, IReferencesListPickerContainer, IEvidenceRelationshipChangeListener {
 
 	public static final String LABEL = "Micro Publication";
 	public static final String LABEL_EDIT = "Edit Micro Publication";
@@ -135,11 +137,12 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	@UiField VerticalPanel referencePanel;
 	
 	private MMicroPublication _item;
+	private FMicroPublicationForm _this;
 	private ImagesListPickerWidget imagesListPickerWidget;
 	private ReferencesListPickerWidget referencesListPickerWidget;
 	
-	private ArrayList<ImageProxy> images = new ArrayList<ImageProxy>();
-	private ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
+	//private ArrayList<ImageProxy> images = new ArrayList<ImageProxy>();
+	//private ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
 	
 	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
 	
@@ -148,6 +151,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	public FMicroPublicationForm(IDomeo domeo, final AFormsManager manager, boolean inFolders) {
 		super(domeo);
 		_manager = manager;
+		_this = this;
 		
 		initWidget(binder.createAndBindUi(this));
 	
@@ -381,170 +385,14 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 				if(ev.getObjectElement().getSelector() instanceof MImageInDocumentSelector) {
 					//String imgUrl = ((MImageInDocumentSelector)ev.getObjectElement().getSelector()).getTarget().getUrl();
 					//Window.alert(imgUrl);
-					displayImageInEvidence(vp, counter++, (MOnlineImage)((MImageInDocumentSelector)ev.getObjectElement().getSelector()).getTarget());
+					displayImageInEvidence(vp, counter++, ev);
 				}
+			} else if(ev.getObjectElement() instanceof MMpReference) {
+				displayReferenceInEvidence(vp, counter++, ev);
 			}
 		}
 		
-//		//int counter = 0;
-//		for(ImageProxy image: images) {
-//			VerticalPanel hp1 = new VerticalPanel();
-//			hp1.setWidth("432px");
-//			
-//			boolean small = false;
-//			boolean reduced = false;
-//			Image img = new Image(image.getDisplayUrl());
-//			if(img.getWidth()>380) {
-//				img.setWidth("380px");  
-//				reduced = true;
-//			} else if(img.getWidth()<220) {
-//				small = true;
-//				//img.setWidth("200px"); 
-//			}
-//			if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-//				img.setTitle(image.getTitle());
-//			}
-//			
-//			if(!small) {
-//				
-//				HorizontalPanel main = new HorizontalPanel();
-//				
-//				VerticalPanel actionsPanel = new VerticalPanel();
-//				actionsPanel.setHeight("100%");
-//				
-//			
-//				final Image supportedByIcon = new Image(localResources.supportedBy());
-//				supportedByIcon.setTitle("Supported By");
-//				supportedByIcon.setStyleName(style.link());
-//				supportedByIcon.addClickHandler(new ClickHandler() {
-//					@Override
-//					public void onClick(ClickEvent event) {
-//						//box.setEnabled(false);
-//						//_container.addImageAsData(_image);
-//					}
-//				});					
-//				actionsPanel.add(supportedByIcon);
-//				actionsPanel.setCellHeight(supportedByIcon, "50%");
-//				actionsPanel.setCellWidth(supportedByIcon, "22px");
-//				
-//				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
-//				removeIcon.setStyleName(style.link());
-//				removeIcon.addClickHandler(new ClickHandler() {
-//					@Override
-//					public void onClick(ClickEvent event) {
-//						//box.setEnabled(false);
-//						//_container.addImageAsData(_image);
-//					}
-//				});					
-//				actionsPanel.add(removeIcon);
-//				actionsPanel.setCellHeight(removeIcon, "50%");
-//				actionsPanel.setCellWidth(removeIcon, "22px");
-//				actionsPanel.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_LEFT);
-//				
-//				main.add(actionsPanel);		
-//				main.setCellHeight(actionsPanel, "100%");
-//				
-//				VerticalPanel left = new VerticalPanel();
-//				
-//				SimplePanel imageWrap = new SimplePanel();
-//				imageWrap.setStyleName(style.imageWrap());
-//				imageWrap.add(img);
-//				imageWrap.setStyleName(style.centerText());
-//				left.add(imageWrap);
-//				left.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_LEFT);
-//				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-//					HTML title = new HTML("<b>"+image.getTitle()+"</b>");
-//					left.add(title);
-//					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-//				} /* else {
-//					HTML title = new HTML("<b>Title</b>");
-//					left.add(title);
-//					left.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-//				} */
-//				main.add(left);	
-//				
-//				
-//				hp1.add(main);	
-//				
-//				if(counter%2 == 1) {
-//					hp1.addStyleName(style.indexOdd());
-//				} else {
-//					hp1.addStyleName(style.indexEven());
-//				}
-//				counter++;
-//			} else {
-//				HorizontalPanel main = new HorizontalPanel();
-//				
-//				VerticalPanel actionsPanel = new VerticalPanel();
-//				actionsPanel.setHeight("100%");
-//				
-//				final Image supportedByIcon = new Image(localResources.supportedBy());
-//				supportedByIcon.setTitle("Supported By");
-//				supportedByIcon.setStyleName(style.link());
-//				supportedByIcon.addClickHandler(new ClickHandler() {
-//					@Override
-//					public void onClick(ClickEvent event) {
-//						//box.setEnabled(false);
-//						//_container.addImageAsData(_image);
-//					}
-//				});					
-//				actionsPanel.add(supportedByIcon);
-//				actionsPanel.setCellHeight(supportedByIcon, "50%");
-//				actionsPanel.setCellWidth(supportedByIcon, "22px");
-//				
-//				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
-//				removeIcon.setStyleName(style.link());
-//				removeIcon.addClickHandler(new ClickHandler() {
-//					@Override
-//					public void onClick(ClickEvent event) {
-//						//box.setEnabled(false);
-//						//_container.addImageAsData(_image);
-//					}
-//				});					
-//				actionsPanel.add(removeIcon);
-//				actionsPanel.setCellHeight(removeIcon, "50%");
-//				actionsPanel.setCellWidth(removeIcon, "22px");
-//				actionsPanel.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_LEFT);
-//				
-//				main.add(actionsPanel);
-//				main.setCellHeight(actionsPanel, "100%");
-//				
-//				SimplePanel imageWrap = new SimplePanel();
-//				imageWrap.setStyleName(style.imageWrap());
-//				imageWrap.add(img);
-//				main.add(imageWrap);
-//				
-//				//hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_CENTER);
-//				
-//				VerticalPanel right = new VerticalPanel();
-//				right.setWidth("100%");
-//				
-//				if(image.getTitle()!=null && image.getTitle().trim().length()>0) {
-//					HTML title = new HTML("<b>"+image.getTitle()+"</b>");
-//					right.add(title);
-//					right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-//				} /*else {					
-//					HTML title = new HTML("title: <b>Title</b>");
-//					right.add(title);
-//					right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
-//				}*/
-//				
-//				main.add(right);
-//				main.setCellWidth(right, "100%");
-//				
-//
-//				
-//				hp1.add(main);	
-//
-//				if(counter%2 == 1) {
-//					hp1.addStyleName(style.indexOdd());
-//				} else {
-//					hp1.addStyleName(style.indexEven());
-//				}
-//				counter++;
-//			}				
-//			vp.add(hp1);
-//		}
+		/*
 		for(MPublicationArticleReference reference: references) {
 			HorizontalPanel hp1 = new HorizontalPanel();
 			hp1.add(PubMedCitationPainter.getFullCitation(reference, _domeo));
@@ -568,14 +416,14 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			counter++;
 			vp.add(hp1);
 		}
+		*/
 		
 		
 		supportPanel.add(vp);
 	}
 
 	@Override
-	public void addImageAsData(ImageProxy image) {	
-		
+	public void addImageAsData(ImageProxy image) {		
 		MOnlineImage _imageResource = new MOnlineImage();
 		_imageResource.setUrl(image.getOriginalUrl());
 		_imageResource.setDisplayUrl(image.getDisplayUrl());
@@ -586,15 +434,21 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 		MImageInDocumentSelector imgSelector = AnnotationFactory.createImageSelector(_domeo, _domeo.getAgentManager().getUserPerson(), _imageResource);
 		MMpData imageData = new MMpData(imgSelector);
-		MMpRelationship suportedBy = new MMpRelationship(imageData, IMicroPublicationsOntology.supportedBy);
-		evidence.add(suportedBy);
-		//images.add(image);	
+		
+		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), imageData, IMicroPublicationsOntology.supportedBy);
+		evidence.add(suportedBy);	
 		refreshSupport();
 	}
 
 	@Override
 	public void addBibliographicObject(MPublicationArticleReference reference) {
-		references.add(reference);
+		//references.add(reference);
+		MMpReference referenceData = new MMpReference();
+		referenceData.setReference(reference);
+		
+		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
+		
+		evidence.add(suportedBy);
 		refreshSupport();
 	}
 
@@ -610,10 +464,68 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		return null;
 	}
 	
-	private void displayImageInEvidence(VerticalPanel vp, Integer counter, MOnlineImage image) {
+	private void displayReferenceInEvidence(VerticalPanel vp, Integer counter, final MMpRelationship relationship) {
+		HorizontalPanel hp1 = new HorizontalPanel();
+		hp1.setWidth("442px");
+		hp1.setStyleName(style.indexWrapper());
+	
+		if(relationship.getName().equals(IMicroPublicationsOntology.supportedBy)) {
+			final Image supportedByIcon = new Image(localResources.supportedBy());
+			supportedByIcon.setTitle("Supported By");
+			supportedByIcon.setStyleName(style.link());
+			supportedByIcon.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					EvidenceRelationshipBubble bubble = new EvidenceRelationshipBubble(
+							_this, _domeo, _item, relationship, "");
+					int x = supportedByIcon.getAbsoluteLeft();
+					int y = supportedByIcon.getAbsoluteTop();
+					bubble.show(x, y);
+				}
+			});					
+			hp1.add(supportedByIcon);
+			hp1.setCellWidth(supportedByIcon, "22px");
+		} else if(relationship.getName().equals(IMicroPublicationsOntology.challengedBy)) {
+			final Image supportedByIcon = new Image(localResources.challengedBy());
+			supportedByIcon.setTitle("Supported By");
+			supportedByIcon.setStyleName(style.link());
+			supportedByIcon.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					EvidenceRelationshipBubble bubble = new EvidenceRelationshipBubble(
+							_this, _domeo, _item, relationship, "");
+					int x = supportedByIcon.getAbsoluteLeft();
+					int y = supportedByIcon.getAbsoluteTop();
+					bubble.show(x, y);
+				}
+			});					
+			hp1.add(supportedByIcon);
+			hp1.setCellWidth(supportedByIcon, "22px");
+		}
+		
+		hp1.add(PubMedCitationPainter.getFullCitation(((MMpReference)relationship.getObjectElement()).getReference(), _domeo));
+		
+		final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+		removeIcon.setStyleName(style.link());
+		removeIcon.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				//box.setEnabled(false);
+				//_container.addImageAsData(_image);
+			}
+		});					
+		hp1.add(removeIcon);
+		hp1.setCellWidth(removeIcon, "16px");
+		hp1.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+		
+		vp.add(hp1);
+	}
+	
+	private void displayImageInEvidence(VerticalPanel vp, Integer counter, final MMpRelationship relationship) {
 
+		MOnlineImage image = (MOnlineImage)((MImageInDocumentSelector)relationship.getObjectElement().getSelector()).getTarget();
 		VerticalPanel hp1 = new VerticalPanel();
-		hp1.setWidth("432px");
+		hp1.setWidth("442px");
 		
 		boolean small = false;
 		boolean reduced = false;
@@ -632,23 +544,44 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		if(!small) {
 			
 			HorizontalPanel main = new HorizontalPanel();
+			main.setWidth("442px");
 			
 			//VerticalPanel actionsPanel = new VerticalPanel();
 			//actionsPanel.setHeight("100%");
 			
-		
-			final Image supportedByIcon = new Image(localResources.supportedBy());
-			supportedByIcon.setTitle("Supported By");
-			supportedByIcon.setStyleName(style.link());
-			supportedByIcon.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-					//box.setEnabled(false);
-					//_container.addImageAsData(_image);
-				}
-			});					
-			main.add(supportedByIcon);
-			main.setCellWidth(supportedByIcon, "22px");
+			if(relationship.getName().equals(IMicroPublicationsOntology.supportedBy)) {
+				final Image supportedByIcon = new Image(localResources.supportedBy());
+				supportedByIcon.setTitle("Supported By");
+				supportedByIcon.setStyleName(style.link());
+				supportedByIcon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						EvidenceRelationshipBubble bubble = new EvidenceRelationshipBubble(
+								_this, _domeo, _item, relationship, "");
+						int x = supportedByIcon.getAbsoluteLeft();
+						int y = supportedByIcon.getAbsoluteTop();
+						bubble.show(x, y);
+					}
+				});					
+				main.add(supportedByIcon);
+				main.setCellWidth(supportedByIcon, "22px");
+			} else if(relationship.getName().equals(IMicroPublicationsOntology.challengedBy)) {
+				final Image supportedByIcon = new Image(localResources.challengedBy());
+				supportedByIcon.setTitle("Supported By");
+				supportedByIcon.setStyleName(style.link());
+				supportedByIcon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						EvidenceRelationshipBubble bubble = new EvidenceRelationshipBubble(
+								_this, _domeo, _item, relationship, "");
+						int x = supportedByIcon.getAbsoluteLeft();
+						int y = supportedByIcon.getAbsoluteTop();
+						bubble.show(x, y);
+					}
+				});					
+				main.add(supportedByIcon);
+				main.setCellWidth(supportedByIcon, "22px");
+			}
 			
 			
 			VerticalPanel left = new VerticalPanel();
@@ -687,7 +620,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 				}
 			});					
 			main.add(removeIcon);
-			main.setCellWidth(removeIcon, "22px");
+			main.setCellWidth(removeIcon, "16px");
 			main.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_RIGHT);
 			
 			
@@ -702,8 +635,11 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			supportedByIcon.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					//box.setEnabled(false);
-					//_container.addImageAsData(_image);
+					EvidenceRelationshipBubble bubble = new EvidenceRelationshipBubble(
+							_this, _domeo, _item, relationship, "");
+					int x = supportedByIcon.getAbsoluteLeft();
+					int y = supportedByIcon.getAbsoluteTop();
+					bubble.show(x, y);
 				}
 			});					
 			main.add(supportedByIcon);
@@ -742,10 +678,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 				}
 			});					
 			main.add(removeIcon);
-			main.setCellWidth(removeIcon, "22px");
+			main.setCellWidth(removeIcon, "16px");
 			main.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_RIGHT);
-			
-
 			
 			hp1.add(main);	
 
@@ -757,5 +691,24 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		}				
 		vp.add(hp1);
 	
+	}
+
+	@Override
+	public void updateEvidence(MMicroPublication element, MMpRelationship evidence, String originalType, String newType) {
+		
+		//ArrayList<MMpRelationship> evidences = element.getEvidence();
+		//for(MMpRelationship ev: evidences) {
+		//	if()
+		//}
+		evidence.setName(newType);
+		
+		
+		// TODO Auto-generated method stub
+		//MImageInDocumentSelector imgSelector = AnnotationFactory.createImageSelector(_domeo, _domeo.getAgentManager().getUserPerson(), evidence.getObjectElement());
+		//MMpData imageData = new MMpData(imgSelector);
+		//MMpRelationship suportedBy = new MMpRelationship(imageData, IMicroPublicationsOntology.supportedBy);
+		//evidence.add(suportedBy);
+		//images.add(image);	
+		refreshSupport();
 	}
 }

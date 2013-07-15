@@ -43,4 +43,7 @@ public class MMicroPublication implements IMpSupportingElement {
 		argues = new MMpStatement(selector);
 	}
 
+	public ArrayList<MMpRelationship> getEvidence() {
+		return evidence;
+	}
 }
