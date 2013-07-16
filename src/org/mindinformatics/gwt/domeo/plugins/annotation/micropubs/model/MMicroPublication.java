@@ -34,6 +34,7 @@ public class MMicroPublication implements IMpSupportingElement {
 	
 	private MMpStatement argues;
 	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
+	private ArrayList<MMpRelationship> qualifiers = new ArrayList<MMpRelationship>();
 	
 	public MMicroPublication(HighlightedTextBuffer buffer) {
 		argues = new MMpStatement(buffer);
@@ -42,8 +43,24 @@ public class MMicroPublication implements IMpSupportingElement {
 	public MMicroPublication(MTextQuoteSelector selector) {
 		argues = new MMpStatement(selector);
 	}
+	
+	public MMpStatement getArgues() {
+		return argues;
+	}
 
 	public ArrayList<MMpRelationship> getEvidence() {
 		return evidence;
+	}
+
+	public void setEvidence(ArrayList<MMpRelationship> evidence) {
+		this.evidence = evidence;
+	}
+
+	public ArrayList<MMpRelationship> getQualifiers() {
+		return qualifiers;
+	}
+
+	public void setQualifiers(ArrayList<MMpRelationship> qualifiers) {
+		this.qualifiers = qualifiers;
 	}
 }

@@ -46,6 +46,10 @@ public class MMpStatement extends MMpElement {
 	}
 
 	public String getText() {
+		if(text==null || text.trim().length()==0) {
+			if(getSelector()!=null) return ((MTextQuoteSelector)getSelector()).getExact();
+			else return buffer.getExact();
+		}
 		return text;
 	}
 

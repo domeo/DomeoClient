@@ -181,6 +181,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 							((TextAnnotationFormsPanel)_manager).getHighlight().getPrefix(), ((TextAnnotationFormsPanel)_manager).getHighlight().getSuffix());
 						
 						MMicroPublication micropublication = MicroPublicationFactory.createMicroPublication((MTextQuoteSelector) selector);
+						micropublication.setQualifiers(qualifiers);
+						micropublication.setEvidence(evidence);
 						
 						MMicroPublicationAnnotation annotation = MicroPublicationFactory.createMicroPublicationAnnotation(
 							((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
