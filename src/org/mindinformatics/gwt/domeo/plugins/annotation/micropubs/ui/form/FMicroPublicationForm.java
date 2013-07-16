@@ -21,6 +21,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
@@ -33,6 +34,7 @@ import org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker.Refere
 import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.listpicker.IImagesListPickerContainer;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.listpicker.ImagesListPickerWidget;
+import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.ITrustedResourceDigester;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
@@ -44,15 +46,19 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPu
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpData;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationsResources;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.ISelectionProvider;
+import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.search.terms.SearchTermsWidget;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.IPubmedSearchObjectContainer;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedSearchWidget;
+import org.mindinformatics.gwt.framework.component.qualifiers.ui.ISearchTermsContainer;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.model.references.ISelfReference;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.src.IResizable;
@@ -87,7 +93,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public class FMicroPublicationForm extends AFormComponent implements IResizable, ISelectionProvider, 
-	IPubmedSearchObjectContainer, IImagesListPickerContainer, IReferencesListPickerContainer, IEvidenceRelationshipChangeListener {
+	IPubmedSearchObjectContainer, IImagesListPickerContainer, IReferencesListPickerContainer, IEvidenceRelationshipChangeListener, ISearchTermsContainer {
 
 	public static final String LABEL = "Micro Publication";
 	public static final String LABEL_EDIT = "Edit Micro Publication";
@@ -126,6 +132,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	@UiField VerticalPanel rightColumn;
 	@UiField TabBar tabBar;
 	@UiField ScrollPanel supportPanel;
+	@UiField ScrollPanel qualifiersPanel;
 	
 	//@UiField Image addDataImage;
 	
@@ -145,6 +152,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	//private ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
 	
 	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
+	private ArrayList<MMpRelationship> qualifiers = new ArrayList<MMpRelationship>();
 	
 	//private AntibodiesSearchWidget antibodiesSearchWidget;
 
@@ -209,6 +217,11 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		PubmedSearchWidget pubmedSearchWidget = new PubmedSearchWidget(_domeo, this, false);
 		tabs.add(pubmedSearchWidget);
 		tabBar.addTab("PubMed Search");
+		
+		SearchTermsWidget searchTermsWidget = new SearchTermsWidget(_domeo, this, false);
+		tabs.add(searchTermsWidget);
+		tabBar.addTab("Terms Search");
+		
 		
 		tabBar.addSelectionHandler(new SelectionHandler<Integer>() {
 			public void onSelection(SelectionEvent<Integer> event) {
@@ -374,6 +387,54 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		return "";
 	}
 	
+	public void refreshQualifiers() {
+		qualifiersPanel.clear();
+		
+		Integer counter = 0;
+		VerticalPanel vp = new VerticalPanel();
+		vp.setWidth("444px");
+		
+		for(MMpRelationship q: qualifiers) {
+			if(q.getObjectElement() instanceof MMpQualifier) {
+				MLinkedResource res = ((MMpQualifier)q.getObjectElement()).getQualifier();
+
+				StringBuffer sb = new StringBuffer();				
+				sb.append("<img src='" + Domeo.resources.tagIcon().getSafeUri().asString() + "'/> " +  "<b>" + res.getLabel()+"</b> from <a target=\"_blank\"href=\""+res.getSource().getUrl() +"\">"+
+						res.getSource().getLabel()+"</a>");
+				if(res.getDescription()!=null && res.getDescription().length()>0)
+					sb.append(", "+ res.getDescription());
+				boolean nodigester = true;
+				List<ITrustedResourceDigester> digesters = _domeo.getLinkedDataDigestersManager().getLnkedDataDigesters(res);
+				for(ITrustedResourceDigester digester: digesters) {
+					if(digester.getLinkLabel(res).trim().length()>0) {
+						sb.append(", <a target=\"_blank\"href=\""+digester.getLinkUrl(res)+"\">@"+digester.getLinkLabel(res)+"</a>&nbsp;");
+						nodigester = false;
+					}
+				}		
+				HorizontalPanel hp = new HorizontalPanel();
+				hp.setStyleName(style.indexWrapper());
+				hp.setWidth("444px");
+				hp.add(new HTML(sb.toString()));
+				vp.add(hp);
+				
+				final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
+				removeIcon.setStyleName(style.link());
+				removeIcon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						//box.setEnabled(false);
+						//_container.addImageAsData(_image);
+					}
+				});					
+				hp.add(removeIcon);
+				hp.setCellWidth(removeIcon, "16px");
+				hp.setCellHorizontalAlignment(removeIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+			}
+		}
+		
+		qualifiersPanel.add(vp);
+	}
+	
 	public void refreshSupport() {
 		supportPanel.clear();
 		
@@ -417,8 +478,6 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			vp.add(hp1);
 		}
 		*/
-		
-		
 		supportPanel.add(vp);
 	}
 
@@ -445,6 +504,18 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		//references.add(reference);
 		MMpReference referenceData = new MMpReference();
 		referenceData.setReference(reference);
+		
+		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
+		
+		evidence.add(suportedBy);
+		refreshSupport();
+	}
+	
+	@Override
+	public void addBibliographicObject(MAnnotationReference referenceAnnotation) {
+		//references.add(reference);
+		MMpReference referenceData = new MMpReference();
+		referenceData.setReference((MPublicationArticleReference)referenceAnnotation.getReference());
 		
 		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
 		
@@ -710,5 +781,23 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		//evidence.add(suportedBy);
 		//images.add(image);	
 		refreshSupport();
+	}
+
+	@Override
+	public void addAssociatedTerm(MLinkedResource term) {
+		//MMpReference referenceData = new MMpReference();
+		//referenceData.setReference((MPublicationArticleReference)referenceAnnotation.getReference());
+		MMpQualifier qualifier = new MMpQualifier();
+		qualifier.setQualifier(term);
+		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), qualifier, IMicroPublicationsOntology.supportedBy);
+		
+		qualifiers.add(suportedBy);
+		refreshQualifiers();
+	}
+
+	@Override
+	public ArrayList<MLinkedResource> getItems() {
+		// TODO Auto-generated method stub
+		return new  ArrayList<MLinkedResource>();
 	}
 }

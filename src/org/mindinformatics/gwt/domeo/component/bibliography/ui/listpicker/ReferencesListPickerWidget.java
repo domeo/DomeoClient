@@ -166,12 +166,13 @@ public class ReferencesListPickerWidget extends Composite implements IExceptionR
 //			hp.add(fp2);
 //			hp.setCellWidth(fp2, "18px");
 			
+			final int ii = i;
 			final CheckBox box = new CheckBox();
 			box.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					box.setEnabled(false);
-					//_container.addImageAsData(_image);
+					_container.addBibliographicObject(((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().get(ii));
 				}
 			});			
 			hp.add(box);

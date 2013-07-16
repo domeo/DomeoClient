@@ -265,7 +265,7 @@
 						          <g:header>
 						             Qualified By
 						          </g:header>
-						          <g:HTML><h2>Qualifiers</h2></g:HTML>
+						         <g:ScrollPanel ui:field='qualifiersPanel' styleName='{style.evidencePanel}'></g:ScrollPanel>
 						      </g:tab>
 						  </g:TabLayoutPanel>
 						  <!-- 
