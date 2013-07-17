@@ -96,7 +96,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 			sb.append("<ul class='tags'>");
 			
 			for(MMpRelationship rel: _annotation.getMicroPublication().getQualifiers()) {
-				sb.append("<li><a href='#'>" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getLabel()+ "</a></li>");
+				sb.append("<li><a href='" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getUrl() + "' target='_blank'>" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getLabel()+ "</a></li>");
 			}
 			
 			
