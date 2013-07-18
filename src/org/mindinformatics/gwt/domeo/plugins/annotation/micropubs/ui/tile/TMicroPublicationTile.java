@@ -93,24 +93,31 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 				}
 			});
 			
-			StringBuffer sb2 = new StringBuffer();
-			//for(MMpRelationship rel: _annotation.getMicroPublication().getEvidence()) {
-				sb2.append("Supported by: " + _annotation.getMicroPublication().getEvidence().size());
-			//}
-			support.setHTML(sb2.toString());
-			
-			// http://cssglobe.com/pure-css3-post-tags/
-			StringBuffer sb = new StringBuffer();
-			sb.append(" <ul class='tags'>");
-			sb.append("<li>&nbsp;&nbsp;&nbsp;Qualified by:</li>");
-			for(MMpRelationship rel: _annotation.getMicroPublication().getQualifiers()) {
-				sb.append("<li><a href='" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getUrl() + "' target='_blank'>" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getLabel()+ "</a></li>");
+			if(_annotation.getMicroPublication().getEvidence().size()>0) {
+				StringBuffer sb2 = new StringBuffer();
+				//for(MMpRelationship rel: _annotation.getMicroPublication().getEvidence()) {
+					sb2.append("Supported by: " + _annotation.getMicroPublication().getEvidence().size() + "<br/>");
+				//}
+				support.setHTML(sb2.toString());
+			} else {
+				support.setVisible(false);
 			}
 			
-			sb.append("</ul>");
-			tags.setHTML(sb.toString());
-			
-			
+			// http://cssglobe.com/pure-css3-post-tags/
+			if(_annotation.getMicroPublication().getQualifiers().size()>0) {
+				StringBuffer sb = new StringBuffer();
+				sb.append(" <ul class='tags'>");
+				//sb.append("<li>&nbsp;&nbsp;&nbsp;Qualified by:</li>");
+				for(MMpRelationship rel: _annotation.getMicroPublication().getQualifiers()) {
+					sb.append("<li><a href='" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getUrl() + "' target='_blank'>" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getLabel() + " <span class='source'>(" +  
+							((MMpQualifier)rel.getObjectElement()).getQualifier().getSource().getLabel() + ")</span></a></li>");
+				}
+				
+				sb.append("</ul>");
+				tags.setHTML(sb.toString());
+			} else {
+				tags.setVisible(false);
+			}
 			
 			/*
 			highlight.addMouseOverHandler(new MouseOverHandler() {
