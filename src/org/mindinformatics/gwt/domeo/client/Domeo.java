@@ -69,6 +69,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.tile.Highli
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.info.MicroPublicationsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form.MicroPublicationFormProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.tile.MicroPublicationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.search.AntibodySearchComponent;
@@ -158,8 +159,6 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Timer;
@@ -481,6 +480,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			annotationFormsManager.registerAnnotationForm(MMicroPublicationAnnotation.class.getName(),
 					new MicroPublicationFormProvider(this));
 		}
+		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
+				new MicroPublicationTileProvider(this));
 		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 

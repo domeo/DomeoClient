@@ -10,6 +10,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpElement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
@@ -47,6 +48,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 	@UiField Label type;
 	@UiField Label text;
 	@UiField HTML tags;
+	@UiField HTML support;
 	
 	public TMicroPublicationTile(IDomeo domeo, IAnnotationEditListener listener) {
 		super(domeo, listener);
@@ -91,18 +93,24 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 				}
 			});
 			
+			StringBuffer sb2 = new StringBuffer();
+			//for(MMpRelationship rel: _annotation.getMicroPublication().getEvidence()) {
+				sb2.append("Supported by: " + _annotation.getMicroPublication().getEvidence().size());
+			//}
+			support.setHTML(sb2.toString());
+			
 			// http://cssglobe.com/pure-css3-post-tags/
 			StringBuffer sb = new StringBuffer();
-			sb.append("<ul class='tags'>");
-			
+			sb.append(" <ul class='tags'>");
+			sb.append("<li>&nbsp;&nbsp;&nbsp;Qualified by:</li>");
 			for(MMpRelationship rel: _annotation.getMicroPublication().getQualifiers()) {
 				sb.append("<li><a href='" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getUrl() + "' target='_blank'>" + ((MMpQualifier)rel.getObjectElement()).getQualifier().getLabel()+ "</a></li>");
 			}
 			
-			
-			
 			sb.append("</ul>");
 			tags.setHTML(sb.toString());
+			
+			
 			
 			/*
 			highlight.addMouseOverHandler(new MouseOverHandler() {

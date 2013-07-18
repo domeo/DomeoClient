@@ -8,3 +8,4 @@ public class MMpData extends MMpElement implements IMpSupportingElement {
 		this.selector = selector;
 	}
 }
+ 

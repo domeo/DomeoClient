@@ -27,6 +27,10 @@
 		.contentItemIcon {
 			display:inline;	
 		}
+		.supportItem {
+			display:inline;	
+			font-size:11px;
+		}
 		.contentItemType {
 			font-weight: bold;
 			display:inline;	
@@ -61,6 +65,7 @@
 				<g:Label ui:field='type' styleName='{style.contentItemType}'></g:Label>
 				<g:Label ui:field='text' styleName='{style.contentItem}'></g:Label>
 				<g:HTML ui:field='tags' styleName='{style.contentItem}'></g:HTML>
+				<g:HTML ui:field='support' styleName='{style.supportItem}'></g:HTML>
 			</g:FlowPanel>
 		</g:SimplePanel>
 	</g:VerticalPanel>

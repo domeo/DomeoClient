@@ -29,6 +29,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormsManager;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.ATextFormsManager;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.TextAnnotationFormsPanel;
+import org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper;
 import org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker.IReferencesListPickerContainer;
 import org.mindinformatics.gwt.domeo.component.bibliography.ui.listpicker.ReferencesListPickerWidget;
 import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
@@ -143,6 +144,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	@UiField VerticalPanel referencePanel;
 	
+	private boolean hasChanged = false;
+	private MMicroPublicationAnnotation _ann;
 	private MMicroPublication _item;
 	private FMicroPublicationForm _this;
 	private ImagesListPickerWidget imagesListPickerWidget;
@@ -246,10 +249,11 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	public FMicroPublicationForm(IDomeo domeo, final AFormsManager manager, final MMicroPublicationAnnotation annotation) {
 		super(domeo);
 		_manager = manager;
-//		_item = annotation;
-//		
-//		initWidget(binder.createAndBindUi(this));
-//		
+		_ann = annotation;
+		_item = annotation.getMicroPublication();
+		
+		initWidget(binder.createAndBindUi(this));
+		
 //		try {
 //			if(_item.getComment()!=null) statementBody.setText(_item.getComment());
 //			refreshAnnotationSetFilter(annotationSet, annotation);
@@ -259,65 +263,111 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 //			_domeo.getLogger().exception(this, "Failed to display current annotation " + annotation.getLocalId());
 //			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
 //		}
-//		
-////		try {
-////			refreshAnnotationSetFilter(annotationSet, annotation);
-////			currentAntibody = annotation.getAntibodyUsage().getAntibody();
-////		} catch(Exception e) {
-////			_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this, "Failed to display current annotation " + annotation.getLocalId());
-////			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
-////		}
-//		
-//		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
-//		sameVersionButton.setStyleName(Domeo.resources.generalCss().applyButton());
-//		sameVersionButton.setWidth("78px");
-//		sameVersionButton.setHeight("22px");
-//		sameVersionButton.setResource(Domeo.resources.acceptLittleIcon());
-//		sameVersionButton.setText("Apply");
-//		sameVersionButton.addClickHandler(new ClickHandler() {
-//			public void onClick(ClickEvent event) {
-//				try {
-//					if(isContentInvalid()) return;
-//					if(!isContentChanged(_item)) {
-//						_domeo.getLogger().debug(this, "No changes to save for annotation " + _item.getLocalId());
-//						_manager.getContainer().hide();
-//						return;
+		
+		try {
+			refreshAnnotationSetFilter(annotationSet, annotation);
+		} catch(Exception e) {
+			_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this, "Failed to display current annotation " + annotation.getLocalId());
+			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
+		}
+		
+		statementBody.setText(_item.getArgues().getText());
+		evidence.addAll(_item.getEvidence());
+		qualifiers.addAll(_item.getQualifiers());
+		refreshSupport();
+		refreshQualifiers();
+		
+		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
+		sameVersionButton.setStyleName(Domeo.resources.generalCss().applyButton());
+		sameVersionButton.setWidth("78px");
+		sameVersionButton.setHeight("22px");
+		sameVersionButton.setResource(Domeo.resources.acceptLittleIcon());
+		sameVersionButton.setText("Apply");
+		sameVersionButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				try {
+					if(isContentInvalid()) return;
+					if(!isContentChanged(_ann)) {
+						_domeo.getLogger().debug(this, "No changes to save for annotation " + _ann.getLocalId());
+						_manager.getContainer().hide();
+						return;
+					}
+					
+					_item.getArgues().setText(statementBody.getText());
+					
+					_item.setQualifiers(qualifiers);
+					_item.setEvidence(evidence);
+					
+//					if(_manager instanceof TextAnnotationFormsPanel) {
+//						MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(
+//							_domeo.getAgentManager().getUserPerson(), 
+//							_domeo.getPersistenceManager().getCurrentResource(), ((TextAnnotationFormsPanel)_manager).getHighlight().getExact(), 
+//							((TextAnnotationFormsPanel)_manager).getHighlight().getPrefix(), ((TextAnnotationFormsPanel)_manager).getHighlight().getSuffix());
+//						
+//						MMicroPublication micropublication = MicroPublicationFactory.createMicroPublication((MTextQuoteSelector) selector);
+//						micropublication.setQualifiers(qualifiers);
+//						micropublication.setEvidence(evidence);
+//						
+//						MMicroPublicationAnnotation annotation = MicroPublicationFactory.createMicroPublicationAnnotation(
+//							((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
+//							_domeo.getAgentManager().getUserPerson(), 
+//							_domeo.getAgentManager().getSoftware(),
+//							_manager.getResource(), selector, 
+//							micropublication);
+//						
+//						if(getSelectedSet(annotationSet)==null) {
+//							_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
+//						} else {
+//							_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, getSelectedSet(annotationSet));
+//						}
+//						_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(annotation, ((TextAnnotationFormsPanel)_manager).getHighlight());
+//						_manager.hideContainer();
 //					}
-//					_item.setComment(statementBody.getText());
-////					_item.getProtocols().clear();
-////					_item.getAntibodyUsage().setAntibody(currentAntibody);
-//					
-//					_domeo.getContentPanel().getAnnotationFrameWrapper().updateAnnotation(_item, getSelectedSet(annotationSet));
-//					_manager.hideContainer();
-//				} catch(Exception e) {
-//					_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this, "Failed to apply modified anntoation " + annotation.getLocalId());
-//					displayDialog("Failed to apply modified annotation " + e.getMessage(), true);
-//				}
-//			}
-//		});
-//		buttonsPanel.add(sameVersionButton);
-//
-//		this.setHeight("100px");
-//		/*
-//		antibodiesSearchWidget = new AntibodiesSearchWidget(_domeo, this, Domeo.resources, false);
-//		// TODO If border is needed, there is a need for a wrapper. SearchTermWidget is one
-//		//AntibodiesSelectionList termsList = new AntibodiesSelectionList(_domeo, this, getAntibodiesList(), new HashMap<String, MLinkedDataResource>(0));
-//		tabs.add(antibodiesSearchWidget);
-//		//tabs.add(termsList);		
-//		 * 
-//		 */
-//		
-//		tabBar.addTab("Search for Antibodies");
-//		tabBar.addTab("Recently Used");
-//		tabBar.addSelectionHandler(new SelectionHandler<Integer>() {
-//			public void onSelection(SelectionEvent<Integer> event) {
-//				rightColumn.clear();
-//				rightColumn.add(tabs.get(event.getSelectedItem()));
-//			}
-//	    });
-//		
-//		rightColumn.add(tabs.get(0));
-//		//refreshAssociatedAntibodies();
+					
+					_domeo.getContentPanel().getAnnotationFrameWrapper().updateAnnotation(_ann, getSelectedSet(annotationSet));
+					_manager.hideContainer();
+				} catch(Exception e) {
+					_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this, "Failed to apply modified anntoation " + annotation.getLocalId());
+					displayDialog("Failed to apply modified annotation " + e.getMessage(), true);
+				}
+			}
+		});
+		buttonsPanel.add(sameVersionButton);
+
+		this.setHeight("100px");
+
+		imagesListPickerWidget = new ImagesListPickerWidget(_domeo, this, false);
+		tabs.add(imagesListPickerWidget);
+		tabBar.addTab("Images");
+		
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MPubMedDocument) {
+			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
+			tabs.add(referencesListPickerWidget);
+			tabBar.addTab("References");
+		}
+		
+		PubmedSearchWidget pubmedSearchWidget = new PubmedSearchWidget(_domeo, this, false);
+		tabs.add(pubmedSearchWidget);
+		tabBar.addTab("PubMed Search");
+		
+		SearchTermsWidget searchTermsWidget = new SearchTermsWidget(_domeo, this, false);
+		tabs.add(searchTermsWidget);
+		tabBar.addTab("Terms Search");
+		
+		
+		tabBar.addSelectionHandler(new SelectionHandler<Integer>() {
+			public void onSelection(SelectionEvent<Integer> event) {
+				rightColumn.clear();
+				rightColumn.add(tabs.get(event.getSelectedItem()));
+			}
+	    });
+		
+		rightColumn.add(tabs.get(0));
+		
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof ISelfReference && ((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()!=null) {
+			referencePanel.add(PubMedCitationPainter.getCitation((MPublicationArticleReference)(((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()).getReference()));
+		}
+		
 		resized();
 	}
 	
@@ -353,12 +403,11 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	@Override
 	public boolean isContentChanged(MAnnotation annotation) {
 		// TODO just checking the size is not right.
-//		if(_item!=null) {
-//			if(!_item.getAntibodyUsage().getAntibody().getUrl().equals(currentAntibody.getUrl())
-//					|| !statementBody.getText().equals(_item.getAntibodyUsage().getComment())) {
-//				return true;
-//			}
-//		}	
+		if(_item!=null) {
+			if(!_item.getArgues().getText().equals(statementBody.getText()) || hasChanged) {
+				return true;
+			}
+		}	
 		return false;
 	}
 
@@ -498,7 +547,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), imageData, IMicroPublicationsOntology.supportedBy);
 		evidence.add(suportedBy);	
-		refreshSupport();
+		hasChanged = true;
+		refreshSupport();		
 	}
 
 	@Override
@@ -510,6 +560,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
 		
 		evidence.add(suportedBy);
+		hasChanged = true;
 		refreshSupport();
 	}
 	
@@ -522,6 +573,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
 		
 		evidence.add(suportedBy);
+		hasChanged = true;
 		refreshSupport();
 	}
 
@@ -781,7 +833,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		//MMpData imageData = new MMpData(imgSelector);
 		//MMpRelationship suportedBy = new MMpRelationship(imageData, IMicroPublicationsOntology.supportedBy);
 		//evidence.add(suportedBy);
-		//images.add(image);	
+		//images.add(image);
+		hasChanged = true;
 		refreshSupport();
 	}
 
@@ -794,6 +847,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), qualifier, IMicroPublicationsOntology.supportedBy);
 		
 		qualifiers.add(suportedBy);
+		hasChanged = true;
 		refreshQualifiers();
 	}
 

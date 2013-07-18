@@ -23,6 +23,9 @@ public interface Resources extends ClientBundle,
 
 		@ClassName("af-applyButton")
 		String applyButton();
+		
+		@ClassName("tags")
+		String tags();
 	}
 	
 	@Source("org/mindinformatics/gwt/domeo/client/icons/domeo24x24.png")
