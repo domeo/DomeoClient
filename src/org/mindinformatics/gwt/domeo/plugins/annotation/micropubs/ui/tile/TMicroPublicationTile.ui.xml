@@ -64,8 +64,8 @@
 				<g:HTML ui:field='icon' styleName='{style.contentItemIcon}'></g:HTML>
 				<g:Label ui:field='type' styleName='{style.contentItemType}'></g:Label>
 				<g:Label ui:field='text' styleName='{style.contentItem}'></g:Label>
-				<g:HTML ui:field='tags' styleName='{style.contentItem}'></g:HTML>
 				<g:HTML ui:field='support' styleName='{style.supportItem}'></g:HTML>
+				<g:HTML ui:field='tags' styleName='{style.contentItem}'></g:HTML>
 			</g:FlowPanel>
 		</g:SimplePanel>
 	</g:VerticalPanel>
