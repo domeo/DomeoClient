@@ -2,7 +2,9 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.info;
 
 import org.mindinformatics.gwt.domeo.client.ui.annotation.plugins.APlugin;
 
-
+/**
+ * @author Richard Boyce  <rdb20@pitt.edu>
+ */
 public class SPLsPlugin extends APlugin {
 
     public static final String VERSION = "0.1";

@@ -3,14 +3,14 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.search;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.search.ASearchComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 
 /**
  * @author Richard Boyce  <rdb20@pitt.edu>
  */
-public class SPLSearchComponent extends ASearchComponent {
+public class SPLsSearchComponent extends ASearchComponent {
 
-	public SPLSearchComponent(IDomeo domeo) {
+	public SPLsSearchComponent(IDomeo domeo) {
 		super(domeo);
 	}
 	
@@ -19,8 +19,8 @@ public class SPLSearchComponent extends ASearchComponent {
 	 */
 	public boolean filterByText(MAnnotation annotation, String textSearch) {
 		if(super.filterByText(annotation, textSearch)) return true;
-		if(annotation instanceof MSPLAnnotation) {
-			return ((MSPLAnnotation)annotation).getText().toLowerCase()
+		if(annotation instanceof MSPLsAnnotation) {
+			return ((MSPLsAnnotation)annotation).getText().toLowerCase()
 					.contains(textSearch.toLowerCase());
 		}
 		return false;

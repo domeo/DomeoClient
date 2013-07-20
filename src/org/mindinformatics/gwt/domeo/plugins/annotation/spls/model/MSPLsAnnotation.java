@@ -2,7 +2,7 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
-import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 /**
  * @author Richard Boyce  <rdb20@pitt.edu>
