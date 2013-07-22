@@ -82,6 +82,7 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TabBar;
@@ -135,6 +136,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	@UiField ScrollPanel supportPanel;
 	@UiField ScrollPanel qualifiersPanel;
 	
+	@UiField RadioButton radioClaim;
+	@UiField RadioButton radioHypothesis;
 	//@UiField Image addDataImage;
 	
 	@UiField TextArea statementBody;
@@ -167,6 +170,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		initWidget(binder.createAndBindUi(this));
 	
 		refreshAnnotationSetFilter(annotationSet, null);
+		radioClaim.setValue(true);
 		statementBody.setText(getTextContent());
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
@@ -186,6 +190,13 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 						MMicroPublication micropublication = MicroPublicationFactory.createMicroPublication((MTextQuoteSelector) selector);
 						micropublication.setQualifiers(qualifiers);
 						micropublication.setEvidence(evidence);
+						
+
+						if(radioClaim.getValue()) {
+							micropublication.setType(MMicroPublication.CLAIM);
+						} else if(radioHypothesis.getValue()) {
+							micropublication.setType(MMicroPublication.HYPOTHESIS);
+						}
 						
 						MMicroPublicationAnnotation annotation = MicroPublicationFactory.createMicroPublicationAnnotation(
 							((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
@@ -274,6 +285,12 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
 		}
 		
+		if(_item.getType().equals("Claim")) {
+			radioClaim.setValue(true);
+		} else if(_item.getType().equals("Hypothesis")) {
+			radioHypothesis.setValue(true);
+		}
+		
 		statementBody.setText(_item.getArgues().getText());
 		evidence.addAll(_item.getEvidence());
 		qualifiers.addAll(_item.getQualifiers());
@@ -290,6 +307,10 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			public void onClick(ClickEvent event) {
 				try {
 					if(isContentInvalid()) return;
+					
+					if(radioClaim.getValue() && _item.getType().equals(MMicroPublication.HYPOTHESIS)) hasChanged = true;
+					if(radioHypothesis.getValue() && _item.getType().equals(MMicroPublication.CLAIM)) hasChanged = true;
+					
 					if(!isContentChanged(_ann)) {
 						_domeo.getLogger().debug(this, "No changes to save for annotation " + _ann.getLocalId());
 						_manager.getContainer().hide();
@@ -300,6 +321,12 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 					
 					_item.setQualifiers(qualifiers);
 					_item.setEvidence(evidence);
+					
+					if(radioClaim.getValue()) {
+						_item.setType(MMicroPublication.CLAIM);
+					} else if(radioHypothesis.getValue()) {
+						_item.setType(MMicroPublication.HYPOTHESIS);
+					}
 					
 //					if(_manager instanceof TextAnnotationFormsPanel) {
 //						MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(

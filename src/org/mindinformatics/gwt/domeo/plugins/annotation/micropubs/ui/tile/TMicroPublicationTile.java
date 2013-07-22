@@ -81,7 +81,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar("", provenance, "Claim", _annotation);
+			createProvenanceBar("", provenance, _annotation.getMicroPublication().getType(), _annotation);
 
 //			if(_annotation.getType() == PostitType.COMMENT_TYPE)
 //				icon.setHTML("<img src='" + Domeo.resources.littleCommentIcon().getSafeUri().asString() + "'/>");

@@ -111,7 +111,7 @@
 	  		color: #333;
 	  		font-style: normal;
 	  		width: 440px;
-	  		height: 130px;
+	  		height: 110px;
 	  		font-size: 12px;
 	  	}
 	  	
@@ -228,6 +228,11 @@
 					             Statement
 					          </g:header>
 								<g:VerticalPanel styleName='{style.inner2}'>
+									<g:HorizontalPanel>
+								  		<g:Label>Type:</g:Label>
+								  		<g:RadioButton ui:field="radioClaim" ui:name="mpType" ui:text="Claim" styleName='{style.elementType}'/>
+							  			<g:RadioButton ui:field="radioHypothesis" ui:name="mpType" styleName='{style.elementType}' ui:text="Hypothesis" />
+						  			</g:HorizontalPanel>
 						  			<g:TextArea ui:field='statementBody' styleName='{style.statementBody}'></g:TextArea>
 						  		</g:VerticalPanel>
 					      </g:tab>

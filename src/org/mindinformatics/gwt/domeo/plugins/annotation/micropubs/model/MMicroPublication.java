@@ -30,8 +30,12 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
  */
 public class MMicroPublication implements IMpSupportingElement {
 	
+	public static final String CLAIM = "Claim";
+	public static final String HYPOTHESIS = "Hypothesis";
+	
 	String id;
 	
+	private String type;
 	private MMpStatement argues;
 	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
 	private ArrayList<MMpRelationship> qualifiers = new ArrayList<MMpRelationship>();
@@ -44,6 +48,14 @@ public class MMicroPublication implements IMpSupportingElement {
 		argues = new MMpStatement(selector);
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public MMpStatement getArgues() {
 		return argues;
 	}
