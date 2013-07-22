@@ -122,8 +122,13 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 					if(statementsCounter==1) sb2.append("1 statement");
 					else sb2.append(statementsCounter + " statements");
 				}
-				if(refCounter>0 || statementsCounter>0) {
+				if(refCounter>0 && statementsCounter>0) {
 					if(dataCounter>0) sb2.append(" and ");
+				}
+				if(refCounter>0 || statementsCounter>0) {
+					if(dataCounter>0) sb2.append(", ");
+				}
+				if(refCounter>0) {
 					if(refCounter==1) sb2.append("1 reference");
 					else sb2.append(refCounter + " references");
 				}
