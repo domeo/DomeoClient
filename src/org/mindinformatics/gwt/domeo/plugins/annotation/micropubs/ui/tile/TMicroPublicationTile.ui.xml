@@ -7,17 +7,8 @@
 			width: 100%;
 			padding-top: 0px;
 		}
-		.content {
-			
+		.content {		
 			background-color: #fbfbfb;	
-			/*
-			-moz-border-radius: 15px;
-			border-radius: 15px;
-			*/
-			border-top-right-radius: 10px;	
-			-moz-border-radius-topright: 10px;
-			border-bottom-right-radius: 10px;
-			-moz-border-radius-bottomright: 10px;
 			padding:2px 2px 2px 0px;
 		}
 		.contentItem {
@@ -45,10 +36,6 @@
 		.provenance {
 			width: 100%;
 			background-color: #F1EFE2;	
-			border-top-right-radius: 10px;	
-			-moz-border-radius-topright: 10px;
-			border-bottom-right-radius: 10px;
-			-moz-border-radius-bottomright: 10px;
 			padding:3px 5px 3px 3px;
 			border-top: 1px #ccc dotted;
 		}

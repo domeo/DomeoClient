@@ -10,14 +10,6 @@
 		.content {
 			background-color: #fbfbfb;	
 			border-left: 4px solid #E7E4D3;
-			/*
-			-moz-border-radius: 15px;
-			border-radius: 15px;
-			*/
-			border-top-right-radius: 10px;	
-			-moz-border-radius-topright: 10px;
-			border-bottom-right-radius: 10px;
-			-moz-border-radius-bottomright: 10px;
 			padding:3px 5px 3px 3px;
 		}
 		.contentFrame {
@@ -35,10 +27,6 @@
 		.provenance {
 			width: 100%;
 			background-color: #E7E4D3;	
-			border-top-right-radius: 10px;	
-			-moz-border-radius-topright: 10px;
-			border-bottom-right-radius: 10px;
-			-moz-border-radius-bottomright: 10px;
 			padding:3px 5px 3px 3px;
 			border-top: 1px #ccc dotted;
 		}
