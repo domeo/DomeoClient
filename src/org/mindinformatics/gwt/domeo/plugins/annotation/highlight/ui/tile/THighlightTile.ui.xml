@@ -8,7 +8,7 @@
 			padding-top: 0px;
 		}
 		.content {
-			background-color: #fbfbfb;	
+			background-color: #f9f9f9;	
 			border-left: 4px solid #FFF380;	
 			padding:3px 5px 3px 3px;
 		}
@@ -18,7 +18,7 @@
 		.contentItem {
 			display:inline;	
 			font-style:italic;
-			font-size: 14px;
+			font-size:13px;
 		}
 		.provenance {
 			width: 100%;

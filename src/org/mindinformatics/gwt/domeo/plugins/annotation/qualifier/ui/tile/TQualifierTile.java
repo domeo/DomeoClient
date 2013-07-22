@@ -72,7 +72,7 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, "Qualifier", _annotation);
+			createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, (_annotation.getTerms().size()>1 ? "Qualifiers" : "Qualifier"), _annotation);
 			
 			StringBuffer sb2 = new StringBuffer();
 			

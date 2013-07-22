@@ -8,7 +8,7 @@
 			padding-top: 0px;
 		}
 		.content {
-			background-color: #fbfbfb;	
+			background-color: #f9f9f9;	
 			border-left: 4px solid #E7E4D3;
 			padding:3px 5px 3px 3px;
 		}
@@ -17,7 +17,7 @@
 		}
 		.contentItem {
 			display:inline;	
-			font-size: 14px;
+			font-size: 13px;
 		}
 		.contentItemType {
 			font-weight: bold;

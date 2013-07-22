@@ -26,6 +26,7 @@
 		.contentFrame {
 			padding: 0px 1px 1px 0px;	
 			border-left: 4px solid #EEEEEE;
+			overflow: hidden;
 		}
 		.provenance {
 			width: 100%;

@@ -8,30 +8,32 @@
 			padding-top: 0px;
 		}
 		.content {		
-			background-color: #fbfbfb;	
+			background-color: #f9f9f9;	
 			padding:2px 2px 2px 0px;
 		}
 		.contentItem {
 			display:inline;	
-			font-size: 12px;
+			font-size: 13px;
 		}
 		.contentItemIcon {
 			display:inline;	
 		}
 		.supportItem {
 			display:inline;	
-			font-size:11px;
+			font-size:12px;
 			padding-left: 2px;
+			font-style:italic;
 		}
 		.contentItemType {
 			font-weight: bold;
 			display:inline;	
 			padding-right: 4px;
-			font-size: 12px;
+			font-size: 13px;
 		}
 		.contentFrame {
 			padding: 0px 1px 1px 0px;	
 			border-left: 4px solid #F1EFE2;
+			overflow: hidden;
 		}
 		.provenance {
 			width: 100%;
