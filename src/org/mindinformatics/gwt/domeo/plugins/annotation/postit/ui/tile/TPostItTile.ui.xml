@@ -5,11 +5,11 @@
 	<ui:style>	
 		.body {
 			width: 100%;
-			padding-top: 4px;
+			padding-top: 0px;
 		}
 		.content {
-			
-			background-color: #F0F8FF;	
+			background-color: #fbfbfb;	
+			border-left: 4px solid #BBD9EE;
 			/*
 			-moz-border-radius: 15px;
 			border-radius: 15px;
@@ -33,11 +33,12 @@
 			padding-right: 4px;
 		}
 		.contentFrame {
-			padding: 0px 1px 4px 0px;	
+			padding: 0px 1px 1px 0px;	
 		}
 		.provenance {
 			width: 100%;
-			background-color: #fff;	
+			color: white;
+			background-color: #BBD9EE;	
 			border-top-right-radius: 10px;	
 			-moz-border-radius-topright: 10px;
 			border-bottom-right-radius: 10px;

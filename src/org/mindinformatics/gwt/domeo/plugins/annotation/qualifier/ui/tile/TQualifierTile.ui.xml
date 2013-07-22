@@ -5,7 +5,7 @@
 	<ui:style>	
 		.body {
 			width: 100%;
-			padding-top: 4px;
+			padding-top: 0px;
 		}
 		.content {
 			background-color: #F0F8FF;	
@@ -21,7 +21,8 @@
 		}
 		.contentItem {
 			display:inline;	
-			padding-right: 4px;
+			
+			font-size: 12px;
 		}
 		.contentItemType {
 			font-weight: bold;
@@ -31,7 +32,8 @@
 			background-color: #F0F8FF;	
 		}
 		.contentFrame {
-			padding: 0px 1px 4px 0px;	
+			padding: 0px 1px 1px 0px;	
+			border-left: 4px solid #EEEEEE;
 		}
 		.provenance {
 			width: 100%;
@@ -53,10 +55,13 @@
 			</g:HorizontalPanel>
 		</g:SimplePanel>
 		<g:SimplePanel styleName='{style.contentFrame}'>
+			<!--  
 			<g:FlowPanel styleName='{style.content}' ui:field='content'>
 				<g:HTML ui:field='icon' styleName='{style.contentItemType}'></g:HTML>
 				<g:HTML ui:field='description' styleName='{style.contentItem}'></g:HTML>
 			</g:FlowPanel>
+			-->
+			<g:HTML ui:field='description' styleName='{style.contentItem}'></g:HTML>
 		</g:SimplePanel>
 	</g:VerticalPanel>
 </ui:UiBinder>

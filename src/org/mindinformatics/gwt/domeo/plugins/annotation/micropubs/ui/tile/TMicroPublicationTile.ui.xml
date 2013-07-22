@@ -5,11 +5,11 @@
 	<ui:style>	
 		.body {
 			width: 100%;
-			padding-top: 4px;
+			padding-top: 0px;
 		}
 		.content {
 			
-			background-color: #F0F8FF;	
+			background-color: #fbfbfb;	
 			/*
 			-moz-border-radius: 15px;
 			border-radius: 15px;
@@ -22,7 +22,7 @@
 		}
 		.contentItem {
 			display:inline;	
-			font-size: 14px;
+			font-size: 12px;
 		}
 		.contentItemIcon {
 			display:inline;	
@@ -36,13 +36,15 @@
 			font-weight: bold;
 			display:inline;	
 			padding-right: 4px;
+			font-size: 12px;
 		}
 		.contentFrame {
-			padding: 0px 1px 4px 0px;	
+			padding: 0px 1px 1px 0px;	
+			border-left: 4px solid #F1EFE2;
 		}
 		.provenance {
 			width: 100%;
-			background-color: #fff;	
+			background-color: #F1EFE2;	
 			border-top-right-radius: 10px;	
 			-moz-border-radius-topright: 10px;
 			border-bottom-right-radius: 10px;
@@ -65,7 +67,7 @@
 				<g:FlowPanel styleName='{style.content}' ui:field='content'>
 					<g:HTML ui:field='icon' styleName='{style.contentItemIcon}'></g:HTML>
 					<g:Label ui:field='type' styleName='{style.contentItemType}'></g:Label>
-					<g:Label ui:field='text' styleName='{style.contentItem}'></g:Label>
+					<g:HTML ui:field='text' styleName='{style.contentItem}'></g:HTML>
 				</g:FlowPanel>
 				<g:HTML ui:field='support' styleName='{style.supportItem}'></g:HTML>
 				<g:HTML ui:field='tags' styleName='{style.contentItem}'></g:HTML>

@@ -5,10 +5,11 @@
 	<ui:style>	
 		.body {
 			width: 100%;
-			padding-top: 4px;
+			padding-top: 0px;
 		}
 		.content {
-			background-color: #F0F8FF;	
+			background-color: #fbfbfb;	
+			border-left: 4px solid #E7E4D3;
 			/*
 			-moz-border-radius: 15px;
 			border-radius: 15px;
@@ -20,7 +21,7 @@
 			padding:3px 5px 3px 3px;
 		}
 		.contentFrame {
-			padding: 0px 1px 4px 0px;	
+			padding: 0px 1px 1px 0px;	
 		}
 		.contentItem {
 			display:inline;	
@@ -33,7 +34,7 @@
 		}
 		.provenance {
 			width: 100%;
-			background-color: #fff;	
+			background-color: #E7E4D3;	
 			border-top-right-radius: 10px;	
 			-moz-border-radius-topright: 10px;
 			border-bottom-right-radius: 10px;

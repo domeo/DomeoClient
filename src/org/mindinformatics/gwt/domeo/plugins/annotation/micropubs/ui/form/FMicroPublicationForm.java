@@ -237,8 +237,11 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 		rightColumn.add(tabs.get(0));
 		
-		if(_domeo.getPersistenceManager().getCurrentResource() instanceof ISelfReference && ((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()!=null) {
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof ISelfReference && 
+				((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()!=null) {
 			referencePanel.add(PubMedCitationPainter.getCitation((MPublicationArticleReference)(((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()).getReference()));
+		} else {
+			referencePanel.add(new HTML("<a target='_blank' href='" + _domeo.getPersistenceManager().getCurrentResourceUrl() + "'>" + _domeo.getPersistenceManager().getCurrentResourceUrl() + "</a>"));
 		}
 		resized();
 	}
@@ -344,7 +347,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
 			tabs.add(referencesListPickerWidget);
 			tabBar.addTab("References");
-		}
+		} 
 		
 		PubmedSearchWidget pubmedSearchWidget = new PubmedSearchWidget(_domeo, this, false);
 		tabs.add(pubmedSearchWidget);
@@ -364,8 +367,11 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 		rightColumn.add(tabs.get(0));
 		
-		if(_domeo.getPersistenceManager().getCurrentResource() instanceof ISelfReference && ((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()!=null) {
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof ISelfReference && 
+				((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()!=null) {
 			referencePanel.add(PubMedCitationPainter.getCitation((MPublicationArticleReference)(((ISelfReference)_domeo.getPersistenceManager().getCurrentResource()).getSelfReference()).getReference()));
+		} else {
+			referencePanel.add(new HTML("<a target='_blank' href='" + _domeo.getPersistenceManager().getCurrentResourceUrl() + "'>" + _domeo.getPersistenceManager().getCurrentResourceUrl() + "</a>"));
 		}
 		
 		resized();
