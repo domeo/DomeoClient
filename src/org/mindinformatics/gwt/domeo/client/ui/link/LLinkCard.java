@@ -3,7 +3,9 @@ package org.mindinformatics.gwt.domeo.client.ui.link;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.popup.CurationPopup;
+import org.mindinformatics.gwt.framework.component.reporting.src.testing.JsonReportManager;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 import org.mindinformatics.gwt.utils.src.UrlUtils;
 
 import com.google.gwt.core.client.GWT;
@@ -24,7 +26,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class LLinkCard extends Composite {
+public class LLinkCard extends Composite implements ICommandCompleted {
 
 	interface Binder extends UiBinder<VerticalPanel, LLinkCard> { }
 	private static final Binder binder = GWT.create(Binder.class);
@@ -105,10 +107,14 @@ public class LLinkCard extends Composite {
 		final String documentUrl =  _domeo.getContentPanel().getAnnotationFrameWrapper().getUrl();
 		final String jumpLink =  UrlUtils.getAbsoluteLink(documentUrl, link);
 		
+		final ICommandCompleted _this = this;
 		annotatePageLabel.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				String finalLink = ApplicationUtils.getAnnotationToolLink(jumpLink);
+				Window.alert(finalLink);
+				JsonReportManager mgr = new JsonReportManager(_domeo, _this);
+				mgr.recordPathEntry(_domeo.getPersistenceManager().getCurrentResourceUrl(), finalLink);
 				openAnnotationWindow(finalLink);
 			}
 		});
@@ -153,5 +159,11 @@ public class LLinkCard extends Composite {
 		hp.add(annotateLinkPanel);
 		
 		body.add(hp);
+	}
+
+	@Override
+	public void notifyStageCompletion() {
+		// TODO Auto-generated method stub
+		
 	}
 }

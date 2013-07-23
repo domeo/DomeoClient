@@ -175,7 +175,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetrieveExistingBibliographySetHandler,*/ IRetrieveExistingAnnotationSetHandler, IRetrieveExistingAnnotationSetListHandler {
 	
 	public static final boolean verbose = false;
-	
+	public static final boolean pathfinder = true;
+
 	public static String APP_NAME = "Domeo";
 	public static String APP_VERSION = "b5";
 	public static String APP_VERSION_LABEL = "build 5";

@@ -172,3 +172,32 @@ function qualifyURL(url){
     img.src = null; // no server request
     return url;
 }
+
+function trackpath(completeLink, sourceFrom, sourceTo, username) {
+	try {
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		
+		var JSONstring = '{"user": "' + username + '","resourceFrom": "' + sourceFrom + '",' + 
+			'"resourceTo": "' + sourceTo + '"}';
+		
+		var params = "data=" + encodeURIComponent(JSONstring);
+		xmlhttp.open("POST", "reporting/path?format=json", true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.setRequestHeader("Content-length", params.length);
+		xmlhttp.setRequestHeader("Connection", "close");
+		//xmlhttp.onreadystatechange = serverSpeaks;
+		xmlhttp.send(params);
+	} catch (e) {
+		alert(e);
+	}
+	window.open(completeLink);
+}
+
