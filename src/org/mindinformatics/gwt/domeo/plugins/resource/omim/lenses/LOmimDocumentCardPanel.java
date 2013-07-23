@@ -92,6 +92,9 @@ public class LOmimDocumentCardPanel extends Composite implements IRefreshableCom
 				}
 			});
 			
+			int scrollerHeight = Window.getClientHeight()-80;
+			referencesPanel.setHeight("" + scrollerHeight + "px"); 
+			
 			refresh();
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, "Exception while initialing resource info " + e.getMessage());

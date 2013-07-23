@@ -1,8 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.resource.omim.extractors;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.component.bibliography.src.IBibliographicParameters;
 import org.mindinformatics.gwt.domeo.services.extractors.IContentExtractor;
@@ -47,7 +44,7 @@ public class OmimDocumentPipeline extends APipeline implements IContentExtractor
 		IStage subjectStage = new Stage(new OmimExtractSubjectCommand(application, application, this));
 		_stages.add(subjectStage);
 		
-		IStage referencesStage = new Stage(new OmimExtractBibliographicCitationsCommand(application, application, this));
+		IStage referencesStage = new Stage(new OmimExtractBibliographicReferencesCommand(application, application, this));
 		_stages.add(referencesStage);
 	}
 
