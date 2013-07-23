@@ -6,7 +6,7 @@ import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
 import org.mindinformatics.gwt.domeo.client.ui.east.resource.CitationReferencesPanel;
-import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LDocumentResourceCardPanel;
+import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LSlimDocumentResourceCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
@@ -152,7 +152,7 @@ public class LOmimDocumentCardPanel extends Composite implements IRefreshableCom
 		
 		// Generic Document Resource 
 		try {
-			LDocumentResourceCardPanel d = new LDocumentResourceCardPanel(_domeo);
+			LSlimDocumentResourceCardPanel d = new LSlimDocumentResourceCardPanel(_domeo);
 			d.initializeLens(_resource, _parameters);
 			contentPanel.clear();
 			contentPanel.add(d);
