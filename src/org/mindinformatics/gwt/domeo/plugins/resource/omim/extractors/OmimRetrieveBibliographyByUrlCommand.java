@@ -36,7 +36,7 @@ public class OmimRetrieveBibliographyByUrlCommand extends APubMedBibliograhyExtr
 		String url = _domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url!=null) {
 			try {
-				Window.alert("Retrieve existing bibliography");
+				//Window.alert("Retrieve existing bibliography");
 				//_completionCallback.notifyStageCompletion();
 				
 				PubMedManager pubMedManager = PubMedManager.getInstance();
