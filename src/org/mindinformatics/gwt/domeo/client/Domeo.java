@@ -475,6 +475,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				new AntibodySearchComponent(this));
 		
 		// Micropublications
+		/*
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
 		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), false);
 		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
@@ -483,6 +484,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
 				new MicroPublicationTileProvider(this));
+			*/
 		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 
