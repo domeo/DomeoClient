@@ -40,6 +40,8 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		annotationSetJson.put(IRdfsOntology.id, new JSONString(annotationSet.getIndividualUri()));
 		annotationSetJson.put(IDomeoOntology.transientLocalId, new JSONString(Long.toString(annotationSet.getLocalId())));
 		annotationSetJson.put(IDomeoOntology.annotates, new JSONString(annotationSet.getTargetResource().getUrl()));
+		manager.addResourceToSerialize(annotationSet.getTargetResource());
+		
 		
 		//  Creation
 		// --------------------------------------------------------------------

@@ -27,6 +27,7 @@ import org.mindinformatics.gwt.framework.component.agents.model.MAgentDatabase;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentGroup;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
+import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.model.references.MReference;
@@ -44,6 +45,7 @@ public class JsonSerializerManager {
 	
 	private HashMap<String, ISerializer> serializers = new HashMap<String, ISerializer>();
 	private HashMap<String, IAgent> agentsToSerialize = new HashMap<String, IAgent>();
+	private HashMap<String, MGenericResource> resourcesToSerialize = new HashMap<String, MGenericResource>();
 	
 	private JsonSerializerManager(IDomeo domeo) {
 		_domeo = domeo;
@@ -90,10 +92,12 @@ public class JsonSerializerManager {
 	public void initializeSerializerManager() {
 		_domeo.getLogger().debug(this, "Initializing serializer manager");
 		agentsToSerialize.clear();
+		resourcesToSerialize.clear();
 	}
 	
 	public void clearAgentsToSerialize() {
 		agentsToSerialize.clear();
+		resourcesToSerialize.clear();
 	}
 	
 	public void addAgentToSerialize(IAgent agent) {
@@ -101,8 +105,17 @@ public class JsonSerializerManager {
 			agentsToSerialize.put(agent.getUri(), agent);
 	}
 	
+	public void addResourceToSerialize(MGenericResource resource) {
+		if(!resourcesToSerialize.containsKey(resource.getUrl()))
+			resourcesToSerialize.put(resource.getUrl(), resource);
+	}
+	
 	public Collection<IAgent> getAgentsToSerialize() {
 		return agentsToSerialize.values();
+	}
+	
+	public Collection<MGenericResource> getResourcesToSerialize() {
+		return resourcesToSerialize.values();
 	}
 	
 	public void serialize(MDocumentAnnotation documentAnnotation) {

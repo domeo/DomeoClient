@@ -18,10 +18,13 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetriev
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsoAnnotationSetSummary;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsoAnnotationSummary;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonSerializerManager;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentDatabase;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
+import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
+import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
@@ -295,8 +298,35 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 					}
 				}
 				jsonSet.put(IDomeoOntology.agents, agents);
-				sets.set(i, jsonSet);
 				
+				int jsonResourcesCounter = 0;
+				JSONArray resources = new JSONArray();
+				for(MGenericResource resource: jsonSerializerManager.getResourcesToSerialize()) {
+					 if(resource instanceof MPubMedDocument) {
+						 
+						MPubMedDocument document = (MPubMedDocument) resource;
+						Window.alert(document.getUrl());
+						//JSONValue json = jsonSerializerManager.serialize(document);
+						JSONObject r = new JSONObject();
+						r.put("url", new JSONString(document.getUrl()));
+						r.put("label", new JSONString(document.getLabel()));					
+						if(document.getSelfReference().getReference() instanceof MPublicationArticleReference) {
+							MPublicationArticleReference ref = ((MPublicationArticleReference)document.getSelfReference().getReference());
+							if(ref.getPubMedId()!=null && ref.getPubMedId().trim().length()>0) r.put("pmid", new JSONString(ref.getPubMedId()));
+							if(ref.getDoi()!=null && ref.getDoi().trim().length()>0) r.put("doi", new JSONString(ref.getDoi()));
+						}
+						resources.set(jsonResourcesCounter++, r);
+					} else if(resource instanceof MGenericResource) {
+						MGenericResource gResource = (MGenericResource) resource;
+						JSONObject r = new JSONObject();
+						r.put("url", new JSONString(gResource.getUrl()));
+						r.put("label", new JSONString(gResource.getLabel()));
+						resources.set(jsonResourcesCounter++, r);
+					} 
+				}
+				jsonSet.put(IDomeoOntology.resources, resources);
+				
+				sets.set(i, jsonSet);
 				jsonSerializerManager.clearAgentsToSerialize();
 			}
 			
@@ -353,6 +383,32 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 					}
 				}
 				jsonSet.put(IDomeoOntology.agents, agents);
+				
+				int jsonResourcesCounter = 0;
+				JSONArray resources = new JSONArray();
+				for(MGenericResource resource: jsonSerializerManager.getResourcesToSerialize()) {
+					 if(resource instanceof MPubMedDocument) {
+						MPubMedDocument document = (MPubMedDocument) resource;
+						//JSONValue json = jsonSerializerManager.serialize(document);
+						JSONObject r = new JSONObject();
+						r.put("url", new JSONString(document.getUrl()));
+						r.put("label", new JSONString(document.getLabel()));					
+						if(document.getSelfReference().getReference() instanceof MPublicationArticleReference) {
+							MPublicationArticleReference ref = ((MPublicationArticleReference)document.getSelfReference().getReference());
+							if(ref.getPubMedId()!=null && ref.getPubMedId().trim().length()>0) r.put("pmid", new JSONString(ref.getPubMedId()));
+							if(ref.getDoi()!=null && ref.getDoi().trim().length()>0) r.put("doi", new JSONString(ref.getDoi()));
+						}
+						resources.set(jsonResourcesCounter++, r);
+					} else if(resource instanceof MGenericResource) {
+						MGenericResource gResource = (MGenericResource) resource;
+						JSONObject r = new JSONObject();
+						r.put("url", new JSONString(gResource.getUrl()));
+						r.put("label", new JSONString(gResource.getLabel()));
+						resources.set(jsonResourcesCounter++, r);
+					} 
+				}
+				jsonSet.put(IDomeoOntology.resources, resources);
+				
 				sets.set(i, jsonSet);
 				
 				jsonSerializerManager.clearAgentsToSerialize();

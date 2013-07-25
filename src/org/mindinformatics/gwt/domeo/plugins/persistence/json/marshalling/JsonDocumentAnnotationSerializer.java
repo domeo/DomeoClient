@@ -2,7 +2,6 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling;
 
 import org.mindinformatics.gwt.domeo.model.MDocumentAnnotation;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 
