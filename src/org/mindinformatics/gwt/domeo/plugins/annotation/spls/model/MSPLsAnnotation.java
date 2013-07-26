@@ -1,47 +1,69 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 
+import java.util.Set;
+
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 /**
- * @author Richard Boyce  <rdb20@pitt.edu>
+ * @author Richard Boyce <rdb20@pitt.edu>
  */
 @SuppressWarnings("serial")
-public class MSPLsAnnotation extends MAnnotation {
+    public class MSPLsAnnotation extends MAnnotation {
 
 	protected static final String LABEL = "SPL Annotation";
-	public static final String TYPE = "ao:SPL_Annotation";
+	public static final String TYPE = "ao:SPLAnnotation";
+	public static final String BODY_TYPE = "domeo:PharmgxUsage";
 	
-	private SPLType type;
-	private MContentAsRdf body;
+	private MSPLPharmgxUsage pharmgxUsage;
 
-	public MContentAsRdf getBody() {
-		return body;
+	public MSPLPharmgxUsage getPharmgxUsage() {
+	    return pharmgxUsage;
 	}
-	public void setBody(MContentAsRdf body) {
-		this.body = body;
+
+	public void setPharmgxUsage(MSPLPharmgxUsage pharmgxUsage) {
+	    this.pharmgxUsage = pharmgxUsage;
 	}
-	public SPLType getType() {
-		return type;
+
+	public String getComment() {
+	    return pharmgxUsage.getComment();
 	}
-	public void setType(SPLType type) {
-		this.type = type;
+
+	public void setComment(String comment) {
+	    pharmgxUsage.setComment(comment);
 	}
+
 	public String getText() {
-		return body.getChars();
+	    return pharmgxUsage.getPharmgx().getLabel();
 	}
-	public void setText(String text) {
-		body.setChars(text);
+	
+	public Set<MLinkedResource> getSioDescriptions(){
+	    return pharmgxUsage.getSioDescriptions();
+	}
+
+	public void addSioDescription(MLinkedResource sioDescriptionAnnot){
+	    pharmgxUsage.getSioDescriptions().add(sioDescriptionAnnot);
+	}
+
+	public void addSioDescriptions(Set<MLinkedResource> sioDescriptions) {
+	    pharmgxUsage.getSioDescriptions().addAll(sioDescriptions);
+	}
+
+	public MLinkedResource getSubject(){
+	    return pharmgxUsage.getSubject();
+	}
+
+	public void setSubject(MLinkedResource subject){
+	    pharmgxUsage.setSubject(subject);
 	}
 	
 	@Override
-	public String getLabel() {
-		return LABEL;
+	    public String getLabel() {
+	    return LABEL;
 	}
 	
 	@Override
-	public String getAnnotationType() {
-		return TYPE;
+	    public String getAnnotationType() {
+	    return TYPE;
 	}
-}
+    }

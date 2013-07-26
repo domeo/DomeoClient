@@ -14,6 +14,7 @@ public class SPLsSearchComponent extends ASearchComponent {
 		super(domeo);
 	}
 	
+	
 	/**
 	 * The search on the text match is NOT case sensitive.
 	 */

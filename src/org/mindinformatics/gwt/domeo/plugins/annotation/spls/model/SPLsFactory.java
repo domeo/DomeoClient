@@ -64,10 +64,10 @@ public class SPLsFactory extends AnnotationFactory {
     }
 	
     public static MSPLPharmgxUsage createSPLPharmgxUsage() {
-	usage = new MSPLPharmgxUsage();
-	usage.setLocalId(getLocalId());
-	usage.setIndividualUri(getUrn(getUuid()));
-	return usage;
+    	MSPLPharmgxUsage usage = new MSPLPharmgxUsage();
+    	usage.setLocalId(getLocalId());
+    	usage.setIndividualUri(getUrn(getUuid()));
+    	return usage;
     }
 	
     public static MSPLsAnnotation createSPLsAnnotation(

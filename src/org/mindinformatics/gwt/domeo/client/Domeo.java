@@ -89,6 +89,12 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.postit.search.PostItSear
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.ui.card.PostItCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.ui.form.PostItFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.ui.tile.PostItTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.search.SPLsSearchComponent;
+//import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card.SPLsCardProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form.SPLsFormProvider;
+//import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile.SPLsTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.HQualifierHelper;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
@@ -421,7 +427,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		pluginsManager.registerPlugin(SelectionPlugin.getInstance(), true);
 		annotationTailsManager.registerAnnotationTile(MSelectionAnnotation.class.getName(), 
 				new SelectionTileProvider(this));
-
+		
 		// Highlight
 		pluginsManager.registerPlugin(HighlightPlugin.getInstance(), true);
 		annotationTailsManager.registerAnnotationTile(MHighlightAnnotation.class.getName(), 
@@ -483,6 +489,11 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 
 				new CommentTileProvider(this));
+		
+		// SPLs
+		pluginsManager.registerPlugin(SPLsPlugin.getInstance(), true);
+		annotationFormsManager.registerAnnotationForm(MSPLsAnnotation.class.getName(),
+				new SPLsFormProvider(this));
 		
 		// Digesters
 		linkedDataDigestersManager.registerLnkedDataDigester(new NifStandardDigester());

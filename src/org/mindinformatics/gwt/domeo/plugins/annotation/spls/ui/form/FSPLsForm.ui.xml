@@ -1,109 +1,189 @@
 <ui:UiBinder
-  xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
-  	<ui:style>
-	  	.outer {
-		    height: 30px;
-		    padding-left: 14px;
-		    padding-top: 12px;
-		    width: 100%;
-	 	}
-	 	
-	 	.buttonsPanel {
-			position: absolute;
-			right: 20px;
-	  		float:right;
-	  		padding-top:4px;
-	  		padding-right: 0px;
-	  		height: 0px;
-	  		max-height: 20px;
-	  		display: block;
-	  	}
-	  	
-	  	.setPanel {
-	  		padding-right: 5px;	
-	  	}
-	  	
-	  	.rightColumn {
-	  		padding-left:5px;
-	  		padding-top: 24px;
-	  		width: 100%;
-	  		min-width: 598px;	
-	  		height: 300px;
-	  	}
-	  	
-	  	.leftColumn {
-	  		width: 464px;	
-	  		vertical-align: top;
-	  	}
-	  	
-	  	.panel {
-	  		width: 100%;
-	  		vertical-align: top;
-	  		padding: 5px;
-	  	}
-	  	
-	  	.provenance {
-	 		backgorund-color: gray;
-	 		padding-top: 3px;
-	 		padding-left: 10px;
-	 		cursor: pointer;
-    		cursor: hand;
-	 	}
-	 	
-	 	.types {
-	  		padding-bottom: 2px;
-	  	}
-	  	
-	  	.typesLabel {
-	  		padding-top: 2px;
-	  		padding-right: 4px;
-	  	}
-	  	
-	  	.elementType {
-	  		padding-right: 2px;
-	  	}
-	  	
-	  	.annotationText {
-	  		padding-top: 3px;
-	  		padding-left: 3px;
-	  		color: #333;
-	  		font-style: normal;
-	  		width: 460px;
-	  		height: 140px;
-	  		font-size: 12px;
-	  	}
-  	</ui:style>
-  	
-  	<!--  
-  	<ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' /> 
-	-->
+  <ui:style>
+    .outer {
+    height: 30px;
+    padding-left: 0px;
+    padding-top: 0px;
+    width: 100%;
+    }
+    
+    .buttonsPanel {
+    position: absolute;
+    right: 20px;
+    float:right;
+    padding-top:4px;
+    padding-right: 0px;
+    padding-left: 2px;
+    height: 0px;
+    max-height: 20px;
+    display: block;
+    }
+    
+    .setPanel {
+    padding-right: 5px;	
+    }
+    
+    .rightColumn {
+    padding-left:0px;
+    /*padding-top: 24px;*/
+    width: 100%;
+    min-width: 598px;	
+    height: 300px;
+    }
+    
+    .leftColumn {
+    width: 464px;	
+    vertical-align: top;
+    }
+    
+    .panel {
+    width: 100%;
+    vertical-align: top;
+    padding-top: 10px;
+    }
+    
+    .provenance {
+    backgorund-color: gray;
+    padding-top: 3px;
+    padding-left: 10px;
+    cursor: pointer;
+    cursor: hand;
+    }
+    
+    .subTitle {
+    /*width: 99%;*/
+    background-color: #eee;
+    padding-left: 4px;
+    padding-right: 14px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-weight: bold;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px; 	 		
+    }
+    
+    .subPanel {
+    min-height: 40px;	
+    }
+    
+    .newQualifierPanel {
+    min-height: 26px;	
+    display: inline;
+    }
+    
+    .inner {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    cursor: pointer;
+    cursor: hand;
+    }
+    
+    .inner2 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    }
+    
+    .qualifiersLabel {
+    font-weight: bold;
+    padding-right:3px;
+    }
+    
+    .titlebar {
+    width: 460px;	
+    background-color:#DDDDDD;
+    border-top:3px solid white;
+    }
+    
+    .commentBody {
+    padding-top: 3px;
+    padding-left: 3px;
+    color: #333;
+    font-style: normal;
+    width: 452px;
+    height: 100px;
+    font-size: 12px;
+    }
+    
+    .elementType {
+    padding-right: 2px;
+    display: inline;
+    white-space: nowrap;
+    }
+    
+    z.titleLeft {
+    padding-left:4px;
+    }	  	
+  </ui:style>
+  
+  <!--  
+       <ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' /> 
+  -->
 
-  	<g:VerticalPanel styleName='{style.outer}'>
-  		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
-  			<g:SimplePanel styleName='{style.setPanel}'>
-  		    	<g:ListBox ui:field='annotationSet'></g:ListBox>
-  		    </g:SimplePanel>
-	  	</g:HorizontalPanel>
-	  	<g:HorizontalPanel styleName='{style.panel}'>
-			<g:cell width="466px">
-	  			<g:VerticalPanel styleName='{style.leftColumn}'>
-	  				<g:HorizontalPanel ui:field='header' styleName='{style.provenance}'>
-			  			<g:Label ui:field="createdBy" />
-			  			<g:Label ui:field="createdOn" />
-				  	</g:HorizontalPanel>
-				  	<g:HorizontalPanel ui:field='deTypes' styleName='{style.types}'>
-				  		<g:Label styleName='{style.typesLabel}'>Type</g:Label>
-				  		<g:ListBox ui:field="postitTypes"></g:ListBox>
-				  	</g:HorizontalPanel>
-	  				<g:TextArea ui:field='annotationBody' styleName='{style.annotationText}'></g:TextArea>
-	  			</g:VerticalPanel>
-	  		</g:cell>
-	  		<g:cell>
-			  	<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
-			  	</g:VerticalPanel>
-		  	</g:cell>
-  		</g:HorizontalPanel>
-  	</g:VerticalPanel>
+  <g:VerticalPanel ui:field='container' styleName='{style.outer}'>
+    <g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
+      <g:SimplePanel styleName='{style.setPanel}'>
+	<g:ListBox ui:field='annotationSet'></g:ListBox>
+      </g:SimplePanel>
+    </g:HorizontalPanel>
+    <g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
+      <g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>Pharmgx Annotation:</g:Label>
+      <g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
+    </g:HorizontalPanel>
+    <!-- g:cell height="30px">
+	 <g:FlowPanel ui:field='newQualifiers' styleName='{style.newQualifierPanel}'></g:FlowPanel>
+	 </g:cell>  -->
+    
+    <g:HorizontalPanel styleName='{style.panel}'>
+      <g:cell width="466px">
+	<g:VerticalPanel styleName='{style.leftColumn}'>
+	  <g:HorizontalPanel styleName='{style.titlebar}'>
+	    <g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>PK Impact:</g:Label>
+	  </g:HorizontalPanel>
+	  <g:HorizontalPanel ui:field='header3' styleName='{style.inner}'>
+	    <g:CheckBox ui:field="descriptpkdm" name="descript" styleName='{style.elementType}' text="Decreased Metabolism" />
+	    <g:CheckBox ui:field="descriptpkim" name="descript" styleName='{style.elementType}' text="Increased Metabolism" />
+	  </g:HorizontalPanel>
+	  <g:HorizontalPanel styleName='{style.titlebar}'>
+	    <g:Label ui:field="pdLabel" styleName='{style.titleLeft}'>PD Impact:</g:Label>
+	  </g:HorizontalPanel>
+	  <g:HorizontalPanel styleName='{style.inner}'>
+	    <g:CheckBox ui:field="descriptpddt" name="descript" styleName='{style.elementType}' text="Decreased Tox Risk" />
+	    <g:CheckBox ui:field="descriptpdit" name="descript" styleName='{style.elementType}' text="Increased Tox Risk" />
+	  </g:HorizontalPanel>
+	  <g:HorizontalPanel styleName='{style.titlebar}'>
+	    <g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose Recommendation:</g:Label>
+	  </g:HorizontalPanel>
+	  <g:HorizontalPanel ui:field='header5' styleName='{style.inner}'>
+	    <g:CheckBox ui:field="descriptdrdfb" name="descript" styleName='{style.elementType}' text="Decrease from baseline" />
+	    <g:CheckBox ui:field="descriptdrifb" name="descript" styleName='{style.elementType}' text="Increase from baseline" />
+	  </g:HorizontalPanel>
+	  <g:HorizontalPanel styleName='{style.titlebar}'>
+	    <g:Label ui:field="monitLabel" styleName='{style.titleLeft}'>Monitoring Recommendation:</g:Label>
+	  </g:HorizontalPanel>
+	  <g:HorizontalPanel styleName='{style.inner}'>
+	    <g:CheckBox ui:field="descriptmreq" name="descript" styleName='{style.elementType}' text="Required" />
+	    <g:CheckBox ui:field="descriptmrec" name="descript" styleName='{style.elementType}' text="Recommended" />
+	  </g:HorizontalPanel>
+	  <g:VerticalPanel styleName='{style.inner2}'>
+	    <g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Note:</g:Label>
+	    <g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
+	  </g:VerticalPanel>
+	</g:VerticalPanel>
+      </g:cell>
+      <g:cell>
+	<g:VerticalPanel>
+	  <g:cell height="30px">
+	    <g:TabBar ui:field="tabBar" height="25px"/>
+	  </g:cell>
+	  <g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+	    
+	  </g:VerticalPanel>
+	</g:VerticalPanel>
+      </g:cell>
+    </g:HorizontalPanel>
+  </g:VerticalPanel>
 </ui:UiBinder>

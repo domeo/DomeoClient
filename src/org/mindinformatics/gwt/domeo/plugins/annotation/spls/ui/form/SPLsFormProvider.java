@@ -21,8 +21,10 @@ public class SPLsFormProvider implements IFormGenerator {
 	
 	@Override
 	public boolean isFormSupported(String annotationName) {
-		if(annotationName.equals(MSPLsAnnotation.class.getName())) return true;
-		return false;
+		if(annotationName.equals(MSPLsAnnotation.class.getName())) 
+				return true;
+		else
+			return false;
 	}
 	
 	@Override
@@ -37,7 +39,9 @@ public class SPLsFormProvider implements IFormGenerator {
 
 	@Override
 	public AFormComponent getForm(String annotationName, AFormsManager manager) {
-		if(isFormSupported(annotationName)) return new FSPLsForm(_domeo,  manager);
-		return null;
+		if(isFormSupported(annotationName)) 
+			return new FSPLsForm(_domeo,  manager);
+		else 
+			return null;
 	}
 }
