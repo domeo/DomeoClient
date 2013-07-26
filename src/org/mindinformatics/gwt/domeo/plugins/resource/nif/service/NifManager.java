@@ -1,15 +1,21 @@
 package org.mindinformatics.gwt.domeo.plugins.resource.nif.service;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
-import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalTextminingRequestCompleted;
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextMiningConnector;
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
+import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.annotator.FNifAnnotatorParametrizationForm;
+import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.annotator.PNifAnnotatorParameters;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.src.NifJsonConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.src.StandaloneNifConnector;
+
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class NifManager {
+public class NifManager implements ITextMiningConnector{
 
+	private IDomeo _domeo;
 	private INifConnector _connector;
 	
 	private NifManager() {}
@@ -19,8 +25,9 @@ public class NifManager {
 		return _instance;
 	}
 	
-	public INifConnector selectConnector(IDomeo domeo) {
-		if(_connector!=null) return _connector;
+	public boolean selectConnector(IDomeo domeo) {
+		if(_connector!=null) return true;
+		_domeo = domeo;
 		if(domeo.isStandaloneMode()) {
 			_connector = new StandaloneNifConnector();
 		} else {
@@ -31,10 +38,8 @@ public class NifManager {
 				_connector = new NifJsonConnector(domeo);
 			}
 		}
-		
-		domeo.getLogger().debug(this, "Nif Connector selected: " + _connector.getClass().getName());
-		
-		return _connector;
+		domeo.getLogger().debug(this, "Nif Connector selected: " + _connector.getClass().getName());	
+		return false;
 	} 
 	
 	public void searchData(final INifDataRequestCompleted completionCallback,
@@ -45,11 +50,28 @@ public class NifManager {
 		} else throw new IllegalArgumentException("No Nif Connector selected");
 	}
 
-	public void annotate(final IBioPortalTextminingRequestCompleted completionCallback,
-			String url, String textContent, String virtualIds) throws IllegalArgumentException {
+	@Override
+	public void annotate(final ITextminingRequestCompleted completionCallback,
+			String url, String textContent, String... params) throws IllegalArgumentException {
 		if (_connector!=null) {
-			 _connector.annotate(completionCallback, url, textContent, "", "");
-		} else throw new IllegalArgumentException("No Nif Connector selected");
-		
+			 _connector.annotate(completionCallback, url, textContent, 
+				 PNifAnnotatorParameters.getInstance().includeCat,
+				 PNifAnnotatorParameters.getInstance().excludeCat,
+				 PNifAnnotatorParameters.getInstance().minLength,
+				 PNifAnnotatorParameters.getInstance().longestOnly,
+				 PNifAnnotatorParameters.getInstance().includeAbbrev,
+				 PNifAnnotatorParameters.getInstance().includeAcronym,
+				 PNifAnnotatorParameters.getInstance().includeNumbers);
+		} else throw new IllegalArgumentException("No Nif Connector selected");		
+	}
+	
+	@Override
+	public String getAnnotatorLabel() {
+		return "NIF Annotator Web Service";
+	}
+
+	@Override
+	public Widget getAnnotatorPanel() {
+		return new FNifAnnotatorParametrizationForm(_domeo);
 	}
 }

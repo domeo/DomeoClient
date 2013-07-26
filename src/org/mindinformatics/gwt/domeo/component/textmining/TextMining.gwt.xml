@@ -13,4 +13,5 @@
 
   <!-- Specify the paths for translatable code                    -->
   <source path='src'/>
+  <source path='ui'/>
 </module>

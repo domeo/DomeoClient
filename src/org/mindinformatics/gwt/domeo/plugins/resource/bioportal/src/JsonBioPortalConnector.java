@@ -2,12 +2,12 @@ package org.mindinformatics.gwt.domeo.plugins.resource.bioportal.src;
 
 import java.util.ArrayList;
 
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.model.JsoBioPortalEntry;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.model.JsoBioPortalSearchResultsWrapper;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalItemsRequestCompleted;
-import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalTextminingRequestCompleted;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
@@ -164,7 +164,7 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 
 	@Override
 	public void textmine(
-			final IBioPortalTextminingRequestCompleted completionCallback,
+			final ITextminingRequestCompleted completionCallback,
 			String source, String textContent, String virtualIds)
 			throws IllegalArgumentException {
 		String url = GWT.getModuleBaseURL() + "bioportal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + "&ontologies=" + virtualIds;

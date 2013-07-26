@@ -234,7 +234,7 @@ public class RelationshipAnnotationFormsPanel extends AFormsManager implements I
 		
 		try {
 			BioPortalManager bioPortalManager = BioPortalManager.getInstance();
-			bioPortalManager.selectBioPortalConnector(_domeo);
+			bioPortalManager.selectConnector(_domeo);
 			bioPortalManager.searchTerms(this, "");
 		} catch(Exception exc) {
 			_domeo.getLogger().exception( 

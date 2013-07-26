@@ -226,7 +226,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 							new EnhancedGlassPanel(_domeo, tmsp, tmsp.getTitle(), 800, false, false, false);
 						} else {
 							_domeo.getLogger().debug(this, "No text to textmine...");
-							_domeo.getContentPanel().getAnnotationFrameWrapper().clearSelection(frameDocument);
+							_domeo.getContentPanel().getAnnotationFrameWrapper().clearSelection();
 							_domeo.getToolbarPanel().deselectAnalyze();
 							_domeo.getProgressPanelContainer().setWarningMessage("No text has been selected for textmining!");
 						}

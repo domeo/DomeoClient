@@ -53,6 +53,7 @@ import org.mindinformatics.gwt.domeo.component.cache.images.src.ImagesCache;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.LinkedDataDigestersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.model.JsoLinkedDataResource;
+import org.mindinformatics.gwt.domeo.component.textmining.src.TextMiningRegistry;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineResource;
@@ -66,10 +67,6 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlig
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.search.HighligthSearchComponent;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.card.HighlightCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.tile.HighlightTileProvider;
-import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.info.MicroPublicationsPlugin;
-import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form.MicroPublicationFormProvider;
-import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.tile.MicroPublicationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.search.AntibodySearchComponent;
@@ -104,10 +101,12 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotation
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.info.BioPortalPlugin;
+import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.BioPortalManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.info.DocumentPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LDocumentResourceCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.digesters.NifStandardDigester;
+import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.NifManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.info.OmimPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.lenses.LOmimDocumentCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
@@ -534,6 +533,12 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			sidePanelsFacade.registerSideComponent(annotationsDebugSideTab, annotationDebugSidePanel, (AnnotationDebugSideTab.HEIGHT+16) + "px");
 		}
 		
+		// -----------------------------------
+		//  TEXT MINING SERVICES REGISTRATION
+		// ===================================
+		TextMiningRegistry.getInstance(this).registerTextMiningService(BioPortalManager.getInstance());
+		TextMiningRegistry.getInstance(this).registerTextMiningService(NifManager.getInstance());
+		
 		RootPanel rpp = RootPanel.get();
 		rpp.add(sideTabPanel);
 
@@ -565,7 +570,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	    	}
 	    });
 		
-		this.logger.info(this, "Creation Domeo completed");
+		this.logger.info(this, "Domeo Creation completed");
+		this.logger.info(this, "-------------------------------------");
 		extractorsManager = new ContentExtractorsManager(this);
 		componentsManager.addComponent(extractorsManager);
 		

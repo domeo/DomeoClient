@@ -191,7 +191,17 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		focusParentElement = null;
 	}
 	
-	public native void clearSelection(Document frameDocument) /*-{
+	public void clearSelection() {
+		IFrameElement iframe = IFrameElement.as(this.getFrame().getElement());
+		final Document frameDocument = iframe.getContentDocument();
+		clrSelections(frameDocument);
+	}
+	
+	public void clearSelection(Document frameDocument) {
+		clrSelections(frameDocument);
+	}
+	
+	public native void clrSelections(Document frameDocument) /*-{
 		if ($wnd.getSelection) {
 			$doc.getElementById($wnd.FRAME_ID).contentWindow.window.getSelection().removeAllRanges();
 		} else if(frameDocument.getSelection) {

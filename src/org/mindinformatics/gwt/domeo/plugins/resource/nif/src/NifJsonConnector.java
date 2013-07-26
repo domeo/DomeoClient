@@ -2,9 +2,9 @@ package org.mindinformatics.gwt.domeo.plugins.resource.nif.src;
 
 import java.util.ArrayList;
 
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibody;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
-import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalTextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.model.JsoNifDataEntry;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.model.JsoNifDataSearchResultsWrapper;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.INifConnector;
@@ -263,12 +263,19 @@ public class NifJsonConnector implements INifConnector {
 
 	@Override
 	public void annotate(
-			final IBioPortalTextminingRequestCompleted completionCallback,
-			String source, String textContent, String include, String exclude)
+			final ITextminingRequestCompleted completionCallback,
+			String source, String textContent, String include, String exclude, int minLength, 
+			boolean longestOnly, boolean includeAbbrev, 
+			boolean includeAcronym, boolean includeNumbers)
 			throws IllegalArgumentException {
-		String url = GWT.getModuleBaseURL() + "nif/annotate?format=json&content=" + URL.encode(textContent) + "&url=" + source + "&categoriesIn=" + include + "&categoriesOut=" + exclude;
+		
+		String url = GWT.getModuleBaseURL() + "nif/annotate?format=json&content=" + URL.encode(textContent) + 
+				"&url=" + source + "&categoriesIn=" + include + "&categoriesOut=" + exclude + "&longestOnly=" + longestOnly + 
+				"&includeAbbrev=" + includeAbbrev + "&includeAcronym=" + includeAcronym + "&includeNumbers=" + includeNumbers;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "nif/annotate?format=json&content=" + URL.encode(textContent) + "&url=" + source + "&categoriesIn=" + include  + "&categoriesOut=" + exclude;
+			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "nif/annotate?format=json&content=" + URL.encode(textContent) + 
+				"&url=" + source + "&categoriesIn=" + include  + "&categoriesOut=" + exclude + "&longestOnly=" + longestOnly + 
+				"&includeAbbrev=" + includeAbbrev + "&includeAcronym=" + includeAcronym + "&includeNumbers=" + includeNumbers;
 	   
 		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 		builder.setTimeoutMillis(10000);
