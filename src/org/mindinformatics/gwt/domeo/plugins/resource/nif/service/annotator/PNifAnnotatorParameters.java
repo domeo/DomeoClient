@@ -47,6 +47,12 @@ public class PNifAnnotatorParameters {
 	
 	private PNifAnnotatorParameters() {}
 	
+	final String categories[] = {"All", "biological_process", "anatomical entity","age", "Assay","brain","Platform","gene","assay","cell","Brain","organism (NCBI Taxonomy Slim) ",
+			"Cellular Component","Data role","organism","molecular entity","multi-cellular organism","quality","Behavioral process","Population","Extracellular Structure",
+			"reagent role","anatomical projection","PATO quality","Device","Molecule role","disease","Chemical role","anatomical_structure","Familial role","biological_region",
+			"Phenotype","Regional Part Of Cell","molecule","polypeptide_region","institution","site","Resource","Disease","binding_site","cell line","Data object","Cell line",
+			"Institution","Cell role","process","disease_state","biomaterial_region","Vendor","device","cellular_component","Reagent role"};
+	
 	public static PNifAnnotatorParameters instance;
 	public static PNifAnnotatorParameters getInstance() {
 		if(instance==null) 
@@ -55,8 +61,8 @@ public class PNifAnnotatorParameters {
 	}
 	
 	public int minLength = 4; // The minimum length of annotated entitie (default: 4)
-	public String includeCat; // A set of categories to include
-	public String excludeCat; // A set of categories to exclude
+	public String includeCat = ""; // A set of categories to include
+	public String excludeCat = ""; // A set of categories to exclude
 	public boolean longestOnly = true; // Should only the longest entity be returned for an overlapping group (default: false)
 	public boolean includeAbbrev = false; // Should abbreviations be included (default: false)
 	public boolean includeAcronym = false; // Should acronyms be included (default: false)

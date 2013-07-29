@@ -3,86 +3,51 @@
   xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 	<ui:style>	
-		.body {
-			width: 100%;
-			height: 80px;
-			padding: 0px;
-		}
-		
 		.label {
 			padding-top: 5px;
 			font-weight: bold;	
 			display: inline;
 			border-bottom: 1px #ddd solid;
 		}
-		
-		.editableDeckPanel {
-			width: 98%;	
-		}
-		
-		.activeIcon {
-			height: 16px;
-			width: 16px;
-			cursor: pointer;	
-			display: inline;	
-		}
-		
-		.title {
-			border-top: 1px solid #ccc;	
-			border-bottom: 1px solid #ddd;	
-			background-color: #eee;
-		}
-		
-		.inline {
-			display: inline;	
-		}
-		
-		.inlineWithBottom {
-			display: inline;	
-			padding-bottom: 8px;
-		}
-		
 		.outer {
 		    padding-bottom:16px;
 		    width: 100%;
 		    font-size: 11px;
 		}
-		
-		.content {
-			padding: 0;	
-			margin: 0;
-			height: 100%;
+		.button {
+			padding-top:3px;
+			padding-left:3px;
+			padding-right:3px;
 		}
-		
-		.scrollContent {
-			padding: 0;	
-			margin: 0;
-		}
-	
-		.provenanceInline {
-			display: inline;	
-			padding-right: 4px;
-		}
-		.provenance {	
-			padding-right: 4px;
-		}
-		
-		.infoBarRight {
-			color: #aaa;
-			text-align: right;
-			border-top: 3px solid #ddd;	
-			padding-right: 3px;
-		}
-		
-		.contentPanel {
-			width: 100%;	
-			padding: 0px;
+		.toolbar {
+			padding-bottom:10px;
 		}
 	</ui:style>
-	<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
-		<g:CheckBox ui:field='longestOnly'>Longest Only</g:CheckBox>
-		<g:CheckBox ui:field='includeAbbrev'>Include Abbreviations</g:CheckBox>
-		<g:CheckBox ui:field='includeAcronym'>Include Acronym</g:CheckBox>
-		<g:CheckBox ui:field='includeNumbers'>Include Numbers</g:CheckBox>
-	</g:VerticalPanel>
+	<g:HorizontalPanel>
+		<g:cell width="300px">
+			<g:VerticalPanel ui:field='left' styleName='{style.outer}'>
+				<g:Label styleName='{style.label}'>NIF Annotator Inclusions/Exclusions</g:Label>
+				<g:HorizontalPanel styleName='{style.toolbar}'>
+					<g:ListBox ui:field='categoriesList'></g:ListBox><g:Label ui:field='addCategory' styleName='{style.button}'>Add</g:Label><g:Label ui:field='clearCategory' styleName='{style.button}'>Clear</g:Label>
+				</g:HorizontalPanel>
+				<g:ListBox ui:field='criteria'>
+				  <g:item>
+				    Including
+				  </g:item>
+				  <g:item value='2'>
+				    Excluding
+				  </g:item>
+				</g:ListBox>
+				<g:FlowPanel ui:field='categories'></g:FlowPanel>
+			</g:VerticalPanel>
+		</g:cell>
+		<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
+			<g:Label styleName='{style.label}'>NIF Annotator Parameters</g:Label>
+			<g:CheckBox ui:field='longestOnly'>Longest Only</g:CheckBox>
+			<g:CheckBox ui:field='includeAbbrev'>Include Abbreviations</g:CheckBox>
+			<g:CheckBox ui:field='includeAcronym'>Include Acronym</g:CheckBox>
+			<g:CheckBox ui:field='includeNumbers'>Include Numbers</g:CheckBox>
+			<g:Image  ui:field='nifLogo'></g:Image>
+		</g:VerticalPanel>
+	</g:HorizontalPanel>
 </ui:UiBinder>

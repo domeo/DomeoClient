@@ -177,8 +177,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public static final boolean pathfinder = true;
 
 	public static String APP_NAME = "Domeo";
-	public static String APP_VERSION = "b5";
-	public static String APP_VERSION_LABEL = "build 5";
+	public static String APP_VERSION = "b30";
+	public static String APP_VERSION_LABEL = "build 30";
 	
 	public String getApplicationName() { return APP_NAME; }
 	public String getApplicationVersion() { return APP_VERSION; }
