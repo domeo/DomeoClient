@@ -64,7 +64,7 @@ public class PNifAnnotatorParameters {
 	public String includeCat = ""; // A set of categories to include
 	public String excludeCat = ""; // A set of categories to exclude
 	public boolean longestOnly = true; // Should only the longest entity be returned for an overlapping group (default: false)
-	public boolean includeAbbrev = false; // Should abbreviations be included (default: false)
-	public boolean includeAcronym = false; // Should acronyms be included (default: false)
-	public boolean includeNumbers = false; // Should numbers be included (default: false)
+	public boolean includeAbbrev = true; // Should abbreviations be included (default: false)
+	public boolean includeAcronym = true; // Should acronyms be included (default: false)
+	public boolean includeNumbers = true; // Should numbers be included (default: false)
 }
