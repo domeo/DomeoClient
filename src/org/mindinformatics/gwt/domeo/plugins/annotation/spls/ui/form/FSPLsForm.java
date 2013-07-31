@@ -76,17 +76,50 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@UiField VerticalPanel rightColumn;
 	@UiField TabBar tabBar;
 	
+	//PK Impact
+	
 	@UiField RadioButton descriptpkdm;
 	@UiField RadioButton descriptpkim;
-	@UiField RadioButton descriptpddt;
-	@UiField RadioButton descriptpdit;
-	@UiField RadioButton descriptdrdfb;
-	@UiField RadioButton descriptdrifb;
-	@UiField RadioButton descriptmreq;
-	@UiField RadioButton descriptmrec;
 	@UiField RadioButton descriptpkia;
 	@UiField RadioButton descriptpkda;
+	@UiField RadioButton descriptpkid;
+	@UiField RadioButton descriptpkdd;
+	@UiField RadioButton descriptpkie;
+	@UiField RadioButton descriptpkde;
+	@UiField RadioButton descriptpkni;
+	
+	
+	//PD Impact
+	
+	@UiField RadioButton descriptpddt;
+	@UiField RadioButton descriptpdit;
+	@UiField RadioButton descriptpdir;
+	@UiField RadioButton descriptpdni;
+	@UiField RadioButton descriptpdie;
+	@UiField RadioButton descriptpdde;
+	
 
+	//recommendation drug
+	@UiField CheckBox descriptdsca;
+	@UiField CheckBox descriptdsal;
+	@UiField CheckBox descriptdsam;
+	@UiField CheckBox descriptdsnr;
+	@UiField CheckBox descriptdsnc;
+	
+	//recommendation dose
+	@UiField CheckBox descriptdrdfb;
+	@UiField CheckBox descriptdrifb;
+	@UiField CheckBox descriptdrnc;
+	@UiField CheckBox descriptdrus;
+	@UiField CheckBox descriptdrcs;
+
+	//recommendation monitoring
+	@UiField CheckBox descriptmreq;
+	@UiField CheckBox descriptmrec;
+	@UiField CheckBox descriptmnc;
+	@UiField CheckBox descriptmcms;
+	
+	
 		
 	//@UiField RadioButton Drug, Dose, Monitoring, test_Re;
 	
@@ -95,16 +128,65 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	public Set<MLinkedResource> getMethods() {
 		Set<MLinkedResource> sioDescriptions = new HashSet<MLinkedResource>();
 		
+		//Pharmacokinetic impact  PK
 		if(descriptpkia.getValue()) 
 			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "metabolism-decrease", 
-					"Metabolism Decrease", 
-					"The pharmacogenomic biomarker is associated with a decrease in metabolism of the drug.", 
+					SPL_POC_PREFIX + "absorption-increase", 
+					"Absorption Increase", 
+					"The pharmacogenomic biomarker is associated with a increase in absorption of the drug.", 
 					SPL_POC_PREFIX + "PharmacokineticImpact", 
 					SPL_POC_PREFIX, 
 					"U of Pitt SPL Pharmgx Annotation"));
 
 		if(descriptpkda.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "absorption-decrease", 
+					"Absorption Decrease", 
+					"The pharmacogenomic biomarker is associated with an decrease in absorption of the drug.", 
+					SPL_POC_PREFIX + "PharmacokineticImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		
+		if(descriptpkid.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "distribution-increase", 
+					"Distribution Increase", 
+					"The pharmacogenomic biomarker is associated with a increase in distribution of the drug.", 
+					SPL_POC_PREFIX + "PharmacokineticImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptpkdd.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "distribution-decrease", 
+					"Distribution Increase", 
+					"The pharmacogenomic biomarker is associated with an decrease in distribution of the drug.", 
+					SPL_POC_PREFIX + "PharmacokineticImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		
+		if(descriptpkie.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "excretion-increase", 
+					"Excretion Increase", 
+					"The pharmacogenomic biomarker is associated with a increase in excretion of the drug.", 
+					SPL_POC_PREFIX + "PharmacokineticImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		if(descriptpkde.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "excretion-decrease", 
+					"Excretion Decrease", 
+					"The pharmacogenomic biomarker is associated with an decrease in excretion of the drug.", 
+					SPL_POC_PREFIX + "PharmacokineticImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		
+		if(descriptpkim.getValue()) 
 			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
 					SPL_POC_PREFIX + "metabolism-increase", 
 					"Metabolism Increase", 
@@ -121,16 +203,18 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					SPL_POC_PREFIX + "PharmacokineticImpact", 
 					SPL_POC_PREFIX, 
 					"U of Pitt SPL Pharmgx Annotation"));
-
-		if(descriptpkim.getValue()) 
+		
+		if(descriptpkni.getValue()) 
 			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "metabolism-increase", 
-					"Metabolism Increase", 
-					"The pharmacogenomic biomarker is associated with an increase in metabolism of the drug.", 
+					SPL_POC_PREFIX + "not-important", 
+					"Not Important", 
+					"The pharmacogenomic biomarker is not associated any clinically relevant pharmacokinetic with respect to the drug.", 
 					SPL_POC_PREFIX + "PharmacokineticImpact", 
 					SPL_POC_PREFIX, 
 					"U of Pitt SPL Pharmgx Annotation"));
 
+		//Pharmacodynamic impact  PD
+		
 		if(descriptpddt.getValue()) 
 			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
 					SPL_POC_PREFIX + "drug-toxicity-risk-decreased", 
@@ -149,6 +233,95 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					SPL_POC_PREFIX, 
 					"U of Pitt SPL Pharmgx Annotation"));
 
+		if(descriptpdir.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "influences-drug-response", 
+					"Influences Drug Response", 
+					"The pharmacogenomic biomarker influences drug response", 
+					SPL_POC_PREFIX + "PharmacodynamicImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptpdni.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "not-important", 
+					"Not Important", 
+					"The pharmacogenomic biomarker is not associated with clinically relevant pharmacodynamic effect", 
+					SPL_POC_PREFIX + "PharmacodynamicImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		if(descriptpdie.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "drug-efficacy-increased-from-baseline", 
+					"Increased Efficacy", 
+					"The pharmacogenomic biomarker is associated with an increase in the efficacy of the drug. ", 
+					SPL_POC_PREFIX + "PharmacodynamicImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptpdde.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "drug-efficacy-decreased-from-baseline", 
+					"Decreased Efficacy", 
+					"The pharmacogenomic biomarker is associated with an decrease in the efficacy of the drug.", 
+					SPL_POC_PREFIX + "PharmacodynamicImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		
+		//Recommendation drug
+
+		/*
+		if(descriptdsal.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "alternative", 
+					"Alternative", 
+					"The pharmacogenomic biomarker is related to a recommendation to alternates the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DrugRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptdsca.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "change-administration", 
+					"Change Administration", 
+					"The pharmacogenomic biomarker is related to a recommendation to increase the dose of the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DrugRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptdsam.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "add-medication", 
+					"Add medication", 
+					"The pharmacogenomic biomarker is related to a recommendation to not change the dose of the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DoseSelectionRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptdsnr.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "not-restart", 
+					"Not-restart", 
+					"The pharmacogenomic biomarker is related to a recommendation to use specific dose of the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DoseSelectionRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		if(descriptdsnc.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "Not change", 
+					"Not change", 
+					"The pharmacogenomic biomarker is related to a recommendation to change schedule of the dose of the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DoseSelectionRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		*/
+		
+		//Recommendation Dose
+		
 		if(descriptdrdfb.getValue()) 
 			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
 					SPL_POC_PREFIX + "decrease-from-recommended-baseline", 
@@ -167,6 +340,37 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					SPL_POC_PREFIX, 
 					"U of Pitt SPL Pharmgx Annotation"));
 
+		if(descriptdrnc.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "not-change-from-recommended baseline", 
+					"Not change from baseline", 
+					"The pharmacogenomic biomarker is related to a recommendation to not change the dose of the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DoseSelectionRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptdrus.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "use-specific", 
+					"Use specific", 
+					"The pharmacogenomic biomarker is related to a recommendation to use specific dose of the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DoseSelectionRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		if(descriptdrcs.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "change-schedule", 
+					"Change schedule", 
+					"The pharmacogenomic biomarker is related to a recommendation to change schedule of the dose of the drug from the recommended baseline.", 
+					SPL_POC_PREFIX + "DoseSelectionRecommendation", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+		
+		
+		
+		//Recommendation Monitoring
+		
 		if(descriptmreq.getValue()) 
 			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
 					SPL_POC_PREFIX + "required", 
@@ -176,14 +380,32 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					SPL_POC_PREFIX, 
 					"U of Pitt SPL Pharmgx Annotation"));
 
-  	        if(descriptmrec.getValue()) 
-			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+  	    if(descriptmrec.getValue()) 
+		    sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
 					SPL_POC_PREFIX + "recommended", 
 					"Recommended", 
-					"A recommended monitoring recommendation is related to the pharmacogenomic biomarker..", 
+					"A recommended monitoring recommendation is related to the pharmacogenomic biomarker.", 
 					SPL_POC_PREFIX + "MonitoringRecommendation", 
 					SPL_POC_PREFIX, 
 					"U of Pitt SPL Pharmgx Annotation"));
+  	        
+  	    if(descriptmnc.getValue()) 
+  			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+  					SPL_POC_PREFIX + "not-necessary", 
+  					"Not necessary", 
+  					"A not necessary monitoring recommendation is related to the pharmacogenomic biomarker.", 
+  					SPL_POC_PREFIX + "MonitoringRecommendation", 
+  					SPL_POC_PREFIX, 
+  					"U of Pitt SPL Pharmgx Annotation"));
+
+        if(descriptmcms.getValue()) 
+  			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+  					SPL_POC_PREFIX + "change-monitoring-strategy", 
+  					"Change monitoring strategy", 
+  					"A strategy changed monitoring recommendation is related to the pharmacogenomic biomarker.", 
+  					SPL_POC_PREFIX + "MonitoringRecommendation", 
+  					SPL_POC_PREFIX, 
+  					"U of Pitt SPL Pharmgx Annotation"));
 
 		return sioDescriptions;
 	}
