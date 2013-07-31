@@ -181,7 +181,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		yesButton.setText("Apply");
 		yesButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				if(isContentInvalid()) return;
+				//if(isContentInvalid()) return;  // TODO: use this function to validate form elements in the UI
 			
 				try { 
 					if(_item == null) {
@@ -222,6 +222,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					} else {
 						//_item.setType(PostitType.findByName(postitTypes.getItemText(postitTypes.getSelectedIndex())));
 						//_item.setText(getPostItBody());
+						_manager.hideContainer();
 					}
 				} catch (Exception e) {
 					_domeo.getLogger().exception(this, e.getMessage());
@@ -294,7 +295,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		sameVersionButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				try {
-					if(isContentInvalid()) return;
+					//if(isContentInvalid()) return; // TODO: modify this function to validate our UI
 					if(!isContentChanged(_item)) {
 						_domeo.getLogger().debug(this, "No changes to save for annotation " + _item.getLocalId());
 						_manager.getContainer().hide();
@@ -336,6 +337,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return LOG_CATEGORY_QUALIFIER_EDIT;
 	}
 
+	// TODO: edit this method to validate the relevant form elements 
 	@Override
 	public boolean isContentInvalid() {
 		if(currentPharmgx==null) {
