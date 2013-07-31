@@ -139,21 +139,52 @@
     
     <g:HorizontalPanel styleName='{style.panel}'>
       <g:cell width="466px">
+      
 	<g:VerticalPanel styleName='{style.leftColumn}'>
 	  <g:HorizontalPanel styleName='{style.titlebar}'>
 	    <g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>PK Impact:</g:Label>
 	  </g:HorizontalPanel>
-	  <g:HorizontalPanel ui:field='header3' styleName='{style.inner}'>
+	  
+	  <g:HorizontalPanel styleName='{style.panel}'>
+	  <g:RadioButton ui:field="descriptpkia" name="descriptpk" checked="true">Increased absorption</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkda" name="descriptpk" checked="true">Decreased absorption</g:RadioButton>
+	  </g:HorizontalPanel>
+	  
+	  <g:HorizontalPanel styleName='{style.panel}'>
+	  <g:RadioButton ui:field="descriptpkid" name="descriptpk" checked="true">Increased distribution</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkdd" name="descriptpk" checked="true">Decreased distribution</g:RadioButton>
+	  </g:HorizontalPanel>
+	  
+	  <g:HorizontalPanel styleName='{style.panel}'>
+	  <g:RadioButton ui:field="descriptpkim" name="descriptpk" checked="true">Increased metabolism</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkdm" name="descriptpk" checked="true">Decreased metabolism</g:RadioButton>
+	  </g:HorizontalPanel>
+	  
+	  <g:HorizontalPanel styleName='{style.panel}'>
+	  <g:RadioButton ui:field="descriptpkie" name="descriptpk" checked="true">Increased excretion</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkde" name="descriptpk" checked="true">Decreased excretion</g:RadioButton>
+	  </g:HorizontalPanel>
+	  
+	  
+	  <g:HorizontalPanel styleName='{style.panel}'>
+	  <g:RadioButton ui:field="descriptni" name="descriptpk" checked="true">Not important</g:RadioButton>
+	  </g:HorizontalPanel>
+	  <!--  
 	    <g:CheckBox ui:field="descriptpkdm" name="descript" styleName='{style.elementType}' text="Decreased Metabolism" />
 	    <g:CheckBox ui:field="descriptpkim" name="descript" styleName='{style.elementType}' text="Increased Metabolism" />
-	  </g:HorizontalPanel>
+	  -->
+	  
+	  
 	  <g:HorizontalPanel styleName='{style.titlebar}'>
 	    <g:Label ui:field="pdLabel" styleName='{style.titleLeft}'>PD Impact:</g:Label>
 	  </g:HorizontalPanel>
+	  
 	  <g:HorizontalPanel styleName='{style.inner}'>
-	    <g:CheckBox ui:field="descriptpddt" name="descript" styleName='{style.elementType}' text="Decreased Tox Risk" />
-	    <g:CheckBox ui:field="descriptpdit" name="descript" styleName='{style.elementType}' text="Increased Tox Risk" />
+	  <g:RadioButton ui:field="descriptpdit" name="descriptpd" checked="true">Increased risk of toxicity</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpddt" name="descriptpd" checked="true">Reduced risk of toxicity</g:RadioButton>
 	  </g:HorizontalPanel>
+	  
+	  
 	  <g:HorizontalPanel styleName='{style.titlebar}'>
 	    <g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose Recommendation:</g:Label>
 	  </g:HorizontalPanel>
@@ -180,6 +211,11 @@
 	    <g:TabBar ui:field="tabBar" height="25px"/>
 	  </g:cell>
 	  <g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+	  
+	  
+	    <g:Label>add sth right here</g:Label>
+	    
+	    
 	    
 	  </g:VerticalPanel>
 	</g:VerticalPanel>

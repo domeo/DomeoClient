@@ -76,19 +76,42 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@UiField VerticalPanel rightColumn;
 	@UiField TabBar tabBar;
 	
-	@UiField CheckBox descriptpkdm;
-	@UiField CheckBox descriptpkim;
-	@UiField CheckBox descriptpddt;
-	@UiField CheckBox descriptpdit;
-	@UiField CheckBox descriptdrdfb;
-	@UiField CheckBox descriptdrifb;
-	@UiField CheckBox descriptmreq;
-	@UiField CheckBox descriptmrec;
+	@UiField RadioButton descriptpkdm;
+	@UiField RadioButton descriptpkim;
+	@UiField RadioButton descriptpddt;
+	@UiField RadioButton descriptpdit;
+	@UiField RadioButton descriptdrdfb;
+	@UiField RadioButton descriptdrifb;
+	@UiField RadioButton descriptmreq;
+	@UiField RadioButton descriptmrec;
+	@UiField RadioButton descriptpkia;
+	@UiField RadioButton descriptpkda;
+
 		
+	//@UiField RadioButton Drug, Dose, Monitoring, test_Re;
+	
 	@UiField TextArea commentBody;
 	
 	public Set<MLinkedResource> getMethods() {
 		Set<MLinkedResource> sioDescriptions = new HashSet<MLinkedResource>();
+		
+		if(descriptpkia.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "metabolism-decrease", 
+					"Metabolism Decrease", 
+					"The pharmacogenomic biomarker is associated with a decrease in metabolism of the drug.", 
+					SPL_POC_PREFIX + "PharmacokineticImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		if(descriptpkda.getValue()) 
+			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "metabolism-increase", 
+					"Metabolism Increase", 
+					"The pharmacogenomic biomarker is associated with an increase in metabolism of the drug.", 
+					SPL_POC_PREFIX + "PharmacokineticImpact", 
+					SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation"));
 		
 		if(descriptpkdm.getValue()) 
 			sioDescriptions.add(ResourcesFactory.createTrustedTypedResource(
