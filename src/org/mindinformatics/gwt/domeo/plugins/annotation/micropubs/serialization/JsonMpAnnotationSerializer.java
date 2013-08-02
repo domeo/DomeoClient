@@ -10,6 +10,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpDataI
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpStatement;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonAnnotationSerializer;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonSerializerManager;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
@@ -99,6 +100,18 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 				}
 				
 				supportedBy.put("reif:resource", r);
+			} else if(rel.getObjectElement() instanceof MMpStatement) {
+				MMpStatement mMpStatement = (MMpStatement) rel.getObjectElement();
+				
+				JSONObject statement = new JSONObject();
+				statement.put(IDomeoOntology.generalType, new JSONString("mp:Statement"));
+				//argues.put(IDomeoOntology.generalId, new JSONString(ann.getMicroPublication().getArgues().getId()));
+				statement.put("mp:hasContent", new JSONString(mMpStatement.getText()));
+				
+				JSONValue va = encodeSelector(manager, mMpStatement.getSelector());
+				statement.put("hasContext", va);
+				
+				supportedBy.put("reif:resource", statement);
 			}
 			
 			support.set(i++, supportedBy);

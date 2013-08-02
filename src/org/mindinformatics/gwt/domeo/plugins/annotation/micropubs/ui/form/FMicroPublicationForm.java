@@ -391,6 +391,9 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		tabs.add(searchTermsWidget);
 		tabBar.addTab("Terms Search");
 		
+		StatementsSearchWidget statementsListPickerWidget = new StatementsSearchWidget(_domeo, this, false);
+		tabs.add(statementsListPickerWidget);
+		tabBar.addTab("Statements Search");
 		
 		tabBar.addSelectionHandler(new SelectionHandler<Integer>() {
 			public void onSelection(SelectionEvent<Integer> event) {
