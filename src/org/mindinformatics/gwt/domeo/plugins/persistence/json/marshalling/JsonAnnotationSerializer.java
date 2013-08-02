@@ -85,13 +85,23 @@ public class JsonAnnotationSerializer extends ASerializer implements ISerializer
 	 * @param ann		The annotation to serialize
 	 * @return The Selectors in JSON format
 	 */
-	private JSONArray encodeSelectors(JsonSerializerManager manager, MAnnotation ann) {
+	protected JSONArray encodeSelectors(JsonSerializerManager manager, MAnnotation ann) {
 		JSONArray jsonSelectors = new JSONArray();
 		List<MSelector> selectorsList = ann.getSelectors();
 		for(int i=0; i<selectorsList.size(); i++) {
 			jsonSelectors.set(i, manager.serialize(selectorsList.get(i)));
 		}
 		return jsonSelectors;
+	}
+	
+	/**
+	 * Encodes selectors in JSON format.
+	 * @param manager	The serializer manager
+	 * @param ann		The annotation to serialize
+	 * @return The Selectors in JSON format
+	 */
+	protected JSONValue encodeSelector(JsonSerializerManager manager, MSelector sel) {
+		return manager.serialize(sel);
 	}
 	
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {

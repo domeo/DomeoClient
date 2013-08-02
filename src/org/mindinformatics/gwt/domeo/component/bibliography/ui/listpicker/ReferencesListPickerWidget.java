@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
-import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.IExceptionReporter;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;

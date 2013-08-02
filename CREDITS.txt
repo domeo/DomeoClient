@@ -1,6 +1,6 @@
 Code
 ----
-The Domeo code as on July 9th 2012 has been written by 
+The Domeo code as on July 27th 2013 has been written by 
 Dr. Paolo Ciccarese http://paolo.ciccarese.info
 
 Icons

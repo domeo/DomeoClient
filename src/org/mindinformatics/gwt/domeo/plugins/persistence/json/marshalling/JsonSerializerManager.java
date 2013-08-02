@@ -19,6 +19,8 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.JsonAnnotationCurationSerializer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsonMpAnnotationSerializer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
@@ -76,6 +78,7 @@ public class JsonSerializerManager {
 		serializers.put(MQualifierAnnotation.class.getName(), new JsonQualifierAnnotationSerializer());
 		serializers.put(MAntibodyAnnotation.class.getName(), new JsonAntibodyAnnotationSerializer(_domeo));
 		serializers.put(MCommentAnnotation.class.getName(), new JsonCommentAnnotationSerializer());
+		serializers.put(MMicroPublicationAnnotation.class.getName(), new JsonMpAnnotationSerializer());
 		serializers.put(MCurationToken.class.getName(), new JsonAnnotationCurationSerializer());
 		serializers.put(MAnnotationReference.class.getName(), new JsonReferenceAnnotationSerializer());
 		serializers.put(MAnnotationCitationReference.class.getName(), new JsonCitationReferenceAnnotationSerializer());

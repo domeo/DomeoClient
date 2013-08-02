@@ -28,6 +28,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
  */
 public class MMpStatement extends MMpElement {
 	
+	private String id;
 	private HighlightedTextBuffer buffer;
 	private String text;
 	
@@ -55,5 +56,13 @@ public class MMpStatement extends MMpElement {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

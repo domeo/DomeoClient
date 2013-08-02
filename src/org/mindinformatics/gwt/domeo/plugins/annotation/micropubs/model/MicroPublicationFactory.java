@@ -26,7 +26,6 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
-import org.mindinformatics.gwt.framework.component.agents.model.MAgent;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
 import org.mindinformatics.gwt.framework.model.agents.ISoftware;
@@ -56,6 +55,7 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	
 	public static MMicroPublication createMicroPublication(MTextQuoteSelector selector) {
 		MMicroPublication mp = new MMicroPublication(selector);
+		mp.setId(getUuid());
 		return mp;
 	}	
 	

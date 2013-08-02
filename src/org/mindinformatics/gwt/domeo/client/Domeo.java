@@ -67,6 +67,11 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlig
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.search.HighligthSearchComponent;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.card.HighlightCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.tile.HighlightTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.info.MicroPublicationsPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationCache;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form.MicroPublicationFormProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.tile.MicroPublicationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.search.AntibodySearchComponent;
@@ -474,7 +479,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				new AntibodySearchComponent(this));
 		
 		// Micropublications
-		/*
+		
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
 		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), false);
 		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
@@ -483,7 +488,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
 				new MicroPublicationTileProvider(this));
-			*/
+		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
+		
 		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 

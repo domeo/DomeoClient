@@ -18,22 +18,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model;
+package org.mindinformatics.gwt.domeo.model;
 
-import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import java.util.ArrayList;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class MMpElement {
-	 
-	protected MSelector selector;
+public interface ICache {
 
-	public MSelector getSelector() {
-		return selector;
-	}
-
-	public void setSelector(MSelector selector) {
-		this.selector = selector;
-	}
+	public void resetCache();
+	public String getCachedType();
+	public ArrayList<MAnnotation> getCachedAnnotations();
+	public boolean cacheAnnotation(MAnnotation annotation);
 }

@@ -13,6 +13,7 @@ import java.util.Set;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.helpers.IAnnotationHelper;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
+import org.mindinformatics.gwt.domeo.model.ICache;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MBibliographicSet;
@@ -24,6 +25,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Window;
 
 /**
  * The class takes care of all annotation related persistence.
@@ -34,6 +36,19 @@ import com.google.gwt.user.client.Element;
  */
 public class AnnotationPersistenceManager extends PersistenceManager {
 
+	// Annotation Caches
+	private HashMap<String, ICache> caches = new HashMap<String, ICache>();
+	
+	public ICache getCache(String type) {
+		return caches.get(type);
+	}
+	
+	public boolean registerCache(ICache cache) {
+		if(caches.containsValue(cache)) return false;
+		caches.put(cache.getCachedType(), cache);
+		return true;
+	}
+	
 	
 	// ANNOTATIONS SETS
 	// ----------------
@@ -316,6 +331,10 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		annotationsOfAnnotations.clear();
 		annotationsOfAnnotationsCounter.clear();
 		annotationsOfImages.clear();
+		
+		for(ICache c:caches.values()) {
+			c.resetCache();
+		}
 	}
 	
 	public boolean addAnnotation(MAnnotation annotation, boolean newSet) {
@@ -448,6 +467,14 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 					}
 				}
 			//}
+				
+			// Cache by type
+			for(ICache cache: caches.values()) {
+				if(annotation.getClass().getName().equals(cache.getCachedType())) {
+					cache.cacheAnnotation(annotation);
+					break;
+				}
+			}
 			
 			//annotation.get
 			//annotationsByQualifiers

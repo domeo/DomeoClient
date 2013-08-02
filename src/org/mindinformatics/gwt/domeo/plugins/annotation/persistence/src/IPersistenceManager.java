@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.mindinformatics.gwt.domeo.model.ICache;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MBibliographicSet;
@@ -19,6 +20,8 @@ import com.google.gwt.user.client.Element;
 
 public interface IPersistenceManager {
 
+	public boolean registerCache(ICache cache);
+	public ICache getCache(String type);
 	public boolean addAnnotation(MAnnotation annotation, boolean newSet);
 	public boolean addAnnotation(MAnnotation annotation, MAnnotationSet set);
 	public boolean addAnnotationOfAnnotation(MCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set);
