@@ -4,6 +4,7 @@ import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpData;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpDataImage;
@@ -56,7 +57,9 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 		body.put("mp:argues", argues);
 		
 		int i = 0;
+		int c = 0;
 		JSONArray support = new JSONArray();
+		JSONArray challenge = new JSONArray();
 		for(MMpRelationship rel: ann.getMicroPublication().getEvidence()) {
 			JSONObject supportedBy = new JSONObject();
 			supportedBy.put(IDomeoOntology.generalId,  new JSONString(rel.getId()));
@@ -114,9 +117,11 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 				supportedBy.put("reif:resource", statement);
 			}
 			
-			support.set(i++, supportedBy);
+			if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) support.set(i++, supportedBy);
+			else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challenge.set(c++, supportedBy);
 		}
-		argues.put("mp:supportedBy", support);
+		if(support.size()>0) argues.put("mp:supportedBy", support);
+		if(challenge.size()>0) argues.put("mp:challengedBy", challenge);
 		
 		int j = 0;
 		JSONArray qualification = new JSONArray();
@@ -148,7 +153,7 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 			
 			qualification.set(j++, qualifiedBy);
 		}
-		argues.put("mp:qualifiedBy", qualification);
+		if(qualification.size()>0)  argues.put("mp:qualifiedBy", qualification);
 		
 		//body.put(ICntOntology.chars, new JSONString(ann.getBody().getChars()));
 		//body.put(IDublinCoreTerms.format, new JSONString(ann.getBody().getFormat()));

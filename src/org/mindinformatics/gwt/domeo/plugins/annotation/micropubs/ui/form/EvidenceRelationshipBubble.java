@@ -6,13 +6,13 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpData;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpElement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpStatement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.IMpResources;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -65,6 +65,9 @@ public class EvidenceRelationshipBubble extends PopupPanel {
 					} else if(element instanceof MMpData) {
 						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.supportedBy);
 						hide();
+					} else if(element instanceof MMpStatement) {
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.supportedBy);
+						hide();
 					}
 				}			
 			}
@@ -86,6 +89,9 @@ public class EvidenceRelationshipBubble extends PopupPanel {
 						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.challengedBy);
 						hide();
 					} else if(element instanceof MMpData) {
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.challengedBy);
+						hide();
+					} else if(element instanceof MMpStatement) {
 						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.challengedBy);
 						hide();
 					}
