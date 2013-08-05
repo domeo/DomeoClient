@@ -142,8 +142,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 					}
 					if(challengeDataCounter==0 && challengeStatementsCounter==0 && challengeRefCounter==0)  buffer.append(".<br/>");
 					else buffer.append(". ");	
-				}
-				
+				}				
 				if(challengeDataCounter>0 || challengeStatementsCounter>0 || challengeRefCounter>0) {
 					flag = true;
 					buffer.append("Challenged by ");
