@@ -46,7 +46,8 @@
 		}
 		.addCommentBody {
 			width: 434px;
-			border:0;
+			border:1px solid #ddd;
+			padding: 3px;
 		}
 	</ui:style>
 	

@@ -490,6 +490,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		vp.setWidth("444px");
 		
 		for(MMpRelationship q: qualifiers) {
+			final MMpRelationship _q = q;
 			if(q.getObjectElement() instanceof MMpQualifier) {
 				MLinkedResource res = ((MMpQualifier)q.getObjectElement()).getQualifier();
 
@@ -517,8 +518,13 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 				removeIcon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						//box.setEnabled(false);
-						//_container.addImageAsData(_image);
+						hasChanged = true;
+						qualifiers.remove(_q);
+						if(_item!=null) {
+							_item.getQualifiers().remove(_q);
+							_ann.setHasChanged(true);
+						}
+						refreshQualifiers();
 					}
 				});					
 				hp.add(removeIcon);
