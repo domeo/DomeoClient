@@ -9,6 +9,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpData;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
@@ -96,47 +97,81 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 				}
 			});
 			
-			int statementsCounter = 1;
+			int statementsCounter = 0;
 			int dataCounter = 0;
 			int refCounter = 0;
+			int challengeStatementsCounter = 0;
+			int challengeDataCounter = 0;
+			int challengeRefCounter = 0;
 			
 			for(MMpRelationship rel:_annotation.getMicroPublication().getEvidence()) {
 				if(rel.getObjectElement() instanceof MMpReference) {
-					refCounter++;
+					if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) refCounter++;
+					else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challengeRefCounter++;
 				} else if(rel.getObjectElement() instanceof MMpData) {
-					dataCounter++;
+					if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) dataCounter++;
+					else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challengeDataCounter++;
 				} else if(rel.getObjectElement() instanceof MMpStatement) {
-					statementsCounter++;
+					if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) statementsCounter++;
+					else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challengeStatementsCounter++;
 				}
 			}
 			
+			boolean flag = false;
+			StringBuffer buffer = new StringBuffer();
 			if(_annotation.getMicroPublication().getEvidence().size()>0) {
-				StringBuffer sb2 = new StringBuffer();
-				sb2.append("Supported by ");
-				if(dataCounter>0) {
-					if(dataCounter==1) sb2.append("1 data item");
-					else sb2.append(dataCounter + " data items");
-				}
-				if(statementsCounter>0) {
-					if(dataCounter>0) sb2.append(", ");
-					if(statementsCounter==1) sb2.append("1 statement");
-					else sb2.append(statementsCounter + " statements");
-				}
-				if(refCounter>0 && statementsCounter>0) {
-					if(dataCounter>0) sb2.append(" and ");
-				}
-				if(refCounter>0 || statementsCounter>0) {
-					if(dataCounter>0) sb2.append(", ");
-				}
-				if(refCounter>0) {
-					if(refCounter==1) sb2.append("1 reference");
-					else sb2.append(refCounter + " references");
+				if(dataCounter>0 || statementsCounter>0 || refCounter>0) {
+					flag = true;
+					buffer.append("Supported by ");
+					if(dataCounter>0) {
+						if(dataCounter==1) buffer.append("1 data item");
+						else buffer.append(dataCounter + " data items");
+					}					
+					if(statementsCounter>0) {
+						if(dataCounter>0 && refCounter==0) buffer.append(" and ");
+						else if(dataCounter>0 && refCounter>0) buffer.append(", ");
+						if(statementsCounter==1) buffer.append("1 statement");
+						else buffer.append(statementsCounter + " statements");
+					}
+					if((dataCounter>0 || statementsCounter>0) && refCounter>0) {
+						buffer.append(" and ");
+					} 
+					if(refCounter>0) {
+						if(refCounter==1) buffer.append("1 reference");
+						else buffer.append(refCounter + " references");
+					}
+					if(challengeDataCounter==0 && challengeStatementsCounter==0 && challengeRefCounter==0)  buffer.append(".<br/>");
+					else buffer.append(". ");	
 				}
 				
-				sb2.append("<br/>");				//}
-				support.setHTML(sb2.toString());
-			} else {
+				if(challengeDataCounter>0 || challengeStatementsCounter>0 || challengeRefCounter>0) {
+					flag = true;
+					buffer.append("Challenged by ");
+					if(challengeDataCounter>0) {
+						if(challengeDataCounter==1) buffer.append("1 data item");
+						else buffer.append(challengeDataCounter + " data items");
+					}					
+					if(challengeStatementsCounter>0) {
+						if(challengeDataCounter>0 && challengeRefCounter==0) buffer.append(" and ");
+						else if(challengeDataCounter>0 && challengeRefCounter>0) buffer.append(", ");
+						if(challengeStatementsCounter==1) buffer.append("1 statement");
+						else buffer.append(challengeStatementsCounter + " statements");
+					}
+					if((challengeDataCounter>0 || challengeStatementsCounter>0) && challengeRefCounter>0) {
+						buffer.append(" and ");
+					} 
+					if(challengeRefCounter>0) {
+						if(challengeRefCounter==1) buffer.append("1 reference");
+						else buffer.append(challengeRefCounter + " references");
+					}
+					buffer.append(".<br/>");		
+				}				
+			} 
+			
+			if(!flag) {
 				support.setVisible(false);
+			} else {
+				support.setHTML(buffer.toString());
 			}
 			
 			// http://cssglobe.com/pure-css3-post-tags/

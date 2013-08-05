@@ -26,8 +26,6 @@ import java.util.HashMap;
 import org.mindinformatics.gwt.domeo.model.ICache;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 
-import com.google.gwt.user.client.Window;
-
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */

@@ -70,6 +70,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.tile.Highli
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.info.MicroPublicationsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationCache;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.card.MicroPublicationCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form.MicroPublicationFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.tile.MicroPublicationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
@@ -488,7 +489,11 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
 				new MicroPublicationTileProvider(this));
+		annotationCardsManager.registerAnnotationCard(MMicroPublicationAnnotation.class.getName(), 
+				new MicroPublicationCardProvider(this));
 		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
+		
+		
 		
 		
 		// Comments

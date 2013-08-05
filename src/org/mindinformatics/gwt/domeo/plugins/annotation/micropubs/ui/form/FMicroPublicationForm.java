@@ -272,6 +272,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		_manager = manager;
 		_ann = annotation;
 		_item = annotation.getMicroPublication();
+		_this = this;
 		
 		initWidget(binder.createAndBindUi(this));
 		
