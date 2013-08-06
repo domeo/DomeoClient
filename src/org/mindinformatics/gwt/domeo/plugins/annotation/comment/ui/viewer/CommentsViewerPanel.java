@@ -73,11 +73,7 @@ public class CommentsViewerPanel extends Composite implements IContainerPanel, I
 		_discussionTree.setWidth("100%");
 		
 		_root = annotations.get(0);
-		
-//		if(_root instanceof MCommentAnnotation) {
-//			topContent.clear();
-//			topContent.add(new HTML("Thread: " + ((MCommentAnnotation)_root).getTitle()));
-//		}
+
 		
 		ITileComponent c = _domeo.getAnnotationTailsManager().getAnnotationTile(_root.getClass().getName(), null);
 		if(c==null) {
@@ -90,35 +86,16 @@ public class CommentsViewerPanel extends Composite implements IContainerPanel, I
 			_discussionTree.ensureSelectedItemVisible();
 			buildDiscussionTree(annotations.get(0), i, null);
 		} else {
-			if(_root.getSelector() instanceof MTargetSelector) {
-//				MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_root.getLocalId());
-//				
-//				LGeneralCommentLens lens1 = new LGeneralCommentLens(_domeo, null, set);
-//				lens1.initializeLens(annotations.get(0));
-//				lens1.setWidth("400px");
-				
-				
+			if(_root.getSelector() instanceof MTargetSelector) {	
 				BCommentThreadBrick lens1 = new BCommentThreadBrick(_domeo, this);
 				TreeItem i2 = new TreeItem(lens1);
 				lens1.initializeLens(_threadsTree, i2, null, _root);
 				i2.setWidth("100%");
-				//lens1.setWidth("400px"); //TODO use this to limit the width
-				
-				//TreeItem i = new TreeItem(lens1);
+
 				_discussionTree.addItem(i2);
 				_discussionTree.setSelectedItem(i2); 
 				_discussionTree.ensureSelectedItemVisible();
 				buildDiscussionTree(annotations.get(0), i2, lens1);
-				
-//				LGeneralCommentLens lens2 = new LGeneralCommentLens(_domeo, null, set);
-//				lens2.initializeLens(annotations.get(0));
-//				lens2.setWidth("400px");
-//				
-//				TreeItem i2 = new TreeItem(lens2);
-//				_threadsTree.addItem(i2);
-//				_threadsTree.setSelectedItem(i2); 
-//				_threadsTree.ensureSelectedItemVisible();
-//				buildThreadsTree(annotations.get(0), i2);
 			} else {
 				try {
 					c.initializeLens(_root);
@@ -127,18 +104,9 @@ public class CommentsViewerPanel extends Composite implements IContainerPanel, I
 					_discussionTree.setSelectedItem(i); 
 					_discussionTree.ensureSelectedItemVisible();
 					buildDiscussionTree(annotations.get(0), i, null);
-					
-//					TreeItem i2 = new TreeItem(c.getTile());
-//					_threadsTree.addItem(i2);
-//					_threadsTree.setSelectedItem(i2); 
-//					_threadsTree.ensureSelectedItemVisible();
-//					buildThreadsTree(annotations.get(0), i2);
 				} catch(Exception e) {
 					// If something goes wrong just display the default tile
 					_domeo.getLogger().exception(this, "Refreshing tile: " + e.getMessage());
-					//VerticalPanel vp = new VerticalPanel();
-					//vp.add(new Label(ann.getLocalId() + " - " + ann.getClass().getName() + " - " + ann.getY()));
-					//content.add(vp);
 				}
 			}
 		}
@@ -200,11 +168,6 @@ public class CommentsViewerPanel extends Composite implements IContainerPanel, I
 	}
 	
 	public void buildDiscussionTree(MAnnotation annotation) {
-//		if(annotation instanceof MCommentAnnotation) {
-//			topContent.clear();
-//			topContent.add(new HTML("Thread: " + ((MCommentAnnotation)annotation).getTitle()));
-//		}
-		
 			_discussionTree.clear();
 			BCommentThreadBrick c = new BCommentThreadBrick(_domeo, this);
 			TreeItem i = new TreeItem(c.getBrick());

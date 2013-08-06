@@ -67,6 +67,7 @@ public class CommentSummaryTable extends Composite
 	
 	interface LocalCss extends CssResource {
 		String formArea();
+		String formBox();
 	}
 	
 	@UiField LocalCss style;
@@ -175,6 +176,7 @@ public class CommentSummaryTable extends Composite
 					final TextArea ta = new TextArea();
 				    ta.setCharacterWidth(68);
 				    ta.setVisibleLines(5);
+				    ta.setStyleName(style.formBox());
 				    bottomContent.add(ta);
 				    bottomContent.setStyleName(style.formArea());
 				    
