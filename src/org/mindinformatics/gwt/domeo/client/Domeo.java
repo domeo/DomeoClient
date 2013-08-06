@@ -483,10 +483,12 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
 		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), false);
+		/*
 		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
 			annotationFormsManager.registerAnnotationForm(MMicroPublicationAnnotation.class.getName(),
 					new MicroPublicationFormProvider(this));
 		}
+		*/
 		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
 				new MicroPublicationTileProvider(this));
 		annotationCardsManager.registerAnnotationCard(MMicroPublicationAnnotation.class.getName(), 

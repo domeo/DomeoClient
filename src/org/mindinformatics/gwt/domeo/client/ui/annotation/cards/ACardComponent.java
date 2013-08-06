@@ -20,7 +20,6 @@ import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.src.CurationUtils;
-import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 import org.mindinformatics.gwt.framework.component.styles.src.StylesManager;
 import org.mindinformatics.gwt.framework.widget.CustomButton;
