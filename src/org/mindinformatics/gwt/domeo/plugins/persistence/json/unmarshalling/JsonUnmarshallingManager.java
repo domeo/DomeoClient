@@ -33,6 +33,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPu
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpDataImage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpStatement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
@@ -59,6 +60,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotation
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsBibliographicSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsImageInDocumentSelector;
+import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsPublicationArticleReference;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsTextQuoteSelector;
 import org.mindinformatics.gwt.framework.component.agents.model.JsoAgent;
 import org.mindinformatics.gwt.framework.component.agents.src.AgentsFactory;
@@ -728,6 +730,30 @@ public class JsonUnmarshallingManager {
 											rr.setCreationDate(rel.getFormattedCreatedOn());
 											microPublication.getEvidence().add(rr);
 										}
+									} else if(getObjectType(res).equals("org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference")) {
+										_domeo.getLogger().debug(this, "0-1-5 mp:Reference");
+
+										JsPublicationArticleReference reference = (JsPublicationArticleReference) res;
+										
+										MPublicationArticleReference publicationReference = new MPublicationArticleReference();
+										publicationReference.setDoi(reference.getDoi());
+										publicationReference.setPubMedId(reference.getPubMedId());
+										publicationReference.setPubMedCentralId(reference.getPubMedCentralId());
+										publicationReference.setAuthorNames(reference.getAuthorNames());
+										publicationReference.setTitle(reference.getTitle());
+										publicationReference.setJournalPublicationInfo(reference.getPublicationInfo());
+										publicationReference.setJournalName(reference.getJournalName());
+										publicationReference.setJournalIssn(reference.getJournalIssn());
+										publicationReference.setUnrecognized(reference.getUnrecognized());
+										
+										MMpReference rrrr = new MMpReference();
+										rrrr.setReference(publicationReference);
+										
+										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.supportedBy);
+										rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+										rr.setId(rel.getId());
+										rr.setCreationDate(rel.getFormattedCreatedOn());
+										microPublication.getEvidence().add(rr);
 									}
 								}
 							}
@@ -775,6 +801,30 @@ public class JsonUnmarshallingManager {
 											rr.setCreationDate(rel.getFormattedCreatedOn());
 											microPublication.getEvidence().add(rr);
 										}
+									} else if(getObjectType(res).equals("org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference")) {
+										_domeo.getLogger().debug(this, "0-1-5 mp:Reference");
+
+										JsPublicationArticleReference reference = (JsPublicationArticleReference) res;
+										
+										MPublicationArticleReference publicationReference = new MPublicationArticleReference();
+										publicationReference.setDoi(reference.getDoi());
+										publicationReference.setPubMedId(reference.getPubMedId());
+										publicationReference.setPubMedCentralId(reference.getPubMedCentralId());
+										publicationReference.setAuthorNames(reference.getAuthorNames());
+										publicationReference.setTitle(reference.getTitle());
+										publicationReference.setJournalPublicationInfo(reference.getPublicationInfo());
+										publicationReference.setJournalName(reference.getJournalName());
+										publicationReference.setJournalIssn(reference.getJournalIssn());
+										publicationReference.setUnrecognized(reference.getUnrecognized());
+										
+										MMpReference rrrr = new MMpReference();
+										rrrr.setReference(publicationReference);
+										
+										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.supportedBy);
+										rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+										rr.setId(rel.getId());
+										rr.setCreationDate(rel.getFormattedCreatedOn());
+										microPublication.getEvidence().add(rr);
 									}
 								}
 							}
