@@ -34,22 +34,28 @@ public class MMpStatement extends MMpElement {
 	
 	public MMpStatement() {}
 	
-	public MMpStatement(HighlightedTextBuffer buffer) {
-		this.buffer = buffer;
-	}
+//	public MMpStatement(HighlightedTextBuffer buffer) {
+//		this.buffer = buffer;
+//	}
 	
-	public MMpStatement(MTextQuoteSelector selector) {
-		this.setSelector(selector);
-	}
+//	public MMpStatement(MTextQuoteSelector selector) {
+//		this.setSelector(selector);
+//	}
+	
+	
 	
 	public HighlightedTextBuffer getBuffer() {
 		return buffer;
 	}
 
+	public void setBuffer(HighlightedTextBuffer buffer) {
+		this.buffer = buffer;
+	}
+
 	public String getText() {
 		if(text==null || text.trim().length()==0) {
 			if(getSelector()!=null) return ((MTextQuoteSelector)getSelector()).getExact();
-			else return buffer.getExact();
+			else if(buffer!=null) return buffer.getExact();
 		}
 		return text;
 	}

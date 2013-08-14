@@ -298,11 +298,15 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		} else if(_item.getType().equals("Hypothesis")) {
 			radioHypothesis.setValue(true);
 		}
-		
+		_domeo.getLogger().debug(this, "0");
 		statementBody.setText(_item.getArgues().getText());
+		_domeo.getLogger().debug(this, "1");
 		evidence.addAll(_item.getEvidence());
+		_domeo.getLogger().debug(this, "2");
 		qualifiers.addAll(_item.getQualifiers());
+		_domeo.getLogger().debug(this, "3");
 		refreshSupport();
+		_domeo.getLogger().debug(this, "4");
 		refreshQualifiers();
 		
 		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
@@ -541,10 +545,13 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 		Integer counter = 0;
 		VerticalPanel vp = new VerticalPanel();
-		
+		_domeo.getLogger().debug(this, "3a");
 		for(MMpRelationship ev: evidence) {
+			_domeo.getLogger().debug(this, "3a" + ev.getObjectElement().getClass().getName());
 			if(ev.getObjectElement() instanceof MMpData) {
+				_domeo.getLogger().debug(this, "3b");
 				if(ev.getObjectElement().getSelector() instanceof MImageInDocumentSelector) {
+					_domeo.getLogger().debug(this, "3c");
 					//String imgUrl = ((MImageInDocumentSelector)ev.getObjectElement().getSelector()).getTarget().getUrl();
 					//Window.alert(imgUrl);
 					displayImageInEvidence(vp, counter++, ev);
@@ -682,11 +689,19 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		
 		hp1.add(PubMedCitationPainter.getFullCitation(((MMpReference)relationship.getObjectElement()).getReference(), _domeo));
 		
+		final MMpRelationship _q = relationship;
 		final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
 		removeIcon.setStyleName(style.link());
 		removeIcon.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
+				hasChanged = true;
+				evidence.remove(_q);
+				if(_item!=null) {
+					_item.getEvidence().remove(_q);
+					_ann.setHasChanged(true);
+				}
+				refreshSupport();
 				//box.setEnabled(false);
 				//_container.addImageAsData(_image);
 			}
@@ -757,13 +772,17 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	private void displayImageInEvidence(VerticalPanel vp, Integer counter, final MMpRelationship relationship) {
 
+		_domeo.getLogger().debug(this, "3c1");
 		MOnlineImage image = (MOnlineImage)((MImageInDocumentSelector)relationship.getObjectElement().getSelector()).getTarget();
+		_domeo.getLogger().debug(this, "3c2");
 		VerticalPanel hp1 = new VerticalPanel();
 		hp1.setWidth("442px");
 		
 		boolean small = false;
 		boolean reduced = false;
+		//Window.alert(image.getUrl() + " - " + image.getDisplayUrl());
 		Image img = new Image(image.getDisplayUrl());
+		_domeo.getLogger().debug(this, "3c3");
 		if(img.getWidth()>380) {
 			img.setWidth("380px");  
 			reduced = true;
@@ -775,6 +794,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 			img.setTitle(image.getLabel());
 		}
 		
+		_domeo.getLogger().debug(this, "3c4");
 		if(!small) {
 			
 			HorizontalPanel main = new HorizontalPanel();

@@ -43,7 +43,7 @@ import com.google.gwt.json.client.JSONValue;
 
 public class JsonSerializerManager {
 
-	private static IDomeo _domeo;
+	public IDomeo _domeo;
 	
 	private HashMap<String, ISerializer> serializers = new HashMap<String, ISerializer>();
 	private HashMap<String, IAgent> agentsToSerialize = new HashMap<String, IAgent>();

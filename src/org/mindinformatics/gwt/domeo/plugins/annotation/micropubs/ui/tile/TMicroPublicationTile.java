@@ -82,6 +82,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 	@Override
 	public void refresh() {
 		try {
+			_domeo.getLogger().debug(this, "t-1 missing type!!!!");
 			createProvenanceBar("", provenance, _annotation.getMicroPublication().getType(), _annotation);
 
 //			if(_annotation.getType() == PostitType.COMMENT_TYPE)
@@ -89,6 +90,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 			
 			//type.setText(_annotation.getType().getName()+":");
 			//type.setText("Claim:");
+			_domeo.getLogger().debug(this, "t00 ");
 			text.setHTML(_annotation.getMicroPublication().getArgues().getText());
 			text.addClickHandler(new ClickHandler() {
 				@Override
@@ -96,7 +98,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 					Window.alert("Edit or display?");
 				}
 			});
-			
+			_domeo.getLogger().debug(this, "t01 ");
 			int statementsCounter = 0;
 			int dataCounter = 0;
 			int refCounter = 0;
@@ -116,7 +118,7 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 					else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challengeStatementsCounter++;
 				}
 			}
-			
+			_domeo.getLogger().debug(this, "t02 ");
 			boolean flag = false;
 			StringBuffer buffer = new StringBuffer();
 			if(_annotation.getMicroPublication().getEvidence().size()>0) {

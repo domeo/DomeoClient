@@ -39,12 +39,18 @@ public class MMicroPublication implements IMpSupportingElement {
 	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
 	private ArrayList<MMpRelationship> qualifiers = new ArrayList<MMpRelationship>();
 	
+	public MMicroPublication() {
+		
+	}
+	
 	public MMicroPublication(HighlightedTextBuffer buffer) {
-		argues = new MMpStatement(buffer);
+		argues = MicroPublicationFactory.createMicroPublicationStatement();
+		argues.setBuffer(buffer);
 	}
 	
 	public MMicroPublication(MTextQuoteSelector selector) {
-		argues = new MMpStatement(selector);
+		argues = MicroPublicationFactory.createMicroPublicationStatement();
+		argues.setSelector(selector);
 	}
 	
 	public String getId() {
@@ -61,6 +67,12 @@ public class MMicroPublication implements IMpSupportingElement {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	
+	
+	public void setArgues(MMpStatement argues) {
+		this.argues = argues;
 	}
 
 	public MMpStatement getArgues() {

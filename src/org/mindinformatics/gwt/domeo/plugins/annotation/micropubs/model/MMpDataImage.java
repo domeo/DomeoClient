@@ -27,7 +27,17 @@ import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
  */
 public class MMpDataImage extends MMpData implements IMpSupportingElement {
 
+	private String id;
+	
 	public MMpDataImage(MImageInDocumentSelector selector) {
 		super(selector);
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

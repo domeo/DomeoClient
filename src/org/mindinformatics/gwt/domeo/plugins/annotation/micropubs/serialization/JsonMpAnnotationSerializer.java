@@ -34,40 +34,54 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {
 		MMicroPublicationAnnotation ann = (MMicroPublicationAnnotation) obj;
+		manager._domeo.getLogger().debug(this, "0");
 		JSONObject annotation = initializeAnnotation(manager, ann);
-		
-		JSONArray types = new JSONArray();
-		types.set(0, new JSONString("mp:MicroPublication"));
-		types.set(1, new JSONString("swande:"+ann.getMicroPublication().getType()));
-				
+		manager._domeo.getLogger().debug(this, "1");
 		// Body creation
 		JSONArray bodies = new JSONArray();
 		JSONObject body = new JSONObject();
 		body.put(IDomeoOntology.generalId,  new JSONString(ann.getMicroPublication().getId()));
 		body.put(IDomeoOntology.generalType, new JSONString("mp:MicroPublication"));
 		
+		manager._domeo.getLogger().debug(this, "2");
+		JSONArray types = new JSONArray();
+		types.set(0, new JSONString("mp:Statement"));
+		types.set(1, new JSONString("swande:"+ann.getMicroPublication().getType()));
+		
+		manager._domeo.getLogger().debug(this, "3");
 		JSONObject argues = new JSONObject();
-		argues.put(IDomeoOntology.generalType, new JSONString("mp:Statement"));
+		argues.put(IDomeoOntology.generalId, new JSONString(ann.getMicroPublication().getArgues().getId()));
+		manager._domeo.getLogger().debug(this, "3.1");
+		argues.put(IDomeoOntology.generalType, types);
+		manager._domeo.getLogger().debug(this, "3.2");
 		//argues.put(IDomeoOntology.generalId, new JSONString(ann.getMicroPublication().getArgues().getId()));
 		argues.put("mp:hasContent", new JSONString(ann.getMicroPublication().getArgues().getText()));
+		manager._domeo.getLogger().debug(this, "3.3");
 		
+		manager._domeo.getLogger().debug(this, "4");
 		JSONValue val = encodeSelector(manager, ann.getMicroPublication().getArgues().getSelector());
-		argues.put("hasContext", val);
-		
+		argues.put("ao:context", val);
 		body.put("mp:argues", argues);
 		
+		manager._domeo.getLogger().debug(this, "5");
 		int i = 0;
 		int c = 0;
 		JSONArray support = new JSONArray();
 		JSONArray challenge = new JSONArray();
 		for(MMpRelationship rel: ann.getMicroPublication().getEvidence()) {
 			JSONObject supportedBy = new JSONObject();
+			manager._domeo.getLogger().debug(this, "5.1");
 			supportedBy.put(IDomeoOntology.generalId,  new JSONString(rel.getId()));
+			manager._domeo.getLogger().debug(this, "5.2");
 			supportedBy.put(IPavOntology.createdBy, new JSONString(rel.getCreator()!=null?ann.getCreator().getUri():""));
+			manager._domeo.getLogger().debug(this, "5.3");
 			if(ann.getCreator()!=null) manager.addAgentToSerialize(ann.getCreator());
+			manager._domeo.getLogger().debug(this, "5.4");
 			supportedBy.put(IPavOntology.createdOn, nonNullable(rel.getCreationDate()));
 			
+			manager._domeo.getLogger().debug(this, "6");
 			if(rel.getObjectElement() instanceof MMpDataImage) {
+				manager._domeo.getLogger().debug(this, "6.1");
 				MMpData mMpData = (MMpData) rel.getObjectElement();
 				JSONObject data = new JSONObject();
 				data.put(IDomeoOntology.generalId,  new JSONString(mMpData.getSelector().getUri()));
@@ -78,10 +92,11 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 				//data.put("resource", nonNullable(mMpData.getSelector().getTarget().getUrl()));
 				
 				JSONValue v = encodeSelector(manager, mMpData.getSelector());
-				data.put("hasContext", v);
+				data.put("ao:context", v);
 				
 				supportedBy.put("reif:resource", data);
 			} else if(rel.getObjectElement() instanceof MMpReference) {
+				manager._domeo.getLogger().debug(this, "6.2");
 				MMpReference mMpReference = (MMpReference) rel.getObjectElement();
 				//JSONObject ref = new JSONObject();
 				
@@ -99,20 +114,22 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 				
 				if(mMpReference.getSelector()!=null) {
 					JSONValue v = encodeSelector(manager, mMpReference.getSelector());
-					r.put("hasContext", v);
+					r.put("ao:context", v);
 				}
 				
 				supportedBy.put("reif:resource", r);
 			} else if(rel.getObjectElement() instanceof MMpStatement) {
+				manager._domeo.getLogger().debug(this, "6.3");
 				MMpStatement mMpStatement = (MMpStatement) rel.getObjectElement();
 				
 				JSONObject statement = new JSONObject();
+				statement.put(IDomeoOntology.generalId, new JSONString(mMpStatement.getId()));
 				statement.put(IDomeoOntology.generalType, new JSONString("mp:Statement"));
 				//argues.put(IDomeoOntology.generalId, new JSONString(ann.getMicroPublication().getArgues().getId()));
 				statement.put("mp:hasContent", new JSONString(mMpStatement.getText()));
 				
 				JSONValue va = encodeSelector(manager, mMpStatement.getSelector());
-				statement.put("hasContext", va);
+				statement.put("ao:context", va);
 				
 				supportedBy.put("reif:resource", statement);
 			}
@@ -123,6 +140,7 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 		if(support.size()>0) argues.put("mp:supportedBy", support);
 		if(challenge.size()>0) argues.put("mp:challengedBy", challenge);
 		
+		manager._domeo.getLogger().debug(this, "7");
 		int j = 0;
 		JSONArray qualification = new JSONArray();
 		for(MMpRelationship rel: ann.getMicroPublication().getQualifiers()) {
