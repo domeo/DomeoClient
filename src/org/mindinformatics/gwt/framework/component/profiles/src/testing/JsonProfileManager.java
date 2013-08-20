@@ -114,8 +114,26 @@ public class JsonProfileManager extends AProfileManager {
 		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType]; 
 	}-*/;
 	
+//	public static native JavaScriptObject parseJson(String jsonStr) /*-{
+//	  	return eval(jsonStr);
+//	}-*/;
+//	
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-	  	return eval(jsonStr);
+		
+		try {
+			var jsonStr = jsonStr      
+	    		.replace(/[\\]/g, '\\\\')
+	    		.replace(/[\/]/g, '\\/')
+	    		.replace(/[\b]/g, '\\b')
+	    		.replace(/[\f]/g, '\\f')
+	    		.replace(/[\n]/g, '\\n')
+	    		.replace(/[\r]/g, '\\r')
+	    		.replace(/[\t]/g, '\\t')
+	    		.replace(/\\'/g, "\\'");
+		  	return JSON.parse(jsonStr);
+		} catch (e) {
+			alert("Error while parsing the JSON message: " + e);
+		}
 	}-*/;
 
 	@Override
