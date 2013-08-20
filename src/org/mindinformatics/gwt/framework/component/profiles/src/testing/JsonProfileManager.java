@@ -113,13 +113,8 @@ public class JsonProfileManager extends AProfileManager {
 	private final native String getObjectType(Object obj) /*-{ 
 		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType]; 
 	}-*/;
-	
-//	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-//	  	return eval(jsonStr);
-//	}-*/;
-//	
+
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-		
 		try {
 			var jsonStr = jsonStr      
 	    		.replace(/[\\]/g, '\\\\')

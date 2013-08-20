@@ -32,12 +32,7 @@ public class JsonUserManager extends AUserManager {
 		super(application, callbackCompleted);
 	}
 	
-//	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-//	  	return eval(jsonStr);
-//	}-*/;
-	
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-	
 		try {
 			var jsonStr = jsonStr      
 	    		.replace(/[\\]/g, '\\\\')

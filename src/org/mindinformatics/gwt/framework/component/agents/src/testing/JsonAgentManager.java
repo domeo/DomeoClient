@@ -29,7 +29,6 @@ public class JsonAgentManager extends AAgentManager {
 //	}-*/;
 	
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-		
 		try {
 			var jsonStr = jsonStr      
 	    		.replace(/[\\]/g, '\\\\')
