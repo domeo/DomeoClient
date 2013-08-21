@@ -363,6 +363,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 			@Override
 			public void onClick(ClickEvent event) {
 				_domeo.getAnnotationPersistenceManager().removeAnnotationSet(_set);
+				_parent.resetAnnotationSetInfo();
 			}
 		});
 		

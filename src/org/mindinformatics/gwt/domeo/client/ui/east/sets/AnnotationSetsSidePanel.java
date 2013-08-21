@@ -156,6 +156,10 @@ public class AnnotationSetsSidePanel extends ASidePanel implements IInitializabl
 		info.add(_lensInfo);
 	}
 	
+	public void resetAnnotationSetInfo() {
+		info.clear();
+	}
+	
 	/**
 	 * Checks if the lens has been already cached.
 	 * @param set	The annotation set
