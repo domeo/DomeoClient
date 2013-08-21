@@ -136,6 +136,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 							}
 							deselectManualMultipleAnnotation();
 						}
+						if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
 					}
 				}, _resources.highlightLittleIcon(), 
 				_resources.highlightLittleColorIcon(), "Highlight", "Highlight");
@@ -168,6 +169,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 						}
 						deselectManualMultipleAnnotation();
 					}
+					if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
 				}
 			}, _resources.domeoAnnotateIcon(), 
 			_resources.domeoAnnotateColorIcon(), "Annotate", "Annotate");

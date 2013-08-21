@@ -268,8 +268,14 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 						_curationPopup = null;
 					}
 					
+					// From here annotation management
+					getSelectionText(_this, doc);
+			
+/*					if(isSelectionCollapsed) 
+					Window.alert(""+anchorNode);
+*/					
 					// If not in annotation mode it displays cards
-					if(!_domeo.isManualAnnotationEnabled() && !_domeo.isManualHighlightEnabled() && !_domeo.isManualClipAnnotationEnabled()) {
+					if(isSelectionCollapsed && !_domeo.isManualAnnotationEnabled() && !_domeo.isManualHighlightEnabled() && !_domeo.isManualClipAnnotationEnabled()) {
 						Element linkElement = null;
 						boolean linkflag = false;
 						if(Element.is(event.getNativeEvent().getEventTarget())) {
@@ -378,14 +384,12 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 							} else if(linkElement!=null && elementsIds.size()>0) {
 								_curationPopup.show(linkElement, items, spans, x, y, maxHeight);
 							}
-						}
-						
+						}					
 						return; 
+					} else if(anchorNode!=null && !_domeo.isManualAnnotationEnabled() && !_domeo.isManualHighlightEnabled() && !_domeo.isManualClipAnnotationEnabled()){		
+						return;
 					}
 
-					
-					// From here annotation management
-					getSelectionText(_this, doc);
 
 					if (anchorNode==null) return;
 					
@@ -620,6 +624,218 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 			Window.alert(e.getMessage());
 			_domeo.getLogger().exception(AnnotationFrameWrapper.class.getName(), 
 				"Problems in registering highlight handlers " + e.getMessage());
+		}
+	}
+	
+	public void annotate() {
+		if (isSelectionCollapsed) return;
+		
+		IFrameElement iframe = IFrameElement.as(_frame.getElement());
+		final Document frameDocument = iframe.getContentDocument();
+		Document doc = frameDocument;
+		
+//		if (isSelectionCollapsed) {
+//			if(_domeo.isManualAnnotationEnabled()) {
+//				// Management of entities for relationships
+//				ArrayList<String> elementsIds = new ArrayList<String>();
+//				ArrayList<MAnnotation> items = new ArrayList<MAnnotation>();
+//				ArrayList<Element> spans = new ArrayList<Element>();
+//				if(Element.is(event.getNativeEvent().getEventTarget())) {
+//					Element currentElement = (Element) Element.as(event.getNativeEvent().getEventTarget());
+//					
+//					HtmlUtils.getOnClickAnnotationElements(currentElement, spans, 5);
+//					//Window.alert("spans: " + spans.size());
+//					//ArrayList<Node> nodes = new ArrayList<Node>();
+//					//HtmlUtils.getOnClickAnnotationElements(currentElement, nodes);
+//					for(Element element: spans) {
+//						//Element element = (Element) n;
+//						String idString = HtmlUtils.getAnnotationIdAttribute(element);
+//						if(idString!=null) {
+//							if(idString.indexOf(":")>0) idString = idString.substring(0, idString.indexOf(":"));
+//							elementsIds.add(HtmlUtils.getAnnotationIdAttribute(element));
+//							//spans.add(element);
+//							MAnnotation annotation = _domeo.getAnnotationPersistenceManager().getAnnotationByLocalId(Long.parseLong(idString));
+//							if(annotation==null) { // References
+//								List<MAnnotation> anns = _domeo.getAnnotationPersistenceManager().getBibliographicSet().getAnnotations();
+//								for(MAnnotation ann: anns) {
+//									// TODO Qualifier Annotation 
+//									if(ann.getLocalId()==Long.parseLong(idString)) {
+//										Window.alert(""+ann.getLocalId());
+//										items.add(ann);
+//										break;
+//									}
+//								}
+//							} else { // Others
+//								
+//								items.add(annotation);
+//							}
+//						}
+//					}
+//				}
+//			
+//				// If there are potential subject for creating structured relationships
+//				// between annotation item, the method is called
+//				if(items.size()>0) {
+//					performAnnotation(items);
+//				}
+//				
+//				resetSelection();
+//				return;
+//			} /*if(_domeo.isManualClipAnnotationEnabled()) {
+//				Window.alert("Add annotation item to clipboard");
+//			}*/
+//			// This is necessary to allow double click selection for a single word
+//			else return;
+//		}
+		
+		if (anchorNode == focusNode) {
+			int start = 0, stop = 0;
+			if (anchorOffset > focusOffset) {
+				start = focusOffset;
+				stop = anchorOffset;
+			} else {
+				start = anchorOffset;
+				stop = focusOffset;
+			}
+			
+			String prefix = ((Node) anchorNode).getNodeValue().toString().substring(0, start);
+			String suffix = ((Node) anchorNode).getNodeValue().toString().substring(stop, ((Node) anchorNode).getNodeValue() .toString().length());
+			
+			try {
+			    _domeo.getLogger().debug(this, "Before calibration(1): "+prefix +  matchText + suffix);
+				if(isWeakSelection("Weak selection (1)", prefix, matchText, suffix)) {
+					// Selection enhancement strategy
+					prefix =  selectionPrefixEnhancement((Node)anchorNode, (Node)focusNode) + ((Node) anchorNode).getNodeValue().toString().substring(0, start);
+					if(isWeakSelection("Weak selection (1b)", prefix, matchText, suffix)) {
+						suffix = ((Node) anchorNode).getNodeValue().toString().substring(stop) + selectionPostfixEnhancement((Node)anchorNode, (Node)focusNode);
+					}
+				}
+				_domeo.getLogger().debug(this, "After calibration(1): "+prefix +  matchText + suffix);
+			} catch(Exception e) {
+				_domeo.getLogger().warn(this, "SELECTION ENHANCEMENT", e.getMessage());
+			}
+			
+			prefix = trimPrefix(prefix);
+			suffix = trimSuffix(suffix);
+			logSelection(prefix, matchText, suffix);
+			
+			/*
+			ArrayList<AnnotationTermDTO> items = displayIncludedSpans(
+					matchText, 
+					prefix,
+					suffix,
+					(Element) anchorNode);
+
+			new AnnotationManagementGlassPanel(ann, resources,
+					new AnnotationManagementPanel(ann, resources,
+							matchText, 
+							prefix,
+							suffix,
+							(Node) anchorNode, items));
+							*/
+			
+			
+			clearSelection(doc);
+			
+			if (matchText.length()>0 && _domeo.isManualClipAnnotationEnabled()) 
+				addToClipboard(matchText, prefix, suffix, (Node) anchorNode);
+			else
+				performAnnotation(matchText, prefix, suffix, (Node) anchorNode);
+
+		} else {
+			int start, stop = 0;
+			String prefix, suffix;
+
+			List<Node> nodes = new ArrayList<Node>();
+			if (compareNodesOrder((Node) anchorNode, (Node) focusNode) == 1) {
+				//Window.alert(((Element) anchorNode).getInnerHTML() + " - " + ((Element) focusNode).getInnerHTML());
+				start = focusOffset;
+				prefix = ((Node) focusNode).getNodeValue().toString()
+						.substring(0, start);
+				stop = anchorOffset;
+				suffix = (stop >= ((Node) anchorNode).getNodeValue()
+						.toString().length()) ? ""
+						: ((Node) anchorNode)
+								.getNodeValue()
+								.toString()
+								.substring(
+										stop,
+										((Node) anchorNode)
+												.getNodeValue()
+												.toString().length() - 1);
+
+				nodes.add((Node) focusNode);
+				nodes.add((Node) anchorNode);
+			} else {
+				// Returns if elements like wrapped tables or images
+				if(((Node) anchorNode).getNodeValue()==null) return;
+				
+				start = anchorOffset;
+				prefix = ((Node) anchorNode).getNodeValue().toString()
+						.substring(0, anchorOffset);
+				stop = focusOffset;
+				suffix = (focusOffset >= ((Node) focusNode)
+						.getNodeValue().toString().length()) ? ""
+						: ((Node) focusNode)
+								.getNodeValue()
+								.toString()
+								.substring(
+										focusOffset,
+										((Node) focusNode)
+												.getNodeValue()
+												.toString().length() - 1);
+
+				nodes.add((Node) anchorNode);
+				nodes.add((Node) focusNode);
+			}
+
+			prefix = trimPrefix(prefix);
+			suffix = trimSuffix(suffix);
+			logSelection(prefix, matchText, suffix);
+			
+			try {
+			    _domeo.getLogger().warn(this, "Before calibration(2): "+prefix +  matchText + suffix);
+				if(isWeakSelection("Weak selection (2)", prefix, matchText, suffix)) {
+					// Selection enhancement strategy
+					
+					if (compareNodesOrder((Node) anchorNode, (Node) focusNode) == 1) {
+						_domeo.getLogger().debug(this, ((Node) focusNode).getNodeValue().toString());
+						prefix =  selectionPrefixEnhancement((Node)anchorNode, (Node)focusNode) + ((Node) focusNode).getNodeValue().toString().substring(0, start);
+					} else {
+						_domeo.getLogger().debug(this, ((Node) anchorNode).getNodeValue().toString());
+						prefix =  selectionPrefixEnhancement((Node)anchorNode, (Node)focusNode) + ((Node) anchorNode).getNodeValue().toString().substring(0, start);
+					}
+					
+					if(isWeakSelection("Weak selection (2b)", prefix, matchText, suffix)) {
+						if (compareNodesOrder((Node) anchorNode, (Node) focusNode) == 1) {
+							suffix = ((Node) anchorNode).getNodeValue().toString().substring(stop) + selectionPostfixEnhancement((Node)anchorNode, (Node)focusNode);
+						} else {
+							suffix = ((Node) focusNode).getNodeValue().toString().substring(stop) + selectionPostfixEnhancement((Node)anchorNode, (Node)focusNode);
+						}
+					}
+				}
+				 _domeo.getLogger().warn(this, "After calibration(2): "+prefix +  matchText + suffix);
+			} catch(Exception e) {
+				_domeo.getLogger().warn(this, "SELECTION ENHANCEMENT", e.getMessage());
+			}
+
+			/*
+			ArrayList<AnnotationTermDTO> items = displayIncludedSpans(
+					matchText, prefix, suffix, (Element) HtmlUtils
+							.getCommonParent(nodes), nodes);
+			
+			new AnnotationManagementGlassPanel(ann, resources,
+					new AnnotationManagementPanel(ann, resources,
+							matchText, prefix, suffix, (Node) HtmlUtils
+									.getCommonParent(nodes), items));
+									*/
+			
+			clearSelection(doc);
+			
+			if (matchText.length()>0 && _domeo.isManualClipAnnotationEnabled()) 
+				addToClipboard(matchText, prefix, suffix, (Node) anchorNode);
+			else
+				performAnnotation(matchText, prefix, suffix, (Node) anchorNode);
 		}
 	}
 	
