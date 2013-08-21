@@ -279,6 +279,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 				
 				try {
 					// List groups
+					access.clear();
 					access.add(new HTML("<b>Accessible to</b>"));
 					
 					if(_domeo.getAnnotationAccessManager().getAnnotationSetGroups(_set)!=null) {

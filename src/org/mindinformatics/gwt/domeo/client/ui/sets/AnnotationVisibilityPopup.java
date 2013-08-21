@@ -78,7 +78,7 @@ public class AnnotationVisibilityPopup extends PopupPanel {
 				_domeo.getLogger().command(_this, "Set AnnotationSet " + _set.getLocalId() + " as hidden");
 				_domeo.getContentPanel().getAnnotationFrameWrapper().manageSetVisibility(_set, false);
 				_domeo.getLogger().command(_this, "Refreshing lens");
-				_domeo.refreshAnnotationComponents();
+				_domeo.getComponentsManager().updateObjectLenses(_set);
 				_lens.refresh();
 				_this.hide();
 			}
