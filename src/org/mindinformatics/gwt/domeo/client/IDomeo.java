@@ -65,6 +65,7 @@ public interface IDomeo extends IContentHandler, IApplication {
 	public void refreshAnnotationComponents();
 	
 	public void displayAnnotationOfSet(MAnnotationSet set);
+	public void removeAnnotationSetTab(MAnnotationSet set);
 	
 	public DomeoToolbarPanel getToolbarPanel();
 	public JsonUnmarshallingManager getUnmarshaller();

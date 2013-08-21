@@ -21,6 +21,7 @@
 package org.mindinformatics.gwt.domeo.client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.feature.clipboard.ClipboardManager;
@@ -1064,6 +1065,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public void reinitEnvironment() {
 		this.getLogger().info(this.getClass().getName(), "Re-initializing environment");
 		componentsManager.initializeComponents();
+		tabsSets.clear();
 	}
 
 	@Override
@@ -1087,7 +1089,19 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		componentsManager.addComponent(sidePanel);
 
 		ASideTab selectedTab = sidePanelsFacade.registerSideComponent(tab, sidePanel, (58+16) + "px");
+		tabsSets.put(set, selectedTab);
 		sidePanelsFacade.toggleTab(selectedTab);
+	}
+	
+	private HashMap<MAnnotationSet, ASideTab> tabsSets = new HashMap<MAnnotationSet, ASideTab>();
+	
+	public void removeAnnotationSetTab(MAnnotationSet set) {
+		this.getLogger().debug(this, set.getLabel());
+		Object obj = tabsSets.get(set);
+		this.getLogger().debug(this, ""+obj);
+		if(obj!=null) {
+			sidePanelsFacade.removeSideTab((ASideTab) obj);
+		}
 	}
 	
 	// ----------------------------------

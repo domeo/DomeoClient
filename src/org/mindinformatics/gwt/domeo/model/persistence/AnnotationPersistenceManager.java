@@ -25,7 +25,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Window;
 
 /**
  * The class takes care of all annotation related persistence.
@@ -302,12 +301,15 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		}
 		return null;
 	}
-	
+
 	public void removeAnnotationSet(MAnnotationSet set) {
 		_application.getLogger().command("REMOVING SET", this, "with id " + set.getLocalId());
 		for(MAnnotationSet _set: allUserSets) {
 			if(_set.getLocalId()==set.getLocalId()) {
-				if(currentSet.getLocalId().equals(set.getLocalId())) currentSet = null;
+				if(currentSet.getLocalId().equals(set.getLocalId())) {
+					currentSet = null;
+				}
+				((IDomeo)_application).removeAnnotationSetTab(set);
 				// reset set permissions
 				((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
 				((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set);
