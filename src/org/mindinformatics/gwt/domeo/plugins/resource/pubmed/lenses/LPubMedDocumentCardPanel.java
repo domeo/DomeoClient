@@ -10,6 +10,7 @@ import org.mindinformatics.gwt.domeo.client.ui.east.resource.ReferencesSidePanel
 import org.mindinformatics.gwt.domeo.client.ui.east.resource.ResourceSidePanelTopbar;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.CachedImagesPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
+import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LSlimDocumentResourceCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedReferenceSearchPanel;
@@ -232,16 +233,16 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 
 		// Metadata panel
 		// --------------
-//		try {
-//			LDocumentResourceCardPanel d = new LDocumentResourceCardPanel(_domeo);
-//			d.initializeLens(_resource, _parameters);
-//			contentPanel.clear();
-//			contentPanel.add(d);
-//		} catch(Exception e) {
-//			_domeo.getLogger().exception(this, "Exception while rendering resource info " + e.getMessage());
-//			contentPanel.clear();
-//			contentPanel.add(new HTML("<img src='" + _resources.crossLittleIcon().getSafeUri().asString() + "'/> Exception while rendering PubMed resource info " + e.getMessage()));
-//		}
+		try {
+			LSlimDocumentResourceCardPanel d = new LSlimDocumentResourceCardPanel(_domeo);
+			d.initializeLens(_resource, _parameters);
+			contentPanel.clear();
+			contentPanel.add(d);
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, "Exception while rendering resource info " + e.getMessage());
+			contentPanel.clear();
+			contentPanel.add(new HTML("<img src='" + _resources.crossLittleIcon().getSafeUri().asString() + "'/> Exception while rendering PubMed resource info " + e.getMessage()));
+		}
 	}
 	
 	@Override

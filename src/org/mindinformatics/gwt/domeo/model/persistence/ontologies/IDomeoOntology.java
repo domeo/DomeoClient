@@ -21,6 +21,7 @@ public interface IDomeoOntology {
 	public static final String extractionLevel = "domeo:extractionLevel";
 	
 	public static final String agents = "domeo:agents";
+	public static final String resources = "domeo:resources";
 	
 	public static final String synonyms = "obo_annot:synonym"; 
 	

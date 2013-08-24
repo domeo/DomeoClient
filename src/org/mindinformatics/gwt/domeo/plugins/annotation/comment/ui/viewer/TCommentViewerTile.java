@@ -104,7 +104,7 @@ public class TCommentViewerTile extends ATileComponent implements ITileComponent
 				
 			
 			//type.setText("Comment:");
-			text.setText(_annotation.getText());
+			text.setText("------ "+_annotation.getText());
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
@@ -275,7 +275,11 @@ public class TCommentViewerTile extends ATileComponent implements ITileComponent
 							provenance.setCellWidth(editIcon, "22px");
 						}
 						provenance.add(addCommentIcon);
+						provenance.setCellHorizontalAlignment(addCommentIcon, HasHorizontalAlignment.ALIGN_LEFT);
+						provenance.setCellWidth(addCommentIcon, "22px");
 						provenance.add(commentBranchIcon);
+						provenance.setCellHorizontalAlignment(commentBranchIcon, HasHorizontalAlignment.ALIGN_LEFT);
+						provenance.setCellWidth(commentBranchIcon, "22px");
 						provenance.add(deleteIcon);
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
 						provenance.setCellWidth(deleteIcon, "22px");
@@ -303,7 +307,7 @@ public class TCommentViewerTile extends ATileComponent implements ITileComponent
 					}
 					
 					step=9;
-					provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>By " + annotation.getCreator().getName() + "</span>  <span style='padding-left:5px' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
+					provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>By " + annotation.getCreator().getName() + "</span>  <span style='padding-left:5px; font-size: 12px; color: #696969;' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
 					 
 					provenance.add(showIcon);
 					provenance.add(editIcon);

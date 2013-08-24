@@ -28,28 +28,47 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
  */
 public class MMpStatement extends MMpElement {
 	
+	private String id;
 	private HighlightedTextBuffer buffer;
 	private String text;
 	
 	public MMpStatement() {}
 	
-	public MMpStatement(HighlightedTextBuffer buffer) {
-		this.buffer = buffer;
-	}
+//	public MMpStatement(HighlightedTextBuffer buffer) {
+//		this.buffer = buffer;
+//	}
 	
-	public MMpStatement(MTextQuoteSelector selector) {
-		this.setSelector(selector);
-	}
+//	public MMpStatement(MTextQuoteSelector selector) {
+//		this.setSelector(selector);
+//	}
+	
+	
 	
 	public HighlightedTextBuffer getBuffer() {
 		return buffer;
 	}
 
+	public void setBuffer(HighlightedTextBuffer buffer) {
+		this.buffer = buffer;
+	}
+
 	public String getText() {
+		if(text==null || text.trim().length()==0) {
+			if(getSelector()!=null) return ((MTextQuoteSelector)getSelector()).getExact();
+			else if(buffer!=null) return buffer.getExact();
+		}
 		return text;
 	}
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

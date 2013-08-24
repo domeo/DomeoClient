@@ -134,6 +134,19 @@
 		            </g:ScrollPanel>
 	            </g:VerticalPanel>
 	        </g:tab>
+	        <g:tab>
+	        	 <g:header>
+	                <div>
+	                    <span>Images</span>
+	                </div>
+	            </g:header>
+	            <g:VerticalPanel width="100%">
+		            <!--   g:VerticalPanel ui:field='ImageCacheToolbarPanel' styleName='{style.contentPanel}'/ -->
+		            <g:ScrollPanel ui:field='imagesPanel' styleName='{style.scrollContent}'>
+		            	<g:HTML>No images available</g:HTML>
+		            </g:ScrollPanel>
+	            </g:VerticalPanel>
+	        </g:tab>
 			<g:tab>
 	        	 <g:header>
 	                <div>

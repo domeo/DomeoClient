@@ -94,7 +94,7 @@ public class SearchTermsWidget extends Composite implements IWidget, IBioPortalI
 		_domeo.getLogger().command(this, "Searching for: " + textQuery);
 		try {
 			BioPortalManager bioPortalManager = BioPortalManager.getInstance();
-			bioPortalManager.selectBioPortalConnector(_domeo);
+			bioPortalManager.selectConnector(_domeo);
 			bioPortalManager.searchTerms(this, textQuery);
 		} catch(Exception exc) {
 			_domeo.getLogger().exception( 

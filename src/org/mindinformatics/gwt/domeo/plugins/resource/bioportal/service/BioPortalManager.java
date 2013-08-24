@@ -1,14 +1,18 @@
 package org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextMiningConnector;
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.GwtBioPortalServiceConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.StandaloneBioPortalConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.src.JsonBioPortalConnector;
 
+import com.google.gwt.user.client.ui.Widget;
+
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class BioPortalManager {
+public class BioPortalManager implements ITextMiningConnector {
 
 	private IBioPortalConnector _connector;
 	
@@ -19,8 +23,8 @@ public class BioPortalManager {
 		return _instance;
 	}
 	
-	public IBioPortalConnector selectBioPortalConnector(IDomeo domeo) {
-		if(_connector!=null) return _connector;
+	public boolean selectConnector(IDomeo domeo) {
+		if(_connector!=null) return true;
 		if(domeo.isStandaloneMode()) {
 			_connector = new StandaloneBioPortalConnector();
 		} else {
@@ -31,10 +35,8 @@ public class BioPortalManager {
 				_connector = new JsonBioPortalConnector(domeo);
 			}
 		}
-		
 		domeo.getLogger().debug(this, "BioPortal Connector selected: " + _connector.getClass().getName());
-		
-		return _connector;
+		return false;
 	} 
 	
 	public void searchTerms(IBioPortalItemsRequestCompleted completionCallback, String textQuery) throws IllegalArgumentException {
@@ -43,11 +45,23 @@ public class BioPortalManager {
 		} else throw new IllegalArgumentException("No BioPortal Connector selected");
 	}
 	
-	public void textmine(final IBioPortalTextminingRequestCompleted completionCallback,
-			String url, String textContent, String virtualIds) throws IllegalArgumentException {
+	@Override
+	public void annotate(ITextminingRequestCompleted completionCallback,
+			String url, String textContent, String... params) throws IllegalArgumentException {
 		if (_connector!=null) {
 			 _connector.textmine(completionCallback, url, textContent, "");
 		} else throw new IllegalArgumentException("No BioPortal Connector selected");
 		
+	}
+
+	@Override
+	public String getAnnotatorLabel() {
+		return "NCBO Annotator Web Service";
+	}
+
+	@Override
+	public Widget getAnnotatorPanel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -9,14 +9,6 @@
 		}
 		.content {
 			background-color: #fff;	
-			/*
-			-moz-border-radius: 15px;
-			border-radius: 15px;
-			*/
-			border-top-right-radius: 10px;	
-			-moz-border-radius-topright: 10px;
-			border-bottom-right-radius: 10px;
-			-moz-border-radius-bottomright: 10px;
 			padding:3px 5px 3px 3px;
 		}
 		.contentFrame {
@@ -29,7 +21,7 @@
 		}
 		.contentItem {
 			display:inline;	
-			font-size: 14px;
+			font-size: 13px;
 		}
 		.contentItemType {
 			font-weight: bold;
@@ -39,15 +31,23 @@
 		.provenance {
 			width: 100%;
 			background-color: #fff;	
-			border-top-right-radius: 10px;	
-			-moz-border-radius-topright: 10px;
-			border-bottom-right-radius: 10px;
-			-moz-border-radius-bottomright: 10px;
 			padding:3px 5px 3px 3px;
 			border-top: 1px #ccc dotted;
 		}
 		.provenanceFrame {
 			padding: 0px 1px 0px 0px;	
+		}
+		.addCommentSection {
+			background: white;
+
+		}
+		.addCommentTitle {
+			width: 430px;
+		}
+		.addCommentBody {
+			width: 434px;
+			border:1px solid #ddd;
+			padding: 3px;
 		}
 	</ui:style>
 	
@@ -61,6 +61,14 @@
 			<g:FlowPanel styleName='{style.content}' ui:field='content'>
 				<g:Label ui:field='title' styleName='{style.titleItem}'></g:Label>
 				<g:Label ui:field='text' styleName='{style.contentItem}'></g:Label>
+				<g:VerticalPanel  ui:field='addCommentSection' styleName='{style.addCommentSection}'>
+					<g:TextBox ui:field='addCommentTitle' styleName='{style.addCommentTitle}'></g:TextBox>
+					<g:TextArea ui:field='addCommentBody' styleName='{style.addCommentBody}'></g:TextArea>
+					<g:FlowPanel>
+						<g:Button ui:field='submitButton'>Submit</g:Button>
+						<g:Button ui:field='cancelButton'>Cancel</g:Button>
+					</g:FlowPanel>
+				</g:VerticalPanel>
 			</g:FlowPanel>
 		</g:SimplePanel>
 	</g:VerticalPanel>

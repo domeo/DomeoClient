@@ -23,8 +23,8 @@ package org.mindinformatics.gwt.framework.model.relationships;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.mindinformatics.gwt.framework.component.agents.model.MAgent;
 import org.mindinformatics.gwt.framework.component.resources.model.IIdentifiable;
+import org.mindinformatics.gwt.framework.model.agents.IAgent;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -39,7 +39,7 @@ public class MRelationship implements IIdentifiable, Serializable, IsSerializabl
 	
 	private String id;
 	private String name;
-	private MAgent creator;
+	private IAgent creator;
 	private Date creationDate;
 	protected Object object;
 	
@@ -55,10 +55,10 @@ public class MRelationship implements IIdentifiable, Serializable, IsSerializabl
 	public void setName(String name) {
 		this.name = name;
 	}
-	public MAgent getCreator() {
+	public IAgent getCreator() {
 		return creator;
 	}
-	public void setCreator(MAgent creator) {
+	public void setCreator(IAgent creator) {
 		this.creator = creator;
 	}
 	public Date getCreationDate() {

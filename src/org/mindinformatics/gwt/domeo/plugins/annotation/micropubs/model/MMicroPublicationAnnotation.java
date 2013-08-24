@@ -29,7 +29,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 public class MMicroPublicationAnnotation extends MAnnotation {
 
 	protected static final String LABEL = "Micropublication Annotation";
-	public static final String TYPE = "ao:MicropublicationAnnotation";
+	public static final String TYPE = "ao:MicroPublicationAnnotation";
 	public static final String BODY_TYPE = "domeo:AntibodyUsage";
 	
 	private MMicroPublication microPublication;

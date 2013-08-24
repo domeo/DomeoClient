@@ -15,13 +15,18 @@
 	 </ui:style>
   
   	<g:VerticalPanel styleName='{style.outer}'>
-  		<g:RadioButton ui:field="nifAnnotator" name="rbname" checked="true">NIF Annotator Web Service</g:RadioButton>
-  		<g:RadioButton ui:field="ncboAnnotator" name="rbname">NCBO Annotator Web Service</g:RadioButton>
-  		
+  		<g:HorizontalPanel width="800px" styleName='{style.footer}'>
+  		<g:cell horizontalAlignment='ALIGN_LEFT' width='240px'>
+  			<g:VerticalPanel ui:field="availableServices"></g:VerticalPanel>
+  		</g:cell>
+  		<g:cell horizontalAlignment='ALIGN_LEFT' width='440px'>
+				<g:VerticalPanel ui:field='annotatorDetails'></g:VerticalPanel>
+			</g:cell>
+  		</g:HorizontalPanel>
   		<g:HorizontalPanel ui:field='footerPanel' width="800px" styleName='{style.footer}'>
 			<g:cell horizontalAlignment='ALIGN_LEFT' width='140px'>
 				<g:Button ui:field='annotateButton'>Annotate</g:Button>
-			</g:cell>
+			</g:cell>			
 		</g:HorizontalPanel>
   	</g:VerticalPanel>
 </ui:UiBinder>

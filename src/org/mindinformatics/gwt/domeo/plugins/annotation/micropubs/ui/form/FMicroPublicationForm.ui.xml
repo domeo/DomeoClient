@@ -111,7 +111,7 @@
 	  		color: #333;
 	  		font-style: normal;
 	  		width: 440px;
-	  		height: 130px;
+	  		height: 110px;
 	  		font-size: 12px;
 	  	}
 	  	
@@ -173,7 +173,7 @@
 			padding-top: 8px;
 		}
 		.indexEven {
-			background-color: #EEEEFF;
+			background-color: #fff;
 			padding-bottom: 5px;
 			padding-left: 5px;
 			padding-top: 8px;	
@@ -181,7 +181,7 @@
 		}
 		.indexWrapper{
 			padding-top: 2px;
-			border-bottom: 1px solid #ddd;	
+			border-bottom: 2px solid #ddd;	
 			padding-bottom: 2px;
 		}
 		.imageWrap {
@@ -228,6 +228,11 @@
 					             Statement
 					          </g:header>
 								<g:VerticalPanel styleName='{style.inner2}'>
+									<g:HorizontalPanel>
+								  		<g:Label>Type:</g:Label>
+								  		<g:RadioButton ui:field="radioClaim" ui:name="mpType" ui:text="Claim" styleName='{style.elementType}'/>
+							  			<g:RadioButton ui:field="radioHypothesis" ui:name="mpType" styleName='{style.elementType}' ui:text="Hypothesis" />
+						  			</g:HorizontalPanel>
 						  			<g:TextArea ui:field='statementBody' styleName='{style.statementBody}'></g:TextArea>
 						  		</g:VerticalPanel>
 					      </g:tab>
@@ -265,7 +270,7 @@
 						          <g:header>
 						             Qualified By
 						          </g:header>
-						          <g:HTML><h2>Qualifiers</h2></g:HTML>
+						         <g:ScrollPanel ui:field='qualifiersPanel' styleName='{style.evidencePanel}'></g:ScrollPanel>
 						      </g:tab>
 						  </g:TabLayoutPanel>
 						  <!-- 

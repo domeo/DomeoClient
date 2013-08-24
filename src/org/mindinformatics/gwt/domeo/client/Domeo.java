@@ -21,6 +21,7 @@
 package org.mindinformatics.gwt.domeo.client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.feature.clipboard.ClipboardManager;
@@ -53,6 +54,7 @@ import org.mindinformatics.gwt.domeo.component.cache.images.src.ImagesCache;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.LinkedDataDigestersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.model.JsoLinkedDataResource;
+import org.mindinformatics.gwt.domeo.component.textmining.src.TextMiningRegistry;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineResource;
@@ -68,7 +70,10 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.card.Highli
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.ui.tile.HighlightTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.info.MicroPublicationsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationCache;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.card.MicroPublicationCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.form.MicroPublicationFormProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.tile.MicroPublicationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.search.AntibodySearchComponent;
@@ -109,10 +114,12 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotation
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.info.BioPortalPlugin;
+import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.BioPortalManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.info.DocumentPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LDocumentResourceCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.digesters.NifStandardDigester;
+import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.NifManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.info.OmimPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.lenses.LOmimDocumentCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
@@ -164,8 +171,6 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Timer;
@@ -182,10 +187,11 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetrieveExistingBibliographySetHandler,*/ IRetrieveExistingAnnotationSetHandler, IRetrieveExistingAnnotationSetListHandler {
 	
 	public static final boolean verbose = false;
-	
+	public static final boolean pathfinder = true;
+
 	public static String APP_NAME = "Domeo";
-	public static String APP_VERSION = "b5";
-	public static String APP_VERSION_LABEL = "build 5";
+	public static String APP_VERSION = "b31";
+	public static String APP_VERSION_LABEL = "build 31";
 	
 	public String getApplicationName() { return APP_NAME; }
 	public String getApplicationVersion() { return APP_VERSION; }
@@ -310,7 +316,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
             public void onWindowClosing(ClosingEvent event) {
             	
             	if(_this.getAnnotationPersistenceManager().isWorskspaceUnsaved()) {
-            		Window.alert("The workspace contains unsaved annotation. By closing the window, the unsaved annotations will be lost.");
+            		Window.alert("The workspace contains unsaved annotation.\n\n" +
+            			"By selecting 'Leaving the Page', the unsaved annotations will be lost.\n\n" +
+            			"By selecting 'Stay on Page', you will have the chance to save the annotation.\n\n");
             		event.setMessage("The workspace contains unsaved annotation.");
             	}
             }
@@ -479,12 +487,21 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				new AntibodySearchComponent(this));
 		
 		// Micropublications
+		
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
 		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), false);
 		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
 			annotationFormsManager.registerAnnotationForm(MMicroPublicationAnnotation.class.getName(),
 					new MicroPublicationFormProvider(this));
 		}
+		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
+				new MicroPublicationTileProvider(this));
+		annotationCardsManager.registerAnnotationCard(MMicroPublicationAnnotation.class.getName(), 
+				new MicroPublicationCardProvider(this));
+		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
+		
+		
+		
 		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 
@@ -539,6 +556,12 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			sidePanelsFacade.registerSideComponent(annotationsDebugSideTab, annotationDebugSidePanel, (AnnotationDebugSideTab.HEIGHT+16) + "px");
 		}
 		
+		// -----------------------------------
+		//  TEXT MINING SERVICES REGISTRATION
+		// ===================================
+		TextMiningRegistry.getInstance(this).registerTextMiningService(BioPortalManager.getInstance());
+		TextMiningRegistry.getInstance(this).registerTextMiningService(NifManager.getInstance());
+		
 		RootPanel rpp = RootPanel.get();
 		rpp.add(sideTabPanel);
 
@@ -570,7 +593,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	    	}
 	    });
 		
-		this.logger.info(this, "Creation Domeo completed");
+		this.logger.info(this, "Domeo Creation completed");
+		this.logger.info(this, "-------------------------------------");
 		extractorsManager = new ContentExtractorsManager(this);
 		componentsManager.addComponent(extractorsManager);
 		
@@ -1408,6 +1432,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public void reinitEnvironment() {
 		this.getLogger().info(this.getClass().getName(), "Re-initializing environment");
 		componentsManager.initializeComponents();
+		tabsSets.clear();
 	}
 
 	@Override
@@ -1431,7 +1456,19 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		componentsManager.addComponent(sidePanel);
 
 		ASideTab selectedTab = sidePanelsFacade.registerSideComponent(tab, sidePanel, (58+16) + "px");
+		tabsSets.put(set, selectedTab);
 		sidePanelsFacade.toggleTab(selectedTab);
+	}
+	
+	private HashMap<MAnnotationSet, ASideTab> tabsSets = new HashMap<MAnnotationSet, ASideTab>();
+	
+	public void removeAnnotationSetTab(MAnnotationSet set) {
+		this.getLogger().debug(this, set.getLabel());
+		Object obj = tabsSets.get(set);
+		this.getLogger().debug(this, ""+obj);
+		if(obj!=null) {
+			sidePanelsFacade.removeSideTab((ASideTab) obj);
+		}
 	}
 	
 	// ----------------------------------

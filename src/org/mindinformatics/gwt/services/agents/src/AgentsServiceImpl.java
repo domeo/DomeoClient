@@ -66,76 +66,80 @@ public class AgentsServiceImpl extends RemoteServiceServlet implements AgentsSer
 			if(format.equals("json") && username.equals("paolo.ciccarese")) {
 				if(request.equals("info")) {
 					PrintWriter out = resp.getWriter();
-					out.println('[');
-		
-					out.println("  {");
-					out.print("    \"@id\": \"");
-					out.print("urn:person:uuid:paolociccarese");
-					out.println("\",");
-					out.print("    \"@type\": \"");
-					out.print("foafx:Person");
-					out.println("\",");
-					out.print("    \"uri\": \"");
-					out.print("urn:person:uuid:paolociccarese");
-					out.println("\",");
-					out.print("    \"domeo:uuid\": \"");
-					out.print("paolo.ciccarese");
-					out.println("\",");
-					out.print("    \"foafx:email\": \"");
-					out.print("paolo.ciccarese@gmail.com");
-					out.println("\",");
-					out.print("    \"displayname\": \"");
-					out.print("Dr. Paolo Ciccarese");
-					out.println("\",");
-					out.print("    \"foafx:title\": \"");
-					out.print("Dr.");
-					out.println("\",");
-					out.print("    \"foafx:email\": \"");
-					out.print("paolo.ciccarese@gmail.com");
-					out.println("\",");
-					out.print("    \"foafx:name\": \"");
-					out.print("Paolo Ciccarese");
-					out.println("\",");
-					out.print("    \"foafx:firstname\": \"");
-					out.print("Paolo");
-					out.println("\",");
-					out.print("    \"foafx:middlename\": \"");
-					out.print("Nunzio");
-					out.println("\",");
-					out.print("    \"foafx:lastname\": \"");
-					out.print("Ciccarese");
-					out.println("\",");
-					out.print("    \"foafx:picture\": \"");
-					out.print("http://www.hcklab.org/images/me/paolo%20ciccarese-boston.jpg");
-					out.println("\"");
-					out.println("  },");
+//					out.println('[');
+//		
+//					out.println("  {");
+//					out.print("    \"@id\": \"");
+//					out.print("urn:person:uuid:paolociccarese");
+//					out.println("\",");
+//					out.print("    \"@type\": \"");
+//					out.print("foafx:Person");
+//					out.println("\",");
+//					out.print("    \"uri\": \"");
+//					out.print("urn:person:uuid:paolociccarese");
+//					out.println("\",");
+//					out.print("    \"domeo:uuid\": \"");
+//					out.print("paolo.ciccarese");
+//					out.println("\",");
+//					out.print("    \"foafx:email\": \"");
+//					out.print("paolo.ciccarese@gmail.com");
+//					out.println("\",");
+//					out.print("    \"displayname\": \"");
+//					out.print("Dr. Paolo Ciccarese");
+//					out.println("\",");
+//					out.print("    \"foafx:title\": \"");
+//					out.print("Dr.");
+//					out.println("\",");
+//					out.print("    \"foafx:email\": \"");
+//					out.print("paolo.ciccarese@gmail.com");
+//					out.println("\",");
+//					out.print("    \"foafx:name\": \"");
+//					out.print("Paolo Ciccarese");
+//					out.println("\",");
+//					out.print("    \"foafx:firstname\": \"");
+//					out.print("Paolo");
+//					out.println("\",");
+//					out.print("    \"foafx:middlename\": \"");
+//					out.print("Nunzio");
+//					out.println("\",");
+//					out.print("    \"foafx:lastname\": \"");
+//					out.print("Ciccarese");
+//					out.println("\",");
+//					out.print("    \"foafx:picture\": \"");
+//					out.print("http://www.hcklab.org/images/me/paolo%20ciccarese-boston.jpg");
+//					out.println("\"");
+//					out.println("  },");
+//					
+//					out.println(']');
 					
-					out.println(']');
+					out.print("[{\"uri\": \"urn:domeo:person:uuid:8a70347a4096d318014096d369480000\",    \"@id\": \"urn:person:uuid:8a70347a4096d318014096d369480000\",    \"@type\": \"foafx:Person\",    \"domeo:uuid\": \"8a70347a4096d318014096d369480000\",    \"foafx:email\": \"admin@commonsemantics.org\",    \"foafx:title\": \"\",    \"foafx:name\": \"Dr. John Doe\",    \"foafx:firstname\": \"John\",    \"foafx:middlename\": \"\",    \"foafx:lastname\": \"Doe\",    \"foafx:picture\": \"http://www.hcklab.org/images/me/paolo%20ciccarese-boston.jpg\"  }]");
 					out.flush();
 				}
 			} else if(format.equals("json") && username.toLowerCase().equals("domeo")) {
 				PrintWriter out = resp.getWriter();
-				out.println('[');
-	
-				out.println("  {");
-				out.print("    \"@id\": \"");
-				out.print("http://www.commonsemantics.com/agent/domeo_"+request);
-				out.println("\",");
-				out.print("    \"@type\": \"");
-				out.print("foafx:Software");
-				out.println("\",");
-				out.print("    \"domeo:uuid\": \"");
-				out.print("domeo_"+request);
-				out.println("\",");
-				out.print("    \"foafx:name\": \"");
-				out.print("Domeo");
-				out.println("\",");
-				out.print("    \"foafx:version\": \"");
-				out.print(request);
-				out.println("\"");
-				out.println("  },");
+				out.print("[  {    \"@id\": \"urn:domeo:software:id:Domeo-2.0alpha-030\",    \"@type\": \"foafx:Software\",    \"domeo:uuid\": \"Domeo_2.0alpha_030\",    \"foafx:name\": \"Domeo Annotation Toolkit\",    \"foafx:version\": \"2.0alpha\",    \"foafx:build\": \"030\"  }]");
 				
-				out.println(']');
+//				out.println('[');
+//	
+//				out.println("  {");
+//				out.print("    \"@id\": \"");
+//				out.print("http://www.commonsemantics.com/agent/domeo_"+request);
+//				out.println("\",");
+//				out.print("    \"@type\": \"");
+//				out.print("foafx:Software");
+//				out.println("\",");
+//				out.print("    \"domeo:uuid\": \"");
+//				out.print("domeo_"+request);
+//				out.println("\",");
+//				out.print("    \"foafx:name\": \"");
+//				out.print("Domeo");
+//				out.println("\",");
+//				out.print("    \"foafx:version\": \"");
+//				out.print(request);
+//				out.println("\"");
+//				out.println("  },");
+//				
+//				out.println(']');
 				out.flush();
 			} else {
 				PrintWriter out = resp.getWriter();

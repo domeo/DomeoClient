@@ -10,8 +10,10 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.ITrustedResourceDigester;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -37,8 +39,8 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 	
 	@UiField VerticalPanel body;
 	@UiField HorizontalPanel provenance;
-	@UiField FlowPanel content;
-	@UiField HTML icon;
+	//@UiField FlowPanel content;
+	//@UiField HTML icon;
 	@UiField HTML description;
 	
 	public TQualifierTile(IDomeo domeo, IAnnotationEditListener listener) {
@@ -70,9 +72,23 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
-			createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, "Qualifier", _annotation);
+			createProvenanceBar(QualifierPlugin.getInstance().getPluginName(), provenance, (_annotation.getTerms().size()>1 ? "Qualifiers" : "Qualifier"), _annotation);
 			
+			StringBuffer sb2 = new StringBuffer();
+			
+			sb2.append(" <ul class='tags'>");
+			for(MLinkedResource rel: _annotation.getTerms()) {
+				sb2.append("<li><a href='" + rel.getUrl() + "' target='_blank'>" + 
+						rel.getLabel() + " <span class='source'>- " +  
+						rel.getSource().getLabel() + "</span></a></li>");
+			}
+			
+			sb2.append("</ul>");
+			description.setHTML(sb2.toString());
+			
+			/*
 			StringBuffer sb = new StringBuffer();
+
 			
 			for(int j=0; j<_annotation.getTerms().size(); j++) {
 				sb.append("<img src='" + Domeo.resources.tagIcon().getSafeUri().asString() + "'/>" +  "<b>" + _annotation.getTerms().get(j).getLabel()+"</b> from <a target=\"_blank\"href=\""+ _annotation.getTerms().get(j).getSource().getUrl() +"\">"+
@@ -87,6 +103,10 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 						nodigester = false;
 					}
 				}
+				
+				
+					
+
 				
 				if(_annotation.getAnnotatedBy().size()>0) {
 					int right = 0;
@@ -111,15 +131,9 @@ public class TQualifierTile extends ATileComponent implements ITileComponent {
 			}
 			
 			description.setHTML(sb.toString());
-			/*description.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-					Window.alert("Edit or display?");
-				}
-			});
 			*/
 			
-			injectButtons(QualifierPlugin.getInstance().getPluginName(), content, _annotation);
+			//injectButtons(QualifierPlugin.getInstance().getPluginName(), content, _annotation);
 			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());

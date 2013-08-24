@@ -28,6 +28,20 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationF
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.JsAnnotationCuration;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpDataImage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpStatement;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsoMicroPublication;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsoMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsoMpDataImage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsoMpRelationship;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsoMpStatement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.JsoAntibody;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.JsoAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.JsoAntibodyUsage;
@@ -46,6 +60,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotation
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsBibliographicSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsImageInDocumentSelector;
+import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsPublicationArticleReference;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsTextQuoteSelector;
 import org.mindinformatics.gwt.framework.component.agents.model.JsoAgent;
 import org.mindinformatics.gwt.framework.component.agents.src.AgentsFactory;
@@ -108,6 +123,9 @@ public class JsonUnmarshallingManager {
 	}-*/;
 	private final native String getSelectorTargetUrl(Object obj) /*-{ 
 		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::source]; 
+	}-*/;
+	private final native String getImageDisplayUrl(Object obj) /*-{ 
+		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::displaySource]; 
 	}-*/;
 	
 	public final native JsArray<JsoLinkedDataResource> getSemanticTags(Object obj) /*-{ 
@@ -616,6 +634,226 @@ public class JsonUnmarshallingManager {
 //								ldr.setSource(r);
 //								((MQualifierAnnotation)ann).addTerm(ldr);
 //							}
+						} else if(typesSet.contains(MMicroPublicationAnnotation.TYPE)) {
+							JsoMicroPublicationAnnotation mp = (JsoMicroPublicationAnnotation) jsonAnnotations.get(j);
+							_domeo.getLogger().debug(this, "0-1 "+ mp);
+							ann = MicroPublicationFactory.createMicroPublicationAnnotation(
+								mp.getId(), 
+								mp.getLineageUri(), 
+								mp.getFormattedCreatedOn(),
+								mp.getFormattedLastSaved(),
+								set,
+								_domeo.getAgentManager().getAgentByUri(mp.getCreatedBy()),
+								(ISoftware)_domeo.getAgentManager().getAgentByUri(mp.getCreatedWith()),
+								mp.getVersionNumber(),
+								mp.getPreviousVersion(),
+								_domeo.getPersistenceManager().getCurrentResource(),
+								selectors,
+								mp.getLabel()
+								);
+							if(mp.getCreatedWith()!=null && mp.getCreatedWith().trim().length()>0) {
+								ann.setTool((ISoftware) _domeo.getAgentManager().getAgentByUri(mp.getCreatedWith()));
+							}
+							_domeo.getLogger().debug(this, "0-1a");
+							JsArray<JsoMicroPublication> aus = mp.getBody();
+							JsoMicroPublication au = aus.get(0);
+							//JsArray<JsoMpStatement> statements = au.getArgues();
+							JsoMpStatement argues = au.getArgues();			
+							_domeo.getLogger().debug(this, "0-1b");
+							HashSet<String> arguesTypesSet = new HashSet<String>();
+							if(hasMultipleTypes(argues)) {
+								JsArrayString types = getObjectTypes(argues);
+								for(int k=0; k<types.length(); k++) {
+									arguesTypesSet.add(types.get(k));
+								}
+							} else {
+								arguesTypesSet.add(getObjectType(argues));
+							}
+							_domeo.getLogger().debug(this, "0-1c");
+							JsAnnotationTarget tar = argues.getContext();	
+							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+							
+							_domeo.getLogger().debug(this, mp.getId() + " --- " + argues.getId());
+							MMicroPublication microPublication = MicroPublicationFactory.cloneMicroPublication(mp.getId(), argues.getId(), selector);
+							
+							
+							_domeo.getLogger().debug(this, "0-1d");
+							if(arguesTypesSet.contains("swande:Claim")) {
+								microPublication.setType(MMicroPublication.CLAIM);
+							} else if(arguesTypesSet.contains("swande:Hypothesis")) {
+								microPublication.setType(MMicroPublication.HYPOTHESIS);
+							} else {
+								microPublication.setType(MMicroPublication.CLAIM);
+							}
+							_domeo.getLogger().debug(this, "0-1e");
+							((MMicroPublicationAnnotation)ann).setMicroPublication(microPublication);
+							if(argues.isSupportingEvidence()) {
+								JsArray<JsoMpRelationship> relsEvidence = argues.getSupportingEvidence();
+								_domeo.getLogger().debug(this, "0-1-1 " + relsEvidence.length());
+								for(int x=0; x<relsEvidence.length(); x++) {
+									JsoMpRelationship rel = relsEvidence.get(x);
+									JavaScriptObject res = rel.getResource();
+									_domeo.getLogger().debug(this, "0-1-2 " + getObjectType(res));
+									if(getObjectType(res).equals("mp:DataImage")) {
+										_domeo.getLogger().debug(this, "0-1-3 mp:DataImage");
+										JsoMpDataImage dataImage = (JsoMpDataImage) res;
+										JsAnnotationTarget target = dataImage.getContext();
+										_domeo.getLogger().debug(this, "0-1-3 " + target.getSelector()); 
+										_domeo.getLogger().debug(this, "0-1-3 " + getObjectType(target.getSelector())); 
+										if(getObjectType(target.getSelector()).equals("domeo:ImageInDocumentSelector")) {
+											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											s.getTarget().setUrl(getSelectorTargetUrl(target));
+											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
+											
+											MMpDataImage di = new MMpDataImage(s);
+											di.setId(dataImage.getId());
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.supportedBy);
+											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+											rr.setId(rel.getId());
+											rr.setCreationDate(rel.getFormattedCreatedOn());
+											microPublication.getEvidence().add(rr);
+										}
+									} else if(getObjectType(res).equals("mp:Statement")) {
+										_domeo.getLogger().debug(this, "0-1-4 mp:Statement");
+										JsoMpStatement statement = (JsoMpStatement) res;
+										JsAnnotationTarget target = statement.getContext();
+										_domeo.getLogger().debug(this, "0-1-4 " + target.getSelector()); 
+										_domeo.getLogger().debug(this, "0-1-4 " + getObjectType(target.getSelector())); 
+										if(getObjectType(target.getSelector()).equals("ao:PrefixSuffixTextSelector")) {
+											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
+											di.setId(statement.getId());
+											di.setSelector(sss);
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.supportedBy);
+											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+											rr.setId(rel.getId());
+											rr.setCreationDate(rel.getFormattedCreatedOn());
+											microPublication.getEvidence().add(rr);
+										}
+									} else if(getObjectType(res).equals("org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference")) {
+										_domeo.getLogger().debug(this, "0-1-5 mp:Reference");
+
+										JsPublicationArticleReference reference = (JsPublicationArticleReference) res;
+										
+										MPublicationArticleReference publicationReference = new MPublicationArticleReference();
+										publicationReference.setDoi(reference.getDoi());
+										publicationReference.setPubMedId(reference.getPubMedId());
+										publicationReference.setPubMedCentralId(reference.getPubMedCentralId());
+										publicationReference.setAuthorNames(reference.getAuthorNames());
+										publicationReference.setTitle(reference.getTitle());
+										publicationReference.setJournalPublicationInfo(reference.getPublicationInfo());
+										publicationReference.setJournalName(reference.getJournalName());
+										publicationReference.setJournalIssn(reference.getJournalIssn());
+										publicationReference.setUnrecognized(reference.getUnrecognized());
+										
+										MMpReference rrrr = new MMpReference();
+										rrrr.setReference(publicationReference);
+										
+										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.supportedBy);
+										rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+										rr.setId(rel.getId());
+										rr.setCreationDate(rel.getFormattedCreatedOn());
+										microPublication.getEvidence().add(rr);
+									}
+								}
+							}
+							
+							if(argues.isChallengingEvidence()) {
+								JsArray<JsoMpRelationship> relsEvidence = argues.getChallengingEvidence();
+								_domeo.getLogger().debug(this, "0-1-1 " + relsEvidence.length());
+								for(int x=0; x<relsEvidence.length(); x++) {
+									JsoMpRelationship rel = relsEvidence.get(x);
+									JavaScriptObject res = rel.getResource();
+									_domeo.getLogger().debug(this, "0-1-2 " + getObjectType(res));
+									if(getObjectType(res).equals("mp:DataImage")) {
+										_domeo.getLogger().debug(this, "0-1-3 mp:DataImage");
+										JsoMpDataImage dataImage = (JsoMpDataImage) res;
+										JsAnnotationTarget target = dataImage.getContext();
+										_domeo.getLogger().debug(this, "0-1-3 " + target.getSelector()); 
+										_domeo.getLogger().debug(this, "0-1-3 " + getObjectType(target.getSelector())); 
+										if(getObjectType(target.getSelector()).equals("domeo:ImageInDocumentSelector")) {
+											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											s.getTarget().setUrl(getSelectorTargetUrl(target));
+											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
+											
+											MMpDataImage di = new MMpDataImage(s);
+											di.setId(dataImage.getId());
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.challengedBy);
+											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+											rr.setId(rel.getId());
+											rr.setCreationDate(rel.getFormattedCreatedOn());
+											microPublication.getEvidence().add(rr);
+										}
+									} else if(getObjectType(res).equals("mp:Statement")) {
+										_domeo.getLogger().debug(this, "0-1-4 mp:Statement");
+										JsoMpStatement statement = (JsoMpStatement) res;
+										JsAnnotationTarget target = statement.getContext();
+										_domeo.getLogger().debug(this, "0-1-4 " + target.getSelector()); 
+										_domeo.getLogger().debug(this, "0-1-4 " + getObjectType(target.getSelector())); 
+										if(getObjectType(target.getSelector()).equals("ao:PrefixSuffixTextSelector")) {
+											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
+											di.setId(statement.getId());
+											di.setSelector(sss);
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.challengedBy);
+											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+											rr.setId(rel.getId());
+											rr.setCreationDate(rel.getFormattedCreatedOn());
+											microPublication.getEvidence().add(rr);
+										}
+									} else if(getObjectType(res).equals("org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference")) {
+										_domeo.getLogger().debug(this, "0-1-5 mp:Reference");
+
+										JsPublicationArticleReference reference = (JsPublicationArticleReference) res;
+										
+										MPublicationArticleReference publicationReference = new MPublicationArticleReference();
+										publicationReference.setDoi(reference.getDoi());
+										publicationReference.setPubMedId(reference.getPubMedId());
+										publicationReference.setPubMedCentralId(reference.getPubMedCentralId());
+										publicationReference.setAuthorNames(reference.getAuthorNames());
+										publicationReference.setTitle(reference.getTitle());
+										publicationReference.setJournalPublicationInfo(reference.getPublicationInfo());
+										publicationReference.setJournalName(reference.getJournalName());
+										publicationReference.setJournalIssn(reference.getJournalIssn());
+										publicationReference.setUnrecognized(reference.getUnrecognized());
+										
+										MMpReference rrrr = new MMpReference();
+										rrrr.setReference(publicationReference);
+										
+										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.supportedBy);
+										rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+										rr.setId(rel.getId());
+										rr.setCreationDate(rel.getFormattedCreatedOn());
+										microPublication.getEvidence().add(rr);
+									}
+								}
+							}
+							
+							if(argues.isQualifiers()) {
+								JsArray<JsoMpRelationship> relsQualifiers = argues.getQualifier();
+								_domeo.getLogger().debug(this, "0-2-1 " + relsQualifiers.length());
+								for(int x=0; x<relsQualifiers.length(); x++) {
+									JsoMpRelationship rel = relsQualifiers.get(x);
+									JavaScriptObject res = rel.getResource();
+	
+									JsonGenericResource gr = ((JsoLinkedDataResource)res).getSource();
+									MGenericResource r = ResourcesFactory.createGenericResource(gr.getUrl(), gr.getLabel());
+									
+									MLinkedResource ldr = ResourcesFactory.createTrustedResource(((JsoLinkedDataResource)res).getUrl(), 
+											((JsoLinkedDataResource)res).getLabel(), r);
+									ldr.setDescription(((JsoLinkedDataResource)res).getDescription());
+									
+									MMpQualifier q = new MMpQualifier();
+									q.setQualifier(ldr);
+	
+							
+									MMpRelationship rr = new MMpRelationship(q, IMicroPublicationsOntology.supportedBy);
+									rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+									rr.setId(rel.getId());
+									rr.setCreationDate(rel.getFormattedCreatedOn());
+									microPublication.getQualifiers().add(rr);
+								}
+							}
 						}
 					
 						if(Domeo.verbose) _domeo.getLogger().debug(this, "Lazy binding (" + j + ")");

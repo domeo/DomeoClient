@@ -12,4 +12,5 @@ import com.google.gwt.user.client.ui.Widget;
 @RemoteServiceRelativePath("reporting")
 public interface ReportingService extends RemoteService {
 	String sendWidgetAsEmail(String sourceComponent, String title, Widget message, String url)  throws IllegalArgumentException;
+	String recordPathEntry(String sourceFrom, String sourceTo)  throws IllegalArgumentException;
 }

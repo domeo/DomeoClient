@@ -10,7 +10,6 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.framework.component.ui.lenses.ILensComponent;
-import org.mindinformatics.gwt.framework.model.agents.IPerson;
 import org.mindinformatics.gwt.framework.model.agents.ISoftware;
 import org.mindinformatics.gwt.framework.model.users.IUserGroup;
 import org.mindinformatics.gwt.framework.widget.EditableLabel;
@@ -23,7 +22,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
@@ -281,6 +279,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 				
 				try {
 					// List groups
+					access.clear();
 					access.add(new HTML("<b>Accessible to</b>"));
 					
 					if(_domeo.getAnnotationAccessManager().getAnnotationSetGroups(_set)!=null) {
@@ -364,6 +363,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 			@Override
 			public void onClick(ClickEvent event) {
 				_domeo.getAnnotationPersistenceManager().removeAnnotationSet(_set);
+				_parent.resetAnnotationSetInfo();
 			}
 		});
 		

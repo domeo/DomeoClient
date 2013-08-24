@@ -18,7 +18,6 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens.DiscussionSummaryListLens;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens.LGeneralCommentLens;
-import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.viewer.TCommentViewerTile;
 import org.mindinformatics.gwt.framework.component.ICommentsRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
@@ -28,6 +27,7 @@ import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
@@ -64,6 +64,13 @@ public class CommentSummaryTable extends Composite
 	
 	interface Binder extends UiBinder<Widget, CommentSummaryTable> { }
 	private static final Binder binder = GWT.create(Binder.class);
+	
+	interface LocalCss extends CssResource {
+		String formArea();
+		String formBox();
+	}
+	
+	@UiField LocalCss style;
 	
 	public static final CommentSummaryTableResources localResources = 
 		GWT.create(CommentSummaryTableResources.class);
@@ -136,9 +143,11 @@ public class CommentSummaryTable extends Composite
 									}
 								} else {
 									if(ann instanceof MCommentAnnotation) { // Remove for simple commenting
-										ITileComponent cc = new TCommentViewerTile(_domeo, _listener);
-										cc.initializeLens(ann);
-										Widget w = cc.getTile();
+										//ITileComponent cc = new TCommentViewerTile(_domeo, _listener);
+										//cc.initializeLens(ann);
+										//Widget w = cc.getTile();
+										c.initializeLens(ann);
+										Widget w = c.getTile();
 										topContent.add(w);
 									} else {
 										c.initializeLens(ann);
@@ -167,7 +176,9 @@ public class CommentSummaryTable extends Composite
 					final TextArea ta = new TextArea();
 				    ta.setCharacterWidth(68);
 				    ta.setVisibleLines(5);
+				    ta.setStyleName(style.formBox());
 				    bottomContent.add(ta);
+				    bottomContent.setStyleName(style.formArea());
 				    
 				    FlowPanel commands = new FlowPanel();
 				    

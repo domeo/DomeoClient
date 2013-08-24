@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
-import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.IExceptionReporter;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
@@ -166,12 +165,13 @@ public class ReferencesListPickerWidget extends Composite implements IExceptionR
 //			hp.add(fp2);
 //			hp.setCellWidth(fp2, "18px");
 			
+			final int ii = i;
 			final CheckBox box = new CheckBox();
 			box.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					box.setEnabled(false);
-					//_container.addImageAsData(_image);
+					_container.addBibliographicObject(((IReferences)_domeo.getPersistenceManager().getCurrentResource()).getReferences().get(ii));
 				}
 			});			
 			hp.add(box);

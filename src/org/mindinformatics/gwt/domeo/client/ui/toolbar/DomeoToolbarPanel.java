@@ -136,6 +136,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 							}
 							deselectManualMultipleAnnotation();
 						}
+						if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
 					}
 				}, _resources.highlightLittleIcon(), 
 				_resources.highlightLittleColorIcon(), "Highlight", "Highlight");
@@ -168,6 +169,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 						}
 						deselectManualMultipleAnnotation();
 					}
+					if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
 				}
 			}, _resources.domeoAnnotateIcon(), 
 			_resources.domeoAnnotateColorIcon(), "Annotate", "Annotate");
@@ -226,7 +228,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 							new EnhancedGlassPanel(_domeo, tmsp, tmsp.getTitle(), 800, false, false, false);
 						} else {
 							_domeo.getLogger().debug(this, "No text to textmine...");
-							_domeo.getContentPanel().getAnnotationFrameWrapper().clearSelection(frameDocument);
+							_domeo.getContentPanel().getAnnotationFrameWrapper().clearSelection();
 							_domeo.getToolbarPanel().deselectAnalyze();
 							_domeo.getProgressPanelContainer().setWarningMessage("No text has been selected for textmining!");
 						}

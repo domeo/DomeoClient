@@ -13,6 +13,7 @@ import java.util.Set;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.helpers.IAnnotationHelper;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
+import org.mindinformatics.gwt.domeo.model.ICache;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MBibliographicSet;
@@ -34,6 +35,19 @@ import com.google.gwt.user.client.Element;
  */
 public class AnnotationPersistenceManager extends PersistenceManager {
 
+	// Annotation Caches
+	private HashMap<String, ICache> caches = new HashMap<String, ICache>();
+	
+	public ICache getCache(String type) {
+		return caches.get(type);
+	}
+	
+	public boolean registerCache(ICache cache) {
+		if(caches.containsValue(cache)) return false;
+		caches.put(cache.getCachedType(), cache);
+		return true;
+	}
+	
 	
 	// ANNOTATIONS SETS
 	// ----------------
@@ -287,12 +301,15 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		}
 		return null;
 	}
-	
+
 	public void removeAnnotationSet(MAnnotationSet set) {
 		_application.getLogger().command("REMOVING SET", this, "with id " + set.getLocalId());
 		for(MAnnotationSet _set: allUserSets) {
 			if(_set.getLocalId()==set.getLocalId()) {
-				if(currentSet.getLocalId().equals(set.getLocalId())) currentSet = null;
+				if(currentSet.getLocalId().equals(set.getLocalId())) {
+					currentSet = null;
+				}
+				((IDomeo)_application).removeAnnotationSetTab(set);
 				// reset set permissions
 				((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
 				((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set);
@@ -316,6 +333,10 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		annotationsOfAnnotations.clear();
 		annotationsOfAnnotationsCounter.clear();
 		annotationsOfImages.clear();
+		
+		for(ICache c:caches.values()) {
+			c.resetCache();
+		}
 	}
 	
 	public boolean addAnnotation(MAnnotation annotation, boolean newSet) {
@@ -448,6 +469,14 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 					}
 				}
 			//}
+				
+			// Cache by type
+			for(ICache cache: caches.values()) {
+				if(annotation.getClass().getName().equals(cache.getCachedType())) {
+					cache.cacheAnnotation(annotation);
+					break;
+				}
+			}
 			
 			//annotation.get
 			//annotationsByQualifiers

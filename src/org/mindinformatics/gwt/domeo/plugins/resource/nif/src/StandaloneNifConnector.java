@@ -2,11 +2,13 @@ package org.mindinformatics.gwt.domeo.plugins.resource.nif.src;
 
 import java.util.ArrayList;
 
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibody;
-import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalTextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.INifConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.INifDataRequestCompleted;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
+
+import com.google.gwt.user.client.Window;
 
 public class StandaloneNifConnector implements INifConnector {
 
@@ -44,11 +46,14 @@ public class StandaloneNifConnector implements INifConnector {
 
 	@Override
 	public void annotate(
-			IBioPortalTextminingRequestCompleted completionCallback,
-			String url, String textContent, String include, String exclude)
+			ITextminingRequestCompleted completionCallback,
+			String url, String textContent, String include, String exclude, int minLength, 
+			boolean longestOnly, boolean includeAbbrev, 
+			boolean includeAcronym, boolean includeNumbers)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
+		Window.alert("Annotate with: include " + include + " - exclude " + exclude + " - minLength " + minLength + 
+				" - longestOnly " + longestOnly+ " - includeAbbrev " + includeAbbrev+ " - includeAcronym " + includeAcronym + 
+				" - includeNumbers " + includeNumbers);
 	}
 
 }

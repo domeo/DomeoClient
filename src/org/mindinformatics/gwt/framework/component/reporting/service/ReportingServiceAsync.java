@@ -11,5 +11,8 @@ import com.google.gwt.user.client.ui.Widget;
 public interface ReportingServiceAsync {
 	void sendWidgetAsEmail(String sourceComponent, String title, Widget message, String url, AsyncCallback<String> callback) 
 			throws IllegalArgumentException;
+	
+	void recordPathEntry(String sourceFrom, String sourceTo, AsyncCallback<String> callback) 
+			throws IllegalArgumentException;
 }
 

@@ -1,8 +1,8 @@
 package org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test;
 
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalItemsRequestCompleted;
-import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalTextminingRequestCompleted;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -26,7 +26,7 @@ public class GwtBioPortalServiceConnector implements IBioPortalConnector {
 
 	@Override
 	public void textmine(
-			IBioPortalTextminingRequestCompleted completionCallback,
+			ITextminingRequestCompleted completionCallback,
 			String url, String textContent, String virtualIds)
 			throws IllegalArgumentException {
 		// TODO Auto-generated method stub

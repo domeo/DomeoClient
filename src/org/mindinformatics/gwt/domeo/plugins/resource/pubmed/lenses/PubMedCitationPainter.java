@@ -9,9 +9,11 @@ import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
+import org.mindinformatics.gwt.framework.component.reporting.src.testing.JsonReportManager;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -20,7 +22,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 
 
-public class PubMedCitationPainter  {
+public class PubMedCitationPainter {
 
 	public static final String DOI_SYSTEM_PREFIX = "http://dx.doi.org/";
 	public static final String PUBMED_PREFIX = "http://www.ncbi.nlm.nih.gov/pubmed/";
@@ -290,7 +292,16 @@ public class PubMedCitationPainter  {
 		String text = (pmcid!=null && pmcid.trim().length()>0)? 
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + PUBMED_CENTRAL_PREFIX + 
 			pmcid + "\" title=\"Open document in PubMed Central\">PubMed Central</a> " + pmcid +
-			" <a target=\"_blank\" onclick=\"window.open('" + finalLink + "')\" title=\"Edit document in Domeo\"><img src='" + Domeo.resources.editLittleIcon().getSafeUri().asString() + "' style='border: 0px;' /></a>" :null;
+			" <a target=\"_blank\" onclick=\"trackpath('" + finalLink 
+			+ "','" + domeo.getPersistenceManager().getCurrentResourceUrl() 
+			+ "','" + PUBMED_CENTRAL_PREFIX +  pmcid
+			+ "','" + domeo.getUserManager().getUser().getUserName()
+			+ "')\" title=\"Edit document in Domeo\">"+ 
+			"<img src='" + Domeo.resources.editLittleIcon().getSafeUri().asString() + "' style='border: 0px;' /></a>" :null;
+			/*
+			" <a target=\"_blank\" onclick=\"window.open('" + finalLink + "')\" title=\"Edit document in Domeo\">"+ 
+			"<img src='" + Domeo.resources.editLittleIcon().getSafeUri().asString() + "' style='border: 0px;' /></a>" :null;
+			*/
 		return text;
 	}
 	
@@ -305,8 +316,18 @@ public class PubMedCitationPainter  {
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + PUBMED_CENTRAL_PREFIX + 
 			pmcid + "\" title=\"Open document in PubMed Central\">PubMed Central</a> " + (displayId?pmcid:"") +
 			(displayEditButton?
+			" <a target=\"_blank\" onclick=\"trackpath('" + finalLink 
+			+ "','" + domeo.getPersistenceManager().getCurrentResourceUrl() 
+			+ "','" + PUBMED_CENTRAL_PREFIX +  pmcid
+			+ "','" + domeo.getUserManager().getUser().getUserName()
+			+ "')\" title=\"Edit document in Domeo\">"+ 
+			"<img src='" + Domeo.resources.editLittleIcon().getSafeUri().asString() + "' style='border: 0px;' /></a>":"") :null;
+					
+			/*
 			" <a target=\"_blank\" onclick=\"window.open('" + finalLink + "')\" title=\"Edit document in Domeo\">"+ 
 			"<img src='" + Domeo.resources.editLittleIcon().getSafeUri().asString() + "' style='border: 0px;' /></a>":"") :null;
+					
+			*/
 		return text;
 	}
 	
@@ -319,9 +340,15 @@ public class PubMedCitationPainter  {
 		
 		String text = (pmcid!=null && pmcid.trim().length()>0)? 
 			" <a target=\"_blank\" href=\"" + PUBMED_CENTRAL_PREFIX + 
-			pmcid + "\" title=\"Open document in PubMed Central\"><img src='" + Domeo.resources.pmcLittleColorIcon().getSafeUri().asString() + "' style='border: 0px; height: 16px;' /></a> " + pmcid:null;
+			pmcid + "\" title=\"Open document in PubMed Central\">" + 
+			"<img src='" + Domeo.resources.pmcLittleColorIcon().getSafeUri().asString() + "' style='border: 0px; height: 16px;' /></a> " + pmcid:null;
 		/*+
 			" <a target=\"_blank\" onclick=\"window.open('" + finalLink + "')\" title=\"Open document in PubMed\"><img src='" + Domeo.resources.editLittleIcon().getURL() + "' style='border: 0px;' /></a>" :null;*/
 		return text;
+	}
+	
+	public static void annotateDocument(IDomeo _domeo, String url) {
+		JsonReportManager mgr = new JsonReportManager(_domeo, null);
+		mgr.recordPathEntry(_domeo.getPersistenceManager().getCurrentResourceUrl(), url);
 	}
 }

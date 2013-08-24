@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service;
 
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
+
 
 
 /**
@@ -13,6 +15,6 @@ public interface IBioPortalConnector {
 	public void searchTerm(IBioPortalItemsRequestCompleted completionCallback,
 			final String textQuery, final String virtualIds, final int pageNumber, final int pageSize) throws IllegalArgumentException;
 	
-	public void textmine(IBioPortalTextminingRequestCompleted completionCallback, final String url,
+	public void textmine(ITextminingRequestCompleted completionCallback, final String url,
 			final String textContent, final String virtualIds) throws IllegalArgumentException;
 }

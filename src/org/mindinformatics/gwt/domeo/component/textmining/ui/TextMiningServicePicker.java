@@ -1,9 +1,12 @@
 package org.mindinformatics.gwt.domeo.component.textmining.ui;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.mindinformatics.gwt.domeo.client.IDomeo;
-import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.BioPortalManager;
-import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.textmine.TextMiningManager;
-import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.NifManager;
+import org.mindinformatics.gwt.domeo.component.textmining.src.ITextMiningConnector;
+import org.mindinformatics.gwt.domeo.component.textmining.src.TextMiningManager;
+import org.mindinformatics.gwt.domeo.component.textmining.src.TextMiningRegistry;
 import org.mindinformatics.gwt.framework.src.IContainerPanel;
 import org.mindinformatics.gwt.framework.src.IContentPanel;
 
@@ -20,6 +23,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class TextMiningServicePicker  extends Composite implements IContentPanel {
 
 	private static final String TITLE = "Text mining picker";
+	public String getTitle() { return TITLE; }
 	
 	// UI BInder
 	interface Binder extends UiBinder<VerticalPanel, TextMiningServicePicker> {}
@@ -30,25 +34,48 @@ public class TextMiningServicePicker  extends Composite implements IContentPanel
 	private IContainerPanel _container;
 	
 	@UiField Button annotateButton;
-	@UiField RadioButton nifAnnotator;
-	@UiField RadioButton ncboAnnotator;
+	@UiField VerticalPanel availableServices;
+	@UiField VerticalPanel annotatorDetails;
 
+	private ArrayList<RadioButton> buttons = new ArrayList<RadioButton>();
+	
 	public TextMiningServicePicker(IDomeo domeo) {
 		_domeo = domeo;
 	
 		initWidget(binder.createAndBindUi(this)); // Necessary for initializing Composite
 		
+		Collection<ITextMiningConnector> connectors = TextMiningRegistry.getInstance(_domeo).getTextMiningServices();
+		boolean first = true;
+		for(ITextMiningConnector connector: connectors) {
+			RadioButton button = new RadioButton("textmining", connector.getAnnotatorLabel());
+			final ITextMiningConnector _connector = connector;
+			button.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					annotatorDetails.clear();
+					annotatorDetails.add(_connector.getAnnotatorPanel());
+				}
+			});
+			if(first) button.setValue(true);
+			first = false;
+			availableServices.add(button);
+			buttons.add(button);
+		}
+		
 		annotateButton.addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(ClickEvent event) {
-				if(ncboAnnotator.getValue()) {
-					BioPortalManager bioPortalManager = BioPortalManager.getInstance();
-					bioPortalManager.selectBioPortalConnector(_domeo);
-					bioPortalManager.textmine(new TextMiningManager(_domeo), _domeo.getPersistenceManager().getCurrentResourceUrl(), _domeo.getContentPanel().getAnnotationFrameWrapper().matchText , "");
-				} else {
-					NifManager nifManager = NifManager.getInstance();
-					nifManager.selectConnector(_domeo);
-					nifManager.annotate(new TextMiningManager(_domeo), _domeo.getPersistenceManager().getCurrentResourceUrl(), _domeo.getContentPanel().getAnnotationFrameWrapper().matchText , "");
+			public void onClick(ClickEvent event) {				
+				for(RadioButton button: buttons) {
+					if(button.getValue()) {
+						ITextMiningConnector connector = TextMiningRegistry.getInstance(_domeo).getTextMiningServiceByName(button.getText());
+						if(connector!=null) {
+							connector.selectConnector(_domeo);
+							connector.annotate(new TextMiningManager(_domeo), 
+								_domeo.getPersistenceManager().getCurrentResourceUrl(), 
+								_domeo.getContentPanel().getAnnotationFrameWrapper().matchText);
+							break;
+						}
+					}
 				}
 				_container.hide();
 			}
@@ -65,7 +92,5 @@ public class TextMiningServicePicker  extends Composite implements IContentPanel
 		return _container;
 	}
 	
-	public String getTitle() {
-		return TITLE;
-	}
+
 }

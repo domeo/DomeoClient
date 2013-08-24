@@ -30,17 +30,68 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
  */
 public class MMicroPublication implements IMpSupportingElement {
 	
-	String id;
+	public static final String CLAIM = "Claim";
+	public static final String HYPOTHESIS = "Hypothesis";
 	
+	private String id;
+	private String type;
 	private MMpStatement argues;
 	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
+	private ArrayList<MMpRelationship> qualifiers = new ArrayList<MMpRelationship>();
+	
+	public MMicroPublication() {
+		
+	}
 	
 	public MMicroPublication(HighlightedTextBuffer buffer) {
-		argues = new MMpStatement(buffer);
+		argues = MicroPublicationFactory.createMicroPublicationStatement();
+		argues.setBuffer(buffer);
 	}
 	
 	public MMicroPublication(MTextQuoteSelector selector) {
-		argues = new MMpStatement(selector);
+		argues = MicroPublicationFactory.createMicroPublicationStatement();
+		argues.setSelector(selector);
+	}
+	
+	public String getId() {
+		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	
+	
+	public void setArgues(MMpStatement argues) {
+		this.argues = argues;
+	}
+
+	public MMpStatement getArgues() {
+		return argues;
+	}
+
+	public ArrayList<MMpRelationship> getEvidence() {
+		return evidence;
+	}
+
+	public void setEvidence(ArrayList<MMpRelationship> evidence) {
+		this.evidence = evidence;
+	}
+
+	public ArrayList<MMpRelationship> getQualifiers() {
+		return qualifiers;
+	}
+
+	public void setQualifiers(ArrayList<MMpRelationship> qualifiers) {
+		this.qualifiers = qualifiers;
+	}
 }

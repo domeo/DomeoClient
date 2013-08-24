@@ -9,7 +9,6 @@ import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
-import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsTextQuoteSelector;
 
@@ -33,6 +32,7 @@ public class ImageInDocumentSelectorJsonUnmarshaller extends AUnmarshaller imple
 		
 		JsImageInDocumentSelector jsonSelector = (JsImageInDocumentSelector) json;
 		MOnlineImage image = AnnotationFactory.cloneOnlineImage("", jsonSelector.getXPath(), "");
+		//image.setUrl(jsonSelector.g);
 		
 		MImageInDocumentSelector selector = AnnotationFactory.cloneImageInDocumentSelector(
 				jsonSelector.getId(), 
