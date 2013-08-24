@@ -3,6 +3,11 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
@@ -25,6 +30,8 @@ import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFact
 import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.ButtonWithIcon;
 
+import com.google.gwt.logging.client.HasWidgetsLogHandler;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -46,19 +53,22 @@ import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.requestfactory.server.Logging;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
  */
 public class FSPLsForm extends AFormComponent implements IResizable {
 
+	private static Logger logger = Logger.getLogger("");
+	
 	public static final String LABEL = "SPL Annotation";
 	public static final String LABEL_EDIT = "EDIT SPL ANNOTATION";
 	
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING SPL ANNOTATION";
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING SPL ANNOTATION";
 	
-        public static final String SPL_POC_PREFIX = 
+    public static final String SPL_POC_PREFIX = 
 		"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#";
 	
 	interface Binder extends UiBinder<VerticalPanel, FSPLsForm> { }
@@ -410,15 +420,19 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return sioDescriptions;
 	}
 	
-	
+	// NEW annotation
 	public FSPLsForm(IDomeo domeo, final AFormsManager manager) {
 		super(domeo);
 		_manager = manager;
 		
 		initWidget(binder.createAndBindUi(this));
 		
+		logger.log(Level.INFO, "SPL annotation widget bound to UI");
+		
 		refreshAnnotationSetFilter(annotationSet, null);
 
+		logger.log(Level.INFO, "SPL annotation filter set refreshed");
+		
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
 		yesButton.setWidth("78px");
 		yesButton.setHeight("22px");
@@ -426,60 +440,86 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		yesButton.setText("Apply");
 		yesButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				//if(isContentInvalid()) return;  // TODO: use this function to validate form elements in the UI
+				if(isContentInvalid()) return;  // TODO: use this function to validate form elements in the UI
 			
+				logger.log(Level.INFO, "SPL annotation content validated");
+				
 				try { 
 					if(_item == null) {
+						logger.log(Level.INFO, "_item is null...");
 						if(_manager instanceof TextAnnotationFormsPanel) {
 							MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(
 									_domeo.getAgentManager().getUserPerson(), 
 									_domeo.getPersistenceManager().getCurrentResource(), ((TextAnnotationFormsPanel)_manager).getHighlight().getExact(), 
 									((TextAnnotationFormsPanel)_manager).getHighlight().getPrefix(), ((TextAnnotationFormsPanel)_manager).getHighlight().getSuffix());
 							
+							logger.log(Level.INFO, "quote selector initialized");
 							
 							// TODO Register coordinate of the selection.
 							MSPLsAnnotation annotation = SPLsFactory.createSPLsAnnotation(
 									((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
 									_domeo.getAgentManager().getUserPerson(), _domeo.getAgentManager().getSoftware(),
 									_manager.getResource(), selector);
+							
+							logger.log(Level.INFO, "SPL annotation factory initialized");
+														
 							// TODO Register coordinate of highlight.
 							
 							MSPLPharmgxUsage pharmgxUsage = SPLsFactory.createSPLPharmgxUsage();
 							annotation.setPharmgxUsage(pharmgxUsage);
-								
-							_domeo.getLogger().command(getLogCategoryCreate(), this, " with term " + currentPharmgx.getLabel());
+							
+							logger.log(Level.INFO, "SPL pharmgxUsage initialized and attached to the SPL annotation instance");
+							
+							//_domeo.getLogger().command(getLogCategoryCreate(), this, " with term " + currentPharmgx.getLabel());
 	
 							// TODO: figure out how to set the subject up properly
-							annotation.setSubject(ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "TEST-SUBJECT", "TEST-SUBJECT", "A dummy subject to test the model", SPL_POC_PREFIX + "TEST", SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+							//annotation.setSubject(ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "TEST-SUBJECT", "TEST-SUBJECT", "A dummy subject to test the model", SPL_POC_PREFIX + "TEST", SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
 							annotation.setComment(commentBody.getText());
+							
+							logger.log(Level.INFO, "SPL comment set");
+							
 							annotation.getSioDescriptions().clear();
+							
+							logger.log(Level.INFO, "SPL descriptions cleared");
+							
 							annotation.addSioDescriptions(getMethods());
+							
+							logger.log(Level.INFO, "SPL descriptions re-loaded");
 								
 							if(getSelectedSet(annotationSet)==null) {
+								logger.log(Level.INFO, "empty annotation set, passing first SPL annotation to persistance manager");
 								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
 							} else {
+								logger.log(Level.INFO, "Annotation set is not empty, passing new SPL annotation to persistance manager");
 								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, getSelectedSet(annotationSet));
 							}
+							logger.log(Level.INFO, "Making the new SPL annotation visible in the content panel");
 							_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(annotation, ((TextAnnotationFormsPanel)_manager).getHighlight());
+							
+							logger.log(Level.INFO, "SPL annotation data collected. widget should close now.");
+							
 							_manager.hideContainer();
 							
 						} 
 					} else {
 						//_item.setType(PostitType.findByName(postitTypes.getItemText(postitTypes.getSelectedIndex())));
 						//_item.setText(getPostItBody());
+						logger.log(Level.INFO, "_item is NOT null...");
+												
 						_manager.hideContainer();
 					}
 				} catch (Exception e) {
+					logger.log(Level.WARNING, "throwing exception " + e.getMessage());
 					_domeo.getLogger().exception(this, e.getMessage());
 				}
 			}
 		});
 		buttonsPanel.add(yesButton);
 		
+		logger.log(Level.INFO, "'Apply' button added");
+		
 		this.setHeight("100px");
 
-	   
-		
 		//rightColumn.add(tabs.get(0));
 		//resized();
 	}
@@ -494,7 +534,12 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		
 		initWidget(binder.createAndBindUi(this));
 		
+		logger.log(Level.INFO, "SPL annotation widget bound to UI (edit)");
+
 		try {
+
+    		        logger.log(Level.INFO, "Attempting to initialize UI with loaded annotation values");
+
 			if(_item.getComment()!=null) 
 			    commentBody.setText(_item.getComment());
 
@@ -525,7 +570,12 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		
 		try {
 			refreshAnnotationSetFilter(annotationSet, annotation);
+
+                         logger.log(Level.INFO, "SPL annotation filter set refreshed");
+
 			currentPharmgx = annotation.getPharmgxUsage().getPharmgx();
+
+                        logger.log(Level.INFO, "acquired the pharmgx usage from the annotation instance passed to this method");
 		} catch(Exception e) {
 			_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this, "Failed to display current annotation " + annotation.getLocalId());
 			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
@@ -540,19 +590,28 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		sameVersionButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				try {
-					//if(isContentInvalid()) return; // TODO: modify this function to validate our UI
+					if(isContentInvalid()) return; // TODO: modify this function to validate our UI
+
+					logger.log(Level.INFO, "SPL annotation content validated (edit)");
+
 					if(!isContentChanged(_item)) {
-						_domeo.getLogger().debug(this, "No changes to save for annotation " + _item.getLocalId());
+						logger.log(Level.INFO, "No changes to save for annotation " + _item.getLocalId());
 						_manager.getContainer().hide();
 						return;
 					}
 					_item.setComment(commentBody.getText());
 					_item.setSubject(ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "TEST-SUBJECT", "TEST-SUBJECT", "A dummy subject to test the model", SPL_POC_PREFIX + "TEST", SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+
 					_item.getSioDescriptions().clear();
 					_item.addSioDescriptions(getMethods());
+					
+					logger.log(Level.INFO, "SPL descriptions cleared and re-loaded (edit)");
+
 					_item.getPharmgxUsage().setPharmgx(currentPharmgx);
 					
 					_domeo.getContentPanel().getAnnotationFrameWrapper().updateAnnotation(_item, getSelectedSet(annotationSet));
+
+					logger.log(Level.INFO, "SPL annotation data collected. widget should close now.");
 					_manager.hideContainer();
 				} catch(Exception e) {
 					_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this, "Failed to apply modified anntoation " + annotation.getLocalId());
@@ -585,16 +644,17 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	// TODO: edit this method to validate the relevant form elements 
 	@Override
 	public boolean isContentInvalid() {
-		if(currentPharmgx==null) {
-			_manager.displayMessage("The body of the annotation cannot be empty!");
-			Timer timer = new Timer() {
-				public void run() {
-					_manager.clearMessage();
-				}
-			};
-			timer.schedule(2000);
-			return true;
-		}
+		_manager.displayMessage("Click received!");
+//		if(currentPharmgx==null) {
+//			_manager.displayMessage("The body of the annotation cannot be empty!");
+//			Timer timer = new Timer() {
+//				public void run() {
+//					_manager.clearMessage();
+//				}
+//			};
+//			timer.schedule(2000);
+//			return true;
+//		}
 		return false;
 	}
 	

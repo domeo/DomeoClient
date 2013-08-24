@@ -508,7 +508,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				new CommentTileProvider(this));
 		
 		// SPLs
-		pluginsManager.registerPlugin(SPLsPlugin.getInstance(), true);
+		//pluginsManager.registerPlugin(SPLsPlugin.getInstance(), true);
 		annotationFormsManager.registerAnnotationForm(MSPLsAnnotation.class.getName(),
 				new SPLsFormProvider(this));
 		

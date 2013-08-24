@@ -39,3 +39,16 @@ git pull
 git branch -va
 
 
+9) Get in sync with the original fork
+
+If 'git remote -v' does now show https://github.com/domeo/DomeoClient.git as upstream:
+
+$ git remote add upstream https://github.com/domeo/DomeoClient.git
+
+Otherwise:
+
+git fetch upstream
+git branch -va
+git checkout master
+git merge upstream/master
+
