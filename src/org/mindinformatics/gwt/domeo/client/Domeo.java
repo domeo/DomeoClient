@@ -94,12 +94,6 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.postit.search.PostItSear
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.ui.card.PostItCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.ui.form.PostItFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.ui.tile.PostItTileProvider;
-import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
-import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.spls.search.SPLsSearchComponent;
-//import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card.SPLsCardProvider;
-import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form.SPLsFormProvider;
-//import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile.SPLsTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.HQualifierHelper;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
@@ -110,6 +104,9 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.tile.Qualif
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.info.SelectionPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.ui.tile.SelectionTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form.SPLsFormProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile.SPLsTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
@@ -180,6 +177,8 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+//import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card.SPLsCardProvider;
+//import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile.SPLsTileProvider;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -511,6 +510,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		//pluginsManager.registerPlugin(SPLsPlugin.getInstance(), true);
 		annotationFormsManager.registerAnnotationForm(MSPLsAnnotation.class.getName(),
 				new SPLsFormProvider(this));
+		annotationTailsManager.registerAnnotationTile(MSPLsAnnotation.class.getName(), 
+				new SPLsTileProvider(this));
 		
 		// Digesters
 		linkedDataDigestersManager.registerLnkedDataDigester(new NifStandardDigester());

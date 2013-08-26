@@ -1,6 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
 
 /**
@@ -9,16 +10,17 @@ import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResou
 @SuppressWarnings("serial")
 public class MPharmgx extends MTrustedResource {
 
-    String pkImpact, pdImpact, doseRec, drugRec, monitRec, testRec;
+	MLinkedResource pkImpact;
+    String pdImpact, doseRec, drugRec, monitRec, testRec;
 	
 	public MPharmgx(String url, String label, MGenericResource source) {
 		super(url, label, source);
 	}
 	
-	public String getPkImpact() {
+	public MLinkedResource getPkImpact() {
 		return pkImpact;
 	}
-	public void setPkImpact(String pkImpact) {
+	public void setPkImpact(MLinkedResource pkImpact) {
 		this.pkImpact = pkImpact;
 	}
 
