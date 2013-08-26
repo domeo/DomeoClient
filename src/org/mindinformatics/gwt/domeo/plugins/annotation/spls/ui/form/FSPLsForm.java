@@ -3,57 +3,43 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Handler;
 import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormsManager;
-import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.images.ImageAnnotationFormsPanel;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.TextAnnotationFormsPanel;
 import org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper;
-import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MPharmgx;
-import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLPharmgxUsage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLsFactory;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
 import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.ButtonWithIcon;
 
-import com.google.gwt.logging.client.HasWidgetsLogHandler;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.web.bindery.requestfactory.server.Logging;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
@@ -134,6 +120,86 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	//@UiField RadioButton Drug, Dose, Monitoring, test_Re;
 	
 	@UiField TextArea commentBody;
+	
+	// Paolo this is taking care of the 'PK impact' for 'apply'
+	// I Normally create a method for each group
+	// RadioButton groups return MLinkedResource
+	// CheckBoxes groups return Set<MLinkedResource> 
+	// See FAntibodyForm as an example
+	public MLinkedResource getPkImpact() {
+		if(descriptpkia.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "absorption-increase", 
+				"Absorption Increase", 
+				"The pharmacogenomic biomarker is associated with a increase in absorption of the drug.", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");
+		} else if(descriptpkda.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "absorption-decrease", 
+				"Absorption Decrease", 
+				"The pharmacogenomic biomarker is associated with an decrease in absorption of the drug.", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+					"U of Pitt SPL Pharmgx Annotation");
+		} else if(descriptpkid.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "distribution-increase", 
+				"Distribution Increase", 
+				"The pharmacogenomic biomarker is associated with a increase in distribution of the drug.", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");
+		} else if(descriptpkdd.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "distribution-decrease", 
+				"Distribution Decrease", 
+				"The pharmacogenomic biomarker is associated with an decrease in distribution of the drug.", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");
+		} else if(descriptpkim.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "metabolism-increase", 
+				"Metabolism Increase", 
+				"The pharmacogenomic biomarker is associated with an increase in metabolism of the drug.", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");		
+		} else if(descriptpkdm.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "metabolism-decrease", 
+				"Metabolism Decrease", 
+				"The pharmacogenomic biomarker is associated with a decrease in metabolism of the drug.", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");
+		} else if(descriptpkie.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "excretion-increase", 
+				"Excretion Increase", 
+				"*************************** this was missing ************************", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");		
+		} else if(descriptpkde.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "excretion-decrease", 
+				"Excretion Decrease", 
+				"*************************** this was missing ************************", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");
+		} else if(descriptpkni.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "not-important", 
+				"Not Important", 
+				"The pharmacogenomic biomarker is not associated any clinically relevant pharmacokinetic with respect to the drug.", 
+				SPL_POC_PREFIX + "PharmacokineticImpact", 
+				SPL_POC_PREFIX, 
+				"U of Pitt SPL Pharmgx Annotation");
+		}
+		return null;
+	}
 	
 	public Set<MLinkedResource> getMethods() {
 		Set<MLinkedResource> sioDescriptions = new HashSet<MLinkedResource>();
@@ -466,6 +532,14 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							// TODO Register coordinate of highlight.
 							
 							MSPLPharmgxUsage pharmgxUsage = SPLsFactory.createSPLPharmgxUsage();
+							
+							// Paolo initialization of model class
+							MPharmgx pharmgx = new MPharmgx("","",null);
+							// Paolo I've changed the PkImpact field to accommodate MLinkedResource and not strings
+							// The others have to be changed accordingly
+							pharmgx.setPkImpact(getPkImpact());
+							pharmgxUsage.setPharmgx(pharmgx);
+							
 							annotation.setPharmgxUsage(pharmgxUsage);
 							
 							logger.log(Level.INFO, "SPL pharmgxUsage initialized and attached to the SPL annotation instance");
