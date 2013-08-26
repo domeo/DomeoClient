@@ -1,0 +1,55 @@
+<project name="domeo-client-plugin-builder" basedir="." xmlns:ora="antlib:net.sf.incanto">
+  <!-- Put README Style comments Here -->
+
+ <!-- ******************************************************************************** -->
+ <!-- GLOBAL PROPERTIES FOR THIS BUILD - use plug.properties  -->
+ <!-- ******************************************************************************** -->  
+  
+	
+<!-- the path of properties file -->	
+<property file="plugin.properties"/>
+<property name="version"   value="1.0"/>                            
+
+<!-- create folders fitting the plugins architecture -->
+
+<target name="plugin-folders" depends="">
+  <!-- <mkdir dir="src/.../annotation/${PLUGIN-NAME}/info"/> -->
+  
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}"/>
+  
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model"/>
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/serialization"/>
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search"/>
+  
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui"/>
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form"/>
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile"/>
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card"/>
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/viewer"/>
+
+</target>  
+
+<!-- copy template file into new folders -->
+<target name="copy-tmpl">
+  <copy file="templates/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+	<token key="SUB_TYPE" value ="${SUB_TYPE}" />
+	<token key="VERSION" value ="${VERSION}" />
+
+      </replacetokens>
+    </filterchain>
+    
+  </copy>
+</target>
+
+<!-- clean folders and files -->
+<target name="clean">
+  <delete dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}"></delete>
+  <delete file=""></delete>
+</target>
+
+</project>
