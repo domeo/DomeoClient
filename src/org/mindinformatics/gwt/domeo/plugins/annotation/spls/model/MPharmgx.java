@@ -10,17 +10,16 @@ import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResou
 @SuppressWarnings("serial")
 public class MPharmgx extends MTrustedResource {
 
-	MLinkedResource pkImpact;
-    String pdImpact, doseRec, drugRec, monitRec, testRec;
+	String pkImpact, pdImpact, doseRec, drugRec, monitRec, testRec;
 	
 	public MPharmgx(String url, String label, MGenericResource source) {
 		super(url, label, source);
 	}
 	
-	public MLinkedResource getPkImpact() {
+	public String getPkImpact() {
 		return pkImpact;
 	}
-	public void setPkImpact(MLinkedResource pkImpact) {
+	public void setPkImpact(String pkImpact) {
 		this.pkImpact = pkImpact;
 	}
 

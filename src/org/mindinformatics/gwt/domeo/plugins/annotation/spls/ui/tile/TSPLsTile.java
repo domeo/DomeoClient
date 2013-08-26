@@ -71,7 +71,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			// Paolo Here all the content to display
 			
 			sb2.append("PkImpact: ");
-			sb2.append(_annotation.getPharmgxUsage().getPharmgx().getPkImpact().getLabel());
+			sb2.append(_annotation.getPharmgxUsage().getPharmgx().getPkImpact());
 			
 			description.setHTML(sb2.toString());
 

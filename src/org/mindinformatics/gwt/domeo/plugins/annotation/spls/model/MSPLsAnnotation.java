@@ -37,25 +37,46 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    return pharmgxUsage.getPharmgx().getLabel();
 	}
 	
-	public Set<MLinkedResource> getSioDescriptions(){
-	    return pharmgxUsage.getSioDescriptions();
+	public MLinkedResource getPKImpact(){
+	    return pharmgxUsage.getPkImpact();
 	}
 
-	public void addSioDescription(MLinkedResource sioDescriptionAnnot){
-	    pharmgxUsage.getSioDescriptions().add(sioDescriptionAnnot);
+	public void setPKImpact(MLinkedResource pkImpact){
+	    pharmgxUsage.setPkImpact(pkImpact);
+	}
+	
+	public MLinkedResource getPdImpact(){
+	    return pharmgxUsage.getPdImpact();
 	}
 
-	public void addSioDescriptions(Set<MLinkedResource> sioDescriptions) {
-	    pharmgxUsage.getSioDescriptions().addAll(sioDescriptions);
+	public void setPdImpact(MLinkedResource pdImpact){
+	    pharmgxUsage.setPdImpact(pdImpact);
+	}
+	
+	public MLinkedResource getDoseRec(){
+	    return pharmgxUsage.getDoseRec();
 	}
 
-	public MLinkedResource getSubject(){
-	    return pharmgxUsage.getSubject();
+	public void setDoseRec(MLinkedResource doseRec){
+	    pharmgxUsage.setDoseRec(doseRec);
+	}
+	
+	public MLinkedResource getMonitRec(){
+	    return pharmgxUsage.getMonitRec();
 	}
 
-	public void setSubject(MLinkedResource subject){
-	    pharmgxUsage.setSubject(subject);
+	public void setMonitRec(MLinkedResource monitRec){
+	    pharmgxUsage.setMonitRec(monitRec);
 	}
+	
+	public MLinkedResource getTestRec(){
+	    return pharmgxUsage.getTestRec();
+	}
+
+	public void setTestRec(MLinkedResource testRec){
+	    pharmgxUsage.setTestRec(testRec);
+	}
+	
 	
 	@Override
 	    public String getLabel() {

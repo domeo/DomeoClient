@@ -533,33 +533,21 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							
 							MSPLPharmgxUsage pharmgxUsage = SPLsFactory.createSPLPharmgxUsage();
 							
-							// Paolo initialization of model class
-							MPharmgx pharmgx = new MPharmgx("","",null);
 							// Paolo I've changed the PkImpact field to accommodate MLinkedResource and not strings
 							// The others have to be changed accordingly
-							pharmgx.setPkImpact(getPkImpact());
-							pharmgxUsage.setPharmgx(pharmgx);
-							
+							pharmgxUsage.setPkImpact(getPkImpact());
+														
 							annotation.setPharmgxUsage(pharmgxUsage);
 							
 							logger.log(Level.INFO, "SPL pharmgxUsage initialized and attached to the SPL annotation instance");
 							
 							//_domeo.getLogger().command(getLogCategoryCreate(), this, " with term " + currentPharmgx.getLabel());
-	
-							// TODO: figure out how to set the subject up properly
-							//annotation.setSubject(ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "TEST-SUBJECT", "TEST-SUBJECT", "A dummy subject to test the model", SPL_POC_PREFIX + "TEST", SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+							
 							annotation.setComment(commentBody.getText());
 							
 							logger.log(Level.INFO, "SPL comment set");
-							
-							annotation.getSioDescriptions().clear();
-							
-							logger.log(Level.INFO, "SPL descriptions cleared");
-							
-							annotation.addSioDescriptions(getMethods());
-							
-							logger.log(Level.INFO, "SPL descriptions re-loaded");
-								
+						
+												
 							if(getSelectedSet(annotationSet)==null) {
 								logger.log(Level.INFO, "empty annotation set, passing first SPL annotation to persistance manager");
 								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
@@ -617,26 +605,26 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			if(_item.getComment()!=null) 
 			    commentBody.setText(_item.getComment());
 
-			if(_item.getSioDescriptions()!=null) {
-				for(MLinkedResource descript:_item.getSioDescriptions()) {
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"metabolism-decrease"))
-						descriptpkdm.setValue(true);
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"metabolism-increase"))
-						descriptpkim.setValue(true);
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"drug-toxicity-risk-decreased"))
-						descriptpddt.setValue(true);
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"drug-toxicity-risk-increased"))
-						descriptpdit.setValue(true);
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"decrease-from-recommended-baseline"))
-						descriptdrdfb.setValue(true);
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"increase-from-recommended-baseline"))
-						descriptdrifb.setValue(true);
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"required"))
-						descriptmreq.setValue(true);
-					if(descript.getUrl().equals(SPL_POC_PREFIX +"recommended"))
-						descriptmrec.setValue(true);
-				}
-			} 
+//			if(_item.getSioDescriptions()!=null) {
+//				for(MLinkedResource descript:_item.getSioDescriptions()) {
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"metabolism-decrease"))
+//						descriptpkdm.setValue(true);
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"metabolism-increase"))
+//						descriptpkim.setValue(true);
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"drug-toxicity-risk-decreased"))
+//						descriptpddt.setValue(true);
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"drug-toxicity-risk-increased"))
+//						descriptpdit.setValue(true);
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"decrease-from-recommended-baseline"))
+//						descriptdrdfb.setValue(true);
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"increase-from-recommended-baseline"))
+//						descriptdrifb.setValue(true);
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"required"))
+//						descriptmreq.setValue(true);
+//					if(descript.getUrl().equals(SPL_POC_PREFIX +"recommended"))
+//						descriptmrec.setValue(true);
+//				}
+//			} 
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, "Failed to display current annotation " + annotation.getLocalId());
 			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
@@ -674,10 +662,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 						return;
 					}
 					_item.setComment(commentBody.getText());
-					_item.setSubject(ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "TEST-SUBJECT", "TEST-SUBJECT", "A dummy subject to test the model", SPL_POC_PREFIX + "TEST", SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
-
-					_item.getSioDescriptions().clear();
-					_item.addSioDescriptions(getMethods());
+					
+					//_item.getSioDescriptions().clear();
+					//_item.addSioDescriptions(getMethods());
 					
 					logger.log(Level.INFO, "SPL descriptions cleared and re-loaded (edit)");
 
@@ -734,7 +721,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	
 	
 	public boolean areMethodsChanged() {
-		if(_item.getSioDescriptions().size()!=getMethods().size()) return true;
+		//if(_item.getSioDescriptions().size()!=getMethods().size()) return true;
 		//TODO check items
 		return false;
 	}

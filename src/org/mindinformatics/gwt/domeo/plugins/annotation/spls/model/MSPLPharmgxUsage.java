@@ -26,8 +26,17 @@ public class MSPLPharmgxUsage {
 		this.individualUri = individualUri;
 	}
 
-        // The MPharmgx instance that will hold tagging data
-	MPharmgx pharmgx;
+	// tags in the pharmgx model are the object of SIO predicates
+	private String comment;
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
+    // The MPharmgx instance is a "normalized" instance that holds the model values as strings
+	MPharmgx pharmgx = new MPharmgx("","",null);
 	
 	public MPharmgx getPharmgx() {
 		return pharmgx;
@@ -35,32 +44,56 @@ public class MSPLPharmgxUsage {
 	public void setPharmgx(MPharmgx pharmgx) {
 		this.pharmgx = pharmgx;
 	}
-   
-        // tags in the pharmgx model are the object of SIO predicates
-	private String comment;
-	MLinkedResource subject;
-	Set<MLinkedResource> sioDescriptions  = new HashSet<MLinkedResource>();
+    
+	// These are the linked resources associated with the pharmgx annotation
+	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource, drugRecResource, monitRecResource, testRecResource;
+			
+	public MLinkedResource getPkImpact() {
+		return pkImpactResource;
+	}
+	public void setPkImpact(MLinkedResource pkImpact) {
+		this.pkImpactResource = pkImpact;
+		this.pharmgx.setPkImpact(pkImpact.getLabel());
+	}
 
+	public MLinkedResource getPdImpact() {
+		return this.pdImpactResource;
+	}
+	public void setPdImpact(MLinkedResource pdImpact) {
+		this.pdImpactResource = pdImpact;
+		this.pharmgx.setPdImpact(pdImpact.getLabel());
+	}
 
-	public void addSioDescriptions(MLinkedResource sioDescription) {
-		sioDescriptions.add(sioDescription);
+	public MLinkedResource getDoseRec() {
+		return this.doseRecResource;
 	}
-	public Set<MLinkedResource> getSioDescriptions() {
-		return sioDescriptions;
+	public void setDoseRec(MLinkedResource doseRec) {
+		this.doseRecResource = doseRec;
+		this.pharmgx.setDoseRec(doseRec.getLabel());
 	}
-	public void setSioDescriptions(Set<MLinkedResource> sioDescriptions) {
-		this.sioDescriptions = sioDescriptions;
+
+	public MLinkedResource getDrugRec() {
+		return this.drugRecResource;
 	}
-	public String getComment() {
-		return comment;
+	public void setDrugRec(MLinkedResource drugRec) {
+		this.drugRecResource = drugRec;
+		this.pharmgx.setDrugRec(drugRec.getLabel());
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+
+	public MLinkedResource getMonitRec() {
+		return this.monitRecResource;
 	}
-	public MLinkedResource getSubject() {
-		return subject;
+	public void setMonitRec(MLinkedResource monitRec) {
+		this.monitRecResource = monitRec;
+		this.pharmgx.setMonitRec(monitRec.getLabel());
 	}
-	public void setSubject(MLinkedResource subject) {
-		this.subject = subject;
+
+	public MLinkedResource getTestRec() {
+		return this.testRecResource;
+	}
+	public void setTestRec(MLinkedResource testRec) {
+		this.testRecResource = testRec;
+		this.pharmgx.setTestRec(testRec.getLabel());
 	}
 }
+
