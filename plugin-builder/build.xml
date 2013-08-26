@@ -11,9 +11,8 @@
 <property name="version"   value="1.0"/>                            
 
 <!-- create folders fitting the plugins architecture -->
-<target name="plugin-folders" depends="">
-  <!-- <mkdir dir="src/.../annotation/${PLUGIN-NAME}/info"/> -->
-  
+<target name="plugin-folders" depends="clean">
+
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}"/>
   
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info"/>
@@ -27,29 +26,34 @@
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card"/>
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/viewer"/>
 
+  <copy file="templates/info-plugin.gwt.xml" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/" />
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info-plugin.gwt.xml" tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/${PLUGIN-NAME}.gwt.xml"/> 
+    
+
 </target>  
 
-<!-- copy template file into new folders -->
-<target name="copy-tmpl">
-  <copy file="templates/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/">
+<!-- copy template files into new folders -->
+<target name="create-info-template">
+  <copy file="templates/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/">
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>
 	
 	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
-	<token key="SUB_TYPE" value ="${SUB_TYPE}" />
+	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
 	<token key="VERSION" value ="${VERSION}" />
-
+	
       </replacetokens>
     </filterchain>
-    
   </copy>
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/info-plugin.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/SPL_DDI_Plugin.java" />
+
 </target>
 
 <!-- clean folders and files -->
 <target name="clean">
-  <delete dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}"></delete>
-  <delete file=""></delete>
+ <delete dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}"/>
 </target>
 
 </project>
