@@ -391,7 +391,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 					}
 
 
-					if (anchorNode==null) return;
+					if (anchorNode==null || focusNode==null) return;
 					
 					if (isSelectionCollapsed) {
 						if(_domeo.isManualAnnotationEnabled()) {
@@ -1008,6 +1008,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		} else if(_domeo.isManualHighlightEnabled()) {		
 			try {
 				_domeo.getLogger().command(LOG_CATEGORY_TEXT_HIGHLIGHT, this, matchText);
+				
 				long start = System.currentTimeMillis();
 				MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(
 						_domeo.getAgentManager().getUserPerson(), 
@@ -1021,10 +1022,14 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				
 				if(success) {
 					try {
-						HtmlUtils.performHighlight(Long.toString(annotation.getLocalId()), match, prefix, suffix, node, StylesManager.HIGHLIGHT);
+						HtmlUtils.performHighlight(Long.toString(annotation.getLocalId()), match, prefix, suffix, node, _domeo.getCssManager().getStrategy().getObjectStyleClass(annotation));
+						//HtmlUtils.performHighlight(Long.toString(annotation.getLocalId()), match, prefix, suffix, node, StylesManager.HIGHLIGHT);
 						int y = HtmlUtils.getVerticalPositionOfElementWithId(_frame.getElement(), annotation.getLocalId().toString());
 						annotation.setY(y);
-					
+						
+						clearSelection();
+						resetSelection("");
+						
 						_domeo.getLogger().info(LOG_CATEGORY_TEXT_HIGHLIGHTED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
 						_domeo.refreshAnnotationComponents();
 					} catch(Exception e) {
@@ -1049,9 +1054,12 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		try {
 			long start = System.currentTimeMillis();
 			HtmlUtils.performHighlight(Long.toString(annotation.getLocalId()), buffer.getExact(), 
-					buffer.getPrefix(), buffer.getSuffix(), buffer.getNode(), "domeo-annotation");
+					buffer.getPrefix(), buffer.getSuffix(), buffer.getNode(), _domeo.getCssManager().getStrategy().getObjectStyleClass(annotation));
 			int y = HtmlUtils.getVerticalPositionOfElementWithId(_frame.getElement(), annotation.getLocalId().toString());
 			annotation.setY(y);
+			
+			clearSelection();
+			resetSelection("");
 			
 			_domeo.getLogger().info(LOG_CATEGORY_TEXT_ANNOTATED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
 			_domeo.refreshAnnotationComponents();

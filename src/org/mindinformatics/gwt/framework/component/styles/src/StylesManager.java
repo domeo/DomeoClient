@@ -13,6 +13,7 @@ public class StylesManager {
 	public static final String NEUTRAL = "domeo-neutral";
 	public static final String EMPHASIZED = "domeo-emphasized";
 	public static final String HIGHLIGHT = "domeo-highlight";
+	public static final String ANNOTATION = "domeo-annotation";
 	public static final String JUST_SELECTED = "domeo-just-selected";
 	public static final String IMG_ANNOTATED = "domeo-image-annotated";
 	public static final String IMG_ANNOTATED_BORDER = "domeo-image-annotated-border";
@@ -22,9 +23,21 @@ public class StylesManager {
 	public static final String LIGHTBLUE_HIGHLIGHT = "domeo-highlight-lightblue";
 	public static final String LIGHTRED_HIGHLIGHT = "domeo-curated-incorrect";
 	public static final String LIGHTGREEN_HIGHLIGHT = "domeo-curated-correct";
+	public static final String LIGHTGRAY_HIGHLIGHT = "domeo-highlight-lightgray";
+	public static final String LIGHTBROWN_HIGHLIGHT = "domeo-highlight-lightbrown";
 	
 	
 	private HashMap<String, String> styles = new HashMap<String, String>();
+	
+	private IStyleStrategy strategy;
+
+	public IStyleStrategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(IStyleStrategy strategy) {
+		this.strategy = strategy;
+	}
 	
 	public StylesManager() {
 		// Initialization
@@ -44,7 +57,9 @@ public class StylesManager {
 		styles.put(JUST_SELECTED, "background-color: blue; color: yellow;");
 		styles.put(HIGHLIGHT, "background: rgba(255, 243, 128, 0.4); padding: 0px;"); // background-color: #FFF380;
 		styles.put(LIGHTBLUE_HIGHLIGHT, "background: rgba(153, 221, 255, 0.4); padding-top: 5px;padding-bottom: 5px;padding-left: 3px;padding-right: 3px;"); // background-color: #99DDFF; 
-		styles.put("domeo-annotation", "background: rgba(176, 196, 222, 0.4); padding-top: 5px;padding-bottom: 5px;padding-left: 3px;padding-right: 3px;"); // background-color: #B0C4DE;
+		styles.put(LIGHTGRAY_HIGHLIGHT, "background: rgba(204, 204, 204, 0.4); padding-top: 5px;padding-bottom: 5px;padding-left: 3px;padding-right: 3px;"); // background-color: #CCCCCC; 
+		styles.put(LIGHTBROWN_HIGHLIGHT, "background: rgba(194, 175, 152, 0.4); padding-top: 5px;padding-bottom: 5px;padding-left: 3px;padding-right: 3px;"); // background-color: #C2AF98; 
+		styles.put(ANNOTATION, "background: rgba(176, 196, 222, 0.4); padding-top: 5px;padding-bottom: 5px;padding-left: 3px;padding-right: 3px;"); // background-color: #B0C4DE;
 		
 		styles.put(LIGHTGREEN_HIGHLIGHT, "background: rgba(153, 255, 153, 0.4); padding: 2px;"); // background-color: #99FF99;
 		styles.put(LIGHTRED_HIGHLIGHT, "background: rgba(255, 102, 102, 0.4); padding: 2px;"); // background-color: #FF6666;
