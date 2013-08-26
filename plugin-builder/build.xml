@@ -11,12 +11,12 @@
 <property name="version"   value="1.0"/>                            
 
 <!-- create folders fitting the plugins architecture -->
-
 <target name="plugin-folders" depends="">
   <!-- <mkdir dir="src/.../annotation/${PLUGIN-NAME}/info"/> -->
   
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}"/>
   
+  <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info"/>
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model"/>
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/serialization"/>
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search"/>
@@ -31,7 +31,7 @@
 
 <!-- copy template file into new folders -->
 <target name="copy-tmpl">
-  <copy file="templates/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/">
+  <copy file="templates/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/">
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>

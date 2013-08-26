@@ -6,6 +6,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ATileComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MPharmgx;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 
 import com.google.gwt.core.client.GWT;
@@ -68,10 +69,12 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			
 			StringBuffer sb2 = new StringBuffer();
 			
-			// Paolo Here all the content to display
-			
-			sb2.append("PkImpact: ");
-			sb2.append(_annotation.getPharmgxUsage().getPharmgx().getPkImpact());
+			// Create the content to display
+			MPharmgx pharmgx = _annotation.getPharmgxUsage().getPharmgx(); 
+			sb2.append("PK Impact: ");
+			sb2.append(pharmgx.getPkImpact());
+			sb2.append("PD Impact: ");
+			sb2.append(pharmgx.getPdImpact());
 			
 			description.setHTML(sb2.toString());
 

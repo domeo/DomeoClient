@@ -146,35 +146,35 @@
       
 	<g:VerticalPanel styleName='{style.leftColumn}'>
 	
-	<!-- Pk Impact -->
+	<!-- PK Impact -->
 	
 	  <g:HorizontalPanel styleName='{style.titlebar}'>
 	    <g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>PK Impact:</g:Label>
 	  </g:HorizontalPanel>
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkia" name="descriptpk" checked="true">Increased absorption</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkda" name="descriptpk" checked="true">Decreased absorption</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkia" name="descriptpk" checked="false">Increased absorption</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkda" name="descriptpk" checked="false">Decreased absorption</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkid" name="descriptpk" checked="true">Increased distribution</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkdd" name="descriptpk" checked="true">Decreased distribution</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkid" name="descriptpk" checked="false">Increased distribution</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkdd" name="descriptpk" checked="false">Decreased distribution</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkim" name="descriptpk" checked="true">Increased metabolism</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkdm" name="descriptpk" checked="true">Decreased metabolism</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkim" name="descriptpk" checked="false">Increased metabolism</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkdm" name="descriptpk" checked="false">Decreased metabolism</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkie" name="descriptpk" checked="true">Increased excretion</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkde" name="descriptpk" checked="true">Decreased excretion</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkie" name="descriptpk" checked="false">Increased excretion</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkde" name="descriptpk" checked="false">Decreased excretion</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkni" name="descriptpk" checked="true">Not important</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpkni" name="descriptpk" checked="false">Not important</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	  <!-- PD Impact -->
@@ -184,18 +184,18 @@
 	  </g:HorizontalPanel>
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpdit" name="descriptpd" checked="true">Increased risk of toxicity</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpddt" name="descriptpd" checked="true">Reduced risk of toxicity</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpdit" name="descriptpd" checked="false">Increased risk of toxicity</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpddt" name="descriptpd" checked="false">Reduced risk of toxicity</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpdir" name="descriptpd" checked="true">Influence response</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpdni" name="descriptpd" checked="true">Not important</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpdir" name="descriptpd" checked="false">Influence response</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpdni" name="descriptpd" checked="false">Not important</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpdie" name="descriptpd" checked="true">Increased Efficacy</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpdde" name="descriptpd" checked="true">Decreased Efficacy</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpdie" name="descriptpd" checked="false">Increased Efficacy</g:RadioButton>
+	  <g:RadioButton ui:field="descriptpdde" name="descriptpd" checked="false">Decreased Efficacy</g:RadioButton>
 	  </g:HorizontalPanel>
 	  
 	 
@@ -247,12 +247,12 @@
 	    <g:Label ui:field="selection" styleName='{style.titleLeft}'>Drug selection:</g:Label>
 	  </g:HorizontalPanel>
 	  <g:HorizontalPanel ui:field='header7' styleName='{style.inner}'>
-	    <g:CheckBox ui:field="descriptdsal" name="descript" styleName='{style.elementType}' text="Alternative" />
-	    <g:CheckBox ui:field="descriptdsca" name="descript" styleName='{style.elementType}' text="Change Administration" />
+	    <g:RadioButton ui:field="descriptdsal" name="descriptds" checked="false" text="Alternative" />
+	    <g:RadioButton ui:field="descriptdsca" name="descriptds" checked="false" text="Change Administration" />
 	    
-	    <g:CheckBox ui:field="descriptdsam" name="descript" styleName='{style.elementType}' text="Add medication" />
-	    <g:CheckBox ui:field="descriptdsnr" name="descript" styleName='{style.elementType}' text="Not restart" />
-	    <g:CheckBox ui:field="descriptdsnc" name="descript" styleName='{style.elementType}' text="Not change" />
+	    <g:RadioButton ui:field="descriptdsam" name="descriptds" checked="false" text="Add medication" />
+	    <g:RadioButton ui:field="descriptdsnr" name="descriptds" checked="false" text="Not restart" />
+	    <g:RadioButton ui:field="descriptdsnc" name="descriptds" checked="false" text="Not change" />
 	    
 	  </g:HorizontalPanel>
 	  
@@ -263,12 +263,12 @@
 	    <g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose Recommendation:</g:Label>
 	  </g:HorizontalPanel>	
 	  <g:HorizontalPanel ui:field='header5' styleName='{style.inner}'>
-	    <g:CheckBox ui:field="descriptdrdfb" name="descript" styleName='{style.elementType}' text="Decrease from baseline" />
-	    <g:CheckBox ui:field="descriptdrifb" name="descript" styleName='{style.elementType}' text="Increase from baseline" />
+	    <g:RadioButton ui:field="descriptdrdfb" name="descriptdr" checked="false" text="Decrease from baseline" />
+	    <g:RadioButton ui:field="descriptdrifb" name="descriptdr" checked="false" text="Increase from baseline" />
 	    
-	    <g:CheckBox ui:field="descriptdrnc" name="descript" styleName='{style.elementType}' text="Not change" />
-	    <g:CheckBox ui:field="descriptdrus" name="descript" styleName='{style.elementType}' text="Use specific" />
-	    <g:CheckBox ui:field="descriptdrcs" name="descript" styleName='{style.elementType}' text="Change schedule" />
+	    <g:RadioButton ui:field="descriptdrnc" name="descriptdr" checked="false" text="Not change" />
+	    <g:RadioButton ui:field="descriptdrus" name="descriptdr" checked="false" text="Use specific" />
+	    <g:RadioButton ui:field="descriptdrcs" name="descriptdr" checked="false" text="Change schedule" />
 	    
 	     </g:HorizontalPanel>
 	  <!-- monitoring -->  
@@ -278,10 +278,10 @@
 	    <g:Label ui:field="monitLabel" styleName='{style.titleLeft}'>Monitoring Recommendation:</g:Label>
 	  </g:HorizontalPanel>
 	  <g:HorizontalPanel styleName='{style.inner}'>
-	    <g:CheckBox ui:field="descriptmreq" name="descript" styleName='{style.elementType}' text="Required" />
-	    <g:CheckBox ui:field="descriptmrec" name="descript" styleName='{style.elementType}' text="Recommended" />
-	    <g:CheckBox ui:field="descriptmnc" name="descript" styleName='{style.elementType}' text="Not necessary" />
-	    <g:CheckBox ui:field="descriptmcms" name="descript" styleName='{style.elementType}' text="Change monitoring strategy" />
+	    <g:RadioButton ui:field="descriptmreq" name="descriptmr" checked="false" text="Required" />
+	    <g:RadioButton ui:field="descriptmrec" name="descriptmr" checked="false" text="Recommended" />
+	    <g:RadioButton ui:field="descriptmnc" name="descriptmr" checked="false" text="Not necessary" />
+	    <g:RadioButton ui:field="descriptmcms" name="descriptmr" checked="false" text="Change monitoring strategy" />
 	    
 	  </g:HorizontalPanel>
 	    
@@ -291,10 +291,10 @@
 	    <g:Label ui:field="TestLabel" styleName='{style.titleLeft}'>Test:</g:Label>
 	  </g:HorizontalPanel>
 	  <g:HorizontalPanel styleName='{style.inner}'>
-	  	  <g:RadioButton ui:field="descripttreq" name="descript" checked="true">Required</g:RadioButton>
-	  	  <g:RadioButton ui:field="descripttrec" name="descript" checked="true">Recommended</g:RadioButton>
-	  	  <g:RadioButton ui:field="descriptttna" name="descript" checked="true">Take note that avaliable</g:RadioButton>
-	  	  <g:RadioButton ui:field="descripttnn" name="descript" checked="true">Not necessary</g:RadioButton>
+	  	  <g:RadioButton ui:field="descripttreq" name="descripttst" checked="false">Required</g:RadioButton>
+	  	  <g:RadioButton ui:field="descripttrec" name="descripttst" checked="false">Recommended</g:RadioButton>
+	  	  <g:RadioButton ui:field="descriptttna" name="descripttst" checked="false">Take note that avaliable</g:RadioButton>
+	  	  <g:RadioButton ui:field="descripttnn" name="descripttst" checked="false">Not necessary</g:RadioButton>
 	    
 	  </g:HorizontalPanel>
 	    

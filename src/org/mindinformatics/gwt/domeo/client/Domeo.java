@@ -456,20 +456,20 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			new PostItSearchComponent(this));
 		
 		// Qualifier
-		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);	
-		pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
-		if(_profileManager.getUserCurrentProfile().isPluginEnabled(QualifierPlugin.getInstance().getPluginName())) {
-			annotationFormsManager.registerAnnotationForm(MQualifierAnnotation.class.getName(),
-					new QualifierFormProvider(this));
-		}
-		annotationTailsManager.registerAnnotationTile(MQualifierAnnotation.class.getName(), 
-				new QualifierTileProvider(this));
-		annotationCardsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
-				new QualifierCardProvider(this));
-		searchComponentsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
-				new QualifierSearchComponent(this));
-		annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
-				new HQualifierHelper());
+//		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);	
+//		pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
+//		if(_profileManager.getUserCurrentProfile().isPluginEnabled(QualifierPlugin.getInstance().getPluginName())) {
+//			annotationFormsManager.registerAnnotationForm(MQualifierAnnotation.class.getName(),
+//					new QualifierFormProvider(this));
+//		}
+//		annotationTailsManager.registerAnnotationTile(MQualifierAnnotation.class.getName(), 
+//				new QualifierTileProvider(this));
+//		annotationCardsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
+//				new QualifierCardProvider(this));
+//		searchComponentsManager.registerAnnotationCard(MQualifierAnnotation.class.getName(), 
+//				new QualifierSearchComponent(this));
+//		annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
+//				new HQualifierHelper());
 		
 		// Antibody
 		pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true);
@@ -487,17 +487,17 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		
 		// Micropublications
 		
-		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
-		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), false);
-		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
-			annotationFormsManager.registerAnnotationForm(MMicroPublicationAnnotation.class.getName(),
-					new MicroPublicationFormProvider(this));
-		}
-		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
-				new MicroPublicationTileProvider(this));
-		annotationCardsManager.registerAnnotationCard(MMicroPublicationAnnotation.class.getName(), 
-				new MicroPublicationCardProvider(this));
-		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
+//		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(), true);
+//		pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(), false);
+//		if(_profileManager.getUserCurrentProfile().isPluginEnabled(MicroPublicationsPlugin.getInstance().getPluginName())) {	
+//			annotationFormsManager.registerAnnotationForm(MMicroPublicationAnnotation.class.getName(),
+//					new MicroPublicationFormProvider(this));
+//		}
+//		annotationTailsManager.registerAnnotationTile(MMicroPublicationAnnotation.class.getName(), 
+//				new MicroPublicationTileProvider(this));
+//		annotationCardsManager.registerAnnotationCard(MMicroPublicationAnnotation.class.getName(), 
+//				new MicroPublicationCardProvider(this));
+//		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
 		
 		
 		
