@@ -151,6 +151,7 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 			qualifiedBy.put(IPavOntology.createdOn, nonNullable(rel.getCreationDate()));
 			
 			MLinkedResource r = ((MMpQualifier)rel.getObjectElement()).getQualifier();
+			manager.addResourceToSerialize(r);
 			
 			JSONObject term = new JSONObject();
 			term.put(IDomeoOntology.generalId, new JSONString(r.getUrl()));

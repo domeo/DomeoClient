@@ -5,7 +5,8 @@ function highlightTextFromNode(exact, prefix, suffix,
 	// However the right node has to come from outside.
 	//textNodes = getTextNodes(node.parentNode);
 	textNodes = getTextNodes();
-	var foundText = findText(exact, prefix, suffix, textNodes);
+
+	var foundText = findText(exact.replace(/\\n/g,'\n'), prefix.replace(/\\n/g,'\n'), suffix.replace(/\\n/g,'\n'), textNodes);
 	if (foundText == null || foundText.length == 0) {
 		throw('The text:"'+exact+'" was not found ' + prefix + '/' + suffix);
 		/*
@@ -69,8 +70,12 @@ function traverseDomTree_recurse(curr_element, level, block) {
 }
 
 RegExp.escape = function(str) {
-	var specials = new RegExp("[.*+?|()\\[\\]{}\\\\$]", "g"); // .*+?|()[]{}\
-	return str.replace(specials, "\\$&");
+	try {
+		var specials = new RegExp("[.*+?|()\\[\\]{}\\\\$]", "g"); // .*+?|()[]{}$\ 
+		return str.replace(specials, "\\$&");
+	} catch(e) {
+		alert(e);
+	}
 };
 
 /* Looks for matching text within the body of the current document */
@@ -102,16 +107,21 @@ function findText(exact, prefix, suffix, textNodes) {
 		return rawString.replace(/\s+/g, "\\s*");
 	};
 
-	for ( var i = 0; i < terms.length; i++) {
-		terms[i]
-				&& (regexSearchTerm += ('(' + buildRegexSearchString(terms[i]) + ')'));
+	try {
+		for ( var i = 0; i < terms.length; i++) {
+			terms[i]
+					&& (regexSearchTerm += ('(' + buildRegexSearchString(terms[i]) + ')'));
+		}
+	} catch (e) {
+		alert("Invalid build regex:" + e);
+		// alert('The regular expression was invalid:'+regexSearchTerm);
 	}
 	// console.debug("Initial regexSearchTerm:"+regexSearchTerm);
 	var preliminaryMatch = null;
 	try {
 		preliminaryMatch = allTheText.match(new RegExp(regexSearchTerm));
 	} catch (e) {
-		console.debug && console.debug("Invalid regex:" + regexSearchTerm);
+		alert("Invalid regex:" + regexSearchTerm);
 		// alert('The regular expression was invalid:'+regexSearchTerm);
 	}
 	if (!preliminaryMatch) {

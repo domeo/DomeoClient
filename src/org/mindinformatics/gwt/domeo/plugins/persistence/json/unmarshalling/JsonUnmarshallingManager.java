@@ -287,11 +287,18 @@ public class JsonUnmarshallingManager {
 					for(int z=0; z<ann.getSelectors().size(); z++) {
 						try {
 							if(ann.getSelectors().get(z) instanceof MTextQuoteSelector) {
+//								HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
+//										((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
+//										((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
+//										((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
+//										HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+								
 								HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
 										((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
 										((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
 										((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
-										HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+										HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L),
+										_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
 							} else if(ann.getSelectors().get(z) instanceof MImageInDocumentSelector) {
 								// Place the annotation???
 								Element image = HtmlUtils.getImage(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 
@@ -454,7 +461,8 @@ public class JsonUnmarshallingManager {
 						for(int z=0; z<ann.getSelectors().size(); z++) {
 							HtmlUtils.performHighlight(Long.toString(ann.getLocalId()), ((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
 									((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), ((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
-									HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), StylesManager.HIGHLIGHT);
+									HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), 
+									_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
 						}
 						
 						((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
@@ -861,11 +869,18 @@ public class JsonUnmarshallingManager {
 							for(int z=0; z<ann.getSelectors().size(); z++) {
 								try {
 									if(ann.getSelectors().get(z) instanceof MTextQuoteSelector) {
+//										HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
+//												((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
+//												((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
+//												((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
+//												HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+										
 										HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
 												((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
 												((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
 												((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
-												HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+												HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L),
+												_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
 									} else if(ann.getSelectors().get(z) instanceof MImageInDocumentSelector) {
 										// Place the annotation???
 										_domeo.getLogger().info(this, "image;;;" + ((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl());
@@ -1018,11 +1033,18 @@ public class JsonUnmarshallingManager {
 							//for(int z=0; z<annotation.getSelectors().size(); z++) {
 							if(annotation.getReferenceSelector()!=null) {
 								if(annotation.getReferenceSelector() instanceof MTextQuoteSelector) {
+//									HtmlUtils.performAnnotation(Long.toString(annotation.getLocalId())+((annotation.getSelectors().size()>1)?(":"+annotation.getReferenceSelector().getLocalId()):""), 
+//											((MTextQuoteSelector)annotation.getReferenceSelector()).getExact(), 
+//											((MTextQuoteSelector)annotation.getReferenceSelector()).getPrefix(), 
+//											((MTextQuoteSelector)annotation.getReferenceSelector()).getSuffix(), 
+//											HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+									
 									HtmlUtils.performAnnotation(Long.toString(annotation.getLocalId())+((annotation.getSelectors().size()>1)?(":"+annotation.getReferenceSelector().getLocalId()):""), 
 											((MTextQuoteSelector)annotation.getReferenceSelector()).getExact(), 
 											((MTextQuoteSelector)annotation.getReferenceSelector()).getPrefix(), 
 											((MTextQuoteSelector)annotation.getReferenceSelector()).getSuffix(), 
-											HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+											HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), 
+											_domeo.getCssManager().getStrategy().getObjectStyleClass(annotation));
 								} 
 							}
 							// 3 ??

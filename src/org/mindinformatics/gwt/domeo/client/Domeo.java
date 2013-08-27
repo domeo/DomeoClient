@@ -32,6 +32,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AnnotationFormsM
 import org.mindinformatics.gwt.domeo.client.ui.annotation.helpers.AnnotationHelpersManager;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.plugins.PluginsManager;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.search.AnnotationSearchManager;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.style.AnnotationTypeStyleStrategy;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.AnnotationTailsManager;
 import org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper;
 import org.mindinformatics.gwt.domeo.client.ui.content.ContentPanel;
@@ -349,6 +350,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 
 		// Resources
 		componentsManager.addComponent(resourcesManager);
+		
+		// Style
+		this.getCssManager().setStrategy(new AnnotationTypeStyleStrategy(this));
 		
 		// Persistence
 		//persistenceManager = new AnnotationPersistenceManager(this);

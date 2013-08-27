@@ -30,15 +30,15 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 	public MTextQuoteSelector unmarshall(JsonUnmarshallingManager manager, JavaScriptObject json, String validation) {
 		// Triggers input validation (skip when validation is OFF: IUnmarshaller.OFF_VALIDATION)
 		validation(json, validation);
-		
+
 		JsTextQuoteSelector jsonSelector = (JsTextQuoteSelector) json;
 		MTextQuoteSelector selector = AnnotationFactory.clonePrefixSuffixTextSelector(
 			jsonSelector.getId(), 
 			jsonSelector.getFormattedCreatedOn(), 
 			_domeo.getPersistenceManager().getCurrentResource(), 
-			jsonSelector.getMatch(), 
-			jsonSelector.getPrefix(), 
-			jsonSelector.getSuffix());
+			jsonSelector.getMatch().replaceAll("\\\\n", "n"), 
+			jsonSelector.getPrefix().replaceAll("\\\\n", "n"), 
+			jsonSelector.getSuffix().replaceAll("\\\\n", "n"));
 		return selector;
 	}
 
