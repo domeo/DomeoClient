@@ -16,9 +16,10 @@ public class JsonTextQuoteSelectorSerializer extends JsonSelectorSerializer {
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {
 		MTextQuoteSelector sel = (MTextQuoteSelector) obj;
 		JSONObject selector = (JSONObject) initializeSelector(sel);
-		selector.put(MTextQuoteSelector.PREFIX, new JSONString(sel.getPrefix().replaceAll("\n", "\\\\n")));
-		selector.put(MTextQuoteSelector.EXACT, new JSONString(sel.getExact().replaceAll("\n", "\\\\n")));
-		selector.put(MTextQuoteSelector.SUFFIX, new JSONString(sel.getSuffix().replaceAll("\n", "\\\\n")));
+		
+		selector.put(MTextQuoteSelector.PREFIX, new JSONString(sel.getPrefix().replaceAll("\n", "\\\\\\n")));
+		selector.put(MTextQuoteSelector.EXACT, new JSONString(sel.getExact().replaceAll("\n", "\\\\\\n")));
+		selector.put(MTextQuoteSelector.SUFFIX, new JSONString(sel.getSuffix().replaceAll("\n", "\\\\\\n")));
 		JSONObject specificTarget = (JSONObject) initializeSpecificTarget(sel);
 		specificTarget.put(IDomeoOntology.selector, selector);
 		return specificTarget;

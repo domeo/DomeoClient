@@ -1039,12 +1039,16 @@ public class JsonUnmarshallingManager {
 //											((MTextQuoteSelector)annotation.getReferenceSelector()).getSuffix(), 
 //											HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
 									
-									HtmlUtils.performAnnotation(Long.toString(annotation.getLocalId())+((annotation.getSelectors().size()>1)?(":"+annotation.getReferenceSelector().getLocalId()):""), 
+									try {
+										HtmlUtils.performAnnotation(Long.toString(annotation.getLocalId())+((annotation.getSelectors().size()>1)?(":"+annotation.getReferenceSelector().getLocalId()):""), 
 											((MTextQuoteSelector)annotation.getReferenceSelector()).getExact(), 
 											((MTextQuoteSelector)annotation.getReferenceSelector()).getPrefix(), 
 											((MTextQuoteSelector)annotation.getReferenceSelector()).getSuffix(), 
 											HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), 
 											_domeo.getCssManager().getStrategy().getObjectStyleClass(annotation));
+									} catch(Exception e) {
+										_domeo.getLogger().exception(this, LOGGING_PREFIX, e.getMessage());
+									}
 								} 
 							}
 							// 3 ??

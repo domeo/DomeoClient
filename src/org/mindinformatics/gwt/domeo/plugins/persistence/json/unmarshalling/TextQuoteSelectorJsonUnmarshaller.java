@@ -36,9 +36,9 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 			jsonSelector.getId(), 
 			jsonSelector.getFormattedCreatedOn(), 
 			_domeo.getPersistenceManager().getCurrentResource(), 
-			jsonSelector.getMatch().replaceAll("\\\\n", "n"), 
-			jsonSelector.getPrefix().replaceAll("\\\\n", "n"), 
-			jsonSelector.getSuffix().replaceAll("\\\\n", "n"));
+			jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""));
 		return selector;
 	}
 
