@@ -33,6 +33,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -236,25 +237,33 @@ public class JsonPubMedConnector implements IPubMedConnector {
 
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
+						//Window.alert("back");
 						JsoPubMedEntry pubmedEntry = (JsoPubMedEntry) ((JsArray)parseJson(response.getText())).get(0);
-						ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
-
-						MPublicationArticleReference reference = new MPublicationArticleReference();
-						reference.setUrl(pubmedEntry.getUrl());
-						reference.setDoi(pubmedEntry.getDoi());
-						reference.setPubMedId(pubmedEntry.getPmId());
-						reference.setPubMedCentralId(pubmedEntry.getPmcId());
-						reference.setTitle(pubmedEntry.getTitle());
-						reference.setAuthorNames(pubmedEntry.getPublicationAuthors());
-						reference.setJournalPublicationInfo(pubmedEntry.getPublicationInfo());
-						reference.setPublicationDate(pubmedEntry.getPublicationDate());
-						reference.setSource(EPubMedDatabase.getInstance());
-						reference.setJournalName(pubmedEntry.getJournalName());
-						reference.setJournalIssn(pubmedEntry.getJournalIssn());
-		
-						references.add(reference);
+						//Window.alert("" + pubmedEntry);
+						try {
+							ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
+	
+							MPublicationArticleReference reference = new MPublicationArticleReference();
+							reference.setUrl(pubmedEntry.getUrl());
+							reference.setDoi(pubmedEntry.getDoi());
+							reference.setPubMedId(pubmedEntry.getPmId());
+							reference.setPubMedCentralId(pubmedEntry.getPmcId());
+							reference.setTitle(pubmedEntry.getTitle());
+							reference.setAuthorNames(pubmedEntry.getPublicationAuthors());
+							reference.setJournalPublicationInfo(pubmedEntry.getPublicationInfo());
+							reference.setPublicationDate(pubmedEntry.getPublicationDate());
+							reference.setSource(EPubMedDatabase.getInstance());
+							reference.setJournalName(pubmedEntry.getJournalName());
+							reference.setJournalIssn(pubmedEntry.getJournalIssn());
+			
+							references.add(reference);
 						
-						completionCallback.returnBibliographicObject(references);
+							completionCallback.returnBibliographicObject(references);
+						} catch (Exception e) {
+							_application.getLogger().exception(this, "Bibliographic object retrieval: " + e.getMessage());
+							((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not retrieve bibliographic object " + response.getStatusCode());
+							completionCallback.bibliographyObjectNotFound("Bibliographic object retrieval: " + e.getMessage());
+						}
 					} else if (503 == response.getStatusCode()) {
 						_application.getLogger().exception(this, "Bibliographic object retrieval 503: " + response.getText());
 						((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not retrieve bibliographic object " + response.getStatusCode());
@@ -267,7 +276,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 				}
 			});
 		} catch (RequestException e) {
-			_application.getInitializer().addException("Couldn't retrieve Agent Person JSON");
+			_application.getInitializer().addException("Couldn't retrieve Bibliographic Object");
 		}	
 	}
 	

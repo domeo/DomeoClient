@@ -214,6 +214,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 			
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3308009_v082012.html");
 			
+			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3639628.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2759694.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2759694_v062012.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2700002.html");
@@ -231,6 +232,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 			oracle.add("http://www.stembook.org/node/514");
 			oracle.add("http://www.jbiomedsem.com/content/3/S1/S1");
 			oracle.add("http://www.jbiomedsem.com/content/2/S2/S4");
+			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3639628/");
 			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3308009/");
 			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059018/");
 			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2700002/");
