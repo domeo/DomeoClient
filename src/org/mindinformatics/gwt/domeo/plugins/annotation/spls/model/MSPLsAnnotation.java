@@ -1,7 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 
-import java.util.Set;
-
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 

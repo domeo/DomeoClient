@@ -10,51 +10,77 @@ import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResou
 @SuppressWarnings("serial")
 public class MPharmgx extends MTrustedResource {
 
-	String pkImpact, pdImpact, doseRec, drugRec, monitRec, testRec;
+	//String pkImpact, pdImpact, doseRec, drugRec, monitRec, testRec;
+	
+	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource, drugRecResource, monitRecResource, testRecResource;
 	
 	public MPharmgx(String url, String label, MGenericResource source) {
 		super(url, label, source);
 	}
 	
-	public String getPkImpact() {
-		return pkImpact;
+	
+	public MLinkedResource getPkImpactResource() {
+		return pkImpactResource;
 	}
-	public void setPkImpact(String pkImpact) {
-		this.pkImpact = pkImpact;
-	}
-
-	public String getPdImpact() {
-		return pdImpact;
-	}
-	public void setPdImpact(String pdImpact) {
-		this.pdImpact = pdImpact;
+//	public String getPkImpactLabel() {
+//		return (pkImpactResource!=null) ? pkImpactResource.getLabel():"";
+//	}
+	public void setPkImpact(MLinkedResource pkImpact) {
+		this.pkImpactResource = pkImpact;
 	}
 
-	public String getDoseRec() {
-		return doseRec;
+	
+	public MLinkedResource getPdImpactResource() {
+		return pdImpactResource;
 	}
-	public void setDoseRec(String doseRec) {
-		this.doseRec = doseRec;
-	}
-
-	public String getDrugRec() {
-		return drugRec;
-	}
-	public void setDrugRec(String drugRec) {
-		this.drugRec = drugRec;
+//	public String getPdImpactLabel() {
+//		return (pdImpactResource!=null) ? pdImpactResource.getLabel():"";
+//	}
+	public void setPdImpact(MLinkedResource pdImpact) {
+		this.pdImpactResource = pdImpact;
 	}
 
-	public String getMonitRec() {
-		return monitRec;
+	
+	public MLinkedResource getDoseRecResource() {
+		return doseRecResource;
 	}
-	public void setMonitRec(String monitRec) {
-		this.monitRec = monitRec;
+//	public String getDoseRecLabel() {
+//		return (doseRecResource!=null) ? doseRecResource.getLabel():"";
+//	}
+	public void setDoseRec(MLinkedResource doseRec) {
+		this.doseRecResource = doseRec;
 	}
 
-	public String getTestRec() {
-		return testRec;
+	
+	public MLinkedResource getDrugRecResource() {
+		return drugRecResource;
 	}
-	public void setTestRec(String testRec) {
-		this.testRec = testRec;
+//	public String getDrugRecLabel() {
+//		return (drugRecResource!=null) ? drugRecResource.getLabel():"";
+//	}
+	public void setDrugRec(MLinkedResource drugRec) {
+		this.drugRecResource = drugRec;
+	}
+
+	
+	public MLinkedResource getMonitRecResource() {
+		return monitRecResource;
+	}
+//	public String getMonitRecLabel() {
+//		return (monitRecResource!=null) ? monitRecResource.getLabel():"";
+//	}
+	public void setMonitRec(MLinkedResource monitRec) {
+		this.monitRecResource = monitRec;
+	}
+
+	
+	public MLinkedResource getTestRecResource() {
+		return testRecResource;
+	}
+//	public String getTestRecLabel() {
+//		return (testRecResource!=null) ? testRecResource.getLabel():"";
+//	}
+	public void setTestRec(MLinkedResource testRec) {
+		this.testRecResource = testRec;
 	}
 }

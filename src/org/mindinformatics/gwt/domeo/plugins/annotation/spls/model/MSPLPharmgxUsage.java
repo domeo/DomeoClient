@@ -1,8 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 /**
@@ -46,54 +43,48 @@ public class MSPLPharmgxUsage {
 	}
     
 	// These are the linked resources associated with the pharmgx annotation
-	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource, drugRecResource, monitRecResource, testRecResource;
+	//MLinkedResource pkImpactResource, pdImpactResource, doseRecResource, drugRecResource, monitRecResource, testRecResource;
 			
 	public MLinkedResource getPkImpact() {
-		return pkImpactResource;
+		return pharmgx.getPkImpactResource();
 	}
 	public void setPkImpact(MLinkedResource pkImpact) {
-		this.pkImpactResource = pkImpact;
-		this.pharmgx.setPkImpact(pkImpact.getLabel());
+		pharmgx.setPkImpact(pkImpact);
 	}
 
 	public MLinkedResource getPdImpact() {
-		return this.pdImpactResource;
+		return pharmgx.getPdImpactResource();
 	}
 	public void setPdImpact(MLinkedResource pdImpact) {
-		this.pdImpactResource = pdImpact;
-		this.pharmgx.setPdImpact(pdImpact.getLabel());
+		pharmgx.setPdImpact(pdImpact);
 	}
 
 	public MLinkedResource getDoseRec() {
-		return this.doseRecResource;
+		return pharmgx.getDoseRecResource();
 	}
 	public void setDoseRec(MLinkedResource doseRec) {
-		this.doseRecResource = doseRec;
-		this.pharmgx.setDoseRec(doseRec.getLabel());
+		pharmgx.setDoseRec(doseRec);
 	}
 
 	public MLinkedResource getDrugRec() {
-		return this.drugRecResource;
+		return pharmgx.getDrugRecResource();
 	}
 	public void setDrugRec(MLinkedResource drugRec) {
-		this.drugRecResource = drugRec;
-		this.pharmgx.setDrugRec(drugRec.getLabel());
+		pharmgx.setDrugRec(drugRec);
 	}
 
 	public MLinkedResource getMonitRec() {
-		return this.monitRecResource;
+		return pharmgx.getMonitRecResource();
 	}
 	public void setMonitRec(MLinkedResource monitRec) {
-		this.monitRecResource = monitRec;
-		this.pharmgx.setMonitRec(monitRec.getLabel());
+		pharmgx.setMonitRec(monitRec);
 	}
 
 	public MLinkedResource getTestRec() {
-		return this.testRecResource;
+		return pharmgx.getTestRecResource();
 	}
 	public void setTestRec(MLinkedResource testRec) {
-		this.testRecResource = testRec;
-		this.pharmgx.setTestRec(testRec.getLabel());
+		pharmgx.setTestRec(testRec);
 	}
 }
 
