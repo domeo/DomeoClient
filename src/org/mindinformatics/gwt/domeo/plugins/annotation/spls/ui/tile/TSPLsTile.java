@@ -71,10 +71,14 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			
 			// Create the content to display
 			MPharmgx pharmgx = _annotation.getPharmgxUsage().getPharmgx(); 
-			sb2.append("PK Impact: ");
-			sb2.append(pharmgx.getPkImpact());
-			sb2.append("PD Impact: ");
-			sb2.append(pharmgx.getPdImpact());
+			if(pharmgx.getPkImpactResource()!=null) {
+				sb2.append("PK Impact: ");
+				sb2.append(pharmgx.getPkImpactResource().getLabel());
+			}
+			if(pharmgx.getPdImpactResource()!=null) {
+				sb2.append("PD Impact: ");
+				sb2.append(pharmgx.getPdImpactResource().getLabel());
+			}
 			
 			description.setHTML(sb2.toString());
 
