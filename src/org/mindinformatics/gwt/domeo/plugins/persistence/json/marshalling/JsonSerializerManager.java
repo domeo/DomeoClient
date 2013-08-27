@@ -24,6 +24,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.serialization.JsonSPLsAnnotationSerializer;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgent;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentDatabase;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentGroup;
@@ -77,6 +79,7 @@ public class JsonSerializerManager {
 		serializers.put(MPostItAnnotation.class.getName(), new JsonPostItAnnotationSerializer());
 		serializers.put(MQualifierAnnotation.class.getName(), new JsonQualifierAnnotationSerializer());
 		serializers.put(MAntibodyAnnotation.class.getName(), new JsonAntibodyAnnotationSerializer(_domeo));
+		serializers.put(MSPLsAnnotation.class.getName(), new JsonSPLsAnnotationSerializer());
 		serializers.put(MCommentAnnotation.class.getName(), new JsonCommentAnnotationSerializer());
 		serializers.put(MMicroPublicationAnnotation.class.getName(), new JsonMpAnnotationSerializer());
 		serializers.put(MCurationToken.class.getName(), new JsonAnnotationCurationSerializer());
