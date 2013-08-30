@@ -64,7 +64,9 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
         		.replace(/[\n]/g, '\\n')
         		.replace(/[\r]/g, '\\r')
         		.replace(/[\t]/g, '\\t')
+        		.replace(/[\\][\"]/g, '\\\\\"')
         		.replace(/\\'/g, "\\'");
+        	//alert(jsonStr);
 		  	return JSON.parse(jsonStr);
 		} catch (e) {
 			alert("Error while parsing the JSON message: " + e);
