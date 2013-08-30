@@ -96,24 +96,24 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	
 
 	//recommendation drug
-	@UiField CheckBox descriptdsca;
-	@UiField CheckBox descriptdsal;
-	@UiField CheckBox descriptdsam;
-	@UiField CheckBox descriptdsnr;
-	@UiField CheckBox descriptdsnc;
+	@UiField RadioButton descriptdsca;
+	@UiField RadioButton descriptdsal;
+	@UiField RadioButton descriptdsam;
+	@UiField RadioButton descriptdsnr;
+	@UiField RadioButton descriptdsnc;
 	
 	//recommendation dose
-	@UiField CheckBox descriptdrdfb;
-	@UiField CheckBox descriptdrifb;
-	@UiField CheckBox descriptdrnc;
-	@UiField CheckBox descriptdrus;
-	@UiField CheckBox descriptdrcs;
+	@UiField RadioButton descriptdrdfb;
+	@UiField RadioButton descriptdrifb;
+	@UiField RadioButton descriptdrnc;
+	@UiField RadioButton descriptdrus;
+	@UiField RadioButton descriptdrcs;
 
 	//recommendation monitoring
-	@UiField CheckBox descriptmreq;
-	@UiField CheckBox descriptmrec;
-	@UiField CheckBox descriptmnc;
-	@UiField CheckBox descriptmcms;
+	@UiField RadioButton descriptmreq;
+	@UiField RadioButton descriptmrec;
+	@UiField RadioButton descriptmnc;
+	@UiField RadioButton descriptmcms;
 	
 	
 		
@@ -523,26 +523,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			if(_item.getComment()!=null) 
 			    commentBody.setText(_item.getComment());
 
-//			if(_item.getSioDescriptions()!=null) {
-//				for(MLinkedResource descript:_item.getSioDescriptions()) {
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"metabolism-decrease"))
-//						descriptpkdm.setValue(true);
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"metabolism-increase"))
-//						descriptpkim.setValue(true);
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"drug-toxicity-risk-decreased"))
-//						descriptpddt.setValue(true);
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"drug-toxicity-risk-increased"))
-//						descriptpdit.setValue(true);
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"decrease-from-recommended-baseline"))
-//						descriptdrdfb.setValue(true);
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"increase-from-recommended-baseline"))
-//						descriptdrifb.setValue(true);
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"required"))
-//						descriptmreq.setValue(true);
-//					if(descript.getUrl().equals(SPL_POC_PREFIX +"recommended"))
-//						descriptmrec.setValue(true);
-//				}
-//			} 
+			// TODO: update the form UI elements with existing selections
+			
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, "Failed to display current annotation " + annotation.getLocalId());
 			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
@@ -580,9 +562,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 						return;
 					}
 					_item.setComment(commentBody.getText());
-					
-					//_item.getSioDescriptions().clear();
-					//_item.addSioDescriptions(getMethods());
+				
+					// TODO: save the updated version of the data mode
 					
 					_domeo.getLogger().debug(this, "SPL descriptions cleared and re-loaded (edit)");
 
