@@ -614,8 +614,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			System.out.println("pk source is: "
 					+ _item.getPKImpact().getSource());
 
-			descriptpkim.setValue(true);
-
 			if (_item.getPKImpact() != null) {
 				System.out.println("step1: " + descriptpkdm.getValue());
 				if (_item.getPKImpact().getLabel()
