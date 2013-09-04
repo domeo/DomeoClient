@@ -66,6 +66,7 @@ public class MSPLPharmgxUsage {
 		pharmgx.setDoseRec(doseRec);
 	}
 
+	
 	public MLinkedResource getDrugRec() {
 		return pharmgx.getDrugRecResource();
 	}
@@ -86,5 +87,6 @@ public class MSPLPharmgxUsage {
 	public void setTestRec(MLinkedResource testRec) {
 		pharmgx.setTestRec(testRec);
 	}
+	
 }
 
