@@ -59,6 +59,14 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    pharmgxUsage.setDoseRec(doseRec);
 	}
 	
+	public MLinkedResource getDrugRec(){
+	    return pharmgxUsage.getDrugRec();
+	}
+
+	public void setDrugRec(MLinkedResource drugRec){
+	    pharmgxUsage.setDrugRec(drugRec);
+	}
+	
 	public MLinkedResource getMonitRec(){
 	    return pharmgxUsage.getMonitRec();
 	}

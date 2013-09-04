@@ -174,7 +174,6 @@ public class FAntibodyForm extends AFormComponent implements IResizable, IAntibo
 		
 		initWidget(binder.createAndBindUi(this));
 		
-		
 		refreshAnnotationSetFilter(annotationSet, null);
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
@@ -193,7 +192,6 @@ public class FAntibodyForm extends AFormComponent implements IResizable, IAntibo
 									_domeo.getAgentManager().getUserPerson(), 
 									_domeo.getPersistenceManager().getCurrentResource(), ((TextAnnotationFormsPanel)_manager).getHighlight().getExact(), 
 									((TextAnnotationFormsPanel)_manager).getHighlight().getPrefix(), ((TextAnnotationFormsPanel)_manager).getHighlight().getSuffix());
-							
 							
 							// TODO Register coordinate of the selection.
 							MAntibodyAnnotation annotation = NifAntibodyFactory.createAntibody(
