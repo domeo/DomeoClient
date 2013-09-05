@@ -43,7 +43,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
- */ 
+ */
 public class FSPLsForm extends AFormComponent implements IResizable {
 
 	private static Logger logger = Logger.getLogger("");
@@ -292,10 +292,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	}
 
 	public MLinkedResource getDrugRec() {
-		
-		System.out.println("accessing in getDrugRec()...");
 
-		
 		// Recommendation drug
 		if (descriptdsal.getValue()) {
 			return ResourcesFactory
@@ -317,7 +314,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			return ResourcesFactory
 					.createTrustedTypedResource(
 							SPL_POC_PREFIX + "no-change-necessary",
-							"No change necessary",
+							"Not change necessary",
 							"The pharmacogenomic biomarker is not associated with any drug selection recommendation.",
 							SPL_POC_PREFIX + "DrugSelectionRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
@@ -352,7 +349,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	public MLinkedResource getDoseRec() {
 
 		// Recommendation Dose
-		System.out.println("accessing in getDoseRec()...");
 
 		if (descriptdrdfb.getValue()) {
 			return ResourcesFactory
@@ -604,7 +600,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					.debug(this,
 							"Attempting to initialize UI with loaded annotation values");
 
-			if (_item.getComment() != null)
+			if (_item.getComment() != null && !_item.getComment().equals(""))
 				commentBody.setText(_item.getComment());
 
 			if (_item.getPKImpact() != null) {
@@ -635,7 +631,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				else if (_item.getPKImpact().getLabel().equals("Not Important"))
 					descriptpkni.setValue(true);
 			}
-			
 
 			if (_item.getPdImpact() != null) {
 				if (_item.getPdImpact().getLabel()
@@ -688,21 +683,19 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 			if (_item.getDrugRec() != null) {
 
-				System.out
-						.println("dr label: " + _item.getDrugRec().getLabel());
 
-				if (_item.getDrugRec().getLabel().equals("Alternative Recommended"))
+				if (_item.getDrugRec().getLabel()
+						.equals("Alternative Recommended"))
 					descriptdsal.setValue(true);
 				else if (_item.getDrugRec().getLabel()
 						.equals("Change in route of administration"))
 					descriptdsca.setValue(true);
 				else if (_item.getDrugRec().getLabel().equals("Add medication"))
 					descriptdsam.setValue(true);
-				else if (_item.getDrugRec().getLabel().equals("Do not restart")){
+				else if (_item.getDrugRec().getLabel().equals("Do not restart")) {
 					descriptdsnr.setValue(true);
-					System.out.println("**************");
-				}
-				else if (_item.getDrugRec().getLabel().equals("No change necessary"))
+				} else if (_item.getDrugRec().getLabel()
+						.equals("Not change necessary"))
 					descriptdsnc.setValue(true);
 			}
 
@@ -746,36 +739,40 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		sameVersionButton.setResource(Domeo.resources.acceptLittleIcon());
 		sameVersionButton.setText("Apply");
 		sameVersionButton.addClickHandler(new ClickHandler() {
-			
+
 			public void onClick(ClickEvent event) {
 				System.out.println("onClick function triggered");
 				try {
-					if (isContentInvalid())
+					if (isContentInvalid()){
+						System.out.println("step1");
 						return; // TODO: modify this function to validate our UI
+						
+					}
 
 					_domeo.getLogger().debug(this,
 							"SPL annotation content validated (edit)");
 
+					/*
 					if (!isContentChanged(_item)) {
 						_domeo.getLogger().debug(
 								this,
 								"No changes to save for annotation "
 										+ _item.getLocalId());
 						_manager.getContainer().hide();
+						System.out.println("step2");
 						return;
 					}
+					*/
 					
 					_item.setComment(commentBody.getText());
-					
+
 					_item.setPKImpact(getPkImpact());
 					_item.setPdImpact(getPdImpact());
-					
-					System.out.println("drug onclick: "+_item.getDrugRec().getLabel());
-					
+
 					_item.setDrugRec(getDrugRec());
 					_item.setDoseRec(getDoseRec());
 					_item.setMonitRec(getMonitRec());
-					
+
 					_domeo.getLogger().debug(this,
 							"SPL descriptions cleared and re-loaded (edit)");
 
@@ -807,8 +804,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		this.setHeight("100px");
 
-		 //rightColumn.add(tabs.get(0));
-		 //resized();
+		// rightColumn.add(tabs.get(0));
+		// resized();
 	}
 
 	public String getTitle() {
@@ -853,6 +850,17 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	public boolean isContentChanged(MAnnotation annotation) {
 		// TODO just checking the size is not right.
 		if (_item != null) {
+			
+			/*
+			System.out.println(_item.getPharmgxUsage().getPharmgx().getUrl());
+			System.out.println(currentPharmgx.getUrl());
+			System.out.println("--------------------------");
+
+			System.out.println(commentBody.getText());
+			System.out.println(_item.getPharmgxUsage().getComment());
+
+			*/
+			
 			if (!_item.getPharmgxUsage().getPharmgx().getUrl()
 					.equals(currentPharmgx.getUrl())
 					|| !commentBody.getText().equals(
