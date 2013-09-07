@@ -149,6 +149,16 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@UiField
 	CheckBox descriptmcms;
 
+	// test section
+	@UiField
+	CheckBox descripttreq;
+	@UiField
+	CheckBox descripttrec;
+	@UiField
+	CheckBox descriptttna;
+	@UiField
+	CheckBox descripttnn;
+
 	// @UiField RadioButton Drug, Dose, Monitoring, test_Re;
 
 	@UiField
@@ -159,6 +169,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	// RadioButton groups return MLinkedResource
 	// CheckBoxes groups return Set<MLinkedResource>
 	// See FAntibodyForm as an example
+
 	public MLinkedResource getPkImpact() {
 		if (descriptpkia.getValue()) {
 			return ResourcesFactory
@@ -236,9 +247,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return null;
 	}
 
+	// Pharmacodynamic impact PD
+
 	public MLinkedResource getPdImpact() {
 
-		// Pharmacodynamic impact PD
 		if (descriptpddt.getValue()) {
 			return ResourcesFactory
 					.createTrustedTypedResource(
@@ -291,9 +303,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return null;
 	}
 
+	// Recommendation drug
+
 	public MLinkedResource getDrugRec() {
 
-		// Recommendation drug
 		if (descriptdsal.getValue()) {
 			return ResourcesFactory
 					.createTrustedTypedResource(
@@ -346,9 +359,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return null;
 	}
 
-	public MLinkedResource getDoseRec() {
+	// Recommendation Dose
 
-		// Recommendation Dose
+	public MLinkedResource getDoseRec() {
 
 		if (descriptdrdfb.getValue()) {
 			return ResourcesFactory
@@ -397,8 +410,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return null;
 	}
 
+	// Recommendation Monitoring
+
 	public MLinkedResource getMonitRec() {
-		// Recommendation Monitoring
 
 		if (descriptmreq.getValue()) {
 			return ResourcesFactory
@@ -432,6 +446,51 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"A strategy changed monitoring recommendation is related to the pharmacogenomic biomarker.",
 							SPL_POC_PREFIX + "MonitoringRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		}
+		return null;
+	}
+
+	//drug section 
+	
+	public MLinkedResource getTest() {
+		if (descripttreq.getValue()) {
+			return ResourcesFactory
+					.createTrustedTypedResource(
+							SPL_POC_PREFIX + "absorption-increase",
+							"Absorption Increase",
+							"The pharmacogenomic biomarker is associated with a increase in absorption of the drug.",
+							SPL_POC_PREFIX + "PharmacokineticImpact",
+							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} 
+	   if (descripttrec.getValue()) {
+			return ResourcesFactory
+					.createTrustedTypedResource(
+							SPL_POC_PREFIX + "absorption-decrease",
+							"Absorption Decrease",
+							"The pharmacogenomic biomarker is associated with an decrease in absorption of the drug.",
+							SPL_POC_PREFIX + "PharmacokineticImpact",
+							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} 
+	   
+	   if (descriptttna.getValue()) {
+			return ResourcesFactory
+					.createTrustedTypedResource(
+							SPL_POC_PREFIX + "distribution-increase",
+							"Distribution Increase",
+							"The pharmacogenomic biomarker is associated with a increase in distribution of the drug.",
+							SPL_POC_PREFIX + "PharmacokineticImpact",
+							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} 
+	   
+	   if (descripttnn.getValue()) {
+			return ResourcesFactory
+					.createTrustedTypedResource(
+							SPL_POC_PREFIX + "distribution-decrease",
+							"Distribution Decrease",
+							"The pharmacogenomic biomarker is associated with an decrease in distribution of the drug.",
+							SPL_POC_PREFIX + "PharmacokineticImpact",
+							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+
 		}
 		return null;
 	}
@@ -683,7 +742,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 			if (_item.getDrugRec() != null) {
 
-
 				if (_item.getDrugRec().getLabel()
 						.equals("Alternative Recommended"))
 					descriptdsal.setValue(true);
@@ -743,27 +801,15 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			public void onClick(ClickEvent event) {
 				System.out.println("onClick function triggered");
 				try {
-					if (isContentInvalid()){
+					if (isContentInvalid()) {
 						System.out.println("step1");
 						return; // TODO: modify this function to validate our UI
-						
+
 					}
 
 					_domeo.getLogger().debug(this,
 							"SPL annotation content validated (edit)");
 
-					/*
-					if (!isContentChanged(_item)) {
-						_domeo.getLogger().debug(
-								this,
-								"No changes to save for annotation "
-										+ _item.getLocalId());
-						_manager.getContainer().hide();
-						System.out.println("step2");
-						return;
-					}
-					*/
-					
 					_item.setComment(commentBody.getText());
 
 					_item.setPKImpact(getPkImpact());
@@ -847,31 +893,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	}
 
 	@Override
-	public boolean isContentChanged(MAnnotation annotation) {
-		// TODO just checking the size is not right.
-		if (_item != null) {
-			
-			/*
-			System.out.println(_item.getPharmgxUsage().getPharmgx().getUrl());
-			System.out.println(currentPharmgx.getUrl());
-			System.out.println("--------------------------");
-
-			System.out.println(commentBody.getText());
-			System.out.println(_item.getPharmgxUsage().getComment());
-
-			*/
-			
-			if (!_item.getPharmgxUsage().getPharmgx().getUrl()
-					.equals(currentPharmgx.getUrl())
-					|| !commentBody.getText().equals(
-							_item.getPharmgxUsage().getComment())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
 	public void resized() {
 		this.setWidth((Window.getClientWidth() - 340) + "px");
 		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
@@ -879,6 +900,12 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			// if(tab instanceof IResizable) ((IResizable)tab).resized();
 			tab.setWidth((Window.getClientWidth() - 615) + "px");
 		}
+	}
+
+	@Override
+	public boolean isContentChanged(MAnnotation annotation) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	// @Override
