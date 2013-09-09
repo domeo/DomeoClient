@@ -64,6 +64,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAn
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSidePanel;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSideTab;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.tile.CommentTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
+import org.mindinformatics.gwt.domeo.plugins.annotation.curation.ui.tile.CurationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.info.HighlightPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.search.HighligthSearchComponent;
@@ -469,6 +471,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				new QualifierSearchComponent(this));
 		annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
 				new HQualifierHelper());
+		
+		// Curation
+		annotationTailsManager.registerAnnotationTile(MCurationToken.class.getName(), 
+				new CurationTileProvider(this));
 		
 		// Antibody
 		pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true);
