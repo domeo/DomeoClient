@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 
+import java.util.Set;
+
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
@@ -13,12 +15,18 @@ public class MPharmgx extends MTrustedResource {
 	//String pkImpact, pdImpact, doseRec, drugRec, monitRec, testRec;
 	
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource, drugRecResource, monitRecResource, testRecResource;
+	Set<MLinkedResource> statementsResource;
 	
 	public MPharmgx(String url, String label, MGenericResource source) {
 		super(url, label, source);
 	}
 	
 	
+	public Set<MLinkedResource> getStatementsResource() {
+		return statementsResource;
+	}
+
+
 	public MLinkedResource getPkImpactResource() {
 		return pkImpactResource;
 	}
@@ -41,6 +49,11 @@ public class MPharmgx extends MTrustedResource {
 	}
 
 	
+	public void setStatementsResource(Set<MLinkedResource> statementsResource) {
+		this.statementsResource = statementsResource;
+	}
+
+
 	public MLinkedResource getDoseRecResource() {
 		return doseRecResource;
 	}

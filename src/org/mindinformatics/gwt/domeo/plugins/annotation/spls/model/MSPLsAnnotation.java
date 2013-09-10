@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 
+import java.util.Set;
+
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
@@ -79,10 +81,18 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    return pharmgxUsage.getTestRec();
 	}
 
+	//statements refers to ...
+	public void setStatements(Set<MLinkedResource> statement){
+	    pharmgxUsage.setStatements(statement);
+	}
+	
+	public Set<MLinkedResource> getStatements(){
+	    return pharmgxUsage.getStatements();
+	}
+
 	public void setTestRec(MLinkedResource testRec){
 	    pharmgxUsage.setTestRec(testRec);
 	}
-	
 	
 	@Override
 	    public String getLabel() {

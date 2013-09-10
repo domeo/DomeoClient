@@ -1,7 +1,9 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +65,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	private MSPLsAnnotation _item;
 	private MPharmgx currentPharmgx;
+	private Set<String> statems_set = new HashSet<String>();
 
 	private ArrayList<Widget> tabs = new ArrayList<Widget>();
 
@@ -158,6 +161,20 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	CheckBox descriptttna;
 	@UiField
 	CheckBox descripttnn;
+
+	// statements
+	@UiField
+	CheckBox descriptsai;
+	@UiField
+	CheckBox descriptsmcc;
+	@UiField
+	CheckBox descriptsvt;
+	@UiField
+	CheckBox descriptsmc;
+	@UiField
+	CheckBox descriptsts;
+	@UiField
+	CheckBox descriptsbm;
 
 	// @UiField RadioButton Drug, Dose, Monitoring, test_Re;
 
@@ -305,6 +322,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	// Recommendation drug
 
+	// recommendation drug
+
 	public MLinkedResource getDrugRec() {
 
 		if (descriptdsal.getValue()) {
@@ -315,7 +334,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is related to a recommendation to use an alternative drug.",
 							SPL_POC_PREFIX + "DrugSelectionRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} else if (descriptdsca.getValue()) {
+		} else if (descriptdsnr.getValue()) {
 			return ResourcesFactory
 					.createTrustedTypedResource(
 							SPL_POC_PREFIX + "do-not-restart",
@@ -323,7 +342,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is related to a recommendation to not restart the drug",
 							SPL_POC_PREFIX + "DrugSelectionRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} else if (descriptdsam.getValue()) {
+		} else if (descriptdsnc.getValue()) {
 			return ResourcesFactory
 					.createTrustedTypedResource(
 							SPL_POC_PREFIX + "no-change-necessary",
@@ -331,15 +350,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is not associated with any drug selection recommendation.",
 							SPL_POC_PREFIX + "DrugSelectionRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} else if (descriptdsnr.getValue()) {
-			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX + "discontinue",
-							"Discontinue",
-							"The pharmacogenomic biomarker is related to a recommendation to discontinue the drug.",
-							SPL_POC_PREFIX + "DrugSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} else if (descriptdsnc.getValue()) {
+		} else if (descriptdsam.getValue()) {
 			return ResourcesFactory
 					.createTrustedTypedResource(
 							SPL_POC_PREFIX + "addition-of-medication",
@@ -347,7 +358,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is related to a recommendation to add a concomitant medication.",
 							SPL_POC_PREFIX + "DrugSelectionRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} else if (descriptdsnc.getValue()) {
+		} else if (descriptdsca.getValue()) {
 			return ResourcesFactory
 					.createTrustedTypedResource(
 							SPL_POC_PREFIX + "change-in-route-of-admin",
@@ -450,49 +461,101 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return null;
 	}
 
-	//drug section 
-	
-	public MLinkedResource getTest() {
-		if (descripttreq.getValue()) {
-			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX + "absorption-increase",
-							"Absorption Increase",
-							"The pharmacogenomic biomarker is associated with a increase in absorption of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} 
-	   if (descripttrec.getValue()) {
-			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX + "absorption-decrease",
-							"Absorption Decrease",
-							"The pharmacogenomic biomarker is associated with an decrease in absorption of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} 
-	   
-	   if (descriptttna.getValue()) {
-			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX + "distribution-increase",
-							"Distribution Increase",
-							"The pharmacogenomic biomarker is associated with a increase in distribution of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
-		} 
-	   
-	   if (descripttnn.getValue()) {
-			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX + "distribution-decrease",
-							"Distribution Decrease",
-							"The pharmacogenomic biomarker is associated with an decrease in distribution of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+	// test section
 
+	public MLinkedResource getTest_Re() {
+		if (descripttreq.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "required", "Required",
+					"A required test is related to the biomarker.",
+					SPL_POC_PREFIX + "TestRecommendation", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
+		} else if (descripttrec.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "recommend", "Recommend",
+					"A recommended test is related to the biomarker.",
+					SPL_POC_PREFIX + "TestRecommendation", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
+		}
+
+		else if (descriptttna.getValue()) {
+			return ResourcesFactory
+					.createTrustedTypedResource(
+							SPL_POC_PREFIX
+									+ "take-note-that-tests-are-avaliable",
+							"Take note that tests are avaliable",
+							"Testing related to the pharmacogenomic biomarker is avaliable.",
+							SPL_POC_PREFIX + "TestRecommendation",
+							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		}
+
+		else if (descripttnn.getValue()) {
+			return ResourcesFactory
+					.createTrustedTypedResource(
+							SPL_POC_PREFIX + "not-necessary",
+							"Not necessary",
+							"Testing related to the pharmacogenomic biomarker is not necessary.",
+							SPL_POC_PREFIX + "TestRecommendation",
+							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
 		}
 		return null;
+	}
+
+	// statements
+	// the value of each variables is made up
+	public Set<MLinkedResource> getStatements() {
+
+		Set<MLinkedResource> statements = new HashSet<MLinkedResource>();
+
+		if (descriptsai.getValue()) {
+			statements.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "ingredient-active", "Active ingredient",
+					"the ingredient is active", SPL_POC_PREFIX + "Statements",
+					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+
+		}
+
+		if (descriptsmcc.getValue()) {
+			statements.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "concomitant-medication-concern",
+					"Concomitant medication concern",
+					"we should concern the concomitant medication.",
+					SPL_POC_PREFIX + "Statements", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation"));
+		}
+
+		if (descriptsvt.getValue()) {
+			statements.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "variant", "Variant",
+					"it is highly possible changes with time.", SPL_POC_PREFIX
+							+ "Statements", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation"));
+		}
+
+		if (descriptsmc.getValue()) {
+			statements.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "medical-condition", "Medical Condition",
+					"it is should be references to medical condition.",
+					SPL_POC_PREFIX + "Statements", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation"));
+
+		}
+
+		if (descriptsts.getValue()) {
+			statements.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "test", "Test",
+					"based on the test result.", SPL_POC_PREFIX + "Statements",
+					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+		}
+
+		if (descriptsbm.getValue()) {
+			statements.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "biomarker", "Biomarker",
+					"Based on biomarker.", SPL_POC_PREFIX + "Statements",
+					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+
+		}
+		return statements;
 	}
 
 	// NEW annotation
@@ -572,6 +635,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							pharmgxUsage.setDoseRec(getDoseRec());
 							_domeo.getLogger().debug(this, "SPL annotation 5");
 							pharmgxUsage.setMonitRec(getMonitRec());
+							_domeo.getLogger().debug(this, "SPL annotation 6");
+							pharmgxUsage.setStatements(getStatements());
+							_domeo.getLogger().debug(this, "SPL annotation 7");
+							pharmgxUsage.setTestRec(getTest_Re());
 
 							annotation.setPharmgxUsage(pharmgxUsage);
 
@@ -750,11 +817,56 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					descriptdsca.setValue(true);
 				else if (_item.getDrugRec().getLabel().equals("Add medication"))
 					descriptdsam.setValue(true);
-				else if (_item.getDrugRec().getLabel().equals("Do not restart")) {
+				else if (_item.getDrugRec().getLabel().equals("Do not restart"))
 					descriptdsnr.setValue(true);
-				} else if (_item.getDrugRec().getLabel()
+				else if (_item.getDrugRec().getLabel()
 						.equals("Not change necessary"))
 					descriptdsnc.setValue(true);
+			}
+
+			if (_item.getTestRec() != null) {
+				System.out
+						.println("drug rec :" + _item.getTestRec().getLabel());
+				if (_item.getTestRec().getLabel().equals("Required"))
+					descripttreq.setValue(true);
+				else if (_item.getTestRec().getLabel().equals("Recommend"))
+					descripttrec.setValue(true);
+				else if (_item.getTestRec().getLabel()
+						.equals("Take note that tests are avaliable"))
+					descriptttna.setValue(true);
+				else if (_item.getTestRec().getLabel().equals("Not necessary"))
+					descripttnn.setValue(true);
+
+			}
+
+			// statements, values are made up
+			// checkbox
+
+			if (_item.getStatements() != null) {
+				for (MLinkedResource statemt : _item.getStatements()) {
+
+					if (statemt.getLabel().equals("Active ingredient")) {
+						descriptsai.setValue(true);
+					}
+					if (statemt.getLabel().equals(
+							"Concomitant medication concern")) {
+						descriptsmcc.setValue(true);
+					}
+					if (statemt.getLabel().equals("Variant")) {
+						descriptsvt.setValue(true);
+					}
+					if (statemt.getLabel().equals("Medical condition")) {
+						descriptsmc.setValue(true);
+					}
+					if (statemt.getLabel().equals("Test")) {
+						descriptsts.setValue(true);
+					}
+					if (statemt.getLabel().equals("Biomarker")) {
+						descriptsbm.setValue(true);
+					}
+
+				}
+
 			}
 
 		} catch (Exception e) {
@@ -818,6 +930,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					_item.setDrugRec(getDrugRec());
 					_item.setDoseRec(getDoseRec());
 					_item.setMonitRec(getMonitRec());
+					_item.setStatements(getStatements());
+					_item.setTestRec(getTest_Re());
 
 					_domeo.getLogger().debug(this,
 							"SPL descriptions cleared and re-loaded (edit)");
