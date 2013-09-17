@@ -2,6 +2,7 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card;
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.client.Resources;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.actions.ActionShowAnnotation;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.cards.ACardComponent;
 import org.mindinformatics.gwt.domeo.client.ui.popup.CurationPopup;
@@ -22,7 +23,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -42,18 +45,25 @@ public class CSPLsCard extends ACardComponent {
 	HorizontalPanel provenance;
 	@UiField
 	FlowPanel content;
+
 	@UiField
-	Label type;
-	@UiField
-	Label text;
+	Label type, text, pkimpact;
+
+	@UiField SimplePanel acceptIcon, broadIcon, wrongIcon;
 
 	public CSPLsCard(IDomeo domeo) {
 		super(domeo);
 		initWidget(binder.createAndBindUi(this));
 
+		System.out.println("step2***");
+		// Resources resource = Domeo.resources;
+		// Image acceptImage = new Image(resource.acceptIcon());
+
+		// rightIcon.add(acceptImage);
+
 		tileResources.css().ensureInjected();
 	}
-	
+
 	@Override
 	public void initializeCard(CurationPopup curationPopup,
 			MAnnotation annotation) {
@@ -82,27 +92,48 @@ public class CSPLsCard extends ACardComponent {
 
 	@Override
 	public void refresh() {
+
+		System.out.println("step1***");
+
 		try {
-			if (_index>-1) createProvenanceBar(SPLsPlugin.getInstance().getPluginName(), _index, provenance, _annotation);
-			else createProvenanceBar(SPLsPlugin.getInstance().getPluginName(), provenance, _annotation);
+			if (_index > -1)
+				createProvenanceBar(SPLsPlugin.getInstance().getPluginName(),
+						_index, provenance, _annotation);
+			else
+				createProvenanceBar(SPLsPlugin.getInstance().getPluginName(),
+						provenance, _annotation);
 			type.setText("SPLs:");
-						
-			text.setText(_annotation.getPharmgxUsage().getPharmgx().getLabel());
+
+			System.out.println("pk in card: "
+					+ _annotation.getPharmgxUsage().getPkImpact().getLabel());
+
+			text.setText("clinical statements from SPLs");
+			pkimpact.setText("Pk Impact: "
+					+ _annotation.getPharmgxUsage().getPkImpact().getLabel());
 			
-			if(SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {
+			acceptIcon.add(new Image(Domeo.resources.acceptIcon()));
+			broadIcon.add(new Image(Domeo.resources.acceptBroadIcon()));
+			wrongIcon.add(new Image(Domeo.resources.crossIcon()));
+
+
+			if (SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {
 				HorizontalPanel hp = new HorizontalPanel();
 				hp.add(new HTML("Targets:&nbsp;"));
-				for(MSelector sel: _annotation.getSelectors()) {
-					SimpleIconButtonPanel bu = new SimpleIconButtonPanel(_domeo, ActionShowAnnotation.getClickHandler(_domeo, 
-							_annotation.getLocalId()+":"+sel.getLocalId()),
-							Domeo.resources.showLittleIcon().getSafeUri().asString(), "Show target in context");
-					hp.add(bu);		
+				for (MSelector sel : _annotation.getSelectors()) {
+					SimpleIconButtonPanel bu = new SimpleIconButtonPanel(
+							_domeo, ActionShowAnnotation.getClickHandler(
+									_domeo, _annotation.getLocalId() + ":"
+											+ sel.getLocalId()),
+							Domeo.resources.showLittleIcon().getSafeUri()
+									.asString(), "Show target in context");
+					hp.add(bu);
 				}
 				content.add(hp);
 			}
-			
-			injectButtons(SPLsPlugin.getInstance().getPluginName(), content, _annotation);
-		} catch(Exception e) {
+
+			injectButtons(SPLsPlugin.getInstance().getPluginName(), content,
+					_annotation);
+		} catch (Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());
 		}
 	}

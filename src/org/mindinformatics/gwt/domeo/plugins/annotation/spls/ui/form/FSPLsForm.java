@@ -65,8 +65,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	private MSPLsAnnotation _item;
 	private MPharmgx currentPharmgx;
-	private Set<String> statems_set = new HashSet<String>();
-
 	private ArrayList<Widget> tabs = new ArrayList<Widget>();
 
 	@UiField
