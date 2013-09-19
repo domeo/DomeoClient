@@ -6,7 +6,9 @@ function highlightTextFromNode(exact, prefix, suffix,
 	//textNodes = getTextNodes(node.parentNode);
 	textNodes = getTextNodes();
 
-	var foundText = findText(exact.replace(/\\n/g,'\n'), prefix.replace(/\\n/g,'\n'), suffix.replace(/\\n/g,'\n'), textNodes);
+	//alert(prefix.replace(/\\n/g,'\n').replace(/\\"/g,'"'));
+	
+	var foundText = findText(exact.replace(/\\n/g,'\n').replace(/\\"/g,'"').replace(/\&amp;/g,'&'), prefix.replace(/\\n/g,'\n').replace(/\\"/g,'"').replace(/\&amp;/g,'&'), suffix.replace(/\\n/g,'\n').replace(/\\"/g,'"').replace(/\&amp;/g,'&'), textNodes);
 	if (foundText == null || foundText.length == 0) {
 		throw('The text:"'+exact+'" was not found ' + prefix + '/' + suffix);
 		/*
@@ -16,7 +18,6 @@ function highlightTextFromNode(exact, prefix, suffix,
 		*/
 		return;
 	}
-	
 	if (textNodes) {
 		_highlightText(textNodes, foundText[0], foundText[1],
 				titleAttributeOrSpanCreation, node.parentNode, cssClass);
