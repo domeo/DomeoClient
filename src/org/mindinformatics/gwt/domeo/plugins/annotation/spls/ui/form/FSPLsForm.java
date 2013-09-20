@@ -604,6 +604,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							_domeo.getLogger().debug(this,
 									"quote selector initialized");
 
+							System.out.println("selector in new: "
+									+ selector.getExact());
+
 							// TODO Register coordinate of the selection.
 							MSPLsAnnotation annotation = SPLsFactory
 									.createSPLsAnnotation(
@@ -664,6 +667,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 										.addAnnotation(annotation,
 												getSelectedSet(annotationSet));
 							}
+
 							_domeo.getLogger()
 									.debug(this,
 											"Making the new SPL annotation visible in the content panel");
@@ -912,10 +916,27 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				System.out.println("onClick function triggered");
 				try {
 					if (isContentInvalid()) {
-						System.out.println("step1");
 						return; // TODO: modify this function to validate our UI
 
 					}
+
+					MTextQuoteSelector selector = AnnotationFactory
+							.createPrefixSuffixTextSelector(_domeo
+									.getAgentManager().getUserPerson(), _domeo
+									.getPersistenceManager()
+									.getCurrentResource(),
+									((TextAnnotationFormsPanel) _manager)
+											.getHighlight().getExact(),
+									((TextAnnotationFormsPanel) _manager)
+											.getHighlight().getPrefix(),
+									((TextAnnotationFormsPanel) _manager)
+											.getHighlight().getSuffix());
+
+					System.out.println("selector in edit: "
+							+ selector.getExact());
+					
+					
+					_item.setSelector(selector);
 
 					_domeo.getLogger().debug(this,
 							"SPL annotation content validated (edit)");
