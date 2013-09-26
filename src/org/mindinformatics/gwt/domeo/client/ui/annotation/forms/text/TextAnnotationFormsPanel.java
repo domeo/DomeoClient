@@ -88,6 +88,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 		if(formGenerator!=null) {
 			AFormComponent form = formGenerator.getForm(this, annotation);
 			tabToolsPanel.add(form, form.getTitle());
+			forms.add(form);
 		}
 		
 		leftBottomSide.addClickHandler(new ClickHandler() {
@@ -160,6 +161,14 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 				refreshHighlightedText();
 			}
 		});
+		
+		Timer t = new Timer() {
+			@Override
+			public void run() {
+				resized();
+			}
+		};
+		t.schedule(200);
 	}
 	
 	// ------------------------------------------------------------------------
@@ -287,8 +296,6 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 	    	  resized();
 	      }
 	    };
-
-	    // Schedule the timer to run once in 5 seconds.
 	    t.schedule(100);
 	}
 	
