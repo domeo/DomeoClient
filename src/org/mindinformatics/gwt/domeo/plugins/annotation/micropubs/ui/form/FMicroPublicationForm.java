@@ -131,9 +131,12 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	private ArrayList<Widget> tabs = new ArrayList<Widget>();
 	
+	@UiField HorizontalPanel headerPanel;
+	@UiField HorizontalPanel buttonsPanel;
+	@UiField HorizontalPanel buttonsPanelSpacer;
+	
 	@UiField VerticalPanel container;
 	//@UiField FlowPanel newQualifiers;
-	@UiField HorizontalPanel buttonsPanel;
 	@UiField ListBox annotationSet;
 	@UiField VerticalPanel rightColumn;
 	@UiField TabBar tabBar;
@@ -179,7 +182,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
 		yesButton.setWidth("78px");
-		yesButton.setHeight("26px");
+		yesButton.setHeight("22px");
 		yesButton.setResource(Domeo.resources.acceptLittleIcon());
 		yesButton.setText("Apply");
 		yesButton.addClickHandler(new ClickHandler() {
@@ -466,16 +469,21 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	@Override
 	public void resized() {
-		this.setWidth((Window.getClientWidth() - 340) + "px");
-		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
-		for(Widget tab:tabs) {
-			//if(tab instanceof IResizable) ((IResizable)tab).resized();
-			tab.setWidth((Window.getClientWidth() - 615) + "px");
-		}
+//		this.setWidth((Window.getClientWidth() - 340) + "px");
+//		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
+//		for(Widget tab:tabs) {
+//			//if(tab instanceof IResizable) ((IResizable)tab).resized();
+//			tab.setWidth((Window.getClientWidth() - 615) + "px");
+//		}
+//		
+//		evidenceTabs.setHeight((Window.getClientHeight() - 490) + "px");
+//		supportPanel.setHeight((Window.getClientHeight() - 520) + "px");
+//		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
 		
-		evidenceTabs.setHeight((Window.getClientHeight() - 490) + "px");
-		supportPanel.setHeight((Window.getClientHeight() - 520) + "px");
-		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
+		
+		buttonsPanelSpacer.setWidth(Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
+		headerPanel.setCellWidth(buttonsPanelSpacer, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
 	}
 	
 	@Override
