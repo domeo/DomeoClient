@@ -70,6 +70,7 @@ public class ExistingAnnotationSetsListPanel extends Composite implements IIniti
 			toolbar.add(new GroupsAnnotationTopbar(_domeo, this));
 		}
 		
+		importButton.setEnabled(false);
 		importButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -104,6 +105,14 @@ public class ExistingAnnotationSetsListPanel extends Composite implements IIniti
 	@Override
 	public void refresh() {
 		//refresh(_application.getAnnotationPersistenceManager().getAllUserSets());
+		List<String> uuids = getSelected();
+		if(uuids.size()>0) {
+			importButton.setEnabled(true);
+			importButton.setText("Import " + uuids.size() + (uuids.size()==1?" Set":" Sets"));
+		} else {
+			importButton.setEnabled(false);
+			importButton.setText("Import");
+		}
 	}
 	
 	/**

@@ -70,6 +70,7 @@ public class JsAnnotationSetSummaryLens extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				//parent.setSelectedAnnotaitonSet(_set);	
+				parent.refresh();
 				event.stopPropagation();
 			}
 		});
