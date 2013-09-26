@@ -233,4 +233,9 @@ public class ImageAnnotationFormsPanel extends AFormsManager implements IContent
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public int getContainerWidth() {
+		return main.getOffsetWidth();
+	}
 }

@@ -78,9 +78,12 @@ public class FAntibodyForm extends AFormComponent implements IResizable, IAntibo
 	
 	private ArrayList<Widget> tabs = new ArrayList<Widget>();
 	
+	@UiField HorizontalPanel headerPanel;
+	@UiField HorizontalPanel buttonsPanel;
+	@UiField HorizontalPanel buttonsPanelSpacer;
+	
 	@UiField VerticalPanel container;
 	@UiField FlowPanel newQualifiers;
-	@UiField HorizontalPanel buttonsPanel;
 	@UiField ListBox annotationSet;
 	@UiField VerticalPanel rightColumn;
 	@UiField TabBar tabBar;
@@ -509,6 +512,10 @@ public class FAntibodyForm extends AFormComponent implements IResizable, IAntibo
 			//if(tab instanceof IResizable) ((IResizable)tab).resized();
 			tab.setWidth((Window.getClientWidth() - 615) + "px");
 		}
+		
+		buttonsPanelSpacer.setWidth(Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
+		headerPanel.setCellWidth(buttonsPanelSpacer, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
 	}
 
 //	@Override

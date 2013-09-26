@@ -11,12 +11,11 @@
 	 	}
 	 	
 	 	.buttonsPanel {
-			position: absolute;
+			position: relative;
 			right: 20px;
-	  		float:right;
-	  		padding-top:4px;
+	  		/*float:right;*/
+	  		padding-top:0px;
 	  		padding-right: 0px;
-	  		padding-left: 2px;
 	  		height: 0px;
 	  		max-height: 20px;
 	  		display: block;
@@ -42,7 +41,8 @@
 	  	.panel {
 	  		width: 100%;
 	  		vertical-align: top;
-	  		padding-top: 10px;
+	  		padding: 5px;
+	  		padding-top: 0px;
 	  	}
 	  	
 	  	.provenance {
@@ -124,11 +124,24 @@
 	-->
 
   	<g:VerticalPanel ui:field='container' styleName='{style.outer}'>
+  		<g:cell>		
+  			<g:HorizontalPanel ui:field='headerPanel' styleName='{style.panel}'>
+  				<g:HorizontalPanel ui:field='buttonsPanelSpacer'>
+			  	</g:HorizontalPanel>
+		  		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
+		  			<g:SimplePanel styleName='{style.setPanel}'>
+		  		    	<g:ListBox ui:field='annotationSet'></g:ListBox>
+		  		    </g:SimplePanel>
+			  	</g:HorizontalPanel>			  	
+		  	</g:HorizontalPanel>
+		</g:cell>
+		<!--  
   		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
   			<g:SimplePanel styleName='{style.setPanel}'>
   		    	<g:ListBox ui:field='annotationSet'></g:ListBox>
   		    </g:SimplePanel>
 	  	</g:HorizontalPanel>
+	  	-->
 	  	<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
   			<g:Label ui:field="antibodiesLabel" styleName='{style.qualifiersLabel}'>Antibodies:</g:Label>
   			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>

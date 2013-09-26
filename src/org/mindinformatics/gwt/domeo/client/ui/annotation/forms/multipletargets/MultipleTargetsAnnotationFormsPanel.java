@@ -240,4 +240,9 @@ public class MultipleTargetsAnnotationFormsPanel extends AFormsManager implement
 	public ArrayList<MAnnotation> getTargets() {
 		return _targets;
 	}
+	
+	@Override
+	public int getContainerWidth() {
+		return main.getOffsetWidth();
+	}
 }

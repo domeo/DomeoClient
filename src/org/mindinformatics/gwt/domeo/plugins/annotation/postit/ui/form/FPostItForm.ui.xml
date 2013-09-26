@@ -4,19 +4,31 @@
 
   	<ui:style>
 	  	.outer {
-		    height: 30px;
+		    height: 10px;
 		    padding-left: 14px;
-		    padding-top: 12px;
+		    padding-top: 0px;
 		    width: 100%;
 	 	}
 	 	
+	 	/*
 	 	.buttonsPanel {
-			position: absolute;
-			right: 20px;
-	  		float:right;
 	  		padding-top:4px;
 	  		padding-right: 0px;
 	  		height: 0px;
+	  		max-height: 20px;
+	  		max-width: 500px;
+	  		display: block;
+	  	}
+	  	*/
+	  	
+	  	.buttonsPanel {
+			position: relative	;
+			right: 20px;
+	  		/*float:right;*/
+	  		padding-top:0px;
+	  		padding-right: 0px;
+	  		height: 0px;
+	  		width: 300px;
 	  		max-height: 20px;
 	  		display: block;
 	  	}
@@ -29,7 +41,7 @@
 	  		padding-left:5px;
 	  		padding-top: 24px;
 	  		width: 100%;
-	  		min-width: 598px;	
+	  		min-width: 598px;
 	  		height: 300px;
 	  	}
 	  	
@@ -42,6 +54,7 @@
 	  		width: 100%;
 	  		vertical-align: top;
 	  		padding: 5px;
+	  		padding-top: 0px;
 	  	}
 	  	
 	  	.provenance {
@@ -81,11 +94,17 @@
 	-->
 
   	<g:VerticalPanel styleName='{style.outer}'>
-  		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
-  			<g:SimplePanel styleName='{style.setPanel}'>
-  		    	<g:ListBox ui:field='annotationSet'></g:ListBox>
-  		    </g:SimplePanel>
-	  	</g:HorizontalPanel>
+  		<g:cell>		
+  			<g:HorizontalPanel ui:field='headerPanel' styleName='{style.panel}'>
+  				<g:HorizontalPanel ui:field='buttonsPanelSpacer'>
+			  	</g:HorizontalPanel>
+		  		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
+		  			<g:SimplePanel styleName='{style.setPanel}'>
+		  		    	<g:ListBox ui:field='annotationSet'></g:ListBox>
+		  		    </g:SimplePanel>
+			  	</g:HorizontalPanel>			  	
+		  	</g:HorizontalPanel>
+		</g:cell>
 	  	<g:HorizontalPanel styleName='{style.panel}'>
 			<g:cell width="466px">
 	  			<g:VerticalPanel styleName='{style.leftColumn}'>

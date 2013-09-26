@@ -22,8 +22,10 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
@@ -40,8 +42,10 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 	private String _title;
 	
 	private HighlightedTextBuffer highlightBuffer;
+	private ArrayList<AFormComponent> forms = new ArrayList<AFormComponent>(); 
 	
 	@UiField FlowPanel main;
+	@UiField HorizontalPanel header;
 	@UiField SpanElement prefixText;
 	@UiField SpanElement matchText;
 	@UiField SpanElement suffixText;
@@ -188,6 +192,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 					IFormGenerator g = it.next();
 					pluginName = g.getClass().getName();
 					AFormComponent form = g.getForm(this);
+					forms.add(form);
 					tabToolsPanel.add(form, form.getTitle());
 				} catch (Exception e) {
 					_domeo.getLogger().exception(this, "Exception while loading form: " + pluginName);
@@ -269,6 +274,22 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 				refreshHighlightedText();
 			}
 		});
+		
+//		Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+//	        public void execute() {
+//	            resized();
+//	        }
+//	    });
+		
+		Timer t = new Timer() {
+	      @Override
+	      public void run() {
+	    	  resized();
+	      }
+	    };
+
+	    // Schedule the timer to run once in 5 seconds.
+	    t.schedule(100);
 	}
 	
 	public void refreshHighlightedText() {
@@ -308,10 +329,14 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 	}
 
 	@Override
-	public void resized() {
+	public void resized() {		
 		this.setWidth((Window.getClientWidth() - 140) + "px");
 		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
+		
+		for(AFormComponent form: forms) {
+			((IResizable)form).resized();
+		}
 	}
 
 	@Override
@@ -328,5 +353,10 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 	public ArrayList<MAnnotation> getTargets() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public int getContainerWidth() {
+		return main.getOffsetWidth();
 	}
 }
