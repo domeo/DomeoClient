@@ -169,7 +169,10 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 						}
 						deselectManualMultipleAnnotation();
 					}
-					if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
+					// If not multiple selections and text selected...
+					else if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) {
+						_domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
+					}
 				}
 			}, _resources.domeoAnnotateIcon(), 
 			_resources.domeoAnnotateColorIcon(), "Annotate", "Annotate");
