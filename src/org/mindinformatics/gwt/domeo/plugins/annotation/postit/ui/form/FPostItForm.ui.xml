@@ -96,8 +96,7 @@
   	<g:VerticalPanel styleName='{style.outer}'>
   		<g:cell>		
   			<g:HorizontalPanel ui:field='headerPanel' styleName='{style.panel}'>
-  				<g:HorizontalPanel ui:field='buttonsPanelSpacer'>
-			  	</g:HorizontalPanel>
+  				<g:HorizontalPanel ui:field='buttonsPanelSpacer'> </g:HorizontalPanel>
 		  		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
 		  			<g:SimplePanel styleName='{style.setPanel}'>
 		  		    	<g:ListBox ui:field='annotationSet'></g:ListBox>

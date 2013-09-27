@@ -435,7 +435,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 							// If there are potential subject for creating structured relationships
 							// between annotation item, the method is called
 							if(items.size()>0) {
-								performAnnotation(items);
+								//performAnnotation(items);
 							}
 							
 							resetSelection();

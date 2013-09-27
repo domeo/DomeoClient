@@ -316,8 +316,8 @@ public class FPostItForm extends AFormComponent implements IResizable, IAllowsMu
 	@Override
 	public void resized() {
 		//_domeo.getLogger().exception(this, Window.getClientWidth() + " - "+_manager.getContainerWidth() + " - " + Math.max(0, (_manager.getContainerWidth()-320)) + "px");
-		//buttonsPanelSpacer.clear();
-		//buttonsPanelSpacer.add(new HTML(Window.getClientWidth() + " - "+_manager.getContainerWidth() + " - " + Math.max(0, (_manager.getContainerWidth()-300)) + "px"));
+		// buttonsPanelSpacer.clear();
+		// buttonsPanelSpacer.add(new HTML(Window.getClientWidth() + " - "+_manager.getContainerWidth() + " - " + Math.max(0, (_manager.getContainerWidth()-300)) + "px"));
 		//buttonsPanelSpacer.setWidth(((Window.getClientWidth()-_manager.getContainerWidth())-70) + "px");
 		buttonsPanelSpacer.setWidth(Math.max(0, (_manager.getContainerWidth()-300)) + "px");
 		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
