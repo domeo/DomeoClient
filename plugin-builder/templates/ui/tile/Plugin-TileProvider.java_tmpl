@@ -1,0 +1,32 @@
+package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.ui.tile;
+
+import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.actions.IAnnotationEditListener;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileGenerator;
+import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
+
+/**
+ * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
+ */
+public class @PLUGIN_NAME@TileProvider implements ITileGenerator {
+
+	// By contract 
+	private IDomeo _domeo;
+	
+	public @PLUGIN_NAME@TileProvider(IDomeo domeo) {
+		_domeo = domeo;
+	}
+	
+	@Override
+	public boolean isTileSupported(String annotationName) {
+		if(annotationName.equals(M@PLUGIN_NAME@Annotation.class.getName())) return true;
+		return false;
+	}
+
+	@Override
+	public ITileComponent getTile(String annotationName, IAnnotationEditListener listener) {
+		if(isTileSupported(annotationName)) return new T@PLUGIN_NAME@Tile(_domeo, listener);
+		return null;
+	}
+}

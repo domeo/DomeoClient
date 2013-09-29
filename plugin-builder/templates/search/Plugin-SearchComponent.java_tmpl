@@ -1,0 +1,29 @@
+package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.search;
+
+import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.search.ASearchComponent;
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
+
+/**
+ * @author Richard Boyce  <rdb20@pitt.edu>
+ */
+public class @PLUGIN_NAME@SearchComponent extends ASearchComponent {
+
+	public @PLUGIN_NAME@SearchComponent(IDomeo domeo) {
+		super(domeo);
+	}
+	
+	
+	/**
+	 * The search on the text match is NOT case sensitive.
+	 */
+	public boolean filterByText(MAnnotation annotation, String textSearch) {
+		if(super.filterByText(annotation, textSearch)) return true;
+		if(annotation instanceof M@PLUGIN_NAME@Annotation) {
+			return ((M@PLUGIN_NAME@Annotation)annotation).getText().toLowerCase()
+					.contains(textSearch.toLowerCase());
+		}
+		return false;
+	}
+}
