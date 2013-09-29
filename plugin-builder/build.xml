@@ -26,15 +26,17 @@
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card"/>
   <mkdir dir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/viewer"/>
 
-  <copy file="templates/info-plugin.gwt.xml" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/" />
-  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info-plugin.gwt.xml" tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/${PLUGIN-NAME}.gwt.xml"/> 
+  <copy file="templates/plugin.gwt.xml" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/" />
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/plugin.gwt.xml" tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/${PLUGIN-NAME}.gwt.xml"/> 
     
 
 </target>  
 
 <!-- copy template files into new folders -->
 <target name="create-info-template">
-  <copy file="templates/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/">
+
+<!-- info sub-folder -->
+  <copy file="templates/info/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/">
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>
@@ -47,7 +49,108 @@
     </filterchain>
   </copy>
   <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/info-plugin.java_tmpl"
-	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/SPL_DDI_Plugin.java" />
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/${PLUGIN-NAME}.java" />
+
+<!-- search sub-folder -->
+ <copy file="templates/search/Plugin-SearchComponent.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
+	<token key="VERSION" value ="${VERSION}" />
+	
+      </replacetokens>
+    </filterchain>
+  </copy>
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search/Plugin-SearchComponent.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search/${PLUGIN-NAME}SearchComponent.java" />
+
+<!-- C-Plugin-Card.java_tmpl ui.card sub-folder -->
+ <copy file="templates/ui/card/C-Plugin-Card.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
+	<token key="VERSION" value ="${VERSION}" />
+	
+      </replacetokens>
+    </filterchain>
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/C-Plugin-Card.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/C${PLUGIN-NAME}Card.java" />
+
+<!-- C-Plugin-Card.ui.xml ui.card sub-folder -->
+ <copy file="templates/ui/card/C-Plugin-Card.ui.xml" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/">
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/C-Plugin-Card.ui.xml"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/C${PLUGIN-NAME}Card.ui.xml" />
+
+<!-- Plugin-CardProvider.java_tmpl ui.card sub-folder -->
+<copy file="templates/ui/card/Plugin-CardProvider.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
+	<token key="VERSION" value ="${VERSION}" />
+	
+      </replacetokens>
+    </filterchain>
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/Plugin-CardProvider.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/${PLUGIN-NAME}Card.Providerjava" />
+
+<!--  Plugin-TileProvider.java_tmpl  ui.tile sub-folder -->
+ <copy file="templates/ui/tile/Plugin-TileProvider.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
+	<token key="VERSION" value ="${VERSION}" />
+	
+      </replacetokens>
+    </filterchain>
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/Plugin-TileProvider.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/${PLUGIN-NAME}TileProvider.java" />
+
+<!-- T-Plugin-Tile.ui.xml ui.tile sub-folder -->
+ <copy file="templates/ui/tile/T-Plugin-Tile.ui.xml" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/">
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/T-Plugin-Tile.ui.xml"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/T${PLUGIN-NAME}Tile.ui.xml" />
+
+<!-- T-Plugin-Tile.java_tmpl ui.tile sub-folder -->
+<copy file="templates/ui/tile/T-Plugin-Tile.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
+	<token key="VERSION" value ="${VERSION}" />
+	
+      </replacetokens>
+    </filterchain>
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/T-Plugin-Tile.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/T${PLUGIN-NAME}Tile.java" />
+
+
+
 
 </target>
 
