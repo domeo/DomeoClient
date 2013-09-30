@@ -76,6 +76,7 @@ public class GroupsAccessPicker  extends Composite implements IContentPanel {
 				}
 				_domeo.getAnnotationAccessManager().setAnnotationSetAccess(_set, AnnotationAccessManager.GROUPS);
 				_domeo.getAnnotationAccessManager().setAnnotationSetGroups(_set, groups);
+				_domeo.getComponentsManager().updateObjectLenses(_set);
 				lens.refresh();
 				_container.hide();
 			}

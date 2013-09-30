@@ -260,6 +260,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 				hp1.add(publicLabel);
 				hp1.setStyleName(style.activeIcon());
 				footerLeftSide.add(hp1);
+				access.clear();
 			} else if(_domeo.getAnnotationAccessManager().isAnnotationSetGroups(_set)) {
 				HorizontalPanel hp1 = new HorizontalPanel();
 				final Image imgPublic = new Image(Domeo.resources.friendsLittleIcon());
@@ -309,6 +310,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 				hp1.add(publicLabel);
 				hp1.setStyleName(style.activeIcon());
 				footerLeftSide.add(hp1);
+				access.clear();
 			}
 		} catch(Exception e) {
 			footerLeftSide.add(new Label("Exception (access)"));
