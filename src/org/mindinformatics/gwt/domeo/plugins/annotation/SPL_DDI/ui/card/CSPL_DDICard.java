@@ -1,4 +1,4 @@
-package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.ui.card;
+package org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.ui.card;
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
@@ -12,8 +12,8 @@ import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.info.@PLUGIN_NAME@Plugin;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.info.SPL_DDIPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDIAnnotation;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 
 import com.google.gwt.core.client.GWT;
@@ -29,15 +29,15 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class C@PLUGIN_NAME@Card extends ACardComponent {
+public class CSPL_DDICard extends ACardComponent {
 
-	interface Binder extends UiBinder<Widget, C@PLUGIN_NAME@Card> {
+	interface Binder extends UiBinder<Widget, CSPL_DDICard> {
 	}
 
 	private static final Binder binder = GWT.create(Binder.class);
 
 	private int _index = -1;
-	private M@PLUGIN_NAME@Annotation _annotation;
+	private MSPL_DDIAnnotation _annotation;
 
 	@UiField
 	VerticalPanel body;
@@ -51,7 +51,7 @@ public class C@PLUGIN_NAME@Card extends ACardComponent {
 
 	@UiField SimplePanel acceptIcon, broadIcon, wrongIcon;
 
-	public C@PLUGIN_NAME@Card(IDomeo domeo) {
+	public CSPL_DDICard(IDomeo domeo) {
 		super(domeo);
 		initWidget(binder.createAndBindUi(this));
 
@@ -67,7 +67,7 @@ public class C@PLUGIN_NAME@Card extends ACardComponent {
 	@Override
 	public void initializeCard(CurationPopup curationPopup,
 			MAnnotation annotation) {
-		_annotation = (M@PLUGIN_NAME@Annotation) annotation;
+		_annotation = (MSPL_DDIAnnotation) annotation;
 		_curationPopup = curationPopup;
 		refresh();
 	}
@@ -97,15 +97,15 @@ public class C@PLUGIN_NAME@Card extends ACardComponent {
 
 		try {
 			if (_index > -1)
-				createProvenanceBar(@PLUGIN_NAME@Plugin.getInstance().getPluginName(),
+				createProvenanceBar(SPL_DDIPlugin.getInstance().getPluginName(),
 						_index, provenance, _annotation);
 			else
-				createProvenanceBar(@PLUGIN_NAME@Plugin.getInstance().getPluginName(),
+				createProvenanceBar(SPL_DDIPlugin.getInstance().getPluginName(),
 						provenance, _annotation);
-			type.setText("@PLUGIN_NAME@:");
+			type.setText("SPL_DDI:");
 
 		/*
-			text.setText("clinical statements from @PLUGIN_NAME@");
+			text.setText("clinical statements from SPL_DDI");
 			pkimpact.setText("Pk Impact: "
 					+ _annotation.getPharmgxUsage().getPkImpact().getLabel());
 		*/
@@ -129,7 +129,7 @@ public class C@PLUGIN_NAME@Card extends ACardComponent {
 				content.add(hp);
 			}
 
-			injectButtons(@PLUGIN_NAME@Plugin.getInstance().getPluginName(), content,
+			injectButtons(SPL_DDIPlugin.getInstance().getPluginName(), content,
 					_annotation);
 		} catch (Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());

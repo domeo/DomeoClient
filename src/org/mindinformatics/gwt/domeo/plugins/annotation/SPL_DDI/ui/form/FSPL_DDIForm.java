@@ -1,4 +1,4 @@
-package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.ui.form;
+package org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.ui.form;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,10 +18,10 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.MPharmgx;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@PharmgxUsage;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.@PLUGIN_NAME@Factory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MPharmgx;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDIPharmgxUsage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDIAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.SPL_DDIFactory;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
 import org.mindinformatics.gwt.framework.src.IResizable;
@@ -46,25 +46,25 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
  */
-public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
+public class FSPL_DDIForm extends AFormComponent implements IResizable {
 
 	private static Logger logger = Logger.getLogger("");
 
-	public static final String LABEL = "@PLUGIN_NAME@ Annotation";
-	public static final String LABEL_EDIT = "EDIT @PLUGIN_NAME@ ANNOTATION";
+	public static final String LABEL = "SPL_DDI Annotation";
+	public static final String LABEL_EDIT = "EDIT SPL_DDI ANNOTATION";
 
-	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING @PLUGIN_NAME@ ANNOTATION";
-	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING @PLUGIN_NAME@ ANNOTATION";
+	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING SPL_DDI ANNOTATION";
+	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING SPL_DDI ANNOTATION";
 
-	public static final String @PLUGIN_NAME@_POC_PREFIX = "http://purl.org/net/nlprepository/@PLUGIN_NAME@-pharmgx-annotation-poc#";
+	public static final String SPL_DDI_POC_PREFIX = "http://purl.org/net/nlprepository/SPL_DDI-pharmgx-annotation-poc#";
 
-	interface Binder extends UiBinder<VerticalPanel, F@PLUGIN_NAME@Form> {
+	interface Binder extends UiBinder<VerticalPanel, FSPL_DDIForm> {
 	}
 
 	private static final Binder binder = GWT.create(Binder.class);
 
-	private M@PLUGIN_NAME@Annotation _item;
-	private M@PLUGIN_NAME@ current@PLUGIN_NAME@;
+	private MSPL_DDIAnnotation _item;
+	private MSPL_DDI currentSPL_DDI;
 	private ArrayList<Widget> tabs = new ArrayList<Widget>();
 
 	@UiField
@@ -82,17 +82,17 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 
 	
 	// NEW annotation
-	public F@PLUGIN_NAME@Form(IDomeo domeo, final AFormsManager manager) {
+	public FSPL_DDIForm(IDomeo domeo, final AFormsManager manager) {
 		super(domeo);
 		_manager = manager;
 
 		initWidget(binder.createAndBindUi(this));
 
-		_domeo.getLogger().debug(this, "@PLUGIN_NAME@ annotation widget bound to UI");
+		_domeo.getLogger().debug(this, "SPL_DDI annotation widget bound to UI");
 
 		refreshAnnotationSetFilter(annotationSet, null);
 
-		_domeo.getLogger().debug(this, "@PLUGIN_NAME@ annotation filter set refreshed");
+		_domeo.getLogger().debug(this, "SPL_DDI annotation filter set refreshed");
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
 				.generalCss().applyButton());
@@ -107,7 +107,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 							// in the UI
 
 				_domeo.getLogger().debug(this,
-						"@PLUGIN_NAME@ annotation content validated");
+						"SPL_DDI annotation content validated");
 
 				try {
 					if (_item == null) {
@@ -133,8 +133,8 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 									+ selector.getExact());
 
 							// TODO Register coordinate of the selection.
-							M@PLUGIN_NAME@Annotation annotation = @PLUGIN_NAME@Factory
-									.create@PLUGIN_NAME@Annotation(
+							MSPL_DDIAnnotation annotation = SPL_DDIFactory
+									.createSPL_DDIAnnotation(
 											((AnnotationPersistenceManager) _domeo
 													.getPersistenceManager())
 													.getCurrentSet(), _domeo
@@ -145,31 +145,31 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 													.getResource(), selector);
 
 							_domeo.getLogger().debug(this,
-									"@PLUGIN_NAME@ annotation factory initialized");
+									"SPL_DDI annotation factory initialized");
 
-							M@PLUGIN_NAME@Usage @PLUGIN_NAME@Usage = @PLUGIN_NAME@Factory
-									.create@PLUGIN_NAME@Usage();
+							MSPL_DDIUsage SPL_DDIUsage = SPL_DDIFactory
+									.createSPL_DDIUsage();
 
 							
 							
 							
-							annotation.set@PLUGIN_NAME@Usage(@PLUGIN_NAME@Usage);
+							annotation.setSPL_DDIUsage(SPL_DDIUsage);
 
 							
 
 							annotation.setComment(commentBody.getText());
-							_domeo.getLogger().debug(this, "@PLUGIN_NAME@ comment set");
+							_domeo.getLogger().debug(this, "SPL_DDI comment set");
 
 							if (getSelectedSet(annotationSet) == null) {
 								_domeo.getLogger()
 										.debug(this,
-												"empty annotation set, passing first @PLUGIN_NAME@ annotation to persistance manager");
+												"empty annotation set, passing first SPL_DDI annotation to persistance manager");
 								_domeo.getAnnotationPersistenceManager()
 										.addAnnotation(annotation, true);
 							} else {
 								_domeo.getLogger()
 										.debug(this,
-												"Annotation set is not empty, passing new @PLUGIN_NAME@ annotation to persistance manager");
+												"Annotation set is not empty, passing new SPL_DDI annotation to persistance manager");
 								_domeo.getAnnotationPersistenceManager()
 										.addAnnotation(annotation,
 												getSelectedSet(annotationSet));
@@ -177,7 +177,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 
 							_domeo.getLogger()
 									.debug(this,
-											"Making the new @PLUGIN_NAME@ annotation visible in the content panel");
+											"Making the new SPL_DDI annotation visible in the content panel");
 							_domeo.getContentPanel()
 									.getAnnotationFrameWrapper()
 									.performAnnotation(
@@ -187,7 +187,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 
 							_domeo.getLogger()
 									.debug(this,
-											"@PLUGIN_NAME@ annotation data collected. widget should close now.");
+											"SPL_DDI annotation data collected. widget should close now.");
 
 							_manager.hideContainer();
 
@@ -219,8 +219,8 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 	// ------------------------
 	// EDITING OF ANNOTATION
 	// ------------------------
-	public F@PLUGIN_NAME@Form(IDomeo domeo, final AFormsManager manager,
-			final M@PLUGIN_NAME@Annotation annotation) {
+	public FSPL_DDIForm(IDomeo domeo, final AFormsManager manager,
+			final MSPL_DDIAnnotation annotation) {
 		super(domeo);
 		_manager = manager;
 		_item = annotation;
@@ -228,7 +228,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 		initWidget(binder.createAndBindUi(this));
 
 		_domeo.getLogger().debug(this,
-				"@PLUGIN_NAME@ annotation widget bound to UI (edit)");
+				"SPL_DDI annotation widget bound to UI (edit)");
 
 		try {
 			_domeo.getLogger()
@@ -244,10 +244,10 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
 					this,
-					"Failed to di@PLUGIN_NAME@ay current annotation "
+					"Failed to diSPL_DDIay current annotation "
 							+ annotation.getLocalId());
-			di@PLUGIN_NAME@ayDialog(
-					"Failed to properly di@PLUGIN_NAME@ay existing annotation "
+			diSPL_DDIayDialog(
+					"Failed to properly diSPL_DDIay existing annotation "
 							+ e.getMessage(), true);
 		}
 
@@ -255,7 +255,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 			refreshAnnotationSetFilter(annotationSet, annotation);
 
 			_domeo.getLogger().debug(this,
-					"@PLUGIN_NAME@ annotation filter set refreshed");
+					"SPL_DDI annotation filter set refreshed");
 
 			currentPharmgx = annotation.getPharmgxUsage().getPharmgx();
 
@@ -266,10 +266,10 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 			_domeo.getLogger().exception(
 					AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION,
 					this,
-					"Failed to di@PLUGIN_NAME@ay current annotation "
+					"Failed to diSPL_DDIay current annotation "
 							+ annotation.getLocalId());
-			di@PLUGIN_NAME@ayDialog(
-					"Failed to properly di@PLUGIN_NAME@ay existing annotation "
+			diSPL_DDIayDialog(
+					"Failed to properly diSPL_DDIay existing annotation "
 							+ e.getMessage(), true);
 		}
 
@@ -309,16 +309,16 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 					_item.setSelector(selector);
 
 					_domeo.getLogger().debug(this,
-							"@PLUGIN_NAME@ annotation content validated (edit)");
+							"SPL_DDI annotation content validated (edit)");
 
 					_item.setComment(commentBody.getText());
 
 			
 
 					_domeo.getLogger().debug(this,
-							"@PLUGIN_NAME@ descriptions cleared and re-loaded (edit)");
+							"SPL_DDI descriptions cleared and re-loaded (edit)");
 
-					_item.get@PLUGIN_NAME@Usage().set@PLUGIN_NAME@(current@PLUGIN_NAME@);
+					_item.getSPL_DDIUsage().setSPL_DDI(currentSPL_DDI);
 
 					_domeo.getContentPanel()
 							.getAnnotationFrameWrapper()
@@ -327,7 +327,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 
 					_domeo.getLogger()
 							.debug(this,
-									"@PLUGIN_NAME@ annotation data collected. widget should close now.");
+									"SPL_DDI annotation data collected. widget should close now.");
 					_manager.hideContainer();
 				} catch (Exception e) {
 					_domeo.getLogger()
@@ -336,7 +336,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 									this,
 									"Failed to apply modified anntoation "
 											+ annotation.getLocalId());
-					di@PLUGIN_NAME@ayDialog(
+					diSPL_DDIayDialog(
 							"Failed to apply modified annotation "
 									+ e.getMessage(), true);
 				}
@@ -367,9 +367,9 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 	// TODO: edit this method to validate the relevant form elements
 	@Override
 	public boolean isContentInvalid() {
-		// _manager.di@PLUGIN_NAME@ayMessage("Click received!");
+		// _manager.diSPL_DDIayMessage("Click received!");
 		// if(currentPharmgx==null) {
-		// _manager.di@PLUGIN_NAME@ayMessage("The body of the annotation cannot be empty!");
+		// _manager.diSPL_DDIayMessage("The body of the annotation cannot be empty!");
 		// Timer timer = new Timer() {
 		// public void run() {
 		// _manager.clearMessage();

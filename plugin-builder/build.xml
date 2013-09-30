@@ -56,27 +56,68 @@
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>
-	
 	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
-	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
-	<token key="VERSION" value ="${VERSION}" />
-	
       </replacetokens>
     </filterchain>
   </copy>
   <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search/Plugin-SearchComponent.java_tmpl"
 	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search/${PLUGIN-NAME}SearchComponent.java" />
 
+<!-- model folder M-Plugin.java_tmpl-->
+ <copy file="templates/model/M-Plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+      </replacetokens>
+    </filterchain>
+  </copy>
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/M-Plugin.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/M${PLUGIN-NAME}.java" />
+
+<!-- model folder M-Plugin-Usage.java_tmpl-->
+ <copy file="templates/model/M-Plugin-Usage.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+      </replacetokens>
+    </filterchain>
+  </copy>
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/M-Plugin-Usage.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/M${PLUGIN-NAME}Usage.java" />
+
+<!-- model folder M-Plugin-Annotation.java_tmpl-->
+ <copy file="templates/model/M-Plugin-Annotation.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+      </replacetokens>
+    </filterchain>
+  </copy>
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/M-Plugin-Annotation.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/M${PLUGIN-NAME}Annotation.java" />
+
+<!-- model folder Plugin-Factory.java_tmpl-->
+ <copy file="templates/model/Plugin-Factory.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+      </replacetokens>
+    </filterchain>
+  </copy>
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/Plugin-Factory.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/${PLUGIN-NAME}Factory.java" />
+
+
 <!-- C-Plugin-Card.java_tmpl ui.card sub-folder -->
  <copy file="templates/ui/card/C-Plugin-Card.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/">
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
-      <replacetokens>
-	
-	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
-	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
-	<token key="VERSION" value ="${VERSION}" />
-	
+      <replacetokens>	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />	
       </replacetokens>
     </filterchain>
   </copy>
@@ -96,11 +137,7 @@
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>
-	
 	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
-	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
-	<token key="VERSION" value ="${VERSION}" />
-	
       </replacetokens>
     </filterchain>
   </copy>
@@ -113,11 +150,7 @@
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>
-	
 	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
-	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
-	<token key="VERSION" value ="${VERSION}" />
-	
       </replacetokens>
     </filterchain>
   </copy>
@@ -137,11 +170,7 @@
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>
-	
-	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
-	<token key="SUB-TYPE" value ="${SUB-TYPE}" />
-	<token key="VERSION" value ="${VERSION}" />
-	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />	
       </replacetokens>
     </filterchain>
   </copy>
@@ -149,6 +178,38 @@
   <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/T-Plugin-Tile.java_tmpl"
 	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/T${PLUGIN-NAME}Tile.java" />
 
+<!-- F-Plugin-Form.java_tmpl ui.form sub-folder -->
+ <copy file="templates/ui/form/F-Plugin-Form.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+     <replacetokens>
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+      </replacetokens>
+    </filterchain>
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/F-Plugin-Form.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/F${PLUGIN-NAME}Form.java" />
+
+<!-- F-Plugin-Form.ui.xml ui.form sub-folder -->
+ <copy file="templates/ui/form/F-Plugin-Form.ui.xml" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/">
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/F-Plugin-Form.ui.xml"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/F${PLUGIN-NAME}Form.ui.xml" />
+
+<!-- PluginFormProvider.java_tmpl ui.form sub-folder -->
+<copy file="templates/ui/form/PluginFormProvider.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>	
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+      </replacetokens>
+    </filterchain>
+  </copy>
+  
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/PluginFormProvider.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/{PLUGIN-NAME}FormProvider.java" />
 
 
 

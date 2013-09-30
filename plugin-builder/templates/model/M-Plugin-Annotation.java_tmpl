@@ -1,0 +1,50 @@
+package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model;
+
+import java.util.Set;
+
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+
+/**
+ * @author Richard Boyce <rdb20@pitt.edu>
+ */
+@SuppressWarnings("serial")
+    public class M@PLUGIN_NAME@Annotation extends MAnnotation {
+
+	protected static final String LABEL = "SPL Annotation";
+	public static final String TYPE = "ao:SPLAnnotation";
+	public static final String BODY_TYPE = "domeo:@PLUGIN_NAME@Usage";
+	
+	private M@PLUGIN_NAME@Usage @PLUGIN_NAME@Usage;
+
+	public M@PLUGIN_NAME@Usage get@PLUGIN_NAME@Usage() {
+	    return @PLUGIN_NAME@Usage;
+	}
+
+	public void set@PLUGIN_NAME@Usage(M@PLUGIN_NAME@Usage @PLUGIN_NAME@Usage) {
+	    this.@PLUGIN_NAME@Usage = @PLUGIN_NAME@Usage;
+	}
+
+	public String getComment() {
+	    return @PLUGIN_NAME@Usage.getComment();
+	}
+
+	public void setComment(String comment) {
+	    @PLUGIN_NAME@Usage.setComment(comment);
+	}
+
+	public String getText() {
+	    return @PLUGIN_NAME@Usage.get@PLUGIN_NAME@().getLabel();
+	}
+	
+	
+	@Override
+	    public String getLabel() {
+	    return LABEL;
+	}
+	
+	@Override
+	    public String getAnnotationType() {
+	    return TYPE;
+	}
+    }
