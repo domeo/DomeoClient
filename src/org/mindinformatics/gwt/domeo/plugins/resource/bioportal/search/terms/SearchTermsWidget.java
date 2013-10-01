@@ -8,15 +8,19 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
 import org.mindinformatics.gwt.domeo.client.ui.services.IWidget;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.ITermsSelectionConsumer;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.IVocabulariesSelectionConsumer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.TermsSelectionList;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.VocabulariesSelectionList;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.BioPortalManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalItemsRequestCompleted;
 import org.mindinformatics.gwt.framework.component.qualifiers.ui.ISearchTermsContainer;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -28,7 +32,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class SearchTermsWidget extends Composite implements IWidget, IBioPortalItemsRequestCompleted, ITermsSelectionConsumer {
+public class SearchTermsWidget extends Composite implements IWidget, IBioPortalItemsRequestCompleted, IVocabulariesSelectionConsumer, ITermsSelectionConsumer {
 	
 	interface Binder extends UiBinder<VerticalPanel, SearchTermsWidget> {}
 	private static final Binder binder = GWT.create(Binder.class);
@@ -48,6 +52,8 @@ public class SearchTermsWidget extends Composite implements IWidget, IBioPortalI
 	private TermsSelectionList termsResultsPanel;
 	private TermsSearch termsSearchPanel;
 	
+	private ArrayList<MLinkedResource> vocabularies;
+	
 	
 	private HashMap<String, MLinkedResource> associatedTerms = new HashMap<String, MLinkedResource>();
 	private ArrayList<MLinkedResource> searchTermsResult; 
@@ -57,6 +63,8 @@ public class SearchTermsWidget extends Composite implements IWidget, IBioPortalI
 		_domeo = annotator;
 		_resources = Domeo.resources;
 		_container = container;
+		
+		vocabularies = new ArrayList<MLinkedResource>();
 		
 		initWidget(binder.createAndBindUi(this)); // Necessary for initializing Composite 
 		initMapOfAlreadyAssociatedTerms(container.getItems());
@@ -85,6 +93,18 @@ public class SearchTermsWidget extends Composite implements IWidget, IBioPortalI
 		for(MLinkedResource term: terms) {
 			associatedTerms.put(term.getUrl(), term);
 		}
+	}
+	
+	public void visualizeAvailableVocabularies() {
+		
+		ArrayList<MLinkedResource> vocabularies = new ArrayList<MLinkedResource>();
+		MLinkedResource ncbo = ResourcesFactory.createLinkedResource("http://ncbo.org", "NCBO");
+		MLinkedResource voc1 = ResourcesFactory.createTrustedResource("http://pro.com", "PRotein Ontology (PRO)", ncbo);
+		vocabularies.add(voc1);
+		
+		VocabulariesSelectionList vocabulariesSelectionList = new VocabulariesSelectionList(_domeo, this, vocabularies, associatedTerms);
+		resultsContainerPanel.clear();
+		resultsContainerPanel.add(vocabulariesSelectionList); 
 	}
 	
 	public void performSearch(String textQuery) {
@@ -205,5 +225,17 @@ public class SearchTermsWidget extends Composite implements IWidget, IBioPortalI
 	public void reportException(String message) {
 		resultsContainerPanel.clear();
 		resultsContainerPanel.add(new HTML("Exception while performing search. " + message + " See logs for details."));
+	}
+
+	@Override
+	public void addVocabulary(MLinkedResource term) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<MLinkedResource> getVocabulariesList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -13,6 +13,7 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -37,6 +38,7 @@ public class TermsSearch extends Composite {
 	 
 	 @UiField TextBox searchBox;
 	 @UiField Image rightSide;
+	 @UiField Image optionsList;
 	 @UiField Label numberResults;
 	 @UiField Label filterLabel;
 	 @UiField ListBox sourcesLabels;
@@ -66,6 +68,14 @@ public class TermsSearch extends Composite {
 				_widget.performSearch(searchBox.getText());
 			}
 		});
+		
+		/*
+		optionsList.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				_widget.visualizeAvailableVocabularies();
+			}
+		});
+		*/
 		 
 		// For filtering results according to the source
 		sourcesLabels.addChangeHandler(new ChangeHandler() {
