@@ -42,6 +42,7 @@ public class DiscussionSummaryListLens extends Composite implements ILensRefresh
 	private DiscussionSummaryListLens _this;
 	private CommentSidePanel _parent;
 	
+	
 	@UiField VerticalPanel body;
 	@UiField FocusPanel wrapper;
 	@UiField Label nameEditableField;
@@ -61,14 +62,14 @@ public class DiscussionSummaryListLens extends Composite implements ILensRefresh
 		
 		initWidget(binder.createAndBindUi(this));
 		
-		/*
+		
 		wrapper.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				parent.displayAannotationSetInfo(_set);
+				parent.displayCommentsSetInfo(_set);
 			}
 		});
-		*/
+		
 		
 		/*
 		nameEditableField.addValueChangeHandler(new ValueChangeHandler<String>() {

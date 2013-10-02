@@ -81,18 +81,18 @@ public class CommentSidePanelTopbar  extends Composite
 		hp2.add(l1);
 		newThreadPanel.add(hp2);
 		
-		Label l2 = new Label("Local threads");
-		l2.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				Window.alert("Local threads not implemented");
-			}
-		});
-		HorizontalPanel hp4 = new HorizontalPanel();
-		hp4.add(new Image(Domeo.resources.littleThreadIcon()));
-		hp4.add(l2);
-		seeLocalizedThreadsPanel.add(hp4);
-		seeLocalizedThreadsPanel.setWidth("110px");
+//		Label l2 = new Label("Local threads");
+//		l2.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				Window.alert("Local threads not implemented");
+//			}
+//		});
+//		HorizontalPanel hp4 = new HorizontalPanel();
+//		hp4.add(new Image(Domeo.resources.littleThreadIcon()));
+//		hp4.add(l2);
+//		seeLocalizedThreadsPanel.add(hp4);
+//		seeLocalizedThreadsPanel.setWidth("110px");
 		
 		secondLineTopbar.add(new Label("No comments found"));
 		

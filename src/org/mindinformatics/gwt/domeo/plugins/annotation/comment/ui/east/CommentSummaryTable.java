@@ -57,6 +57,8 @@ public class CommentSummaryTable extends Composite
 	private CommentSidePanel _parentPanel;
 	private MAnnotation _root;
 	
+	private int numberComments;
+	
 	@UiField ScrollPanel body;
 	@UiField VerticalPanel content;
 	
@@ -116,6 +118,7 @@ public class CommentSummaryTable extends Composite
 			bottomContent.clear();
 			if(annotations!=null){  
 				if(annotations.size()>0) {
+					numberComments = annotations.size();
 					_root = annotations.get(0);
 					int counter = 0;
 					for(MAnnotation ann: annotations) {
@@ -210,7 +213,9 @@ public class CommentSummaryTable extends Composite
 					});
 					commands.add(bu);
 					bottomContent.add(commands);					
-				} 
+				} else {
+					numberComments = 0;
+				}
 			}
 			if(isGeneralComment)
 				_parentPanel.updateStatistics(annotations, annotations.size(), usersIds.size(), threadsCounter);
@@ -222,6 +227,10 @@ public class CommentSummaryTable extends Composite
 			_domeo.getLogger().exception(this, e.getMessage());
 		}
 		_domeo.getLogger().debug(this, "Comments summary panel refreshed in (ms):" + (System.currentTimeMillis()-start));
+	}
+	
+	public int getNumberComments() {
+		return numberComments;
 	}
 	
 	public void displayThread(Long id) {
