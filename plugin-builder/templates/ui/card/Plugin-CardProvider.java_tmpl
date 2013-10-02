@@ -1,0 +1,29 @@
+package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.ui.card;
+
+import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.cards.ACardComponent;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.cards.ICardGenerator;
+import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.postit.ui.card.CPostItCard;
+import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
+
+public class @PLUGIN_NAME@CardProvider implements ICardGenerator{
+	// By contract 
+		private IDomeo _domeo;
+		
+		public @PLUGIN_NAME@CardProvider(IDomeo domeo) {
+			_domeo = domeo;
+		}
+		
+		@Override
+		public boolean isCardSupported(String annotationName) {
+			if(annotationName.equals(M@PLUGIN_NAME@Annotation.class.getName())) return true;
+			return false;
+		}
+
+		@Override
+		public ACardComponent getCard(String annotationName) {
+			if(isCardSupported(annotationName)) return new C@PLUGIN_NAME@Card(_domeo);
+			return null;
+		}
+}
