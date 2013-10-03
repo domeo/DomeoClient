@@ -110,6 +110,8 @@
 	  		width: 460px;	
 	  		background-color:#DDDDDD;
 			border-top:3px solid white;
+			padding-left: 2px;
+			font-weight: bold;
 	  	}
 	  	
 	  	.commentBody {
@@ -135,6 +137,10 @@
 	  	.elementTypeContainer {
 			
 	  	}
+	  	
+	  	.panelRight {
+			padding-top: 7px;
+		}
   	</ui:style>
   	
   	<!--  
@@ -193,7 +199,7 @@
   				</g:VerticalPanel>
   			</g:cell>
   			<g:cell>
-  				<g:SimplePanel ui:field="panelRight">
+  				<g:SimplePanel ui:field="panelRight" styleName='{style.panelRight}'>
 	  				<g:VerticalPanel>
 	  					<g:cell height="30px">
 					  		<g:TabBar ui:field="tabBar" height="25px"/>
