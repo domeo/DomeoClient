@@ -32,11 +32,31 @@
 
 </target>  
 
-<!-- copy template files into new folders -->
-<target name="create-info-template">
+<!--
+	For register new plugin
+		<1> Please replace ${PLUGIN-NAME} with PLUGIN-NAME setting in plugin.properties
+		<2> copy the code belows into Domeo.java     Around line 582
+		
+		//${PLUGIN-NAME}
+		pluginsManager.registerPlugin(${PLUGIN-NAME}Plugin.getInstance(), true);
+		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+				${PLUGIN-NAME}Plugin.getInstance().getPluginName())) {
+			annotationFormsManager
+					.registerAnnotationForm(M${PLUGIN-NAME}Annotation.class.getName(),
+							new ${PLUGIN-NAME}FormProvider(this));
+		}
+		annotationTailsManager.registerAnnotationTile(
+				M${PLUGIN-NAME}Annotation.class.getName(), new ${PLUGIN-NAME}TileProvider(this));
+		annotationCardsManager.registerAnnotationCard(
+				M${PLUGIN-NAME}Annotation.class.getName(), new ${PLUGIN-NAME}CardProvider(this));
+-->
 
-<!-- info sub-folder -->
-  <copy file="templates/info/info-plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/">
+
+<!-- copy template files into new folders -->
+<target name="create-template">
+
+<!-- info sub-folder Plugin-Plugin.java_tmpl -->
+  <copy file="templates/info/Plugin-Plugin.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/">
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>
@@ -48,8 +68,8 @@
       </replacetokens>
     </filterchain>
   </copy>
-  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/info-plugin.java_tmpl"
-	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/${PLUGIN-NAME}.java" />
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/Plugin-Plugin.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/info/${PLUGIN-NAME}Plugin.java" />
 
 <!-- search sub-folder -->
  <copy file="templates/search/Plugin-SearchComponent.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/search/">
@@ -111,6 +131,18 @@
   <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/Plugin-Factory.java_tmpl"
 	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/${PLUGIN-NAME}Factory.java" />
 
+<!-- model folder Plugin-Type.java_tmpl-->
+ <copy file="templates/model/Plugin-Type.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/">
+    <globmapper from="*.java_tmpl" to = "*.java" />
+    <filterchain>
+      <replacetokens>
+	<token key="PLUGIN_NAME" value="${PLUGIN-NAME}" />
+      </replacetokens>
+    </filterchain>
+  </copy>
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/Plugin-Type.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/model/${PLUGIN-NAME}Type.java" />
+
 
 <!-- C-Plugin-Card.java_tmpl ui.card sub-folder -->
  <copy file="templates/ui/card/C-Plugin-Card.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/">
@@ -143,7 +175,7 @@
   </copy>
   
   <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/Plugin-CardProvider.java_tmpl"
-	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/${PLUGIN-NAME}Card.Providerjava" />
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/card/${PLUGIN-NAME}CardProvider.java" />
 
 <!--  Plugin-TileProvider.java_tmpl  ui.tile sub-folder -->
  <copy file="templates/ui/tile/Plugin-TileProvider.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/tile/">
@@ -199,7 +231,7 @@
 	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/F${PLUGIN-NAME}Form.ui.xml" />
 
 <!-- PluginFormProvider.java_tmpl ui.form sub-folder -->
-<copy file="templates/ui/form/PluginFormProvider.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/">
+<copy file="templates/ui/form/Plugin-FormProvider.java_tmpl" todir="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/">
     <globmapper from="*.java_tmpl" to = "*.java" />
     <filterchain>
       <replacetokens>	
@@ -208,8 +240,8 @@
     </filterchain>
   </copy>
   
-  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/PluginFormProvider.java_tmpl"
-	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/{PLUGIN-NAME}FormProvider.java" />
+  <move file="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/Plugin-FormProvider.java_tmpl"
+	tofile="${DOMEOCLIENT-BASE}/${PLUGIN-PATH}/${PLUGIN-NAME}/ui/form/${PLUGIN-NAME}FormProvider.java" />
 
 
 

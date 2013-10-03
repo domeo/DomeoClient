@@ -63,8 +63,8 @@ public class @PLUGIN_NAME@Factory extends AnnotationFactory {
 	return ann;
     }
 	
-    public static MSPL@PLUGIN_NAME@Usage createSPL@PLUGIN_NAME@Usage() {
-    	MSPL@PLUGIN_NAME@Usage usage = new MSPL@PLUGIN_NAME@Usage();
+    public static M@PLUGIN_NAME@Usage create@PLUGIN_NAME@Usage() {
+    	M@PLUGIN_NAME@Usage usage = new M@PLUGIN_NAME@Usage();
     	usage.setLocalId(getLocalId());
     	usage.setIndividualUri(getUrn(getUuid()));
     	return usage;

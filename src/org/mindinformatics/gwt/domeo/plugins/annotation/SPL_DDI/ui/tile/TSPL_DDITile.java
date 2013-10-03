@@ -6,7 +6,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ATileComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.info.SPL_DDIPlugin;
-import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MPharmgx;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDI;
 import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDIAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
@@ -84,7 +84,7 @@ public class TSPL_DDITile extends ATileComponent implements ITileComponent {
 			 */
 
 			// Create the content to display
-			MPharmgx pharmgx = _annotation.getPharmgxUsage().getPharmgx();
+			MSPL_DDI SPL_DDI = _annotation.getSPL_DDIUsage().getSPL_DDI();
 
 			String html1 = "<html><head></head> <body><table>";
 

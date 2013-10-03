@@ -18,8 +18,8 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
-import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MPharmgx;
-import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDIPharmgxUsage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDI;
+import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDIUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.MSPL_DDIAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.SPL_DDI.model.SPL_DDIFactory;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
@@ -56,7 +56,7 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING SPL_DDI ANNOTATION";
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING SPL_DDI ANNOTATION";
 
-	public static final String SPL_DDI_POC_PREFIX = "http://purl.org/net/nlprepository/SPL_DDI-pharmgx-annotation-poc#";
+	public static final String SPL_DDI_POC_PREFIX = "http://purl.org/net/nlprepository/SPL_DDI-annotation-poc#";
 
 	interface Binder extends UiBinder<VerticalPanel, FSPL_DDIForm> {
 	}
@@ -157,7 +157,6 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 
 							
 
-							annotation.setComment(commentBody.getText());
 							_domeo.getLogger().debug(this, "SPL_DDI comment set");
 
 							if (getSelectedSet(annotationSet) == null) {
@@ -235,19 +234,15 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 					.debug(this,
 							"Attempting to initialize UI with loaded annotation values");
 
-			if (_item.getComment() != null && !_item.getComment().equals(""))
-				commentBody.setText(_item.getComment());
 
-			
-			
 
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
 					this,
-					"Failed to diSPL_DDIay current annotation "
+					"Failed to display current annotation "
 							+ annotation.getLocalId());
-			diSPL_DDIayDialog(
-					"Failed to properly diSPL_DDIay existing annotation "
+			displayDialog(
+					"Failed to properly display existing annotation "
 							+ e.getMessage(), true);
 		}
 
@@ -257,19 +252,19 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 			_domeo.getLogger().debug(this,
 					"SPL_DDI annotation filter set refreshed");
 
-			currentPharmgx = annotation.getPharmgxUsage().getPharmgx();
+			currentSPL_DDI = annotation.getSPL_DDIUsage().getSPL_DDI();
 
 			_domeo.getLogger()
 					.debug(this,
-							"acquired the pharmgx usage from the annotation instance passed to this method");
+							"acquired the SPL_DDI usage from the annotation instance passed to this method");
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
 					AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION,
 					this,
-					"Failed to diSPL_DDIay current annotation "
+					"Failed to display current annotation "
 							+ annotation.getLocalId());
-			diSPL_DDIayDialog(
-					"Failed to properly diSPL_DDIay existing annotation "
+			displayDialog(
+					"Failed to properly display existing annotation "
 							+ e.getMessage(), true);
 		}
 
@@ -311,7 +306,6 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 					_domeo.getLogger().debug(this,
 							"SPL_DDI annotation content validated (edit)");
 
-					_item.setComment(commentBody.getText());
 
 			
 
@@ -336,7 +330,7 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 									this,
 									"Failed to apply modified anntoation "
 											+ annotation.getLocalId());
-					diSPL_DDIayDialog(
+					displayDialog(
 							"Failed to apply modified annotation "
 									+ e.getMessage(), true);
 				}
@@ -367,9 +361,9 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 	// TODO: edit this method to validate the relevant form elements
 	@Override
 	public boolean isContentInvalid() {
-		// _manager.diSPL_DDIayMessage("Click received!");
-		// if(currentPharmgx==null) {
-		// _manager.diSPL_DDIayMessage("The body of the annotation cannot be empty!");
+		// _manager.displayMessage("Click received!");
+		// if(currentSPL_DDI==null) {
+		// _manager.displayMessage("The body of the annotation cannot be empty!");
 		// Timer timer = new Timer() {
 		// public void run() {
 		// _manager.clearMessage();
@@ -405,7 +399,7 @@ public class FSPL_DDIForm extends AFormComponent implements IResizable {
 	}
 
 	// @Override
-	// public void addPharmgx(MPharmgx pharmgx) {
-	// addAssociatedAntibody(pharmgx);
+	// public void addSPL_DDI(MSPL_DDI SPL_DDI) {
+	// addAssociatedAntibody(SPL_DDI);
 	// }
 }

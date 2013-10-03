@@ -6,7 +6,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ATileComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.info.@PLUGIN_NAME@Plugin;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.MPharmgx;
+import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@;
 import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
@@ -84,7 +84,7 @@ public class T@PLUGIN_NAME@Tile extends ATileComponent implements ITileComponent
 			 */
 
 			// Create the content to display
-			MPharmgx pharmgx = _annotation.getPharmgxUsage().getPharmgx();
+			M@PLUGIN_NAME@ @PLUGIN_NAME@ = _annotation.get@PLUGIN_NAME@Usage().get@PLUGIN_NAME@();
 
 			String html1 = "<html><head></head> <body><table>";
 

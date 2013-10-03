@@ -18,8 +18,8 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.MPharmgx;
-import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@PharmgxUsage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@;
+import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Usage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.@PLUGIN_NAME@Factory;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
@@ -56,7 +56,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING @PLUGIN_NAME@ ANNOTATION";
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING @PLUGIN_NAME@ ANNOTATION";
 
-	public static final String @PLUGIN_NAME@_POC_PREFIX = "http://purl.org/net/nlprepository/@PLUGIN_NAME@-pharmgx-annotation-poc#";
+	public static final String @PLUGIN_NAME@_POC_PREFIX = "http://purl.org/net/nlprepository/@PLUGIN_NAME@-annotation-poc#";
 
 	interface Binder extends UiBinder<VerticalPanel, F@PLUGIN_NAME@Form> {
 	}
@@ -157,7 +157,6 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 
 							
 
-							annotation.setComment(commentBody.getText());
 							_domeo.getLogger().debug(this, "@PLUGIN_NAME@ comment set");
 
 							if (getSelectedSet(annotationSet) == null) {
@@ -235,19 +234,15 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 					.debug(this,
 							"Attempting to initialize UI with loaded annotation values");
 
-			if (_item.getComment() != null && !_item.getComment().equals(""))
-				commentBody.setText(_item.getComment());
 
-			
-			
 
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
 					this,
-					"Failed to di@PLUGIN_NAME@ay current annotation "
+					"Failed to display current annotation "
 							+ annotation.getLocalId());
-			di@PLUGIN_NAME@ayDialog(
-					"Failed to properly di@PLUGIN_NAME@ay existing annotation "
+			displayDialog(
+					"Failed to properly display existing annotation "
 							+ e.getMessage(), true);
 		}
 
@@ -257,19 +252,19 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 			_domeo.getLogger().debug(this,
 					"@PLUGIN_NAME@ annotation filter set refreshed");
 
-			currentPharmgx = annotation.getPharmgxUsage().getPharmgx();
+			current@PLUGIN_NAME@ = annotation.get@PLUGIN_NAME@Usage().get@PLUGIN_NAME@();
 
 			_domeo.getLogger()
 					.debug(this,
-							"acquired the pharmgx usage from the annotation instance passed to this method");
+							"acquired the @PLUGIN_NAME@ usage from the annotation instance passed to this method");
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
 					AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION,
 					this,
-					"Failed to di@PLUGIN_NAME@ay current annotation "
+					"Failed to display current annotation "
 							+ annotation.getLocalId());
-			di@PLUGIN_NAME@ayDialog(
-					"Failed to properly di@PLUGIN_NAME@ay existing annotation "
+			displayDialog(
+					"Failed to properly display existing annotation "
 							+ e.getMessage(), true);
 		}
 
@@ -311,7 +306,6 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 					_domeo.getLogger().debug(this,
 							"@PLUGIN_NAME@ annotation content validated (edit)");
 
-					_item.setComment(commentBody.getText());
 
 			
 
@@ -336,7 +330,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 									this,
 									"Failed to apply modified anntoation "
 											+ annotation.getLocalId());
-					di@PLUGIN_NAME@ayDialog(
+					displayDialog(
 							"Failed to apply modified annotation "
 									+ e.getMessage(), true);
 				}
@@ -367,9 +361,9 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 	// TODO: edit this method to validate the relevant form elements
 	@Override
 	public boolean isContentInvalid() {
-		// _manager.di@PLUGIN_NAME@ayMessage("Click received!");
-		// if(currentPharmgx==null) {
-		// _manager.di@PLUGIN_NAME@ayMessage("The body of the annotation cannot be empty!");
+		// _manager.displayMessage("Click received!");
+		// if(current@PLUGIN_NAME@==null) {
+		// _manager.displayMessage("The body of the annotation cannot be empty!");
 		// Timer timer = new Timer() {
 		// public void run() {
 		// _manager.clearMessage();
@@ -405,7 +399,7 @@ public class F@PLUGIN_NAME@Form extends AFormComponent implements IResizable {
 	}
 
 	// @Override
-	// public void addPharmgx(MPharmgx pharmgx) {
-	// addAssociatedAntibody(pharmgx);
+	// public void add@PLUGIN_NAME@(M@PLUGIN_NAME@ @PLUGIN_NAME@) {
+	// addAssociatedAntibody(@PLUGIN_NAME@);
 	// }
 }

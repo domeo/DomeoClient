@@ -63,8 +63,8 @@ public class SPL_DDIFactory extends AnnotationFactory {
 	return ann;
     }
 	
-    public static MSPLSPL_DDIUsage createSPLSPL_DDIUsage() {
-    	MSPLSPL_DDIUsage usage = new MSPLSPL_DDIUsage();
+    public static MSPL_DDIUsage createSPL_DDIUsage() {
+    	MSPL_DDIUsage usage = new MSPL_DDIUsage();
     	usage.setLocalId(getLocalId());
     	usage.setIndividualUri(getUrn(getUuid()));
     	return usage;
