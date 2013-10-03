@@ -133,8 +133,8 @@ public class CommentSidePanel extends ASidePanel
 
 		Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
 		if(annLocalIds.size()>0) {
-			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*50 + 16))+ "px");
-			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*50 + 16)) +"px");
+			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
+			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
 		} 
 	}
 	

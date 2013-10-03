@@ -94,10 +94,10 @@ public class CommentSidePanelTopbar  extends Composite
 //		seeLocalizedThreadsPanel.add(hp4);
 //		seeLocalizedThreadsPanel.setWidth("110px");
 		
-		secondLineTopbar.add(new Label("No comments found"));
+		secondLineTopbar.add(new Label("No available threads"));
 		
 		explorePanelIcon.clear();
-		explorePanelIcon.add(new Image(Domeo.resources.littleZoomIcon()));
+		//explorePanelIcon.add(new Image(Domeo.resources.littleZoomIcon()));
 	}
 	
 	@Override
@@ -114,6 +114,7 @@ public class CommentSidePanelTopbar  extends Composite
 		secondLineTopbar.clear();
 
 		if(numberComments>0 && numberUsers>0) {
+			/*
 			threadsCounter++;
 			Label l = new Label(threadsCounter + ((threadsCounter==1) ? " Thread": " Threads"));
 			l.addClickHandler(new ClickHandler() {
@@ -126,20 +127,21 @@ public class CommentSidePanelTopbar  extends Composite
 			explorePanelLabel.clear();
 			explorePanelLabel.add(l);
 			explorePanelLabel.setWidth("60px");
+			*/
 			
 			HorizontalPanel socialPanel = new HorizontalPanel();
 			
 			Resources resource = Domeo.resources;
 			
-			Image commentIcon = new Image(resource.littleCommentsIcon());
+			//Image commentIcon = new Image(resource.littleCommentsIcon());
 			
-			String label = (numberComments==1) ? " Comment by": " Comments by";
+			String label =  (numberComments==1) ? " comment by": " omments by";
 			
-			commentIcon.setTitle("Comment on Item");
-			commentIcon.setStyleName(ATileComponent.tileResources.css().button());
+			//commentIcon.setTitle("Comment on Item");
+		//	commentIcon.setStyleName(ATileComponent.tileResources.css().button());
 			//commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
-			socialPanel.add(commentIcon);
-			socialPanel.add(new Label(numberComments + label));
+			//socialPanel.add(commentIcon);
+			socialPanel.add(new Label("Thread with " + numberComments + label));
 			
 			Image usersIcon = new Image(resource.usersIcon());
 			usersIcon.setTitle("Involved users");

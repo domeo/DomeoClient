@@ -71,6 +71,7 @@ public class CommentSummaryTable extends Composite
 	interface LocalCss extends CssResource {
 		String formArea();
 		String formBox();
+		String buttonLabel();
 	}
 	
 	@UiField LocalCss style;
@@ -192,6 +193,7 @@ public class CommentSummaryTable extends Composite
 						@Override
 						public void onClick(ClickEvent event) {
 							if(ta.getText().trim().length()==0) return; 
+							// Decide if an annotation has to react to the main annotation of the thread or if reacts to the previous one in the list
 							MAnnotationSelector selector = AnnotationFactory.createAnnotationSelector(_domeo.getAgentManager().getUserPerson(), 
 									_domeo.getPersistenceManager().getCurrentResource(), _annotations.get(_annotations.size()-1));
 							MCommentAnnotation annotation = AnnotationFactory.createComment(_domeo.getPersistenceManager().getCurrentSet(), _domeo.getAgentManager().getUserPerson(), 
@@ -287,15 +289,22 @@ public class CommentSummaryTable extends Composite
  			topContent.clear();
  			topContent.setVisible(true);
  			bottomContent.clear();
- 			Label l = new Label("Create the first discussion thread");
+ 			Label l = new Label("Create the first general discussion thread");
+ 			l.setStyleName(style.buttonLabel());
  			l.addClickHandler(new ClickHandler() {
  				@Override
  				public void onClick(ClickEvent event) {
  					createNewGeneralThread();
  				}
  			});
- 			topContent.add(l);
- 			createNewThreadForm(topContent);
+ 			
+ 			FlowPanel fp = new FlowPanel();
+ 			fp.setStyleName(style.buttonLabel());
+ 			fp.add(new Image(Domeo.resources.littleAddIcon()));
+ 			fp.add(l);
+ 			
+ 			topContent.add(fp);
+ 			//createNewThreadForm(topContent);
  		}
 	}
 	
@@ -343,8 +352,8 @@ public class CommentSummaryTable extends Composite
 		//privacy.setWidth("150px");
 		privacy.setHeight("30px");
 		privacy.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		privacy.add(new Image(Domeo.resources.publicLittleIcon()));
-		privacy.add(new HTML("Public"));
+		//privacy.add(new Image(Domeo.resources.publicLittleIcon()));
+		//privacy.add(new HTML("Public"));
 		
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(bu);

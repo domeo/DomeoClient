@@ -15,7 +15,6 @@
 		.list {
 			width: 100%;
 			border-left: 2px solid #ddd;
-			border-bottom: 2px solid #ddd;
 		}
 		
 		.info {

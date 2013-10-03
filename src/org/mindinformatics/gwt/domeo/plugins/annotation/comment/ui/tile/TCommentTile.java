@@ -152,6 +152,7 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 			showIcon.addClickHandler(ActionShowAnnotation.getClickHandler(_domeo, this, getAnnotation()));
 			step=2;
 			
+			/*
 			Image addCommentIcon = new Image(resource.addCommentIcon());
 			addCommentIcon.setTitle("Comment on item");
 			addCommentIcon.setStyleName(ATileComponent.tileResources.css().button());
@@ -173,6 +174,7 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 				}
 			});
 			step=4;
+			*/
 			
 			//final CommentsViewerPanel viewer = _viewer;
 			final MAnnotation ann = _annotation;
@@ -274,12 +276,12 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 							provenance.add(editIcon);
 							provenance.setCellWidth(editIcon, "22px");
 						}
-						provenance.add(addCommentIcon);
-						provenance.setCellHorizontalAlignment(addCommentIcon, HasHorizontalAlignment.ALIGN_LEFT);
-						provenance.setCellWidth(addCommentIcon, "22px");
-						provenance.add(commentBranchIcon);
-						provenance.setCellHorizontalAlignment(commentBranchIcon, HasHorizontalAlignment.ALIGN_LEFT);
-						provenance.setCellWidth(commentBranchIcon, "22px");
+//						provenance.add(addCommentIcon);
+//						provenance.setCellHorizontalAlignment(addCommentIcon, HasHorizontalAlignment.ALIGN_LEFT);
+//						provenance.setCellWidth(addCommentIcon, "22px");
+//						provenance.add(commentBranchIcon);
+//						provenance.setCellHorizontalAlignment(commentBranchIcon, HasHorizontalAlignment.ALIGN_LEFT);
+//						provenance.setCellWidth(commentBranchIcon, "22px");
 						provenance.add(deleteIcon);
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
 						provenance.setCellWidth(deleteIcon, "22px");
@@ -311,8 +313,8 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 					 
 					provenance.add(showIcon);
 					provenance.add(editIcon);
-					provenance.add(commentBranchIcon);
-					provenance.add(addCommentIcon);
+					//provenance.add(commentBranchIcon);
+					//provenance.add(addCommentIcon);
 					provenance.add(deleteIcon);
 				}
 			} else {

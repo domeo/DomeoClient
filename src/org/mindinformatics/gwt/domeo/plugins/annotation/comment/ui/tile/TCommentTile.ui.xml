@@ -33,6 +33,7 @@
 			background-color: #fff;	
 			padding:3px 5px 3px 3px;
 			border-top: 1px #ccc dotted;
+			padding-right: 10px;
 		}
 		.provenanceFrame {
 			padding: 0px 1px 0px 0px;	
