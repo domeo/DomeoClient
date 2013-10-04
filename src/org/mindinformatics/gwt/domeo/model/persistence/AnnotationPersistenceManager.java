@@ -105,8 +105,8 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	private HashMap<String, MLinkedResource> termsByUrl =
 		new  HashMap<String, MLinkedResource>();
 	
-	private HashMap<Long, Integer> annotationsOfAnnotationsCounter =
-			new  HashMap<Long, Integer>();
+//	private HashMap<Long, Integer> annotationsOfAnnotationsCounter =
+//			new  HashMap<Long, Integer>();
 	
 	/**
 	 * Constructor
@@ -142,10 +142,22 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 				annotation.setNewVersion(false);
 				annotation.setVersionNumber("<test>");
 			}
-			//set.setHasChanged(false);
+			set.setHasChanged(false);
 			set.setVersionNumber("<test>");
 			set.setLastSavedOn(new Date());
 		}
+		
+		for(MAnnotationSet set:allDiscussionsSets) {
+			for(MAnnotation annotation: set.getAnnotations()) {
+				annotation.setHasChanged(false);
+				annotation.setNewVersion(false);
+				annotation.setVersionNumber("<test>");
+			}
+			set.setHasChanged(false);
+			set.setVersionNumber("<test>");
+			set.setLastSavedOn(new Date());
+		}
+		
 		((IDomeo)_application).refreshAnnotationComponents();
 	}
 	
@@ -305,18 +317,58 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 
 	public void removeAnnotationSet(MAnnotationSet set) {
 		_application.getLogger().command("REMOVING SET", this, "with id " + set.getLocalId());
+		
+		//ArrayList<MAnnotationSet> allSets = new ArrayList<MAnnotationSet>();
+		//allSets.addAll(allDiscussionsSets);
+		//allSets.addAll(allUserSets);
+		
 		for(MAnnotationSet _set: allUserSets) {
 			if(_set.getLocalId()==set.getLocalId()) {
 				if(currentSet.getLocalId().equals(set.getLocalId())) {
 					currentSet = null;
 				}
 				if(_set.getLastSavedOn()==null) {
-					//Window.alert("Unsaved");
+					Window.alert("Unsaved " + _set.getLabel());
 					((IDomeo)_application).removeAnnotationSetTab(set);
 					// reset set permissions
 					((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
 					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, false);
 					allUserSets.remove(_set);
+					((IDomeo)_application).refreshAnnotationComponents();
+					break;
+				} else {
+					//Window.alert("Saved");
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, true);
+					_set.setIsDeleted(true);
+					_set.setHasChanged(true);
+					((IDomeo)_application).refreshAnnotationComponents();
+				}
+			}
+		}
+	}
+	
+	public void removeDiscussionSet(MAnnotationSet set) {
+		_application.getLogger().command("REMOVING SET", this, "with id " + set.getLocalId());
+		
+//		ArrayList<MAnnotationSet> allSets = new ArrayList<MAnnotationSet>();
+//		allSets.addAll(allDiscussionsSets);
+//		allSets.addAll(allUserSets);
+		
+		for(MAnnotationSet _set: allDiscussionsSets) {
+			if(_set.getLocalId()==set.getLocalId()) {
+				if(currentSet.getLocalId().equals(set.getLocalId())) {
+					currentSet = null;
+				}
+				if(_set.getLastSavedOn()==null) {
+					//Window.alert("Unsaved " + _set.getLocalId());
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					// reset set permissions
+					((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
+					removeAnnotationOfTargetResource(_set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, false);
+					allDiscussionsSets.remove(_set);
+					
 					((IDomeo)_application).refreshAnnotationComponents();
 					break;
 				} else {
@@ -342,7 +394,7 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		annotationsByLocalIdCache = new  HashMap<Long, MAnnotation>();
 		annotationsOfTargetResource.clear();
 		annotationsOfAnnotations.clear();
-		annotationsOfAnnotationsCounter.clear();
+//		annotationsOfAnnotationsCounter.clear();
 		annotationsOfImages.clear();
 		
 		for(ICache c:caches.values()) {
@@ -399,13 +451,17 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		return annotationsOfTargetResource.size();
 	}
 	
-//	public boolean addAnnotationOfTargetResource(MCommentAnnotation annotation, GenericResource targetResource, MAnnotationSet set) {
-//		//Window.alert("Cache comment");
-//		//annotationsOfAnnotationsCounter.put(annotation.getLocalId(), arg1);
-//		allDiscussionsSets.add(set);
-//		Window.alert("1 "+ allDiscussionsSets.size());
-//		return addAnnotationOfTargetResource((MAnnotation)annotation, targetResource, set);
-//	}
+	public void removeAnnotationOfTargetResource(MAnnotationSet set) {
+		Window.alert("" + annotationsOfTargetResource.size());
+		Window.alert("annsize " + set.getAnnotations().size());
+		for(MAnnotation ann: set.getAnnotations()) {
+			Window.alert("" + ann.getLocalId());
+			annotationsOfTargetResource.remove(ann.getLocalId());
+		}
+		
+		
+		Window.alert(""+annotationsOfTargetResource.size());
+	}
 	
 	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set) {
 		try {

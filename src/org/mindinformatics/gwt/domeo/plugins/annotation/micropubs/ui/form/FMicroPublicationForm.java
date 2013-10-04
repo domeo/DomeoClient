@@ -476,8 +476,8 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 //			tab.setWidth((Window.getClientWidth() - 615) + "px");
 //		}
 //		
-//		evidenceTabs.setHeight((Window.getClientHeight() - 490) + "px");
-//		supportPanel.setHeight((Window.getClientHeight() - 520) + "px");
+		evidenceTabs.setHeight(Math.max(20, (Window.getClientHeight() - 490)) + "px");
+		supportPanel.setHeight(Math.max(20, (Window.getClientHeight() - 520)) + "px");
 //		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
 		
 		

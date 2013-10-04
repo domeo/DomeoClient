@@ -65,12 +65,12 @@ public class CommentSidePanel extends ASidePanel
 		setsList.setCellVerticalAlignment(info, HasVerticalAlignment.ALIGN_TOP);
 		setsList.add(table);
 		
-		Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
-		if(annLocalIds.size()>0) {
-			setsListScroller.setHeight((annLocalIds.size()*30) + "px");
-			body.setCellHeight(setsListScroller, (annLocalIds.size()*30)+"px");
-		} else
-		setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
+//		Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
+//		if(annLocalIds.size()>0) {
+//			setsListScroller.setHeight((annLocalIds.size()*30) + "px");
+//			body.setCellHeight(setsListScroller, (annLocalIds.size()*30)+"px");
+//		} else
+//		setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
 		
 		body.setHeight("100%");
 		
@@ -128,13 +128,12 @@ public class CommentSidePanel extends ASidePanel
 	}
 	
 	public void listGeneralThreads() {
-		table.listGeneralThreads();
-		topbar.updateStatistics(((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResourceSize());
-
-		Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
-		if(annLocalIds.size()>0) {
-			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
-			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
+		int counter = table.listGeneralThreads();
+		topbar.updateStatistics(counter);
+		
+		if(counter>0) {
+			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (counter*48 + 16))+ "px");
+			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (counter*48 + 16)) +"px");
 		} 
 	}
 	

@@ -260,15 +260,20 @@ public class CommentSummaryTable extends Composite
 		
 	}
 	
-	public void listGeneralThreads() {
+	public int listGeneralThreads() {
+		int counter = 0;
 		if(_domeo.getAnnotationPersistenceManager().getAnnotationOfTargetResourceSize()>0) {
 			topContent.clear();
 			bottomContent.clear();
 			Collection<Long> annLocalIds = _domeo.getAnnotationPersistenceManager().getAnnotationOfTargetResource();
 			for(Long id: annLocalIds) {
-				DiscussionSummaryListLens lens2 = new DiscussionSummaryListLens(_domeo, _parentPanel, _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(id),
-						((MCommentAnnotation)_domeo.getAnnotationPersistenceManager().getAnnotationByLocalId(id)));
 				MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(id);
+				//Window.alert(set.getLabel() + " " + set.getIsDeleted());
+				if(set.getIsDeleted()) continue;
+				counter++;
+				DiscussionSummaryListLens lens2 = new DiscussionSummaryListLens(_domeo, _parentPanel, set,
+						((MCommentAnnotation)_domeo.getAnnotationPersistenceManager().getAnnotationByLocalId(id)));
+				
 				_domeo.getComponentsManager().registerObjectLens(set, lens2);
 				bottomContent.add(lens2);
 				/*
@@ -306,6 +311,7 @@ public class CommentSummaryTable extends Composite
  			topContent.add(fp);
  			//createNewThreadForm(topContent);
  		}
+		return counter;
 	}
 	
 	private void createNewThreadForm(VerticalPanel content) {

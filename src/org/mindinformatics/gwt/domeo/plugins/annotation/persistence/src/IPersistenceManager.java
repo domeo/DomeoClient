@@ -49,6 +49,7 @@ public interface IPersistenceManager {
 	public boolean updateAnnotationAnnotationSet(MAnnotation annotation, MAnnotationSet set);
 	public void removeAnnotation(MAnnotation annotation, boolean mark);
 	public void removeAnnotationSet(MAnnotationSet annotationSet);
+	public void removeDiscussionSet(MAnnotationSet annotationSet);
 	public MAnnotationSet getSetByLocalId();
 	public MAnnotation getAnnotationByLocalId(Long localId);
 	public MAnnotation getAnnotationByUri(String uri);

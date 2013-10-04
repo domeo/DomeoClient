@@ -135,7 +135,7 @@ public class CommentSidePanelTopbar  extends Composite
 			
 			//Image commentIcon = new Image(resource.littleCommentsIcon());
 			
-			String label =  (numberComments==1) ? " comment by": " omments by";
+			String label =  (numberComments==1) ? " comment by": " comments by";
 			
 			//commentIcon.setTitle("Comment on Item");
 		//	commentIcon.setStyleName(ATileComponent.tileResources.css().button());

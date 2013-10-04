@@ -1,21 +1,13 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
-import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationAccessPopup;
 import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationRightsPopup;
-import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationVisibilityPopup;
 import org.mindinformatics.gwt.domeo.client.ui.sets.DiscussionAccessPopup;
 import org.mindinformatics.gwt.domeo.client.ui.sets.ILensRefresh;
-import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSidePanel;
-import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.framework.component.ui.lenses.ILensComponent;
-import org.mindinformatics.gwt.framework.model.agents.ISoftware;
 import org.mindinformatics.gwt.framework.model.users.IUserGroup;
 import org.mindinformatics.gwt.framework.widget.EditableLabel;
 
@@ -317,8 +309,9 @@ public class CommentsSetLens extends Composite implements ILensRefresh, ILensCom
 		deleteIcon.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				_domeo.getAnnotationPersistenceManager().removeAnnotationSet(_set);
+				_domeo.getAnnotationPersistenceManager().removeDiscussionSet(_set);
 				_parent.resetAnnotationSetInfo();
+				_parent.listGeneralThreads();
 			}
 		});
 		

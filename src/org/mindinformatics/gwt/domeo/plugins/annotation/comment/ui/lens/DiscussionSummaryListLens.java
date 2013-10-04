@@ -1,7 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens;
 
-import java.util.Date;
-
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationRightsPopup;

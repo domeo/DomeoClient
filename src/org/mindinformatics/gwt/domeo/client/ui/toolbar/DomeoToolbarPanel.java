@@ -329,8 +329,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 					public void onClick(ClickEvent event) {
 						_domeo.getLogger().command(this, "Saving annotation...");
 						_domeo.getAnnotationPersistenceManager().saveAnnotation();
-						if(_domeo.isHostedMode()) 
-							_domeo.getAnnotationPersistenceManager().mockupSavingOfTheAnnotation();
+						if(_domeo.isHostedMode()) _domeo.getAnnotationPersistenceManager().mockupSavingOfTheAnnotation();
 						//toolbar.disableToolbarItems();
 					}
 				}, _resources.saveMediumIcon().getSafeUri().asString(), "Save");
