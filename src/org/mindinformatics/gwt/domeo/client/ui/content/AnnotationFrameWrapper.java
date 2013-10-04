@@ -1037,7 +1037,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 						_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, 
 								prefix + " $ " + matchText + " $ " + suffix + " $$$$ " + e.getMessage());
 						Window.alert("FIXME: annotation could not be completed: " + prefix + matchText + suffix);
-						_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+						_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 					}
 				} else {
 					_domeo.getLogger().exception(LOG_CATEGORY_ANNOTATION_FAILED, this, "Something went wrong while caching new annotation item.");
@@ -1066,7 +1066,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		}  catch(Exception e) {
 			// TODO Add notification to user
 			_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, e.getMessage());
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 		}
 	}
 	
@@ -1093,7 +1093,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		}  catch(Exception e) {
 			// TODO Add notification to user
 			_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, e.getMessage());
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 		}
 	}
 	
@@ -1127,7 +1127,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		}  catch(Exception e) {
 			// TODO Add notification to user
 			_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, e.getMessage());
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 		}
 	}
 	
@@ -1226,7 +1226,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		}
 	}
 	
-	public void removeAnnotationSetAnnotation(MAnnotationSet set) {
+	public void removeAnnotationSetAnnotation(MAnnotationSet set, boolean mark) {
 		long start=System.currentTimeMillis();
 		_domeo.getLogger().debug(this, "Starting set with id " + set.getLocalId() + " annotation removal");
 		
@@ -1234,13 +1234,13 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		toRemove.addAll(set.getAnnotations());
 		Iterator<MAnnotation> it = toRemove.iterator();
 		while(it.hasNext()) {
-			removeAnnotation(it.next());
+			removeAnnotation(it.next(), mark);
 		}
 		
 		_domeo.getLogger().info(LOG_CATEGORY_ANNOTATION_DELETED, this, "Set " + set.getLocalId() + " annotation removed in(ms):"+(System.currentTimeMillis()-start));
 	}
 	
-	public void removeAnnotation(MAnnotation annotation) {
+	public void removeAnnotation(MAnnotation annotation, boolean mark) {
 		long start=System.currentTimeMillis();
 		_domeo.getLogger().debug(this, "Starting annotation removal " + annotation.getClass().getName() + "-" + annotation.getLocalId());
 		
@@ -1259,7 +1259,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 			_domeo.getClipboardManager().removeAnnotation((MSelectionAnnotation)annotation);
 			_domeo.refreshClipboardComponents();
 		} else {
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, mark);
 			_domeo.refreshAnnotationComponents();
 		}
 		
