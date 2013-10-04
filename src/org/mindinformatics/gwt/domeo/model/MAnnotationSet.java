@@ -26,6 +26,7 @@ public class MAnnotationSet implements Serializable, IsSerializable,
 	// Annotation Set graph
 	private Long localId;
 	private Boolean hasChanged = true;	// flag for triggering the saving
+	private Boolean isDeleted = false;	// flag for triggering the saving
 	
 	// Persistent mutable fields: these are going to be stored in the 
     // Annotation Set sometimes after being modified by the server
@@ -272,4 +273,14 @@ public class MAnnotationSet implements Serializable, IsSerializable,
 	public void setVirtual(boolean isVirtual) {
 		this.isVirtual = isVirtual;
 	}
+
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+	
+	
 }

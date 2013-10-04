@@ -95,6 +95,7 @@ public class AnnotationSetsSidePanel extends ASidePanel implements IInitializabl
 			int counter=0;
 			setsList.clear();
 			for(MAnnotationSet set: sets) {
+				if(set.getIsDeleted()) continue;
 				AnnotationSetSummaryListLens lens = isLensAlreadyDisplayed(set);
 				if(lens==null) {
 					_application.getLogger().debug(this, "Creating lens for set " + set.getLocalId());

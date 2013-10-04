@@ -47,7 +47,7 @@ public interface IPersistenceManager {
 	public ArrayList<MAnnotationSet> getAllDiscussionSets();
 	public ArrayList<MLinkedResource> getAllTerms();
 	public boolean updateAnnotationAnnotationSet(MAnnotation annotation, MAnnotationSet set);
-	public void removeAnnotation(MAnnotation annotation);
+	public void removeAnnotation(MAnnotation annotation, boolean mark);
 	public void removeAnnotationSet(MAnnotationSet annotationSet);
 	public MAnnotationSet getSetByLocalId();
 	public MAnnotation getAnnotationByLocalId(Long localId);

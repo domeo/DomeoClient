@@ -35,6 +35,7 @@ public interface IDomeoOntology {
 	public static final String content = "ao:body" ;
 	public static final String title = "domeo_title" ;
 	public static final String semanticTag = "ao:hasTopic" ;
+	public static final String deleted = "domeo:deleted" ;
 	
 	public static final String hasTarget = "ao:context";
 	

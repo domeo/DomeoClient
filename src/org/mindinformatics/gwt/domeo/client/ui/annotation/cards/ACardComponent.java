@@ -416,7 +416,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 	    }
 	    if(alreadyExisting!=null) {
 	        annotation.getAnnotatedBy().remove(alreadyExisting);
-	        _domeo.getPersistenceManager().removeAnnotation(alreadyExisting); 
+	        _domeo.getPersistenceManager().removeAnnotation(alreadyExisting, false); 
 	    }
         
         MCurationToken ann = CurationFactory.createCurationToken(_domeo, 

@@ -25,6 +25,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Window;
 
 /**
  * The class takes care of all annotation related persistence.
@@ -309,13 +310,23 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 				if(currentSet.getLocalId().equals(set.getLocalId())) {
 					currentSet = null;
 				}
-				((IDomeo)_application).removeAnnotationSetTab(set);
-				// reset set permissions
-				((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
-				((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set);
-				allUserSets.remove(_set);
-				((IDomeo)_application).refreshAnnotationComponents();
-				break;
+				if(_set.getLastSavedOn()==null) {
+					//Window.alert("Unsaved");
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					// reset set permissions
+					((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, false);
+					allUserSets.remove(_set);
+					((IDomeo)_application).refreshAnnotationComponents();
+					break;
+				} else {
+					//Window.alert("Saved");
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, true);
+					_set.setIsDeleted(true);
+					_set.setHasChanged(true);
+					((IDomeo)_application).refreshAnnotationComponents();
+				}
 			}
 		}
 	}
@@ -502,13 +513,13 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		return true;
 	}
 	
-	public void removeAnnotation(MAnnotation annotation) {	
+	public void removeAnnotation(MAnnotation annotation, boolean mark) {	
 		try {
 			HashMap<Long, MAnnotation> annotationsByLocalId = annotationsByTypeCache.get(annotation.getClass().getName());
 			annotationsByLocalId.remove(annotation.getLocalId());
 			annotationsByLocalIdCache.remove(annotation.getLocalId());
 			MAnnotationSet set = annotationsSetsByAnnotationLocalIdCache.get(annotation.getLocalId());
-			set.removeAnnotation(annotation);
+			if(!mark) set.removeAnnotation(annotation);
 		} catch (Exception e) {
 			_application.getLogger().exception(this, e.getMessage());
 		}

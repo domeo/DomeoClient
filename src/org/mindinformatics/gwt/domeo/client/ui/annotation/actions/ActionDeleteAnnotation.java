@@ -15,7 +15,7 @@ public class ActionDeleteAnnotation {
 			public void onClick(ClickEvent event) {
 				domeo.getLogger().command(AnnotationFrameWrapper.LOG_CATEGORY_DELETE_ANNOTATION, clazz, "Item " + annotation.getClass().getName() + "-"+annotation.getLocalId());
 				// TODO manage deletion and undo???
-				domeo.getContentPanel().getAnnotationFrameWrapper().removeAnnotation(annotation);
+				domeo.getContentPanel().getAnnotationFrameWrapper().removeAnnotation(annotation, false);
 			}
 		};
 		return ch;
