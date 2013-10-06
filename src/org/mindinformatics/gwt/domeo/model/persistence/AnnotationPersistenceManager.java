@@ -328,7 +328,7 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 					currentSet = null;
 				}
 				if(_set.getLastSavedOn()==null) {
-					Window.alert("Unsaved " + _set.getLabel());
+					//Window.alert("Unsaved " + _set.getLabel());
 					((IDomeo)_application).removeAnnotationSetTab(set);
 					// reset set permissions
 					((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
@@ -452,15 +452,9 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	}
 	
 	public void removeAnnotationOfTargetResource(MAnnotationSet set) {
-		Window.alert("" + annotationsOfTargetResource.size());
-		Window.alert("annsize " + set.getAnnotations().size());
 		for(MAnnotation ann: set.getAnnotations()) {
-			Window.alert("" + ann.getLocalId());
 			annotationsOfTargetResource.remove(ann.getLocalId());
 		}
-		
-		
-		Window.alert(""+annotationsOfTargetResource.size());
 	}
 	
 	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set) {

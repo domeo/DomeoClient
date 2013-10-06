@@ -19,6 +19,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
@@ -309,9 +310,12 @@ public class CommentsSetLens extends Composite implements ILensRefresh, ILensCom
 		deleteIcon.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				_domeo.getAnnotationPersistenceManager().removeDiscussionSet(_set);
-				_parent.resetAnnotationSetInfo();
-				_parent.listGeneralThreads();
+				boolean deleteFlag = Window.confirm("Do you really want to delete the discussion?");
+				if(deleteFlag) {
+					_domeo.getAnnotationPersistenceManager().removeDiscussionSet(_set);
+					_parent.resetAnnotationSetInfo();
+					_parent.listGeneralThreads();
+				}
 			}
 		});
 		

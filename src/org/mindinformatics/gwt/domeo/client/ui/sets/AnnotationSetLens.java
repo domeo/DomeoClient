@@ -22,6 +22,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
@@ -142,7 +143,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 	                hp.add(showAddedFilter);
 	                //display.add(hp);
 	                
-	                HorizontalPanel hp1 = new HorizontalPanel();
+	               // HorizontalPanel hp1 = new HorizontalPanel();
 
 	                filter.add(new HTML("<b>Show</b> (uncheck to hide)"));
 	                filter.add(hp);
@@ -364,8 +365,11 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 		deleteIcon.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				_domeo.getAnnotationPersistenceManager().removeAnnotationSet(_set);
-				_parent.resetAnnotationSetInfo();
+				boolean deleteFlag = Window.confirm("Do you really want to delete the set?");
+				if(deleteFlag) {
+					_domeo.getAnnotationPersistenceManager().removeAnnotationSet(_set);
+					_parent.resetAnnotationSetInfo();
+				}
 			}
 		});
 		
