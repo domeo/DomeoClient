@@ -312,9 +312,11 @@ public class CommentsSetLens extends Composite implements ILensRefresh, ILensCom
 			public void onClick(ClickEvent event) {
 				boolean deleteFlag = Window.confirm("Do you really want to delete the discussion?");
 				if(deleteFlag) {
+					_domeo.getProgressPanelContainer().setProgressMessage("Deleting discussion set...");
 					_domeo.getAnnotationPersistenceManager().removeDiscussionSet(_set);
 					_parent.resetAnnotationSetInfo();
 					_parent.listGeneralThreads();
+					_domeo.getProgressPanelContainer().setCompletionMessage("Discussion set deleted!");
 				}
 			}
 		});

@@ -367,8 +367,10 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 			public void onClick(ClickEvent event) {
 				boolean deleteFlag = Window.confirm("Do you really want to delete the set?");
 				if(deleteFlag) {
+					_domeo.getProgressPanelContainer().setProgressMessage("Deleting annotation set...");
 					_domeo.getAnnotationPersistenceManager().removeAnnotationSet(_set);
 					_parent.resetAnnotationSetInfo();
+					_domeo.getProgressPanelContainer().setCompletionMessage("Annotation set deleted!");
 				}
 			}
 		});
