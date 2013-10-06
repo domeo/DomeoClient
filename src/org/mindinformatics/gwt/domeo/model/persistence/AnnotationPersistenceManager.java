@@ -23,6 +23,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAn
 import org.mindinformatics.gwt.framework.component.persistance.src.PersistenceManager;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
@@ -244,8 +245,12 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	}
 	
 	private void setDefaultAnnotationSetAccessPolicy(MAnnotationSet set) {
-		//TODO Check default access policy in the preferences
-		((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPublic(set);
+		String defaultSetPrivacy = ApplicationUtils.getDefaultSetPrivacy();
+		if(defaultSetPrivacy!=null && defaultSetPrivacy.trim().equals("private"))
+			((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPrivate(set);
+		else 
+			((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPublic(set);
+		
 	}
 	
 	public MAnnotationSet getSetByAnnotationId(Long id) {

@@ -56,6 +56,10 @@ public class ApplicationUtils {
 	    window.open (url,"mywindow");
 	}-*/;
 	
+	public native static String getDefaultSetPrivacy() /*-{
+		return $wnd.defaultSetPrivacy;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;
