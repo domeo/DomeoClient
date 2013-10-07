@@ -160,6 +160,7 @@ public class AnnotationSetSummaryListLens extends Composite implements ILensRefr
 			
 			// Locking
 			// -------
+			/*
 			final Image rightsIcon = new Image();
 			ClickHandler lockHandler = new ClickHandler() {
 				@Override
@@ -176,6 +177,7 @@ public class AnnotationSetSummaryListLens extends Composite implements ILensRefr
 				rightsIcon.setResource(Domeo.resources.readWriteLittleIcon());
 				addSimpleButton(lockingPolicy, rightsIcon, lockHandler);
 			}
+			*/
 			
 			// Visibility
 			// ----------

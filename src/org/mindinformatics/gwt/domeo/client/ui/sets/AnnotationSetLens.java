@@ -325,7 +325,8 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 		} catch(Exception e) {
 		    display.add(new Label("Exception (display)"));
         }
-				
+			
+		/*
 		if(_set.getIsLocked()) {
 			HorizontalPanel hp3 = new HorizontalPanel();
 			final Image imgRights = new Image(Domeo.resources.readOnlyLittleIcon());
@@ -359,6 +360,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
 			hp3.setStyleName(style.activeIcon());
 			footerLeftSide.add(hp3);
 		}
+		*/
 		
 		HorizontalPanel hp5= new HorizontalPanel();
 		final Image deleteIcon = new Image(Domeo.resources.deleteLittleIcon());
