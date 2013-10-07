@@ -60,6 +60,10 @@ public class ApplicationUtils {
 		return $wnd.defaultSetPrivacy;
 	}-*/;
 	
+	public native static String getProvideExamplesUrls() /*-{
+		return $wnd.provideExamplesUrls;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;
