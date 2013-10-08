@@ -90,7 +90,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetriev
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.testing.GwtPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.testing.JsonPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.testing.StandalonePersistenceManager;
-import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.ExistingAnnotationViewerPanel;
+import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.ExistingAnnotationViewerPanel2;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.info.PostitPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.search.PostItSearchComponent;
@@ -1044,7 +1044,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		} else {
 			this.getProgressPanelContainer().hide();
 			try {
-				ExistingAnnotationViewerPanel lwp = new ExistingAnnotationViewerPanel(this, responseOnSets);
+				ExistingAnnotationViewerPanel2 lwp = new ExistingAnnotationViewerPanel2(this, responseOnSets);
 				new EnhancedGlassPanel(this, lwp, lwp.getTitle(), false, false, false);
 				//_dialogPanel.hide();
 			} catch (Exception e) {

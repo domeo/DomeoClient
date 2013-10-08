@@ -5,10 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetHandler;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.AnnotationSetTreeViewModel.AnnotationSetInfo;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.AnnotationSetTreeViewModel.Category;
-import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.AnnotationSetTreeViewModel.Images;
-import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.ContactDatabase.ContactInfo;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsoAnnotationSetSummary;
 import org.mindinformatics.gwt.framework.src.IContainerPanel;
 import org.mindinformatics.gwt.framework.src.IContentPanel;
@@ -17,12 +16,15 @@ import org.mindinformatics.gwt.framework.src.IResizable;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -59,6 +61,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 	// Layout
 	@UiField HorizontalPanel main;
 	@UiField ScrollPanel left;
+	@UiField Button importButton;
 	
 //	 /**
 //	   * The CellTree.
@@ -191,18 +194,22 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 		
 		_domeo.getLogger().debug(this, "3");
 
+		final ArrayList<String> idsToLoad = new ArrayList<String>();
+		
 		 final MultiSelectionModel<AnnotationSetInfo> selectionModel =
 			      new MultiSelectionModel<AnnotationSetInfo>(AnnotationSetTreeViewModel.AnnotationSetInfo.KEY_PROVIDER);
 		 
 			selectionModel
 					.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 						public void onSelectionChange(SelectionChangeEvent event) {
+							idsToLoad.clear();
 							StringBuilder sb = new StringBuilder();
 							boolean first = true;
 							List<AnnotationSetInfo> selected = new ArrayList<AnnotationSetInfo>(
 									selectionModel.getSelectedSet());
 							Collections.sort(selected);
 							for (AnnotationSetInfo value : selected) {
+								idsToLoad.add(value.getId());
 								if (first) {
 									first = false;
 								} else {
@@ -211,6 +218,18 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 								sb.append(value.getLabel());
 							}
 							selectedLabel.setText(sb.toString());
+							
+							
+							importButton.setText("Import " + selected.size() + (selected.size()==1?" Set":" Sets"));
+							importButton.addClickHandler(new ClickHandler() {
+								@Override
+								public void onClick(ClickEvent event) {
+									Window.alert(""+idsToLoad.size());
+									hide();
+									List<String> uuids = idsToLoad;
+									_domeo.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)_domeo);
+								}							
+							});
 						}
 					});
 

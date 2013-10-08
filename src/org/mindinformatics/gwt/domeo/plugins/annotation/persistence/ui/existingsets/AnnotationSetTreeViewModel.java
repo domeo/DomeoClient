@@ -54,6 +54,8 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 	 * The images used for this example.
 	 */
 	static interface Images extends ClientBundle {
+		ImageResource commentsIcon_32();
+		ImageResource annotationIcon_32();
 		ImageResource publicAccess();
 		ImageResource privateAccess();
 		ImageResource groupsAccess();
@@ -101,7 +103,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		});
 		hasCells.add(new HasCell<AnnotationSetInfo, AnnotationSetInfo>() {
 
-			private AnnotationSetCell cell = new AnnotationSetCell(images.privateAccess());
+			private AnnotationSetCell cell = new AnnotationSetCell(images.commentsIcon_32());
 
 			public Cell<AnnotationSetInfo> getCell() {
 				return cell;
@@ -147,7 +149,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		if (value == null) {
 			// Return top level categories.
 			return new DefaultNodeInfo<Category>(categoryDataProvider,
-					new CategoryCell(images.groupsAccess()));
+					new CategoryCell());
 		} else if (value instanceof Category) {
 			// Return the first letters of each first name.
 			Category category = (Category) value;
@@ -294,10 +296,10 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		/**
 		 * The html of the image used for contacts.
 		 */
-		private final String imageHtml;
+		private String imageHtml;
 
 		public AnnotationSetCell(ImageResource image) {
-			this.imageHtml = AbstractImagePrototype.create(image).getHTML();
+			
 		}
 
 		@Override
@@ -307,6 +309,11 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 			if (value == null) {
 				return;
 			}
+			
+			if(value.getType().equals("domeo:DiscussionSet"))
+				this.imageHtml = AbstractImagePrototype.create(images.commentsIcon_32()).getHTML();
+			else
+				this.imageHtml = AbstractImagePrototype.create(images.annotationIcon_32()).getHTML();
 
 			//JsAnnotationSetSummaryLens lens = new JsAnnotationSetSummaryLens();
 			
@@ -332,27 +339,29 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		}
 	}
 	
-	  /**
-	   * The cell used to render categories.
-	   */
-	  private static class CategoryCell extends AbstractCell<Category> {
+	/**
+	 * The cell used to render categories.
+	 */
+	private static class CategoryCell extends AbstractCell<Category> {
 
-	    /**
-	     * The html of the image used for contacts.
-	     */
-	    private String imageHtml;
+		/**
+		 * The html of the image used for contacts.
+		 */
+		private String imageHtml;
 
-	    public CategoryCell(ImageResource image) {
-	    	this.imageHtml = AbstractImagePrototype.create(image).getHTML();
-	    }
+		public CategoryCell() {
+		}
 
-	    @Override
-	    public void render(Context context, Category value, SafeHtmlBuilder sb) {
-	      if (value != null) {
-	    	  this.imageHtml = AbstractImagePrototype.create(value.getIcon()).getHTML();
-	        sb.appendHtmlConstant(imageHtml).appendEscaped(" ");
-	        sb.appendEscaped(value.getDisplayName());
-	      }
-	    }
-	  }
+		@Override
+		public void render(Context context, Category value, SafeHtmlBuilder sb) {
+			if (value != null) {
+				this.imageHtml = AbstractImagePrototype.create(value.getIcon())
+						.getHTML();
+				sb.appendHtmlConstant(imageHtml).appendEscaped(" ");
+				sb.appendHtmlConstant("<span style='font-size:120%;'>");
+				sb.appendEscaped(value.getDisplayName());
+				sb.appendHtmlConstant("</span>");
+			}
+		}
+	}
 }
