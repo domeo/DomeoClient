@@ -56,7 +56,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 	static interface Images extends ClientBundle {
 		ImageResource commentsIcon_32();
 		ImageResource annotationIcon_32();
-		ImageResource publicAccess();
+		ImageResource publicAccess_24();
 		ImageResource privateAccess();
 		ImageResource groupsAccess();
 	}
@@ -273,6 +273,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 	
 	public static class Category {
 
+		private int counter = 0;
 		private final String permission;
 		private final ImageResource icon;
 
@@ -283,6 +284,14 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		
 		public String getDisplayName() {
 			return permission;
+		}
+		
+		public void incrementCounter() {
+			counter++;
+		}
+		
+		public String getCounter() {
+			return Integer.toString(counter);
 		}
 		
 		public ImageResource getIcon() {
@@ -359,7 +368,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 						.getHTML();
 				sb.appendHtmlConstant(imageHtml).appendEscaped(" ");
 				sb.appendHtmlConstant("<span style='font-size:120%;'>");
-				sb.appendEscaped(value.getDisplayName());
+				sb.appendEscaped(value.getDisplayName() + " (" + value.getCounter() + ")");
 				sb.appendHtmlConstant("</span>");
 			}
 		}

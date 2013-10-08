@@ -136,9 +136,9 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 	private static Images images;
 	
 	static interface Images extends ClientBundle {
-		ImageResource publicAccess();
+		ImageResource publicAccess_24_bn();
 		ImageResource privateAccess();
-		ImageResource groupsAccess();
+		ImageResource groupsAccess_24();
 	}
 	
 	// ------------------------------------------------------------------------
@@ -156,8 +156,8 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 		catIcons = new ImageResource[catNames.length];
 		
 		categories = new Category[catNames.length];
-		categories[0] = new Category(catNames[0], images.publicAccess());
-		categories[1] = new Category(catNames[1], images.groupsAccess());
+		categories[0] = new Category(catNames[0], images.publicAccess_24_bn());
+		categories[1] = new Category(catNames[1], images.groupsAccess_24());
 		categories[2] = new Category(catNames[2], images.privateAccess());
 		
 //		for (int i = 0; i < catNames.length; i++) {
@@ -176,12 +176,15 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 				if(((JsoAnnotationSetSummary)responseOnSets.get(i)).isPublic()) {
 					publicList.add(new AnnotationSetInfo(categories[0], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					addAnnotationSet(new AnnotationSetInfo(categories[0], (JsoAnnotationSetSummary)responseOnSets.get(i)));
+					categories[0].incrementCounter();
 				} else if(((JsoAnnotationSetSummary)responseOnSets.get(i)).isGroups()) {
 					groupsList.add(new AnnotationSetInfo(categories[1], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					addAnnotationSet(new AnnotationSetInfo(categories[1], (JsoAnnotationSetSummary)responseOnSets.get(i)));
+					categories[1].incrementCounter();
 				} else if(((JsoAnnotationSetSummary)responseOnSets.get(i)).getPermissionsAccessType().equals(_domeo.getAgentManager().getUserPerson().getUri())) {
 					privateList.add(new AnnotationSetInfo(categories[2], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					addAnnotationSet(new AnnotationSetInfo(categories[2], (JsoAnnotationSetSummary)responseOnSets.get(i)));
+					categories[2].incrementCounter();
 				}
 			}
 			
