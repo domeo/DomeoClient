@@ -19,6 +19,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MBibliographicSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
+import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.framework.component.persistance.src.PersistenceManager;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
@@ -570,6 +571,12 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	
 	public void removeAnnotation(MAnnotation annotation, boolean mark) {	
 		try {
+			if(annotation.getSelector() instanceof MAnnotationSelector) {
+				// Remove cross pointers if chaining is implemented
+				ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
+				((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
+				((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().addAll(anns);
+			}
 			HashMap<Long, MAnnotation> annotationsByLocalId = annotationsByTypeCache.get(annotation.getClass().getName());
 			annotationsByLocalId.remove(annotation.getLocalId());
 			annotationsByLocalIdCache.remove(annotation.getLocalId());
