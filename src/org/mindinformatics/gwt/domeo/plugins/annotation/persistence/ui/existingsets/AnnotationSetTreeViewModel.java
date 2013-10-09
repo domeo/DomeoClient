@@ -33,11 +33,14 @@ import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.CompositeCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.HasCell;
+import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
@@ -69,7 +72,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		      DefaultSelectionEventManager.createCheckboxManager();
 	private final SelectionModel<AnnotationSetInfo> selectionModel;
 	
-	public AnnotationSetTreeViewModel(final SelectionModel<AnnotationSetInfo> selectionModel, ExistingAnnotationViewerPanel2 parent) {
+	public AnnotationSetTreeViewModel(final SelectionModel<AnnotationSetInfo> selectionModel, final ExistingAnnotationViewerPanel2 parent) {
 		this.parent = parent;
 		this.selectionModel = selectionModel;
 		if (images == null) {
@@ -103,7 +106,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		});
 		hasCells.add(new HasCell<AnnotationSetInfo, AnnotationSetInfo>() {
 
-			private AnnotationSetCell cell = new AnnotationSetCell(images.commentsIcon_32());
+			private AnnotationSetCell cell = new AnnotationSetCell(selectionModel, parent);
 
 			public Cell<AnnotationSetInfo> getCell() {
 				return cell;
@@ -301,14 +304,20 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 
 	public static class AnnotationSetCell extends
 			AbstractCell<AnnotationSetInfo> {
+		
+		SelectionModel<AnnotationSetInfo> selectionModel;
+		ExistingAnnotationViewerPanel2 parentPanel;
 
 		/**
 		 * The html of the image used for contacts.
 		 */
 		private String imageHtml;
 
-		public AnnotationSetCell(ImageResource image) {
-			
+		public AnnotationSetCell(SelectionModel<AnnotationSetInfo> selectionModel, ExistingAnnotationViewerPanel2 parentPanel) {
+			super("mousedown");
+			// http://stackoverflow.com/questions/18599619/gwt-cell-tree-right-click-selection
+			this.selectionModel = selectionModel;
+			this.parentPanel = parentPanel;
 		}
 
 		@Override
@@ -339,13 +348,25 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 			sb.appendHtmlConstant("</td><td width='70px' align='right'>");
 			sb.appendEscaped(value.annotationSet.getNumberOfAnnotationItems() +(value.annotationSet.getNumberOfAnnotationItems()==1?" item":" items"));
 			sb.appendHtmlConstant("</td></tr><tr><td>");
-			sb.appendHtmlConstant("By <a target='_blank' href='" + value.annotationSet.getCreatedBy().getUri() + "'>" + 
-					value.annotationSet.getCreatedBy().getScreenName() +"</a> on " + value.annotationSet.getFormattedCreatedOn());
+			sb.appendHtmlConstant("By " + value.annotationSet.getCreatedBy().getScreenName() +" on " + value.annotationSet.getFormattedCreatedOn());
 			sb.appendHtmlConstant("</td><td align='right'>");
-			sb.appendHtmlConstant("<a target='_blank' href='" + value.annotationSet.getCreatedBy().getUri() + "'><img src='"+ 
-					Domeo.resources.browseLittleIcon().getSafeUri().asString() +"'></a>");
+			//sb.appendHtmlConstant("<a target='_blank' href='" + value.annotationSet.getCreatedBy().getUri() + "'><img src='"+ 
+			//		Domeo.resources.browseLittleIcon().getSafeUri().asString() +"'></a>");
 			sb.appendHtmlConstant("</td></tr></table>");
 		}
+		
+		@Override
+	    public void onBrowserEvent(com.google.gwt.cell.client.Cell.Context context, Element parent, AnnotationSetInfo value, NativeEvent event, ValueUpdater<AnnotationSetInfo> valueUpdater) {
+			//Window.alert(" click");
+			/*
+	        if (event.getButton() == NativeEvent.BUTTON_RIGHT) {
+	            Window.alert("right click");
+	        }
+	        */
+			parentPanel.showAnnotationSetPreview(value.getId());
+			
+	        super.onBrowserEvent(context, parent, value, event, valueUpdater);
+	    }
 	}
 	
 	/**

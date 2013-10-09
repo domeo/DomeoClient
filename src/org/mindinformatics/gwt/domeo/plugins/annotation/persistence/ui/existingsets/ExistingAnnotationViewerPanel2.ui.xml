@@ -36,7 +36,9 @@
 	<g:VerticalPanel>
   	<g:ScrollPanel ui:field='left' styleName='{style.outer}'>
   	</g:ScrollPanel>
+  	<g:cell horizontalAlignment='ALIGN_CENTER'>
   	<g:Button ui:field='importButton' styleName='{style.importBtn}'>Import</g:Button>
+  	</g:cell>
   	</g:VerticalPanel>
   	</g:cell>
   	<g:cell>
@@ -44,6 +46,9 @@
   		<g:Label
 		            addStyleNames='{style.selectedLabel}'
 		            ui:field='selectedLabel' />
+		<g:VerticalPanel ui:field='preview'>
+		
+		</g:VerticalPanel>
   	</g:VerticalPanel>
   	</g:cell>
   </g:HorizontalPanel>

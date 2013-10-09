@@ -26,9 +26,11 @@ import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -40,7 +42,7 @@ import com.google.gwt.view.client.TreeViewModel;
  */
 public class ExistingAnnotationViewerPanel2 extends Composite implements IContainerPanel, IContentPanel, IResizable {
 
-	private static final String TITLE = "Import of Existing Annotation";
+	private static final String TITLE = "Import of Existing Annotation Sets";
 	
 	interface Binder extends UiBinder<HorizontalPanel, ExistingAnnotationViewerPanel2> { }	
 	private static final Binder binder = GWT.create(Binder.class);
@@ -62,6 +64,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 	@UiField HorizontalPanel main;
 	@UiField ScrollPanel left;
 	@UiField Button importButton;
+	@UiField VerticalPanel preview;
 	
 //	 /**
 //	   * The CellTree.
@@ -126,7 +129,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 	  }
 	
 	private  final Category[] categories;
-	String[] catNames = {"Public", "Groups", "Private"};
+	String[] catNames = {"Public", "Groups", "Private", "External"};
 	ImageResource[] catIcons; 
 	
 	public Category[] getCategories() {
@@ -139,6 +142,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 		ImageResource publicAccess_24_bn();
 		ImageResource privateAccess();
 		ImageResource groupsAccess_24();
+		ImageResource boxIcon_24();
 	}
 	
 	// ------------------------------------------------------------------------
@@ -159,6 +163,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 		categories[0] = new Category(catNames[0], images.publicAccess_24_bn());
 		categories[1] = new Category(catNames[1], images.groupsAccess_24());
 		categories[2] = new Category(catNames[2], images.privateAccess());
+		categories[3] = new Category(catNames[3], images.boxIcon_24());
 		
 //		for (int i = 0; i < catNames.length; i++) {
 //	      categories[i] = new Category(catNames[i]);
@@ -201,7 +206,6 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 		
 		 final MultiSelectionModel<AnnotationSetInfo> selectionModel =
 			      new MultiSelectionModel<AnnotationSetInfo>(AnnotationSetTreeViewModel.AnnotationSetInfo.KEY_PROVIDER);
-		 
 			selectionModel
 					.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 						public void onSelectionChange(SelectionChangeEvent event) {
@@ -220,14 +224,13 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 								}
 								sb.append(value.getLabel());
 							}
-							selectedLabel.setText(sb.toString());
+							//selectedLabel.setText(sb.toString());
 							
 							
 							importButton.setText("Import " + selected.size() + (selected.size()==1?" Set":" Sets"));
 							importButton.addClickHandler(new ClickHandler() {
 								@Override
 								public void onClick(ClickEvent event) {
-									Window.alert(""+idsToLoad.size());
 									hide();
 									List<String> uuids = idsToLoad;
 									_domeo.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)_domeo);
@@ -256,6 +259,11 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 			_domeo.getLogger().debug(this, "ExistingAnnotationViewerPanel " + e.getMessage());
 		}
 
+	}
+	
+	public void showAnnotationSetPreview(String id) {
+		preview.clear();
+		//preview.add(new HTML("Preview of: " + id));
 	}
 
 	public void refreshPreferencesList() {
