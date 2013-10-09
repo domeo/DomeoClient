@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsoAnnotationSetSummary;
 
 import com.google.gwt.cell.client.AbstractCell;
@@ -40,7 +39,6 @@ import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
@@ -59,6 +57,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 	static interface Images extends ClientBundle {
 		ImageResource commentsIcon_32();
 		ImageResource annotationIcon_32();
+		ImageResource machineIcon_32();
 		ImageResource publicAccess_24();
 		ImageResource privateAccess();
 		ImageResource groupsAccess();
@@ -330,6 +329,8 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 			
 			if(value.getType().equals("domeo:DiscussionSet"))
 				this.imageHtml = AbstractImagePrototype.create(images.commentsIcon_32()).getHTML();
+			//else if(value.annotationSet.getCreatedBy().get.equals("domeo:DiscussionSet") )
+			//	this.imageHtml = AbstractImagePrototype.create(images.commentsIcon_32()).getHTML();
 			else
 				this.imageHtml = AbstractImagePrototype.create(images.annotationIcon_32()).getHTML();
 

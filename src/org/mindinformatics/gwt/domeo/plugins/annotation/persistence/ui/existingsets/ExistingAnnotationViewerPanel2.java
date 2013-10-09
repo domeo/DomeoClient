@@ -26,7 +26,6 @@ import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -225,19 +224,18 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 								sb.append(value.getLabel());
 							}
 							//selectedLabel.setText(sb.toString());
-							
-							
+														
 							importButton.setText("Import " + selected.size() + (selected.size()==1?" Set":" Sets"));
-							importButton.addClickHandler(new ClickHandler() {
-								@Override
-								public void onClick(ClickEvent event) {
-									hide();
-									List<String> uuids = idsToLoad;
-									_domeo.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)_domeo);
-								}							
-							});
 						}
 					});
+			
+			importButton.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					hide();
+					_domeo.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(idsToLoad, (IRetrieveExistingAnnotationSetHandler)_domeo);
+				}							
+			});
 
 			    CellTree.Resources res = GWT.create(CellTree.BasicResources.class);
 			    CellTree cellTree = new CellTree(
