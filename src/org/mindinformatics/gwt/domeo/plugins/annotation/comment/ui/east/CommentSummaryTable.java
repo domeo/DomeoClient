@@ -35,7 +35,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -148,9 +147,6 @@ public class CommentSummaryTable extends Composite
 									}
 								} else {
 									if(ann instanceof MCommentAnnotation || ann instanceof MCurationToken) { // Remove for simple commenting
-										//ITileComponent cc = new TCommentViewerTile(_domeo, _listener);
-										//cc.initializeLens(ann);
-										//Widget w = cc.getTile();
 										c.initializeLens(ann);
 										Widget w = c.getTile();
 										topContent.add(w);
