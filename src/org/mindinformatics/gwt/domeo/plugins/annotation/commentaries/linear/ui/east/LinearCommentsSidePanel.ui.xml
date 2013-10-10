@@ -1,0 +1,41 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>	
+		.body {
+			width: 100%;
+			border-left: 2px solid #ddd;
+		}
+		
+		.toolbar {
+			width: 100%;
+		}
+		 
+		.list {
+			width: 100%;
+			border-left: 2px solid #fff;
+		}
+		
+		.info {
+			width: 100%;
+			padding-top: 10px;	
+		}
+		
+		.setsScroller {
+			
+		}
+	</ui:style>
+	
+	<g:VerticalPanel styleName='{style.body}' ui:field='body'>
+		<g:cell height="26px">
+			<g:VerticalPanel styleName='{style.toolbar}' ui:field='toolbar'/>
+		</g:cell>
+		<g:ScrollPanel styleName='{style.setsScroller}' ui:field='setsListScroller'>
+			<g:VerticalPanel styleName='{style.list}' ui:field='setsList'/>
+		</g:ScrollPanel>
+		<g:cell verticalAlignment='ALIGN_TOP'>
+			<g:VerticalPanel styleName='{style.info}' ui:field='info' verticalAlignment='ALIGN_TOP'/>
+		</g:cell>
+	</g:VerticalPanel>
+</ui:UiBinder>

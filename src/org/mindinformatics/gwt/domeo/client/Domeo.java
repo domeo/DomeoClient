@@ -64,6 +64,10 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAn
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSidePanel;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSideTab;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.tile.CommentTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east.LinearCommentsSidePanel;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east.LinearCommentsSideTab;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.tile.LinearCommentTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.ui.tile.CurationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.info.HighlightPlugin;
@@ -297,6 +301,11 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		return discussionSideTab;
 	}
 	
+	private ASideTab commentsSideTab;
+	public  ASideTab getLinearCommentsSideTab() {
+		return commentsSideTab;
+	}
+	
 	public Domeo _this;
 	
 	/**
@@ -503,13 +512,12 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		annotationCardsManager.registerAnnotationCard(MMicroPublicationAnnotation.class.getName(), 
 				new MicroPublicationCardProvider(this));
 		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
-		
-		
-		
-		
+
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 
 				new CommentTileProvider(this));
+		annotationTailsManager.registerAnnotationTile(MLinearCommentAnnotation.class.getName(), 
+				new LinearCommentTileProvider(this));
 		
 		// Digesters
 		linkedDataDigestersManager.registerLnkedDataDigester(new NifStandardDigester());
@@ -520,8 +528,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		final ASideTab resourceSideTab = new ResourceSideTab(this, sidePanelsFacade);
 		final ASideTab annotationSetsSideTab2 = new AnnotationSetSideTab(this, sidePanelsFacade);
 		final ASideTab clipboardSideTab = new ClipboardSideTab(this, sidePanelsFacade);
-		discussionSideTab = new CommentSideTab(this, sidePanelsFacade);
-		
+			
 		AnnotationSidePanel annotationSidePanel = new AnnotationSidePanel(this, sidePanelsFacade, annotationsSideTab);
 		ResourceSidePanel resourceSidePanel = new ResourceSidePanel(this, sidePanelsFacade, resourceSideTab);
 		AnnotationSetsSidePanel annotationSetsSidePanel2 = new AnnotationSetsSidePanel(this, sidePanelsFacade, annotationSetsSideTab2);
@@ -531,11 +538,14 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		sidePanelsFacade.registerSideComponent(annotationsSideTab, annotationSidePanel, (AnnotationSideTab.HEIGHT+16) + "px");
 		sidePanelsFacade.registerSideComponent(annotationSetsSideTab2, annotationSetsSidePanel2,  (AnnotationSetSideTab.HEIGHT+16) + "px");
 		
-		
+		discussionSideTab = new CommentSideTab(this, sidePanelsFacade);
+		//commentsSideTab = new LinearCommentsSideTab(this, sidePanelsFacade);
 		if(((BooleanPreference)getPreferences().getPreferenceItem(Domeo.class.getName(), 
 				Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
 			CommentSidePanel commentSidePanel = new CommentSidePanel(this, sidePanelsFacade, discussionSideTab);
 			sidePanelsFacade.registerSideComponent(discussionSideTab, commentSidePanel,  (CommentSideTab.HEIGHT+16) + "px");
+			//LinearCommentsSidePanel commentsSidePanel = new LinearCommentsSidePanel(this, sidePanelsFacade, discussionSideTab);
+			//sidePanelsFacade.registerSideComponent(commentsSideTab, commentsSidePanel,  (CommentSideTab.HEIGHT+16) + "px");
 		}
 		
 		if(((BooleanPreference)this.getPreferences().

@@ -55,6 +55,7 @@ public interface IDomeo extends IContentHandler, IApplication {
 	public LinkedDataDigestersManager getLinkedDataDigestersManager();
 
 	public  ASideTab getDiscussionSideTab();
+	public  ASideTab getLinearCommentsSideTab();
 	
 	
 	public void notifyEndExtraction();

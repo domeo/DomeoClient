@@ -23,6 +23,8 @@ import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.LinearCommentsFactory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.JsAnnotationCuration;
@@ -68,7 +70,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
 import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
-import org.mindinformatics.gwt.framework.component.styles.src.StylesManager;
 import org.mindinformatics.gwt.framework.model.agents.IDatabase;
 import org.mindinformatics.gwt.framework.model.agents.IPerson;
 import org.mindinformatics.gwt.framework.model.agents.ISoftware;
@@ -557,6 +558,22 @@ public class JsonUnmarshallingManager {
 									);
 							if(postIt.getTitle()!=null && postIt.getTitle().trim().length()>0)
 								((MCommentAnnotation)ann).setTitle(postIt.getTitle());
+						} else if(typesSet.contains(MLinearCommentAnnotation.TYPE)) {
+							JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j); // TODO change
+							ann = LinearCommentsFactory.cloneLinearComment(
+									postIt.getId(), 
+									postIt.getLineageUri(), 
+									postIt.getFormattedCreatedOn(),
+									postIt.getFormattedLastSaved(),
+									postIt.getVersionNumber(),
+									postIt.getPreviousVersion(),
+									_domeo.getAgentManager().getAgentByUri(postIt.getCreatedBy()),
+									(ISoftware)_domeo.getAgentManager().getAgentByUri(postIt.getCreatedWith()),
+									selectors,
+									postIt.getBody().get(0).getChars()
+									);
+							if(postIt.getTitle()!=null && postIt.getTitle().trim().length()>0)
+								((MLinearCommentAnnotation)ann).setTitle(postIt.getTitle());
 						} else if(typesSet.contains(MCurationToken.TYPE)) {
 							JsAnnotationCuration annotationCuration = (JsAnnotationCuration) jsonAnnotations.get(j); // TODO change
 							ann = CurationFactory.cloneCurationToken(

@@ -1,0 +1,56 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style type='org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east.LinearCommentsSummaryTable.LocalCss'>
+		.body {
+			padding: 0px;
+			width: 464px;
+			max-height: 800px;
+		}
+		
+		.content {
+			padding-left: 0px;
+			width: 100%; 
+		}
+		
+		.topContent {
+			padding-left: 0px;
+			padding-top: 4px;
+			padding-bottom: 4px;
+			width: 100%; 
+			border-bottom: 0px #bbb solid;
+		}
+		
+		.bottomContent {
+			padding-left: 0px;
+			padding-top: 2px;
+			width: 100%; 
+		}
+		
+		.formArea {
+			padding-top: 4px;
+			padding-left: 4px;
+		}
+		
+		.formBox {
+			width: 434px;
+			border:1px solid #ddd;
+			padding: 3px;
+		}
+		
+		.buttonLabel {
+			cursor: pointer;
+			padding-left: 2px;
+			display: inline;
+			vertical-align: top;
+		}
+	</ui:style>
+
+  	<g:ScrollPanel styleName='{style.body}' ui:field='body'>
+        <g:VerticalPanel styleName='{style.content}' ui:field='content'>
+        	<g:VerticalPanel styleName='{style.topContent}' ui:field='topContent'></g:VerticalPanel>
+        	<g:VerticalPanel styleName='{style.bottomContent}' ui:field='bottomContent'></g:VerticalPanel>
+        </g:VerticalPanel>
+	</g:ScrollPanel>
+</ui:UiBinder>
