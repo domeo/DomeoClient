@@ -10,7 +10,6 @@ import org.mindinformatics.gwt.domeo.client.ui.services.IWidget;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.ITermsSelectionConsumer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.IVocabulariesSelectionConsumer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.TermsSelectionList;
-import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.VocabulariesSelectionList;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.BioPortalManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.IBioPortalItemsRequestCompleted;
 import org.mindinformatics.gwt.framework.component.qualifiers.ui.ISearchTermsContainer;
@@ -20,7 +19,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFact
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -102,9 +100,9 @@ public class SearchTermsWidget extends Composite implements IWidget, IBioPortalI
 		MLinkedResource voc1 = ResourcesFactory.createTrustedResource("http://pro.com", "PRotein Ontology (PRO)", ncbo);
 		vocabularies.add(voc1);
 		
-		VocabulariesSelectionList vocabulariesSelectionList = new VocabulariesSelectionList(_domeo, this, vocabularies, associatedTerms);
+		//VocabulariesSelectionList vocabulariesSelectionList = new VocabulariesSelectionList(_domeo, this, vocabularies, associatedTerms);
 		resultsContainerPanel.clear();
-		resultsContainerPanel.add(vocabulariesSelectionList); 
+		//resultsContainerPanel.add(vocabulariesSelectionList); 
 	}
 	
 	public void performSearch(String textQuery) {
