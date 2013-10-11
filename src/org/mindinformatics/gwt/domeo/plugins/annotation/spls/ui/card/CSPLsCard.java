@@ -1,5 +1,8 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
@@ -14,18 +17,28 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAn
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DecoratedPopupPanel;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -38,24 +51,26 @@ public class CSPLsCard extends ACardComponent {
 
 	private int _index = -1;
 	private MSPLsAnnotation _annotation;
-
+	String statements_str = "";
 	@UiField
 	VerticalPanel body;
 	@UiField
 	HorizontalPanel provenance;
 	@UiField
 	FlowPanel content;
+	// recommendation drug, recommendation dose, recommendation monitoring, test
+	// section statements
+	@UiField
+	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
+			test, statement;
 
 	@UiField
-	Label type, text, pkimpact;
-
-	@UiField SimplePanel acceptIcon, broadIcon, wrongIcon;
+	Image wrongIcon, rightIcon;
 
 	public CSPLsCard(IDomeo domeo) {
 		super(domeo);
 		initWidget(binder.createAndBindUi(this));
 
-		System.out.println("step2***");
 		// Resources resource = Domeo.resources;
 		// Image acceptImage = new Image(resource.acceptIcon());
 
@@ -93,8 +108,6 @@ public class CSPLsCard extends ACardComponent {
 	@Override
 	public void refresh() {
 
-		System.out.println("step1***");
-
 		try {
 			if (_index > -1)
 				createProvenanceBar(SPLsPlugin.getInstance().getPluginName(),
@@ -102,19 +115,92 @@ public class CSPLsCard extends ACardComponent {
 			else
 				createProvenanceBar(SPLsPlugin.getInstance().getPluginName(),
 						provenance, _annotation);
+
+			rightIcon.setResource(Domeo.resources.acceptIcon());
+			wrongIcon.setResource(Domeo.resources.crossIcon());
+
+			final TextArea comment = new TextArea();
+			final DialogBox dialog = new DialogBox();
+			final VerticalPanel panel = new VerticalPanel();
+			final HorizontalPanel hp1 = new HorizontalPanel();
+			comment.setCharacterWidth(50);
+			comment.setVisibleLines(10);
+			panel.add(comment);
+
+			wrongIcon.addClickHandler(new ClickHandler() {
+
+				@Override
+				public void onClick(ClickEvent event) {
+					System.out.println("event process.....");
+
+					Button close = new Button("Close");
+					close.addClickHandler(new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							dialog.hide();
+						}
+					});
+					hp1.add(close);
+
+					Button submit = new Button("submit");
+					submit.addClickHandler(new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							System.out.println("comment: " + comment.getText());
+							dialog.hide();
+
+						}
+					});
+					hp1.add(submit);
+
+					panel.add(hp1);
+
+					dialog.setWidget(panel);
+					dialog.setText("The reason of disagree:");
+					int left = wrongIcon.getAbsoluteLeft();
+					int top = wrongIcon.getAbsoluteTop();
+					dialog.setPopupPosition(left, top + 10);
+					dialog.setHeight("150px");
+					dialog.setWidth("200px");
+					dialog.show();
+
+				}
+
+			});
+
+			System.out.println("Images are loaded in UI");
+
 			type.setText("SPLs:");
 
-			System.out.println("pk in card: "
-					+ _annotation.getPharmgxUsage().getPkImpact().getLabel());
-
 			text.setText("clinical statements from SPLs");
-			pkimpact.setText("Pk Impact: "
-					+ _annotation.getPharmgxUsage().getPkImpact().getLabel());
-			
-			acceptIcon.add(new Image(Domeo.resources.acceptIcon()));
-			broadIcon.add(new Image(Domeo.resources.acceptBroadIcon()));
-			wrongIcon.add(new Image(Domeo.resources.crossIcon()));
 
+			/*
+			 * can not skip some labels
+			 */
+			pkimpact.setText(_annotation.getPharmgxUsage().getPkImpact()
+					.getLabel());
+			pdimpact.setText(_annotation.getPharmgxUsage().getPdImpact()
+					.getLabel());
+			recdrug.setText(_annotation.getPharmgxUsage().getDrugRec()
+					.getLabel());
+			recdose.setText(_annotation.getPharmgxUsage().getDoseRec()
+					.getLabel());
+			recmonitoring.setText(_annotation.getPharmgxUsage().getMonitRec()
+					.getLabel());
+			test.setText(_annotation.getPharmgxUsage().getTestRec().getLabel());
+
+			int count = 2;
+			for (MLinkedResource mr : _annotation.getPharmgxUsage()
+					.getStatements()) {
+				statements_str += mr.getLabel().toString() + " ";
+				if (count <= 0)
+					break;
+				count++;
+			}
+
+			statement.setText(statements_str);
+			// .iterator().toString());
+			System.out.println("load values of labels");
 
 			if (SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {
 				HorizontalPanel hp = new HorizontalPanel();

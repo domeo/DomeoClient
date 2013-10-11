@@ -34,8 +34,11 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TabBar;
@@ -77,8 +80,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	ListBox annotationSet;
 	@UiField
 	VerticalPanel rightColumn;
-	@UiField
-	TabBar tabBar;
+	//@UiField
+	//TabBar tabBar;
 
 	// PK Impact
 
@@ -168,13 +171,14 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@UiField
 	CheckBox descriptsvt;
 	@UiField
-	CheckBox descriptsmc;
+	ListBox descriptsmc;
 	@UiField
 	CheckBox descriptsts;
 	@UiField
 	CheckBox descriptsbm;
 
-	// @UiField RadioButton Drug, Dose, Monitoring, test_Re;
+	@UiField 
+	Hyperlink pklink;
 
 	@UiField
 	TextArea commentBody;
@@ -530,14 +534,15 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					"U of Pitt SPL Pharmgx Annotation"));
 		}
 
-		if (descriptsmc.getValue()) {
-			statements.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "medical-condition", "Medical Condition",
-					"it is should be references to medical condition.",
-					SPL_POC_PREFIX + "Statements", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation"));
+		// medical condition ListBox
+		int index = descriptsmc.getSelectedIndex();
 
-		}
+		statements.add(ResourcesFactory.createTrustedTypedResource(
+				SPL_POC_PREFIX + "medical-condition",
+				descriptsmc.getItemText(index),
+				"it is should be references to medical condition.",
+				SPL_POC_PREFIX + "Statements", SPL_POC_PREFIX,
+				"U of Pitt SPL Pharmgx Annotation"));
 
 		if (descriptsts.getValue()) {
 			statements.add(ResourcesFactory.createTrustedTypedResource(
@@ -557,6 +562,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	}
 
 	// NEW annotation
+	@SuppressWarnings("deprecation")
 	public FSPLsForm(IDomeo domeo, final AFormsManager manager) {
 		super(domeo);
 		_manager = manager;
@@ -603,9 +609,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 							_domeo.getLogger().debug(this,
 									"quote selector initialized");
-
-							System.out.println("selector in new: "
-									+ selector.getExact());
 
 							// TODO Register coordinate of the selection.
 							MSPLsAnnotation annotation = SPLsFactory
@@ -704,6 +707,28 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		_domeo.getLogger().debug(this, "'Apply' button added");
 
 		this.setHeight("100px");
+		
+		/*
+		pklink.addClickHandler(new ClickHandler(){
+		DialogBox dialog = new DialogBox();
+		HorizontalPanel hp= new HorizontalPanel();
+		Label description = new Label("radio button: can only selects one of choices");
+			@Override
+			public void onClick(ClickEvent event) {
+				System.out.println("hyper link");
+				int left = pklink.getAbsoluteLeft();
+				int top = pklink.getAbsoluteTop();
+				
+				System.out.println(left+"|"+top);
+				hp.add(description);
+				dialog.setText("description test");
+				dialog.setWidget(hp);
+				dialog.setPopupPosition(left, top);
+				dialog.show();
+			}
+
+		});
+		*/
 
 		// rightColumn.add(tabs.get(0));
 		// resized();
@@ -827,8 +852,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			}
 
 			if (_item.getTestRec() != null) {
-				System.out
-						.println("drug rec :" + _item.getTestRec().getLabel());
+
 				if (_item.getTestRec().getLabel().equals("Required"))
 					descripttreq.setValue(true);
 				else if (_item.getTestRec().getLabel().equals("Recommend"))
@@ -843,6 +867,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 			// statements, values are made up
 			// checkbox
+			
 
 			if (_item.getStatements() != null) {
 				for (MLinkedResource statemt : _item.getStatements()) {
@@ -857,16 +882,21 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					if (statemt.getLabel().equals("Variant")) {
 						descriptsvt.setValue(true);
 					}
-					if (statemt.getLabel().equals("Medical condition")) {
-						descriptsmc.setValue(true);
-					}
 					if (statemt.getLabel().equals("Test")) {
 						descriptsts.setValue(true);
 					}
 					if (statemt.getLabel().equals("Biomarker")) {
 						descriptsbm.setValue(true);
 					}
-
+					
+					// Listbox medical condition
+					if (statemt.getLabel().equals("condition 0")) {
+						descriptsmc.setSelectedIndex(0);
+					} else if (statemt.getLabel().equals("condition 1")) {
+						descriptsmc.setSelectedIndex(1);
+					} else if (statemt.getLabel().equals("condition 2")) {
+						descriptsmc.setSelectedIndex(2);
+					}
 				}
 
 			}
@@ -932,14 +962,12 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 									((TextAnnotationFormsPanel) _manager)
 											.getHighlight().getSuffix());
 
-					System.out.println("selector in edit: "
-							+ selector.getExact());
-					
-					
 					_item.setSelector(selector);
 
 					_domeo.getLogger().debug(this,
 							"SPL annotation content validated (edit)");
+
+				
 
 					_item.setComment(commentBody.getText());
 
@@ -1027,12 +1055,14 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	@Override
 	public void resized() {
+		/*
 		this.setWidth((Window.getClientWidth() - 340) + "px");
 		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
 		for (Widget tab : tabs) {
 			// if(tab instanceof IResizable) ((IResizable)tab).resized();
 			tab.setWidth((Window.getClientWidth() - 615) + "px");
 		}
+		*/
 	}
 
 	@Override

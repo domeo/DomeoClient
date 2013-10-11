@@ -90,54 +90,32 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 
 			String html2 = "</table></body></html>";
 
+			String labels = "<tr bgcolor='#EEE'><td>PK Impact</td><td>PD Impact</td><td>Drug Rec</td>"
+					+ "<td>Dose Rec</td><td>Monitoring Rec</td><td>Test</td><td>Statement</td></tr>";
+
+			String statements_str = "";
+			int count = 2;
+			for (MLinkedResource mr : _annotation.getPharmgxUsage()
+					.getStatements()) {
+				statements_str += mr.getLabel().toString() + " ";
+				if (count <= 0)
+					break;
+				count++;
+			}
+
+			String values = "<tr bgcolor='#F0F8FF'><td>"
+					+ pharmgx.getPkImpactResource().getLabel() + "</td>"
+					+ "<td>" + pharmgx.getPdImpactResource().getLabel()
+					+ "</td><td>" + pharmgx.getDrugRecResource().getLabel()
+					+ "</td><td>" + pharmgx.getDoseRecResource().getLabel()
+					+ "</td><td>" + pharmgx.getMonitRecResource().getLabel()
+					+ "</td><td>" + pharmgx.getTestRecResource().getLabel()
+					+ "</td><td>" + statements_str + "</td></tr>";
+
 			sb2.append(html1);
 
-			sb2.append(addRecInHTML("PK Impact: ", pharmgx
-					.getPkImpactResource().getLabel()));
-
-			if (pharmgx.getPdImpactResource() != null) {
-				sb2.append(addRecInHTML("Pd Impact: ", pharmgx
-						.getPdImpactResource().getLabel()));
-			}
-
-			if (pharmgx.getStatementsResource() != null) {
-				String labels = "";
-				for (MLinkedResource statement : pharmgx
-						.getStatementsResource()) {
-					labels += statement.getLabel() + "  ";
-				}
-
-				if (labels.length() >= MAX_STATEMENT)
-					labels = labels.substring(0, MAX_STATEMENT);
-
-				sb2.append(addRecInHTML("Statements: ", labels));
-			}
-
-			if (pharmgx.getDrugRecResource() != null) {
-				sb2.append(addRecInHTML("Drug reaction: ", pharmgx
-						.getDrugRecResource().getLabel()));
-			}
-
-			if (pharmgx.getDoseRecResource() != null) {
-				sb2.append(addRecInHTML("Dose reaction: ", pharmgx
-						.getDoseRecResource().getLabel()));
-			}
-
-			if (pharmgx.getMonitRecResource() != null) {
-				sb2.append(addRecInHTML("Monitor reaction: ", pharmgx
-						.getMonitRecResource().getLabel()));
-			}
-
-			if (pharmgx.getTestRecResource() != null) {
-				sb2.append(addRecInHTML("Test reaction: ", pharmgx
-						.getTestRecResource().getLabel()));
-			}
-
-			/*
-			 * if (pharmgx.getComment() != null) {
-			 * sb2.append(addRecInHTML("Comment: ", pharmgx
-			 * .getComment().getDescription())); }
-			 */
+			sb2.append(labels);
+			sb2.append(values);
 
 			sb2.append(html2);
 			System.out.println(sb2.toString());
@@ -151,7 +129,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 
 	// generate each statements for variables
 	private static String addRecInHTML(String title, String label) {
-		//System.out.println("****" + title + " | " + label);
+		// System.out.println("****" + title + " | " + label);
 		String str = "<tr bgcolor='#DEDEDE'><td>clinical statements from SPLs</td></tr>";
 		str += "<tr><td>" + title;
 		if (label.length() >= MAX_STATEMENT)
