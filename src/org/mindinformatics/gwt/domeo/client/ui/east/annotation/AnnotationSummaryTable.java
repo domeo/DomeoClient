@@ -10,6 +10,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
@@ -70,7 +71,7 @@ public class AnnotationSummaryTable extends Composite
 			if(annotations!=null && annotations.size()>0) {
 				Collections.sort(annotations, new SortByVerticalPostion());
 				for(MAnnotation ann: annotations) {
-					if(ann instanceof MCommentAnnotation || ann instanceof MCurationToken || ann instanceof MAnnotationCitationReference) continue; 
+					if(ann instanceof MLinearCommentAnnotation || ann instanceof MCommentAnnotation || ann instanceof MCurationToken || ann instanceof MAnnotationCitationReference) continue; 
 					ITileComponent c = _domeo.getAnnotationTailsManager().getAnnotationTile(ann.getClass().getName(), _listener);
 					if(c==null) {
 						VerticalPanel vp = new VerticalPanel();

@@ -368,6 +368,7 @@ public class JsonUnmarshallingManager {
 				if(jsonSet.getPermissions().isLocked().equals("true")) set.setIsLocked(true);
 				else set.setIsLocked(false);
 				_domeo.getAnnotationAccessManager().setAnnotationSetAccess(set, jsonSet.getPermissions().getPermissionType());
+
 				if(jsonSet.getPermissions().getPermissionType().equals(IPermissionsOntology.accessGroups)) {
 					Set<IUserGroup> groups = new HashSet<IUserGroup>();
 					for(int ii=0; ii<jsonSet.getPermissions().getPermissionDetails().getAllowedGroups().length(); ii++) {
@@ -379,13 +380,12 @@ public class JsonUnmarshallingManager {
 					}
 					if(groups.size()>0) _domeo.getAnnotationAccessManager().setAnnotationSetGroups(set, groups);
 				}
-				
+
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling annotations");
 				// Unmarshalling annotations
 				JsArray<JavaScriptObject> jsonAnnotations = jsonSet.getAnnotation();
 				for(int j=0; j<jsonAnnotations.length(); j++) {
 					boolean isGeneral = false;
-					
 					if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling annotation selector (" + j + ")");
 					// Selectors
 					ArrayList<MSelector> selectors = new ArrayList<MSelector>();
@@ -425,7 +425,7 @@ public class JsonUnmarshallingManager {
 							}
 						}
 					}
-					
+
 					if(Domeo.verbose) _domeo.getLogger().debug(this, "Detect annotation type (" + j + ")");
 					// Detect annotation type
 					HashSet<String> typesSet = new HashSet<String>();
@@ -880,7 +880,7 @@ public class JsonUnmarshallingManager {
 								}
 							}
 						}
-					
+						
 						if(Domeo.verbose) _domeo.getLogger().debug(this, "Lazy binding (" + j + ")");
 						if(ann!=null) {
 							for(int z=0; z<ann.getSelectors().size(); z++) {
@@ -926,7 +926,7 @@ public class JsonUnmarshallingManager {
 									_domeo.getLogger().exception(this, LOGGING_PREFIX, e.getMessage());
 								}
 							}
-		
+							
 							if(isGeneral) 
 								_domeo.getAnnotationPersistenceManager().addAnnotationOfTargetResource(ann, _domeo.getPersistenceManager().getCurrentResource(), set); 
 							else  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);

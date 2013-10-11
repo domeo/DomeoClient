@@ -130,7 +130,7 @@ public class LLinearCommentListLens extends Composite implements ILensRefresh, I
 					event.stopPropagation();
 				}
 			};
-			
+
 			if(_domeo.getAnnotationAccessManager().isAnnotationSetPublic(_set)) {
 				accessIcon.setResource(Domeo.resources.publicLittleIcon());
 				addSimpleButton(accessPolicy, accessIcon, accessHandler);

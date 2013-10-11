@@ -200,8 +200,8 @@ public class LinearCommentsSummaryTable extends Composite
 								annotation.setTitle(title.getValue());
 							}
 
-							_domeo.getAnnotationPersistenceManager().addAnnotationOfAnnotation(annotation,  _annotations.get(_annotations.size()-1), 
-									_domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_annotations.get(_annotations.size()-1).getLocalId()));
+							_domeo.getAnnotationPersistenceManager().addAnnotationOfAnnotation(annotation,  _root, 
+									_domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_root.getLocalId()));
 
 							ASideTab tab = _domeo.getLinearCommentsSideTab();
 							ASidePanel panel = _domeo.getSidePanelsFacade().getPanelForTab(tab);
@@ -342,7 +342,7 @@ public class LinearCommentsSummaryTable extends Composite
 						_domeo.getPersistenceManager().getCurrentResource(), title.getText(), ta.getText());
 				discussionSet.setType(IDomeoOntology.discussionSet);
 				
-				_domeo.getAnnotationPersistenceManager().addAnnotationOfTargetResource(annotation, _domeo.getPersistenceManager().getCurrentResource(), discussionSet);
+				_domeo.getAnnotationPersistenceManager().addAnnotationOfTargetResource(annotation, _domeo.getPersistenceManager().getCurrentResource(), discussionSet, true);
 
 				ASideTab tab = _domeo.getLinearCommentsSideTab();
 				ASidePanel panel = _domeo.getSidePanelsFacade().getPanelForTab(tab);

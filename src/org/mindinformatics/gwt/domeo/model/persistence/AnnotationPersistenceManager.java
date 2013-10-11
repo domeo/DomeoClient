@@ -21,6 +21,7 @@ import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.framework.component.persistance.src.PersistenceManager;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
@@ -465,7 +466,20 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	
 	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set) {
 		try {
-			setDefaultAnnotationSetAccessPolicy(set);
+			//setDefaultAnnotationSetAccessPolicy(set);
+			allDiscussionsSets.add(set);
+			annotationsOfTargetResource.put(annotation.getLocalId(), targetResource);
+			return addAnnotation(annotation, set);
+		} catch(Exception exc) {
+			_application.getLogger().exception(this, "The annotation creation failed " + annotation.getClass().getName() + "-" + annotation.getLocalId());
+			return false;
+		}
+	}
+	
+	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set, boolean isPublic) {
+		try {
+			if(isPublic) ((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPublic(set);
+			else setDefaultAnnotationSetAccessPolicy(set);
 			allDiscussionsSets.add(set);
 			annotationsOfTargetResource.put(annotation.getLocalId(), targetResource);
 			return addAnnotation(annotation, set);
@@ -572,10 +586,17 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	public void removeAnnotation(MAnnotation annotation, boolean mark) {	
 		try {
 			if(annotation.getSelector() instanceof MAnnotationSelector) {
-				// Remove cross pointers if chaining is implemented
-				ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
-				((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
-				((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().addAll(anns);
+				if(annotation instanceof MCommentAnnotation) {
+					// Remove cross pointers if chaining is implemented
+					ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
+					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
+					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().addAll(anns);
+				} else if(annotation instanceof MLinearCommentAnnotation) {
+					Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
+					//ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
+					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
+					Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
+				}
 			}
 			HashMap<Long, MAnnotation> annotationsByLocalId = annotationsByTypeCache.get(annotation.getClass().getName());
 			annotationsByLocalId.remove(annotation.getLocalId());

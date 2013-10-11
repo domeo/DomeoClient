@@ -29,6 +29,7 @@ public interface IPersistenceManager {
 	public void bindAnnotationOfAnnotation(MAnnotation annotation, MAnnotation targetAnnotation);
 	
 	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set);
+	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set, boolean isPublic);
 	public Collection<Long> getAnnotationOfTargetResource();
 	public int getAnnotationOfTargetResourceSize();
 	
