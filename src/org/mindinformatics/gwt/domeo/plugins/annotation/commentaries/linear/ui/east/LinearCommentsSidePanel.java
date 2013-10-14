@@ -20,6 +20,7 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
@@ -85,10 +86,10 @@ public class LinearCommentsSidePanel extends ASidePanel
 		
 //		Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
 //		if(annLocalIds.size()>0) {
-//			setsListScroller.setHeight((annLocalIds.size()*30) + "px");
-//			body.setCellHeight(setsListScroller, (annLocalIds.size()*30)+"px");
-//		} else
-//		setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
+//			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
+//			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
+//		} else 
+		setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
 		
 		body.setHeight("100%");
 		
@@ -107,11 +108,12 @@ public class LinearCommentsSidePanel extends ASidePanel
 		try {
 			topbar.refresh();
 			table.refresh();
-//			Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
-//			if(annLocalIds.size()>0) {
-//				setsListScroller.setHeight((annLocalIds.size()*47) + "px");
-//				body.setCellHeight(setsListScroller, (annLocalIds.size()*47)+"px");
-//			}
+
+			Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
+			if(annLocalIds.size()>0) {
+				setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
+				body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
+			} else setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
 		} catch (Exception e) {
 			_application.getLogger().exception(this, "Refreshing failed " + e.getMessage());
 		}

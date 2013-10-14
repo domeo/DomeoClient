@@ -220,9 +220,7 @@ public class LinearCommentsSummaryTable extends Composite
 			if(isGeneralComment)
 				_parentPanel.updateStatistics(annotations, annotations.size(), usersIds.size(), threadsCounter);
 			else
-				_parentPanel.updateStatistics(annotations, annotations.size()-1, usersIds.size(), threadsCounter);
-			
-			
+				_parentPanel.updateStatistics(annotations, annotations.size()-1, usersIds.size(), threadsCounter);	
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, e.getMessage());
 		}
