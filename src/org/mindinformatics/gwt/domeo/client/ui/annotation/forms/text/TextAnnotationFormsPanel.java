@@ -91,76 +91,80 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 			forms.add(form);
 		}
 		
-		leftBottomSide.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				int counter = 0;
-				String prefix = highlightBuffer.getPrefix();
-				
-				while(counter<prefix.length() && prefix.substring(prefix.length()-counter-2, prefix.length()-counter-1).trim().length()==0) {
-					counter++;
-				}
-
-				String buffer = prefix.substring(prefix.length()-counter-1);
-				highlightBuffer.setPrefix(prefix.substring(0, prefix.length()-counter-1));
-				highlightBuffer.setExact(buffer + highlightBuffer.getExact());
-				
-				refreshHighlightedText();
-			}
-		});
-		rightBottomSide.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				int counter = 0;
-				String prefix = highlightBuffer.getPrefix();
-				String exact = highlightBuffer.getExact();
-				
-				while(counter<exact.length() && exact.substring(0, counter).trim().length()==0) {
-					counter++;
-				}
-				
-				String buffer = exact.substring(0, counter);
-				highlightBuffer.setPrefix(prefix + buffer);
-				highlightBuffer.setExact(exact.substring(counter));
-				
-				refreshHighlightedText();
-			}
-		});
-		leftTopSide.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				int counter = 0;
-				String exact = highlightBuffer.getExact();
-				
-				while(counter<exact.length() && exact.substring(exact.length()-counter-2, exact.length()-counter-1).trim().length()==0) {
-					counter++;
-				}
-				
-				String buffer = exact.substring(exact.length()-counter-1);
-				highlightBuffer.setExact(exact.substring(0, exact.length()-counter-1));
-				highlightBuffer.setSuffix(buffer + highlightBuffer.getSuffix());
-				
-				refreshHighlightedText();
-			}
-		});
-		rightTopSide.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				int counter = 0;
-				String suffix = highlightBuffer.getSuffix();
-				String exact = highlightBuffer.getExact();
-				
-				while(counter<suffix.length() && suffix.substring(0, counter).trim().length()==0) {
-					counter++;
-				}
-				
-				String buffer = suffix.substring(0, counter);
-				highlightBuffer.setExact(exact + buffer);
-				highlightBuffer.setSuffix(suffix.substring(counter));
-				
-				refreshHighlightedText();
-			}
-		});
+		leftBottomSide.setVisible(false);
+//		leftBottomSide.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				int counter = 0;
+//				String prefix = highlightBuffer.getPrefix();
+//				
+//				while(counter<prefix.length() && prefix.substring(prefix.length()-counter-2, prefix.length()-counter-1).trim().length()==0) {
+//					counter++;
+//				}
+//
+//				String buffer = prefix.substring(prefix.length()-counter-1);
+//				highlightBuffer.setPrefix(prefix.substring(0, prefix.length()-counter-1));
+//				highlightBuffer.setExact(buffer + highlightBuffer.getExact());
+//				
+//				refreshHighlightedText();
+//			}
+//		});
+		rightBottomSide.setVisible(false);
+//		rightBottomSide.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				int counter = 0;
+//				String prefix = highlightBuffer.getPrefix();
+//				String exact = highlightBuffer.getExact();
+//				
+//				while(counter<exact.length() && exact.substring(0, counter).trim().length()==0) {
+//					counter++;
+//				}
+//				
+//				String buffer = exact.substring(0, counter);
+//				highlightBuffer.setPrefix(prefix + buffer);
+//				highlightBuffer.setExact(exact.substring(counter));
+//				
+//				refreshHighlightedText();
+//			}
+//		});
+		leftTopSide.setVisible(false);
+//		leftTopSide.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				int counter = 0;
+//				String exact = highlightBuffer.getExact();
+//				
+//				while(counter<exact.length() && exact.substring(exact.length()-counter-2, exact.length()-counter-1).trim().length()==0) {
+//					counter++;
+//				}
+//				
+//				String buffer = exact.substring(exact.length()-counter-1);
+//				highlightBuffer.setExact(exact.substring(0, exact.length()-counter-1));
+//				highlightBuffer.setSuffix(buffer + highlightBuffer.getSuffix());
+//				
+//				refreshHighlightedText();
+//			}
+//		});
+		rightTopSide.setVisible(false);
+//		rightTopSide.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				int counter = 0;
+//				String suffix = highlightBuffer.getSuffix();
+//				String exact = highlightBuffer.getExact();
+//				
+//				while(counter<suffix.length() && suffix.substring(0, counter).trim().length()==0) {
+//					counter++;
+//				}
+//				
+//				String buffer = suffix.substring(0, counter);
+//				highlightBuffer.setExact(exact + buffer);
+//				highlightBuffer.setSuffix(suffix.substring(counter));
+//				
+//				refreshHighlightedText();
+//			}
+//		});
 		
 		Timer t = new Timer() {
 			@Override
