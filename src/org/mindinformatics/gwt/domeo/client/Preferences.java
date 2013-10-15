@@ -43,7 +43,8 @@ public class Preferences implements IInitializableComponent {
 		prefsManager.putPreferenceItem(prefsFactory.createBooleanPreference(Domeo.PREF_DISPLAY_USER_PROVENANCE, Domeo.class.getName(), true));
 		
 		// Display of annotations for debug
-		prefsManager.putPreferenceItem(prefsFactory.createBooleanPreference(Domeo.PREF_DISPLAY_ANNOTATION_FOR_DEBUG, Domeo.class.getName(), true));
+		prefsManager.putPreferenceItem(prefsFactory.createBooleanPreference(Domeo.PREF_DISPLAY_ANNOTATION_FOR_DEBUG, Domeo.class.getName(), false));
+		
 		prefsManager.putPreferenceItem(prefsFactory.createBooleanPreference(Domeo.PREF_ALLOW_COMMENTING, Domeo.class.getName(), true));
 		prefsManager.putPreferenceItem(prefsFactory.createBooleanPreference(Domeo.PREF_ALLOW_CURATION, Domeo.class.getName(), true));
 		
