@@ -845,8 +845,14 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		        getContentPanel().getAnnotationFrameWrapper().setUrl(url, url);
 		    } else {
 		        getLogger().info(this, "Attempting to open a remote resoruce");
-    			String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
-    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + url, url);
+		        if(!url.endsWith(".pdf")) {
+	    			String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + url, url);
+		        } else {
+		        	String PREFIX = ApplicationUtils.getUrlBase(ApplicationUtils.getUrlString()) + "web/pdf?pdf=";
+		        	String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + url, url);
+		        }
 		    }
 		}
 		
