@@ -181,8 +181,10 @@ public class TSelectionTile extends ATileComponent implements ITileComponent {
 						if(!(annotation.getSelector() instanceof MTargetSelector) && !(annotation.getSelector() instanceof MAnnotationSelector)) {
 							provenance.add(showIcon);
 							provenance.setCellWidth(showIcon, "22px");
-							provenance.add(editIcon);
-							provenance.setCellWidth(editIcon, "22px");
+							if(!(annotation instanceof MSelectionAnnotation)) {
+								provenance.add(editIcon);
+								provenance.setCellWidth(editIcon, "22px");
+							}
 						}
 						provenance.add(deleteIcon);
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
