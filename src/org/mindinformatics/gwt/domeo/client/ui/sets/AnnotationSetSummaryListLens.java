@@ -6,6 +6,7 @@ import org.mindinformatics.gwt.domeo.client.ui.east.sets.AnnotationSetsSidePanel
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.framework.component.ui.lenses.ILensComponent;
 import org.mindinformatics.gwt.framework.widget.EditableLabel;
+import org.mindinformatics.gwt.framework.widget.IEditLabelUpdateHandler;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,7 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class AnnotationSetSummaryListLens extends Composite implements ILensRefresh, ILensComponent {
+public class AnnotationSetSummaryListLens extends Composite implements ILensRefresh, ILensComponent, IEditLabelUpdateHandler {
 
 	interface Binder extends UiBinder<Widget, AnnotationSetSummaryListLens> { }
 	private static final Binder binder = GWT.create(Binder.class);
@@ -65,6 +66,7 @@ public class AnnotationSetSummaryListLens extends Composite implements ILensRefr
 			}
 		});
 		
+		nameEditableField.setLabelUpdateHandler(this);
 		nameEditableField.addValueChangeHandler(new ValueChangeHandler<String>() {
 			@Override
 			public void onValueChange(ValueChangeEvent<String> event) {
@@ -210,5 +212,11 @@ public class AnnotationSetSummaryListLens extends Composite implements ILensRefr
 		panel.clear();
 		img.addClickHandler(clickHandler);
 		panel.add(img);
+	}
+
+	@Override
+	public void labelUpdated() {
+		_domeo.getComponentsManager().updateObjectLenses(_set);
+		_parent.refresh();
 	}
 }

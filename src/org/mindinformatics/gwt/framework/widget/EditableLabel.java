@@ -8,8 +8,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -63,14 +63,14 @@ public class EditableLabel extends Composite implements HasValue<String> {
 			}
 		});
 
-		editBox.addKeyPressHandler(new KeyPressHandler() {
+		editBox.addKeyUpHandler(new KeyUpHandler() {
 
 			@Override
-			public void onKeyPress(KeyPressEvent event) {
+			public void onKeyUp(KeyUpEvent event) {
 
-				if (event.getCharCode() == KeyCodes.KEY_ENTER) {
+				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					switchToLabel();
-				} else if (event.getCharCode() == KeyCodes.KEY_ESCAPE) {
+				} else if (event.getNativeKeyCode() == KeyCodes.KEY_ESCAPE) {
 					editBox.setText(editLabel.getText()); // reset to the
 															// original value
 				}
@@ -78,6 +78,11 @@ public class EditableLabel extends Composite implements HasValue<String> {
 		});
 	}
 
+	IEditLabelUpdateHandler editLabelUpdateHandler;
+	public void setLabelUpdateHandler(IEditLabelUpdateHandler handler) {
+		editLabelUpdateHandler = handler;
+	}
+	
 	public void setReadOnly(boolean readOnly) {
 		this.readOnly = readOnly;
 	}
@@ -98,6 +103,7 @@ public class EditableLabel extends Composite implements HasValue<String> {
 			return;
 		setValue(editBox.getText(), true); // fires events, too
 		deckPanel.showWidget(0);
+		if(editLabelUpdateHandler!=null) editLabelUpdateHandler.labelUpdated();
 	}
 
 	@Override
