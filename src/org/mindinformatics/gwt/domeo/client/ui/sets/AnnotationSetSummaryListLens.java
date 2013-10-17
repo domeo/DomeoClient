@@ -5,6 +5,7 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.east.sets.AnnotationSetsSidePanel;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.framework.component.ui.lenses.ILensComponent;
+import org.mindinformatics.gwt.framework.model.users.IUserGroup;
 import org.mindinformatics.gwt.framework.widget.EditableLabel;
 import org.mindinformatics.gwt.framework.widget.IEditLabelUpdateHandler;
 
@@ -155,6 +156,16 @@ public class AnnotationSetSummaryListLens extends Composite implements ILensRefr
 			} else if(_domeo.getAnnotationAccessManager().isAnnotationSetGroups(_set)) {
 				accessIcon.setResource(Domeo.resources.friendsLittleIcon());
 				addSimpleButton(accessPolicy, accessIcon, accessHandler);
+				
+				int counter = 0;
+				StringBuffer sb = new StringBuffer();
+				for(IUserGroup group: _domeo.getAnnotationAccessManager().getAnnotationSetGroups(_set)) {
+					sb.append(group.getName());
+					counter++;
+					if(counter<_domeo.getAnnotationAccessManager().getAnnotationSetGroups(_set).size()) sb.append(", ");					
+				}
+				accessIcon.setTitle(sb.toString());
+				
 			} else if(_domeo.getAnnotationAccessManager().getAnnotationSetAccess(_set).equals(_domeo.getAgentManager().getUserPerson().getUri())) {
 				accessIcon.setResource(Domeo.resources.privateLittleIcon());
 				addSimpleButton(accessPolicy, accessIcon, accessHandler);

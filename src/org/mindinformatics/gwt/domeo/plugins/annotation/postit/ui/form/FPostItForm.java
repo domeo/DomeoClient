@@ -25,7 +25,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -319,7 +318,9 @@ public class FPostItForm extends AFormComponent implements IResizable, IAllowsMu
 		// buttonsPanelSpacer.clear();
 		// buttonsPanelSpacer.add(new HTML(Window.getClientWidth() + " - "+_manager.getContainerWidth() + " - " + Math.max(0, (_manager.getContainerWidth()-300)) + "px"));
 		//buttonsPanelSpacer.setWidth(((Window.getClientWidth()-_manager.getContainerWidth())-70) + "px");
+		//_domeo.getLogger().exception(this, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
 		buttonsPanelSpacer.setWidth(Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		//_domeo.getLogger().exception(this, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
 		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
 		
 		headerPanel.setCellWidth(buttonsPanelSpacer, Math.max(0, (_manager.getContainerWidth()-300)) + "px");

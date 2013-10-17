@@ -36,16 +36,16 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class AnnotationSetLens extends Composite implements ILensRefresh, ILensComponent {
+public class AnnotationSetInfoLens extends Composite implements ILensRefresh, ILensComponent {
 
 	public static final String DESCRIPTION_CAPTION = "<type description here>";
 	
-	interface Binder extends UiBinder<Widget, AnnotationSetLens> { }
+	interface Binder extends UiBinder<Widget, AnnotationSetInfoLens> { }
 	private static final Binder binder = GWT.create(Binder.class);
 	
 	private IDomeo _domeo;
 	private MAnnotationSet _set;
-	private AnnotationSetLens _this;
+	private AnnotationSetInfoLens _this;
 	private AnnotationSetsSidePanel _parent;
 	
 	@UiField VerticalPanel body;
@@ -78,7 +78,7 @@ public class AnnotationSetLens extends Composite implements ILensRefresh, ILensC
         String activeIcon();
     }
 	
-	public AnnotationSetLens(IDomeo domeo, final AnnotationSetsSidePanel parent) {
+	public AnnotationSetInfoLens(IDomeo domeo, final AnnotationSetsSidePanel parent) {
 		_domeo = domeo;
 		_parent = parent;
 		

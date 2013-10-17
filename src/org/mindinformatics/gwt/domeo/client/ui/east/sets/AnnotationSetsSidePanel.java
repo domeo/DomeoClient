@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
-import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationSetLens;
+import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationSetInfoLens;
 import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationSetSummaryListLens;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.framework.component.IAnnotationRefreshableComponent;
@@ -42,7 +42,7 @@ public class AnnotationSetsSidePanel extends ASidePanel implements IInitializabl
 	
 	private IDomeo _domeo;
 	private MAnnotationSet _setInfo;
-	private AnnotationSetLens _lensInfo;
+	private AnnotationSetInfoLens _lensInfo;
 	private AnnotationSetsSidePanelTopbar topbar;
 	
 	private List<AnnotationSetSummaryListLens> lenses;
@@ -151,7 +151,7 @@ public class AnnotationSetsSidePanel extends ASidePanel implements IInitializabl
 		_setInfo = set;
 		info.clear();
 		
-		_lensInfo = new AnnotationSetLens((IDomeo) _application, this);
+		_lensInfo = new AnnotationSetInfoLens((IDomeo) _application, this);
 		_application.getComponentsManager().registerObjectLens(set, _lensInfo);
 		_lensInfo.initialize(set);
 		info.add(_lensInfo);
