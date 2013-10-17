@@ -213,7 +213,7 @@ public class TLinearCommentTile extends ATileComponent implements ITileComponent
 					_domeo.getAnnotationPersistenceManager().addAnnotationOfAnnotation(annotation,  ann, 
 							_domeo.getAnnotationPersistenceManager().getSetByAnnotationId(ann.getLocalId()));
 
-					ASideTab tab = _domeo.getDiscussionSideTab();
+					ASideTab tab = _domeo.getLinearCommentsSideTab();
 					ASidePanel panel = _domeo.getSidePanelsFacade().getPanelForTab(tab);
 					((ICommentsRefreshableComponent)panel).refreshFromRoot();
 					_domeo.refreshAnnotationComponents();

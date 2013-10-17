@@ -111,33 +111,11 @@ public class LinearCommentsSidePanelTopbar  extends Composite
 		secondLineTopbar.clear();
 
 		if(numberComments>0 && numberUsers>0) {
-			/*
-			threadsCounter++;
-			Label l = new Label(threadsCounter + ((threadsCounter==1) ? " Thread": " Threads"));
-			l.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-					CommentsViewerPanel lwp = new CommentsViewerPanel(_domeo, annotations);
-					new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), false, false, false);
-				}
-			});
-			explorePanelLabel.clear();
-			explorePanelLabel.add(l);
-			explorePanelLabel.setWidth("60px");
-			*/
-			
 			HorizontalPanel socialPanel = new HorizontalPanel();
 			
 			Resources resource = Domeo.resources;
-			
-			//Image commentIcon = new Image(resource.littleCommentsIcon());
-			
+
 			String label =  (numberComments==1) ? " comment by": " comments by";
-			
-			//commentIcon.setTitle("Comment on Item");
-		//	commentIcon.setStyleName(ATileComponent.tileResources.css().button());
-			//commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
-			//socialPanel.add(commentIcon);
 			socialPanel.add(new Label("Thread with " + numberComments + label));
 			
 			Image usersIcon = new Image(resource.usersIcon());
