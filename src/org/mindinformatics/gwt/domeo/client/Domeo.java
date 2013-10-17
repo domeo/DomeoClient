@@ -552,7 +552,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		if(((BooleanPreference)getPreferences().getPreferenceItem(Domeo.class.getName(), 
 				Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
 			LinearCommentsSidePanel commentsSidePanel = new LinearCommentsSidePanel(this, sidePanelsFacade, discussionSideTab);
-			sidePanelsFacade.registerSideComponent(commentsSideTab, commentsSidePanel,  (CommentSideTab.HEIGHT+16) + "px");
+			sidePanelsFacade.registerSideComponent(commentsSideTab, commentsSidePanel,  (LinearCommentsSideTab.HEIGHT+16) + "px");
 		}
 		
 		if(((BooleanPreference)this.getPreferences().
