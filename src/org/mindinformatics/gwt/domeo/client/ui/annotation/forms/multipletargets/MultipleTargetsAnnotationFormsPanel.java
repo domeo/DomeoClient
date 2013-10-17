@@ -29,6 +29,7 @@ import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -90,6 +91,7 @@ public class MultipleTargetsAnnotationFormsPanel extends AFormsManager implement
 		initializeForms();
 	}
 	
+	// Editing
 	public MultipleTargetsAnnotationFormsPanel(IDomeo domeo, final MAnnotation annotation) {
 		_domeo = domeo;
 		_title = TITLE_EDIT;
@@ -139,9 +141,18 @@ public class MultipleTargetsAnnotationFormsPanel extends AFormsManager implement
 			if(formGenerator!=null) {
 				AFormComponent form = formGenerator.getForm(this, _annotation);
 				form.setWidth("600px");
+				if(form instanceof IResizable) forms.add(form);
 				tabToolsPanel.add(form, form.getTitle());
 			}
 		}
+
+		Timer t = new Timer() {
+			@Override
+			public void run() {
+				resized();
+			}
+		};
+		t.schedule(200);
 	}
 	
 	public void refreshTargets() {
