@@ -12,8 +12,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
  */
 public class LinearCommentsSideTab extends ASideTab {
 
-	private static final String TITLE = "Comments";
-	public static final Integer HEIGHT = 76;
+	private static final String TITLE = "Discussions";
+	public static final Integer HEIGHT = 84;
 	private static final String HEIGHT_PX = HEIGHT + "px";
 	
 	public LinearCommentsSideTab(IApplication application, SidePanelsFacade facade) {
