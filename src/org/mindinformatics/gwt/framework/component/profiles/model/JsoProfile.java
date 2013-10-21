@@ -31,4 +31,9 @@ public class JsoProfile extends JavaScriptObject implements IProfile {
 	public final native JsArray<JsoProfileEntry> getStatusPlugins() /*-{
 	    return this.plugins || [];
 	}-*/;
+	
+	// Plugins map
+	public final native JsArray<JsoProfileEntry> getStatusFeatures() /*-{
+	    return this.features || [];
+	}-*/;
 }

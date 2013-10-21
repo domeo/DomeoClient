@@ -10,7 +10,9 @@ import org.mindinformatics.gwt.domeo.component.sharing.ui.SharingOptionsViewer;
 import org.mindinformatics.gwt.domeo.component.textmining.ui.TextMiningServicePicker;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
+import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarHorizontalPanel;
 import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarHorizontalTogglePanel;
 import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarItemsGroup;
 import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarPanel;
@@ -351,7 +353,11 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 		
 		//commandsGroup.addItem(analyzeButtonPanel);
 		//commandsGroup.addItem(analyzeButtonPanel2);
-		commandsGroup.addItem(analyzeButtonPanel);
+		
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_ANALYZE)) {
+			commandsGroup.addItem(analyzeButtonPanel);
+		}
+		
 		commandsGroup.addItem(saveButton);
 		
 		toolbar.registerGroup(commandsGroup);
@@ -361,8 +367,35 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 		
 		toolbar.addToRightPanel(sp);
 		toolbar.addToRightPanel(shareButton);
-		toolbar.addToRightPanel(settingsButton);
-		toolbar.addToRightPanel(helpButton);
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PREFERENCES)) {
+			toolbar.addToRightPanel(settingsButton);
+		}
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_HELP)) {
+			toolbar.addToRightPanel(helpButton);
+		}
+		if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_BRANDING)) {
+			ToolbarHorizontalPanel domeoButton = new ToolbarHorizontalPanel(
+				_domeo, new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						ToolbarPopup popup = new ToolbarPopup(_domeo, "Domeo", Domeo.resources.domeoAnnotateColorIcon().getSafeUri().asString());
+						popup.setWidth(POPUP_WIDTH + "px");
+						popup.setPopupPosition(Window.getClientWidth()-(Integer.parseInt(POPUP_WIDTH)+48), -6); //25
+						popup.setAnimationEnabled(false);
+						popup.addButtonPanel(_applicationResources.allLinkIcon().getSafeUri().asString(), "Current Workspace", new ClickHandler() {
+							@Override
+							public void onClick(ClickEvent event) {
+								if(!_domeo.isLocalResources() && !_domeo.isHostedMode() && _domeo.getPersistenceManager().isResourceLoaded()) {
+									SharingOptionsViewer lwp = new SharingOptionsViewer(_domeo);
+									new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), 440, false, false, false);
+								}
+							}
+						});
+						popup.show();
+					}
+				}, Domeo.resources.domeoLogoIcon().getSafeUri().asString(), "Domeo","Domeo");		
+			toolbar.addToBrandingPanel(domeoButton, "60px");
+		}
 		
 		initWidget(toolbar);
 	}

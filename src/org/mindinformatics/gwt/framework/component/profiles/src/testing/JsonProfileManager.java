@@ -94,6 +94,13 @@ public class JsonProfileManager extends AProfileManager {
 								JsoProfileEntry entry = plugins.get(i);
 								profile.getPlugins().put(entry.getName(), entry.getStatus());
 							}
+							
+							JsArray<JsoProfileEntry> features = jsoProfile.getStatusFeatures();
+							for(int i=0; i<features.length(); i++) {
+								JsoProfileEntry entry = features.get(i);
+								profile.getFeatures().put(entry.getName(), entry.getStatus());
+							}
+							
 							userProfiles.add(profile);
 						}
 
@@ -170,6 +177,12 @@ public class JsonProfileManager extends AProfileManager {
 							profile.getPlugins().put(entry.getName(), entry.getStatus());
 						}
 						
+						JsArray<JsoProfileEntry> features = jsoProfile.getStatusFeatures();
+						for(int i=0; i<features.length(); i++) {
+							JsoProfileEntry entry = features.get(i);
+							profile.getFeatures().put(entry.getName(), entry.getStatus());
+						}
+						
 						setCurrentProfile(profile);
 						stageCompleted();
 					} else {
@@ -190,6 +203,7 @@ public class JsonProfileManager extends AProfileManager {
 	    builder.setHeader("Content-type", "application/json");
 
 	    HashMap<String, String> pluginsStatus = callback.getPluginsStatus();
+	    HashMap<String, String> featuresStatus = callback.getFeaturesStatus();
 	    
 	    StringBuffer postData=new StringBuffer();
 		postData.append("["); 
@@ -220,8 +234,8 @@ public class JsonProfileManager extends AProfileManager {
 		postData.append("\"");
 		postData.append("      }");
 		postData.append("     ],");
-		postData.append("    \"statusplugins\": [");
 		
+		postData.append("    \"statusplugins\": [");
 		for(String key: pluginsStatus.keySet()) {
 			postData.append("      {");
 			postData.append("        \"uuid\": \"");
@@ -231,9 +245,22 @@ public class JsonProfileManager extends AProfileManager {
 			postData.append(pluginsStatus.get(key));
 			postData.append("\"");
 			postData.append("      },");
-		}
+		}	
+		postData.append("     ],");
 		
+		postData.append("    \"statusfeatures\": [");
+		for(String key: featuresStatus.keySet()) {
+			postData.append("      {");
+			postData.append("        \"uuid\": \"");
+			postData.append(key);
+			postData.append("\",");
+			postData.append("        \"status\": \"");
+			postData.append(featuresStatus.get(key));
+			postData.append("\"");
+			postData.append("      },");
+		}	
 		postData.append("     ]");
+		
 		postData.append("  }"); 
 		postData.append("]");
 	    
@@ -267,6 +294,12 @@ public class JsonProfileManager extends AProfileManager {
 							profile.getPlugins().put(entry.getName(), entry.getStatus());
 						}
 						
+						JsArray<JsoProfileEntry> features = jsoProfile.getStatusFeatures();
+						for(int i=0; i<features.length(); i++) {
+							JsoProfileEntry entry = features.get(i);
+							profile.getFeatures().put(entry.getName(), entry.getStatus());
+						}
+						
 						setCurrentProfile(profile);
 						callback.updateCurrentProfile();
 					} else {
@@ -291,6 +324,7 @@ public class JsonProfileManager extends AProfileManager {
 	    builder.setHeader("Content-type", "application/json");
 	    
 	    HashMap<String, String> pluginsStatus = callback.getPluginsStatus();
+	    HashMap<String, String> featuresStatus = callback.getFeaturesStatus();
 	    
 	    StringBuffer postData=new StringBuffer();
 		postData.append("["); 
@@ -334,8 +368,21 @@ public class JsonProfileManager extends AProfileManager {
 			postData.append("\"");
 			postData.append("      },");
 		}
+		postData.append("     ],");
 		
+		postData.append("    \"statusfeatures\": [");
+		for(String key: featuresStatus.keySet()) {
+			postData.append("      {");
+			postData.append("        \"uuid\": \"");
+			postData.append(key);
+			postData.append("\",");
+			postData.append("        \"status\": \"");
+			postData.append(featuresStatus.get(key));
+			postData.append("\"");
+			postData.append("      },");
+		}	
 		postData.append("     ]");
+		
 		postData.append("  }"); 
 		postData.append("]");
 	    

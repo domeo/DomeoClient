@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.component.profiles.model.MProfile;
 
 import com.google.gson.JsonElement;
@@ -93,10 +94,55 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print("foafx:Person");
 					out.print("\",");
 					out.print("\"name\": \"");
-					out.print(profile.getLastSavedBy().getName()+'\n');
+					out.print(profile.getLastSavedBy().getName());
 					out.print("\"");
 					out.print("}");
+					
+					
+					// FEATURES
 					out.print("],");
+					out.print("\"features\": [");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_ANALYZE);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_PREFERENCES);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_HELP);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_BRANDING);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("}");
+					
+					out.print("],");
+					
+			
+					// PLUGINS
 					out.print("\"plugins\": [");
 					
 					out.print("{");

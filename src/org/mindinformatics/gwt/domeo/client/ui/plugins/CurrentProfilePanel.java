@@ -374,5 +374,22 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 		}
 		return pluginsStatus;
 	}
+	
+	@Override
+	public HashMap<String, String> getFeaturesStatus() {
+		HashMap<String, String> feturesStatus = new HashMap<String, String>();
+		/*
+		for (APlugin plugin : _domeo.getPluginsManager().getPluginsList()) {
+			if(plugin.getMandatory()){
+	    	} else if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(plugin.getPluginName())) {
+				pluginsStatus.put(plugin.getPluginName(), IProfile.PLUGIN_ENABLED);
+	    	} else {
+	    		pluginsStatus.put(plugin.getPluginName(), IProfile.PLUGIN_DISABLED);
+	    	}	 
+		}
+		*/
+		
+		return feturesStatus;
+	}
 }
 

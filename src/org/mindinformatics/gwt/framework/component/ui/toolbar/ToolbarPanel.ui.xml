@@ -28,5 +28,9 @@
 	  		<g:HorizontalPanel ui:field='rightPanel' styleName='{style.rightPanel}'>
 	  		</g:HorizontalPanel>
 	  	</g:cell>
+	  	<g:cell>
+	  		<g:HorizontalPanel ui:field='brandingPanel' styleName='{style.rightPanel}'>
+	  		</g:HorizontalPanel>
+	  	</g:cell>
   	</g:HorizontalPanel>
 </ui:UiBinder>

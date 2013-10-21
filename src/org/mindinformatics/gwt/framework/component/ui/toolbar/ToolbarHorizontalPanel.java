@@ -40,8 +40,8 @@ public class ToolbarHorizontalPanel extends Composite implements IToolbarItem {
 		
 		img = new Image(icon);
 		img.setTitle(tooltip);
-		img.setHeight("24px");
-		img.setWidth("24px");
+		//img.setHeight("24px");
+		//img.setWidth("24px");
 		
 		labelPanel = new HTML(label);
 		labelPanel.setTitle(tooltip);

@@ -23,7 +23,7 @@ public class MProfile implements IProfile, Serializable, IsSerializable {
 	
 
 	/*
-	 * This stores the list of the activated plugins for a  
+	 * This stores the list of the activated plugins   
 	 */
 	private HashMap<String, String> pluginsMap = new HashMap<String, String>();
 	
@@ -52,6 +52,35 @@ public class MProfile implements IProfile, Serializable, IsSerializable {
 	
 	public HashMap<String, String> getPlugins() {
 		return pluginsMap;
+	}
+	
+	private HashMap<String, String> featuresMap = new HashMap<String, String>();
+	
+	/**
+	 * @param plugin		The full name of the feature
+	 * @param preference	The preference value (enabled/disabled)
+	 * @return True if the value has been modified
+	 */
+	public boolean addFeaturePreference(String featureName, String preference) {
+		changed = true;
+		return (featuresMap.put(featureName, preference)!=null);
+	}
+	
+	/**
+	 * @param pluginName	The full name of the plugin
+	 * @return True if the plugin is enabled
+	 */
+	public boolean isFeatureEnabled(String featureName) {
+		if(featureName.equals("")) return true;
+		return (featuresMap.get(featureName)!=null && featuresMap.get(featureName).equals(PLUGIN_ENABLED));
+	}
+	
+	public boolean isFeatureDisabled(String pluginName) {
+		return (featuresMap.get(pluginName)!=null && featuresMap.get(pluginName).equals(PLUGIN_DISABLED));
+	}
+	
+	public HashMap<String, String> getFeatures() {
+		return featuresMap;
 	}
 	
 	public void setAsChanged() {

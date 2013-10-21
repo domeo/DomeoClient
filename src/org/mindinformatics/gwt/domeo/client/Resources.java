@@ -28,6 +28,9 @@ public interface Resources extends ClientBundle,
 		String tags();
 	}
 	
+	@Source("org/mindinformatics/gwt/domeo/client/icons/logo_icon16px.png")
+	ImageResource domeoLogoIcon();
+	
 	@Source("org/mindinformatics/gwt/domeo/client/icons/addCommentsIcon_16.png")
 	ImageResource adddCommentsIcon();
 	
