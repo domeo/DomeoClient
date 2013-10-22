@@ -28,6 +28,10 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.persistence.Persistence"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.persistence.json.JsonPersistence"/>
   
+  <!-- Filters  -->
+  <inherits name="org.mindinformatics.gwt.domeo.component.filters.Filters"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.filters.elsevier.ElsevierFilter"/>
+  
   <!-- Highlight  -->
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.ContentAsRdf"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.curation.Curation"/>

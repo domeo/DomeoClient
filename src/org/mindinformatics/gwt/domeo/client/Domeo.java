@@ -53,6 +53,7 @@ import org.mindinformatics.gwt.domeo.client.ui.east.sets.AnnotationSetsSidePanel
 import org.mindinformatics.gwt.domeo.client.ui.toolbar.DomeoToolbarPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.src.ImagesCache;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
+import org.mindinformatics.gwt.domeo.component.filters.src.UrlFiltersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.LinkedDataDigestersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.model.JsoLinkedDataResource;
 import org.mindinformatics.gwt.domeo.component.textmining.src.TextMiningRegistry;
@@ -61,8 +62,6 @@ import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineResource;
 import org.mindinformatics.gwt.domeo.model.accesscontrol.AnnotationAccessManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSidePanel;
-import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSideTab;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.tile.CommentTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east.LinearCommentsSidePanel;
@@ -111,6 +110,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.tile.Qualif
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.info.SelectionPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.ui.tile.SelectionTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.filters.elsevier.src.ScienceDirectUrlFilter;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
@@ -239,6 +239,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	AnnotationAccessManager accessManager;
 	ContentExtractorsManager extractorsManager;
 	ClipboardManager clipboardManager;
+	UrlFiltersManager urlFiltersManager;
 	
 	// ========================================================================
 	// Annotation Tails Manager
@@ -572,6 +573,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			sidePanelsFacade.registerSideComponent(annotationsDebugSideTab, annotationDebugSidePanel, (AnnotationDebugSideTab.HEIGHT+16) + "px");
 		}
 		
+		// Filters
+        urlFiltersManager = new UrlFiltersManager();
+        urlFiltersManager.registerFilter(new ScienceDirectUrlFilter());
+		
 		// -----------------------------------
 		//  TEXT MINING SERVICES REGISTRATION
 		// ===================================
@@ -845,6 +850,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		        getContentPanel().getAnnotationFrameWrapper().setUrl(url, url);
 		    } else {
 		        getLogger().info(this, "Attempting to open a remote resoruce");
+		        
+		    	// Filters: can modify the requested URL to reach an appropriate version of the resource
+		        url = urlFiltersManager.filter(url);
+		        
 		        if(!url.endsWith(".pdf")) {
 	    			String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
 	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + url, url);
