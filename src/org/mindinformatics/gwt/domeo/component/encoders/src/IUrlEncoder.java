@@ -18,27 +18,38 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.mindinformatics.gwt.domeo.component.filters.src;
-
-import java.util.ArrayList;
+package org.mindinformatics.gwt.domeo.component.encoders.src;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class UrlFiltersManager {
+public interface IUrlEncoder {
+	
+	/**
+	 * Checks if the implementation filter applies to the URL.
+	 * @param url	The requested URL
+	 * @return True if the filter applies to the URL
+	 */
+	public boolean doesEncoderApply(String url);
+	
+	/**
+	 * Encode the requested URL and provides a more suitable one.
+	 * @param url	The requested URL
+	 * @return The revised URL to be opened
+	 */
+	public String encodeUrl(String url);
 
-	ArrayList<IUrlFilter> filters = new ArrayList<IUrlFilter>();
+	/**
+	 * Checks if the implementation filter applies to the URL.
+	 * @param url	The requested URL
+	 * @return True if the filter applies to the URL
+	 */
+	public boolean doesDecoderApply(String url);
 	
-	public void registerFilter(IUrlFilter filter) {
-		filters.add(filter);
-	}
-	
-	public String filter(String url) {
-		for(IUrlFilter filter: filters) {
-			if(filter.doesFilterApply(url)) {
-				return filter.filterUrl(url);
-			}
-		}
-		return url;
-	}
+	/**
+	 * Decode the requested URL and provides a more suitable one for persistence.
+	 * @param url	The requested URL
+	 * @return The revised URL to be persisted.
+	 */
+	public String decodeUrl(String url);
 }

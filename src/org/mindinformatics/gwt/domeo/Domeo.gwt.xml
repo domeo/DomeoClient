@@ -29,8 +29,8 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.persistence.json.JsonPersistence"/>
   
   <!-- Filters  -->
-  <inherits name="org.mindinformatics.gwt.domeo.component.filters.Filters"/>
-  <inherits name="org.mindinformatics.gwt.domeo.plugins.filters.elsevier.ElsevierFilter"/>
+  <inherits name="org.mindinformatics.gwt.domeo.component.encoders.Encoders"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.ElsevierEncoder"/>
   
   <!-- Highlight  -->
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.ContentAsRdf"/>

@@ -64,6 +64,10 @@ public class ApplicationUtils {
 		return $wnd.provideExamplesUrls;
 	}-*/;
 	
+	public native static String getDebugActivated() /*-{
+		return $wnd.debugActivated;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;

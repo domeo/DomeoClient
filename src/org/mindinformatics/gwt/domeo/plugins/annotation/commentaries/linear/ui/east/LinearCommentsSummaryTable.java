@@ -170,6 +170,7 @@ public class LinearCommentsSummaryTable extends Composite
 					
 					final TextBox title = new TextBox();
 					title.setWidth("431px");
+					title.setText("Discussion topic");
 					title.setVisible(false);
 					bottomContent.add(title);
 					
@@ -188,7 +189,7 @@ public class LinearCommentsSummaryTable extends Composite
 						@Override
 						public void onClick(ClickEvent event) {
 
-							if(ta.getText().trim().length()==0) return; 
+							if(ta.getText().trim().length()==0 || title.getText().trim().equals("Discussion topic")) return; 
 							// Decide if an annotation has to react to the main annotation of the thread or if reacts to the previous one in the list
 							//MAnnotationSelector selector = AnnotationFactory.createAnnotationSelector(_domeo.getAgentManager().getUserPerson(), 
 							//		_domeo.getPersistenceManager().getCurrentResource(), _annotations.get(_annotations.size()-1));
@@ -315,19 +316,22 @@ public class LinearCommentsSummaryTable extends Composite
 		topContent.setVisible(true);
 		
 		final TextBox title = new TextBox();
+		title.setText("Discussion topic");
 		title.setWidth("431px");
 		content.add(title);
+		
 		
 		final TextArea ta = new TextArea();
 	    ta.setCharacterWidth(68);
 	    ta.setVisibleLines(5);
+	   
 		content.add(ta);
 
 		Button bu = new Button("Post message");
 		bu.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				if(ta.getText().trim().length()==0) return; 
+				if(ta.getText().trim().length()==0 || title.getText().trim().equals("Discussion topic")) return; 
 				MTargetSelector selector = AnnotationFactory.createTargetSelector(_domeo.getAgentManager().getUserPerson(), 
 						_domeo.getPersistenceManager().getCurrentResource());
 				MLinearCommentAnnotation annotation = LinearCommentsFactory.createLinearComment(_domeo.getAgentManager().getUserPerson(),

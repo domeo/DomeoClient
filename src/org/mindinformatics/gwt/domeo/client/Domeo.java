@@ -53,7 +53,7 @@ import org.mindinformatics.gwt.domeo.client.ui.east.sets.AnnotationSetsSidePanel
 import org.mindinformatics.gwt.domeo.client.ui.toolbar.DomeoToolbarPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.src.ImagesCache;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
-import org.mindinformatics.gwt.domeo.component.filters.src.UrlFiltersManager;
+import org.mindinformatics.gwt.domeo.component.encoders.src.UrlEncodersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.LinkedDataDigestersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.model.JsoLinkedDataResource;
 import org.mindinformatics.gwt.domeo.component.textmining.src.TextMiningRegistry;
@@ -110,7 +110,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.tile.Qualif
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.info.SelectionPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.ui.tile.SelectionTileProvider;
-import org.mindinformatics.gwt.domeo.plugins.filters.elsevier.src.ScienceDirectUrlFilter;
+import org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.src.ScienceDirectUrlFilter;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
@@ -239,7 +239,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	AnnotationAccessManager accessManager;
 	ContentExtractorsManager extractorsManager;
 	ClipboardManager clipboardManager;
-	UrlFiltersManager urlFiltersManager;
+	UrlEncodersManager urlFiltersManager;
 	
 	// ========================================================================
 	// Annotation Tails Manager
@@ -574,7 +574,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		
 		// Filters
-        urlFiltersManager = new UrlFiltersManager();
+        urlFiltersManager = new UrlEncodersManager();
         urlFiltersManager.registerFilter(new ScienceDirectUrlFilter());
 		
 		// -----------------------------------

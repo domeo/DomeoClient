@@ -17,7 +17,7 @@ import org.mindinformatics.gwt.framework.component.pipelines.src.Stage;
  */
 public class GenericDocumentPipeline extends APipeline implements IContentExtractor {
 
-	public static final String PREFIX = "http://";
+	public static final String PREFIX = "http";
 	public static final String LABEL = "Generic Document Extractor";
 	public static final String SHORT = "Generic";
 	

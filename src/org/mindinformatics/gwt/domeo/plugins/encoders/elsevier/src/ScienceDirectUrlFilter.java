@@ -18,29 +18,43 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.mindinformatics.gwt.domeo.plugins.filters.elsevier.src;
+package org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.src;
 
-import org.mindinformatics.gwt.domeo.component.filters.src.IUrlFilter;
+import org.mindinformatics.gwt.domeo.component.encoders.src.IUrlEncoder;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class ScienceDirectUrlFilter implements IUrlFilter {
+public class ScienceDirectUrlFilter implements IUrlEncoder {
 
-	public final String KEYS = "apiKey=&Insttoken=";
+	public final String KEYS = "apiKey=key&Insttoken=token";
 
 	@Override
-	public boolean doesFilterApply(String url) {
+	public boolean doesEncoderApply(String url) {
 		// TODO Auto-generated method stub
 		return url.startsWith("http://www.sciencedirect.com/science/article/pii/");
 	}
 	
 	@Override
-	public String filterUrl(String url) {
+	public String encodeUrl(String url) {
 		if(url.startsWith("http://www.sciencedirect.com/science/article/pii/")) {
 			String prefix = url.replaceAll("http://www.sciencedirect.com/science/article/pii/", "https://api.elsevier.com/content/article/PII:");
 			String postfix = "?httpAccept=text/html&";
 			return prefix + postfix + KEYS;
+		}
+		return url;
+	}
+	
+	@Override
+	public boolean doesDecoderApply(String url) {
+		return url.startsWith("https://api.elsevier.com/content/article/");
+	}
+
+	@Override
+	public String decodeUrl(String url) {
+		if(url.startsWith("https://api.elsevier.com/content/article/PII:")) {
+			String pii = url.substring(45, url.indexOf("?"));
+			return "http://www.sciencedirect.com/science/article/pii/" + pii;
 		}
 		return url;
 	}

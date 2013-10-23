@@ -1,7 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model;
 
-import java.util.ArrayList;
-
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 
@@ -11,7 +9,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 @SuppressWarnings("serial")
 public class MLinearCommentAnnotation extends MAnnotation {
 
-	public static final String LABEL = "Linear Comment";
+	public static final String LABEL = "Comment";
 	public static final String TYPE = "ao:LinearComment";
 	
 	private String title;
