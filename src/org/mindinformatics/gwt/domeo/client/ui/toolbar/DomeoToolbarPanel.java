@@ -378,20 +378,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 				_domeo, new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						ToolbarPopup popup = new ToolbarPopup(_domeo, "Domeo", Domeo.resources.domeoAnnotateColorIcon().getSafeUri().asString());
-						popup.setWidth(POPUP_WIDTH + "px");
-						popup.setPopupPosition(Window.getClientWidth()-(Integer.parseInt(POPUP_WIDTH)+48), -6); //25
-						popup.setAnimationEnabled(false);
-						popup.addButtonPanel(_applicationResources.allLinkIcon().getSafeUri().asString(), "Current Workspace", new ClickHandler() {
-							@Override
-							public void onClick(ClickEvent event) {
-								if(!_domeo.isLocalResources() && !_domeo.isHostedMode() && _domeo.getPersistenceManager().isResourceLoaded()) {
-									SharingOptionsViewer lwp = new SharingOptionsViewer(_domeo);
-									new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), 440, false, false, false);
-								}
-							}
-						});
-						popup.show();
+						ApplicationUtils.openUrl("http://annotationframework.org");
 					}
 				}, Domeo.resources.domeoLogoIcon().getSafeUri().asString(), "Domeo","Domeo");		
 			toolbar.addToBrandingPanel(domeoButton, "60px");
