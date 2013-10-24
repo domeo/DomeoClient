@@ -239,7 +239,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	AnnotationAccessManager accessManager;
 	ContentExtractorsManager extractorsManager;
 	ClipboardManager clipboardManager;
-	UrlEncodersManager urlFiltersManager;
+	UrlEncodersManager urlEncodersManager;
 	
 	// ========================================================================
 	// Annotation Tails Manager
@@ -574,8 +574,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		
 		// Filters
-        urlFiltersManager = new UrlEncodersManager();
-        urlFiltersManager.registerFilter(new ScienceDirectUrlFilter());
+        urlEncodersManager = new UrlEncodersManager();
+        urlEncodersManager.registerFilter(new ScienceDirectUrlFilter());
 		
 		// -----------------------------------
 		//  TEXT MINING SERVICES REGISTRATION
@@ -849,23 +849,25 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		        getLogger().info(this, "Attempting to open a local resoruce");
 		        getContentPanel().getAnnotationFrameWrapper().setUrl(url, url);
 		    } else {
-		        getLogger().info(this, "Attempting to open a remote resoruce");
+		        getLogger().info(this, "Attempting to open a remote resoruce " + url);
 		        
 		    	// Filters: can modify the requested URL to reach an appropriate version of the resource
-		        url = urlFiltersManager.filter(url);
+		        String filteredUrl = urlEncodersManager.filter(url);
+		        getLogger().info(this, "Filtered URL " + filteredUrl);
+		        String proxyUrl = (filteredUrl.equals(url))?url:filteredUrl;
+		        
+		        getLogger().info(this, "Proxy URL " + proxyUrl);
 		        
 		        if(!url.endsWith(".pdf")) {
 	    			String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
-	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + url, url);
+	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + proxyUrl, url);
 		        } else {
 		        	String PREFIX = ApplicationUtils.getUrlBase(ApplicationUtils.getUrlString()) + "web/pdf?pdf=";
 		        	String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
-	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + url, url);
+	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + proxyUrl, url);
 		        }
 		    }
 		}
-		
-//		
 	}
 	
 	/**

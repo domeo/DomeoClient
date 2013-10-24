@@ -27,7 +27,7 @@ import org.mindinformatics.gwt.domeo.component.encoders.src.IUrlEncoder;
  */
 public class ScienceDirectUrlFilter implements IUrlEncoder {
 
-	public final String KEYS = "apiKey=key&Insttoken=token";
+	public final String KEYS = "apiKey=elsevierkey&Insttoken=elseviertoken";
 
 	@Override
 	public boolean doesEncoderApply(String url) {
