@@ -68,6 +68,10 @@ public class ApplicationUtils {
 		return $wnd.debugActivated;
 	}-*/;
 	
+	public native static String getProxyProtocol() /*-{
+		return $wnd.proxyProtocol;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;

@@ -189,7 +189,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	
 	public static final boolean verbose = false;
 	public static final boolean pathfinder = true;
-
+	
 	public static String APP_NAME = "Domeo";
 	public static String APP_VERSION = "b31";
 	public static String APP_VERSION_LABEL = "build 31";
@@ -858,12 +858,14 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		        
 		        getLogger().info(this, "Proxy URL " + proxyUrl);
 		        
+		        String proxyProtocol = ApplicationUtils.getProxyProtocol();
+		        proxyProtocol = (proxyProtocol.equals("http")||proxyProtocol.equals("https"))?proxyProtocol:"http";
 		        if(!url.endsWith(".pdf")) {
-	    			String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+	    			String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
 	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + proxyUrl, url);
 		        } else {
 		        	String PREFIX = ApplicationUtils.getUrlBase(ApplicationUtils.getUrlString()) + "web/pdf?pdf=";
-		        	String PROXY = "http://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+		        	String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
 	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + proxyUrl, url);
 		        }
 		    }
