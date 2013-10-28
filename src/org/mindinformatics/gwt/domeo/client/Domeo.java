@@ -859,14 +859,16 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		        getLogger().info(this, "Proxy URL " + proxyUrl);
 		        
 		        String proxyProtocol = ApplicationUtils.getProxyProtocol();
-		        proxyProtocol = (proxyProtocol.equals("http")||proxyProtocol.equals("https"))?proxyProtocol:"http";
+		        proxyProtocol = (proxyProtocol.trim().equals("http")||proxyProtocol.trim().equals("https"))?proxyProtocol:"http";
 		        if(!url.endsWith(".pdf")) {
 	    			String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
 	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + proxyUrl, url);
+	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
 		        } else {
 		        	String PREFIX = ApplicationUtils.getUrlBase(ApplicationUtils.getUrlString()) + "web/pdf?pdf=";
 		        	String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
 	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + proxyUrl, url);
+	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
 		        }
 		    }
 		}
