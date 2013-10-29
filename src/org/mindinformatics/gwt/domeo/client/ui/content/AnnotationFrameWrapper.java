@@ -1471,12 +1471,14 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 	public void setUrl(String url) {
 		currentUrl = url;
 		_frame.setUrl(currentUrl);
+		registerPdfLoadedNotification();
 	}
 	
 	public void setUrl(String url, String realUrl) {
 		currentUrl = realUrl;
 		_domeo.getLogger().debug(this, "Setting up url " + realUrl);
 		_frame.setUrl(url);
+		registerPdfLoadedNotification();
 	}
 	
 	public String getUrl(String dummy) {
@@ -1750,6 +1752,10 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				}
 			};
 		}
+	}-*/;
+	
+	public native void registerPdfLoadedNotification() /*-{
+	   $doc.getElementById($wnd.FRAME_ID).contentWindow.window.pdfLoaded = $entry(@org.mindinformatics.gwt.domeo.client.Domeo::notifyDocumentLoadedStageOneStatic());
 	}-*/;
 	
 	// Called by native javascript code

@@ -221,6 +221,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	 * The static images used throughout the Domeo application.
 	 */
 	public static final Resources resources = GWT.create(Resources.class);
+	public static Domeo _domeo = null;
 	
 	private JsonUnmarshallingManager jsonUnmarshallingManager;
 	
@@ -315,6 +316,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	 * is completed, the method completeInitialization() is called
 	 */
 	public void onModuleLoad() {
+		_domeo = this;
 		this.logger.info(this, "Creating Domeo " + getStartingMode());
 		_this=this;
 		Window.addWindowClosingHandler(new Window.ClosingHandler() {
@@ -880,8 +882,19 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	 */
 	private long documentPipelineTimer;
 
+
+	// For PDF 
+	public static void notifyDocumentLoadedStageOneStatic() {
+		if(_domeo!=null) _domeo.notifyDocumentLoadedStageOneAfter();
+	}
+	
+	// For PDF 
 	@Override
-	public void notifyDocumentLoadedStageOne() { // Document loaded in the browser
+	public void notifyDocumentLoadedStageOne() {
+		if(!getContentPanel().getAnnotationFrameWrapper().getUrl().endsWith(".pdf")) notifyDocumentLoadedStageOneAfter();
+	}
+	
+	private void notifyDocumentLoadedStageOneAfter() { // Document loaded in the browser
 		try {
 			documentPipelineTimer = System.currentTimeMillis();
 			this.getLogger().debug(this, "AFTER DOCUMENT", "Executing notifyDocumentLoadedStageOne()");
