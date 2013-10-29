@@ -97,19 +97,9 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print(profile.getLastSavedBy().getName());
 					out.print("\"");
 					out.print("}");
-					
-					// KEYS
-					out.print("{");
-					out.print("\"name\": \"");
-					out.print("domeo.encoder.elsevier.sciencedirect.api");
-					out.print("\",");
-					out.print("\"status\": \"");
-					out.print("");
-					out.print("\"");
-					out.print("},");
+					out.print("],");
 					
 					// FEATURES
-					out.print("],");
 					out.print("\"features\": [");
 					
 					out.print("{");
