@@ -498,6 +498,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			}
 					
 			tabPanel.setWidth(Math.max(464, (Window.getClientWidth() - 174)) + "px");
+			tabPanel.setHeight("120px");
 			evidenceTabs.setWidth(Math.max(464, (Window.getClientWidth() - 174)) + "px");
 			
 			/*
@@ -509,6 +510,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			resizeEvidenceTab(true);
 			
 			statementBody.setWidth(Math.max(464, (Window.getClientWidth() - 190)) + "px");
+			statementBody.setHeight("54px");
 			
 			scrollContainer.setSize(Math.max(740, (Window.getClientWidth() - 154)) + "px", (Window.getClientHeight() - 295) + "px");
 			leftColumnPanel.setWidth(Math.max(464, (Window.getClientWidth() - 174)) + "px");
@@ -526,6 +528,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			}
 			
 			tabPanel.setWidth("464px");
+			tabPanel.setHeight("180px");
 			
 			/*
 			evidenceTabs.setWidth("464px");
@@ -533,7 +536,8 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			*/
 			resizeEvidenceTab(false);
 			
-			statementBody.setWidth("452px");
+			statementBody.setWidth("450px");
+			statementBody.setHeight("110px");
 			
 			scrollContainer.setSize(Math.max(464, (Window.getClientWidth() - 154)) + "px", (Window.getClientHeight() - 295) + "px");
 			leftColumnPanel.setWidth("464px");
@@ -630,7 +634,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 				}
 			}
 		} else {
-			vp.add(new HTML("No qualifier assigned"));
+			vp.add(new HTML("No qualifier provided"));
 		}
 		
 		resizeEvidenceTab();
