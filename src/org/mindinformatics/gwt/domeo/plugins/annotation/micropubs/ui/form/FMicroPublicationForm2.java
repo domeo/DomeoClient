@@ -167,9 +167,6 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 	private ImagesListPickerWidget imagesListPickerWidget;
 	private ReferencesListPickerWidget referencesListPickerWidget;
 	
-	//private ArrayList<ImageProxy> images = new ArrayList<ImageProxy>();
-	//private ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
-	
 	private ArrayList<MMpRelationship> evidence = new ArrayList<MMpRelationship>();
 	private ArrayList<MMpRelationship> qualifiers = new ArrayList<MMpRelationship>();
 	
@@ -500,13 +497,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			tabPanel.setWidth(Math.max(464, (Window.getClientWidth() - 174)) + "px");
 			tabPanel.setHeight("120px");
 			evidenceTabs.setWidth(Math.max(464, (Window.getClientWidth() - 174)) + "px");
-			
-			/*
-			int height = 0;
-			int max = Math.max(evidence.size(), qualifiers.size());
-			if(max>=1) height = Window.getClientHeight() - 640; //Window.getClientHeight() - 580;
-			evidenceTabs.setHeight(Math.max(60, 60+height) + "px");
-			*/
+
 			resizeEvidenceTab(true);
 			
 			statementBody.setWidth(Math.max(464, (Window.getClientWidth() - 190)) + "px");
@@ -529,11 +520,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			
 			tabPanel.setWidth("464px");
 			tabPanel.setHeight("180px");
-			
-			/*
-			evidenceTabs.setWidth("464px");
-			evidenceTabs.setHeight(Math.max(20, (Window.getClientHeight() - 520)) + "px");
-			*/
+
 			resizeEvidenceTab(false);
 			
 			statementBody.setWidth("450px");
@@ -555,26 +542,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
 		headerPanel.setCellWidth(buttonsPanelSpacer, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
 	}
-	
-//	@Override
-//	public void resized() {
-////		this.setWidth((Window.getClientWidth() - 340) + "px");
-////		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
-////		for(Widget tab:tabs) {
-////			//if(tab instanceof IResizable) ((IResizable)tab).resized();
-////			tab.setWidth((Window.getClientWidth() - 615) + "px");
-////		}
-////		
-//		evidenceTabs.setHeight(Math.max(20, (Window.getClientHeight() - 490)) + "px");
-//		supportPanel.setHeight(Math.max(20, (Window.getClientHeight() - 520)) + "px");
-////		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
-//		
-//		
-//		buttonsPanelSpacer.setWidth(Math.max(0, (_manager.getContainerWidth()-300)) + "px");
-//		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
-//		headerPanel.setCellWidth(buttonsPanelSpacer, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
-//	}
-	
+
 	@Override
 	public String getTextContent() {
 		// TODO Auto-generated method stub
@@ -669,80 +637,88 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 		}
 		
 		resizeEvidenceTab();
-		
-		/*
-		for(MPublicationArticleReference reference: references) {
-			HorizontalPanel hp1 = new HorizontalPanel();
-			hp1.add(PubMedCitationPainter.getFullCitation(reference, _domeo));
-			
-			//final Button box = new Button("Remove");
-			final Image removeIcon = new Image(Domeo.resources.deleteLittleIcon());
-			removeIcon.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-					//box.setEnabled(false);
-					//_container.addImageAsData(_image);
-				}
-			});					
-			hp1.add(removeIcon);
-			
-			if(counter%2 == 1) {
-				hp1.addStyleName(style.indexOdd());
-			} else {
-				hp1.addStyleName(style.indexEven());
-			}
-			counter++;
-			vp.add(hp1);
-		}
-		*/
 		supportPanel.add(vp);
 	}
 
 	@Override
 	public void addImageAsData(ImageProxy image) {		
-		MOnlineImage _imageResource = new MOnlineImage();
-		_imageResource.setUrl(image.getOriginalUrl());
-		_imageResource.setDisplayUrl(image.getDisplayUrl());
-		_imageResource.setLocalId(((Element) image.getImage()).getAttribute("imageid"));
-		_imageResource.setLabel(image.getTitle());
-		_imageResource.setImage((Element) image.getImage());
-		_imageResource.setXPath(HtmlUtils.getElementXPath((Element) image.getImage()));
+		boolean existing = false;
+		for(MMpRelationship ev:evidence) {
+			if(ev.getObjectElement() instanceof MMpDataImage && 
+					((MImageInDocumentSelector)((MMpDataImage)ev.getObjectElement()).getSelector()).getTarget().getUrl().equals(image.getOriginalUrl())) {
+				existing = true;
+				break;
+			}
+		}
 		
-		MImageInDocumentSelector imgSelector = AnnotationFactory.createImageSelector(_domeo, _domeo.getAgentManager().getUserPerson(), _imageResource);
-		MMpDataImage imageData = new MMpDataImage(imgSelector);
-		
-		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), imageData, IMicroPublicationsOntology.supportedBy);
-		evidence.add(suportedBy);	
-		hasChanged = true;
-		refreshSupport();	
+		if(!existing) {
+			MOnlineImage _imageResource = new MOnlineImage();
+			_imageResource.setUrl(image.getOriginalUrl());
+			_imageResource.setDisplayUrl(image.getDisplayUrl());
+			_imageResource.setLocalId(((Element) image.getImage()).getAttribute("imageid"));
+			_imageResource.setLabel(image.getTitle());
+			_imageResource.setImage((Element) image.getImage());
+			_imageResource.setXPath(HtmlUtils.getElementXPath((Element) image.getImage()));
+			
+			MImageInDocumentSelector imgSelector = AnnotationFactory.createImageSelector(_domeo, _domeo.getAgentManager().getUserPerson(), _imageResource);
+			MMpDataImage imageData = new MMpDataImage(imgSelector);
+			
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), imageData, IMicroPublicationsOntology.supportedBy);
+			evidence.add(suportedBy);	
+			hasChanged = true;
+			refreshSupport();
+		}
 		evidenceTabs.selectTab(0);
+		
 	}
 
 	@Override
 	public void addBibliographicObject(MPublicationArticleReference reference) {
-		//references.add(reference);
-		MMpReference referenceData = new MMpReference();
-		referenceData.setReference(reference);
+		boolean existing = false;
+		for(MMpRelationship ev:evidence) {
+			if(ev.getObjectElement() instanceof MMpReference && 
+					((MMpReference)ev.getObjectElement()).getReference().getPubMedId().equals(reference.getPubMedId())) {
+				existing = true;
+				break;
+			}
+		}
 		
-		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
-		
-		evidence.add(suportedBy);
-		hasChanged = true;
-		refreshSupport();
+		if(!existing) {
+			//references.add(reference);
+			MMpReference referenceData = new MMpReference();
+			referenceData.setReference(reference);
+			
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
+			
+			evidence.add(suportedBy);
+			hasChanged = true;
+			refreshSupport();
+		}
 		evidenceTabs.selectTab(0);
 	}
 	
 	@Override
 	public void addBibliographicObject(MAnnotationReference referenceAnnotation) {
 		//references.add(reference);
-		MMpReference referenceData = new MMpReference();
-		referenceData.setReference((MPublicationArticleReference)referenceAnnotation.getReference());
+		boolean existing = false;
+		for(MMpRelationship ev:evidence) {
+			if(ev.getObjectElement() instanceof MMpReference && 
+					((MMpReference)ev.getObjectElement()).getReference().getPubMedId().equals(referenceAnnotation.getReference())) {
+				existing = true;
+				break;
+			}
+		}
 		
-		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
-		
-		evidence.add(suportedBy);
-		hasChanged = true;
-		refreshSupport();
+		if(!existing) {
+			MMpReference referenceData = new MMpReference();
+			referenceData.setReference((MPublicationArticleReference)referenceAnnotation.getReference());
+			
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
+			
+			evidence.add(suportedBy);
+			hasChanged = true;
+			refreshSupport();
+		}
 		evidenceTabs.selectTab(0);
 	}
 
@@ -1079,15 +1055,23 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 
 	@Override
 	public void addAssociatedTerm(MLinkedResource term) {
-		//MMpReference referenceData = new MMpReference();
-		//referenceData.setReference((MPublicationArticleReference)referenceAnnotation.getReference());
-		MMpQualifier qualifier = new MMpQualifier();
-		qualifier.setQualifier(term);
-		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), qualifier, IMicroPublicationsOntology.supportedBy);
+		boolean existing = false;
+		for(MMpRelationship qualifier:qualifiers) {
+			if(qualifier.getObjectElement() instanceof MMpQualifier && 
+					((MMpQualifier)qualifier.getObjectElement()).getQualifier().getUrl().equals(term.getUrl())) {
+				existing = true;
+				break;
+			}
+		}
 		
-		qualifiers.add(suportedBy);
-		hasChanged = true;
-		refreshQualifiers();
+		if(!existing) {
+			MMpQualifier qualifier = new MMpQualifier();
+			qualifier.setQualifier(term);
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), qualifier, IMicroPublicationsOntology.supportedBy);
+			qualifiers.add(suportedBy);
+			hasChanged = true;
+			refreshQualifiers();
+		}
 		evidenceTabs.selectTab(1);
 	}
 
@@ -1099,11 +1083,21 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 
 	@Override
 	public void addMicroPublicationObject(MMicroPublicationAnnotation reference) {
-		MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), reference.getMicroPublication().getArgues(), IMicroPublicationsOntology.supportedBy);
+		boolean existing = false;
+//		for(MMpRelationship ev:evidence) {
+//			if(((MMpDataImage)ev.getObjectElement()).getSelector()).getTarget().getUrl().equals(image.getOriginalUrl())) {
+//				existing = true;
+//				break;
+//			}
+//		}
 		
-		evidence.add(suportedBy);
-		hasChanged = true;
-		refreshSupport();
+		if(!existing) {
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), reference.getMicroPublication().getArgues(), IMicroPublicationsOntology.supportedBy);
+			
+			evidence.add(suportedBy);
+			hasChanged = true;
+			refreshSupport();
+		}
 		evidenceTabs.selectTab(0);
 	}
 
