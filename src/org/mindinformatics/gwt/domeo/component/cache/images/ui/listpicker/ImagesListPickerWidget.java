@@ -75,6 +75,11 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
 	    panel.setWidth((Window.getClientWidth() - 620) + "px");
 	}
 	
+	public void setWidth(String width) {
+		super.setWidth(width);
+	    panel.setWidth(width);
+	}
+	
 	public ImagesListPickerWidget(IDomeo annotator, IImagesListPickerContainer container, boolean showTitle) {
 		_domeo = annotator;
 		_resources = Domeo.resources;
@@ -91,7 +96,6 @@ public class ImagesListPickerWidget extends Composite implements IResizable, IEx
         resultsContainerPanel = new FlowPanel();
 
         resultsContainerPanel.add(new HTML("No results to display"));
-
         
         main.clear();
         panel = new ScrollPanel();
