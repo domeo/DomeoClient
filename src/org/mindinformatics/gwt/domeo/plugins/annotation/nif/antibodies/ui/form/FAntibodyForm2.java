@@ -38,7 +38,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -532,7 +531,7 @@ public class FAntibodyForm2 extends AFormComponent implements IResizable, IAntib
 			noteTitleBar.setWidth(Math.max(464, (Window.getClientWidth() - 174)) + "px");
 			leftColumnPanel.setWidth(Math.max(464, (Window.getClientWidth() - 174)) + "px");
 			leftColumnContainer.setCellWidth(leftColumnPanel, Math.max(464, (Window.getClientWidth() - 174)) + "px");
-			scrollContainer.setSize(Math.max(940, (Window.getClientWidth() - 154)) + "px", (Window.getClientHeight() - 295) + "px");
+			scrollContainer.setSize(Math.max(740, (Window.getClientWidth() - 154)) + "px", (Window.getClientHeight() - 295) + "px");
 			commentBody.setWidth(Math.max(464, (Window.getClientWidth() - 186)) + "px");
 			
 			for(Widget tab:tabs) {
@@ -553,7 +552,6 @@ public class FAntibodyForm2 extends AFormComponent implements IResizable, IAntib
 			commentBody.setWidth("452px");
 			
 			//header.setWidth((Window.getClientWidth() - 160) + "px");
-			headerPanel.setWidth((Window.getClientWidth() - 160) + "px");
 			leftColumnContainer.setWidth(Math.max(464, (Window.getClientWidth() - 160)) + "px");
 			
 			scrollContainer.setSize(Math.max(464, (Window.getClientWidth() - 154)) + "px", (Window.getClientHeight() - 295) + "px");
