@@ -480,7 +480,9 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 		if(oneColumn) {
 			int height = 0;
 			int max = Math.max(evidence.size(), qualifiers.size());
-			if(max>=1) height = Window.getClientHeight() - 640; //Window.getClientHeight() - 580;
+			if(max==0) ;
+			else if(max>=1 && max<=3) height = Window.getClientHeight() - (750 + (3-max) * 20) ; // Window.getClientHeight() - 640; //Window.getClientHeight() - 580;
+			else height =  Window.getClientHeight() - 640;
 			evidenceTabs.setHeight(Math.max(60, 60+height) + "px");
 		} else {
 			evidenceTabs.setWidth("464px");
