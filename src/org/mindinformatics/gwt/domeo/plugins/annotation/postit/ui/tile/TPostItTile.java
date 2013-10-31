@@ -82,12 +82,14 @@ public class TPostItTile extends ATileComponent implements ITileComponent {
 			
 			//type.setText(_annotation.getType().getName()+":");
 			text.setText(_annotation.getText());
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			/*
 			highlight.addMouseOverHandler(new MouseOverHandler() {
 				@Override

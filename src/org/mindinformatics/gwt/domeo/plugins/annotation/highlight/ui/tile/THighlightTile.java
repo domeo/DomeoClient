@@ -71,12 +71,14 @@ public class THighlightTile extends ATileComponent implements ITileComponent {
 
 			//type.setText("Highlight:");
 			text.setText("'" + SelectorUtils.getMatch(_annotation.getSelector()) + "'");
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			
 			if(SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {
 				HorizontalPanel hp = new HorizontalPanel();

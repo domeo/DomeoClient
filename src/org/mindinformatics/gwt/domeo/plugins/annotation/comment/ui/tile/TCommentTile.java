@@ -122,12 +122,14 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 			
 			//type.setText("Comment:");
 			text.setText(_annotation.getText());
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			
 			injectButtons("", content, _annotation);
 			

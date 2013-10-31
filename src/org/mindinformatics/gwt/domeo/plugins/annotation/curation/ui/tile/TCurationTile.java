@@ -101,12 +101,14 @@ public class TCurationTile extends ATileComponent implements ITileComponent {
 			
 			//type.setText("Comment:");
 			text.setText(_annotation.getStatus());
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			
 			injectButtons("", content, _annotation);
 			

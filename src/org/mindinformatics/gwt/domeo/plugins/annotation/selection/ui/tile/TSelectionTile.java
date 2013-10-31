@@ -102,12 +102,14 @@ public class TSelectionTile extends ATileComponent implements ITileComponent {
 
 			type.setText("Selection:");
 			text.setText(SelectorUtils.getMatch(_annotation.getSelector()));
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 
 			injectButtons("", content, _annotation);
 			
