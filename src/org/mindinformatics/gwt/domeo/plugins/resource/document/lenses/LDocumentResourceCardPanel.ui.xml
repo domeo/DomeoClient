@@ -92,7 +92,8 @@
 							</g:FlowPanel>
 						</g:cell>
 						<g:cell height="20px">
-							<my:EditableLabel ui:field='uriField'/>
+							<!--  <my:EditableLabel ui:field='uriField'/> -->
+							<g:HTML ui:field='uriField'/>
 						</g:cell>
 						<g:cell height="20px">
 							<g:Label styleName='{style.label}'>Title</g:Label>

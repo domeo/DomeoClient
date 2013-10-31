@@ -48,7 +48,8 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 	@UiField Label extractorProvenanceDetails;
 	@UiField Image extractionProvenanceImage;
 	
-	@UiField EditableLabel uriField;
+	// @UiField EditableLabel uriField;
+	@UiField HTML uriField;
 	@UiField EditableLabel labelField;
 	@UiField EditableLabel descriptionField;
 	@UiField EditableLabel keywordsField;
@@ -81,12 +82,15 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 			_resource = ((MDocumentResource)resource);
 			_parameters = parameters;
 			
+			/*
 			if(parameters.containsKey(MDocumentResource.PARAM_URI_READONLY)) {
 				if(parameters.get(MDocumentResource.PARAM_URI_READONLY).equals("true"))
 					uriField.setReadOnly(true);
 			} else {
 				uriField.setReadOnly(true);
 			}
+			*/
+			
 			if(parameters.containsKey(MDocumentResource.TITLE_URI_READONLY)) {
 				if(parameters.get(MDocumentResource.TITLE_URI_READONLY).equals("true"))
 					labelField.setReadOnly(true);
@@ -143,7 +147,7 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 	public void refresh() {
 		Resources _resources = Domeo.resources;
 		try {
-			uriField.setValue(_resource.getUrl());
+			uriField.setHTML("<a target='_blank' href='" + _resource.getUrl() + "'/>" + _resource.getUrl() + "</a>");
 			
 			if(_resource.getLabel()!=null && _resource.getLabel().trim().length()>0) labelField.setValue(_resource.getLabel());
 			else labelField.setValue("<none>");
