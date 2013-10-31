@@ -210,7 +210,7 @@ public abstract class ATileComponent extends Composite {
 	    if(days==0) {
 		    if(hours==0) {
 		    	if(minutes==0) {
-		    		return  secs + " seconds";
+		    		return Math.round(secs) + " seconds";
 		    	} else return minutes + " minutes";
 		    } else return hours + " hours";
 	    } else return days + " days";
