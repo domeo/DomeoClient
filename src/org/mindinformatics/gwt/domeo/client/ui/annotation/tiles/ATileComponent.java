@@ -73,7 +73,7 @@ public abstract class ATileComponent extends Composite {
 			deleteIcon.setStyleName(ATileComponent.tileResources.css().button());
 			deleteIcon.addClickHandler(ActionDeleteAnnotation.getClickHandler(_domeo, this, getAnnotation()));
 			
-			content.add(showIcon);
+			if(!SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) content.add(showIcon);
 			content.add(editIcon);
 			content.add(deleteIcon);
 		}
@@ -145,8 +145,10 @@ public abstract class ATileComponent extends Composite {
 						
 						provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>" + prefix + " by Me</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
 						if(!(annotation.getSelector() instanceof MTargetSelector) && !(annotation.getSelector() instanceof MAnnotationSelector)) {
-							provenance.add(showIcon);
-							provenance.setCellWidth(showIcon, "22px");
+							if(!SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) {
+								provenance.add(showIcon);
+								provenance.setCellWidth(showIcon, "22px");
+							}
 							provenance.add(editIcon);
 							provenance.setCellWidth(editIcon, "22px");
 						} 
@@ -180,7 +182,7 @@ public abstract class ATileComponent extends Composite {
 					provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>" + prefix + " by " + annotation.getCreator().getName() + "</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
 					//provenance.add(new Label("By " + annotation.getCreator().getName() + " on " + annotation.getFormattedCreationDate()));
 					 
-					provenance.add(showIcon);
+					if(!SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) provenance.add(showIcon);
 					provenance.add(editIcon);
 					provenance.add(deleteIcon);
 				}
