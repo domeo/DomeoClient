@@ -493,7 +493,6 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 										(Node) anchorNode, items));
 										*/
 						
-						
 						clearSelection(doc);
 						
 						if (matchText.length()>0 && _domeo.isManualClipAnnotationEnabled()) 
@@ -986,6 +985,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 					try {
 						HtmlUtils.performHighlight(Long.toString(annotation.getLocalId()), match, prefix, suffix, node, StylesManager.JUST_SELECTED);
 						int y = HtmlUtils.getVerticalPositionOfElementWithId(_frame.getElement(), annotation.getLocalId().toString());
+						
 						annotation.setY(y);
 					
 						_domeo.getLogger().info(LOG_CATEGORY_TEXT_BUFFERED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
