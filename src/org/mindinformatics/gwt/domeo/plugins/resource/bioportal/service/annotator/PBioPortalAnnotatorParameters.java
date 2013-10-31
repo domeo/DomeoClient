@@ -20,7 +20,6 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.annotator;
 
-
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  * 

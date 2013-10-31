@@ -1,0 +1,58 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>	
+		.label {
+			padding-top: 5px;
+			font-weight: bold;	
+			display: inline;
+			border-bottom: 1px #ddd solid;
+		}
+		.outer {
+		    padding-bottom:16px;
+		    width: 100%;
+		    font-size: 11px;
+		}
+		.button {
+			padding-top:3px;
+			padding-left:3px;
+			padding-right:3px;
+		}
+		.toolbar {
+			padding-bottom:10px;
+		}
+	</ui:style>
+	<g:HorizontalPanel>
+		<g:cell width="300px">
+			<g:VerticalPanel ui:field='left' styleName='{style.outer}'>
+				<g:Label styleName='{style.label}'>NCBO Annotator Ontologies</g:Label>
+				<g:HorizontalPanel styleName='{style.toolbar}'>
+					<g:ListBox ui:field='categoriesList'></g:ListBox><g:Label ui:field='addCategory' styleName='{style.button}'>Add</g:Label><g:Label ui:field='clearCategory' styleName='{style.button}'>Clear</g:Label>
+				</g:HorizontalPanel>
+				<!--  
+				<g:ListBox ui:field='criteria'>
+				  <g:item>
+				    Including
+				  </g:item>
+				  <g:item value='2'>
+				    Excluding
+				  </g:item>
+				</g:ListBox>
+				-->
+				<g:FlowPanel ui:field='categories'></g:FlowPanel>
+			</g:VerticalPanel>
+		</g:cell>
+		<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
+			<g:Label styleName='{style.label}'>NCBO Annotator Parameters</g:Label>
+			<g:CheckBox ui:field='longestOnly'>Longest Only</g:CheckBox>
+			<g:CheckBox ui:field='wholeWordOnly'>Whole word only</g:CheckBox>
+			<g:CheckBox ui:field='filterNumbers'>Filter numbers</g:CheckBox>
+			<g:CheckBox ui:field='withDefaultStopWords'>With Default Stop Words</g:CheckBox>
+			<g:CheckBox ui:field='isStopWordsCaseSenstive'>Is Stop Words Case Senstive</g:CheckBox>
+			<g:CheckBox ui:field='scored'>Scored</g:CheckBox>
+			<g:CheckBox ui:field='withSynonyms'>With Synonyms</g:CheckBox>
+			<g:Image  ui:field='ncboLogo'></g:Image>
+		</g:VerticalPanel>
+	</g:HorizontalPanel>
+</ui:UiBinder>
