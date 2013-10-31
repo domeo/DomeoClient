@@ -363,8 +363,8 @@ public class AnnotationSetInfoLens extends Composite implements ILensRefresh, IL
 		*/
 		
 		HorizontalPanel hp5= new HorizontalPanel();
-		final Image deleteIcon = new Image(Domeo.resources.deleteLittleIcon());
-		deleteIcon.addClickHandler(new ClickHandler() {
+		
+		ClickHandler deleteSetHandler = new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				boolean deleteFlag = Window.confirm("Do you really want to delete the set?");
@@ -375,10 +375,14 @@ public class AnnotationSetInfoLens extends Composite implements ILensRefresh, IL
 					_domeo.getProgressPanelContainer().setCompletionMessage("Annotation set deleted!");
 				}
 			}
-		});
+		};
+		
+		final Image deleteIcon = new Image(Domeo.resources.deleteLittleIcon());
+		deleteIcon.addClickHandler(deleteSetHandler);
 		
 		hp5.add(deleteIcon);
 		Label deleteLabel = new Label("Delete");
+		deleteLabel.addClickHandler(deleteSetHandler);
 		deleteLabel.setStyleName(style.spacedLabel());
 		hp5.add(deleteLabel);
 		hp5.setStyleName(style.activeIcon());
