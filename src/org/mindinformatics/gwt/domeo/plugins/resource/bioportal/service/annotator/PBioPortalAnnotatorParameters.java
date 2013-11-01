@@ -42,7 +42,7 @@ public class PBioPortalAnnotatorParameters {
 	}
 	
 	public int minTermSize = 3; // Specifies the minimum length of the term to be included in the annotations (default: 3)
-	public boolean longestOnly = true; // Specifies whether or not the entity recognition step (done with University of Michigan Mgrep tool) must match the longest word only if they are several terms that match to an expression.  (default: true)
+	public boolean longestOnly = false; // Specifies whether or not the entity recognition step (done with University of Michigan Mgrep tool) must match the longest word only if they are several terms that match to an expression.  (default: true)
 	public boolean wholeWordOnly = true; // Specifies whether the term recognition step must match whole words only or not, if they are several terms that match to a given word from the input text.  (default: true)
 	public boolean filterNumbers = true; // Specifies whether the entity recognition step to filter numbers or not. (default: true)
 	public boolean withDefaultStopWords = false; // Specifies whether or not to use the default stop words. The default stop word list is available from this Web service call: http://rest.bioontology.org/obs/stopwords?apikey=YourAPIKey. If this parameter is set to true, this will override any stop words provided by the user in the parameter "stopWords". 

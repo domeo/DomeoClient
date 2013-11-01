@@ -26,7 +26,7 @@ public class FBioPortalAnnotatorParametrizationForm extends Composite {
 	interface Binder extends UiBinder<Widget, FBioPortalAnnotatorParametrizationForm> { }
 	private static final Binder binder = GWT.create(Binder.class);
 	
-	@UiField CheckBox longestOnly;
+	//@UiField CheckBox longestOnly; //Invalid Parameter.The longestOnly flag may not be set to "true" when either the ontologiesToExpand or ontologiesToKeepInResult field is populated
 	@UiField CheckBox wholeWordOnly;
 	@UiField CheckBox filterNumbers;
 	@UiField CheckBox withDefaultStopWords;
@@ -52,6 +52,7 @@ public class FBioPortalAnnotatorParametrizationForm extends Composite {
 		
 		initWidget(binder.createAndBindUi(this));
 		
+		/*
 		longestOnly.setValue(PBioPortalAnnotatorParameters.getInstance().longestOnly);
 		longestOnly.addClickHandler(new ClickHandler() {
 			@Override
@@ -59,6 +60,7 @@ public class FBioPortalAnnotatorParametrizationForm extends Composite {
 				PBioPortalAnnotatorParameters.getInstance().longestOnly=longestOnly.getValue();
 			}
 		});
+		*/
 		
 		wholeWordOnly.setValue(PBioPortalAnnotatorParameters.getInstance().wholeWordOnly);
 		wholeWordOnly.addClickHandler(new ClickHandler() {

@@ -26,7 +26,10 @@ public class StandaloneBioPortalConnector implements IBioPortalConnector {
 	@Override
 	public void textmine(
 			ITextminingRequestCompleted completionCallback,
-			String url, String textContent, String virtualIds)
+			String url, String textContent, boolean longestOnly,
+			boolean wholeWordOnly, boolean filterNumbers,
+			boolean withDefaultStopWords, boolean isStopWordsCaseSenstive,
+			boolean scored, boolean withSynonyms)
 			throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		

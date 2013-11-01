@@ -45,7 +45,7 @@
 		</g:cell>
 		<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
 			<g:Label styleName='{style.label}'>NCBO Annotator Parameters</g:Label>
-			<g:CheckBox ui:field='longestOnly'>Longest Only</g:CheckBox>
+			<!--  <g:CheckBox ui:field='longestOnly'>Longest Only</g:CheckBox> -->
 			<g:CheckBox ui:field='wholeWordOnly'>Whole word only</g:CheckBox>
 			<g:CheckBox ui:field='filterNumbers'>Filter numbers</g:CheckBox>
 			<g:CheckBox ui:field='withDefaultStopWords'>With Default Stop Words</g:CheckBox>
