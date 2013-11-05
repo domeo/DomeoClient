@@ -202,7 +202,7 @@ public abstract class ATileComponent extends Composite {
 	    var hours = minutes / 60;
 	    minutes = Math.floor(minutes % 60);
 	    hours = Math.floor(hours % 24);
-	    var days = hours / 24;
+	    var days = Math.floor(hours / 24);
 	    hours =  Math.floor(hours % 24);
 	    minutes = Math.floor(minutes % 60);
 	    hours = Math.floor(hours % 24);
@@ -211,10 +211,10 @@ public abstract class ATileComponent extends Composite {
 		    if(hours==0) {
 		    	if(minutes==0) {
 		    		return Math.round(secs) + " seconds";
-		    	} else return minutes + " minutes";
-		    } else return hours + " hours";
-	    } else return days + " days";
+		    	} else return Math.floor(minutes) + " minutes";
+		    } else return Math.floor(hours) + " hours";
+	    } else return Math.floor(days) + " days";
 	    
-	    return hours + ":" + minutes + ":" + secs + "." + ms;  
+	    return Math.floor(hours) + ":" + Math.floor(minutes) + ":" + Math.floor(secs) + "." + ms;  
 	}-*/;
 }
