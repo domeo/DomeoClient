@@ -122,16 +122,15 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 			_domeo, new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					//_domeo.updateHighlightMode();
-					
+
 					if(isManualHighlightSelected()) 
 						_domeo.getLogger().command(this.getClass().getName(), "Enabling manual highlight");
 					else _domeo.getLogger().command(this.getClass().getName(), "Disabling manual highlight");
+					
 					if(isManualAnnotationSelected()) {
 						_domeo.getLogger().debug(this, "Disabling manual annotation");
 						deselectManualAnnotation();
-					}
-					if(isManualMultipleAnnotationSelected()) {
+					} else if(isManualMultipleAnnotationSelected()) {
 						if(_domeo.getClipboardManager().getBufferedAnnotation().size()>0) {
 							_domeo.getLogger().debug(this, "Performing manual multiple highlight");
 							_domeo.getContentPanel().getAnnotationFrameWrapper().performMultipleTargetsHighlight(_domeo.getClipboardManager().getBufferedAnnotation());

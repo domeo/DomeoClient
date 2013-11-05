@@ -1087,6 +1087,10 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				}
 				annotation.addSelector(target.getSelector());
 			}			
+			
+			clearSelection();
+			resetSelection("");
+			
 			_domeo.getLogger().info(LOG_CATEGORY_TEXT_ANNOTATED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
 			_domeo.getContentPanel().getAnnotationFrameWrapper().clearTemporaryAnnotations();
 			_domeo.refreshAnnotationComponents();
@@ -1121,6 +1125,10 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				}
 				annotation.addSelector(target.getSelector());
 			}			
+			
+			clearSelection();
+			resetSelection("");
+			
 			_domeo.getLogger().info(LOG_CATEGORY_TEXT_ANNOTATED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
 			_domeo.getContentPanel().getAnnotationFrameWrapper().clearTemporaryAnnotations();
 			_domeo.refreshAnnotationComponents();
