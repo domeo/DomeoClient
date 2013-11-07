@@ -66,7 +66,7 @@ public abstract class ASelectorTileComponent extends Composite {
 		}
 	}
 	
-	public void createProvenanceBar(HorizontalPanel provenance, final MAnnotation annotation) {
+	public void createProvenanceBar(HorizontalPanel provenance, final MAnnotation annotation, final boolean single) {
 		Resources resource = Domeo.resources;
 		Image editIcon = new Image(resource.editLittleIcon());
 		editIcon.setTitle("Edit Item");
@@ -104,9 +104,11 @@ public abstract class ASelectorTileComponent extends Composite {
 					provenance.add(new Label("By Me on " + getSelector().getFormattedCreationDate()));
 					//provenance.add(editIcon);
 					provenance.setCellWidth(editIcon, "22px");
-					provenance.add(deleteIcon);
-					provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
-					provenance.setCellWidth(deleteIcon, "22px");
+					if(!single) {
+						provenance.add(deleteIcon);
+						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
+						provenance.setCellWidth(deleteIcon, "22px");
+					}			
 				} else {
 					provenance.setVisible(false);
 				}

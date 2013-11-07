@@ -14,6 +14,7 @@ import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 
 import com.google.gwt.core.client.GWT;
@@ -149,12 +150,15 @@ public abstract class ATileComponent extends Composite {
 								provenance.add(showIcon);
 								provenance.setCellWidth(showIcon, "22px");
 							}
-							provenance.add(editIcon);
-							provenance.setCellWidth(editIcon, "22px");
+							if(SelectorUtils.isOnMultipleTargets(annotation.getSelectors()) || !(annotation instanceof MHighlightAnnotation)) {
+								provenance.add(editIcon);
+								provenance.setCellWidth(editIcon, "22px");
+							}
 						} 
-						provenance.add(deleteIcon);
-						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
-						provenance.setCellWidth(deleteIcon, "22px");
+
+							provenance.add(deleteIcon);
+							provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
+							provenance.setCellWidth(deleteIcon, "22px");
 					} else {
 						provenance.setVisible(false);
 					}

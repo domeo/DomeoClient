@@ -181,9 +181,10 @@ public class MultipleTargetsAnnotationFormsPanel extends AFormsManager implement
 				}
 			}
 		} else {
+			boolean single = (_annotation.getSelectors().size()==1);
 			for(MSelector selector: _annotation.getSelectors()) {
 				TPrefixSuffixTextSelectorTile tile = new TPrefixSuffixTextSelectorTile(_domeo, this);
-				tile.initializeLens(_annotation, selector);
+				tile.initializeLens(_annotation, selector, single);
 				targetsPanel.add(tile);
 			}
 		}
