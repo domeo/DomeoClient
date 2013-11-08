@@ -79,7 +79,7 @@ public class CHighlightCard extends ACardComponent {
 			if (_index>-1) createProvenanceBar("", _index, provenance, _annotation);
 			else createProvenanceBar("", provenance, _annotation);
 			type.setText("Highlight:");
-			text.setText(SelectorUtils.getMatch(_annotation.getSelector()));
+			text.setText(SelectorUtils.getMatch(_annotation.getSelectors()));
 			
 			if(SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {
 				HorizontalPanel hp = new HorizontalPanel();
