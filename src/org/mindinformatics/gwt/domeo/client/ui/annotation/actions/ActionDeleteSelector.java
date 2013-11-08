@@ -21,7 +21,9 @@ public class ActionDeleteSelector {
 				domeo.getLogger().command(AnnotationFrameWrapper.LOG_CATEGORY_DELETE_ANNOTATION, clazz, "Item " + annotation.getClass().getName() + "-"+annotation.getLocalId());
 				// TODO manage deletion and undo???
 				annotation.getSelectors().remove(selector);
+				
 				HtmlUtils.removeSpansWithAnnotationId(domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), annotation.getLocalId()+":"+selector.getLocalId());
+				HtmlUtils.processMultipleTargetAnnotation(domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), annotation);
 				domeo.refreshAnnotationComponents();
 			}
 		};

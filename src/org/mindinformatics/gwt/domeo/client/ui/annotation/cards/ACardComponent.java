@@ -20,6 +20,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.src.CurationUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 import org.mindinformatics.gwt.framework.component.styles.src.StylesManager;
 import org.mindinformatics.gwt.framework.widget.CustomButton;
@@ -308,9 +309,11 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 							
 						}
 						
-						provenance.add(editIcon);
-						provenance.setCellWidth(editIcon, "20px");
-						provenance.setCellHorizontalAlignment(editIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+						if(SelectorUtils.isOnMultipleTargets(annotation.getSelectors()) || !(annotation instanceof MHighlightAnnotation)) {
+							provenance.add(editIcon);
+							provenance.setCellWidth(editIcon, "20px");
+							provenance.setCellHorizontalAlignment(editIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+						}
 						provenance.add(deleteIcon);
 						provenance.setCellWidth(deleteIcon, "20px");
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_RIGHT);

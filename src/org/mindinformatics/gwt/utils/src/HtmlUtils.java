@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -335,6 +337,21 @@ public class HtmlUtils {
 		return spans;
 	}
 	
+//	public static Set<Element> getElementsByAnnotationIdStart(Element frameElement, String annotationId) {
+//		IFrameElement iframe = IFrameElement.as(frameElement);
+//		final Document frameDocument = iframe.getContentDocument();
+//		
+//		Set<Element> spans = new HashSet<Element>();
+//		NodeList<Element> elements = frameDocument.getElementsByTagName(ELEMENT_SPAN);
+//		for(int i=0; i<elements.getLength(); i++) {
+//			String id = HtmlUtils.getAnnotationIdAttribute(elements.getItem(i));
+//			if(id != null && id.trim().length()>0 && id.startsWith(annotationId + ":")) {
+//				spans.add(elements.getItem(i));
+//			}
+//		}	
+//		return spans;
+//	}
+	
 	public static int getVerticalPositionOfElement(Element element) {
 		return element.getAbsoluteTop();
 	}
@@ -480,6 +497,21 @@ public class HtmlUtils {
 		}
 	}
 	
+	public static void processMultipleTargetAnnotation(Element frameElement, MAnnotation annotation) {
+		if(annotation.getSelectors().size()==1) {
+			Set<Element> spans = getSpansWithAnnotationIdBegin(frameElement, "" + annotation.getLocalId());
+			if(spans.size()==1) {
+				trimAnnotationId(spans.iterator().next(), ""+annotation.getLocalId());
+			}
+		}
+	}
+	
+	public static void trimAnnotationId(Element span, String annotationId) {
+		//Window.alert(((com.google.gwt.user.client.Element)span).getAttribute("annotationid"));
+		((com.google.gwt.user.client.Element)span).setAttribute("annotationid", annotationId);
+		//Window.alert(((com.google.gwt.user.client.Element)span).getAttribute("annotationid"));
+	}
+	
 	public static Set<Element> getSpansWithAnnotationId(Element frameElement, String annotationId) {
 		IFrameElement iframe = IFrameElement.as(frameElement);
 		final Document frameDocument = iframe.getContentDocument();
@@ -489,6 +521,21 @@ public class HtmlUtils {
 		for(int i=0; i<elements.getLength(); i++) {
 			if(HtmlUtils.getAnnotationIdAttribute(elements.getItem(i))!=null && 
 					HtmlUtils.getAnnotationIdAttribute(elements.getItem(i)).equals(annotationId)) {
+				spans.add(elements.getItem(i));
+			}
+		}
+		return spans;
+	}
+	
+	public static Set<Element> getSpansWithAnnotationIdBegin(Element frameElement, String annotationId) {
+		IFrameElement iframe = IFrameElement.as(frameElement);
+		final Document frameDocument = iframe.getContentDocument();
+		
+		Set<Element> spans = new HashSet<Element>();
+		NodeList<Element> elements = frameDocument.getElementsByTagName(ELEMENT_SPAN);
+		for(int i=0; i<elements.getLength(); i++) {
+			if(HtmlUtils.getAnnotationIdAttribute(elements.getItem(i))!=null && 
+					HtmlUtils.getAnnotationIdAttribute(elements.getItem(i)).startsWith(annotationId + ":")) {
 				spans.add(elements.getItem(i));
 			}
 		}
