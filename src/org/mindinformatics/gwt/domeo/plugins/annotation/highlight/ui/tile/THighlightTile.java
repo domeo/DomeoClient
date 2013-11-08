@@ -67,7 +67,8 @@ public class THighlightTile extends ATileComponent implements ITileComponent {
 			createProvenanceBar("", provenance, "Highlight", _annotation);
 
 			//type.setText("Highlight:");
-			text.setText("'" + SelectorUtils.getMatch(_annotation.getSelector()) + "'");
+			//text.setText("'" + SelectorUtils.getMatch(_annotation.getSelector()) + "'");
+			text.setText(SelectorUtils.getMatch(_annotation.getSelectors()));
 			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
