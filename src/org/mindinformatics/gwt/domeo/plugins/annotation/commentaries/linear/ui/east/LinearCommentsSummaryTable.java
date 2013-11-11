@@ -188,8 +188,7 @@ public class LinearCommentsSummaryTable extends Composite
 					bu.addClickHandler(new ClickHandler() {
 						@Override
 						public void onClick(ClickEvent event) {
-
-							if(ta.getText().trim().length()==0 || title.getText().trim().equals("Discussion topic")) return; 
+							if(ta.getText().trim().length()==0 || (numberComments==0 && title.getText().trim().equals("Discussion topic"))) return; 
 							// Decide if an annotation has to react to the main annotation of the thread or if reacts to the previous one in the list
 							//MAnnotationSelector selector = AnnotationFactory.createAnnotationSelector(_domeo.getAgentManager().getUserPerson(), 
 							//		_domeo.getPersistenceManager().getCurrentResource(), _annotations.get(_annotations.size()-1));
@@ -197,10 +196,9 @@ public class LinearCommentsSummaryTable extends Composite
 									_domeo.getPersistenceManager().getCurrentResource(), _root);
 							MLinearCommentAnnotation annotation = LinearCommentsFactory.createLinearComment(_domeo.getAgentManager().getUserPerson(), 
 									_domeo.getAgentManager().getSoftware(), selector, ta.getText());
-							if(title.getValue()!=null && title.getValue().trim().length()>0) {
+							if(numberComments==0 && title.getValue()!=null && title.getValue().trim().length()>0) {
 								annotation.setTitle(title.getValue());
 							}
-
 							_domeo.getAnnotationPersistenceManager().addAnnotationOfAnnotation(annotation,  _root, 
 									_domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_root.getLocalId()));
 
