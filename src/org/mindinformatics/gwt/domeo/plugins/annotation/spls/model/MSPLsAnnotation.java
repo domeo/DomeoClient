@@ -9,12 +9,8 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
  * @author Richard Boyce <rdb20@pitt.edu>
  */
 @SuppressWarnings("serial")
-    public class MSPLsAnnotation extends MAnnotation {
+    public class MSPLsAnnotation extends MAnnotation implements IPharmgxOntology{
 
-	protected static final String LABEL = "SPL Annotation";
-	public static final String TYPE = "ao:SPLAnnotation";
-	public static final String BODY_TYPE = "domeo:PharmgxUsage";
-	
 	private MSPLPharmgxUsage pharmgxUsage;
 
 	public MSPLPharmgxUsage getPharmgxUsage() {
