@@ -18,15 +18,17 @@
 		
 		.content {
 			background-color: #F0F8FF;
-			/*
-													-moz-border-radius: 15px;
-													border-radius: 15px;
-													*/
 			border-top-right-radius: 10px;
 			-moz-border-radius-topright: 10px;
 			border-bottom-right-radius: 10px;
 			-moz-border-radius-bottomright: 10px;
 			padding: 3px 5px 3px 3px;
+		}
+		
+		.panel {
+			width: 100%;
+			vertical-align: top;
+			padding-top: 8px;
 		}
 		
 		.contentItem {
@@ -56,6 +58,16 @@
 		.provenanceFrame {
 			padding: 0px 1px 0px 0px;
 		}
+		
+		.tablelabel {
+			background-color: #EEE;
+			padding: 3px 5px 3px 3px;
+		}
+		
+		.tablevalue {
+			background-color: #F0F8FF;
+			padding: 3px 5px 3px 3px;
+		}
 	</ui:style>
 
 	<g:VerticalPanel styleName='{style.body}' ui:field='body'>
@@ -73,17 +85,89 @@
 		</g:HorizontalPanel>
 
 		<g:HorizontalPanel>
-			<g:Label ui:field="pkimpact" styleName='{style.contentItem}'></g:Label>
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pkimpactlabel" styleName='{style.tablelabel}'>PK Impact</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pkimpact" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pdimpactlabel" styleName='{style.tablelabel}'>PD Impact</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pdimpact" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdruglabel" styleName='{style.tablelabel}'>drug</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdrug" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdoselabel" styleName='{style.tablelabel}'>dose</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdose" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recmonitoringlabel" styleName='{style.tablelabel}'>monitoring</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recmonitoring" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="testlabel" styleName='{style.tablelabel}'>Test</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="test" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="statementlabel" styleName='{style.tablelabel}'>Statement</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="statement" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
 		</g:HorizontalPanel>
+
+
 
 		<g:HorizontalPanel>
 
-			<g:SimplePanel ui:field="acceptIcon" styleName='{style.clickable}' />
-			<g:Label styleName='{style.contentItem}'>Correct  </g:Label>
-			<g:SimplePanel ui:field="broadIcon" styleName='{style.clickable}' />
-			<g:Label styleName='{style.contentItem}'>Broad  </g:Label>
-			<g:SimplePanel ui:field="wrongIcon" styleName='{style.clickable}' />
-			<g:Label styleName='{style.contentItem}'>Wrong </g:Label>
+			<g:VerticalPanel>
+				<g:Image ui:field="rightIcon" styleName='{style.clickable}' />
+			</g:VerticalPanel>
+			<g:VerticalPanel>
+				<g:Label styleName='{style.contentItem}'>Agree  </g:Label>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:Image ui:field="wrongIcon" styleName='{style.clickable}' />
+			</g:VerticalPanel>
+			<g:VerticalPanel>
+				<g:Label styleName='{style.contentItem}'>Disagree  </g:Label>
+			</g:VerticalPanel>
+
 
 		</g:HorizontalPanel>
 

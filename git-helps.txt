@@ -1,4 +1,4 @@
-Git workflow:
+statGit workflow:
 
 1) clone a fork that I have read/write permissions on
 
