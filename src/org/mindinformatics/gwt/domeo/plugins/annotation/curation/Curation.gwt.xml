@@ -12,6 +12,7 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Specify the paths for translatable code                    -->
+  <source path='ui'/>
   <source path='src'/>
   <source path='model'/>
   <source path='viewer'/>

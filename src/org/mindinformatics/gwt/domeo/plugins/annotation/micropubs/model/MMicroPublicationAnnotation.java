@@ -28,7 +28,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 @SuppressWarnings("serial")
 public class MMicroPublicationAnnotation extends MAnnotation {
 
-	protected static final String LABEL = "Micropublication Annotation";
+	protected static final String LABEL = "Micropublication";
 	public static final String TYPE = "ao:MicroPublicationAnnotation";
 	public static final String BODY_TYPE = "domeo:AntibodyUsage";
 	

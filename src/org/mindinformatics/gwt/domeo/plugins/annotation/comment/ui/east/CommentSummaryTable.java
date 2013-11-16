@@ -18,6 +18,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens.DiscussionSummaryListLens;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens.LGeneralCommentLens;
+import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.framework.component.ICommentsRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
@@ -142,7 +143,7 @@ public class CommentSummaryTable extends Composite
 										topContent.add(w);
 									}
 								} else {
-									if(ann instanceof MCommentAnnotation) { // Remove for simple commenting
+									if(ann instanceof MCommentAnnotation || ann instanceof MCurationToken) { // Remove for simple commenting
 										//ITileComponent cc = new TCommentViewerTile(_domeo, _listener);
 										//cc.initializeLens(ann);
 										//Widget w = cc.getTile();

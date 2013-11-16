@@ -171,4 +171,7 @@ public interface Resources extends ClientBundle,
 	
 	@Source("org/mindinformatics/gwt/domeo/client/icons/tag-blue.png")
 	ImageResource tagIcon();
+	
+	@Source("org/mindinformatics/gwt/domeo/client/icons/arrow_top_left.png")
+	ImageResource annotationIcon();
 }
