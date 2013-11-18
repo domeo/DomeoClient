@@ -255,6 +255,7 @@ public class LinearCommentsSummaryTable extends Composite
 	
 	public void listLocalThreads() {
 		topContent.clear();
+		topContent.setVisible(true);
 		bottomContent.clear();
 		
 		Set<MAnnotation> anns = _domeo.getAnnotationPersistenceManager().getListOfAnnotationCommentedOn();

@@ -5,7 +5,7 @@
 	<ui:style>	
 		.body {
 			width: 100%;
-			border-left: 2px solid #ddd;
+			border-left: 0px solid #ddd;
 		}
 		
 		.toolbar {
@@ -14,7 +14,7 @@
 		 
 		.list {
 			width: 100%;
-			border-left: 2px solid #fff;
+			border-left: 0px solid #fff;
 		}
 		
 		.info {
