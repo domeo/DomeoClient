@@ -373,19 +373,23 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 					Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
 				Resources resource = Domeo.resources;
 				
-				Image commentIcon = new Image(resource.littleCommentIcon());
-				commentIcon.setTitle("Comment on Item");
-				commentIcon.setStyleName(ATileComponent.tileResources.css().button());
-				commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
-				commentIcon.addClickHandler(new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						_curationPopup.hide();
-					}
-				});
-				socialBar.add(commentIcon);
-				socialBar.add(new Label("(10)"));
+				int counter = _domeo.getAnnotationPersistenceManager().getCommentsOnAnnotationCounter(annotation);
+				if(counter>0) {
+					Image commentIcon = new Image(resource.littleCommentIcon());
+					commentIcon.setTitle("Comment on Item");
+					commentIcon.setStyleName(ATileComponent.tileResources.css().button());
+					commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
+					commentIcon.addClickHandler(new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							_curationPopup.hide();
+						}
+					});
+					socialBar.add(commentIcon);
+					socialBar.add(new Label("(" + counter + ")"));
+				}
 				
+				/*
 				Image usersIcon = new Image(resource.usersIcon());
 				usersIcon.setTitle("Involved users");
 				usersIcon.setStyleName(ATileComponent.tileResources.css().button());
@@ -400,6 +404,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 				socialBar.setCellWidth(usersIcon, "24px");
 				socialBar.setCellHorizontalAlignment(usersIcon, HasHorizontalAlignment.ALIGN_RIGHT);
 				socialBar.add(new Label("(2)"));
+				*/
 			}
 		} catch (Exception e) {
 			_domeo.getLogger().exception(this, "create social bar" +  e.getMessage());

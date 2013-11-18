@@ -6,7 +6,7 @@
 		.toolbar {
 			background-color: #eee;
 			/*background-color: #6D98AB;*/
-			height: 16px;
+			height: 31px;
 			width: 100%;
 			border-bottom: 2px #eee solid;
 		}

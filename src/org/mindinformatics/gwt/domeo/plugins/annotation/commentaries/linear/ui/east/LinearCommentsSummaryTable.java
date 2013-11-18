@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
@@ -34,6 +35,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -252,7 +254,22 @@ public class LinearCommentsSummaryTable extends Composite
 	}
 	
 	public void listLocalThreads() {
+		topContent.clear();
+		bottomContent.clear();
 		
+		Set<MAnnotation> anns = _domeo.getAnnotationPersistenceManager().getListOfAnnotationCommentedOn();
+		for(MAnnotation ann: anns) {
+			ITileComponent c = _domeo.getAnnotationTailsManager().getAnnotationTile(ann.getClass().getName(), _listener);
+			if(c==null) {
+				VerticalPanel vp = new VerticalPanel();
+				vp.add(new Label(ann.getLocalId() + " - " + ann.getClass().getName() + " - " + ann.getY()));
+				topContent.add(vp);
+			} else {
+				c.initializeLens(ann);
+				Widget w = c.getTile();
+				topContent.add(w);
+			}
+		}
 	}
 	
 	public int listGeneralThreads() {

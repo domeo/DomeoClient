@@ -108,6 +108,10 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	private HashMap<String, MLinkedResource> termsByUrl =
 		new  HashMap<String, MLinkedResource>();
 	
+	
+	public HashMap<MAnnotation, ArrayList<MLinearCommentAnnotation>> commentsOnAnnotationCache 
+		= new HashMap<MAnnotation, ArrayList<MLinearCommentAnnotation>>();
+	
 //	private HashMap<Long, Integer> annotationsOfAnnotationsCounter =
 //			new  HashMap<Long, Integer>();
 	
@@ -399,6 +403,7 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	private void initializeAnnotationCache() {
 		annotationsByTypeCache = new  HashMap<String, HashMap<Long, MAnnotation>>();
 		annotationsByLocalIdCache = new  HashMap<Long, MAnnotation>();
+		commentsOnAnnotationCache = new HashMap<MAnnotation, ArrayList<MLinearCommentAnnotation>>();
 		annotationsOfTargetResource.clear();
 		annotationsOfAnnotations.clear();
 //		annotationsOfAnnotationsCounter.clear();
@@ -422,8 +427,41 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	public boolean addAnnotationOfAnnotation(MCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set) {
 		//Window.alert("Cache comment");
 		//annotationsOfAnnotationsCounter.put(annotation.getLocalId(), arg1);
+		//cacheCommentOnAnnotation(targetAnnotation, annotation);
 		return addAnnotationOfAnnotation((MAnnotation)annotation, targetAnnotation, set);
 	}
+	
+	public boolean addAnnotationOfAnnotation(MLinearCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set) {
+		//Window.alert("Cache comment");
+		//annotationsOfAnnotationsCounter.put(annotation.getLocalId(), arg1);
+		cacheCommentOnAnnotation(targetAnnotation, annotation);
+		return addAnnotationOfAnnotation((MAnnotation)annotation, targetAnnotation, set);
+	}
+	
+	// -------------------------------------------------------------------------------------------
+	public void cacheCommentOnAnnotation(MAnnotation target, MLinearCommentAnnotation comment) {
+		if(commentsOnAnnotationCache.containsKey(target)) {
+			ArrayList<MLinearCommentAnnotation> comments = commentsOnAnnotationCache.get(target);
+			comments.add(comment);
+		} else {
+			ArrayList<MLinearCommentAnnotation> comments = new ArrayList<MLinearCommentAnnotation>();
+			comments.add(comment);
+			commentsOnAnnotationCache.put(target, comments);
+		}
+	}
+	
+	public Set<MAnnotation> getListOfAnnotationCommentedOn() {
+		return commentsOnAnnotationCache.keySet();
+	}
+	
+	public int getCommentsOnAnnotationCounter(MAnnotation target) {
+		if(commentsOnAnnotationCache.containsKey(target)) {
+			return commentsOnAnnotationCache.get(target).size();
+		}
+		return 0;
+	}
+	// -------------------------------------------------------------------------------------------
+	
 	
 	/**
 	 * Adds an annotation item to the cache. This method indexes the item 
@@ -487,7 +525,7 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 			_application.getLogger().exception(this, "The annotation creation failed " + annotation.getClass().getName() + "-" + annotation.getLocalId());
 			return false;
 		}
-	}
+	}		
 	
 	/**
 	 * Adds an annotation item to the cache. This method indexes the item 

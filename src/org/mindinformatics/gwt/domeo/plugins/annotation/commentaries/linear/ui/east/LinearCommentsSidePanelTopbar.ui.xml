@@ -56,7 +56,7 @@
 		  			<g:SimplePanel ui:field='newThreadPanel' styleName='{style.clickable}'/>
 		  		</g:cell>
 		  		<g:cell>
-		  			<g:SimplePanel ui:field='seeLocalizedThreadsPanel'/>
+		  			<g:SimplePanel ui:field='seeLocalizedThreadsPanel' styleName='{style.clickable}'/>
 		  		</g:cell>
 		  	</g:HorizontalPanel>
 	  	</g:cell>

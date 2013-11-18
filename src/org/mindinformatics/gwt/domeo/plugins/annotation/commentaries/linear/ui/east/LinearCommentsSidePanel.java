@@ -162,7 +162,7 @@ public class LinearCommentsSidePanel extends ASidePanel
 	
 	public void listLocalThreads() {
 		table.listLocalThreads();
-		
+		topbar.updateLocalStatistics(((IDomeo)_application).getAnnotationPersistenceManager().getListOfAnnotationCommentedOn().size());
 	}
 	
 	public void createNewGeneralThread() {

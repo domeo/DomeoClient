@@ -335,8 +335,11 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 					}
 				}, _resources.saveMediumIcon().getSafeUri().asString(), "Save");
 		
-		toolbar.addToLeftPanel(homepageButton, "22");
-		toolbar.addToLeftPanel(addressBarPanel);
+		toolbar.addToLeftPanel(homepageButton, "22");	
+		
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_ADDRESSBAR)) {		
+			toolbar.addToLeftPanel(addressBarPanel);
+		}
 		//toolbar.addToLeftPanel(annotateButtonPanel);
 		//toolbar.addToLeftPanel(analyzeButtonPanel);
 		
@@ -365,7 +368,9 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 		sp.setWidth("100px");
 		
 		toolbar.addToRightPanel(sp);
-		toolbar.addToRightPanel(shareButton);
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_SHARING)) {
+			toolbar.addToRightPanel(shareButton);
+		}
 		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PREFERENCES)) {
 			toolbar.addToRightPanel(settingsButton);
 		}

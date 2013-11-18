@@ -78,23 +78,22 @@ public class LinearCommentsSidePanelTopbar  extends Composite
 		hp2.add(l1);
 		newThreadPanel.add(hp2);
 		
-//		Label l2 = new Label("Local threads");
-//		l2.addClickHandler(new ClickHandler() {
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				Window.alert("Local threads not implemented");
-//			}
-//		});
-//		HorizontalPanel hp4 = new HorizontalPanel();
-//		hp4.add(new Image(Domeo.resources.littleThreadIcon()));
-//		hp4.add(l2);
-//		seeLocalizedThreadsPanel.add(hp4);
-//		seeLocalizedThreadsPanel.setWidth("120px");
+		Label l2 = new Label("Local threads");
+		l2.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				annotationSidePanel.listLocalThreads();
+			}
+		});
+		HorizontalPanel hp4 = new HorizontalPanel();
+		hp4.add(new Image(Domeo.resources.commentsIcon()));
+		hp4.add(l2);
+		seeLocalizedThreadsPanel.add(hp4);
+		seeLocalizedThreadsPanel.setWidth("120px");
 		
 		secondLineTopbar.add(new Label("No available threads"));
 		
 		explorePanelIcon.clear();
-		//explorePanelIcon.add(new Image(Domeo.resources.littleZoomIcon()));
 	}
 	
 	@Override
@@ -154,6 +153,30 @@ public class LinearCommentsSidePanelTopbar  extends Composite
 			explorePanelLabel.clear();
 		} else {
 			secondLineTopbar.add(new HTML("No discussion thread for this document"));
+			explorePanelLabel.clear();
+		}
+	}
+	
+	public void updateLocalStatistics(int numberComments) {
+		secondLineTopbar.clear();
+		
+		if(numberComments>0) {
+			HorizontalPanel socialPanel = new HorizontalPanel();
+			
+			Resources resource = Domeo.resources;
+			
+			//Image commentIcon = new Image(resource.commentsIcon());
+			//commentIcon.setTitle("Comment on Item");
+			//commentIcon.setStyleName(ATileComponent.tileResources.css().button());
+			//commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
+			//socialPanel.add(commentIcon);
+			String label = numberComments==1 ? "thread" : "threads";
+			socialPanel.add(new Label(numberComments + " local " + label));
+
+			secondLineTopbar.add(socialPanel);
+			explorePanelLabel.clear();
+		} else {
+			secondLineTopbar.add(new HTML("No local discussion thread for this document"));
 			explorePanelLabel.clear();
 		}
 	}
