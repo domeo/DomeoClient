@@ -63,7 +63,7 @@ public class ResourceSidePanel extends ASidePanel implements IRefreshableCompone
 		
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put(MGenericResource.PARAM_URI_READONLY, "true");
-		params.put(MGenericResource.TITLE_URI_READONLY, "false");
+		params.put(MGenericResource.TITLE_URI_READONLY, "true");
 		params.put(LOnlineResourceCardPanel.KNOWN_RESOURCE, "false");
 		
 		Widget w = _application.getResourcePanelsManager().getResourcePanel(
