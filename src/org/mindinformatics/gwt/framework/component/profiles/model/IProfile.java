@@ -13,6 +13,7 @@ public interface IProfile {
 	public static final String FEATURE_SHARING = "org.mindinformatics.gwt.domeo.feature.sharing";
 	public static final String FEATURE_HELP = "org.mindinformatics.gwt.domeo.feature.help";
 	public static final String FEATURE_BRANDING = "org.mindinformatics.gwt.domeo.feature.branding";
+	public static final String FEATURE_TEXTMINING_SUMMARY = "org.mindinformatics.gwt.domeo.feature.textmining.summary";
 	
 	String getUuid();
 	String getName();

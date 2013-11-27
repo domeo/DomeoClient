@@ -20,9 +20,14 @@
  */
 package org.mindinformatics.gwt.domeo.component.textmining.src;
 
+import java.util.HashSet;
+
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.plugins.annotation.textmining.ui.viewer.TextminingResultsViewer;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
+import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -34,14 +39,43 @@ public class TextMiningManager implements ITextminingRequestCompleted {
 	public TextMiningManager(IDomeo domeo) { _domeo = domeo; }
 	
 	@Override
-	public void returnTextminingResults(JsAnnotationSet set) {
+	public void returnTextminingResults(JsAnnotationSet set, boolean all) {
+		
+		_domeo.getLogger().debug(this, "Textmining results received...");
+		_domeo.getProgressPanelContainer().setProgressMessage("Textmining results received...");
+		if(all || _domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_TEXTMINING_SUMMARY)) {		
+			JsonUnmarshallingManager manager = _domeo.getUnmarshaller();	
+			try {
+				manager.unmarshallTextmining(set);
+		
+				_domeo.getContentPanel().getAnnotationFrameWrapper().clearSelection();		
+				_domeo.getToolbarPanel().deselectAnalyze();
+				_domeo.getProgressPanelContainer().setCompletionMessage("Textmining completed!");
+				_domeo.getLogger().info(this, "Textmining completed!");
+				_domeo.refreshAllComponents();
+			} catch(Exception e) {
+				textMiningNotCompleted();
+			} 
+		} else {
+			_domeo.getContentPanel().getAnnotationFrameWrapper().clearSelection();		
+			_domeo.getToolbarPanel().deselectAnalyze();
+			_domeo.getProgressPanelContainer().setCompletionMessage("Textmining completed!");
+			_domeo.getLogger().info(this, "Textmining completed!");
+			
+			TextminingResultsViewer afp = new TextminingResultsViewer(_domeo, this, set);
+			new EnhancedGlassPanel(_domeo, afp, afp.getTitle(), false, false, false);
+		}
+	}
+	
+	@Override
+	public void returnTextminingResults(JsAnnotationSet set, HashSet<String> acceptedIds) {
 		
 		_domeo.getLogger().debug(this, "Textmining results received...");
 		_domeo.getProgressPanelContainer().setProgressMessage("Textmining results received...");
 		
 		JsonUnmarshallingManager manager = _domeo.getUnmarshaller();	
 		try {
-			manager.unmarshallTextmining(set);
+			manager.unmarshallTextmining(set, acceptedIds);
 	
 			_domeo.getContentPanel().getAnnotationFrameWrapper().clearSelection();		
 			_domeo.getToolbarPanel().deselectAnalyze();
@@ -51,6 +85,7 @@ public class TextMiningManager implements ITextminingRequestCompleted {
 		} catch(Exception e) {
 			textMiningNotCompleted();
 		} 
+
 	}
 	
 	@Override
@@ -68,4 +103,6 @@ public class TextMiningManager implements ITextminingRequestCompleted {
 		_domeo.getProgressPanelContainer().setErrorMessage("Textmining not completed!");
 		_domeo.getLogger().info(this, "Textmining not completed!");
 	}
+
+
 }

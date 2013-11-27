@@ -20,13 +20,16 @@
  */
 package org.mindinformatics.gwt.domeo.component.textmining.src;
 
+import java.util.HashSet;
+
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public interface ITextminingRequestCompleted {
-	public void returnTextminingResults(JsAnnotationSet set);
+	public void returnTextminingResults(JsAnnotationSet set, boolean all);
+	public void returnTextminingResults(JsAnnotationSet set, HashSet<String> acceptedIds);
 	public void textMiningNotCompleted();
 	public void textMiningNotCompleted(String message);
 }

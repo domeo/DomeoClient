@@ -197,7 +197,7 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						JsAnnotationSet set = (JsAnnotationSet) parseJson(response.getText());
-						completionCallback.returnTextminingResults(set);
+						completionCallback.returnTextminingResults(set, false);
 					} else if (503 == response.getStatusCode()) {
 						_application.getLogger().exception(this, "503: " + response.getText());
 						completionCallback.textMiningNotCompleted("Couldn't run BioPortal Annotator (503)");
