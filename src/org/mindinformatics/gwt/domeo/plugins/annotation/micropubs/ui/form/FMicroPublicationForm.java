@@ -58,8 +58,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.ISelectionP
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.picker.IStatementsSearchObjectContainer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.picker.StatementsSearchWidget;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.search.terms.SearchTermsWidget;
+import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
-import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.IPubmedSearchObjectContainer;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedSearchWidget;
 import org.mindinformatics.gwt.framework.component.qualifiers.ui.ISearchTermsContainer;
@@ -230,7 +230,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		tabs.add(imagesListPickerWidget);
 		tabBar.addTab("Images");
 		
-		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MPubMedDocument) {
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
 			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
 			tabs.add(referencesListPickerWidget);
 			tabBar.addTab("References");
@@ -385,7 +385,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		tabs.add(imagesListPickerWidget);
 		tabBar.addTab("Images");
 		
-		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MPubMedDocument) {
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
 			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
 			tabs.add(referencesListPickerWidget);
 			tabBar.addTab("References");

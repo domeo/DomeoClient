@@ -5,15 +5,15 @@ import java.util.HashMap;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
-import org.mindinformatics.gwt.domeo.client.ui.east.resource.CitationReferencesPanel;
 import org.mindinformatics.gwt.domeo.client.ui.east.resource.ReferencesSidePanelTopbar;
 import org.mindinformatics.gwt.domeo.client.ui.east.resource.ResourceSidePanelTopbar;
+import org.mindinformatics.gwt.domeo.client.ui.east.resource.references.CitationReferencesPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.CachedImagesPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LSlimDocumentResourceCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
-import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedReferenceSearchPanel;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedReferencesSearchPanel;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
@@ -176,7 +176,7 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 					@Override
 					public void onClick(ClickEvent event) {
 						_domeo.getLogger().command(this, "Open panel for adding a citation"); 
-						PubmedReferenceSearchPanel afp = new PubmedReferenceSearchPanel(_domeo, -1);
+						PubmedReferencesSearchPanel afp = new PubmedReferencesSearchPanel(_domeo, -1);
 						new EnhancedGlassPanel(_domeo, afp, afp.getTitle(), false, false, false);
 						Window.alert("addCitation not implemented yet");
 					}

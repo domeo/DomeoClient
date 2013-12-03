@@ -1,0 +1,33 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  
+    <ui:style>
+	  	.outer {
+		    height: 100%;
+		    padding-top: 5px;
+	 	}
+	 	
+	 	.inner {
+		    height: 100%;
+		    
+	 	}
+	 	
+	 	.reference {
+	 		padding: 3px;	
+	 	}
+	 	
+	 	.main {
+	 		
+	 	}
+	 </ui:style>
+  
+  	<g:VerticalPanel styleName='{style.outer}'>
+  		<g:VerticalPanel ui:field='reference'  styleName='{style.reference}'/>
+  		<g:HorizontalPanel styleName='{style.inner}'>
+  			<g:cell>
+  				<g:VerticalPanel ui:field='main'  styleName='{style.main}'></g:VerticalPanel>
+  			</g:cell>
+  		</g:HorizontalPanel>
+  	</g:VerticalPanel>
+</ui:UiBinder>

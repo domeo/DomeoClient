@@ -61,9 +61,89 @@
 			padding: 0;	
 			margin: 0;	
 		}
+		.inlineWithBottom {
+			display: inline;	
+			padding-bottom: 8px;
+		}
 	</ui:style>
   	<g:FlowPanel styleName=''>
 	  	<g:TabLayoutPanel barHeight="32" barUnit="PX" ui:field="tabToolsPanel" height="430px" >
+	  	 	<g:tab>
+	        	 <g:header>
+	                <div>
+	                    <span>Self</span>
+	                </div>
+	            </g:header>
+	            <g:FlowPanel ui:field='self' styleName=''>
+					<g:VerticalPanel styleName='{style.body}'  spacing="3">	
+						<g:VerticalPanel ui:field='pubMedToolbarPanel'/>
+						<g:cell height="18px">
+							<g:FlowPanel>
+								<g:Label styleName='{style.label}'> URL</g:Label>
+								<g:Image ui:field='urlImage2' styleName='{style.activeIcon}'/>
+							</g:FlowPanel>
+						</g:cell>
+						<g:cell height="20px">
+							<g:HTML ui:field='uriField2'/>
+						</g:cell>
+						<!--  
+						<g:cell height="18px">
+							<g:Label styleName='{style.label}'>Source</g:Label>
+						</g:cell>
+						<g:cell height="20px">
+							<g:FlowPanel ui:field='sourceField' styleName='{style.inline}'/>
+						</g:cell>	
+						-->
+						<g:cell height="18px">
+							<g:Label styleName='{style.label}'>CITATION</g:Label>
+						</g:cell>
+						<g:cell height="25px">
+							<g:FlowPanel>
+								<g:FlowPanel ui:field='citationField' styleName='{style.inlineWithBottom}'/>
+							</g:FlowPanel>
+						</g:cell>	
+						<g:cell height="18px">
+							<g:Label styleName='{style.label}'>IDENTIFIERS</g:Label>
+						</g:cell>
+						<g:cell height="25px">
+							<g:FlowPanel ui:field='identifiersField' styleName='{style.inlineWithBottom}'/>
+						</g:cell>	
+						<g:HTMLPanel></g:HTMLPanel>	
+					</g:VerticalPanel>
+					<g:FlowPanel styleName='{style.infoBarRight}'>
+						<g:HTML ui:field='extractionSourceDetails' styleName='{style.provenance}'/>
+						<g:Label ui:field='extractorProvenanceDetails' styleName='{style.provenanceInline}'/>
+						<g:Image ui:field='extractionProvenanceImage' styleName='{style.activeIcon}'/>
+						<g:Label ui:field='extractionDateDetails' styleName='{style.provenance}'/>
+					</g:FlowPanel>
+				</g:FlowPanel>
+			</g:tab>
+			<g:tab>
+	        	<g:header>
+	                <div>
+	                    <span>Bibliography</span>
+	                </div>
+	            </g:header>
+	            <g:VerticalPanel width="100%">
+		            <g:VerticalPanel ui:field='bibliographyToolbarPanel' styleName='{style.contentPanel}'/>
+		            <g:ScrollPanel ui:field='referencesPanel' styleName='{style.scrollContent}'>
+		            	<g:HTML>No references available</g:HTML>
+		            </g:ScrollPanel>
+	            </g:VerticalPanel>
+	        </g:tab>
+	        <g:tab>
+	        	<g:header>
+	                <div>
+	                    <span>Tags</span>
+	                </div>
+	            </g:header>
+	            <g:VerticalPanel width="100%">
+		            <g:VerticalPanel ui:field='qualifiersToolbarPanel' styleName='{style.contentPanel}'/>
+		            <g:ScrollPanel ui:field='qualifiersPanel' styleName='{style.scrollContent}'>
+		            	<g:HTML></g:HTML>
+		            </g:ScrollPanel>
+	            </g:VerticalPanel>
+	        </g:tab>
 	  		<g:tab>
 	        	 <g:header>
 	                <div>
@@ -115,11 +195,13 @@
 						</g:cell>	
 						<g:HTMLPanel></g:HTMLPanel>	
 					</g:VerticalPanel>
+					<!--  
 					<g:FlowPanel styleName='{style.infoBarRight}'>
 						<g:Label ui:field='extractorProvenanceDetails' styleName='{style.provenanceInline}'/>
 						<g:Image ui:field='extractionProvenanceImage' styleName='{style.activeIcon}'/>
 						<g:Label ui:field='extractionDateDetails' styleName='{style.provenance}'/>
 					</g:FlowPanel>
+					-->
 				</g:FlowPanel>
 			</g:tab>
 		</g:TabLayoutPanel>

@@ -1,6 +1,9 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.json.model;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.i18n.client.DateTimeFormat;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -21,4 +24,10 @@ public class JsPublicationArticleReference extends JavaScriptObject {
 	public final native String getPubMedId() /*-{ return this.pmid; }-*/;
 	public final native String getPubMedCentralId() /*-{ return this.pmcid; }-*/;
 	public final native String getUnrecognized() /*-{ return this.unrecognized; }-*/;
+	
+	public final native String getCreatedOnAsString() /*-{ return this.createdon; }-*/;
+	public final Date getCreatedOn() {
+		DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy HH:mm:ss Z");
+		return fmt.parse(getCreatedOnAsString());
+	}
 }

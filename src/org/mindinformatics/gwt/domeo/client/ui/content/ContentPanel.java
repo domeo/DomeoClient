@@ -29,6 +29,7 @@ public class ContentPanel extends Composite {
 		Frame frame = new Frame();
 		frame.setStyleName("cs-Frame");
 		DOM.setElementAttribute(frame.getElement(), "id", FRAME_ID);
+		//DOM.setElementAttribute(frame.getElement(), "sandbox", "allow-forms allow-scripts");
 		frameWrapper = new AnnotationFrameWrapper(_application, frame);
 		frameWrapper.getFrame().setWidth("100%");
 		frameWrapper.getFrame().setHeight("100%");

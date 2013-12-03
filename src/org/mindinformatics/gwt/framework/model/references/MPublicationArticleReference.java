@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.framework.model.references;
 
+import java.util.Date;
+
 import org.mindinformatics.gwt.framework.component.agents.model.MAgent;
 
 /**
@@ -20,7 +22,7 @@ public class MPublicationArticleReference extends MReference {
     
     // Source
     private MAgent source;
-    private String creationDate;
+    private Date creationDate;
     
     // IDs
     private String doi;
@@ -88,10 +90,10 @@ public class MPublicationArticleReference extends MReference {
 	public void setSource(MAgent source) {
 		this.source = source;
 	}
-	public String getImportedOn() {
+	public Date getImportedOn() {
 		return creationDate;
 	}
-	public void setCreationDate(String creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 	public String getDoi() {

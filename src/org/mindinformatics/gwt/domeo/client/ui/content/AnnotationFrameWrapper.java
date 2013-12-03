@@ -1088,6 +1088,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				annotation.addSelector(target.getSelector());
 			}			
 			
+			_domeo.getLogger().debug(AnnotationFrameWrapper.LOG_CATEGORY_TARGETS_ANNOTATION, this, "Clear selection");
 			clearSelection();
 			resetSelection("");
 			
@@ -1126,6 +1127,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				annotation.addSelector(target.getSelector());
 			}			
 			
+			_domeo.getLogger().debug(AnnotationFrameWrapper.LOG_CATEGORY_TARGETS_ANNOTATION, this, "Clear selection");
 			clearSelection();
 			resetSelection("");
 			
@@ -1199,6 +1201,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		} else {
 			Set<com.google.gwt.dom.client.Element> spans = HtmlUtils.getElementsByAnnotationId(
 					_frame.getElement(), annotation.getLocalId().toString());
+			//Window.alert(annotation.getLocalId().toString() + " - " + spans.size());
 			for (com.google.gwt.dom.client.Element span : spans) {
 				HtmlUtils.scrollToElement(_frame.getElement(), span);
 				final com.google.gwt.dom.client.Element _span = span;
@@ -1479,6 +1482,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 	public void setUrl(String url) {
 		currentUrl = url;
 		_frame.setUrl(currentUrl);
+		_domeo.getLogger().debug(this, "registerPdfLoadedNotification");
 		registerPdfLoadedNotification();
 	}
 	
@@ -1486,6 +1490,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		currentUrl = realUrl;
 		_domeo.getLogger().debug(this, "Setting up url " + realUrl);
 		_frame.setUrl(url);
+		_domeo.getLogger().debug(this, "registerPdfLoadedNotification");
 		registerPdfLoadedNotification();
 	}
 	
@@ -1763,7 +1768,11 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 	}-*/;
 	
 	public native void registerPdfLoadedNotification() /*-{
-	   $doc.getElementById($wnd.FRAME_ID).contentWindow.window.pdfLoaded = $entry(@org.mindinformatics.gwt.domeo.client.Domeo::notifyDocumentLoadedStageOneStatic());
+		try {
+	   		$doc.getElementById($wnd.FRAME_ID).contentWindow.window.pdfLoaded = $entry(@org.mindinformatics.gwt.domeo.client.Domeo::notifyDocumentLoadedStageOneStatic());
+		} catch(e) {
+			alert(e);
+		}
 	}-*/;
 	
 	// Called by native javascript code

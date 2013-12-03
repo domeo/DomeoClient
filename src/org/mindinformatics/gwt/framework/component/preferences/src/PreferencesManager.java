@@ -93,7 +93,8 @@ public class PreferencesManager {
 	 */
 	public GenericPreference getPreferenceItem(String pluginName, String name) {
 		HashMap<String, GenericPreference> map = preferencesCache.get(pluginName);
-		return map.get(name);
+		if(map!=null) return map.get(name);
+		return null;
 	}
 	
 	//TODO add getItemAsBoolean

@@ -115,15 +115,12 @@ public abstract class ATileComponent extends Composite {
 			deleteIcon.addClickHandler(ActionDeleteAnnotation.getClickHandler(_domeo, this, getAnnotation()));
 			step=4;
 			
-			_domeo.getLogger().debug(this, ""+annotation.getCreator());
-			_domeo.getLogger().debug(this, annotation.getCreator().getUri());
-			
 			// TODO move to an abstract tile class
 			if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE)).getValue()) {
 				if(annotation.getCreator().getUri().equals(_domeo.getAgentManager().getUserPerson().getUri())) {
 					if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_USER_PROVENANCE)).getValue()) {
 						provenance.clear();
-						step=4;
+						step=5;
 						// TODO Externalize the icon management to the plugins
 						if(SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) { 
 							Image ic = new Image(Domeo.resources.multipleLittleIcon());
@@ -153,7 +150,7 @@ public abstract class ATileComponent extends Composite {
 								provenance.setCellWidth(ic, "18px");
 							}
 						}
-						step=5;
+						step=6;
 						
 						provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>" + prefix + " by Me</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
 						

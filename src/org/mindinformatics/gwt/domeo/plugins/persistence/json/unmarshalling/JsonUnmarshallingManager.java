@@ -153,6 +153,196 @@ public class JsonUnmarshallingManager {
 		return unmarshaller;
 	}
 	
+	public void unmarshallTextmining(JsAnnotationSet jsonSet, HashSet<String> acceptedIds) {
+		annotationSelectorsLazyBinding.clear();
+		creatorAgentsLazyBinding.clear();
+		
+		if(acceptedIds.size()>0) {
+		
+			try {
+				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION);
+				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
+				
+				// Unmarshalling agents
+				JsArray<JsoAgent> jsonAgents = jsonSet.getAgents();
+				for(int j=0; j<jsonAgents.length(); j++) {
+					if(getObjectType(jsonAgents.get(j)).equals(IPerson.TYPE) || 
+							getObjectType(jsonAgents.get(j)).equals(ISoftware.TYPE) || 
+								getObjectType(jsonAgents.get(j)).equals(IDatabase.TYPE)) {
+						_domeo.getAgentManager().addAgent(jsonAgents.get(j));
+					} else {
+						Window.alert("To request: " + getObjectType(jsonAgents.get(j)));
+					}
+				}
+				
+				// Unmarshalling permissions
+				if(jsonSet.getPermissions().isLocked().equals("true")) set.setIsLocked(true);
+				else set.setIsLocked(false);
+				_domeo.getAnnotationAccessManager().setAnnotationSetAccess(set, jsonSet.getPermissions().getPermissionType());
+				if(jsonSet.getPermissions().getPermissionType().equals(IPermissionsOntology.accessGroups)) {
+					Set<IUserGroup> groups = new HashSet<IUserGroup>();
+					for(int ii=0; ii<jsonSet.getPermissions().getPermissionDetails().getAllowedGroups().length(); ii++) {
+						String uuid = jsonSet.getPermissions().getPermissionDetails().getAllowedGroups().get(ii).getUuid();
+						IUserGroup group = _domeo.getUserManager().getUserGroup(uuid); 
+						if(group!=null) {
+							groups.add(group);
+						}
+					}
+					if(groups.size()>0) _domeo.getAnnotationAccessManager().setAnnotationSetGroups(set, groups);
+				}
+				
+				// Unmarshalling annotations
+				JsArray<JavaScriptObject> jsonAnnotations = jsonSet.getAnnotation();
+				for(int j=0; j<jsonAnnotations.length(); j++) {
+					_domeo.getLogger().debug(this, "" + j);
+					boolean isGeneral = false;
+					// Selectors
+					ArrayList<MSelector> selectors = new ArrayList<MSelector>();
+					JsArray<JsAnnotationTarget> targets = getTargets(jsonAnnotations.get(j));
+					for(int z=0; z<targets.length(); z++) {
+						JsAnnotationTarget target = targets.get(z);
+						if(target.getSelector()!=null) {
+							String selectorType = getObjectType(target.getSelector());
+							_domeo.getLogger().debug(this, selectorType);
+							if(selectorType.equals(MTextQuoteSelector.TYPE)) {
+								JsTextQuoteSelector sel = (JsTextQuoteSelector) target.getSelector();
+								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								selectors.add(selector);
+							} else if(selectorType.equals(MImageInDocumentSelector.TYPE)) {
+								JsImageInDocumentSelector sel = (JsImageInDocumentSelector) target.getSelector();
+								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								selector.getTarget().setUrl(getSelectorTargetUrl(target));
+								selectors.add(selector);
+							} else if(selectorType.equals(MAnnotationSelector.TYPE)) {
+								JsAnnotationSelector sel = (JsAnnotationSelector) target.getSelector();
+								MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								
+								// TODO to improve with a Virtual Annotation
+								MAnnotation annotation = new MPostItAnnotation();
+								annotation.setIndividualUri(sel.getAnnotation());
+								selector.setAnnotation(annotation);
+								selectors.add(selector);
+							}
+						} else {
+							String targetType = getObjectType(target);
+							_domeo.getLogger().debug(this, targetType);
+							if(targetType.equals(MTargetSelector.TYPE)) {
+								
+								MTargetSelector selector = AnnotationFactory.cloneTargetSelector(
+									target.getId(),
+									_domeo.getPersistenceManager().getCurrentResource()
+								);
+								selectors.add(selector);
+								isGeneral = true;
+							}
+						}
+					}
+	
+					// Detect annotation type
+					HashSet<String> typesSet = new HashSet<String>();
+					if(hasMultipleTypes(jsonAnnotations.get(j))) {
+						JsArrayString types = getObjectTypes(jsonAnnotations.get(j));
+						for(int k=0; k<types.length(); k++) {
+							typesSet.add(types.get(k));
+						}
+					} else {
+						typesSet.add(getObjectType(jsonAnnotations.get(j)));
+					}
+					
+					// Post it detected
+					boolean allowed = false;
+					MAnnotation ann = null;
+					if(typesSet.contains(MQualifierAnnotation.TYPE)) {
+						JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j); // TODO change
+						ann = AnnotationFactory.cloneQualifier(
+							postIt.getId(), 
+							postIt.getLineageUri(), 
+							postIt.getFormattedCreatedOn(),
+							postIt.getFormattedLastSaved(),
+							set,
+							_domeo.getAgentManager().getAgentByUri(postIt.getCreatedBy()),
+							postIt.getVersionNumber(),
+							postIt.getPreviousVersion(),
+							_domeo.getPersistenceManager().getCurrentResource(),
+							selectors,
+							postIt.getLabel()
+							);
+						
+						if(postIt.getCreatedWith()!=null && postIt.getCreatedWith().trim().length()>0) {
+							ann.setTool((ISoftware) _domeo.getAgentManager().getAgentByUri(postIt.getCreatedWith()));
+						}
+						
+						JsArray<JsoLinkedDataResource> tags = getSemanticTags(jsonAnnotations.get(j));
+						for(int k=0; k<tags.length(); k++) {
+							if(acceptedIds.contains(tags.get(k).getUrl())) {
+								allowed = true;
+								JsonGenericResource gr = tags.get(k).getSource();
+								MGenericResource r = ResourcesFactory.createGenericResource(gr.getUrl(), gr.getLabel());
+								
+								MLinkedResource ldr = ResourcesFactory.createTrustedResource(tags.get(k).getUrl(), 
+										tags.get(k).getLabel(), r);
+								ldr.setUrl(tags.get(k).getUrl());
+								ldr.setLabel(tags.get(k).getLabel());
+								ldr.setDescription(tags.get(k).getDescription());
+								//ldr.setSynonyms(tags.get(k).getSynonyms()!=null? tags.get(k).getSynonyms():"");
+		
+								((MQualifierAnnotation)ann).addTerm(ldr);
+							}
+						}
+					} 
+					if(ann!=null && allowed) {
+						for(int z=0; z<ann.getSelectors().size(); z++) {
+							try {
+								if(ann.getSelectors().get(z) instanceof MTextQuoteSelector) {
+	//								HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
+	//										((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
+	//										((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
+	//										((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
+	//										HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+									
+									HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
+											((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
+											((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
+											((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
+											HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L),
+											_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
+								} else if(ann.getSelectors().get(z) instanceof MImageInDocumentSelector) {
+									// Place the annotation???
+									Element image = HtmlUtils.getImage(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 
+											((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl(), 
+											((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getXPath());
+									if(image!=null) {
+										ann.setY(((com.google.gwt.user.client.Element) image).getAbsoluteTop());
+										((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).setImage((com.google.gwt.user.client.Element) image);
+										_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(ann, 
+												((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget(), (com.google.gwt.user.client.Element) image);
+									}
+								} else if(ann.getSelectors().get(z) instanceof MAnnotationSelector) {
+									//Window.alert("Individual url: " + ((MAnnotationSelector) ann.getSelectors().get(z)).getAnnotation().getIndividualUri() + " - " + ann.getIndividualUri());
+									this.cacheForLazyBinding(((MAnnotationSelector) ann.getSelectors().get(z)).getAnnotation().getIndividualUri(), 
+											ann, (MAnnotationSelector) ann.getSelectors().get(z));
+								}
+							} catch(Exception e) {
+								_domeo.getLogger().exception(this, LOGGING_PREFIX, e.getMessage());
+								// TODO better tracking of terms that don't fall in text.
+							}
+						}
+	
+						if(isGeneral) 
+							_domeo.getAnnotationPersistenceManager().addAnnotationOfTargetResource(ann, _domeo.getPersistenceManager().getCurrentResource(), set); 
+						else  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
+						set.setHasChanged(true);
+					}
+				}
+				this.completeDeserialization();
+			} catch (Exception e) {
+				_domeo.getLogger().exception(this, LOGGING_PREFIX, e.getMessage());
+				e.printStackTrace();
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
 	public void unmarshallTextmining(JsAnnotationSet jsonSet) {
 		annotationSelectorsLazyBinding.clear();
 		creatorAgentsLazyBinding.clear();

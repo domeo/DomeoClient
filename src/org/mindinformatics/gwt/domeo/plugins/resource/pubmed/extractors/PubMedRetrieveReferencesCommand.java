@@ -6,7 +6,6 @@ import java.util.List;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
-import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingBibliographySetHandler;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
@@ -65,8 +64,13 @@ public class PubMedRetrieveReferencesCommand implements ICommand, IPubMedItemsRe
 	@Override
 	public void setExistingBibliographySetList(JsArray responseOnSets, boolean isVirtual) {
 		// TODO Auto-generated method stub
+		
+		_domeo.getLogger().debug(this, "Is virtual: " + isVirtual);
 		JsonUnmarshallingManager manager = _domeo.getUnmarshaller();
-		manager.unmarshallVirtualBibliography(responseOnSets, true, 0);
+		if(isVirtual) 
+			manager.unmarshallVirtualBibliography(responseOnSets, true, 0);
+		else 
+			manager.unmarshallBibliography(responseOnSets, true, 0);
 		_completionCallback.notifyStageCompletion();
 	}
 	

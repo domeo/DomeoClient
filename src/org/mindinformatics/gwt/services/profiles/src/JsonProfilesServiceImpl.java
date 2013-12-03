@@ -131,6 +131,24 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					
 					out.print("{");
 					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_REFERENCE_SELF);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_QUALIFIERS_SELF);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
 					out.print(IProfile.FEATURE_BRANDING);
 					out.print("\",");
 					out.print("\"status\": \"");
@@ -236,6 +254,22 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print("\",");
 					out.print("\"status\": \"");
 					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_QUALIFIERS_SELF);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.feature.document.general.reference.self");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
 					out.print("\"");
 					out.print("}");
 					out.print("]");

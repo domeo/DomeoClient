@@ -39,4 +39,17 @@ public class MGenericResource implements Serializable, IsSerializable {
 	public void setLabel(String label) {
 		this.label = label;
 	}
+	
+	 public int hashCode() {
+		    return url.hashCode();
+		  }
+	
+	public boolean equals(Object obj) {
+	    //null instanceof Object will always return false
+	    if (!(obj instanceof MGenericResource))
+	      return false;
+	    if (obj == this)
+	      return true;
+	    return  this.url.equals(((MGenericResource) obj).url);
+	  }
 }
