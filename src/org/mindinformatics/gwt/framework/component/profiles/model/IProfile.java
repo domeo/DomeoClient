@@ -16,6 +16,8 @@ public interface IProfile {
 	public static final String FEATURE_TEXTMINING_SUMMARY = "org.mindinformatics.gwt.domeo.feature.textmining.summary";
 	public static final String FEATURE_REFERENCE_SELF = "org.mindinformatics.gwt.domeo.feature.document.general.reference.self";
 	public static final String FEATURE_QUALIFIERS_SELF = "org.mindinformatics.gwt.domeo.feature.document.general.qualifiers.self";
+	public static final String FEATURE_MY_BIBLIOGRAPHY = "org.mindinformatics.gwt.domeo.feature.document.general.bibliography";
+	public static final String FEATURE_MY_RECOMMENDATIONS = "org.mindinformatics.gwt.domeo.feature.document.general.recommendations";
 	
 	String getUuid();
 	String getName();

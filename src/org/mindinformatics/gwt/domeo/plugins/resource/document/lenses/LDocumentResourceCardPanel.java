@@ -11,6 +11,8 @@ import org.mindinformatics.gwt.domeo.client.ui.east.resource.qualifiers.Qualifie
 import org.mindinformatics.gwt.domeo.client.ui.east.resource.references.CitationReferencesPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.CachedImagesPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
+import org.mindinformatics.gwt.domeo.plugins.resource.bibliography.src.BibliographyManager;
+import org.mindinformatics.gwt.domeo.plugins.resource.bibliography.src.connector.IStarringRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedReferenceSearchPanel;
@@ -44,7 +46,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public class LDocumentResourceCardPanel extends Composite implements IRefreshableComponent, 
-	IResourceLensComponent, ICachedImages {
+	IResourceLensComponent, ICachedImages, IStarringRequestCompleted {
 	
 	public static final String KNOWN_RESOURCE = "KNOWN RESOURCE";
 	
@@ -69,7 +71,13 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 	@UiField EditableLabel keywordsField;
 	@UiField TabLayoutPanel tabToolsPanel;
 	
+	@UiField VerticalPanel myBibilographyToolbarPanel;
+	@UiField Image starImage;
+	@UiField Label starLabel;
+	@UiField Image recommendImage;
+	@UiField Label recommendLabel;
 	@UiField HTML uriField2;
+	@UiField Label titleField;
 	@UiField FlowPanel self;
 	@UiField FlowPanel identifiersField;
 	@UiField FlowPanel citationField;
@@ -89,7 +97,12 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 	@SuppressWarnings("unused")
 	private HashMap<String, String> _parameters;
 	
+	HandlerRegistration _starImageHandler;
+	HandlerRegistration _starLabelHandler;
+	
 	private ReferencesSidePanelTopbar referencesSidePanelTopbar;
+	private ClickHandler starAction;
+	private ClickHandler unstarAction;
 	
 	CachedImagesPanel p;
 	
@@ -185,13 +198,53 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 				referencesSidePanelTopbar = new ReferencesSidePanelTopbar(_domeo);
 				bibliographyToolbarPanel.add(referencesSidePanelTopbar);
 				bibliographyToolbarPanel.setCellWidth(referencesSidePanelTopbar, "100%");
+				
+				
+				
 	
 				int scrollerHeight = Window.getClientHeight()-100;
 				referencesPanel.setHeight("" + scrollerHeight + "px"); 
 			}
 			
-
+			final IStarringRequestCompleted _this = this;
+			starAction = new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					BibliographyManager manager = BibliographyManager.getInstance();	
+					manager.selectPubMedConnector(_domeo);
+					if(_domeo.getAnnotationPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
+						_domeo.getLogger().debug(this, "starActionHandler");
+						manager.starResource((MDocumentResource)_domeo.getAnnotationPersistenceManager().getCurrentResource(), _this);
+					}
+				}
+			};
+			unstarAction = new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					BibliographyManager manager = BibliographyManager.getInstance();	
+					manager.selectPubMedConnector(_domeo);
+					if(_domeo.getAnnotationPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
+						_domeo.getLogger().debug(this, "unstarActionHandler");
+						manager.unstarResource((MDocumentResource)_domeo.getAnnotationPersistenceManager().getCurrentResource(), _this);
+					}			
+				}
+			};
 			
+			if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_MY_BIBLIOGRAPHY)) {
+				starImage.setResource(Domeo.resources.starColdIcon());
+				starImage.setTitle("Starring a document will list it in your bibliography");
+				_starImageHandler = starImage.addClickHandler(starAction);
+				_starLabelHandler = starLabel.addClickHandler(starAction);
+			} else {
+				myBibilographyToolbarPanel.setVisible(false);
+			}
+			
+			if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_MY_RECOMMENDATIONS)) {
+				recommendImage.setResource(Domeo.resources.shareDocumentIcon());
+			} else {
+				
+			}
+				
 			refresh();
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, "Exception while initializing generic resource info " + e.getMessage());
@@ -300,6 +353,8 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 					referencesPanel.clear();
 					referencesPanel.add(new HTML("<img src='" + _resources.crossLittleIcon().getSafeUri().asString() + "'/> Exception while rendering PubMed resource info " + e.getMessage()));
 				}
+				if(_resource.getLabel()!=null && _resource.getLabel().trim().length()>0) titleField.setText(_resource.getLabel());
+				else titleField.setText("<none>");
 			}
 			
 			if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_QUALIFIERS_SELF)) {
@@ -347,5 +402,27 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 		
 		int scrollerHeight = Window.getClientHeight()-64;
 		imagesPanel.setHeight("" + scrollerHeight + "px"); 
+	}
+
+	@Override
+	public void documentResourceStarred() {
+		starImage.setResource(Domeo.resources.starHotIcon());
+		starImage.setTitle("Starring a document will list it in your bibliography");
+		starLabel.setText("Unstar");
+		_starImageHandler.removeHandler();
+		_starLabelHandler.removeHandler();
+		_starImageHandler = starImage.addClickHandler(unstarAction);
+		_starLabelHandler = starLabel.addClickHandler(unstarAction);
+	}
+
+	@Override
+	public void documentResourceUnstarred() {
+		starImage.setResource(Domeo.resources.starColdIcon());
+		starImage.setTitle("Starring a document will list it in your bibliography");
+		starLabel.setText("Star");
+		_starImageHandler.removeHandler();
+		_starLabelHandler.removeHandler();
+		_starImageHandler = starImage.addClickHandler(starAction);
+		_starLabelHandler = starLabel.addClickHandler(starAction);
 	}
 }

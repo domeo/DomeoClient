@@ -149,6 +149,24 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					
 					out.print("{");
 					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_MY_BIBLIOGRAPHY);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_MY_RECOMMENDATIONS);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
 					out.print(IProfile.FEATURE_BRANDING);
 					out.print("\",");
 					out.print("\"status\": \"");

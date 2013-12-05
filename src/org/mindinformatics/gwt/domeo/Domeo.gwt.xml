@@ -50,12 +50,14 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.omim.OmimResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.pubmed.PubMedResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral.PubMedCentralResourcePlugin"/>
-
+   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.pmcimages.PmcImagesResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.opentrials.OpenTrialsResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.document.GenericDocumentResourcePlugin"/> 
 
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.bioportal.BioPortalResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.nif.NifResourcePlugin"/>
+  
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.bibliography.Bibliography"/>
 
   <!-- Other module inherits                                      -->
 
