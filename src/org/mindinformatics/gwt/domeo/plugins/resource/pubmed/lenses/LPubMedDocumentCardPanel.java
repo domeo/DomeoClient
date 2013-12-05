@@ -10,11 +10,15 @@ import org.mindinformatics.gwt.domeo.client.ui.east.resource.ResourceSidePanelTo
 import org.mindinformatics.gwt.domeo.client.ui.east.resource.references.CitationReferencesPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.CachedImagesPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
+import org.mindinformatics.gwt.domeo.plugins.resource.bibliography.src.BibliographyManager;
+import org.mindinformatics.gwt.domeo.plugins.resource.bibliography.src.connector.IStarringRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LSlimDocumentResourceCardPanel;
+import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedReferencesSearchPanel;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
 import org.mindinformatics.gwt.framework.component.ui.lenses.resources.IResourceLensComponent;
@@ -46,7 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public class LPubMedDocumentCardPanel extends Composite implements IRefreshableComponent, 
-	IResourceLensComponent, ICachedImages {
+	IResourceLensComponent, ICachedImages, IStarringRequestCompleted {
 	
 	public static final String KNOWN_RESOURCE = "KNOWN RESOURCE";
 	
@@ -58,6 +62,12 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 	}
 	
 	@UiField LocalCss style;
+	
+	@UiField VerticalPanel myBibilographyToolbarPanel;
+	@UiField Image starImage;
+	@UiField Label starLabel;
+	@UiField Image recommendImage;
+	@UiField Label recommendLabel;
 	
 	@UiField FlowPanel body;
 	@UiField Image urlImage;
@@ -76,14 +86,18 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 	@UiField TabLayoutPanel tabToolsPanel;
 	
 	@UiField SimplePanel contentPanel;
-	@UiField VerticalPanel pubMedToolbarPanel;
 	@UiField VerticalPanel bibliographyToolbarPanel;
 	@UiField VerticalPanel generalToolbarPanel;
 	
 	@UiField ScrollPanel imagesPanel;
 	CachedImagesPanel p;
 	
+	HandlerRegistration _starImageHandler;
+	HandlerRegistration _starLabelHandler;
+	
 	private ReferencesSidePanelTopbar referencesSidePanelTopbar;
+	private ClickHandler starAction;
+	private ClickHandler unstarAction;
 	
 	// By contract 
 	private IDomeo _domeo;
@@ -121,7 +135,6 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 				}
 			});
 			
-			pubMedToolbarPanel.add(new ResourceSidePanelTopbar(_domeo, "PubMed Resource Information"));
 			generalToolbarPanel.add(new ResourceSidePanelTopbar(_domeo, "Generic Resource Information"));
 			bibliographyToolbarPanel.clear();
 			referencesSidePanelTopbar = new ReferencesSidePanelTopbar(_domeo);
@@ -131,6 +144,45 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 			int scrollerHeight = Window.getClientHeight()-100;
 			referencesPanel.setHeight("" + scrollerHeight + "px"); 
 		
+			final IStarringRequestCompleted _this = this;
+			starAction = new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					BibliographyManager manager = BibliographyManager.getInstance();	
+					manager.selectPubMedConnector(_domeo);
+					if(_domeo.getAnnotationPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
+						_domeo.getLogger().debug(this, "starActionHandler");
+						manager.starResource((MDocumentResource)_domeo.getAnnotationPersistenceManager().getCurrentResource(), _this);
+					}
+				}
+			};
+			unstarAction = new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					BibliographyManager manager = BibliographyManager.getInstance();	
+					manager.selectPubMedConnector(_domeo);
+					if(_domeo.getAnnotationPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
+						_domeo.getLogger().debug(this, "unstarActionHandler");
+						manager.unstarResource((MDocumentResource)_domeo.getAnnotationPersistenceManager().getCurrentResource(), _this);
+					}			
+				}
+			};
+			
+			if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_MY_BIBLIOGRAPHY)) {
+				starImage.setResource(Domeo.resources.starColdIcon());
+				starImage.setTitle("Starring a document will list it in your bibliography");
+				_starImageHandler = starImage.addClickHandler(starAction);
+				_starLabelHandler = starLabel.addClickHandler(starAction);
+			} else {
+				myBibilographyToolbarPanel.setVisible(false);
+			}
+			
+			if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_MY_RECOMMENDATIONS)) {
+				recommendImage.setResource(Domeo.resources.shareDocumentIcon());
+			} else {
+				
+			}
+			
 			refresh();
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, "Exception while initializing resource info " + e.getMessage());
@@ -143,9 +195,7 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 		//sourceField.clear();
 		citationField.clear();
 		identifiersField.clear();
-		pubMedToolbarPanel.clear();
 		generalToolbarPanel.clear();
-		pubMedToolbarPanel.add(new ResourceSidePanelTopbar(_domeo, "PubMed Resource Information"));
 		generalToolbarPanel.add(new ResourceSidePanelTopbar(_domeo, "Generic Resource Information"));
 		//bibliographyToolbarPanel.clear();
 	}
@@ -252,5 +302,27 @@ public class LPubMedDocumentCardPanel extends Composite implements IRefreshableC
 		
 		int scrollerHeight = Window.getClientHeight()-64;
 		imagesPanel.setHeight("" + scrollerHeight + "px"); 
+	}
+	
+	@Override
+	public void documentResourceStarred() {
+		starImage.setResource(Domeo.resources.starHotIcon());
+		starImage.setTitle("Starring a document will list it in your bibliography");
+		starLabel.setText("Unstar");
+		_starImageHandler.removeHandler();
+		_starLabelHandler.removeHandler();
+		_starImageHandler = starImage.addClickHandler(unstarAction);
+		_starLabelHandler = starLabel.addClickHandler(unstarAction);
+	}
+
+	@Override
+	public void documentResourceUnstarred() {
+		starImage.setResource(Domeo.resources.starColdIcon());
+		starImage.setTitle("Starring a document will list it in your bibliography");
+		starLabel.setText("Star");
+		_starImageHandler.removeHandler();
+		_starLabelHandler.removeHandler();
+		_starImageHandler = starImage.addClickHandler(starAction);
+		_starLabelHandler = starLabel.addClickHandler(starAction);
 	}
 }

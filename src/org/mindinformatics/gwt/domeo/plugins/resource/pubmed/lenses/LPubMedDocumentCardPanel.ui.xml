@@ -83,6 +83,28 @@
 			width: 100%;	
 			padding: 0px;
 		}
+		
+		.activeIcon {
+			cursor: pointer;
+			cursor: hand;			
+		}
+		
+		.activeIconInline {
+			display: inline;
+			cursor: pointer;
+			cursor: hand;			
+		}
+		
+		.activeLabel {
+			cursor: pointer;
+			cursor: hand;		
+			padding-top: 5px;
+			font-weight: bold;	
+			display: inline;
+			border-bottom: 1px #ddd solid;
+			margin-right: 4px;
+			margin-left:8px;
+		}
 	</ui:style>
 	<g:VerticalPanel ui:field='main' styleName='{style.outer}'>
 		<g:TabLayoutPanel barHeight="32" barUnit="PX" ui:field="tabToolsPanel" height="580px" >
@@ -94,7 +116,20 @@
 	            </g:header>
 	            <g:FlowPanel ui:field='body' styleName=''>
 					<g:VerticalPanel styleName='{style.body}'  spacing="3">	
-						<g:VerticalPanel ui:field='pubMedToolbarPanel'/>
+						<g:VerticalPanel ui:field='myBibilographyToolbarPanel' width="100%">
+							<g:cell horizontalAlignment="ALIGN_RIGHT">
+								<g:HorizontalPanel>
+									<g:HorizontalPanel styleName='{style.activeIconInline}'>
+										<g:Label ui:field='starLabel' styleName='{style.activeLabel}'> Star</g:Label>
+										<g:Image ui:field='starImage' styleName='{style.activeIconInline}'/>
+									</g:HorizontalPanel>
+									<g:HorizontalPanel styleName='{style.activeIconInline}'>
+										<g:Label ui:field='recommendLabel' styleName='{style.activeLabel}'> Recommend</g:Label>
+										<g:Image ui:field='recommendImage' styleName='{style.activeIconInline}'/>								
+									</g:HorizontalPanel>
+								</g:HorizontalPanel>
+							</g:cell>
+						</g:VerticalPanel>
 						<g:cell height="18px">
 							<g:FlowPanel>
 								<g:Label styleName='{style.label}'> URL</g:Label>
