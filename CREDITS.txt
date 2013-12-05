@@ -56,3 +56,7 @@ tag-blue.png - http://iconlet.com/info/8091_tag_blue_16x16
 folder_link.png - http://www.iconlet.com/info/7951_folder_link_16x16
 arrow_top_left.png - http://iconlet.com/icon/94420/arrow-top-left
 edit-list.png - http://iconlet.com/icon/88156/edit-list
+
+star-cold16x16.png - http://iconlet.com/icon/27618/16-star-cold
+star-hot16x16.png - http://iconlet.com/icon/27607/16-star-hot
+document-share16x16.png - http://iconlet.com/icon/87226/document-share
