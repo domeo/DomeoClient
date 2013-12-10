@@ -14,10 +14,12 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.mode
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
+import org.mindinformatics.gwt.framework.src.IResizable;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -29,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public class AnnotationSummaryTable extends Composite 
-	implements IInitializableComponent, IRefreshableComponent{
+	implements IInitializableComponent, IRefreshableComponent, IResizable {
 
 	private IDomeo _domeo;
 	private IAnnotationEditListener _listener;
@@ -48,6 +50,12 @@ public class AnnotationSummaryTable extends Composite
 		_listener = listener;
 		
 		initWidget(binder.createAndBindUi(this));
+		resized();
+	}
+	
+	@Override
+	public void resized() {
+		body.setHeight((Window.getClientHeight() - 94) + "px");
 	}
 	
 	@Override

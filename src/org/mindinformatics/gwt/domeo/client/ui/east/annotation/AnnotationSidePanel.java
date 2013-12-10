@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class AnnotationSidePanel extends ASidePanel 
 	implements IInitializableComponent, IRefreshableComponent, 
-		IAnnotationRefreshableComponent {
+		IAnnotationRefreshableComponent  {
 
 	interface Binder extends UiBinder<Widget, AnnotationSidePanel> { }
 	private static final Binder binder = GWT.create(Binder.class);
@@ -44,6 +44,8 @@ public class AnnotationSidePanel extends ASidePanel
 		table.init();
 		body.setHeight("100%");
 		body.add(table);
+		
+		domeo.addResizeListener(table);
 	}
 	
 	@Override
