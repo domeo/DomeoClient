@@ -143,7 +143,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print(IProfile.FEATURE_QUALIFIERS_SELF);
 					out.print("\",");
 					out.print("\"status\": \"");
-					out.print("enabled");
+					out.print("disabled");
 					out.print("\"");
 					out.print("},");
 					
@@ -161,7 +161,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print(IProfile.FEATURE_MY_RECOMMENDATIONS);
 					out.print("\",");
 					out.print("\"status\": \"");
-					out.print("enabled");
+					out.print("disabled");
 					out.print("\"");
 					out.print("},");
 					

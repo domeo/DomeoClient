@@ -93,14 +93,14 @@
 	            </g:header>
 	            <g:FlowPanel ui:field='self' styleName=''>
 					<g:VerticalPanel styleName='{style.body}'  spacing="3">	
-						<g:VerticalPanel ui:field='myBibilographyToolbarPanel' width="100%">
+						<g:VerticalPanel width="100%">
 							<g:cell horizontalAlignment="ALIGN_RIGHT">
 								<g:HorizontalPanel>
-									<g:HorizontalPanel styleName='{style.activeIconInline}'>
+									<g:HorizontalPanel ui:field='myBibilographyToolbarPanel' styleName='{style.activeIconInline}'>
 										<g:Label ui:field='starLabel' styleName='{style.activeLabel}'> Star</g:Label>
 										<g:Image ui:field='starImage' styleName='{style.activeIconInline}'/>
 									</g:HorizontalPanel>
-									<g:HorizontalPanel styleName='{style.activeIconInline}'>
+									<g:HorizontalPanel ui:field='myRecommendationsToolbarPanel' styleName='{style.activeIconInline}'>
 										<g:Label ui:field='recommendLabel' styleName='{style.activeLabel}'> Recommend</g:Label>
 										<g:Image ui:field='recommendImage' styleName='{style.activeIconInline}'/>								
 									</g:HorizontalPanel>

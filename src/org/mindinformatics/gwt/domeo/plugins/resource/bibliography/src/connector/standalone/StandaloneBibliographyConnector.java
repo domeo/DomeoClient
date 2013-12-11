@@ -22,6 +22,12 @@ public class StandaloneBibliographyConnector implements IBibliographyConnector {
 	}
 	
 	@Override
+	public void isResourceStarred(MDocumentResource resource,
+			IStarringRequestCompleted completionHandler) {
+		completionHandler.documentResourceStarred(false);		
+	}
+	
+	@Override
 	public void unstarResource(MDocumentResource resource, IStarringRequestCompleted completionHandler) {
 		// TODO Auto-generated method stub
 		

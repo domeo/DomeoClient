@@ -71,9 +71,10 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 	@UiField EditableLabel keywordsField;
 	@UiField TabLayoutPanel tabToolsPanel;
 	
-	@UiField VerticalPanel myBibilographyToolbarPanel;
+	@UiField HorizontalPanel myBibilographyToolbarPanel;
 	@UiField Image starImage;
 	@UiField Label starLabel;
+	@UiField HorizontalPanel myRecommendationsToolbarPanel;
 	@UiField Image recommendImage;
 	@UiField Label recommendLabel;
 	@UiField HTML uriField2;
@@ -230,11 +231,10 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 				}
 			};
 			
-			if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_MY_BIBLIOGRAPHY)) {
-				starImage.setResource(Domeo.resources.starColdIcon());
-				starImage.setTitle("Starring a document will list it in your bibliography");
-				_starImageHandler = starImage.addClickHandler(starAction);
-				_starLabelHandler = starLabel.addClickHandler(starAction);
+			if(resource!=null && _domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_MY_BIBLIOGRAPHY)) {
+				BibliographyManager bm = BibliographyManager.getInstance();
+				bm.selectPubMedConnector(_domeo);
+				bm.isResourceStarred((MDocumentResource)resource, this);
 			} else {
 				myBibilographyToolbarPanel.setVisible(false);
 			}
@@ -242,7 +242,7 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 			if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_MY_RECOMMENDATIONS)) {
 				recommendImage.setResource(Domeo.resources.shareDocumentIcon());
 			} else {
-				
+				myRecommendationsToolbarPanel.setVisible(false);
 			}
 				
 			refresh();
@@ -373,6 +373,7 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 				HorizontalPanel fp = new HorizontalPanel();
 				fp.add(addCitationIcon);
 				fp.add(addCitationLabel);
+				qualifiersToolbarPanel.clear();
 				qualifiersToolbarPanel.add(fp);
 			}
 			
@@ -409,8 +410,8 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 		starImage.setResource(Domeo.resources.starHotIcon());
 		starImage.setTitle("Starring a document will list it in your bibliography");
 		starLabel.setText("Unstar");
-		_starImageHandler.removeHandler();
-		_starLabelHandler.removeHandler();
+		if(_starImageHandler!=null)  _starImageHandler.removeHandler();
+		if(_starLabelHandler!=null)  _starLabelHandler.removeHandler();
 		_starImageHandler = starImage.addClickHandler(unstarAction);
 		_starLabelHandler = starLabel.addClickHandler(unstarAction);
 	}
@@ -420,9 +421,19 @@ public class LDocumentResourceCardPanel extends Composite implements IRefreshabl
 		starImage.setResource(Domeo.resources.starColdIcon());
 		starImage.setTitle("Starring a document will list it in your bibliography");
 		starLabel.setText("Star");
-		_starImageHandler.removeHandler();
-		_starLabelHandler.removeHandler();
+		if(_starImageHandler!=null) _starImageHandler.removeHandler();
+		if(_starLabelHandler!=null) _starLabelHandler.removeHandler();
 		_starImageHandler = starImage.addClickHandler(starAction);
 		_starLabelHandler = starLabel.addClickHandler(starAction);
+	}
+
+	@Override
+	public void documentResourceStarred(boolean starred) {
+		_domeo.getLogger().info(this, "is starred " + starred);
+		if(starred) {
+			documentResourceStarred();
+		} else {
+			documentResourceUnstarred();
+		}
 	}
 }

@@ -9,6 +9,7 @@ import org.mindinformatics.gwt.framework.model.references.MPublicationArticleRef
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
@@ -65,7 +66,7 @@ public class JsonBibliographyConnector implements IBibliographyConnector {
 				
 				r.put("reference", reference);
 			} else {
-				Window.alert("No self reference");
+				//Window.alert("No self reference");
 			}
 			
 			Request request = builder.sendRequest(r.toString(), new RequestCallback() {
@@ -94,8 +95,127 @@ public class JsonBibliographyConnector implements IBibliographyConnector {
 	}
 	
 	@Override
-	public void unstarResource(MDocumentResource resource, final IStarringRequestCompleted completionHandler) {
-		// TODO Auto-generated method stub
-		
+	public void isResourceStarred(MDocumentResource resource,
+			final IStarringRequestCompleted completionHandler) {
+		String url = GWT.getModuleBaseURL() + "bibliography/isStarred";
+		if(!_domeo.isHostedMode())
+			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/isStarred";
+	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
+	    builder.setHeader("Content-Type", "application/json");
+	    builder.setTimeoutMillis(10000);
+	    
+	    try {
+	    	JSONObject r = new JSONObject();
+			r.put("url", new JSONString(resource.getUrl()));
+			r.put("label", new JSONString(resource.getLabel()));
+			
+			if(_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()!=null && 
+					_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()!=null &&
+					((MAnnotationReference)_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()).getReference()!=null &&
+					((MAnnotationReference)_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()).getReference() instanceof MPublicationArticleReference) {
+				MPublicationArticleReference ref = (MPublicationArticleReference) ((MAnnotationReference)_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()).getReference();
+				
+				JSONObject reference = new JSONObject();
+				//jo.put("class", new JSONString(MAnnotation.class.getName()));
+				reference.put("@type", new JSONString(ref.getClass().getName()));
+				reference.put("@id", new JSONString(ref.getDoi()!=null?ref.getDoi():"<unknown-fix>"));
+				reference.put("title", new JSONString(ref.getTitle()!=null?ref.getTitle():"<unknown>"));
+				reference.put("authorNames", new JSONString(ref.getAuthorNames()!=null?ref.getAuthorNames():"<unknown>"));
+				if(ref.getDoi()!=null) reference.put("doi", new JSONString(ref.getDoi()));
+				if(ref.getPubMedId()!=null) reference.put("pmid", new JSONString(ref.getPubMedId()));
+				if(ref.getPubMedCentralId()!=null) reference.put("pmcid", new JSONString(ref.getPubMedCentralId()));
+				reference.put("publicationInfo", new JSONString(ref.getJournalPublicationInfo()!=null?ref.getJournalPublicationInfo():"<unknown>"));
+				reference.put("journalName", new JSONString(ref.getJournalName()!=null?ref.getJournalName():"<unknown>"));
+				reference.put("journalIssn", new JSONString(ref.getJournalIssn()!=null?ref.getJournalIssn():"<unknown>"));
+				if(ref.getUnrecognized()!=null) reference.put("unrecognized", new JSONString(ref.getUnrecognized()));
+				
+				r.put("reference", reference);
+			} else {
+				//Window.alert("No self reference");
+			}
+			
+			Request request = builder.sendRequest(r.toString(), new RequestCallback() {
+				public void onError(Request request, Throwable exception) {
+					Window.alert("error");
+				}
+				
+				public void onResponseReceived(Request request, Response response) {
+					if (200 == response.getStatusCode()) {
+						JsonIsResourceStarred responseObjects = (JsonIsResourceStarred) parseJson(response.getText());
+						completionHandler.documentResourceStarred(Boolean.parseBoolean(responseObjects.isStarred()));
+					} else if (503 == response.getStatusCode()) {
+						_domeo.getLogger().exception(this, "503: " + response.getText());
+						Window.alert("503");
+						//completionCallback.reportException("Couldn't perform BioPortal term search (503)");
+					} else {
+						_domeo.getLogger().exception(this,  response.getStatusCode() + "");
+						Window.alert("code");
+						//completionCallback.reportException("Couldn't perform BioPortal term search " + response.getStatusCode());
+					}
+				}
+			});
+		} catch (RequestException e) {
+			_domeo.getLogger().exception(this, "Couldn't complete the starring of bibliography request");
+			//completionCallback.reportException();
+		}	
 	}	
+	
+	@Override
+	public void unstarResource(MDocumentResource documentResource, final IStarringRequestCompleted completionHandler) {
+		String url = GWT.getModuleBaseURL() + "bibliography/star";
+		if(!_domeo.isHostedMode())
+			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/unstar";
+	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
+	    builder.setHeader("Content-Type", "application/json");
+	    builder.setTimeoutMillis(10000);
+	    
+	    try {
+	    	JSONObject r = new JSONObject();
+			r.put("url", new JSONString(documentResource.getUrl()));
+			r.put("label", new JSONString(documentResource.getLabel()));
+			
+			Request request = builder.sendRequest(r.toString(), new RequestCallback() {
+				public void onError(Request request, Throwable exception) {
+					Window.alert("error");
+				}
+				
+				public void onResponseReceived(Request request, Response response) {
+					if (200 == response.getStatusCode()) {
+						completionHandler.documentResourceUnstarred();
+					} else if (503 == response.getStatusCode()) {
+						_domeo.getLogger().exception(this, "503: " + response.getText());
+						Window.alert("503");
+						//completionCallback.reportException("Couldn't perform BioPortal term search (503)");
+					} else {
+						_domeo.getLogger().exception(this,  response.getStatusCode() + "");
+						Window.alert("code");
+						//completionCallback.reportException("Couldn't perform BioPortal term search " + response.getStatusCode());
+					}
+				}
+			});
+		} catch (RequestException e) {
+			_domeo.getLogger().exception(this, "Couldn't complete the starring of bibliography request");
+			//completionCallback.reportException();
+		}	
+	}
+	
+	public static native JavaScriptObject parseJson(String jsonStr) /*-{
+	
+	try {
+		var jsonStr = jsonStr      
+    		.replace(/[\\]/g, '\\\\')
+    		.replace(/[\/]/g, '\\/')
+    		.replace(/[\b]/g, '\\b')
+    		.replace(/[\f]/g, '\\f')
+    		.replace(/[\n]/g, '\\n')
+    		.replace(/[\r]/g, '\\r')
+    		.replace(/[\t]/g, '\\t')
+    		.replace(/[\\][\"]/g, '\\\\\"')
+    		.replace(/\\'/g, "\\'");
+    	//alert(jsonStr);
+	  	return JSON.parse(jsonStr);
+	} catch (e) {
+		alert("Error while parsing the JSON message: " + e);
+	}
+}-*/;
 }

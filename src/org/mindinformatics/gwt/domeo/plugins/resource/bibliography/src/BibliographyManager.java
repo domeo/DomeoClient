@@ -47,6 +47,14 @@ public class BibliographyManager implements IBibliographyConnector {
 				_connector.starResource(resource, completionHandler);
 			} else throw new IllegalArgumentException("No resource to star");
 	}
+	
+	@Override
+	public void isResourceStarred(MDocumentResource resource,
+			IStarringRequestCompleted completionHandler) throws IllegalArgumentException {
+		if (_connector!=null) {
+			_connector.isResourceStarred(resource, completionHandler);
+		} else throw new IllegalArgumentException("Problem in detecting if the resource is starred");
+	} 
 
 	@Override
 	public void unstarResource(MDocumentResource resource, IStarringRequestCompleted completionHandler) 
@@ -54,5 +62,5 @@ public class BibliographyManager implements IBibliographyConnector {
 			if (_connector!=null) {
 				_connector.unstarResource(resource, completionHandler);
 			} else throw new IllegalArgumentException("No resource to unstar");
-	} 
+	}
 }
