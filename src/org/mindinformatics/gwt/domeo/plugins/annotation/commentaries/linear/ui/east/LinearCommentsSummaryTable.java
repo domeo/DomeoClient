@@ -24,6 +24,7 @@ import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.ui.east.ASidePanel;
 import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
+import org.mindinformatics.gwt.framework.src.IResizable;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -50,7 +51,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public class LinearCommentsSummaryTable extends Composite 
-	implements IInitializableComponent, IRefreshableComponent{
+	implements IInitializableComponent, IRefreshableComponent, IResizable{
 
 	private IDomeo _domeo;
 	private IAnnotationEditListener _listener;
@@ -85,12 +86,18 @@ public class LinearCommentsSummaryTable extends Composite
 		_parentPanel = parentPanel;
 		
 		initWidget(binder.createAndBindUi(this));
+		resized();
 	}
 	
 	@Override
 	public void init() {		
 		topContent.clear();
 		bottomContent.clear();
+	}
+	
+	@Override
+	public void resized() {
+		body.setHeight((Window.getClientHeight() - 94) + "px");
 	}
 	
 	@Override

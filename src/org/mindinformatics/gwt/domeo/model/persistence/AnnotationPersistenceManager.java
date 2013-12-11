@@ -20,6 +20,7 @@ import org.mindinformatics.gwt.domeo.model.MBibliographicSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.framework.component.persistance.src.PersistenceManager;
@@ -432,9 +433,10 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	}
 	
 	public boolean addAnnotationOfAnnotation(MLinearCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set) {
-		//Window.alert("Cache comment");
-		//annotationsOfAnnotationsCounter.put(annotation.getLocalId(), arg1);
-		cacheCommentOnAnnotation(targetAnnotation, annotation);
+		//Window.alert("Cache comment " + (targetAnnotation.getSelector() instanceof MTargetSelector));
+		
+		if(!(targetAnnotation.getSelector() instanceof MTargetSelector)) 
+			cacheCommentOnAnnotation(targetAnnotation, annotation);
 		return addAnnotationOfAnnotation((MAnnotation)annotation, targetAnnotation, set);
 	}
 	

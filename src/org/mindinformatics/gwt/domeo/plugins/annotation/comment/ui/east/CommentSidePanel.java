@@ -93,6 +93,8 @@ public class CommentSidePanel extends ASidePanel
 		
 		body.setHeight("100%");
 		
+		domeo.addResizeListener(table);
+		
 	}
 	
 	@Override

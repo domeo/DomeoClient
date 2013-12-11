@@ -32,6 +32,7 @@ import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.ui.east.ASidePanel;
 import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
 import org.mindinformatics.gwt.framework.component.ui.east.SidePanelsFacade;
+import org.mindinformatics.gwt.framework.src.IResizable;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -47,7 +48,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class LinearCommentsSidePanel extends ASidePanel 
 	implements IInitializableComponent, IRefreshableComponent,
-	ICommentsRefreshableComponent {
+	ICommentsRefreshableComponent, IResizable {
 
 	interface Binder extends UiBinder<Widget, LinearCommentsSidePanel> { }
 	private static final Binder binder = GWT.create(Binder.class);
@@ -68,7 +69,12 @@ public class LinearCommentsSidePanel extends ASidePanel
 	
 	private MAnnotationSet _setInfo;
 	private LLinearCommentsSetInfoLens _lensInfo;
-
+	
+	private int currentStatus = 0;
+	private static final int S_GENERAL_THREADS = 1;
+	private static final int S_GENERAL_THREAD = 2;
+	private static final int S_LOCAL_THREADS = 3;
+	
 	public LinearCommentsSidePanel(IDomeo domeo, SidePanelsFacade facade, ASideTab tab) {
 		super(domeo, facade, tab);
 		
@@ -80,19 +86,43 @@ public class LinearCommentsSidePanel extends ASidePanel
 		
 		table = new LinearCommentsSummaryTable(domeo, this, domeo.getContentPanel().getAnnotationFrameWrapper());
 		table.init();
-		
-		setsList.setCellVerticalAlignment(info, HasVerticalAlignment.ALIGN_TOP);
 		setsList.add(table);
 		
-//		Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
-//		if(annLocalIds.size()>0) {
-//			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
-//			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
-//		} else 
+		setsList.setCellVerticalAlignment(info, HasVerticalAlignment.ALIGN_TOP);
+		
+		
+		Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
+		if(annLocalIds.size()>0) {
+			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
+			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
+		} else 
 		setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
 		
 		body.setHeight("100%");
-		
+		domeo.addResizeListener(this);
+		domeo.addResizeListener(table);
+		resized();
+	}
+	
+	@Override
+	public void resized() {
+		if(currentStatus==LinearCommentsSidePanel.S_GENERAL_THREAD) {
+			setsListScroller.setHeight((Window.getClientHeight()-94) + "px");
+			body.setCellHeight(setsListScroller, (Window.getClientHeight()-94) + "px");
+			table.setHeight((Window.getClientHeight()-94) + "px");
+		} else if(currentStatus==LinearCommentsSidePanel.S_GENERAL_THREADS) {
+			int counter = table.listGeneralThreads();
+			if(counter>0) {
+				setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (counter*49 + 16))+ "px");
+				body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (counter*49 + 16)) +"px");
+				
+				table.setHeight((counter*49 + 16)+ "px");
+			} 
+		} else {
+			setsListScroller.setHeight((Window.getClientHeight() - 94) + "px");
+			table.setHeight((Window.getClientHeight()-94) + "px");
+		}
+		// setsListScroller.setHeight((Window.getClientHeight() - 294) + "px");
 	}
 	
 	@Override
@@ -110,10 +140,12 @@ public class LinearCommentsSidePanel extends ASidePanel
 			table.refresh();
 
 			Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
-			if(annLocalIds.size()>0) {
-				setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
-				body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
-			} else setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
+//			/*
+//			if(annLocalIds.size()>0) {
+//				setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
+//				body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16)) +"px");
+//			} else setsListScroller.setHeight((Window.getClientHeight()-200)+"px");
+//			*/
 		} catch (Exception e) {
 			_application.getLogger().exception(this, "Refreshing failed " + e.getMessage());
 		}
@@ -135,29 +167,31 @@ public class LinearCommentsSidePanel extends ASidePanel
 	 * @param annotations	The list of annotations to display
 	 */
 	public void refresh(List<MAnnotation> annotations) {
+		currentStatus = LinearCommentsSidePanel.S_GENERAL_THREAD;
 		table.refreshPanel(annotations);
-		setsListScroller.setHeight((Window.getClientHeight()-200) + "px");
-		body.setCellHeight(setsListScroller, (Window.getClientHeight()-200) + "px");
-		
+		//setsListScroller.setHeight((Window.getClientHeight()-200) + "px");
+		//body.setCellHeight(setsListScroller, (Window.getClientHeight()-200) + "px");
 		resetAnnotationSetInfo();
+		resized();
 	}
 	
 	public void displayThread(Long id) {
-		table.displayThread(id);
-		setsListScroller.setHeight((Window.getClientHeight()-200) + "px");
-		body.setCellHeight(setsListScroller, (Window.getClientHeight()-200) + "px");
+		currentStatus = LinearCommentsSidePanel.S_GENERAL_THREAD;
 		
+		table.displayThread(id);
 		resetAnnotationSetInfo();
+		resized();
 	}
 	
 	public void listGeneralThreads() {
+		currentStatus = LinearCommentsSidePanel.S_GENERAL_THREADS;
 		int counter = table.listGeneralThreads();
 		topbar.updateStatistics(counter);
-		
-		if(counter>0) {
-			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (counter*48 + 16))+ "px");
-			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (counter*48 + 16)) +"px");
-		} 
+//		if(counter>0) {
+//			setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (counter*48 + 16))+ "px");
+//			body.setCellHeight(setsListScroller, Math.min(Window.getClientHeight()-350, (counter*48 + 16)) +"px");
+//		} 
+		resized();
 	}
 	
 	public void listLocalThreads() {
@@ -166,11 +200,13 @@ public class LinearCommentsSidePanel extends ASidePanel
 	}
 	
 	public void createNewGeneralThread() {
+		currentStatus = LinearCommentsSidePanel.S_GENERAL_THREAD;
 		table.createNewGeneralThread();
-		setsListScroller.setHeight((Window.getClientHeight()-200) + "px");
-		body.setCellHeight(setsListScroller, (Window.getClientHeight()-200) + "px");
+//		setsListScroller.setHeight((Window.getClientHeight()-200) + "px");
+//		body.setCellHeight(setsListScroller, (Window.getClientHeight()-200) + "px");
 		
 		resetAnnotationSetInfo();
+		resized();
 	}
 	
 	public void displayCommentsSetInfo(MAnnotationSet set) {

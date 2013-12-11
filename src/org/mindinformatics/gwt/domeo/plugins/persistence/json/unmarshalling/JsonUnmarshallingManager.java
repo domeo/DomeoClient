@@ -328,6 +328,7 @@ public class JsonUnmarshallingManager {
 							}
 						}
 	
+						// TODO include annotation of annotation (commentaries).
 						if(isGeneral) 
 							_domeo.getAnnotationPersistenceManager().addAnnotationOfTargetResource(ann, _domeo.getPersistenceManager().getCurrentResource(), set); 
 						else  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);

@@ -49,7 +49,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -242,9 +241,12 @@ public class TLinearCommentTile extends ATileComponent implements ITileComponent
 			deleteIcon.setStyleName(ATileComponent.tileResources.css().button());
 			deleteIcon.addClickHandler(ActionDeleteAnnotation.getClickHandler(_domeo, this, getAnnotation()));
 			step=5;
-			
-			_domeo.getLogger().debug(this, ""+annotation.getCreator());
+			_domeo.getLogger().debug(this, ""+annotation);
+			step=50;
+			//_domeo.getLogger().debug(this, ""+annotation.getCreator());
+			step=500;
 			_domeo.getLogger().debug(this, annotation.getCreator().getUri());
+			step=5000;
 			
 			// TODO move to an abstract tile class
 			if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE)).getValue()) {
