@@ -1,3 +1,23 @@
+/*
+ * Copyright 2013 Massachusetts General Hospital
+ * 
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package org.mindinformatics.gwt.domeo.component.cache.images.ui;
 
 import java.util.ArrayList;
@@ -9,6 +29,7 @@ import org.mindinformatics.gwt.domeo.component.cache.images.model.ImageProxy;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.resource.pmcimages.model.JsPmcImage;
 import org.mindinformatics.gwt.framework.widget.WidgetUtilsResources;
 
 import com.google.gwt.core.client.GWT;
@@ -28,6 +49,9 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
+ */
 public class CachedImagesPanel extends Composite {
 
 	// UI Binder
@@ -97,6 +121,17 @@ public class CachedImagesPanel extends Composite {
 						HTML title = new HTML("<b>"+image.getTitle()+"</b>");
 						hp1.add(title);
 						hp1.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_CENTER);
+					}
+					
+					_domeo.getLogger().debug(this, "0 " + image);
+					_domeo.getLogger().debug(this, "1 " + image.getDisplayUrl());
+					JsPmcImage im = _domeo.getPmcImagesCache().getImageMetadataFromUrl(image.getDisplayUrl());
+					
+					if(im!=null) {
+						_domeo.getLogger().debug(this, "2 " + im.getCaption());
+						hp1.add(new HTML(im.getCaption() + " - " + im.getTitle() + 
+							" - <a target='_blank' href='http://krauthammerlab.med.yale.edu/imagefinder/Figure.external?sp=S" + 
+								im.getImageId() + "'>Yale Images</a>"));
 					}
 				
 					HorizontalPanel hp = new HorizontalPanel();
@@ -189,6 +224,14 @@ public class CachedImagesPanel extends Composite {
 					imageWrap.setStyleName(style.imageWrap());
 					imageWrap.add(img);
 					main.add(imageWrap);
+					
+					
+					//_domeo.getImagesCache().getValue(key);
+
+					
+					
+					//Window.alert("" + image.getDisplayUrl() + "" + _domeo.getPmcImagesCache().getImageMetadata(""));
+					
 					//hp1.setCellHorizontalAlignment(img, HasHorizontalAlignment.ALIGN_CENTER);
 					
 					VerticalPanel right = new VerticalPanel();
@@ -199,6 +242,9 @@ public class CachedImagesPanel extends Composite {
 						right.add(title);
 						right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
 					}
+					
+					JsPmcImage im = _domeo.getPmcImagesCache().getImageMetadataFromUrl(image.getDisplayUrl());
+					if(im!=null)  right.add(new HTML(im.getCaption()));
 				
 					HorizontalPanel hp = new HorizontalPanel();
 					final ImageProxy _image = image;

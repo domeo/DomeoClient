@@ -127,6 +127,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.info.OpenTrialsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.lenses.LOpenTrialsDocumentCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.model.MOpenTrialsDocument;
+import org.mindinformatics.gwt.domeo.plugins.resource.pmcimages.src.PmcImagesMetadataCache;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.info.PubMedPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.LPubMedDocumentCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
@@ -191,8 +192,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public static final boolean pathfinder = true;
 	
 	public static String APP_NAME = "Domeo";
-	public static String APP_VERSION = "b31";
-	public static String APP_VERSION_LABEL = "build 31";
+	public static String APP_VERSION = "b40";
+	public static String APP_VERSION_LABEL = "build 40";
 	
 	public String getApplicationName() { return APP_NAME; }
 	public String getApplicationVersion() { return APP_VERSION; }
@@ -235,6 +236,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	SidePanelsContainer eastPanel;
 	
 	ImagesCache imagesCache;
+	PmcImagesMetadataCache pmcImagesCache;
 	
 	//AnnotationPersistenceManager persistenceManager;
 	AnnotationAccessManager accessManager;
@@ -317,7 +319,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	 */
 	public void onModuleLoad() {
 		_domeo = this;
-		this.logger.info(this, "Creating Domeo " + getStartingMode());
+		this.logger.info(this, "Creating Domeo (" + Domeo.APP_VERSION+ ") " + getStartingMode());
 		_this=this;
 		Window.addWindowClosingHandler(new Window.ClosingHandler() {
 
@@ -356,7 +358,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		// Images Cache
 		imagesCache = new ImagesCache(this);
 		componentsManager.addComponent(imagesCache);
-
+		// Images mashup
+		pmcImagesCache = new PmcImagesMetadataCache(this);
+		
 		// Resources
 		componentsManager.addComponent(resourcesManager);
 		
@@ -1077,7 +1081,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public void checkForExistingAnnotationSets() {
 		documentPipelineTimer = System.currentTimeMillis();
 		this.getLogger().debug(this, "AFTER DOCUMENT", "Executing checkForExistingAnnotationSets()");
-		this.getDialogPanel().hide();
+		if(this.getDialogPanel()!=null) this.getDialogPanel().hide();
 		this.getPersistenceManager().retrieveExistingAnnotationSetList(this);
 		
 		//ExistingAnnotationViewerPanel lwp = new ExistingAnnotationViewerPanel(this);
@@ -1232,6 +1236,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public ImagesCache getImagesCache() {
 		return imagesCache;
 	}
+	public PmcImagesMetadataCache getPmcImagesCache() {
+		return pmcImagesCache;
+	}
+	
 	public final native String getAnnotationType(Object obj) /*-{ return obj['@type']; }-*/;
 	public final native String getSelectorType(Object obj) /*-{ return obj['@type']; }-*/;
 	public final native String getSelectorTargetUrl(Object obj) /*-{ return obj['ao:annotatesResource']; }-*/;

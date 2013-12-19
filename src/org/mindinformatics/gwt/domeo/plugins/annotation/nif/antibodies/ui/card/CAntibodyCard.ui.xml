@@ -42,6 +42,12 @@
 		.provenanceFrame {
 			padding: 0px 1px 0px 0px;	
 		}
+		.socialFrame {
+			padding: 1px 1px 1px 0px;	
+		}
+		.social {
+	
+		}
 	</ui:style>
 	
 	<g:VerticalPanel styleName='{style.body}' ui:field='body'>
@@ -54,6 +60,10 @@
 				<g:Label ui:field='type' styleName='{style.contentItemType}'></g:Label>
 				<g:Label ui:field='text' styleName='{style.contentItem}'></g:Label>
 			</g:FlowPanel>
+		</g:SimplePanel>
+		<g:SimplePanel styleName='{style.socialFrame}'>
+			<g:HorizontalPanel styleName='{style.social}' ui:field='socialPanel'>
+			</g:HorizontalPanel>
 		</g:SimplePanel>
 	</g:VerticalPanel>
 </ui:UiBinder>

@@ -78,6 +78,9 @@ public class PubMedCentralDocumentPipeline extends APipeline implements IContent
 		IStage subjectStage = new Stage(new PubMedCentralExtractSubjectCommand(application, this));
 		_stages.add(subjectStage);
 		
+		IStage imageMetadataStage = new Stage(new PubMedCentralExtractImageInfoCommand(application, this));
+		_stages.add(imageMetadataStage);
+		
 		IStage referencesStage = new Stage(new PubMedCentralExtractReferencesCommand(application, this));
 		_stages.add(referencesStage);
 		

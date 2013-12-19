@@ -14,8 +14,10 @@ import org.mindinformatics.gwt.domeo.component.cache.images.src.ImagesCache;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.LinkedDataDigestersManager;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.accesscontrol.AnnotationAccessManager;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east.LinearCommentsSidePanel;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
+import org.mindinformatics.gwt.domeo.plugins.resource.pmcimages.src.PmcImagesMetadataCache;
 import org.mindinformatics.gwt.domeo.services.extractors.ContentExtractorsManager;
 import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
 import org.mindinformatics.gwt.framework.src.IApplication;
@@ -71,6 +73,7 @@ public interface IDomeo extends IContentHandler, IApplication {
 	public DomeoToolbarPanel getToolbarPanel();
 	public JsonUnmarshallingManager getUnmarshaller();
 	public ImagesCache getImagesCache();
+	public PmcImagesMetadataCache getPmcImagesCache();
 	
 	public void jumpToLocation(float percentage);
 }

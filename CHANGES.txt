@@ -1,0 +1,23 @@
+Build 40
+=====================================
+ 40.0  Enhancement
+ 	Added build number in the start of the logging.
+ 
+ 40.1  Enhancement
+	Activated 'Retrieve Sets' in the 'Sets' right side panel. The resulting
+ 	panel shows only the existing sets that can be loaded and will not list 
+ 	those sets that are already loaded in the Annotator. 
+    
+ 40.2  Polishing
+ 	Commented out button 'Explore' for Annotation Set Tab as it is not yet
+ 	functional.   
+       
+ 40.3  Bug fix
+	Fixed the left border of the 'Discussion panel' and the resizing of the 
+ 	main panel so that it now takes the whole available space.
+ 	
+ 40.4  Bug fix
+    Deletion of comments now executes and updates the counter in the card
+    (popup) and refreshes the discussion side panel accordingly.
+    
+ 40.5  
