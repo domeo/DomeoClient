@@ -5,7 +5,7 @@
 	<ui:style>	
 		.body {
 			width: 100%;
-			border-left: 0px solid #ddd;
+			border-left: 2px solid #ddd;
 		}
 		
 		.toolbar {
@@ -14,12 +14,13 @@
 		 
 		.list {
 			width: 100%;
-			border-left: 0px solid #fff;
+			border-left: 0px solid #ddd;
+			
 		}
 		
 		.info {
 			width: 100%;
-			padding-top: 10px;	
+			margin-top: 10px;	
 		}
 		
 		.setsScroller {

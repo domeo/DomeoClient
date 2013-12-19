@@ -106,6 +106,7 @@ public class LinearCommentsSidePanel extends ASidePanel
 	
 	@Override
 	public void resized() {
+		body.setHeight((Window.getClientHeight()-32) + "px");
 		if(currentStatus==LinearCommentsSidePanel.S_GENERAL_THREAD) {
 			setsListScroller.setHeight((Window.getClientHeight()-94) + "px");
 			body.setCellHeight(setsListScroller, (Window.getClientHeight()-94) + "px");
@@ -139,7 +140,7 @@ public class LinearCommentsSidePanel extends ASidePanel
 			topbar.refresh();
 			table.refresh();
 
-			Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
+//			Collection<Long> annLocalIds = ((IDomeo)_application).getAnnotationPersistenceManager().getAnnotationOfTargetResource();
 //			/*
 //			if(annLocalIds.size()>0) {
 //				setsListScroller.setHeight(Math.min(Window.getClientHeight()-350, (annLocalIds.size()*48 + 16))+ "px");
