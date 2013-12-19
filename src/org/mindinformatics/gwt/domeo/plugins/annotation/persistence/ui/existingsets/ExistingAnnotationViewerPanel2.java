@@ -174,7 +174,8 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 			groupsList = new ArrayList<AnnotationSetInfo> ();
 			publicList = new ArrayList<AnnotationSetInfo> ();
 			for(int i=0; i< responseOnSets.length(); i++) {
-				
+				if(_domeo.getAnnotationPersistenceManager().isAnnotationSetLoaded(((JsoAnnotationSetSummary)responseOnSets.get(i)).getId()))
+					continue;
 				//Window.alert(((JsoAnnotationSetSummary)responseOnSets.get(i)).getPermissionsAccessType() + " ---- " + _domeo.getAgentManager().getUserPerson().getUri());
 				
 				if(((JsoAnnotationSetSummary)responseOnSets.get(i)).isPublic()) {

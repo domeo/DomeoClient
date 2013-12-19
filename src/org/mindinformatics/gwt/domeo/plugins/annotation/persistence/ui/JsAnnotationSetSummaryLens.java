@@ -77,6 +77,41 @@ public class JsAnnotationSetSummaryLens extends Composite {
 		refreshLens();
 	}
 	
+	public JsAnnotationSetSummaryLens(IDomeo domeo, final ExistingAnnotationSetsListPanel parent, JsoAnnotationSetSummary set, boolean alreadyLoaded) {
+		_domeo = domeo;
+		_this = this;
+		_set = set;
+		_parent = parent;
+		
+		if(alreadyLoaded) selectionButton.setEnabled(false);
+		
+		initWidget(binder.createAndBindUi(this));
+
+		if(set.getType().equals(IDomeoOntology.discussionSet)) {
+			typeField.add(new Image(Domeo.resources.littleCommentsIcon()));
+		} else {
+			typeField.setVisible(false);
+		}
+		
+		wrapper.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				parent.displayAannotationSetInfo(_set);
+			}
+		});
+
+		selectionButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				//parent.setSelectedAnnotaitonSet(_set);	
+				parent.refresh();
+				event.stopPropagation();
+			}
+		});
+		
+		refreshLens();
+	}
+	
 	public void setSelected(boolean selection) {
 		selectionButton.setValue(selection);
 	}

@@ -23,9 +23,12 @@ import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
+import org.mindinformatics.gwt.framework.component.ICommentsRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.persistance.src.PersistenceManager;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.component.ui.east.ASidePanel;
+import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.user.client.Element;
@@ -201,6 +204,17 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	
 	public ArrayList<MAnnotationSet> getAllUserSets() {
 		return allUserSets;
+	}
+	
+	public boolean isAnnotationSetLoaded(String setId) {
+		_application.getLogger().debug(this, "isAnnotationSetLoaded 1: " + setId);
+		for(MAnnotationSet userSet: allUserSets) {
+			_application.getLogger().debug(this, "isAnnotationSetLoaded 2 " + userSet.getIndividualUri());
+			if(userSet.getIndividualUri().equals(setId)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public ArrayList<MAnnotationSet> getAllDiscussionSets() {
@@ -626,16 +640,29 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	public void removeAnnotation(MAnnotation annotation, boolean mark) {	
 		try {
 			if(annotation.getSelector() instanceof MAnnotationSelector) {
+				//Window.alert("removal " + annotation.getClass().getName());
 				if(annotation instanceof MCommentAnnotation) {
 					// Remove cross pointers if chaining is implemented
 					ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
 					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
 					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().addAll(anns);
 				} else if(annotation instanceof MLinearCommentAnnotation) {
-					Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
+					ArrayList<MLinearCommentAnnotation> l = commentsOnAnnotationCache.get(((MAnnotationSelector)annotation.getSelector()).getAnnotation());
+					//Window.alert("removal b" +  l.size());
+					l.remove(annotation);
+					//Window.alert("removal a" +  l.size());
+					//Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
 					//ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
 					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
-					Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
+					//Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
+					
+					ASideTab tab = ((IDomeo)_application).getLinearCommentsSideTab();//.getDiscussionSideTab();
+					ASidePanel panel = ((IDomeo)_application).getSidePanelsFacade().getPanelForTab(tab);
+					List<MAnnotation> annotations = new ArrayList<MAnnotation>();
+					//annotations.add(annotation);
+					ArrayList<MAnnotation>  anns= ((IDomeo)_application).getPersistenceManager().getAnnotationCascade(((MAnnotationSelector)annotation.getSelector()).getAnnotation(), true);
+					annotations.addAll(anns);
+					((ICommentsRefreshableComponent)panel).refresh(annotations);		
 				}
 			}
 			HashMap<Long, MAnnotation> annotationsByLocalId = annotationsByTypeCache.get(annotation.getClass().getName());

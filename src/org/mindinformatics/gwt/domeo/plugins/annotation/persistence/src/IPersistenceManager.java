@@ -51,6 +51,7 @@ public interface IPersistenceManager {
 	public boolean isCurrentSet();
 	public MAnnotationSet getCurrentSet();
 	public ArrayList<MAnnotationSet> getAllUserSets();
+	public boolean isAnnotationSetLoaded(String setId);
 	public ArrayList<MAnnotationSet> getAllDiscussionSets();
 	public ArrayList<MLinkedResource> getAllTerms();
 	public boolean updateAnnotationAnnotationSet(MAnnotation annotation, MAnnotationSet set);
