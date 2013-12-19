@@ -3,11 +3,16 @@ package org.mindinformatics.gwt.domeo.client.ui.east.resource.qualifiers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
+import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.ITermsSelectionConsumer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.list.TermsSelectionList;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.search.terms.SearchTermsWidget;
@@ -77,7 +82,7 @@ public class QualifiersSearchPanel extends Composite implements IContentPanel, I
 		
 		refreshAnnotationSetFilter(annotationSet, null);
 		
-		SearchTermsWidget widget = new SearchTermsWidget(_domeo, this, false);
+		//SearchTermsWidget widget = new SearchTermsWidget(_domeo, this, false);
 		
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
 		yesButton.setWidth("78px");
@@ -86,7 +91,43 @@ public class QualifiersSearchPanel extends Composite implements IContentPanel, I
 		yesButton.setText("Apply");
 		yesButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
+				MTargetSelector selector = AnnotationFactory.createTargetSelector(_domeo.getAgentManager().getUserPerson(), 
+						_domeo.getPersistenceManager().getCurrentResource());
+				_domeo.getLogger().debug(this, "00");
+						
+//						AnnotationFactory.createPrefixSuffixTextSelector(
+//						_domeo.getAgentManager().getUserPerson(), 
+//						_domeo.getPersistenceManager().getCurrentResource(), ((TextAnnotationFormsPanel)_manager).getHighlight().getExact(), 
+//						((TextAnnotationFormsPanel)_manager).getHighlight().getPrefix(), ((TextAnnotationFormsPanel)_manager).getHighlight().getSuffix());
+				_domeo.getLogger().debug(this, "01");
+				Collection<MLinkedResource> terms = associatedTerms.values();
+				// TODO Register coordinate of highlight.
+				MQualifierAnnotation annotation = AnnotationFactory.createQualifier(
+						((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getCurrentSet(), 
+						_domeo.getAgentManager().getUserPerson(), 
+						_domeo.getAgentManager().getSoftware(),
+						_domeo.getPersistenceManager().getCurrentResource(), selector);
+				// TODO Register coordinate of highlight.
+				_domeo.getLogger().debug(this, "02");
+				Iterator<MLinkedResource> termsIterator = terms.iterator();
+				while(termsIterator.hasNext()) {
+					MLinkedResource term = termsIterator.next();
+					MLinkedResource normalizedTerm = (MLinkedResource) _domeo.getResourcesManager().cacheResource(term);
+					annotation.addTerm(normalizedTerm);
+					_domeo.getLogger().command(this, " annotation with term " + term.getLabel());
+				}
+					
+				if(getSelectedSet(annotationSet)==null) {
+					_domeo.getLogger().debug(this, "03a");
+					_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
+				} else {
+					_domeo.getLogger().debug(this, "03b");
+					_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, getSelectedSet(annotationSet));
+					_domeo.getLogger().debug(this, "03c");
+				}
+				//_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(annotation, ((TextAnnotationFormsPanel)_manager).getHighlight());
+				//_manager.hideContainer();
+				_glassPanel.hide();
 			}
 		});
 		buttonsPanel.add(yesButton);
@@ -243,5 +284,8 @@ public class QualifiersSearchPanel extends Composite implements IContentPanel, I
 	public void addTerm(MLinkedResource term) {
 		// TODO Auto-generated method stub
 		
+	}
+	protected MAnnotationSet getSelectedSet(ListBox annotationSet) {
+		return setsBuffer.get(annotationSet.getSelectedIndex());
 	}
 }

@@ -20,4 +20,9 @@ Build 40
     Deletion of comments now executes and updates the counter in the card
     (popup) and refreshes the discussion side panel accordingly.
     
- 40.5  
+ 40.5  Enhancement
+    Yale Image finder Integration (partial)
+    
+ 40.6  Enhancement
+   Improvements for using the Qualifier Search Panel also for qualifiers 
+   targeting the full document (partial).
