@@ -29,12 +29,16 @@
 
 	<g:HorizontalPanel styleName='{style.main}'>
 		<g:Label ui:field='titleLabel' styleName='{style.title}'></g:Label>
+		<!--  
 		<g:cell width="18px" horizontalAlignment="ALIGN_RIGHT">
+			
 			<g:HorizontalPanel>
 				<g:SimplePanel ui:field='explorePanel' styleName='{style.iconAction}'></g:SimplePanel>
 				<g:Label ui:field='exploreLabel' styleName='{style.iconAction}'>Explore</g:Label>
 			</g:HorizontalPanel>
+			
 		</g:cell>
+		-->
 		<g:cell width="18px" horizontalAlignment="ALIGN_RIGHT">
 			<g:HorizontalPanel styleName='{style.actionPanel}'>
 				<g:SimplePanel ui:field='closePanel' styleName='{style.iconAction}'></g:SimplePanel>
