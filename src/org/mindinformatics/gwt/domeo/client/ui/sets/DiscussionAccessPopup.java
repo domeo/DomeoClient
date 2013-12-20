@@ -5,6 +5,7 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.component.groups.ui.GroupsAccessPicker;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.accesscontrol.AnnotationAccessManager;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -72,28 +73,30 @@ public class DiscussionAccessPopup extends PopupPanel {
 		publicPanel.add(new Label("Public"));
 		vp.add(publicPanel);
 		
-		if(_domeo.getUserManager().getUsersGroups().size()>0) {
-			HorizontalPanel groupsPanel = new HorizontalPanel();
-			RadioButton groupsRadio = new RadioButton("myRadioGroup", "");
-			if(_domeo.getAnnotationAccessManager().getAnnotationSetAccess(_set).equals(AnnotationAccessManager.GROUPS)) 
-				groupsRadio.setValue(true);
-			groupsRadio.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {					
-					GroupsAccessPicker gap = new GroupsAccessPicker(_domeo, _set, _lens);
-					new EnhancedGlassPanel(_domeo, gap, gap.getTitle(), 800, false, false, false);
-					
-					_domeo.getLogger().command(_this, "Set AnnotationSet " + _set.getLocalId() + " access policy to " + _domeo.getUserManager().getUsersGroups().size() + " groups");
-					_domeo.getAnnotationAccessManager().setAnnotationSetGroups(_set, _domeo.getUserManager().getUsersGroups());
-					_domeo.getComponentsManager().updateObjectLenses(_set);
-					_lens.refresh();
-					_this.hide();
-				}
-			});
-			groupsPanel.add(new Image(Domeo.resources.friendsLittleIcon()));
-			groupsPanel.add(groupsRadio);
-			groupsPanel.add(new Label("Groups"));
-			vp.add(groupsPanel);
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_GROUP_ANNOTATION)) {
+			if(_domeo.getUserManager().getUsersGroups().size()>0) {
+				HorizontalPanel groupsPanel = new HorizontalPanel();
+				RadioButton groupsRadio = new RadioButton("myRadioGroup", "");
+				if(_domeo.getAnnotationAccessManager().getAnnotationSetAccess(_set).equals(AnnotationAccessManager.GROUPS)) 
+					groupsRadio.setValue(true);
+				groupsRadio.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {					
+						GroupsAccessPicker gap = new GroupsAccessPicker(_domeo, _set, _lens);
+						new EnhancedGlassPanel(_domeo, gap, gap.getTitle(), 800, false, false, false);
+						
+						_domeo.getLogger().command(_this, "Set AnnotationSet " + _set.getLocalId() + " access policy to " + _domeo.getUserManager().getUsersGroups().size() + " groups");
+						_domeo.getAnnotationAccessManager().setAnnotationSetGroups(_set, _domeo.getUserManager().getUsersGroups());
+						_domeo.getComponentsManager().updateObjectLenses(_set);
+						_lens.refresh();
+						_this.hide();
+					}
+				});
+				groupsPanel.add(new Image(Domeo.resources.friendsLittleIcon()));
+				groupsPanel.add(groupsRadio);
+				groupsPanel.add(new Label("Groups"));
+				vp.add(groupsPanel);
+			}
 		}
 	}
 }

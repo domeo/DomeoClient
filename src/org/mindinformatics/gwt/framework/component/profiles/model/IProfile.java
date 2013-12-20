@@ -18,6 +18,10 @@ public interface IProfile {
 	public static final String FEATURE_QUALIFIERS_SELF = "org.mindinformatics.gwt.domeo.feature.document.general.qualifiers.self";
 	public static final String FEATURE_MY_BIBLIOGRAPHY = "org.mindinformatics.gwt.domeo.feature.document.general.bibliography";
 	public static final String FEATURE_MY_RECOMMENDATIONS = "org.mindinformatics.gwt.domeo.feature.document.general.recommendations";
+	public static final String FEATURE_PRIVATE_ANNOTATION = "org.mindinformatics.gwt.domeo.feature.general.access.private";
+	public static final String FEATURE_GROUP_ANNOTATION = "org.mindinformatics.gwt.domeo.feature.general.access.groups";
+	public static final String FEATURE_PUBLIC_ANNOTATION = "org.mindinformatics.gwt.domeo.feature.general.access.public";
+	public static final String FEATURE_EXTERNAL_ANNOTATION = "org.mindinformatics.gwt.domeo.feature.general.access.external";
 	
 	String getUuid();
 	String getName();

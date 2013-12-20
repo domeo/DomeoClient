@@ -9,6 +9,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.model.users.IUserGroup;
 
 import com.google.gwt.core.client.GWT;
@@ -125,11 +126,15 @@ public class AnnotationSidePanelTopbar  extends Composite
 		accessFilters.clear();
 		if(_domeo.getUserManager().getUsersGroups()!=null) {
 			accessFilters.add(ASearchComponent.ANYBODY);
-			accessFilters.add(ASearchComponent.ONLY_MINE);
-			accessFilters.add(ASearchComponent.ONLY_OTHERS);
+			if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PRIVATE_ANNOTATION)) 
+				accessFilters.add(ASearchComponent.ONLY_MINE);
+			if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PUBLIC_ANNOTATION)) 
+				accessFilters.add(ASearchComponent.ONLY_OTHERS);
 			
-			for(IUserGroup group: _domeo.getUserManager().getUsersGroups()) {
-				accessFilters.add(group.getName()+" - "+group.getDescription());
+			if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_GROUP_ANNOTATION)) {
+				for(IUserGroup group: _domeo.getUserManager().getUsersGroups()) {
+					accessFilters.add(group.getName()+" - "+group.getDescription());
+				}
 			}
 		}
 		// Updating the list box

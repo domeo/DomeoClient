@@ -9,6 +9,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetriev
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.AnnotationSetTreeViewModel.AnnotationSetInfo;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.AnnotationSetTreeViewModel.Category;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsoAnnotationSetSummary;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.src.IContainerPanel;
 import org.mindinformatics.gwt.framework.src.IContentPanel;
 import org.mindinformatics.gwt.framework.src.IResizable;
@@ -91,7 +92,6 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 		return TITLE;
 	}
 	
-	
 	List<AnnotationSetInfo> privateList;
 	List<AnnotationSetInfo> groupsList;
 	List<AnnotationSetInfo> publicList;
@@ -156,43 +156,53 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 			images = GWT.create(Images.class);
 		}
 		
+		int top = ((!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PUBLIC_ANNOTATION))?1:0) +
+			((!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_GROUP_ANNOTATION))?1:0) +
+			((!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PRIVATE_ANNOTATION))?1:0) +
+			((!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_EXTERNAL_ANNOTATION))?1:0);
+		
 		catIcons = new ImageResource[catNames.length];
 		
-		categories = new Category[catNames.length];
-		categories[0] = new Category(catNames[0], images.publicAccess_24_bn());
-		categories[1] = new Category(catNames[1], images.groupsAccess_24());
-		categories[2] = new Category(catNames[2], images.privateAccess());
-		categories[3] = new Category(catNames[3], images.boxIcon_24());
+		int counter = 0;
+		categories = new Category[top];
 		
-//		for (int i = 0; i < catNames.length; i++) {
-//	      categories[i] = new Category(catNames[i]);
-//	    }
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PUBLIC_ANNOTATION))
+			categories[counter++] = new Category(catNames[0], images.publicAccess_24_bn());
 		
-		try {
-			
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_GROUP_ANNOTATION))
+			categories[counter++] = new Category(catNames[1], images.groupsAccess_24());
+		
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PRIVATE_ANNOTATION))
+			categories[counter++] = new Category(catNames[2], images.privateAccess());
+		
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_EXTERNAL_ANNOTATION))
+			categories[counter++] = new Category(catNames[3], images.boxIcon_24());
+	
+		try {		
 			privateList = new ArrayList<AnnotationSetInfo> ();
 			groupsList = new ArrayList<AnnotationSetInfo> ();
 			publicList = new ArrayList<AnnotationSetInfo> ();
 			for(int i=0; i< responseOnSets.length(); i++) {
 				if(_domeo.getAnnotationPersistenceManager().isAnnotationSetLoaded(((JsoAnnotationSetSummary)responseOnSets.get(i)).getId()))
 					continue;
-				//Window.alert(((JsoAnnotationSetSummary)responseOnSets.get(i)).getPermissionsAccessType() + " ---- " + _domeo.getAgentManager().getUserPerson().getUri());
-				
-				if(((JsoAnnotationSetSummary)responseOnSets.get(i)).isPublic()) {
+	
+				if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PUBLIC_ANNOTATION) 
+						&& ((JsoAnnotationSetSummary)responseOnSets.get(i)).isPublic()) {
 					publicList.add(new AnnotationSetInfo(categories[0], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					addAnnotationSet(new AnnotationSetInfo(categories[0], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					categories[0].incrementCounter();
-				} else if(((JsoAnnotationSetSummary)responseOnSets.get(i)).isGroups()) {
+				} else if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_GROUP_ANNOTATION) 
+						&& ((JsoAnnotationSetSummary)responseOnSets.get(i)).isGroups()) {
 					groupsList.add(new AnnotationSetInfo(categories[1], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					addAnnotationSet(new AnnotationSetInfo(categories[1], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					categories[1].incrementCounter();
-				} else if(((JsoAnnotationSetSummary)responseOnSets.get(i)).getPermissionsAccessType().equals(_domeo.getAgentManager().getUserPerson().getUri())) {
+				} else if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PRIVATE_ANNOTATION) 
+						&&((JsoAnnotationSetSummary)responseOnSets.get(i)).getPermissionsAccessType().equals(_domeo.getAgentManager().getUserPerson().getUri())) {
 					privateList.add(new AnnotationSetInfo(categories[2], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					addAnnotationSet(new AnnotationSetInfo(categories[2], (JsoAnnotationSetSummary)responseOnSets.get(i)));
 					categories[2].incrementCounter();
 				}
-			}
-			
+			}			
 			_domeo.getLogger().debug(this, "2");
 		
 		// Create layout

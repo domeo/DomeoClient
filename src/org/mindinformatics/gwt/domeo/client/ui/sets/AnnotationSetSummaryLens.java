@@ -93,10 +93,7 @@ public class AnnotationSetSummaryLens extends Composite implements ILensRefresh,
 			} else if(_domeo.getAnnotationAccessManager().isAnnotationSetPrivate(_set)) {
 				accessIcon.setResource(Domeo.resources.privateLittleIcon());
 			}
-			
-			//} else if(_domeo.getAnnotationAccessManager().getAnnotationSetAccess(_set).equals(_domeo.getAgentManager().getUserPerson().getUri())) {
-
-			
+	
 			accessPolicy.clear();
 			accessPolicy.add(accessIcon);
 	

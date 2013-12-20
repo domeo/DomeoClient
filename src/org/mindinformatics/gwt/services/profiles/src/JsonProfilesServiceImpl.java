@@ -194,6 +194,42 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					
 					out.print("{");
 					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_PRIVATE_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_GROUP_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_PUBLIC_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_EXTERNAL_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
 					out.print(IProfile.FEATURE_TEXTMINING_SUMMARY);
 					out.print("\",");
 					out.print("\"status\": \"");

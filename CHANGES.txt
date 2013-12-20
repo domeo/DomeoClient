@@ -24,5 +24,20 @@ Build 40
     Yale Image finder Integration (partial)
     
  40.6  Enhancement
-   Improvements for using the Qualifier Search Panel also for qualifiers 
-   targeting the full document (partial).
+    Improvements for using the Qualifier Search Panel also for qualifiers 
+    targeting the full document (partial).
+   
+ 40.7  Enhancement
+   	Customizable access control. It is now possible to define which access
+   	levels are available: private, groups or public. It is in fact possible
+   	to switch off private, public and group access by adding the profile 
+   	features entries:
+   	org.mindinformatics.gwt.domeo.feature.general.access.groups = disabled
+   	org.mindinformatics.gwt.domeo.feature.general.access.private = disabled
+   	org.mindinformatics.gwt.domeo.feature.general.access.public = disabled
+   	It is important to make sure to have at least one level enabled.
+   	Also this feature interacts with the initialization default in the html
+   	page loading the annotator. Example
+   	- var defaultSetPrivacy = "public";
+   	This has to be private or public and the level has to be enabled.
+   	
