@@ -20,4 +20,5 @@
   <source path='search'/>
   <source path='serialization'/>
   <source path='ui'/>
+  <source path='util' />
 </module>
