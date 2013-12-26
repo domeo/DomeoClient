@@ -100,23 +100,25 @@ public class JsonPmcImagesConnector implements IPmcImagesConnector {
 			builder.setHeader("Content-Type", "application/json");
 	
 			JSONObject request = new JSONObject();
-			request.put("pmid", new JSONString(pmid));
-			request.put("pmcid", new JSONString(pmcid));
-			request.put("doi", new JSONString(doi));
+			if(pmid!=null) request.put("pmid", new JSONString(pmid));
+			if(pmcid!=null) request.put("pmcid", new JSONString(pmcid));
+			if(doi!=null) request.put("doi", new JSONString(doi));
 			
 			JSONArray messages = new JSONArray();
 			messages.set(0, request);
 			
-			builder.setTimeoutMillis(10000);
+			builder.setTimeoutMillis(20000);
 			builder.setRequestData(messages.toString());
 			builder.setCallback(new RequestCallback() {
 				public void onError(Request request, Throwable exception) {
 					if(exception instanceof RequestTimeoutException) {
-//						_application.getLogger().exception(this, "Couldn't load existing bibliographic set (timeout) " + exception.getMessage());
-//						((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not load existing bibliography  (timeout)");
+						_application.getLogger().exception(this, "Couldn't load images metadata (timeout) " + exception.getMessage());
+						completionCallback.pmcImagesDataNotFound();
+//						((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not load images metadata  (timeout)");
 //						handler.bibliographySetListNotCreated("Could not load existing bibliography  (timeout)");
 					} else {
-//						_application.getLogger().exception(this, "Couldn't load existing bibliographic set");
+						_application.getLogger().exception(this, "Couldn't load images metadata");
+						completionCallback.pmcImagesDataNotFound();
 //						((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not load existing bibliography (onError)");
 //						handler.bibliographySetListNotCreated("Could not load existing bibliography (onError)");
 					}
@@ -125,6 +127,7 @@ public class JsonPmcImagesConnector implements IPmcImagesConnector {
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						try {
+							_application.getLogger().debug(this, response.getText());
 							@SuppressWarnings("unchecked")
 							JsArray<JsPmcImage> responseOnSets = (JsArray<JsPmcImage>) parseJson(response.getText());
 							HashMap<String, JsPmcImage> images = new HashMap<String, JsPmcImage>();
@@ -133,17 +136,19 @@ public class JsonPmcImagesConnector implements IPmcImagesConnector {
 							}					
 							completionCallback.returnPmcImagesData(images);			
 						} catch(Exception e) {
-//							_application.getLogger().exception(this, "Could not parse existing bibliography " + e.getMessage());
+							_application.getLogger().exception(this, "Could not parse images metadata " + e.getMessage());
+							completionCallback.pmcImagesDataNotFound();
 //							((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not parse existing bibliography  " + e.getMessage());
 //							handler.bibliographySetListNotCreated("Could not parse existing bibliography " + e.getMessage() + " - "+ response.getText());
 						}
 					} else if (503 == response.getStatusCode()) {
-//						_application.getLogger().exception(this, "Existing bibliography by url 503: " + response.getText());
+						_application.getLogger().exception(this, "Existing bibliography by url 503: " + response.getText());
+						completionCallback.pmcImagesDataNotFound();
 //						((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not retrieve existing bibliography  " + response.getStatusCode());
 //						handler.bibliographySetListNotCreated("Could not retrieve existing bibliography " + response.getStatusCode() + " - "+ response.getText());
 						//completionCallback.textMiningNotCompleted(response.getText());
 					} else {
-//						_application.getLogger().exception(this,  "Existing bibliography by url " + response.getStatusCode() + ": "+ response.getText());
+						_application.getLogger().exception(this,  "Load images metadata " + response.getStatusCode() + ": "+ response.getText());
 //						((ProgressMessagePanel)((DialogGlassPanel)_application.getDialogPanel()).getPanel()).addErrorMessage("Could not retrieve existing bibliography  " + response.getStatusCode());
 //						handler.bibliographySetListNotCreated("Could not retrieve existing bibliography " + response.getStatusCode() + " - "+ response.getText());
 						//handler.setExistingBibliographySetList(new JsArray(), true);

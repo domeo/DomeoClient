@@ -129,9 +129,11 @@ public class CachedImagesPanel extends Composite {
 					
 					if(im!=null) {
 						_domeo.getLogger().debug(this, "2 " + im.getCaption());
-						hp1.add(new HTML(im.getCaption() + " - " + im.getTitle() + 
+						hp1.add(new HTML("<span style='font-weight: bold;'>" + im.getTitle() + "</span> - " + im.getCaption()  + 
 							" - <a target='_blank' href='http://krauthammerlab.med.yale.edu/imagefinder/Figure.external?sp=S" + 
-								im.getImageId() + "'>Yale Images</a>"));
+								im.getImageId() + "'>Yale Image Finder</a>" + 
+							" - <a target='_blank' href='http://cbakerlab.unbsj.ca:8080/iCyrus/page/" + 
+								im.getImageId() + "'>iCyrus</a>"));
 					}
 				
 					HorizontalPanel hp = new HorizontalPanel();
@@ -243,9 +245,6 @@ public class CachedImagesPanel extends Composite {
 						right.setCellHorizontalAlignment(title, HasHorizontalAlignment.ALIGN_LEFT);
 					}
 					
-					JsPmcImage im = _domeo.getPmcImagesCache().getImageMetadataFromUrl(image.getDisplayUrl());
-					if(im!=null)  right.add(new HTML(im.getCaption()));
-				
 					HorizontalPanel hp = new HorizontalPanel();
 					final ImageProxy _image = image;
 					ClickHandler exploreHandler = new ClickHandler() {
@@ -286,6 +285,16 @@ public class CachedImagesPanel extends Composite {
 //					}
 					right.add(hp);
 					main.add(right);
+					
+					JsPmcImage im = _domeo.getPmcImagesCache().getImageMetadataFromUrl(image.getDisplayUrl());
+					if(im!=null) {
+						_domeo.getLogger().debug(this, "2 " + im.getCaption());
+						main.add(new HTML("<span style='font-weight: bold;'>" + im.getTitle() + "</span> - " + im.getCaption()  + 
+							" - <a target='_blank' href='http://krauthammerlab.med.yale.edu/imagefinder/Figure.external?sp=S" + 
+								im.getImageId() + "'>Yale Image Finder</a>" + 
+							" - <a target='_blank' href='http://cbakerlab.unbsj.ca:8080/iCyrus/page/" + 
+								im.getImageId() + "'>iCyrus</a>"));
+					}
 										
 					if(counter%2 == 1) {
 						//right.setStyleName(widgetUtilsResources.widgetCss().tableOddRow());

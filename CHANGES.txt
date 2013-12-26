@@ -41,3 +41,13 @@ Build 40
    	- var defaultSetPrivacy = "public";
    	This has to be private or public and the level has to be enabled.
    	
+ 40.8  Integration (iCyrus) - Enhancement
+    Improved integration plugin with iCyrus that will enhance the mashups
+    in the images summary panel showing the metadata coming from the Yale
+    Image Finder. Title in bold, description and links to Yale and iCyrus.
+  
+ 40.9  Integration (iCyrus) - Enhancement
+    Increased timout to 20 seconds. Probably this should not make the 
+    pipeline wait.  
+    
+   	

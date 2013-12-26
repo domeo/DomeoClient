@@ -50,7 +50,7 @@ public class PubMedCentralExtractSubjectCommand extends APubMedBibliograhyExtrac
 	public void execute() {
 		if(_domeo.getAnnotationPersistenceManager().getBibliographicSet().getLevel()>0) {
 			_domeo.getLogger().debug(this.getClass().getName()+":execute()", 
-					"Skipping extraction of self citation info...");
+					"Skipping extraction of self citation info... " + _domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference());
 			((ProgressMessagePanel)((DialogGlassPanel)_domeo.getDialogPanel()).getPanel()).setMessage("Skipping extraction of self citation info...");
 			_completionCallback.notifyStageCompletion();
 		} else {
