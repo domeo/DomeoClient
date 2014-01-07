@@ -49,6 +49,7 @@ public class JsonSerializerManager {
 	
 	private HashMap<String, ISerializer> serializers = new HashMap<String, ISerializer>();
 	private HashMap<String, IAgent> agentsToSerialize = new HashMap<String, IAgent>();
+	
 	private HashMap<String, MGenericResource> resourcesToSerialize = new HashMap<String, MGenericResource>();
 	
 	private JsonSerializerManager(IDomeo domeo) {
@@ -114,6 +115,20 @@ public class JsonSerializerManager {
 	public void addResourceToSerialize(MGenericResource resource) {
 		if(!resourcesToSerialize.containsKey(resource.getUrl()))
 			resourcesToSerialize.put(resource.getUrl(), resource);
+	}
+	
+	public JSONValue serializeSelfReference() {
+		_domeo.getLogger().debug(this, "serializeSelfReference()");
+		if(_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()!=null && 
+				_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()!=null &&
+				((MAnnotationReference)_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()).getReference()!=null &&
+				((MAnnotationReference)_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()).getReference() instanceof MPublicationArticleReference) {
+			_domeo.getLogger().debug(this, "serializeSelfReference() in");
+			MPublicationArticleReference ref = (MPublicationArticleReference) ((MAnnotationReference)_domeo.getAnnotationPersistenceManager().getBibliographicSet().getSelfReference()).getReference();
+			return serialize(ref);
+		}
+		_domeo.getLogger().debug(this, "serializeSelfReference() out");
+		return null;
 	}
 	
 	public Collection<IAgent> getAgentsToSerialize() {
