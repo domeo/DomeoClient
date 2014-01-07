@@ -42,7 +42,6 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		annotationSetJson.put(IDomeoOntology.annotates, new JSONString(annotationSet.getTargetResource().getUrl()));
 		manager.addResourceToSerialize(annotationSet.getTargetResource());
 		
-		
 		//  Creation
 		// --------------------------------------------------------------------
 		if(annotationSet.getCreatedBy()!=null) {

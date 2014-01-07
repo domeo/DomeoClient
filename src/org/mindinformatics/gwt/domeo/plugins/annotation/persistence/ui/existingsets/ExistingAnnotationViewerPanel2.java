@@ -262,7 +262,9 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements IContai
 			    //cellTree.setAnimationEnabled(true);
 			
 			    left.add(cellTree);
-			    left.setHeight((Window.getClientHeight() - 320) + "px");
+			    
+			    if(Window.getClientHeight() - 320>0) 
+			    	left.setHeight((Window.getClientHeight() - 320) + "px");
 			
 		} catch (Exception e) {
 			_domeo.getLogger().debug(this, "ExistingAnnotationViewerPanel " + e.getMessage());

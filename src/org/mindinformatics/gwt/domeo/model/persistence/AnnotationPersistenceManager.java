@@ -32,7 +32,6 @@ import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Window;
 
 /**
  * The class takes care of all annotation related persistence.
