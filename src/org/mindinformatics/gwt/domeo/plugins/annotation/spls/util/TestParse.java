@@ -1,11 +1,11 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.util;
 
-import static org.junit.Assert.*; //requires junit4
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONObject; //requires JSON-Lib
+import net.sf.json.JSONObject;
 
 import org.junit.Test;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
@@ -15,7 +15,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 public class TestParse extends GWTTestCase{
 	
-	private JsonParser jsonpaser;
+	//private JsonParser jsonpaser;
 
 	@Test
 	public void test() {
@@ -30,7 +30,6 @@ public class TestParse extends GWTTestCase{
 		JsonParser.loadJsonIntoPOJO(jsonObj);
 		
 		System.out.println(ann.size());
-		//System.out.println("TestParse");
 	}
 
 	@Override

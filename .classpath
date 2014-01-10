@@ -5,7 +5,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gson-2.2.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-visualization.jar"/>
-	<classpathentry kind="lib" path="/usr/share/java/junit4.jar"/>
-	<classpathentry kind="lib" path="/usr/share/java/json-lib.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
