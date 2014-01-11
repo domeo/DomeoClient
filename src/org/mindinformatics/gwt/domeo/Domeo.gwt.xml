@@ -40,6 +40,7 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.relationship.Relationship"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.MicroPublications"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.spls.SPLs"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.expertstudy_pDDI"/>
 
   <!-- Extractors  -->
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.omim.OmimResourcePlugin"/>

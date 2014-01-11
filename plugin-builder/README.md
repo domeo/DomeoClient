@@ -29,7 +29,7 @@ How it works:
 ant create-plugin-folders
 
 # Copy templated files into new Java and GWT files
-ant create-info-template
+ant create-template
 #... more to come...
 
 
