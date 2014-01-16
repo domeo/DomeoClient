@@ -7,7 +7,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
 
 /**
- * @author Richard Boyce <rdb20@pitt.edu>
+ * @author Andres Hernandez <amh211@pitt.edu>
  */
 @SuppressWarnings("serial")
 public class Mexpertstudy_pDDI extends MTrustedResource {

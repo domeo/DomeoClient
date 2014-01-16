@@ -11,8 +11,8 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 @SuppressWarnings("serial")
     public class Mexpertstudy_pDDIAnnotation extends MAnnotation {
 
-	protected static final String LABEL = "SPL Annotation";
-	public static final String TYPE = "ao:SPLAnnotation";
+	public static final String LABEL = "expertstudy Annotation"; //Plugin builder error
+	public static final String TYPE = "ao:expertstudyAnnotation"; //Plugin builder error
 	public static final String BODY_TYPE = "domeo:expertstudy_pDDIUsage";
 	
 	private Mexpertstudy_pDDIUsage expertstudy_pDDIUsage;
