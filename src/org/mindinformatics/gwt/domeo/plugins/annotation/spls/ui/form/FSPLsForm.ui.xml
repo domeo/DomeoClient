@@ -400,7 +400,7 @@
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
-							<g:CheckBox ui:field="descriptpp" name="descriptpp"
+							<g:CheckBox ui:field="descriptppm" name="descriptppm"
 								styleName='{style.elementType}' text="mentioned" />
 						</g:HorizontalPanel>
 

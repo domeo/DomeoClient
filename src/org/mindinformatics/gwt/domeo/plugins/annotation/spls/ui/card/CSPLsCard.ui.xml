@@ -158,6 +158,24 @@
 					<g:Label ui:field="statement" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="prevalencelabel" styleName='{style.tablelabel}'>Prevalence</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="prevalence" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="alleleslabel" styleName='{style.tablelabel}'>Alleles</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="allelesbody" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
 
 		</g:HorizontalPanel>
 

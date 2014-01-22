@@ -11,7 +11,8 @@ public class MSPLPharmgxUsage {
 
 	private Long localId; // sent to the server for matching saved items
 	private String individualUri; // Individual Uniform Resource Identifier
-
+	private String allelesbody;
+	
 	public Long getLocalId() {
 		return localId;
 	}
@@ -119,20 +120,21 @@ public class MSPLPharmgxUsage {
 		pharmgx.setStatementsResource(statements);
 	}
 
-	public MLinkedResource getPrevalence() {
+	public Set<MLinkedResource> getPrevalence() {
 		return pharmgx.getPrevalence();
 	}
 
-	public void setPrevalence(MLinkedResource prevalence) {
+	public void setPrevalence(Set<MLinkedResource> prevalence) {
 		pharmgx.setPrevalence(prevalence);
 	}
 
-	public MLinkedResource getAlleles() {
-		return pharmgx.getAlleles();
+	public String getAllelesbody() {
+		return allelesbody;
 	}
 
-	public void setAlleles(MLinkedResource alleles) {
-		pharmgx.setAlleles(alleles);
+	public void setAllelesbody(String allelesbody) {
+		this.allelesbody = allelesbody;
 	}
+	
 
 }

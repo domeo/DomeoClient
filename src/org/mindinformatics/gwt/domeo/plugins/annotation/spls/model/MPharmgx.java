@@ -16,8 +16,9 @@ public class MPharmgx extends MTrustedResource {
 
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 			drugRecResource, monitRecResource, testRecResource, comment,Alleles,
-			biomarkers, prevalence;
-
+			biomarkers;
+	Set<MLinkedResource> statementsResource, prevalence;
+	
 	public void setAlleles(MLinkedResource alleles) {
 		Alleles = alleles;
 	}
@@ -26,7 +27,7 @@ public class MPharmgx extends MTrustedResource {
 		this.biomarkers = biomarkers;
 	}
 
-	public void setPrevalence(MLinkedResource prevalence) {
+	public void setPrevalence(Set<MLinkedResource> prevalence) {
 		this.prevalence = prevalence;
 	}
 
@@ -42,7 +43,7 @@ public class MPharmgx extends MTrustedResource {
 		return biomarkers;
 	}
 
-	public MLinkedResource getPrevalence() {
+	public Set<MLinkedResource> getPrevalence() {
 		return prevalence;
 	}
 
@@ -50,7 +51,6 @@ public class MPharmgx extends MTrustedResource {
 		this.comment = comment;
 	}
 
-	Set<MLinkedResource> statementsResource;
 
 	public MPharmgx(String url, String label, MGenericResource source) {
 		super(url, label, source);

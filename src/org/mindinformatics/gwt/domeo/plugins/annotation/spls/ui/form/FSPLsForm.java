@@ -189,7 +189,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	
 	//population provalence
 	@UiField
-	CheckBox descriptpp;
+	CheckBox descriptppm;
 	
 	//alleles
 	@UiField
@@ -579,11 +579,26 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					SPL_POC_PREFIX + "biomarker", "Biomarker",
 					"Based on biomarker.", SPL_POC_PREFIX + "Statements",
 					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
-
 		}
 		return statements;
 	}
-
+	
+	//population prevalence
+	public Set<MLinkedResource> getPrevalence() {
+		Set<MLinkedResource> prevalence = new HashSet<MLinkedResource>();
+		if (descriptppm.getValue()) {
+			prevalence.add(ResourcesFactory.createTrustedTypedResource(
+					SPL_POC_PREFIX + "", "Mentioned",
+					"mentioned", SPL_POC_PREFIX + "Population Prevalence",
+					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+		}
+		return prevalence;
+	}
+	
+	//alleles body
+	
+	
+	
 	// NEW annotation
 	@SuppressWarnings("deprecation")
 	public FSPLsForm(IDomeo domeo, final AFormsManager manager) {
@@ -653,19 +668,25 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 							// take the form values and assign
 							_domeo.getLogger().debug(this, "SPL annotation 1");
-							pharmgxUsage.setPkImpact(getPkImpact());
+							pharmgxUsage.setBiomarkers(getBioMarkers());
 							_domeo.getLogger().debug(this, "SPL annotation 2");
-							pharmgxUsage.setPdImpact(getPdImpact());
+							pharmgxUsage.setPkImpact(getPkImpact());
 							_domeo.getLogger().debug(this, "SPL annotation 3");
-							pharmgxUsage.setDrugRec(getDrugRec());
+							pharmgxUsage.setPdImpact(getPdImpact());
 							_domeo.getLogger().debug(this, "SPL annotation 4");
-							pharmgxUsage.setDoseRec(getDoseRec());
+							pharmgxUsage.setDrugRec(getDrugRec());
 							_domeo.getLogger().debug(this, "SPL annotation 5");
-							pharmgxUsage.setMonitRec(getMonitRec());
+							pharmgxUsage.setDoseRec(getDoseRec());
 							_domeo.getLogger().debug(this, "SPL annotation 6");
-							pharmgxUsage.setStatements(getStatements());
+							pharmgxUsage.setMonitRec(getMonitRec());
 							_domeo.getLogger().debug(this, "SPL annotation 7");
+							pharmgxUsage.setStatements(getStatements());
+							_domeo.getLogger().debug(this, "SPL annotation 8");
 							pharmgxUsage.setTestRec(getTest_Re());
+							_domeo.getLogger().debug(this, "SPL annotation 9");
+							pharmgxUsage.setPrevalence(getPrevalence());
+							_domeo.getLogger().debug(this, "SPL annotation 10");
+							pharmgxUsage.setAllelesbody(allelesbody.getText());
 
 							annotation.setPharmgxUsage(pharmgxUsage);
 
@@ -778,16 +799,16 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			if (_item.getBiomarkers() != null) {
 
 				if (_item.getBiomarkers().getLabel().equals("unselected")) {
-					descriptsmc.setSelectedIndex(0);
+					descriptbm.setSelectedIndex(0);
 				} else if (_item.getBiomarkers().getLabel()
 						.equals("CYP2C9")) {
-					descriptsmc.setSelectedIndex(1);
+					descriptbm.setSelectedIndex(1);
 				} else if (_item.getBiomarkers().getLabel()
 						.equals("CYP2D6")) {
-					descriptsmc.setSelectedIndex(2);
+					descriptbm.setSelectedIndex(2);
 				} else if (_item.getBiomarkers().getLabel()
 						.equals("CYP1A2")) {
-					descriptsmc.setSelectedIndex(3);
+					descriptbm.setSelectedIndex(3);
 				}
 			}
 		
@@ -932,8 +953,24 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 						descriptsmc.setSelectedIndex(2);
 					}
 				}
-
 			}
+			
+			//population prevalence
+			if(_item.getPrevalence()!=null){
+				
+				for (MLinkedResource propre : _item.getStatements()) {
+
+					if (propre.getLabel().equals("Mentioned")) {
+						descriptppm.setValue(true);
+					}
+				
+				}
+			}
+			
+			//alleles body
+			
+			
+			
 
 		} catch (Exception e) {
 			_domeo.getLogger().exception(

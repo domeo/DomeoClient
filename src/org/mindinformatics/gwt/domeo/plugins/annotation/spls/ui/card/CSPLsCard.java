@@ -52,7 +52,7 @@ public class CSPLsCard extends ACardComponent {
 
 	private int _index = -1;
 	private MSPLsAnnotation _annotation;
-	String statements_str = "";
+	String statements_str = "", prevalence_str="";
 	@UiField
 	VerticalPanel body;
 	@UiField
@@ -63,7 +63,7 @@ public class CSPLsCard extends ACardComponent {
 	// section statements
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
-			test, statement, biomarkers;
+			test, statement, biomarkers, prevalence, allelesbody;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -179,11 +179,16 @@ public class CSPLsCard extends ACardComponent {
 			 * can not skip some labels
 			 */
 
-			System.out.println("step0");
-
 			if (_annotation != null) {
 				MSPLPharmgxUsage dataUsage = _annotation.getPharmgxUsage();
 
+				if (dataUsage.getBiomarkers() != null) {
+					String bioStr = dataUsage.getBiomarkers().getLabel();
+					biomarkers.setText(bioStr);
+				} else {
+					biomarkers.setText("undefined");
+				}
+			
 				if (dataUsage.getPkImpact() != null) {
 
 					String pkimpactStr = dataUsage.getPkImpact().getLabel();
@@ -242,13 +247,30 @@ public class CSPLsCard extends ACardComponent {
 					statement.setText("undefined");
 				}
 
-				if (dataUsage.getBiomarkers() != null) {
-					String bioStr = dataUsage.getBiomarkers().getLabel();
-					biomarkers.setText(bioStr);
+				if (dataUsage.getPrevalence() != null) {
+					int count = 2;
+					for (MLinkedResource mr : _annotation.getPharmgxUsage()
+							.getPrevalence()) {
+						prevalence_str += mr.getLabel().toString() + " ";
+						if (count <= 0)
+							break;
+						count++;
+					}
+					prevalence.setText(prevalence_str);
 				} else {
-					biomarkers.setText("undefined");
+					prevalence.setText("undefined");
+				}
+				
+				if (dataUsage.getAllelesbody() != null) {
+					String allelesStr = dataUsage.getAllelesbody();
+					allelesbody.setText(allelesStr);
+				} else {
+					allelesbody.setText("undefined");
 				}
 			}
+			
+			
+			
 			System.out.println("load values of labels");
 
 			if (SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {

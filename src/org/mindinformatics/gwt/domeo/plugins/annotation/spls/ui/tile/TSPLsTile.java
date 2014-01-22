@@ -90,21 +90,14 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 
 			String html2 = "</table></body></html>";
 
-			String labels = "<tr bgcolor='#EEE'><td>PK Impact</td><td>PD Impact</td><td>Drug Rec</td>"
-					+ "<td>Dose Rec</td><td>Monitoring Rec</td><td>Test</td><td>Statement</td></tr>";
+			String labels = "<tr bgcolor='#EEE'><td>Biomarker</td><td>PK Impact</td><td>PD Impact</td><td>Drug Rec</td>"
+					+ "<td>Dose Rec</td><td>Monitoring Rec</td><td>Test</td><td>Statement</td><td>Prevalence</td><td>Alleles</td></tr>";
 
-			String statementsStr = "";
-			if (_annotation.getPharmgxUsage().getStatements() != null) {
-				int count = 2;
-				for (MLinkedResource mr : _annotation.getPharmgxUsage()
-						.getStatements()) {
-					statementsStr += mr.getLabel().toString() + " ";
-					if (count <= 0)
-						break;
-					count++;
-				}
+			String biomarkerStr;
+			if (pharmgx.getBiomarkers() != null) {
+				biomarkerStr = pharmgx.getBiomarkers().getLabel();
 			} else {
-				statementsStr = "undefined";
+				biomarkerStr = "undefined";
 			}
 
 			String pkimpactStr;
@@ -148,12 +141,48 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			} else {
 				testRecStr = "undefined";
 			}
+			
+			String allelesStr;
+			if (pharmgx.getAlleles() != null) {
+				allelesStr = pharmgx.getAlleles().getLabel();
+			} else {
+				allelesStr = "undefined";
+			}
 
-			String values = "<tr bgcolor='#F0F8FF'><td>" + pkimpactStr
-					+ "</td>" + "<td>" + pdimpackStr + "</td><td>" + drugRecStr
-					+ "</td><td>" + doseRecStr + "</td><td>" + monRecStr
-					+ "</td><td>" + testRecStr + "</td><td>" + statementsStr
-					+ "</td></tr>";
+			String statementsStr = "";
+			if (_annotation.getPharmgxUsage().getStatements() != null) {
+				int count = 2;
+				for (MLinkedResource mr : _annotation.getPharmgxUsage()
+						.getStatements()) {
+					statementsStr += mr.getLabel().toString() + " ";
+					if (count <= 0)
+						break;
+					count++;
+				}
+			} else {
+				statementsStr = "undefined";
+			}
+
+			String prevalenceStr = "";
+			if (_annotation.getPharmgxUsage().getPrevalence() != null) {
+				int count = 2;
+				for (MLinkedResource mr : _annotation.getPharmgxUsage()
+						.getPrevalence()) {
+					prevalenceStr += mr.getLabel().toString() + " ";
+					if (count <= 0)
+						break;
+					count++;
+				}
+			} else {
+				prevalenceStr = "undefined";
+			}
+
+			String values = "<tr bgcolor='#F0F8FF'><td>" + biomarkerStr
+					+ "</td><td>" + pkimpactStr + "</td>" + "<td>"
+					+ pdimpackStr + "</td><td>" + drugRecStr + "</td><td>"
+					+ doseRecStr + "</td><td>" + monRecStr + "</td><td>"
+					+ testRecStr + "</td><td>" + statementsStr + "</td><td>"
+					+ prevalenceStr + "</td><td>" + allelesStr + "</td></tr>";
 
 			sb2.append(html1);
 

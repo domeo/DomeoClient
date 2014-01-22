@@ -98,20 +98,20 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    pharmgxUsage.setTestRec(testRec);
 	}
 	
-	public MLinkedResource getPrevalence() {
+	public Set<MLinkedResource> getPrevalence() {
 		return pharmgxUsage.getPrevalence();
 	}
 
-	public void setPrevalence(MLinkedResource prevalence) {
+	public void setPrevalence(Set<MLinkedResource> prevalence) {
 		pharmgxUsage.setPrevalence(prevalence);
 	}
 
-	public MLinkedResource getAlleles() {
-		return pharmgxUsage.getAlleles();
+	public String getAllelesbody() {
+		return pharmgxUsage.getAllelesbody();
 	}
 
-	public void setAlleles(MLinkedResource alleles) {
-		pharmgxUsage.setAlleles(alleles);
+	public void setAllelesbody(String Allelesbody) {
+		pharmgxUsage.setAllelesbody(Allelesbody);
 	}
 	
 	@Override
