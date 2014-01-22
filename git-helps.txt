@@ -52,3 +52,7 @@ git branch -va
 git checkout master
 git merge upstream/master
 
+10) mark local changes so that they are not committed to the remote
+
+git update-index --assume-unchanged <file or folder>
+
