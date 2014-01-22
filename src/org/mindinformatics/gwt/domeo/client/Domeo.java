@@ -107,11 +107,19 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.tile.Qualif
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.info.SelectionPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.ui.tile.SelectionTileProvider;
+
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card.SPLsCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form.SPLsFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile.SPLsTileProvider;
+
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.info.expertstudy_pDDIPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.card.expertstudy_pDDICardProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.form.expertstudy_pDDIFormProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.tile.expertstudy_pDDITileProvider;
+
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
@@ -586,6 +594,15 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				MSPLsAnnotation.class.getName(), new SPLsTileProvider(this));
 		annotationCardsManager.registerAnnotationCard(
 				MSPLsAnnotation.class.getName(), new SPLsCardProvider(this));
+
+		// expertstudy_pDDI
+		pluginsManager.registerPlugin(expertstudy_pDDIPlugin.getInstance(), true);
+		/* if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+				expertstudy_pDDIPlugin.getInstance().getPluginName())) { */		
+		annotationFormsManager.registerAnnotationForm(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDIFormProvider(this));
+		// }	
+		annotationTailsManager.registerAnnotationTile(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDITileProvider(this));
+		annotationCardsManager.registerAnnotationCard(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDICardProvider(this));
 
 		// Digesters
 		linkedDataDigestersManager

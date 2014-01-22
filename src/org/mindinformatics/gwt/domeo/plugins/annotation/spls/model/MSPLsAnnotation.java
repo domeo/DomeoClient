@@ -12,6 +12,14 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
     public class MSPLsAnnotation extends MAnnotation implements IPharmgxOntology{
 
 	private MSPLPharmgxUsage pharmgxUsage;
+	
+	public MLinkedResource getBiomarkers() {
+		return pharmgxUsage.getBiomarkers();
+	}
+
+	public void setBiomarkers(MLinkedResource biomarker) {
+		pharmgxUsage.setBiomarkers(biomarker);
+	}
 
 	public MSPLPharmgxUsage getPharmgxUsage() {
 	    return pharmgxUsage;
@@ -88,6 +96,22 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 
 	public void setTestRec(MLinkedResource testRec){
 	    pharmgxUsage.setTestRec(testRec);
+	}
+	
+	public MLinkedResource getPrevalence() {
+		return pharmgxUsage.getPrevalence();
+	}
+
+	public void setPrevalence(MLinkedResource prevalence) {
+		pharmgxUsage.setPrevalence(prevalence);
+	}
+
+	public MLinkedResource getAlleles() {
+		return pharmgxUsage.getAlleles();
+	}
+
+	public void setAlleles(MLinkedResource alleles) {
+		pharmgxUsage.setAlleles(alleles);
 	}
 	
 	@Override

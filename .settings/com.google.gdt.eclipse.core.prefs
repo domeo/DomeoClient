@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
 lastWarOutDir=/home/PITT/rdb20/DomeoClient/war
+launchConfigExternalUrlPrefix=
 warSrcDir=/war
 warSrcDirIsOutput=false

@@ -80,8 +80,12 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	ListBox annotationSet;
 	@UiField
 	VerticalPanel rightColumn;
-	//@UiField
-	//TabBar tabBar;
+	// @UiField
+	// TabBar tabBar;
+
+	// Biomarkers
+	@UiField
+	ListBox descriptbm;
 
 	// PK Impact
 
@@ -177,17 +181,38 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@UiField
 	CheckBox descriptsbm;
 
-	@UiField 
+	@UiField
 	Hyperlink pklink;
 
 	@UiField
 	TextArea commentBody;
+	
+	//population provalence
+	@UiField
+	CheckBox descriptpp;
+	
+	//alleles
+	@UiField
+	TextArea allelesbody;
 
 	// Paolo this is taking care of the 'PK impact' for 'apply'
 	// I Normally create a method for each group
 	// RadioButton groups return MLinkedResource
 	// CheckBoxes groups return Set<MLinkedResource>
 	// See FAntibodyForm as an example
+
+	// biomarkers
+	public MLinkedResource getBioMarkers() {
+
+		int indexbm = descriptbm.getSelectedIndex();
+
+		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+				+ "biomarkers", descriptbm.getItemText(indexbm),
+				"the biomarkers.", SPL_POC_PREFIX + "Biomarkers",
+				SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+	}
+
+	// pk impact
 
 	public MLinkedResource getPkImpact() {
 		if (descriptpkia.getValue()) {
@@ -323,8 +348,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	}
 
 	// Recommendation drug
-
-	// recommendation drug
 
 	public MLinkedResource getDrugRec() {
 
@@ -535,11 +558,11 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		}
 
 		// medical condition ListBox
-		int index = descriptsmc.getSelectedIndex();
+		int indexmc = descriptsmc.getSelectedIndex();
 
 		statements.add(ResourcesFactory.createTrustedTypedResource(
 				SPL_POC_PREFIX + "medical-condition",
-				descriptsmc.getItemText(index),
+				descriptsmc.getItemText(indexmc),
 				"it is should be references to medical condition.",
 				SPL_POC_PREFIX + "Statements", SPL_POC_PREFIX,
 				"U of Pitt SPL Pharmgx Annotation"));
@@ -707,28 +730,23 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		_domeo.getLogger().debug(this, "'Apply' button added");
 
 		this.setHeight("100px");
-		
-		/*
-		pklink.addClickHandler(new ClickHandler(){
-		DialogBox dialog = new DialogBox();
-		HorizontalPanel hp= new HorizontalPanel();
-		Label description = new Label("radio button: can only selects one of choices");
-			@Override
-			public void onClick(ClickEvent event) {
-				System.out.println("hyper link");
-				int left = pklink.getAbsoluteLeft();
-				int top = pklink.getAbsoluteTop();
-				
-				System.out.println(left+"|"+top);
-				hp.add(description);
-				dialog.setText("description test");
-				dialog.setWidget(hp);
-				dialog.setPopupPosition(left, top);
-				dialog.show();
-			}
 
-		});
-		*/
+		/*
+		 * pklink.addClickHandler(new ClickHandler(){ DialogBox dialog = new
+		 * DialogBox(); HorizontalPanel hp= new HorizontalPanel(); Label
+		 * description = new
+		 * Label("radio button: can only selects one of choices");
+		 * 
+		 * @Override public void onClick(ClickEvent event) {
+		 * System.out.println("hyper link"); int left =
+		 * pklink.getAbsoluteLeft(); int top = pklink.getAbsoluteTop();
+		 * 
+		 * System.out.println(left+"|"+top); hp.add(description);
+		 * dialog.setText("description test"); dialog.setWidget(hp);
+		 * dialog.setPopupPosition(left, top); dialog.show(); }
+		 * 
+		 * });
+		 */
 
 		// rightColumn.add(tabs.get(0));
 		// resized();
@@ -756,6 +774,23 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			if (_item.getComment() != null && !_item.getComment().equals(""))
 				commentBody.setText(_item.getComment());
 
+			//set biomarkers
+			if (_item.getBiomarkers() != null) {
+
+				if (_item.getBiomarkers().getLabel().equals("unselected")) {
+					descriptsmc.setSelectedIndex(0);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("CYP2C9")) {
+					descriptsmc.setSelectedIndex(1);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("CYP2D6")) {
+					descriptsmc.setSelectedIndex(2);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("CYP1A2")) {
+					descriptsmc.setSelectedIndex(3);
+				}
+			}
+		
 			if (_item.getPKImpact() != null) {
 				if (_item.getPKImpact().getLabel()
 						.equals("Metabolism Decrease"))
@@ -867,7 +902,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 			// statements, values are made up
 			// checkbox
-			
 
 			if (_item.getStatements() != null) {
 				for (MLinkedResource statemt : _item.getStatements()) {
@@ -888,7 +922,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					if (statemt.getLabel().equals("Biomarker")) {
 						descriptsbm.setValue(true);
 					}
-					
+
 					// Listbox medical condition
 					if (statemt.getLabel().equals("condition 0")) {
 						descriptsmc.setSelectedIndex(0);
@@ -967,9 +1001,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					_domeo.getLogger().debug(this,
 							"SPL annotation content validated (edit)");
 
-				
-
 					_item.setComment(commentBody.getText());
+					
+					_item.setBiomarkers(getBioMarkers());
 
 					_item.setPKImpact(getPkImpact());
 					_item.setPdImpact(getPdImpact());
@@ -1056,13 +1090,12 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@Override
 	public void resized() {
 		/*
-		this.setWidth((Window.getClientWidth() - 340) + "px");
-		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
-		for (Widget tab : tabs) {
-			// if(tab instanceof IResizable) ((IResizable)tab).resized();
-			tab.setWidth((Window.getClientWidth() - 615) + "px");
-		}
-		*/
+		 * this.setWidth((Window.getClientWidth() - 340) + "px");
+		 * tabBar.setWidth((Window.getClientWidth() - 615) + "px"); for (Widget
+		 * tab : tabs) { // if(tab instanceof IResizable)
+		 * ((IResizable)tab).resized(); tab.setWidth((Window.getClientWidth() -
+		 * 615) + "px"); }
+		 */
 	}
 
 	@Override
