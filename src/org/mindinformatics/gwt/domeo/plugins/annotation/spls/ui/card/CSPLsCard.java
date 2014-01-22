@@ -16,6 +16,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.Anti
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLPharmgxUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
@@ -62,7 +63,7 @@ public class CSPLsCard extends ACardComponent {
 	// section statements
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
-			test, statement;
+			test, statement, biomarkers;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -170,36 +171,84 @@ public class CSPLsCard extends ACardComponent {
 
 			System.out.println("Images are loaded in UI");
 
-			type.setText("SPLs:");
+			type.setText("SPLs Annotation:");
 
 			text.setText("clinical statements from SPLs");
 
 			/*
 			 * can not skip some labels
 			 */
-			pkimpact.setText(_annotation.getPharmgxUsage().getPkImpact()
-					.getLabel());
-			pdimpact.setText(_annotation.getPharmgxUsage().getPdImpact()
-					.getLabel());
-			recdrug.setText(_annotation.getPharmgxUsage().getDrugRec()
-					.getLabel());
-			recdose.setText(_annotation.getPharmgxUsage().getDoseRec()
-					.getLabel());
-			recmonitoring.setText(_annotation.getPharmgxUsage().getMonitRec()
-					.getLabel());
-			test.setText(_annotation.getPharmgxUsage().getTestRec().getLabel());
 
-			int count = 2;
-			for (MLinkedResource mr : _annotation.getPharmgxUsage()
-					.getStatements()) {
-				statements_str += mr.getLabel().toString() + " ";
-				if (count <= 0)
-					break;
-				count++;
+			System.out.println("step0");
+
+			if (_annotation != null) {
+				MSPLPharmgxUsage dataUsage = _annotation.getPharmgxUsage();
+
+				if (dataUsage.getPkImpact() != null) {
+
+					String pkimpactStr = dataUsage.getPkImpact().getLabel();
+					pkimpact.setText(pkimpactStr);
+				} else {
+					pkimpact.setText("undefined");
+				}
+
+				if (dataUsage.getPdImpact() != null) {
+
+					String pdimpactStr = dataUsage.getPdImpact().getLabel();
+					pdimpact.setText(pdimpactStr);
+				} else {
+					pdimpact.setText("undefined");
+				}
+
+				if (dataUsage.getDrugRec() != null) {
+					String drugRecStr = dataUsage.getDrugRec().getLabel();
+					recdrug.setText(drugRecStr);
+				} else {
+					recdrug.setText("undefined");
+				}
+
+				if (dataUsage.getDoseRec() != null) {
+					String doseRecStr = dataUsage.getDoseRec().getLabel();
+					recdose.setText(doseRecStr);
+				} else {
+					recdose.setText("undefined");
+				}
+
+				if (dataUsage.getMonitRec() != null) {
+					String monRecStr = dataUsage.getMonitRec().getLabel();
+					recmonitoring.setText(monRecStr);
+				} else {
+					recmonitoring.setText("undefined");
+				}
+
+				if (dataUsage.getTestRec() != null) {
+					String testRec = dataUsage.getTestRec().getLabel();
+					test.setText(testRec);
+				} else {
+					test.setText("undefined");
+				}
+
+				if (dataUsage.getStatements() != null) {
+					int count = 2;
+					for (MLinkedResource mr : _annotation.getPharmgxUsage()
+							.getStatements()) {
+						statements_str += mr.getLabel().toString() + " ";
+						if (count <= 0)
+							break;
+						count++;
+					}
+					statement.setText(statements_str);
+				} else {
+					statement.setText("undefined");
+				}
+
+				if (dataUsage.getBiomarkers() != null) {
+					String bioStr = dataUsage.getBiomarkers().getLabel();
+					biomarkers.setText(bioStr);
+				} else {
+					biomarkers.setText("undefined");
+				}
 			}
-
-			statement.setText(statements_str);
-			// .iterator().toString());
 			System.out.println("load values of labels");
 
 			if (SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {

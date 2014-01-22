@@ -15,9 +15,35 @@ public class MPharmgx extends MTrustedResource {
 	// String pkImpact, pdImpact, doseRec, drugRec, monitRec, testRec;
 
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
-			drugRecResource, monitRecResource, testRecResource, comment;
+			drugRecResource, monitRecResource, testRecResource, comment,Alleles,
+			biomarkers, prevalence;
+
+	public void setAlleles(MLinkedResource alleles) {
+		Alleles = alleles;
+	}
+
+	public void setBiomarkers(MLinkedResource biomarkers) {
+		this.biomarkers = biomarkers;
+	}
+
+	public void setPrevalence(MLinkedResource prevalence) {
+		this.prevalence = prevalence;
+	}
+
 	public MLinkedResource getComment() {
 		return comment;
+	}
+
+	public MLinkedResource getAlleles() {
+		return Alleles;
+	}
+
+	public MLinkedResource getBiomarkers() {
+		return biomarkers;
+	}
+
+	public MLinkedResource getPrevalence() {
+		return prevalence;
 	}
 
 	public void setComment(MLinkedResource comment) {

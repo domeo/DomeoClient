@@ -75,7 +75,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 	public void refresh() {
 		try {
 			createProvenanceBar(SPLsPlugin.getInstance().getPluginName(),
-					provenance, "SPLs", _annotation);
+					provenance, "SPLs Annotation", _annotation);
 
 			StringBuffer sb2 = new StringBuffer();
 
@@ -93,24 +93,67 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String labels = "<tr bgcolor='#EEE'><td>PK Impact</td><td>PD Impact</td><td>Drug Rec</td>"
 					+ "<td>Dose Rec</td><td>Monitoring Rec</td><td>Test</td><td>Statement</td></tr>";
 
-			String statements_str = "";
-			int count = 2;
-			for (MLinkedResource mr : _annotation.getPharmgxUsage()
-					.getStatements()) {
-				statements_str += mr.getLabel().toString() + " ";
-				if (count <= 0)
-					break;
-				count++;
+			String statementsStr = "";
+			if (_annotation.getPharmgxUsage().getStatements() != null) {
+				int count = 2;
+				for (MLinkedResource mr : _annotation.getPharmgxUsage()
+						.getStatements()) {
+					statementsStr += mr.getLabel().toString() + " ";
+					if (count <= 0)
+						break;
+					count++;
+				}
+			} else {
+				statementsStr = "undefined";
 			}
 
-			String values = "<tr bgcolor='#F0F8FF'><td>"
-					+ pharmgx.getPkImpactResource().getLabel() + "</td>"
-					+ "<td>" + pharmgx.getPdImpactResource().getLabel()
-					+ "</td><td>" + pharmgx.getDrugRecResource().getLabel()
-					+ "</td><td>" + pharmgx.getDoseRecResource().getLabel()
-					+ "</td><td>" + pharmgx.getMonitRecResource().getLabel()
-					+ "</td><td>" + pharmgx.getTestRecResource().getLabel()
-					+ "</td><td>" + statements_str + "</td></tr>";
+			String pkimpactStr;
+			if (pharmgx.getPkImpactResource() != null) {
+				pkimpactStr = pharmgx.getPkImpactResource().getLabel();
+			} else {
+				pkimpactStr = "undefined";
+			}
+
+			String pdimpackStr;
+			if (pharmgx.getPdImpactResource() != null) {
+				pdimpackStr = pharmgx.getPdImpactResource().getLabel();
+			} else {
+				pdimpackStr = "undefined";
+			}
+
+			String drugRecStr;
+			if (pharmgx.getDrugRecResource() != null) {
+				drugRecStr = pharmgx.getDrugRecResource().getLabel();
+			} else {
+				drugRecStr = "undefined";
+			}
+
+			String doseRecStr;
+			if (pharmgx.getDoseRecResource() != null) {
+				doseRecStr = pharmgx.getDoseRecResource().getLabel();
+			} else {
+				doseRecStr = "undefined";
+			}
+
+			String monRecStr;
+			if (pharmgx.getMonitRecResource() != null) {
+				monRecStr = pharmgx.getMonitRecResource().getLabel();
+			} else {
+				monRecStr = "undefined";
+			}
+
+			String testRecStr;
+			if (pharmgx.getTestRecResource() != null) {
+				testRecStr = pharmgx.getTestRecResource().getLabel();
+			} else {
+				testRecStr = "undefined";
+			}
+
+			String values = "<tr bgcolor='#F0F8FF'><td>" + pkimpactStr
+					+ "</td>" + "<td>" + pdimpackStr + "</td><td>" + drugRecStr
+					+ "</td><td>" + doseRecStr + "</td><td>" + monRecStr
+					+ "</td><td>" + testRecStr + "</td><td>" + statementsStr
+					+ "</td></tr>";
 
 			sb2.append(html1);
 

@@ -1,340 +1,423 @@
-<ui:UiBinder
-    xmlns:ui='urn:ui:com.google.gwt.uibinder'
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
-  <ui:style>
-    .outer {
-    height: 30px;
-    padding-left: 0px;
-    padding-top: 0px;
-    width: 100%;
-    }
-    
-    .buttonsPanel {
-    position: absolute;
-    right: 20px;
-    float:right;
-    padding-top:4px;
-    padding-right: 0px;
-    padding-left: 2px;
-    height: 0px;
-    max-height: 20px;
-    display: block;
-    }
-    
-    .setPanel {
-    padding-left: 5px;	
-    }
-    
-    .rightColumn {
-    padding-left:0px;
-    /*padding-top: 24px;*/
-    width: 100%;
-    min-width: 400px;	
-    height: 300px;
-    }
-    
-    .leftColumn {
-    width: 380px;	
-    vertical-align: top;
-    }
-    
-    .panel {
-    width: 100%;
-    vertical-align: top;
-    padding-top: 8px;
-    }
-    
-    .provenance {
-    backgorund-color: gray;
-    padding-top: 3px;
-    padding-left: 10px;
-    cursor: pointer;
-    cursor: hand;
-    }
-    
-    .subTitle {
-    /*width: 99%;*/
-    background-color: #eee;
-    padding-left: 4px;
-    padding-right: 14px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    font-weight: bold;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px; 	 		
-    }
-    
-    .subPanel {
-    min-height: 40px;	
-    }
-    
-    .newQualifierPanel {
-    min-height: 26px;	
-    display: inline;
-    }
-    
-    .inner {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    cursor: pointer;
-    cursor: hand;
-    }
-    
-    .inner2 {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 3px;
-    }
-    
-    .listbox {
-	vertical-align: top;
-	padding-left: 1px;
-	padding-right: 12px;
+	<ui:style>
+	.outer {
+		height: 30px;
+		padding-left: 0px;
+		padding-top: 0px;
+		width: 100%;
 	}
-    
-    .qualifiersLabel {
-    font-weight: bold;
-    padding-right:3px;
-    }
-    
-    .titlebar {
-    width: 365px;	
-    background-color:#DDDDDD;
-    border-top:3px solid white;
-    }
-    
-    .titlebarright {
-    width: 460px;	
-    background-color:#DDDDDD;
-    border-top:3px solid white;
-    }
-    
-    .commentBody {
-    padding-top: 3px;
-    padding-left: 3px;
-    color: #333;
-    font-style: normal;
-    width: 360px;
-    height: 100px;
-    font-size: 12px;
-    }
-    
-    .elementType {
-    padding-right: 2px;
-    display: inline;
-    white-space: nowrap;
-    }
-    
-    z.titleLeft {
-    padding-left:4px;
-    }	  	
-  </ui:style>
-  
-  <!--  
-       <ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' /> 
-  -->
-
-  <g:VerticalPanel ui:field='container' styleName='{style.outer}'>
-    <g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
-      <g:SimplePanel styleName='{style.setPanel}'>
-	<g:ListBox ui:field='annotationSet'></g:ListBox>
-      </g:SimplePanel>
-    </g:HorizontalPanel>
-    <g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
-      <g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>Pharmgx Annotation:</g:Label>
-      <g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
-    </g:HorizontalPanel>
-
-    
-    <g:HorizontalPanel styleName='{style.panel}'>
-      <g:cell width="400px">
-      
-	<g:VerticalPanel styleName='{style.leftColumn}'>
 	
-	<!-- PK Impact -->
+	.buttonsPanel {
+		position: absolute;
+		right: 20px;
+		float: right;
+		padding-top: 4px;
+		padding-right: 0px;
+		padding-left: 2px;
+		height: 0px;
+		max-height: 20px;
+		display: block;
+	}
 	
-	  <g:HorizontalPanel styleName='{style.titlebar}'>
-	    <g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>PK Impact:</g:Label>
-	    <g:Hyperlink ui:field="pklink" >description</g:Hyperlink>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkia" name="descriptpk" checked="false">Increased absorption</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkda" name="descriptpk" checked="false">Decreased absorption</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkid" name="descriptpk" checked="false">Increased distribution</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkdd" name="descriptpk" checked="false">Decreased distribution</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkim" name="descriptpk" checked="false">Increased metabolism</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkdm" name="descriptpk" checked="false">Decreased metabolism</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkie" name="descriptpk" checked="false">Increased excretion</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpkde" name="descriptpk" checked="false">Decreased excretion</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpkni" name="descriptpk" checked="false">Not important</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	  <!-- PD Impact -->
-	  
-	  <g:HorizontalPanel styleName='{style.titlebar}'>
-	    <g:Label ui:field="pdLabel" styleName='{style.titleLeft}'>PD Impact:</g:Label>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpdit" name="descriptpd" checked="false">Increased risk of toxicity</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpddt" name="descriptpd" checked="false">Reduced risk of toxicity</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpdir" name="descriptpd" checked="false">Influence response</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpdni" name="descriptpd" checked="false">Not important</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  <g:RadioButton ui:field="descriptpdie" name="descriptpd" checked="false">Increased Efficacy</g:RadioButton>
-	  <g:RadioButton ui:field="descriptpdde" name="descriptpd" checked="false">Decreased Efficacy</g:RadioButton>
-	  </g:HorizontalPanel>
-	  
-	 
-	  <g:VerticalPanel styleName='{style.panel}'>
-	    <g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Note:</g:Label>
-	    <g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
-	  </g:VerticalPanel>
-	  
-	  
+	.setPanel {
+		padding-left: 5px;
+	}
+	
+	.rightColumn {
+		padding-left: 0px;
+		/*padding-top: 24px;*/
+		width: 100%;
+		min-width: 400px;
+		height: 300px;
+	}
+	
+	.leftColumn {
+		width: 380px;
+		vertical-align: top;
+	}
+	
+	.panel {
+		width: 100%;
+		vertical-align: top;
+		padding-top: 8px;
+	}
+	
+	.provenance {
+		backgorund-color: gray;
+		padding-top: 3px;
+		padding-left: 10px;
+		cursor: pointer;
+		cursor: hand;
+	}
+	
+	.subTitle {
+		/*width: 99%;*/
+		background-color: #eee;
+		padding-left: 4px;
+		padding-right: 14px;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		font-weight: bold;
+		border-bottom-right-radius: 10px;
+		border-top-right-radius: 10px;
+	}
+	
+	.subPanel {
+		min-height: 40px;
+	}
+	
+	.newQualifierPanel {
+		min-height: 26px;
+		display: inline;
+	}
+	
+	.inner {
+		padding-top: 3px;
+		padding-bottom: 3px;
+		cursor: pointer;
+		cursor: hand;
+	}
+	
+	.inner2 {
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-left: 3px;
+	}
+	
+	.listbox {
+		vertical-align: top;
+		padding-left: 1px;
+		padding-right: 12px;
+	}
+	
+	.qualifiersLabel {
+		font-weight: bold;
+		padding-right: 3px;
+	}
+	
+	.titlebar {
+		width: 365px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
+	}
+	
+	.titlebarright {
+		width: 480px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
+	}
+	
+	.commentBody {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 360px;
+		height: 100px;
+		font-size: 12px;
+	}
+	
+	.alleles {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 100px;
+		height: 13px;
+		font-size: 12px;
+	}
+	
+	.elementType {
+		padding-right: 2px;
+		display: inline;
+		white-space: nowrap;
+	}
+	
+	z.titleLeft {
+		padding-left: 4px;
+	}
+	</ui:style>
+
+	<!-- <ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' 
+		/> -->
+
+	<g:VerticalPanel ui:field='container' styleName='{style.outer}'>
+		<g:HorizontalPanel ui:field='buttonsPanel'
+			styleName='{style.buttonsPanel}'>
+			<g:SimplePanel styleName='{style.setPanel}'>
+				<g:ListBox ui:field='annotationSet'></g:ListBox>
+			</g:SimplePanel>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
+			<g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>Pharmgx
+				Annotation:</g:Label>
+			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
+		</g:HorizontalPanel>
+
+
+		<g:HorizontalPanel styleName='{style.panel}'>
+			<g:cell width="400px">
+
+				<g:VerticalPanel styleName='{style.leftColumn}'>
+
+					<!-- BioMarkers -->
+					<g:HorizontalPanel>
+						<g:Label>Biomarkers: </g:Label>
+
+						<g:ListBox ui:field="descriptbm" name="descriptbm"
+							visibleItemCount='1'>
+							<g:item value="0">unselected</g:item>
+							<g:item value="1">CYP2C9</g:item>
+							<g:item value="2">CYP2D6</g:item>
+							<g:item value="3">CYP1A2</g:item>
+						</g:ListBox>
+					</g:HorizontalPanel>
+
+
+					<!-- PK Impact -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>PK Impact:</g:Label>
+						<g:Hyperlink ui:field="pklink">description
+						</g:Hyperlink>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpkia" name="descriptpk"
+							checked="false">Increased absorption</g:RadioButton>
+						<g:RadioButton ui:field="descriptpkda" name="descriptpk"
+							checked="false">Decreased absorption</g:RadioButton>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpkid" name="descriptpk"
+							checked="false">Increased distribution</g:RadioButton>
+						<g:RadioButton ui:field="descriptpkdd" name="descriptpk"
+							checked="false">Decreased distribution</g:RadioButton>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpkim" name="descriptpk"
+							checked="false">Increased metabolism</g:RadioButton>
+						<g:RadioButton ui:field="descriptpkdm" name="descriptpk"
+							checked="false">Decreased metabolism</g:RadioButton>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpkie" name="descriptpk"
+							checked="false">Increased excretion</g:RadioButton>
+						<g:RadioButton ui:field="descriptpkde" name="descriptpk"
+							checked="false">Decreased excretion</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpkni" name="descriptpk"
+							checked="false">Not important</g:RadioButton>
+					</g:HorizontalPanel>
+
+					<!-- PD Impact -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="pdLabel" styleName='{style.titleLeft}'>PD Impact:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpdit" name="descriptpd"
+							checked="false">Increased risk of toxicity</g:RadioButton>
+						<g:RadioButton ui:field="descriptpddt" name="descriptpd"
+							checked="false">Reduced risk of toxicity</g:RadioButton>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpdir" name="descriptpd"
+							checked="false">Influence response</g:RadioButton>
+						<g:RadioButton ui:field="descriptpdni" name="descriptpd"
+							checked="false">Not important</g:RadioButton>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpdie" name="descriptpd"
+							checked="false">Increased Efficacy</g:RadioButton>
+						<g:RadioButton ui:field="descriptpdde" name="descriptpd"
+							checked="false">Decreased Efficacy</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+					<g:VerticalPanel styleName='{style.panel}'>
+						<g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Note:</g:Label>
+						<g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
+					</g:VerticalPanel>
+
+
+				</g:VerticalPanel>
+			</g:cell>
+
+
+			<g:cell>
+				<g:VerticalPanel>
+					<!-- <g:cell height="0px"> <g:TabBar ui:field="tabBar" height="0px"/> 
+						</g:cell> -->
+
+					<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+
+						<!--Statement refers to any of the following concepts: -->
+
+						<g:HorizontalPanel styleName='{style.titlebarright}'>
+							<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement refers
+								to any of the following concepts:</g:Label>
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
+							<g:CheckBox ui:field="descriptsai" name="descript"
+								styleName='{style.elementType}' text="Active ingredient" />
+							<g:CheckBox ui:field="descriptsmcc" name="descript"
+								styleName='{style.elementType}' text="Concomitant medication concern" />
+							<g:CheckBox ui:field="descriptsvt" name="descript"
+								styleName='{style.elementType}' text="Variant" />
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel ui:field='header9' styleName='{style.panel}'>
+
+							<g:VerticalPanel>
+								<g:ListBox ui:field="descriptsmc" name="descript"
+									visibleItemCount='1'>
+									<g:item value="0">condition 0</g:item>
+									<g:item value="1">condition 1</g:item>
+									<g:item value="2">condition 2</g:item>
+								</g:ListBox>
+							</g:VerticalPanel>
+
+							<g:VerticalPanel styleName='{style.listbox}'>
+								<g:Label>Medical condition </g:Label>
+							</g:VerticalPanel>
+
+							<g:VerticalPanel>
+								<g:CheckBox ui:field="descriptsts" name="descript"
+									styleName='{style.elementType}' text="Test" />
+							</g:VerticalPanel>
+
+							<g:VerticalPanel>
+								<g:CheckBox ui:field="descriptsbm" name="descript"
+									styleName='{style.elementType}' text="Biomarker" />
+							</g:VerticalPanel>
+
+
+						</g:HorizontalPanel>
+
+						<!-- drug selection -->
+
+						<g:HorizontalPanel styleName='{style.titlebarright}'>
+							<g:Label ui:field="selection" styleName='{style.titleLeft}'>Drug selection:</g:Label>
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
+							<g:RadioButton ui:field="descriptdsal" name="descriptds"
+								checked="false" text="Alternative" />
+							<g:RadioButton ui:field="descriptdsca" name="descriptds"
+								checked="false" text="Change Administration" />
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<g:RadioButton ui:field="descriptdsam" name="descriptds"
+								checked="false" text="Add medication" />
+							<g:RadioButton ui:field="descriptdsnr" name="descriptds"
+								checked="false" text="Not restart" />
+							<g:RadioButton ui:field="descriptdsnc" name="descriptds"
+								checked="false" text="Not change" />
+
+						</g:HorizontalPanel>
+
+
+						<!-- dose -->
+
+						<g:HorizontalPanel styleName='{style.titlebarright}'>
+							<g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose
+								Recommendation:</g:Label>
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel ui:field='header5' styleName='{style.panel}'>
+							<g:RadioButton ui:field="descriptdrdfb" name="descriptdr"
+								checked="false" text="Decrease from baseline" />
+							<g:RadioButton ui:field="descriptdrifb" name="descriptdr"
+								checked="false" text="Increase from baseline" />
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel ui:field='header6' styleName='{style.panel}'>
+							<g:RadioButton ui:field="descriptdrnc" name="descriptdr"
+								checked="false" text="Not change" />
+							<g:RadioButton ui:field="descriptdrus" name="descriptdr"
+								checked="false" text="Use specific" />
+							<g:RadioButton ui:field="descriptdrcs" name="descriptdr"
+								checked="false" text="Change schedule" />
+
+						</g:HorizontalPanel>
+						<!-- monitoring -->
+
+
+						<g:HorizontalPanel styleName='{style.titlebarright}'>
+							<g:Label ui:field="monitLabel" styleName='{style.titleLeft}'>Monitoring
+								Recommendation:</g:Label>
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<g:RadioButton ui:field="descriptmreq" name="descriptmr"
+								checked="false" text="Required" />
+							<g:RadioButton ui:field="descriptmrec" name="descriptmr"
+								checked="false" text="Recommended" />
+							<g:RadioButton ui:field="descriptmnc" name="descriptmr"
+								checked="false" text="Not necessary" />
+							<g:RadioButton ui:field="descriptmcms" name="descriptmr"
+								checked="false" text="Change monitoring strategy" />
+
+						</g:HorizontalPanel>
+
+						<!-- test -->
+
+						<g:HorizontalPanel styleName='{style.titlebarright}'>
+							<g:Label ui:field="TestLabel" styleName='{style.titleLeft}'>Test:</g:Label>
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<g:RadioButton ui:field="descripttreq" name="descripttst"
+								checked="false">Required</g:RadioButton>
+							<g:RadioButton ui:field="descripttrec" name="descripttst"
+								checked="false">Recommended</g:RadioButton>
+							<g:RadioButton ui:field="descriptttna" name="descripttst"
+								checked="false">Take note that avaliable</g:RadioButton>
+							<g:RadioButton ui:field="descripttnn" name="descripttst"
+								checked="false">Not necessary</g:RadioButton>
+
+						</g:HorizontalPanel>
+
+						<!-- population prevalence -->
+
+						<g:HorizontalPanel styleName='{style.titlebarright}'>
+							<g:Label ui:field="prevalence" styleName='{style.titleLeft}'>Population
+								Prevalence:</g:Label>
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<g:CheckBox ui:field="descriptpp" name="descriptpp"
+								styleName='{style.elementType}' text="mentioned" />
+						</g:HorizontalPanel>
+
+						<!-- Alleles textarea -->
+						<g:HorizontalPanel>
+							<g:Label ui:field="alleles" styleName='{style.qualifiersLabel}'>Alleles:</g:Label>
+						</g:HorizontalPanel>
+						
+						<g:HorizontalPanel>
+							<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
+						</g:HorizontalPanel>
+					</g:VerticalPanel>
+				</g:VerticalPanel>
+			</g:cell>
+
+
+
+		</g:HorizontalPanel>
 	</g:VerticalPanel>
-      </g:cell>
-      
-      
-      <g:cell>
-	<g:VerticalPanel>
-	<!--  
-	  <g:cell height="0px">
-	    <g:TabBar ui:field="tabBar" height="0px"/>
-	  </g:cell>
-	-->
-	
-	  <g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
-	  
-	  <!--Statement refers to any of the following concepts: -->
-	  
-	  <g:HorizontalPanel styleName='{style.titlebarright}'>
-	    <g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement refers to any of the following concepts:</g:Label>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
-	    <g:CheckBox ui:field="descriptsai" name="descript" styleName='{style.elementType}' text="Active ingredient" />
-	    <g:CheckBox ui:field="descriptsmcc" name="descript" styleName='{style.elementType}' text="Concomitant medication concern" />
-	    <g:CheckBox ui:field="descriptsvt" name="descript" styleName='{style.elementType}' text="Variant" />
-	    </g:HorizontalPanel>
-	    
-	  <g:HorizontalPanel ui:field='header9' styleName='{style.panel}'>
-	  
-	  <g:VerticalPanel>
-	    <g:ListBox ui:field="descriptsmc" name = "descript"  visibleItemCount='1' >
-	    <g:item value="0">condition 0</g:item>
-	    <g:item value="1">condition 1</g:item>
-	    <g:item value="2">condition 2</g:item>
-	    </g:ListBox>
-	    </g:VerticalPanel>
-	    
-	    <g:VerticalPanel styleName='{style.listbox}'>
-	   <g:Label>Medical condition </g:Label>
-	    </g:VerticalPanel>
-	    
-	    <g:VerticalPanel>
-	    <g:CheckBox ui:field="descriptsts" name="descript" styleName='{style.elementType}' text="Test" />
-	    </g:VerticalPanel>
-	    
-	    <g:VerticalPanel>
-	    <g:CheckBox ui:field="descriptsbm" name="descript" styleName='{style.elementType}' text="Biomarker" />
-	    </g:VerticalPanel>
-
-	  
-	  </g:HorizontalPanel>
-	    
-	  <!-- drug selection -->
-	  
-	  <g:HorizontalPanel styleName='{style.titlebarright}'>
-	    <g:Label ui:field="selection" styleName='{style.titleLeft}'>Drug selection:</g:Label>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
-	    <g:RadioButton ui:field="descriptdsal" name="descriptds" checked="false" text="Alternative" />
-	    <g:RadioButton ui:field="descriptdsca" name="descriptds" checked="false" text="Change Administration" />
-	    </g:HorizontalPanel>
-	    
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	    <g:RadioButton ui:field="descriptdsam" name="descriptds" checked="false" text="Add medication" />
-	    <g:RadioButton ui:field="descriptdsnr" name="descriptds" checked="false" text="Not restart" />
-	    <g:RadioButton ui:field="descriptdsnc" name="descriptds" checked="false" text="Not change" />
-	    
-	  </g:HorizontalPanel>
-	  
-	  
-	  <!-- dose -->
-	  
-	     <g:HorizontalPanel styleName='{style.titlebarright}'>
-	    <g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose Recommendation:</g:Label>
-	  </g:HorizontalPanel>	
-	  
-	  <g:HorizontalPanel ui:field='header5' styleName='{style.panel}'>
-	    <g:RadioButton ui:field="descriptdrdfb" name="descriptdr" checked="false" text="Decrease from baseline" />
-	    <g:RadioButton ui:field="descriptdrifb" name="descriptdr" checked="false" text="Increase from baseline" />
-	  </g:HorizontalPanel>  
-	  
-	   <g:HorizontalPanel ui:field='header6' styleName='{style.panel}'>
-	    <g:RadioButton ui:field="descriptdrnc" name="descriptdr" checked="false" text="Not change" />
-	    <g:RadioButton ui:field="descriptdrus" name="descriptdr" checked="false" text="Use specific" />
-	    <g:RadioButton ui:field="descriptdrcs" name="descriptdr" checked="false" text="Change schedule" />
-	    
-	     </g:HorizontalPanel>
-	  <!-- monitoring -->  
-	    
-	 
-	  <g:HorizontalPanel styleName='{style.titlebarright}'>
-	    <g:Label ui:field="monitLabel" styleName='{style.titleLeft}'>Monitoring Recommendation:</g:Label>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	    <g:RadioButton ui:field="descriptmreq" name="descriptmr" checked="false" text="Required" />
-	    <g:RadioButton ui:field="descriptmrec" name="descriptmr" checked="false" text="Recommended" />
-	    <g:RadioButton ui:field="descriptmnc" name="descriptmr" checked="false" text="Not necessary" />
-	    <g:RadioButton ui:field="descriptmcms" name="descriptmr" checked="false" text="Change monitoring strategy" />
-	    
-	  </g:HorizontalPanel>
-	    
-	    <!-- test -->
-	    
-	  <g:HorizontalPanel styleName='{style.titlebarright}'>
-	    <g:Label ui:field="TestLabel" styleName='{style.titleLeft}'>Test:</g:Label>
-	  </g:HorizontalPanel>
-	  
-	  <g:HorizontalPanel styleName='{style.panel}'>
-	  	  <g:RadioButton ui:field="descripttreq" name="descripttst" checked="false">Required</g:RadioButton>
-	  	  <g:RadioButton ui:field="descripttrec" name="descripttst" checked="false">Recommended</g:RadioButton>
-	  	  <g:RadioButton ui:field="descriptttna" name="descripttst" checked="false">Take note that avaliable</g:RadioButton>
-	  	  <g:RadioButton ui:field="descripttnn" name="descripttst" checked="false">Not necessary</g:RadioButton>
-	    
-	  </g:HorizontalPanel>
-	    
-	    
-	  </g:VerticalPanel>
-	</g:VerticalPanel>
-      </g:cell>
-    
-    
-    
-    </g:HorizontalPanel>
-  </g:VerticalPanel>
 </ui:UiBinder>
