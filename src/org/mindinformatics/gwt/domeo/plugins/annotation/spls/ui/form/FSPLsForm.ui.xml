@@ -164,14 +164,41 @@
 
 					<!-- BioMarkers -->
 					<g:HorizontalPanel>
-						<g:Label>Biomarkers: </g:Label>
+						<g:Label>Biomarker: </g:Label>
 
 						<g:ListBox ui:field="descriptbm" name="descriptbm"
 							visibleItemCount='1'>
 							<g:item value="0">unselected</g:item>
-							<g:item value="1">CYP2C9</g:item>
-							<g:item value="2">CYP2D6</g:item>
-							<g:item value="3">CYP1A2</g:item>
+							<g:item value="1">ApoE2</g:item>
+							<g:item value="2">BRAF</g:item>
+							<g:item value="3">C-Kit</g:item>
+							<g:item value="4">CCR5</g:item>
+							<g:item value="5">CD20_antigen</g:item>
+							<g:item value="6">CD25</g:item>
+							<g:item value="7">CD30</g:item>
+							<g:item value="8">CYP1A2</g:item>
+							<g:item value="9">CYP2C19</g:item>
+							<g:item value="10">CYP2C9</g:item>
+							<g:item value="11">CYP2D6</g:item>
+							<g:item value="12">DPD</g:item>
+							<g:item value="13">EGFR</g:item>
+							<g:item value="14">ER and PgR_receptor</g:item>
+							<g:item value="15">ER_receptor</g:item>
+							<g:item value="16">FIP1L1-PDGFRα</g:item>
+							<g:item value="17">G6PD</g:item>
+							<g:item value="18">HLA-B*1502</g:item>
+							<g:item value="19">HLA-B*5701</g:item>
+							<g:item value="20">Her2/neu</g:item>
+							<g:item value="21">IL28B</g:item>
+							<g:item value="22">KRAS</g:item>
+							<g:item value="23">LDL_Receptor</g:item>
+							<g:item value="24">NAT1;_NAT2</g:item>
+							<g:item value="25">PDGFR</g:item>
+							<g:item value="26">PML/RARα</g:item>
+							<g:item value="27">Rh_genotype</g:item>
+							<g:item value="28">TPMT</g:item>
+							<g:item value="29">UGT1A1</g:item>
+							<g:item value="39">VKORC1</g:item>
 						</g:ListBox>
 					</g:HorizontalPanel>
 
