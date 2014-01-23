@@ -317,10 +317,6 @@
 								</g:ListBox>
 							</g:VerticalPanel>
 
-							<g:VerticalPanel styleName='{style.listbox}'>
-								<g:Label>Medical condition </g:Label>
-							</g:VerticalPanel>
-
 							<g:VerticalPanel>
 								<g:CheckBox ui:field="descriptsts" name="descript"
 									styleName='{style.elementType}' text="Test" />
@@ -330,7 +326,6 @@
 								<g:CheckBox ui:field="descriptsbm" name="descript"
 									styleName='{style.elementType}' text="Biomarker" />
 							</g:VerticalPanel>
-
 
 						</g:HorizontalPanel>
 
@@ -435,9 +430,17 @@
 						<g:HorizontalPanel>
 							<g:Label ui:field="alleles" styleName='{style.qualifiersLabel}'>Alleles:</g:Label>
 						</g:HorizontalPanel>
-						
 						<g:HorizontalPanel>
 							<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
+						</g:HorizontalPanel>
+																								
+						<!-- Medcondit textarea -->
+						<g:HorizontalPanel>
+							<g:Label ui:field="medcondit" styleName='{style.qualifiersLabel}'>Medical Conditions:</g:Label>
+						</g:HorizontalPanel>
+						<g:HorizontalPanel>
+<!-- 						TODO: fix style reference -->
+							<g:TextArea ui:field='medconditbody' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 					</g:VerticalPanel>
 				</g:VerticalPanel>
