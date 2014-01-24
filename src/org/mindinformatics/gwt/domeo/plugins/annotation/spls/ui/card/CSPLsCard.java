@@ -63,7 +63,7 @@ public class CSPLsCard extends ACardComponent {
 	// section statements
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
-			test, statement, biomarkers, prevalence, allelesbody;
+			test, statement, biomarkers, prevalence, allelesbody, medconditbody;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -266,6 +266,13 @@ public class CSPLsCard extends ACardComponent {
 					allelesbody.setText(allelesStr);
 				} else {
 					allelesbody.setText("undefined");
+				}
+				
+				if (dataUsage.getMedconditbody() != null) {
+					String medconditStr = dataUsage.getMedconditbody();
+					medconditbody.setText(medconditStr);
+				} else {
+					medconditbody.setText("undefined");
 				}
 			}
 			

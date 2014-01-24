@@ -12,9 +12,18 @@ public class MSPLPharmgxUsage {
 	private Long localId; // sent to the server for matching saved items
 	private String individualUri; // Individual Uniform Resource Identifier
 	private String allelesbody;
+	private String medconditbody;
 	
 	public Long getLocalId() {
 		return localId;
+	}
+
+	public String getMedconditbody() {
+		return medconditbody;
+	}
+
+	public void setMedconditbody(String medconditbody) {
+		this.medconditbody = medconditbody;
 	}
 
 	public void setLocalId(Long localId) {

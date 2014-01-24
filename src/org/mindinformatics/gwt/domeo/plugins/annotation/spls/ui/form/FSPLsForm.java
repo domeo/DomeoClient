@@ -107,6 +107,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	RadioButton descriptpkde;
 	@UiField
 	RadioButton descriptpkni;
+	@UiField
+	RadioButton descriptpknone;
 
 	// PD Impact
 
@@ -174,8 +176,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	CheckBox descriptsmcc;
 	@UiField
 	CheckBox descriptsvt;
-	@UiField
-	ListBox descriptsmc;
+	/*
+	 * @UiField ListBox descriptsmc;
+	 */
 	@UiField
 	CheckBox descriptsts;
 	@UiField
@@ -186,14 +189,14 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	@UiField
 	TextArea commentBody;
-	
-	//population provalence
+
+	// population provalence
 	@UiField
 	CheckBox descriptppm;
-	
-	//alleles
+
+	// alleles
 	@UiField
-	TextArea allelesbody;
+	TextArea allelesbody, medconditbody;
 
 	// Paolo this is taking care of the 'PK impact' for 'apply'
 	// I Normally create a method for each group
@@ -287,7 +290,14 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is not associated any clinically relevant pharmacokinetic with respect to the drug.",
 							SPL_POC_PREFIX + "PharmacokineticImpact",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+
+		} else if (descriptpknone.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "none", "None", "none", SPL_POC_PREFIX
+					+ "PharmacokineticImpact", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
 		}
+
 		return null;
 	}
 
@@ -558,15 +568,15 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		}
 
 		// medical condition ListBox
-		int indexmc = descriptsmc.getSelectedIndex();
-
-		statements.add(ResourcesFactory.createTrustedTypedResource(
-				SPL_POC_PREFIX + "medical-condition",
-				descriptsmc.getItemText(indexmc),
-				"it is should be references to medical condition.",
-				SPL_POC_PREFIX + "Statements", SPL_POC_PREFIX,
-				"U of Pitt SPL Pharmgx Annotation"));
-
+		/*
+		 * int indexmc = descriptsmc.getSelectedIndex();
+		 * 
+		 * statements.add(ResourcesFactory.createTrustedTypedResource(
+		 * SPL_POC_PREFIX + "medical-condition",
+		 * descriptsmc.getItemText(indexmc),
+		 * "it is should be references to medical condition.", SPL_POC_PREFIX +
+		 * "Statements", SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+		 */
 		if (descriptsts.getValue()) {
 			statements.add(ResourcesFactory.createTrustedTypedResource(
 					SPL_POC_PREFIX + "test", "Test",
@@ -582,23 +592,22 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		}
 		return statements;
 	}
-	
-	//population prevalence
+
+	// population prevalence
 	public Set<MLinkedResource> getPrevalence() {
 		Set<MLinkedResource> prevalence = new HashSet<MLinkedResource>();
+
+		System.out.println("***getPrevalence():" + descriptppm.getValue());
 		if (descriptppm.getValue()) {
+
 			prevalence.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "", "Mentioned",
-					"mentioned", SPL_POC_PREFIX + "Population Prevalence",
-					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+					SPL_POC_PREFIX + "", "Mentioned", "mentioned",
+					SPL_POC_PREFIX + "Population Prevalence", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation"));
 		}
 		return prevalence;
 	}
-	
-	//alleles body
-	
-	
-	
+
 	// NEW annotation
 	@SuppressWarnings("deprecation")
 	public FSPLsForm(IDomeo domeo, final AFormsManager manager) {
@@ -687,6 +696,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							pharmgxUsage.setPrevalence(getPrevalence());
 							_domeo.getLogger().debug(this, "SPL annotation 10");
 							pharmgxUsage.setAllelesbody(allelesbody.getText());
+							_domeo.getLogger().debug(this, "SPL annotation 11");
+							pharmgxUsage.setMedconditbody(medconditbody
+									.getText());
 
 							annotation.setPharmgxUsage(pharmgxUsage);
 
@@ -795,23 +807,84 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			if (_item.getComment() != null && !_item.getComment().equals(""))
 				commentBody.setText(_item.getComment());
 
-			//set biomarkers
+			// set biomarkers
 			if (_item.getBiomarkers() != null) {
 
 				if (_item.getBiomarkers().getLabel().equals("unselected")) {
 					descriptbm.setSelectedIndex(0);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("CYP2C9")) {
+				} else if (_item.getBiomarkers().getLabel().equals("ApoE2")) {
 					descriptbm.setSelectedIndex(1);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("CYP2D6")) {
+				} else if (_item.getBiomarkers().getLabel().equals("BRAF")) {
 					descriptbm.setSelectedIndex(2);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("CYP1A2")) {
+				} else if (_item.getBiomarkers().getLabel().equals("C-Kit")) {
 					descriptbm.setSelectedIndex(3);
+				} else if (_item.getBiomarkers().getLabel().equals("CCR5")) {
+					descriptbm.setSelectedIndex(4);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("CD20_antigen")) {
+					descriptbm.setSelectedIndex(5);
+				} else if (_item.getBiomarkers().getLabel().equals("CD25")) {
+					descriptbm.setSelectedIndex(6);
+				} else if (_item.getBiomarkers().getLabel().equals("CD30")) {
+					descriptbm.setSelectedIndex(7);
+				} else if (_item.getBiomarkers().getLabel().equals("CYP1A2")) {
+					descriptbm.setSelectedIndex(8);
+				} else if (_item.getBiomarkers().getLabel().equals("CYP2C19")) {
+					descriptbm.setSelectedIndex(9);
+				} else if (_item.getBiomarkers().getLabel().equals("CYP2C9")) {
+					descriptbm.setSelectedIndex(10);
+				} else if (_item.getBiomarkers().getLabel().equals("CYP2D6")) {
+					descriptbm.setSelectedIndex(11);
+				} else if (_item.getBiomarkers().getLabel().equals("DPD")) {
+					descriptbm.setSelectedIndex(12);
+				} else if (_item.getBiomarkers().getLabel().equals("EGFR")) {
+					descriptbm.setSelectedIndex(13);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("ER and PgR_receptor")) {
+					descriptbm.setSelectedIndex(14);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("ER_receptor")) {
+					descriptbm.setSelectedIndex(15);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("FIP1L1-PDGFRα")) {
+					descriptbm.setSelectedIndex(16);
+				} else if (_item.getBiomarkers().getLabel().equals("G6PD")) {
+					descriptbm.setSelectedIndex(17);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("HLA-B*1502")) {
+					descriptbm.setSelectedIndex(18);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("HLA-B*5701")) {
+					descriptbm.setSelectedIndex(19);
+				} else if (_item.getBiomarkers().getLabel().equals("Her2/neu")) {
+					descriptbm.setSelectedIndex(20);
+				} else if (_item.getBiomarkers().getLabel().equals("IL28B")) {
+					descriptbm.setSelectedIndex(21);
+				} else if (_item.getBiomarkers().getLabel().equals("KRAS")) {
+					descriptbm.setSelectedIndex(22);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("LDL_Receptor")) {
+					descriptbm.setSelectedIndex(23);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("NAT1;_NAT2")) {
+					descriptbm.setSelectedIndex(24);
+				} else if (_item.getBiomarkers().getLabel().equals("PDGFR")) {
+					descriptbm.setSelectedIndex(25);
+				} else if (_item.getBiomarkers().getLabel().equals("PML/RARα")) {
+					descriptbm.setSelectedIndex(26);
+				} else if (_item.getBiomarkers().getLabel()
+						.equals("Rh_genotype")) {
+					descriptbm.setSelectedIndex(27);
+				} else if (_item.getBiomarkers().getLabel().equals("TPMT")) {
+					descriptbm.setSelectedIndex(28);
+				} else if (_item.getBiomarkers().getLabel().equals("UGT1A1")) {
+					descriptbm.setSelectedIndex(29);
+				} else if (_item.getBiomarkers().getLabel().equals("VKORC1")) {
+					descriptbm.setSelectedIndex(39);
 				}
+
 			}
-		
+
 			if (_item.getPKImpact() != null) {
 				if (_item.getPKImpact().getLabel()
 						.equals("Metabolism Decrease"))
@@ -839,6 +912,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					descriptpkde.setValue(true);
 				else if (_item.getPKImpact().getLabel().equals("Not Important"))
 					descriptpkni.setValue(true);
+				else if (_item.getPKImpact().getLabel().equals("None"))
+					descriptpknone.setValue(true);
 			}
 
 			if (_item.getPdImpact() != null) {
@@ -945,32 +1020,39 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					}
 
 					// Listbox medical condition
-					if (statemt.getLabel().equals("condition 0")) {
-						descriptsmc.setSelectedIndex(0);
-					} else if (statemt.getLabel().equals("condition 1")) {
-						descriptsmc.setSelectedIndex(1);
-					} else if (statemt.getLabel().equals("condition 2")) {
-						descriptsmc.setSelectedIndex(2);
-					}
+					/*
+					 * if (statemt.getLabel().equals("condition 0")) {
+					 * descriptsmc.setSelectedIndex(0); } else if
+					 * (statemt.getLabel().equals("condition 1")) {
+					 * descriptsmc.setSelectedIndex(1); } else if
+					 * (statemt.getLabel().equals("condition 2")) {
+					 * descriptsmc.setSelectedIndex(2); }
+					 */
 				}
 			}
-			
-			//population prevalence
-			if(_item.getPrevalence()!=null){
-				
-				for (MLinkedResource propre : _item.getStatements()) {
 
+			// population prevalence
+			if (_item.getPrevalence() != null) {
+
+				for (MLinkedResource propre : _item.getPrevalence()) {
+
+					System.out.println("edit prevalence:" + propre.getLabel());
 					if (propre.getLabel().equals("Mentioned")) {
 						descriptppm.setValue(true);
 					}
-				
 				}
 			}
-			
-			//alleles body
-			
-			
-			
+
+			// alleles body
+
+			if (_item.getAllelesbody() != null) {
+				allelesbody.setText(_item.getAllelesbody());
+			}
+
+			// medical condition
+			if (_item.getMedconditbody() != null) {
+				medconditbody.setText(_item.getMedconditbody());
+			}
 
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
@@ -1039,17 +1121,18 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"SPL annotation content validated (edit)");
 
 					_item.setComment(commentBody.getText());
-					
-					_item.setBiomarkers(getBioMarkers());
 
+					_item.setBiomarkers(getBioMarkers());
 					_item.setPKImpact(getPkImpact());
 					_item.setPdImpact(getPdImpact());
-
 					_item.setDrugRec(getDrugRec());
 					_item.setDoseRec(getDoseRec());
 					_item.setMonitRec(getMonitRec());
 					_item.setStatements(getStatements());
 					_item.setTestRec(getTest_Re());
+					_item.setPrevalence(getPrevalence());
+					_item.setAllelesbody(allelesbody.getText());
+					_item.setMedconditbody(medconditbody.getText());
 
 					_domeo.getLogger().debug(this,
 							"SPL descriptions cleared and re-loaded (edit)");

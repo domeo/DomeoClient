@@ -114,6 +114,14 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 		pharmgxUsage.setAllelesbody(Allelesbody);
 	}
 	
+	public String getMedconditbody() {
+	    return pharmgxUsage.getMedconditbody();
+	}
+
+	public void setMedconditbody(String mediconditbody) {
+	    pharmgxUsage.setMedconditbody(mediconditbody);
+	}
+	
 	@Override
 	    public String getLabel() {
 	    return LABEL;

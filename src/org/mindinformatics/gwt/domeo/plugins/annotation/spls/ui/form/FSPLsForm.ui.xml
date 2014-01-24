@@ -129,6 +129,16 @@
 		font-size: 12px;
 	}
 	
+	.medical {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 125px;
+		height: 13px;
+		font-size: 12px;
+	}
+	
 	.elementType {
 		padding-right: 2px;
 		display: inline;
@@ -243,6 +253,8 @@
 					<g:HorizontalPanel styleName='{style.panel}'>
 						<g:RadioButton ui:field="descriptpkni" name="descriptpk"
 							checked="false">Not important</g:RadioButton>
+					<g:RadioButton ui:field="descriptpknone" name="descriptpk"
+							checked="false">None</g:RadioButton>
 					</g:HorizontalPanel>
 
 					<!-- PD Impact -->
@@ -308,14 +320,9 @@
 
 						<g:HorizontalPanel ui:field='header9' styleName='{style.panel}'>
 
-							<g:VerticalPanel>
-								<g:ListBox ui:field="descriptsmc" name="descript"
-									visibleItemCount='1'>
-									<g:item value="0">condition 0</g:item>
-									<g:item value="1">condition 1</g:item>
-									<g:item value="2">condition 2</g:item>
-								</g:ListBox>
-							</g:VerticalPanel>
+							<!-- <g:VerticalPanel> <g:ListBox ui:field="descriptsmc" name="descript" 
+								visibleItemCount='1'> <g:item value="0">condition 0</g:item> <g:item value="1">condition 
+								1</g:item> <g:item value="2">condition 2</g:item> </g:ListBox> </g:VerticalPanel> -->
 
 							<g:VerticalPanel>
 								<g:CheckBox ui:field="descriptsts" name="descript"
@@ -426,22 +433,30 @@
 								styleName='{style.elementType}' text="mentioned" />
 						</g:HorizontalPanel>
 
-						<!-- Alleles textarea -->
-						<g:HorizontalPanel>
-							<g:Label ui:field="alleles" styleName='{style.qualifiersLabel}'>Alleles:</g:Label>
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<g:VerticalPanel>
+
+								<!-- Alleles textarea -->
+								<g:HorizontalPanel>
+									<g:Label ui:field="alleles" styleName='{style.qualifiersLabel}'>Alleles:</g:Label>
+								</g:HorizontalPanel>
+								<g:HorizontalPanel>
+									<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
+								</g:HorizontalPanel>
+							</g:VerticalPanel>
+							<!-- Medcondit textarea -->
+							<g:VerticalPanel>
+								<g:HorizontalPanel>
+									<g:Label ui:field="medcondit" styleName='{style.qualifiersLabel}'>Medical
+										Conditions:</g:Label>
+								</g:HorizontalPanel>
+								<g:HorizontalPanel>
+									<g:TextArea ui:field='medconditbody' styleName='{style.medical}'></g:TextArea>
+								</g:HorizontalPanel>
+
+							</g:VerticalPanel>
 						</g:HorizontalPanel>
-						<g:HorizontalPanel>
-							<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
-						</g:HorizontalPanel>
-																								
-						<!-- Medcondit textarea -->
-						<g:HorizontalPanel>
-							<g:Label ui:field="medcondit" styleName='{style.qualifiersLabel}'>Medical Conditions:</g:Label>
-						</g:HorizontalPanel>
-						<g:HorizontalPanel>
-<!-- 						TODO: fix style reference -->
-							<g:TextArea ui:field='medconditbody' styleName='{style.alleles}'></g:TextArea>
-						</g:HorizontalPanel>
+
 					</g:VerticalPanel>
 				</g:VerticalPanel>
 			</g:cell>

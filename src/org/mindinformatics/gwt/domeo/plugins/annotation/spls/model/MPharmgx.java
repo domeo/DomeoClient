@@ -15,10 +15,10 @@ public class MPharmgx extends MTrustedResource {
 	// String pkImpact, pdImpact, doseRec, drugRec, monitRec, testRec;
 
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
-			drugRecResource, monitRecResource, testRecResource, comment,Alleles,
-			biomarkers;
+			drugRecResource, monitRecResource, testRecResource, comment,
+			Alleles, biomarkers;
 	Set<MLinkedResource> statementsResource, prevalence;
-	
+
 	public void setAlleles(MLinkedResource alleles) {
 		Alleles = alleles;
 	}
@@ -50,7 +50,6 @@ public class MPharmgx extends MTrustedResource {
 	public void setComment(MLinkedResource comment) {
 		this.comment = comment;
 	}
-
 
 	public MPharmgx(String url, String label, MGenericResource source) {
 		super(url, label, source);
