@@ -1,14 +1,17 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSelector;
 
@@ -24,14 +27,16 @@ public class AnnotationSelectorJsonUnmarshaller extends AUnmarshaller implements
 	public AnnotationSelectorJsonUnmarshaller(IDomeo domeo) { _domeo = domeo; }
 	
 	@Override
-	public MAnnotationSelector unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json) {
-		return (MAnnotationSelector) super.unmarshallWithoutValidating(manager, json);
+	public MAnnotationSelector unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		return (MAnnotationSelector) super.unmarshallWithoutValidating(manager, json, set, selectors);
 	}
 	
 	@Override
-	public MAnnotationSelector unmarshall(JsonUnmarshallingManager manager, JavaScriptObject json, String validation) {
+	public MAnnotationSelector unmarshall(JsonUnmarshallingManager manager, JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		// Triggers input validation (skip when validation is OFF: IUnmarshaller.OFF_VALIDATION)
-		validation(json, validation);
+		validation(json, validation, set, selectors);
 		
 		JsAnnotationSelector jsonSelector = (JsAnnotationSelector) json;
 		MAnnotationSelector selector = AnnotationFactory.cloneAnnotationSelector(
@@ -47,7 +52,8 @@ public class AnnotationSelectorJsonUnmarshaller extends AUnmarshaller implements
 	}
 
 	@Override
-	protected void validation(JavaScriptObject json, String validation) {
+	protected void validation(JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		verifyType(json, MAnnotationSelector.TYPE);
 		
 		JsAnnotationSelector jsonSelector = (JsAnnotationSelector) json;

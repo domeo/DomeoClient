@@ -160,7 +160,7 @@ public class JsonUnmarshallingManager {
 		if(acceptedIds.size()>0) {
 		
 			try {
-				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION);
+				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION, null, null);
 				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 				
 				// Unmarshalling agents
@@ -206,16 +206,16 @@ public class JsonUnmarshallingManager {
 							_domeo.getLogger().debug(this, selectorType);
 							if(selectorType.equals(MTextQuoteSelector.TYPE)) {
 								JsTextQuoteSelector sel = (JsTextQuoteSelector) target.getSelector();
-								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 								selectors.add(selector);
 							} else if(selectorType.equals(MImageInDocumentSelector.TYPE)) {
 								JsImageInDocumentSelector sel = (JsImageInDocumentSelector) target.getSelector();
-								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 								selector.getTarget().setUrl(getSelectorTargetUrl(target));
 								selectors.add(selector);
 							} else if(selectorType.equals(MAnnotationSelector.TYPE)) {
 								JsAnnotationSelector sel = (JsAnnotationSelector) target.getSelector();
-								MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 								
 								// TODO to improve with a Virtual Annotation
 								MAnnotation annotation = new MPostItAnnotation();
@@ -349,7 +349,7 @@ public class JsonUnmarshallingManager {
 		creatorAgentsLazyBinding.clear();
 		
 		try {
-			MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION);
+			MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION, null, null);
 			((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 			
 			// Unmarshalling agents
@@ -395,16 +395,16 @@ public class JsonUnmarshallingManager {
 						_domeo.getLogger().debug(this, selectorType);
 						if(selectorType.equals(MTextQuoteSelector.TYPE)) {
 							JsTextQuoteSelector sel = (JsTextQuoteSelector) target.getSelector();
-							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION);
+							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 							selectors.add(selector);
 						} else if(selectorType.equals(MImageInDocumentSelector.TYPE)) {
 							JsImageInDocumentSelector sel = (JsImageInDocumentSelector) target.getSelector();
-							MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION);
+							MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 							selector.getTarget().setUrl(getSelectorTargetUrl(target));
 							selectors.add(selector);
 						} else if(selectorType.equals(MAnnotationSelector.TYPE)) {
 							JsAnnotationSelector sel = (JsAnnotationSelector) target.getSelector();
-							MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION);
+							MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 							
 							// TODO to improve with a Virtual Annotation
 							MAnnotation annotation = new MPostItAnnotation();
@@ -537,7 +537,7 @@ public class JsonUnmarshallingManager {
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set get");
 				JsAnnotationSet jsonSet = (JsAnnotationSet) responseOnSets.get(i);
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set unmarshall");
-				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.LOAD_VALIDATION);
+				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.LOAD_VALIDATION, null, null);
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set loading");
 				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 				
@@ -587,14 +587,14 @@ public class JsonUnmarshallingManager {
 							String selectorType = getObjectType(target.getSelector());
 							_domeo.getLogger().debug(this, selectorType);
 							if(selectorType.equals(MTextQuoteSelector.TYPE)) {
-								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 								selectors.add(selector);
 							} else if(selectorType.equals(MImageInDocumentSelector.TYPE)) {
-								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.EASY_VALIDATION);
+								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.EASY_VALIDATION, null, null);
 								selector.getTarget().setUrl(getSelectorTargetUrl(target));
 								selectors.add(selector);
 							} else if(selectorType.equals(MAnnotationSelector.TYPE)) {
-								MAnnotationSelector selector = unmarshallAnnotationSelector((JsAnnotationSelector)target.getSelector(), IUnmarshaller.EASY_VALIDATION);
+								MAnnotationSelector selector = unmarshallAnnotationSelector((JsAnnotationSelector)target.getSelector(), IUnmarshaller.EASY_VALIDATION, null, null);
 								
 								// TODO to improve with a Virtual Annotation
 								// MAnnotation annotation = new MPostItAnnotation();
@@ -633,6 +633,10 @@ public class JsonUnmarshallingManager {
 					// Post it detected
 					MAnnotation ann = null;
 					if(typesSet.contains(MHighlightAnnotation.TYPE)) {
+						
+						ann = unmarshallHighlightAnnotation((JsAnnotationHighlight) jsonAnnotations.get(j), "", set, selectors);
+						
+						/*
 						JsAnnotationHighlight highlight = (JsAnnotationHighlight) jsonAnnotations.get(j);
 						ann = AnnotationFactory.cloneHighlight(
 								highlight.getId(), 
@@ -648,6 +652,7 @@ public class JsonUnmarshallingManager {
 								_domeo.getPersistenceManager().getCurrentResource(),
 								selectors,
 								highlight.getLabel());
+						*/
 						
 						// Highlight allows only text selectors at the moment
 						for(int z=0; z<ann.getSelectors().size(); z++) {
@@ -659,6 +664,7 @@ public class JsonUnmarshallingManager {
 						
 						((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
 						set.setHasChanged(false);
+						
 					} else {
 						if(typesSet.contains(MPostItAnnotation.TYPE)) {
 							PostitType postItType = null;
@@ -887,7 +893,7 @@ public class JsonUnmarshallingManager {
 							}
 							_domeo.getLogger().debug(this, "0-1c");
 							JsAnnotationTarget tar = argues.getContext();	
-							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 							
 							_domeo.getLogger().debug(this, mp.getId() + " --- " + argues.getId());
 							MMicroPublication microPublication = MicroPublicationFactory.cloneMicroPublication(mp.getId(), argues.getId(), selector);
@@ -917,7 +923,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-3 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-3 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("domeo:ImageInDocumentSelector")) {
-											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											s.getTarget().setUrl(getSelectorTargetUrl(target));
 											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
 											
@@ -936,7 +942,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-4 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-4 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("ao:PrefixSuffixTextSelector")) {
-											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
 											di.setId(statement.getId());
 											di.setSelector(sss);
@@ -988,7 +994,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-3 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-3 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("domeo:ImageInDocumentSelector")) {
-											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											s.getTarget().setUrl(getSelectorTargetUrl(target));
 											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
 											
@@ -1007,7 +1013,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-4 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-4 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("ao:PrefixSuffixTextSelector")) {
-											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
 											di.setId(statement.getId());
 											di.setSelector(sss);
@@ -1186,7 +1192,7 @@ public class JsonUnmarshallingManager {
 							_domeo.getLogger().debug(this, selectorType);
 							if(selectorType.equals(MTextQuoteSelector.TYPE)) {
 								JsTextQuoteSelector sel = (JsTextQuoteSelector) target.getSelector();
-								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 								selectors.add(selector);
 							} 
 						} else {
@@ -1363,12 +1369,13 @@ public class JsonUnmarshallingManager {
 	 * @param prefixSuffixTextSelectorInJson Prefix Suffix Text Selector in json format
 	 * @return Prefix Suffix Text Selector or null if exception raised
 	 */
-	private MTextQuoteSelector unmarshallPrefixSuffixTextSelector(JsTextQuoteSelector prefixSuffixTextSelectorInJson, String validation) {
+	private MTextQuoteSelector unmarshallPrefixSuffixTextSelector(JsTextQuoteSelector prefixSuffixTextSelectorInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MTextQuoteSelector.class.getName() + 
 				" with id " + getObjectId(prefixSuffixTextSelectorInJson));
 		try {
 			IUnmarshaller unmarshaller = selectUnmarshaller(MTextQuoteSelector.class.getName());
-			return (MTextQuoteSelector) unmarshaller.unmarshall(this, prefixSuffixTextSelectorInJson, validation);
+			return (MTextQuoteSelector) unmarshaller.unmarshall(this, prefixSuffixTextSelectorInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while serializing the Prefix Suffix text Selector " + e.getMessage());
 			return null;
@@ -1380,12 +1387,13 @@ public class JsonUnmarshallingManager {
 	 * @param annotationSelectorInJson Annotation Selector in json format
 	 * @return Annotation Selector or null if exception raised
 	 */
-	private MAnnotationSelector unmarshallAnnotationSelector(JsAnnotationSelector annotationSelectorInJson, String validation) {
+	private MAnnotationSelector unmarshallAnnotationSelector(JsAnnotationSelector annotationSelectorInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MAnnotationSelector.class.getName() + 
 				" with id " + getObjectId(annotationSelectorInJson));
 		try {
 			IUnmarshaller unmarshaller = selectUnmarshaller(MAnnotationSelector.class.getName());
-			return (MAnnotationSelector) unmarshaller.unmarshall(this, annotationSelectorInJson, validation);
+			return (MAnnotationSelector) unmarshaller.unmarshall(this, annotationSelectorInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while serializing the Annotation Selector " + e.getMessage());
 			return null;
@@ -1397,12 +1405,13 @@ public class JsonUnmarshallingManager {
 	 * @param imageInDocumentSelectorInJson Image in Document Selector in json format
 	 * @return Image in Document Selector or null if exception raised
 	 */	
-	private MImageInDocumentSelector unmarshallImageInDocumentSelector(JsImageInDocumentSelector imageInDocumentSelectorInJson, String validation) {
+	private MImageInDocumentSelector unmarshallImageInDocumentSelector(JsImageInDocumentSelector imageInDocumentSelectorInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MImageInDocumentSelector.class.getName() + 
 				" with id " + getObjectId(imageInDocumentSelectorInJson));
 		try {
 			IUnmarshaller unmarshaller = selectUnmarshaller(MImageInDocumentSelector.class.getName());
-			return (MImageInDocumentSelector) unmarshaller.unmarshall(this, imageInDocumentSelectorInJson, validation);
+			return (MImageInDocumentSelector) unmarshaller.unmarshall(this, imageInDocumentSelectorInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while serializing the Image in Document Selector " + e.getMessage());
 			return null;
@@ -1414,13 +1423,28 @@ public class JsonUnmarshallingManager {
 	 * @param annotationSetInJson	Annotation set in json format
 	 * @return Annotation Set or null if exception raised
 	 */
-	private MAnnotationSet unmarshallAnnotationSet(JsAnnotationSet annotationSetInJson, String validation) {
+	private MAnnotationSet unmarshallAnnotationSet(JsAnnotationSet annotationSetInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MAnnotationSet.class.getName() + 
 			" with id " + getObjectId(annotationSetInJson));
 		IUnmarshaller unmarshaller = null;
 		try {
 			unmarshaller = selectUnmarshaller(MAnnotationSet.class.getName());
-			return (MAnnotationSet) unmarshaller.unmarshall(this, annotationSetInJson, validation);
+			return (MAnnotationSet) unmarshaller.unmarshall(this, annotationSetInJson, validation, set, selectors);
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
+			return null;
+		}
+	}
+	
+	private MHighlightAnnotation unmarshallHighlightAnnotation(JsAnnotationHighlight annotationHighlightInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		_domeo.getLogger().debug(this, "Unmarshalling " + MHighlightAnnotation.class.getName() + 
+			" with id " + getObjectId(annotationHighlightInJson));
+		IUnmarshaller unmarshaller = null;
+		try {
+			unmarshaller = selectUnmarshaller(MHighlightAnnotation.class.getName());
+			return (MHighlightAnnotation) unmarshaller.unmarshall(this, annotationHighlightInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
 			return null;
@@ -1441,7 +1465,8 @@ public class JsonUnmarshallingManager {
 		unmarshallers.put(MAnnotationSet.class.getName(), new AnnotationSetJsonUnmarshaller(_domeo));	
 		unmarshallers.put(MAnnotationSelector.class.getName(), new AnnotationSelectorJsonUnmarshaller(_domeo));
 		unmarshallers.put(MTextQuoteSelector.class.getName(), new TextQuoteSelectorJsonUnmarshaller(_domeo));
-		unmarshallers.put(MImageInDocumentSelector.class.getName(), new ImageInDocumentSelectorJsonUnmarshaller(_domeo));		
+		unmarshallers.put(MImageInDocumentSelector.class.getName(), new ImageInDocumentSelectorJsonUnmarshaller(_domeo));	
+		unmarshallers.put(MHighlightAnnotation.class.getName(), new HighlightJsonUnmarshaller(_domeo));
 	}
 	
 	/**

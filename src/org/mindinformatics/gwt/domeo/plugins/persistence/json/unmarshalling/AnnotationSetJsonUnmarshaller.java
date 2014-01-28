@@ -1,5 +1,6 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
+import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -26,14 +28,16 @@ public class AnnotationSetJsonUnmarshaller extends AUnmarshaller implements IUnm
 	public AnnotationSetJsonUnmarshaller(IDomeo domeo) { _domeo = domeo; }
 	
 	@Override
-	public MAnnotationSet unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json) {
-		return (MAnnotationSet) super.unmarshallWithoutValidating(manager, json);
+	public MAnnotationSet unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		return (MAnnotationSet) super.unmarshallWithoutValidating(manager, json, set, selectors);
 	}
 	
 	@Override
-	public MAnnotationSet unmarshall(JsonUnmarshallingManager manager, JavaScriptObject json, String validation) {
+	public MAnnotationSet unmarshall(JsonUnmarshallingManager manager, JavaScriptObject json, String validation, MAnnotationSet s, 
+			ArrayList<MSelector> selectors) {
 		// Triggers input validation (skip when validation is OFF: IUnmarshaller.OFF_VALIDATION)
-		validation(json, validation);
+		validation(json, validation, s, selectors);
 
 		JsAnnotationSet jsonSet = (JsAnnotationSet) json;
 		
@@ -98,7 +102,8 @@ public class AnnotationSetJsonUnmarshaller extends AUnmarshaller implements IUnm
 	}
 	
 	@Override
-	protected void validation(JavaScriptObject json, String validation) {
+	protected void validation(JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		//verifyType(json, IDomeoOntology.annotationSet);
 		
 		JsAnnotationSet jsonSet = (JsAnnotationSet) json;
