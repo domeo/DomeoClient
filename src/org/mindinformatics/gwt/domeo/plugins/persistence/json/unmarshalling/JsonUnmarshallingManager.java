@@ -25,7 +25,6 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.LinearCommentsFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.JsAnnotationCuration;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
@@ -633,12 +632,10 @@ public class JsonUnmarshallingManager {
 					// Post it detected
 					MAnnotation ann = null;
 					if(typesSet.contains(MHighlightAnnotation.TYPE)) {
-						
-						ann = unmarshallHighlightAnnotation((JsAnnotationHighlight) jsonAnnotations.get(j), "", set, selectors);
-						
+					
 						/*
-						JsAnnotationHighlight highlight = (JsAnnotationHighlight) jsonAnnotations.get(j);
-						ann = AnnotationFactory.cloneHighlight(
+							JsAnnotationHighlight highlight = (JsAnnotationHighlight) jsonAnnotations.get(j);
+							ann = AnnotationFactory.cloneHighlight(
 								highlight.getId(), 
 								highlight.getLineageUri(), 
 								highlight.getFormattedCreatedOn(),
@@ -653,6 +650,8 @@ public class JsonUnmarshallingManager {
 								selectors,
 								highlight.getLabel());
 						*/
+						
+						ann = unmarshallHighlightAnnotation((JsAnnotationHighlight) jsonAnnotations.get(j), "", set, selectors);
 						
 						// Highlight allows only text selectors at the moment
 						for(int z=0; z<ann.getSelectors().size(); z++) {
@@ -680,6 +679,9 @@ public class JsonUnmarshallingManager {
 								postItType = PostitType.COMMENT_TYPE;
 							}
 							if(postItType!=null) {
+								ann = unmarshallPostItAnnotation((JsAnnotationPostIt) jsonAnnotations.get(j), "", set, selectors);
+								((MPostItAnnotation)ann).setType(postItType);
+								/*
 								JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j);
 								
 								MContentAsRdf body = new MContentAsRdf();
@@ -703,6 +705,7 @@ public class JsonUnmarshallingManager {
 									body,
 									postItType
 									);
+								*/
 							}
 						} else  if(typesSet.contains(MQualifierAnnotation.TYPE)) {
 							JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j); // TODO change
@@ -1451,6 +1454,20 @@ public class JsonUnmarshallingManager {
 		}
 	}
 	
+	private MPostItAnnotation unmarshallPostItAnnotation(JsAnnotationPostIt annotationPostItInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		_domeo.getLogger().debug(this, "Unmarshalling " + MPostItAnnotation.class.getName() + 
+			" with id " + getObjectId(annotationPostItInJson));
+		IUnmarshaller unmarshaller = null;
+		try {
+			unmarshaller = selectUnmarshaller(MPostItAnnotation.class.getName());
+			return (MPostItAnnotation) unmarshaller.unmarshall(this, annotationPostItInJson, validation, set, selectors);
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
+			return null;
+		}
+	}
+	
 // ------------------------------------------------------------------------
 //  Cache for lazy binding
 // ------------------------------------------------------------------------
@@ -1467,6 +1484,7 @@ public class JsonUnmarshallingManager {
 		unmarshallers.put(MTextQuoteSelector.class.getName(), new TextQuoteSelectorJsonUnmarshaller(_domeo));
 		unmarshallers.put(MImageInDocumentSelector.class.getName(), new ImageInDocumentSelectorJsonUnmarshaller(_domeo));	
 		unmarshallers.put(MHighlightAnnotation.class.getName(), new HighlightJsonUnmarshaller(_domeo));
+		unmarshallers.put(MPostItAnnotation.class.getName(), new UPostitJsonUnmarshaller(_domeo));
 	}
 	
 	/**
