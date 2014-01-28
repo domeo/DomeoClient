@@ -16,8 +16,41 @@ public class MPharmgx extends MTrustedResource {
 
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 			drugRecResource, monitRecResource, testRecResource, comment,
-			Alleles, biomarkers;
-	Set<MLinkedResource> statementsResource, prevalence;
+			Alleles, biomarkers, varient, test, medicalCondition, drugOfInterest;
+	
+	public MLinkedResource getVarient() {
+		return varient;
+	}
+
+	public MLinkedResource getDrugOfInterest() {
+		return drugOfInterest;
+	}
+
+	public void setDrugOfInterest(MLinkedResource drugOfInterest) {
+		this.drugOfInterest = drugOfInterest;
+	}
+
+	public void setVarient(MLinkedResource varient) {
+		this.varient = varient;
+	}
+
+	public MLinkedResource getMedicalCondition() {
+		return medicalCondition;
+	}
+
+	public void setMedicalCondition(MLinkedResource medicalCondition) {
+		this.medicalCondition = medicalCondition;
+	}
+
+	public MLinkedResource getTest() {
+		return test;
+	}
+
+	public void setTest(MLinkedResource test) {
+		this.test = test;
+	}
+
+	Set<MLinkedResource> statementsResource;
 
 	public void setAlleles(MLinkedResource alleles) {
 		Alleles = alleles;
@@ -27,9 +60,7 @@ public class MPharmgx extends MTrustedResource {
 		this.biomarkers = biomarkers;
 	}
 
-	public void setPrevalence(Set<MLinkedResource> prevalence) {
-		this.prevalence = prevalence;
-	}
+
 
 	public MLinkedResource getComment() {
 		return comment;
@@ -41,10 +72,6 @@ public class MPharmgx extends MTrustedResource {
 
 	public MLinkedResource getBiomarkers() {
 		return biomarkers;
-	}
-
-	public Set<MLinkedResource> getPrevalence() {
-		return prevalence;
 	}
 
 	public void setComment(MLinkedResource comment) {

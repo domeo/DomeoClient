@@ -80,115 +80,49 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	ListBox annotationSet;
 	@UiField
 	VerticalPanel rightColumn;
-	// @UiField
-	// TabBar tabBar;
 
 	// Biomarkers
 	@UiField
-	ListBox descriptbm;
+	ListBox descriptbm, descriptsvtlb, descriptstslb, descriptdoi;
 
 	// PK Impact
-
 	@UiField
-	RadioButton descriptpkdm;
-	@UiField
-	RadioButton descriptpkim;
-	@UiField
-	RadioButton descriptpkia;
-	@UiField
-	RadioButton descriptpkda;
-	@UiField
-	RadioButton descriptpkid;
-	@UiField
-	RadioButton descriptpkdd;
-	@UiField
-	RadioButton descriptpkie;
-	@UiField
-	RadioButton descriptpkde;
-	@UiField
-	RadioButton descriptpkni;
-	@UiField
-	RadioButton descriptpknone;
+	RadioButton descriptpkdm, descriptpkim, descriptpkia, descriptpkda,
+			descriptpkid, descriptpkdd, descriptpkie, descriptpkde,
+			descriptpkni, descriptpknone;
 
 	// PD Impact
-
 	@UiField
-	RadioButton descriptpddt;
-	@UiField
-	RadioButton descriptpdit;
-	@UiField
-	RadioButton descriptpdir;
-	@UiField
-	RadioButton descriptpdni;
-	@UiField
-	RadioButton descriptpdie;
-	@UiField
-	RadioButton descriptpdde;
+	RadioButton descriptpddt, descriptpdit, descriptpdir, descriptpdni,
+			descriptpdie, descriptpdde, descriptpdnone;
 
 	// recommendation drug
 	@UiField
-	CheckBox descriptdsca;
-	@UiField
-	CheckBox descriptdsal;
-	@UiField
-	CheckBox descriptdsam;
-	@UiField
-	CheckBox descriptdsnr;
-	@UiField
-	CheckBox descriptdsnc;
+	CheckBox descriptdsca, descriptdsal, descriptdsam, descriptdsnr,
+			descriptdsnc, descriptdsnone;
 
 	// recommendation dose
 	@UiField
-	CheckBox descriptdrdfb;
-	@UiField
-	CheckBox descriptdrifb;
-	@UiField
-	CheckBox descriptdrnc;
-	@UiField
-	CheckBox descriptdrus;
-	@UiField
-	CheckBox descriptdrcs;
+	CheckBox descriptdrdfb, descriptdrifb, descriptdrnc, descriptdrus,
+			descriptdrcs, descriptdrnone;
 
 	// recommendation monitoring
 	@UiField
-	CheckBox descriptmreq;
-	@UiField
-	CheckBox descriptmrec;
-	@UiField
-	CheckBox descriptmnc;
-	@UiField
-	CheckBox descriptmcms;
+	CheckBox descriptmreq, descriptmrec, descriptmnc, descriptmcms,
+			descriptmcnone;
 
 	// test section
 	@UiField
-	CheckBox descripttreq;
-	@UiField
-	CheckBox descripttrec;
-	@UiField
-	CheckBox descriptttna;
-	@UiField
-	CheckBox descripttnn;
+	CheckBox descripttreq, descripttrec, descriptttna, descripttnn,
+			descripttnone;
 
 	// statements
 	@UiField
-	CheckBox descriptsai;
-	@UiField
-	CheckBox descriptsmcc;
-	@UiField
-	CheckBox descriptsvt;
+	CheckBox descriptsai, descriptsmcc;
+
 	/*
 	 * @UiField ListBox descriptsmc;
 	 */
-	@UiField
-	CheckBox descriptsts;
-	@UiField
-	CheckBox descriptsbm;
-
-	@UiField
-	Hyperlink pklink;
-
-	@UiField
-	TextArea commentBody;
 
 	// population provalence
 	@UiField
@@ -196,13 +130,76 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	// alleles
 	@UiField
-	TextArea allelesbody, medconditbody;
+	TextArea commentBody, allelesbody, medconditbody, descriptsvtbody,
+			descriptstsbody;
+
+	String[] biomarker = { "ApoE2", "BRAF", "C-Kit", "CCR5", "CD20_antigen",
+			"CD25", "CD30", "CYP1A2", "CYP2C19", "CYP2C9", "CYP2D6", "DPD",
+			"EGFR", "ER and PgR_receptor", "ER_receptor", "FIP1L1-PDGFRα",
+			"G6PD", "HLA-B*1502", "HLA-B*5701", "Her2/neu", "IL28B", "KRAS",
+			"LDL_Receptor", "NAT1;_NAT2", "PDGFR", "PML/RARα", "Rh_genotype",
+			"TPMT", "UGT1A1", "VKORC1" };
+
+	String[] varient = { "poor-metabolizer", "intermediate-metabolizer",
+			"extensive-metabolizer", "ultra-metabolizer",
+			"intermediate-activity", "low-or-absent-activity", "HLA-B*1502",
+			"HLA-B*5701" };
+
+	String[] test = { "gene-haplotype-positive", "gene-haplotype-negative",
+			"gene-SNP-positive", "gene-SNP-negative", "fused-gene-positive",
+			"fused-gene-negative", "gene-expression-level-high",
+			"gene-expression-level-low", "biomarker-positive",
+			"biomarker-negative", "biomarker-level-high",
+			"biomarker-level-low", "poor-metabolizer-positive",
+			"poor-metabolizer-negative", "ultra-metabolizer-positive",
+			"ultra-metabolizer-negative", "chromosomal-aberration-positive",
+			"chromosomal-aberration-negative" };
+
+	String[] drugs = { "Abacivir", "Aripiprazole", "Arsenic_Trioxide",
+			"Atomoxetine", "Atorvastatin", "Azathioprine", "Boceprevir",
+			"Brentuximab_Vedotin", "Busulfan", "Capecitabine", "Carbamazepine",
+			"Carisoprodol", "Carvedilol", "Celecoxib", "Cetuximab",
+			"Cevimeline", "Chlordiazepoxide_and_Amitriptyline", "Chloroquine",
+			"Cisplatin", "Citalopram", "Clobazam", "Clomiphene",
+			"Clomipramine", "Clopidogrel", "Clozapine", "Codeine",
+			"Crizotinib", "Dapsone", "Dasatinib", "Denileukin_Diftitox",
+			"Desipramine", "Dexlansoprazole", "Dextromethorphan_and_Quinidine",
+			"Diazepam", "Doxepin", "Drospirenone_and_Estradiol", "Erlotinib",
+			"Esomeprazole", "Exemestane", "Everolimus", "Fluorouracil",
+			"Fluoxetine", "Fluoxetine_and_Olanzapine", "Flurbiprofen",
+			"Fluvoxamine", "Fulvestrant", "Galantamine", "Iloperidone",
+			"Imatinib", "Imipramine", "Indacaterol", "Irinotecan",
+			"Isosorbide", "Ivacaftor", "Lapatinib", "Lenalidomide",
+			"Letrozole", "Maraviroc", "Mercaptopurine", "Metoprolol",
+			"Modafinil", "Nefazodone", "Nilotinib", "Nortriptyline",
+			"Omeprazole", "Panitumumab", "Pantoprazole", "Paroxetine",
+			"Peginterferon_alfa-2b", "Perphenazine", "Pertuzumab", "Phenytoin",
+			"Pimozide", "Prasugrel", "Pravastatin", "Propafenone",
+			"Propranolol", "Protriptyline", "Quinidine", "Rabeprazole",
+			"Rasburicase", "Rifampin", "Isoniazid", "Pyrazinamide",
+			"Risperidone", "Sodium_Phenylacetate", "Sodium_Benzoate",
+			"Sodium_Phenylbutyrate", "Tamoxifen", "Telaprevir", "Terbinafine",
+			"Tetrabenazine", "Thioguanine", "Thioridazine", "Ticagrelor",
+			"Tolterodine", "Tositumomab", "Tramadol_and_Acetaminophen",
+			"Trastuzumab", "Tretinoin", "Trimipramine", "Valproic_Acid",
+			"Vemurafenib", "Venlafaxine", "Voriconazole", "Warfarin" };
 
 	// Paolo this is taking care of the 'PK impact' for 'apply'
 	// I Normally create a method for each group
 	// RadioButton groups return MLinkedResource
 	// CheckBoxes groups return Set<MLinkedResource>
 	// See FAntibodyForm as an example
+
+	// drug of interest
+	public MLinkedResource getDrugOfInterest() {
+
+		int indexdoi = descriptdoi.getSelectedIndex();
+
+		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "",
+				descriptdoi.getItemText(indexdoi), "the drug of interest.",
+				SPL_POC_PREFIX + "Drug of Interest", SPL_POC_PREFIX,
+				"U of Pitt SPL Pharmgx Annotation");
+	}
 
 	// biomarkers
 	public MLinkedResource getBioMarkers() {
@@ -353,6 +350,11 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is associated with an decrease in the efficacy of the drug.",
 							SPL_POC_PREFIX + "PharmacodynamicImpact",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} else if (descriptpdnone.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.", SPL_POC_PREFIX
+					+ "PharmacodynamicImpact", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
 		}
 		return null;
 	}
@@ -401,6 +403,11 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is related to a recommendation to add change the route of administration for the drug.",
 							SPL_POC_PREFIX + "DrugSelectionRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} else if (descriptdsnone.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.", SPL_POC_PREFIX
+					+ "DrugSelectionRecommendation", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
 		}
 		return null;
 	}
@@ -452,6 +459,11 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"The pharmacogenomic biomarker is related to a recommendation to change schedule of the dose of the drug from the recommended baseline.",
 							SPL_POC_PREFIX + "DoseSelectionRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} else if (descriptdrnone.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.", SPL_POC_PREFIX
+					+ "DoseSelectionRecommendation", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
 		}
 		return null;
 	}
@@ -492,6 +504,11 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"A strategy changed monitoring recommendation is related to the pharmacogenomic biomarker.",
 							SPL_POC_PREFIX + "MonitoringRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} else if (descriptmcnone.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.", SPL_POC_PREFIX
+					+ "MonitoringRecommendation", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
 		}
 		return null;
 	}
@@ -532,6 +549,11 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"Testing related to the pharmacogenomic biomarker is not necessary.",
 							SPL_POC_PREFIX + "TestRecommendation",
 							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		} else if (descripttnone.getValue()) {
+			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.", SPL_POC_PREFIX
+					+ "TestRecommendation", SPL_POC_PREFIX,
+					"U of Pitt SPL Pharmgx Annotation");
 		}
 		return null;
 	}
@@ -547,7 +569,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					SPL_POC_PREFIX + "ingredient-active", "Active ingredient",
 					"the ingredient is active", SPL_POC_PREFIX + "Statements",
 					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
-
 		}
 
 		if (descriptsmcc.getValue()) {
@@ -559,53 +580,38 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					"U of Pitt SPL Pharmgx Annotation"));
 		}
 
-		if (descriptsvt.getValue()) {
-			statements.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "variant", "Variant",
-					"it is highly possible changes with time.", SPL_POC_PREFIX
-							+ "Statements", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation"));
-		}
+		if (descriptppm.getValue()) {
 
-		// medical condition ListBox
-		/*
-		 * int indexmc = descriptsmc.getSelectedIndex();
-		 * 
-		 * statements.add(ResourcesFactory.createTrustedTypedResource(
-		 * SPL_POC_PREFIX + "medical-condition",
-		 * descriptsmc.getItemText(indexmc),
-		 * "it is should be references to medical condition.", SPL_POC_PREFIX +
-		 * "Statements", SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
-		 */
-		if (descriptsts.getValue()) {
 			statements.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "test", "Test",
-					"based on the test result.", SPL_POC_PREFIX + "Statements",
+					SPL_POC_PREFIX + "", "Varient Frequency",
+					"varient frequency", SPL_POC_PREFIX + "Statements",
 					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
 		}
 
-		if (descriptsbm.getValue()) {
-			statements.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "biomarker", "Biomarker",
-					"Based on biomarker.", SPL_POC_PREFIX + "Statements",
-					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
-		}
 		return statements;
 	}
 
-	// population prevalence
-	public Set<MLinkedResource> getPrevalence() {
-		Set<MLinkedResource> prevalence = new HashSet<MLinkedResource>();
+	// Varient
+	public MLinkedResource getVarient() {
 
-		System.out.println("***getPrevalence():" + descriptppm.getValue());
-		if (descriptppm.getValue()) {
+		int indexbm = descriptsvtlb.getSelectedIndex();
 
-			prevalence.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "", "Mentioned", "mentioned",
-					SPL_POC_PREFIX + "Population Prevalence", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation"));
-		}
-		return prevalence;
+		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+				+ "variant", descriptsvtlb.getItemText(indexbm),
+				"it is highly possible changes with time.", SPL_POC_PREFIX
+						+ "Varient", SPL_POC_PREFIX,
+				"U of Pitt SPL Pharmgx Annotation");
+	}
+
+	// Test
+	public MLinkedResource getTest() {
+
+		int indexbm = descriptstslb.getSelectedIndex();
+
+		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
+				+ "test", descriptstslb.getItemText(indexbm),
+				"based on the test result. ", SPL_POC_PREFIX + "Test",
+				SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
 	}
 
 	// NEW annotation
@@ -693,12 +699,16 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							_domeo.getLogger().debug(this, "SPL annotation 8");
 							pharmgxUsage.setTestRec(getTest_Re());
 							_domeo.getLogger().debug(this, "SPL annotation 9");
-							pharmgxUsage.setPrevalence(getPrevalence());
-							_domeo.getLogger().debug(this, "SPL annotation 10");
 							pharmgxUsage.setAllelesbody(allelesbody.getText());
-							_domeo.getLogger().debug(this, "SPL annotation 11");
+							_domeo.getLogger().debug(this, "SPL annotation 10");
 							pharmgxUsage.setMedconditbody(medconditbody
 									.getText());
+							pharmgxUsage.setVarient(getVarient());
+							pharmgxUsage.setTest(getTest());
+							pharmgxUsage.setDrugOfInterest(getDrugOfInterest());
+							pharmgxUsage.setVarientbody(descriptsvtbody
+									.getText());
+							pharmgxUsage.setTestbody(descriptstsbody.getText());
 
 							annotation.setPharmgxUsage(pharmgxUsage);
 
@@ -764,23 +774,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		this.setHeight("100px");
 
-		/*
-		 * pklink.addClickHandler(new ClickHandler(){ DialogBox dialog = new
-		 * DialogBox(); HorizontalPanel hp= new HorizontalPanel(); Label
-		 * description = new
-		 * Label("radio button: can only selects one of choices");
-		 * 
-		 * @Override public void onClick(ClickEvent event) {
-		 * System.out.println("hyper link"); int left =
-		 * pklink.getAbsoluteLeft(); int top = pklink.getAbsoluteTop();
-		 * 
-		 * System.out.println(left+"|"+top); hp.add(description);
-		 * dialog.setText("description test"); dialog.setWidget(hp);
-		 * dialog.setPopupPosition(left, top); dialog.show(); }
-		 * 
-		 * });
-		 */
-
 		// rightColumn.add(tabs.get(0));
 		// resized();
 	}
@@ -807,82 +800,34 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			if (_item.getComment() != null && !_item.getComment().equals(""))
 				commentBody.setText(_item.getComment());
 
+			// drug of interest
+
+			if (_item.getDrugOfInterest() != null) {
+				if (_item.getDrugOfInterest().getLabel().equals("unselected")) {
+					descriptdoi.setSelectedIndex(0);
+				}
+
+				String drugOfInterest = _item.getDrugOfInterest().getLabel();
+				for (int i = 0; i < drugs.length; i++) {
+					if (drugs[i].equals(drugOfInterest)) {
+						descriptdoi.setSelectedIndex(i + 1);
+					}
+				}
+			}
+
 			// set biomarkers
 			if (_item.getBiomarkers() != null) {
 
 				if (_item.getBiomarkers().getLabel().equals("unselected")) {
 					descriptbm.setSelectedIndex(0);
-				} else if (_item.getBiomarkers().getLabel().equals("ApoE2")) {
-					descriptbm.setSelectedIndex(1);
-				} else if (_item.getBiomarkers().getLabel().equals("BRAF")) {
-					descriptbm.setSelectedIndex(2);
-				} else if (_item.getBiomarkers().getLabel().equals("C-Kit")) {
-					descriptbm.setSelectedIndex(3);
-				} else if (_item.getBiomarkers().getLabel().equals("CCR5")) {
-					descriptbm.setSelectedIndex(4);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("CD20_antigen")) {
-					descriptbm.setSelectedIndex(5);
-				} else if (_item.getBiomarkers().getLabel().equals("CD25")) {
-					descriptbm.setSelectedIndex(6);
-				} else if (_item.getBiomarkers().getLabel().equals("CD30")) {
-					descriptbm.setSelectedIndex(7);
-				} else if (_item.getBiomarkers().getLabel().equals("CYP1A2")) {
-					descriptbm.setSelectedIndex(8);
-				} else if (_item.getBiomarkers().getLabel().equals("CYP2C19")) {
-					descriptbm.setSelectedIndex(9);
-				} else if (_item.getBiomarkers().getLabel().equals("CYP2C9")) {
-					descriptbm.setSelectedIndex(10);
-				} else if (_item.getBiomarkers().getLabel().equals("CYP2D6")) {
-					descriptbm.setSelectedIndex(11);
-				} else if (_item.getBiomarkers().getLabel().equals("DPD")) {
-					descriptbm.setSelectedIndex(12);
-				} else if (_item.getBiomarkers().getLabel().equals("EGFR")) {
-					descriptbm.setSelectedIndex(13);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("ER and PgR_receptor")) {
-					descriptbm.setSelectedIndex(14);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("ER_receptor")) {
-					descriptbm.setSelectedIndex(15);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("FIP1L1-PDGFRα")) {
-					descriptbm.setSelectedIndex(16);
-				} else if (_item.getBiomarkers().getLabel().equals("G6PD")) {
-					descriptbm.setSelectedIndex(17);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("HLA-B*1502")) {
-					descriptbm.setSelectedIndex(18);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("HLA-B*5701")) {
-					descriptbm.setSelectedIndex(19);
-				} else if (_item.getBiomarkers().getLabel().equals("Her2/neu")) {
-					descriptbm.setSelectedIndex(20);
-				} else if (_item.getBiomarkers().getLabel().equals("IL28B")) {
-					descriptbm.setSelectedIndex(21);
-				} else if (_item.getBiomarkers().getLabel().equals("KRAS")) {
-					descriptbm.setSelectedIndex(22);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("LDL_Receptor")) {
-					descriptbm.setSelectedIndex(23);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("NAT1;_NAT2")) {
-					descriptbm.setSelectedIndex(24);
-				} else if (_item.getBiomarkers().getLabel().equals("PDGFR")) {
-					descriptbm.setSelectedIndex(25);
-				} else if (_item.getBiomarkers().getLabel().equals("PML/RARα")) {
-					descriptbm.setSelectedIndex(26);
-				} else if (_item.getBiomarkers().getLabel()
-						.equals("Rh_genotype")) {
-					descriptbm.setSelectedIndex(27);
-				} else if (_item.getBiomarkers().getLabel().equals("TPMT")) {
-					descriptbm.setSelectedIndex(28);
-				} else if (_item.getBiomarkers().getLabel().equals("UGT1A1")) {
-					descriptbm.setSelectedIndex(29);
-				} else if (_item.getBiomarkers().getLabel().equals("VKORC1")) {
-					descriptbm.setSelectedIndex(39);
 				}
 
+				String bioLabel = _item.getBiomarkers().getLabel();
+				for (int i = 0; i < biomarker.length; i++) {
+					if (biomarker[i].equals(bioLabel)) {
+						descriptbm.setSelectedIndex(i + 1);
+					}
+				}
 			}
 
 			if (_item.getPKImpact() != null) {
@@ -934,6 +879,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				else if (_item.getPdImpact().getLabel()
 						.equals("Decreased Efficacy"))
 					descriptpdde.setValue(true);
+				else if (_item.getPdImpact().getLabel().equals("None"))
+					descriptpdnone.setValue(true);
 			}
 
 			if (_item.getDoseRec() != null) {
@@ -951,6 +898,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				else if (_item.getDoseRec().getLabel()
 						.equals("Change schedule"))
 					descriptdrcs.setValue(true);
+				else if (_item.getDoseRec().getLabel().equals("None"))
+					descriptdrnone.setValue(true);
 			}
 
 			if (_item.getMonitRec() != null) {
@@ -963,6 +912,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				else if (_item.getMonitRec().getLabel()
 						.equals("Change monitoring strategy"))
 					descriptmcms.setValue(true);
+				else if (_item.getMonitRec().getLabel().equals("None"))
+					descriptmcnone.setValue(true);
 			}
 
 			if (_item.getDrugRec() != null) {
@@ -980,6 +931,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				else if (_item.getDrugRec().getLabel()
 						.equals("Not change necessary"))
 					descriptdsnc.setValue(true);
+				else if (_item.getDrugRec().getLabel().equals("None"))
+					descriptdsnone.setValue(true);
 			}
 
 			if (_item.getTestRec() != null) {
@@ -993,7 +946,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					descriptttna.setValue(true);
 				else if (_item.getTestRec().getLabel().equals("Not necessary"))
 					descripttnn.setValue(true);
-
+				else if (_item.getTestRec().getLabel().equals("None"))
+					descripttnone.setValue(true);
 			}
 
 			// statements, values are made up
@@ -1009,36 +963,42 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							"Concomitant medication concern")) {
 						descriptsmcc.setValue(true);
 					}
-					if (statemt.getLabel().equals("Variant")) {
-						descriptsvt.setValue(true);
-					}
-					if (statemt.getLabel().equals("Test")) {
-						descriptsts.setValue(true);
-					}
-					if (statemt.getLabel().equals("Biomarker")) {
-						descriptsbm.setValue(true);
+
+					if (statemt.getLabel().equals("Varient Frequency")) {
+						descriptppm.setValue(true);
 					}
 
-					// Listbox medical condition
-					/*
-					 * if (statemt.getLabel().equals("condition 0")) {
-					 * descriptsmc.setSelectedIndex(0); } else if
-					 * (statemt.getLabel().equals("condition 1")) {
-					 * descriptsmc.setSelectedIndex(1); } else if
-					 * (statemt.getLabel().equals("condition 2")) {
-					 * descriptsmc.setSelectedIndex(2); }
-					 */
 				}
 			}
 
-			// population prevalence
-			if (_item.getPrevalence() != null) {
+			// Varient
 
-				for (MLinkedResource propre : _item.getPrevalence()) {
+			if (_item.getVarient() != null) {
 
-					System.out.println("edit prevalence:" + propre.getLabel());
-					if (propre.getLabel().equals("Mentioned")) {
-						descriptppm.setValue(true);
+				if (_item.getVarient().getLabel().equals("unselected")) {
+					descriptsvtlb.setSelectedIndex(0);
+				}
+
+				String varientLabel = _item.getVarient().getLabel();
+				for (int i = 0; i < varient.length; i++) {
+					if (varient[i].equals(varientLabel)) {
+						descriptsvtlb.setSelectedIndex(i + 1);
+					}
+				}
+			}
+
+			// Test
+
+			if (_item.getTest() != null) {
+
+				if (_item.getTest().getLabel().equals("unselected")) {
+					descriptstslb.setSelectedIndex(0);
+				}
+
+				String testLabel = _item.getTest().getLabel();
+				for (int i = 0; i < test.length; i++) {
+					if (test[i].equals(testLabel)) {
+						descriptstslb.setSelectedIndex(i + 1);
 					}
 				}
 			}
@@ -1052,6 +1012,16 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			// medical condition
 			if (_item.getMedconditbody() != null) {
 				medconditbody.setText(_item.getMedconditbody());
+			}
+
+			// varient textarea
+			if (_item.getVarientBody() != null) {
+				descriptsvtbody.setText(_item.getVarientBody());
+			}
+
+			// test textarea
+			if (_item.getTestBody() != null) {
+				descriptstsbody.setText(_item.getTestBody());
 			}
 
 		} catch (Exception e) {
@@ -1122,6 +1092,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 					_item.setComment(commentBody.getText());
 
+					_item.setDrugOfInterest(getDrugOfInterest());
 					_item.setBiomarkers(getBioMarkers());
 					_item.setPKImpact(getPkImpact());
 					_item.setPdImpact(getPdImpact());
@@ -1130,7 +1101,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					_item.setMonitRec(getMonitRec());
 					_item.setStatements(getStatements());
 					_item.setTestRec(getTest_Re());
-					_item.setPrevalence(getPrevalence());
+					_item.setVarient(getVarient());
+					_item.setTest(getTest());
+					_item.setVarientBody(descriptsvtbody.getText());
+					_item.setTestBody(descriptstsbody.getText());
 					_item.setAllelesbody(allelesbody.getText());
 					_item.setMedconditbody(medconditbody.getText());
 

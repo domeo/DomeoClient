@@ -13,6 +13,14 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 
 	private MSPLPharmgxUsage pharmgxUsage;
 	
+	public MLinkedResource getDrugOfInterest() {
+		return pharmgxUsage.getDrugOfInterest();
+	}
+
+	public void setDrugOfInterest(MLinkedResource drugofinterest) {
+		pharmgxUsage.setDrugOfInterest(drugofinterest);
+	}
+	
 	public MLinkedResource getBiomarkers() {
 		return pharmgxUsage.getBiomarkers();
 	}
@@ -97,14 +105,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	public void setTestRec(MLinkedResource testRec){
 	    pharmgxUsage.setTestRec(testRec);
 	}
-	
-	public Set<MLinkedResource> getPrevalence() {
-		return pharmgxUsage.getPrevalence();
-	}
-
-	public void setPrevalence(Set<MLinkedResource> prevalence) {
-		pharmgxUsage.setPrevalence(prevalence);
-	}
 
 	public String getAllelesbody() {
 		return pharmgxUsage.getAllelesbody();
@@ -120,6 +120,38 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 
 	public void setMedconditbody(String mediconditbody) {
 	    pharmgxUsage.setMedconditbody(mediconditbody);
+	}
+	
+	public MLinkedResource getVarient(){
+	    return pharmgxUsage.getVarient();
+	}
+
+	public void setVarient(MLinkedResource varient){
+	    pharmgxUsage.setVarient(varient);
+	}
+	
+	public MLinkedResource getTest(){
+	    return pharmgxUsage.getTest();
+	}
+
+	public void setTest(MLinkedResource test){
+	    pharmgxUsage.setTest(test);
+	}
+	
+	public String getVarientBody() {
+	    return pharmgxUsage.getVarientbody();
+	}
+
+	public void setVarientBody(String varientbody) {
+	    pharmgxUsage.setVarientbody(varientbody);
+	}
+	
+	public String getTestBody() {
+	    return pharmgxUsage.getTestbody();
+	}
+
+	public void setTestBody(String testbody) {
+	    pharmgxUsage.setTestbody(testbody);
 	}
 	
 	@Override

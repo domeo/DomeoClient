@@ -52,7 +52,7 @@ public class CSPLsCard extends ACardComponent {
 
 	private int _index = -1;
 	private MSPLsAnnotation _annotation;
-	String statements_str = "", prevalence_str="";
+	String statements_str = "", prevalence_str = "";
 	@UiField
 	VerticalPanel body;
 	@UiField
@@ -63,7 +63,8 @@ public class CSPLsCard extends ACardComponent {
 	// section statements
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
-			test, statement, biomarkers, prevalence, allelesbody, medconditbody;
+			testrec, statement, biomarkers, allelesbody, medconditbody, test,
+			varient, drugOfInterest;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -166,7 +167,6 @@ public class CSPLsCard extends ACardComponent {
 					dialog.show();
 
 				}
-
 			});
 
 			System.out.println("Images are loaded in UI");
@@ -182,13 +182,20 @@ public class CSPLsCard extends ACardComponent {
 			if (_annotation != null) {
 				MSPLPharmgxUsage dataUsage = _annotation.getPharmgxUsage();
 
+				if (dataUsage.getDrugOfInterest() != null) {
+					String drugIStr = dataUsage.getDrugOfInterest().getLabel();
+					drugOfInterest.setText(drugIStr);
+				} else {
+					drugOfInterest.setText("undefined");
+				}
+
 				if (dataUsage.getBiomarkers() != null) {
 					String bioStr = dataUsage.getBiomarkers().getLabel();
 					biomarkers.setText(bioStr);
 				} else {
 					biomarkers.setText("undefined");
 				}
-			
+
 				if (dataUsage.getPkImpact() != null) {
 
 					String pkimpactStr = dataUsage.getPkImpact().getLabel();
@@ -228,9 +235,9 @@ public class CSPLsCard extends ACardComponent {
 
 				if (dataUsage.getTestRec() != null) {
 					String testRec = dataUsage.getTestRec().getLabel();
-					test.setText(testRec);
+					testrec.setText(testRec);
 				} else {
-					test.setText("undefined");
+					testrec.setText("undefined");
 				}
 
 				if (dataUsage.getStatements() != null) {
@@ -247,27 +254,47 @@ public class CSPLsCard extends ACardComponent {
 					statement.setText("undefined");
 				}
 
-				if (dataUsage.getPrevalence() != null) {
-					int count = 2;
-					for (MLinkedResource mr : _annotation.getPharmgxUsage()
-							.getPrevalence()) {
-						prevalence_str += mr.getLabel().toString() + " ";
-						if (count <= 0)
-							break;
-						count++;
+				// varient
+
+				if ((dataUsage.getVarientbody() != null && !dataUsage
+						.getVarientbody().trim().equals(""))
+						|| dataUsage.getVarient() != null) {
+
+					if (dataUsage.getVarientbody() != null
+							&& !dataUsage.getVarientbody().trim().equals("")) {
+						varient.setText(dataUsage.getVarientbody());
+
+					} else if (!dataUsage.getVarient().getLabel()
+							.equals("unselected")) {
+						varient.setText(dataUsage.getVarient().getLabel());
 					}
-					prevalence.setText(prevalence_str);
-				} else {
-					prevalence.setText("undefined");
-				}
-				
+				} else
+					varient.setText("undefined");
+
+				// test
+
+				if ((dataUsage.getTestbody() != null && !dataUsage
+						.getTestbody().trim().equals(""))
+						|| dataUsage.getTest() != null) {
+
+					if (dataUsage.getTestbody() != null
+							&& !dataUsage.getTestbody().trim().equals("")) {
+						test.setText(dataUsage.getTestbody());
+
+					} else if (!dataUsage.getTest().getLabel()
+							.equals("unselected")) {
+						test.setText(dataUsage.getTest().getLabel());
+					}
+				} else
+					test.setText("undefined");
+
 				if (dataUsage.getAllelesbody() != null) {
 					String allelesStr = dataUsage.getAllelesbody();
 					allelesbody.setText(allelesStr);
 				} else {
 					allelesbody.setText("undefined");
 				}
-				
+
 				if (dataUsage.getMedconditbody() != null) {
 					String medconditStr = dataUsage.getMedconditbody();
 					medconditbody.setText(medconditStr);
@@ -275,9 +302,7 @@ public class CSPLsCard extends ACardComponent {
 					medconditbody.setText("undefined");
 				}
 			}
-			
-			
-			
+
 			System.out.println("load values of labels");
 
 			if (SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {

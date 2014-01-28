@@ -91,7 +91,8 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String html2 = "</table></body></html>";
 
 			String labels = "<tr bgcolor='#EEE'><td>Biomarker</td><td>PK Impact</td><td>PD Impact</td><td>Drug Rec</td>"
-					+ "<td>Dose Rec</td><td>Monitoring Rec</td><td>Test</td><td>Statement</td><td>Prevalence</td><td>Alleles</td></tr>";
+					+ "<td>Dose Rec</td><td>Monitoring Rec</td><td>Test Rec</td><td>Statement</td><td>Varient</td>"
+					+ "<td>Test</td><td>Alleles</td><td>Medical Condition</td></tr>";
 
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {
@@ -141,12 +142,33 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			} else {
 				testRecStr = "undefined";
 			}
-			
+
+			String varientStr;
+			if (pharmgx.getVarient() != null) {
+				varientStr = pharmgx.getVarient().getLabel();
+			} else {
+				varientStr = "undefined";
+			}
+
+			String testStr;
+			if (pharmgx.getTest() != null) {
+				testStr = pharmgx.getTest().getLabel();
+			} else {
+				testStr = "undefined";
+			}
+
 			String allelesStr;
 			if (pharmgx.getAlleles() != null) {
 				allelesStr = pharmgx.getAlleles().getLabel();
 			} else {
 				allelesStr = "undefined";
+			}
+
+			String medicalStr;
+			if (pharmgx.getMedicalCondition() != null) {
+				medicalStr = pharmgx.getMedicalCondition().getLabel();
+			} else {
+				medicalStr = "undefined";
 			}
 
 			String statementsStr = "";
@@ -163,26 +185,14 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 				statementsStr = "undefined";
 			}
 
-			String prevalenceStr = "";
-			if (_annotation.getPharmgxUsage().getPrevalence() != null) {
-				int count = 2;
-				for (MLinkedResource mr : _annotation.getPharmgxUsage()
-						.getPrevalence()) {
-					prevalenceStr += mr.getLabel().toString() + " ";
-					if (count <= 0)
-						break;
-					count++;
-				}
-			} else {
-				prevalenceStr = "undefined";
-			}
-
 			String values = "<tr bgcolor='#F0F8FF'><td>" + biomarkerStr
 					+ "</td><td>" + pkimpactStr + "</td>" + "<td>"
 					+ pdimpackStr + "</td><td>" + drugRecStr + "</td><td>"
 					+ doseRecStr + "</td><td>" + monRecStr + "</td><td>"
-					+ testRecStr + "</td><td>" + statementsStr + "</td><td>"
-					+ prevalenceStr + "</td><td>" + allelesStr + "</td></tr>";
+					+ testRecStr + "</td><td>" + statementsStr
+					+ "</td><td>" + varientStr + "</td><td>" + testStr
+					+ "</td><td>" + allelesStr + "</td><td>" + medicalStr
+					+ "</td></tr>";
 
 			sb2.append(html1);
 

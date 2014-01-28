@@ -85,6 +85,16 @@
 		</g:HorizontalPanel>
 
 		<g:HorizontalPanel>
+		
+		<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="drugOIlabel" styleName='{style.tablelabel}'>Drug of Interest</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="drugOfInterest" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+		
 			
 			<g:VerticalPanel>
 				<g:HorizontalPanel>
@@ -143,11 +153,11 @@
 
 			<g:VerticalPanel>
 				<g:HorizontalPanel>
-					<g:Label ui:field="testlabel" styleName='{style.tablelabel}'>Test</g:Label>
+					<g:Label ui:field="testreclabel" styleName='{style.tablelabel}'>Test Rec</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
-					<g:Label ui:field="test" styleName='{style.tablevalue}'></g:Label>
-				</g:HorizontalPanel>
+			 	<g:HorizontalPanel>
+					<g:Label ui:field="testrec" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel> 
 			</g:VerticalPanel>
 
 			<g:VerticalPanel>
@@ -159,12 +169,21 @@
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 			
-			<g:VerticalPanel>
+				<g:VerticalPanel>
 				<g:HorizontalPanel>
-					<g:Label ui:field="prevalencelabel" styleName='{style.tablelabel}'>Prevalence</g:Label>
+					<g:Label ui:field="varientlabel" styleName='{style.tablelabel}'>Varient</g:Label>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
-					<g:Label ui:field="prevalence" styleName='{style.tablevalue}'></g:Label>
+					<g:Label ui:field="varient" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="testlabel" styleName='{style.tablelabel}'>Test</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="test" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 			

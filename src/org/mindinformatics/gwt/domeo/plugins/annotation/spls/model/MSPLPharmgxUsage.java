@@ -13,17 +13,12 @@ public class MSPLPharmgxUsage {
 	private String individualUri; // Individual Uniform Resource Identifier
 	private String allelesbody;
 	private String medconditbody;
+	private String comment;
+	private String varientbody;
+	private String testbody;
 	
 	public Long getLocalId() {
 		return localId;
-	}
-
-	public String getMedconditbody() {
-		return medconditbody;
-	}
-
-	public void setMedconditbody(String medconditbody) {
-		this.medconditbody = medconditbody;
 	}
 
 	public void setLocalId(Long localId) {
@@ -39,7 +34,6 @@ public class MSPLPharmgxUsage {
 	}
 
 	// tags in the pharmgx model are the object of SIO predicates
-	private String comment;
 
 	public String getComment() {
 		return comment;
@@ -64,6 +58,30 @@ public class MSPLPharmgxUsage {
 	// These are the linked resources associated with the pharmgx annotation
 	// MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 	// drugRecResource, monitRecResource, testRecResource;
+
+	public MLinkedResource getVarient() {
+		return pharmgx.getVarient();
+	}
+
+	public void setVarient(MLinkedResource varient) {
+		pharmgx.setVarient(varient);
+	}
+
+	public MLinkedResource getTest() {
+		return pharmgx.getTest();
+	}
+
+	public void setTest(MLinkedResource test) {
+		pharmgx.setTest(test);
+	}
+	
+	public MLinkedResource getDrugOfInterest() {
+		return pharmgx.getDrugOfInterest();
+	}
+
+	public void setDrugOfInterest(MLinkedResource drugofinterest) {
+		pharmgx.setDrugOfInterest(drugofinterest);
+	}
 
 	public MLinkedResource getBiomarkers() {
 		return pharmgx.getBiomarkers();
@@ -129,14 +147,6 @@ public class MSPLPharmgxUsage {
 		pharmgx.setStatementsResource(statements);
 	}
 
-	public Set<MLinkedResource> getPrevalence() {
-		return pharmgx.getPrevalence();
-	}
-
-	public void setPrevalence(Set<MLinkedResource> prevalence) {
-		pharmgx.setPrevalence(prevalence);
-	}
-
 	public String getAllelesbody() {
 		return allelesbody;
 	}
@@ -144,6 +154,29 @@ public class MSPLPharmgxUsage {
 	public void setAllelesbody(String allelesbody) {
 		this.allelesbody = allelesbody;
 	}
-	
 
+	public String getMedconditbody() {
+		return medconditbody;
+	}
+
+	public void setMedconditbody(String medconditbody) {
+		this.medconditbody = medconditbody;
+	}
+
+	public String getVarientbody() {
+		return varientbody;
+	}
+
+	public void setVarientbody(String varientbody) {
+		this.varientbody = varientbody;
+	}
+
+	public String getTestbody() {
+		return testbody;
+	}
+
+	public void setTestbody(String testbody) {
+		this.testbody = testbody;
+	}
+	
 }

@@ -172,6 +172,123 @@
 
 				<g:VerticalPanel styleName='{style.leftColumn}'>
 
+					<!-- Drug of Interest -->
+					<g:HorizontalPanel>
+						<g:Label>Drug of Interest: </g:Label>
+
+						<g:ListBox ui:field="descriptdoi" name="descriptdoi"
+							visibleItemCount='1'>
+							<g:item value="0">unselected</g:item>
+							<g:item value="1">Abacivir</g:item>
+							<g:item value="2">Aripiprazole</g:item>
+							<g:item value="3">Arsenic_Trioxide</g:item>
+							<g:item value="4">Atomoxetine</g:item>
+							<g:item value="5">Atorvastatin</g:item>
+							<g:item value="0">Azathioprine</g:item>
+							<g:item value="0">Boceprevir</g:item>
+							<g:item value="0">Brentuximab_Vedotin</g:item>
+							<g:item value="0">Busulfan</g:item>
+							<g:item value="0">Capecitabine</g:item>
+							<g:item value="0">Carbamazepine</g:item>
+							<g:item value="0">Carisoprodol</g:item>
+							<g:item value="0">Carvedilol</g:item>
+							<g:item value="0">Celecoxib</g:item>
+							<g:item value="0">Cetuximab</g:item>
+							<g:item value="0">Cevimeline</g:item>
+							<g:item value="0">Chlordiazepoxide_and_Amitriptyline</g:item>
+							<g:item value="0">Chloroquine</g:item>
+							<g:item value="0">Cisplatin</g:item>
+							<g:item value="0">Citalopram</g:item>
+							<g:item value="0">Clobazam</g:item>
+							<g:item value="0">Clomiphene</g:item>
+							<g:item value="0">Clomipramine</g:item>
+							<g:item value="0">Clopidogrel</g:item>
+							<g:item value="0">Clozapine</g:item>
+							<g:item value="0">Codeine</g:item>
+							<g:item value="0">Crizotinib</g:item>
+							<g:item value="0">Dapsone</g:item>
+							<g:item value="0">Dasatinib</g:item>
+							<g:item value="0">Denileukin_Diftitox</g:item>
+							<g:item value="0">Desipramine</g:item>
+							<g:item value="0">Dexlansoprazole</g:item>
+							<g:item value="0">Dextromethorphan_and_Quinidine</g:item>
+							<g:item value="0">Diazepam</g:item>
+							<g:item value="0">Doxepin</g:item>
+							<g:item value="0">Drospirenone_and_Estradiol</g:item>
+							<g:item value="0">Erlotinib</g:item>
+							<g:item value="0">Esomeprazole</g:item>
+							<g:item value="0">Exemestane</g:item>
+							<g:item value="0">Everolimus</g:item>
+							<g:item value="0">Fluorouracil</g:item>
+							<g:item value="0">Fluoxetine</g:item>
+							<g:item value="0">Fluoxetine_and_Olanzapine</g:item>
+							<g:item value="0">Flurbiprofen</g:item>
+							<g:item value="0">Fluvoxamine</g:item>
+							<g:item value="0">Fulvestrant</g:item>
+							<g:item value="0">Galantamine</g:item>
+							<g:item value="0">Iloperidone</g:item>
+							<g:item value="0">Imatinib</g:item>
+							<g:item value="0">Imipramine</g:item>
+							<g:item value="0">Indacaterol</g:item>
+							<g:item value="0">Irinotecan</g:item>
+							<g:item value="0">Isosorbide</g:item>
+							<g:item value="0">Ivacaftor</g:item>
+							<g:item value="0">Lapatinib</g:item>
+							<g:item value="0">Lenalidomide</g:item>
+							<g:item value="0">Letrozole</g:item>
+							<g:item value="0">Maraviroc</g:item>
+							<g:item value="0">Mercaptopurine</g:item>
+							<g:item value="0">Metoprolol</g:item>
+							<g:item value="0">Modafinil</g:item>
+							<g:item value="0">Nefazodone</g:item>
+							<g:item value="0">Nilotinib</g:item>
+							<g:item value="0">Nortriptyline</g:item>
+							<g:item value="0">Omeprazole</g:item>
+							<g:item value="0">Panitumumab</g:item>
+							<g:item value="0">Pantoprazole</g:item>
+							<g:item value="0">Paroxetine</g:item>
+							<g:item value="0">Peginterferon_alfa-2b</g:item>
+							<g:item value="0">Perphenazine</g:item>
+							<g:item value="0">Pertuzumab</g:item>
+							<g:item value="0">Phenytoin</g:item>
+							<g:item value="0">Pimozide</g:item>
+							<g:item value="0">Prasugrel</g:item>
+							<g:item value="0">Pravastatin</g:item>
+							<g:item value="0">Propafenone</g:item>
+							<g:item value="0">Propranolol</g:item>
+							<g:item value="0">Protriptyline</g:item>
+							<g:item value="0">Quinidine</g:item>
+							<g:item value="0">Rabeprazole</g:item>
+							<g:item value="0">Rasburicase</g:item>
+							<g:item value="0">Rifampin</g:item>
+							<g:item value="0">Isoniazid</g:item>
+							<g:item value="0">Pyrazinamide</g:item>
+							<g:item value="0">Risperidone</g:item>
+							<g:item value="0">Sodium_Phenylacetate</g:item>
+							<g:item value="0">Sodium_Benzoate</g:item>
+							<g:item value="0">Sodium_Phenylbutyrate</g:item>
+							<g:item value="0">Tamoxifen</g:item>
+							<g:item value="0">Telaprevir</g:item>
+							<g:item value="0">Terbinafine</g:item>
+							<g:item value="0">Tetrabenazine</g:item>
+							<g:item value="0">Thioguanine</g:item>
+							<g:item value="0">Thioridazine</g:item>
+							<g:item value="0">Ticagrelor</g:item>
+							<g:item value="0">Tolterodine</g:item>
+							<g:item value="0">Tositumomab</g:item>
+							<g:item value="0">Tramadol_and_Acetaminophen</g:item>
+							<g:item value="0">Trastuzumab</g:item>
+							<g:item value="0">Tretinoin</g:item>
+							<g:item value="0">Trimipramine</g:item>
+							<g:item value="0">Valproic_Acid</g:item>
+							<g:item value="0">Vemurafenib</g:item>
+							<g:item value="0">Venlafaxine</g:item>
+							<g:item value="0">Voriconazole</g:item>
+							<g:item value="0">Warfarin</g:item>
+
+						</g:ListBox>
+					</g:HorizontalPanel>
+
 					<!-- BioMarkers -->
 					<g:HorizontalPanel>
 						<g:Label>Biomarker: </g:Label>
@@ -217,8 +334,7 @@
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>PK Impact:</g:Label>
-						<g:Hyperlink ui:field="pklink">description
-						</g:Hyperlink>
+
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
@@ -253,7 +369,7 @@
 					<g:HorizontalPanel styleName='{style.panel}'>
 						<g:RadioButton ui:field="descriptpkni" name="descriptpk"
 							checked="false">Not important</g:RadioButton>
-					<g:RadioButton ui:field="descriptpknone" name="descriptpk"
+						<g:RadioButton ui:field="descriptpknone" name="descriptpk"
 							checked="false">None</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -271,18 +387,21 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="descriptpdir" name="descriptpd"
-							checked="false">Influence response</g:RadioButton>
-						<g:RadioButton ui:field="descriptpdni" name="descriptpd"
-							checked="false">Not important</g:RadioButton>
-					</g:HorizontalPanel>
-
-					<g:HorizontalPanel styleName='{style.panel}'>
 						<g:RadioButton ui:field="descriptpdie" name="descriptpd"
 							checked="false">Increased Efficacy</g:RadioButton>
 						<g:RadioButton ui:field="descriptpdde" name="descriptpd"
 							checked="false">Decreased Efficacy</g:RadioButton>
 					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="descriptpdir" name="descriptpd"
+							checked="false">Influence response</g:RadioButton>
+						<g:RadioButton ui:field="descriptpdni" name="descriptpd"
+							checked="false">Not important</g:RadioButton>
+						<g:RadioButton ui:field="descriptpdnone" name="descriptpd"
+							checked="false">None</g:RadioButton>
+					</g:HorizontalPanel>
+
 
 
 					<g:VerticalPanel styleName='{style.panel}'>
@@ -302,39 +421,6 @@
 
 					<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
 
-						<!--Statement refers to any of the following concepts: -->
-
-						<g:HorizontalPanel styleName='{style.titlebarright}'>
-							<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement refers
-								to any of the following concepts:</g:Label>
-						</g:HorizontalPanel>
-
-						<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
-							<g:CheckBox ui:field="descriptsai" name="descript"
-								styleName='{style.elementType}' text="Active ingredient" />
-							<g:CheckBox ui:field="descriptsmcc" name="descript"
-								styleName='{style.elementType}' text="Concomitant medication concern" />
-							<g:CheckBox ui:field="descriptsvt" name="descript"
-								styleName='{style.elementType}' text="Variant" />
-						</g:HorizontalPanel>
-
-						<g:HorizontalPanel ui:field='header9' styleName='{style.panel}'>
-
-							<!-- <g:VerticalPanel> <g:ListBox ui:field="descriptsmc" name="descript" 
-								visibleItemCount='1'> <g:item value="0">condition 0</g:item> <g:item value="1">condition 
-								1</g:item> <g:item value="2">condition 2</g:item> </g:ListBox> </g:VerticalPanel> -->
-
-							<g:VerticalPanel>
-								<g:CheckBox ui:field="descriptsts" name="descript"
-									styleName='{style.elementType}' text="Test" />
-							</g:VerticalPanel>
-
-							<g:VerticalPanel>
-								<g:CheckBox ui:field="descriptsbm" name="descript"
-									styleName='{style.elementType}' text="Biomarker" />
-							</g:VerticalPanel>
-
-						</g:HorizontalPanel>
 
 						<!-- drug selection -->
 
@@ -347,16 +433,18 @@
 								checked="false" text="Alternative" />
 							<g:RadioButton ui:field="descriptdsca" name="descriptds"
 								checked="false" text="Change Administration" />
+							<g:RadioButton ui:field="descriptdsam" name="descriptds"
+								checked="false" text="Add medication" />
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
-							<g:RadioButton ui:field="descriptdsam" name="descriptds"
-								checked="false" text="Add medication" />
+
 							<g:RadioButton ui:field="descriptdsnr" name="descriptds"
 								checked="false" text="Not restart" />
 							<g:RadioButton ui:field="descriptdsnc" name="descriptds"
 								checked="false" text="Not change" />
-
+							<g:RadioButton ui:field="descriptdsnone" name="descriptds"
+								checked="false" text="None" />
 						</g:HorizontalPanel>
 
 
@@ -372,16 +460,18 @@
 								checked="false" text="Decrease from baseline" />
 							<g:RadioButton ui:field="descriptdrifb" name="descriptdr"
 								checked="false" text="Increase from baseline" />
+							<g:RadioButton ui:field="descriptdrnc" name="descriptdr"
+								checked="false" text="Not change" />
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel ui:field='header6' styleName='{style.panel}'>
-							<g:RadioButton ui:field="descriptdrnc" name="descriptdr"
-								checked="false" text="Not change" />
+
 							<g:RadioButton ui:field="descriptdrus" name="descriptdr"
 								checked="false" text="Use specific" />
 							<g:RadioButton ui:field="descriptdrcs" name="descriptdr"
 								checked="false" text="Change schedule" />
-
+							<g:RadioButton ui:field="descriptdrnone" name="descriptdr"
+								checked="false" text="None" />
 						</g:HorizontalPanel>
 						<!-- monitoring -->
 
@@ -398,9 +488,13 @@
 								checked="false" text="Recommended" />
 							<g:RadioButton ui:field="descriptmnc" name="descriptmr"
 								checked="false" text="Not necessary" />
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel styleName='{style.panel}'>
 							<g:RadioButton ui:field="descriptmcms" name="descriptmr"
 								checked="false" text="Change monitoring strategy" />
-
+							<g:RadioButton ui:field="descriptmcnone" name="descriptmr"
+								checked="false" text="None" />
 						</g:HorizontalPanel>
 
 						<!-- test -->
@@ -416,21 +510,87 @@
 								checked="false">Recommended</g:RadioButton>
 							<g:RadioButton ui:field="descriptttna" name="descripttst"
 								checked="false">Take note that avaliable</g:RadioButton>
-							<g:RadioButton ui:field="descripttnn" name="descripttst"
-								checked="false">Not necessary</g:RadioButton>
 
-						</g:HorizontalPanel>
-
-						<!-- population prevalence -->
-
-						<g:HorizontalPanel styleName='{style.titlebarright}'>
-							<g:Label ui:field="prevalence" styleName='{style.titleLeft}'>Population
-								Prevalence:</g:Label>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
+							<g:RadioButton ui:field="descripttnn" name="descripttst"
+								checked="false">Not necessary</g:RadioButton>
+							<g:RadioButton ui:field="descripttnone" name="descripttst"
+								checked="false">None</g:RadioButton>
+						</g:HorizontalPanel>
+
+						<!--Statement refers to any of the following concepts: -->
+
+						<g:HorizontalPanel styleName='{style.titlebarright}'>
+							<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement refers
+								to any of the following concepts:</g:Label>
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
+							<g:CheckBox ui:field="descriptsai" name="descript"
+								styleName='{style.elementType}' text="Active ingredient" />
+							<g:CheckBox ui:field="descriptsmcc" name="descript"
+								styleName='{style.elementType}' text="Concomitant medication concern" />
 							<g:CheckBox ui:field="descriptppm" name="descriptppm"
-								styleName='{style.elementType}' text="mentioned" />
+								styleName='{style.elementType}' text="Varient Frequency" />
+						</g:HorizontalPanel>
+
+
+						<!-- Varient -->
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<!-- <g:CheckBox ui:field="descriptsvt" name="descript" styleName='{style.elementType}' 
+								text="Variant" /> -->
+
+							<g:Label>Varient: </g:Label>
+							<g:ListBox ui:field="descriptsvtlb" name="descript"
+								visibleItemCount='1'>
+								<g:item value="0">unselected</g:item>
+								<g:item value="1">poor-metabolizer</g:item>
+								<g:item value="2">intermediate-metabolizer</g:item>
+								<g:item value="3">extensive-metabolizer</g:item>
+								<g:item value="4">ultra-metabolizer</g:item>
+								<g:item value="5">intermediate-activity</g:item>
+								<g:item value="6">low-or-absent-activity</g:item>
+								<g:item value="7">HLA-B*1502</g:item>
+								<g:item value="8">HLA-B*5701</g:item>
+
+							</g:ListBox>
+
+							<g:TextArea ui:field='descriptsvtbody' styleName='{style.alleles}'></g:TextArea>
+						</g:HorizontalPanel>
+
+						<!-- test -->
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<!-- <g:CheckBox ui:field="descriptsts" name="descript" styleName='{style.elementType}' 
+								text="Test" /> -->
+
+							<g:Label>Test: </g:Label>
+							<g:ListBox ui:field="descriptstslb" name="descript"
+								visibleItemCount='1'>
+								<g:item value="0">unselected</g:item>
+								<g:item value="1">gene-haplotype-positive</g:item>
+								<g:item value="2">gene-haplotype-negative</g:item>
+								<g:item value="3">gene-SNP-positive</g:item>
+								<g:item value="4">gene-SNP-negative</g:item>
+								<g:item value="5">fused-gene-positive</g:item>
+								<g:item value="6">fused-gene-negative</g:item>
+								<g:item value="7">gene-expression-level-high</g:item>
+								<g:item value="8">gene-expression-level-low</g:item>
+								<g:item value="9">biomarker-positive</g:item>
+								<g:item value="10">biomarker-negative</g:item>
+								<g:item value="11">biomarker-level-high</g:item>
+								<g:item value="12">biomarker-level-low</g:item>
+								<g:item value="13">poor-metabolizer-positive</g:item>
+								<g:item value="14">poor-metabolizer-negative</g:item>
+								<g:item value="15">ultra-metabolizer-positive</g:item>
+								<g:item value="16">ultra-metabolizer-negative</g:item>
+								<g:item value="17">chromosomal-aberration-positive</g:item>
+								<g:item value="18">chromosomal-aberration-negative</g:item>
+
+							</g:ListBox>
+
+							<g:TextArea ui:field='descriptstsbody' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
