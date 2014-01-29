@@ -161,8 +161,7 @@
 			</g:SimplePanel>
 		</g:HorizontalPanel>
 		<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
-			<g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>Pharmgx
-				Annotation:</g:Label>
+			<g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>Annotation of clinical pharmacogenomics statements:</g:Label>
 			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
 		</g:HorizontalPanel>
 
@@ -333,7 +332,7 @@
 					<!-- PK Impact -->
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
-						<g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>PK Impact:</g:Label>
+						<g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>Pharmacokinetic Impact:</g:Label>
 
 					</g:HorizontalPanel>
 
@@ -370,13 +369,13 @@
 						<g:RadioButton ui:field="descriptpkni" name="descriptpk"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpknone" name="descriptpk"
-							checked="false">None</g:RadioButton>
+							checked="false">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
 					<!-- PD Impact -->
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
-						<g:Label ui:field="pdLabel" styleName='{style.titleLeft}'>PD Impact:</g:Label>
+						<g:Label ui:field="pdLabel" styleName='{style.titleLeft}'>Pharmacodynamic Impact:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
@@ -399,7 +398,7 @@
 						<g:RadioButton ui:field="descriptpdni" name="descriptpd"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpdnone" name="descriptpd"
-							checked="false">None</g:RadioButton>
+							checked="false">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
 
@@ -425,7 +424,7 @@
 						<!-- drug selection -->
 
 						<g:HorizontalPanel styleName='{style.titlebarright}'>
-							<g:Label ui:field="selection" styleName='{style.titleLeft}'>Drug selection:</g:Label>
+							<g:Label ui:field="selection" styleName='{style.titleLeft}'>Drug Selection Recommendation:</g:Label>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
@@ -444,15 +443,14 @@
 							<g:RadioButton ui:field="descriptdsnc" name="descriptds"
 								checked="false" text="Not change" />
 							<g:RadioButton ui:field="descriptdsnone" name="descriptds"
-								checked="false" text="None" />
+								checked="false" text="No mention" />
 						</g:HorizontalPanel>
 
 
 						<!-- dose -->
 
 						<g:HorizontalPanel styleName='{style.titlebarright}'>
-							<g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose
-								Recommendation:</g:Label>
+							<g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose Recommendation:</g:Label>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel ui:field='header5' styleName='{style.panel}'>
@@ -471,7 +469,7 @@
 							<g:RadioButton ui:field="descriptdrcs" name="descriptdr"
 								checked="false" text="Change schedule" />
 							<g:RadioButton ui:field="descriptdrnone" name="descriptdr"
-								checked="false" text="None" />
+								checked="false" text="No mention" />
 						</g:HorizontalPanel>
 						<!-- monitoring -->
 
@@ -494,13 +492,13 @@
 							<g:RadioButton ui:field="descriptmcms" name="descriptmr"
 								checked="false" text="Change monitoring strategy" />
 							<g:RadioButton ui:field="descriptmcnone" name="descriptmr"
-								checked="false" text="None" />
+								checked="false" text="No mention" />
 						</g:HorizontalPanel>
 
 						<!-- test -->
 
 						<g:HorizontalPanel styleName='{style.titlebarright}'>
-							<g:Label ui:field="TestLabel" styleName='{style.titleLeft}'>Test:</g:Label>
+							<g:Label ui:field="TestLabel" styleName='{style.titleLeft}'>Test Recommendation:</g:Label>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
@@ -517,14 +515,13 @@
 							<g:RadioButton ui:field="descripttnn" name="descripttst"
 								checked="false">Not necessary</g:RadioButton>
 							<g:RadioButton ui:field="descripttnone" name="descripttst"
-								checked="false">None</g:RadioButton>
+								checked="false">No mention</g:RadioButton>
 						</g:HorizontalPanel>
 
 						<!--Statement refers to any of the following concepts: -->
 
 						<g:HorizontalPanel styleName='{style.titlebarright}'>
-							<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement refers
-								to any of the following concepts:</g:Label>
+							<g:Label ui:field="statement" styleName='{style.titleLeft}'>Concepts that the Statement Refers To:</g:Label>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
@@ -533,16 +530,16 @@
 							<g:CheckBox ui:field="descriptsmcc" name="descript"
 								styleName='{style.elementType}' text="Concomitant medication concern" />
 							<g:CheckBox ui:field="descriptppm" name="descriptppm"
-								styleName='{style.elementType}' text="Varient Frequency" />
+								styleName='{style.elementType}' text="Variant Frequency" />
 						</g:HorizontalPanel>
 
 
-						<!-- Varient -->
+						<!-- Variant -->
 						<g:HorizontalPanel styleName='{style.panel}'>
 							<!-- <g:CheckBox ui:field="descriptsvt" name="descript" styleName='{style.elementType}' 
 								text="Variant" /> -->
 
-							<g:Label>Varient: </g:Label>
+							<g:Label>Common Variant: </g:Label>
 							<g:ListBox ui:field="descriptsvtlb" name="descript"
 								visibleItemCount='1'>
 								<g:item value="0">unselected</g:item>
@@ -554,9 +551,10 @@
 								<g:item value="6">low-or-absent-activity</g:item>
 								<g:item value="7">HLA-B*1502</g:item>
 								<g:item value="8">HLA-B*5701</g:item>
-
 							</g:ListBox>
-
+						</g:HorizontalPanel>
+						<g:HorizontalPanel>	
+							<g:Label>Other Variants) (use commas to separate): </g:Label>
 							<g:TextArea ui:field='descriptsvtbody' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 
@@ -565,7 +563,7 @@
 							<!-- <g:CheckBox ui:field="descriptsts" name="descript" styleName='{style.elementType}' 
 								text="Test" /> -->
 
-							<g:Label>Test: </g:Label>
+							<g:Label>Common Test: </g:Label>
 							<g:ListBox ui:field="descriptstslb" name="descript"
 								visibleItemCount='1'>
 								<g:item value="0">unselected</g:item>
@@ -589,7 +587,9 @@
 								<g:item value="18">chromosomal-aberration-negative</g:item>
 
 							</g:ListBox>
-
+						</g:HorizontalPanel>
+						<g:HorizontalPanel>
+						<g:Label>Other Test(s) (use commas to separate): </g:Label>
 							<g:TextArea ui:field='descriptstsbody' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 

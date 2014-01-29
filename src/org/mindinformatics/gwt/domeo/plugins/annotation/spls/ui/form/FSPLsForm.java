@@ -583,15 +583,15 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		if (descriptppm.getValue()) {
 
 			statements.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "", "Varient Frequency",
-					"varient frequency", SPL_POC_PREFIX + "Statements",
+					SPL_POC_PREFIX + "", "Variant Frequency",
+					"variant frequency", SPL_POC_PREFIX + "Statements",
 					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
 		}
 
 		return statements;
 	}
 
-	// Varient
+	// Variant
 	public MLinkedResource getVarient() {
 
 		int indexbm = descriptsvtlb.getSelectedIndex();
@@ -599,7 +599,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
 				+ "variant", descriptsvtlb.getItemText(indexbm),
 				"it is highly possible changes with time.", SPL_POC_PREFIX
-						+ "Varient", SPL_POC_PREFIX,
+						+ "Variant", SPL_POC_PREFIX,
 				"U of Pitt SPL Pharmgx Annotation");
 	}
 
@@ -964,14 +964,14 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 						descriptsmcc.setValue(true);
 					}
 
-					if (statemt.getLabel().equals("Varient Frequency")) {
+					if (statemt.getLabel().equals("Variant Frequency")) {
 						descriptppm.setValue(true);
 					}
 
 				}
 			}
 
-			// Varient
+			// Variant
 
 			if (_item.getVarient() != null) {
 
