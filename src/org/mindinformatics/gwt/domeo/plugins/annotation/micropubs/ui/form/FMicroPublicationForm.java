@@ -58,8 +58,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.ISelectionP
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.picker.IStatementsSearchObjectContainer;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.ui.picker.StatementsSearchWidget;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.search.terms.SearchTermsWidget;
+import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
-import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.IPubmedSearchObjectContainer;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedSearchWidget;
 import org.mindinformatics.gwt.framework.component.qualifiers.ui.ISearchTermsContainer;
@@ -131,9 +131,12 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	private ArrayList<Widget> tabs = new ArrayList<Widget>();
 	
+	@UiField HorizontalPanel headerPanel;
+	@UiField HorizontalPanel buttonsPanel;
+	@UiField HorizontalPanel buttonsPanelSpacer;
+	
 	@UiField VerticalPanel container;
 	//@UiField FlowPanel newQualifiers;
-	@UiField HorizontalPanel buttonsPanel;
 	@UiField ListBox annotationSet;
 	@UiField VerticalPanel rightColumn;
 	@UiField TabBar tabBar;
@@ -179,7 +182,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
 		yesButton.setWidth("78px");
-		yesButton.setHeight("26px");
+		yesButton.setHeight("22px");
 		yesButton.setResource(Domeo.resources.acceptLittleIcon());
 		yesButton.setText("Apply");
 		yesButton.addClickHandler(new ClickHandler() {
@@ -227,7 +230,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		tabs.add(imagesListPickerWidget);
 		tabBar.addTab("Images");
 		
-		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MPubMedDocument) {
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
 			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
 			tabs.add(referencesListPickerWidget);
 			tabBar.addTab("References");
@@ -382,7 +385,7 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 		tabs.add(imagesListPickerWidget);
 		tabBar.addTab("Images");
 		
-		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MPubMedDocument) {
+		if(_domeo.getPersistenceManager().getCurrentResource() instanceof MDocumentResource) {
 			referencesListPickerWidget = new ReferencesListPickerWidget(_domeo, this, false);
 			tabs.add(referencesListPickerWidget);
 			tabBar.addTab("References");
@@ -466,16 +469,21 @@ public class FMicroPublicationForm extends AFormComponent implements IResizable,
 	
 	@Override
 	public void resized() {
-		this.setWidth((Window.getClientWidth() - 340) + "px");
-		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
-		for(Widget tab:tabs) {
-			//if(tab instanceof IResizable) ((IResizable)tab).resized();
-			tab.setWidth((Window.getClientWidth() - 615) + "px");
-		}
+//		this.setWidth((Window.getClientWidth() - 340) + "px");
+//		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
+//		for(Widget tab:tabs) {
+//			//if(tab instanceof IResizable) ((IResizable)tab).resized();
+//			tab.setWidth((Window.getClientWidth() - 615) + "px");
+//		}
+//		
+		evidenceTabs.setHeight(Math.max(20, (Window.getClientHeight() - 490)) + "px");
+		supportPanel.setHeight(Math.max(20, (Window.getClientHeight() - 520)) + "px");
+//		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
 		
-		evidenceTabs.setHeight((Window.getClientHeight() - 490) + "px");
-		supportPanel.setHeight((Window.getClientHeight() - 520) + "px");
-		rightColumn.setHeight((Window.getClientHeight() - 340) + "px");
+		
+		buttonsPanelSpacer.setWidth(Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
+		headerPanel.setCellWidth(buttonsPanelSpacer, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
 	}
 	
 	@Override

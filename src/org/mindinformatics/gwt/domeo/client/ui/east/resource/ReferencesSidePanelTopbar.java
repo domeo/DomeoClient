@@ -43,7 +43,6 @@ public class ReferencesSidePanelTopbar  extends Composite {
 		_domeo = domeo;
 		
 		initWidget(binder.createAndBindUi(this));
-		
 		retrieveReferences.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -51,7 +50,8 @@ public class ReferencesSidePanelTopbar  extends Composite {
 			}
 		});
 
-		if(!((TextPreference) _domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.EXTRACT_REFERENCES)).getValue().equals(IBibliographicParameters.SKIP)) {
+		if(!(_domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.EXTRACT_REFERENCES)==null)
+				&& !((TextPreference) _domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.EXTRACT_REFERENCES)).getValue().equals(IBibliographicParameters.SKIP)) {
 			if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_PERFORM_ANNOTATION_OF_REFERENCES)).getValue()) {
 				showReferences.setValue(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_SHOW_ANNOTATION_OF_REFERENCES)).getValue());
 				showReferences.addClickHandler(new ClickHandler() {
@@ -68,7 +68,9 @@ public class ReferencesSidePanelTopbar  extends Composite {
 		} else {
 			showReferences.setVisible(false);
 		}
-		if(!((TextPreference) _domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.EXTRACT_CITATIONS)).getValue().equals(IBibliographicParameters.SKIP)) {
+		
+		if(!(_domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.EXTRACT_CITATIONS)==null)
+				&& !((TextPreference) _domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.EXTRACT_CITATIONS)).getValue().equals(IBibliographicParameters.SKIP)) {
 			if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_PERFORM_ANNOTATION_OF_CITATIONS)).getValue()) {
 				showCitations.setValue(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_SHOW_ANNOTATION_OF_CITATIONS)).getValue());
 				showCitations.addClickHandler(new ClickHandler() {
@@ -93,9 +95,11 @@ public class ReferencesSidePanelTopbar  extends Composite {
 	
 	public void refresh(boolean isBibliographicSetEmpty, boolean isBibliographicSetVirtual) {
 		
-		boolean retrieveReferencesFlag = 
+		_domeo.getLogger().debug(this, "6a");
+		boolean retrieveReferencesFlag = _domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.RETRIEVE_REFERENCES)!=null &&
 			((TextPreference) _domeo.getPreferences().getPreferenceItem(IBibliographicParameters.COMPONENT, IBibliographicParameters.RETRIEVE_REFERENCES))
 			.getValue().equals(IBibliographicParameters.ENABLED);
+		_domeo.getLogger().debug(this, "6b");
 		
 		if(!retrieveReferencesFlag || !isBibliographicSetEmpty) {
 			if(!isBibliographicSetVirtual) {

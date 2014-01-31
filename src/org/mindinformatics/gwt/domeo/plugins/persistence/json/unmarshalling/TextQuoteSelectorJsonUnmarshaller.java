@@ -1,12 +1,15 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
+import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
+import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsTextQuoteSelector;
 
@@ -22,14 +25,16 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 	public TextQuoteSelectorJsonUnmarshaller(IDomeo domeo) { _domeo = domeo;}
 	
 	@Override
-	public MTextQuoteSelector unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json) {
-		return (MTextQuoteSelector) super.unmarshallWithoutValidating(manager, json);
+	public MTextQuoteSelector unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		return (MTextQuoteSelector) super.unmarshallWithoutValidating(manager, json, set, selectors);
 	}
 	
 	@Override
-	public MTextQuoteSelector unmarshall(JsonUnmarshallingManager manager, JavaScriptObject json, String validation) {
+	public MTextQuoteSelector unmarshall(JsonUnmarshallingManager manager, JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		// Triggers input validation (skip when validation is OFF: IUnmarshaller.OFF_VALIDATION)
-		validation(json, validation);
+		validation(json, validation, set, selectors);
 
 		JsTextQuoteSelector jsonSelector = (JsTextQuoteSelector) json;
 		MTextQuoteSelector selector = AnnotationFactory.clonePrefixSuffixTextSelector(
@@ -43,7 +48,8 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 	}
 
 	@Override
-	public void validation(JavaScriptObject json, String validation) {
+	public void validation(JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		verifyType(json, MTextQuoteSelector.TYPE);
 		
 		JsTextQuoteSelector jsonSelector = (JsTextQuoteSelector) json;

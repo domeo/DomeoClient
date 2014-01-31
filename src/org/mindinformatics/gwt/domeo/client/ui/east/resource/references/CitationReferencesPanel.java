@@ -1,10 +1,10 @@
-package org.mindinformatics.gwt.domeo.client.ui.east.resource;
+package org.mindinformatics.gwt.domeo.client.ui.east.resource.references;
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
-import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedReferenceSearchPanel;
+import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.search.PubmedReferencesSearchPanel;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
@@ -84,7 +84,7 @@ public class CitationReferencesPanel extends Composite implements IRefreshableCo
 									@Override
 									public void onClick(ClickEvent event) {
 										_domeo.getLogger().command(this, "Open panel for adding a citation for reference #" + index);
-										PubmedReferenceSearchPanel afp = new PubmedReferenceSearchPanel(_domeo, index, 800);
+										PubmedReferencesSearchPanel afp = new PubmedReferencesSearchPanel(_domeo, index, 800);
 										new EnhancedGlassPanel(_domeo, afp, afp.getTitle(), 800, false, false, false);
 									}},
 								Domeo.resources.littleBookAddIcon().getSafeUri().asString(), "Add reference metadata");

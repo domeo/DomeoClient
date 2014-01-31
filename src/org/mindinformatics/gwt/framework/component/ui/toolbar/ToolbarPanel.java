@@ -28,6 +28,7 @@ public class ToolbarPanel extends Composite implements IInitializableComponent {
 	@UiField HorizontalPanel toolbarPanel;
 	@UiField HorizontalPanel leftPanel;
 	@UiField HorizontalPanel rightPanel;
+	@UiField HorizontalPanel brandingPanel;
 	
 	private IApplication _application;
 	
@@ -81,6 +82,18 @@ public class ToolbarPanel extends Composite implements IInitializableComponent {
 		addToRightPanel(widget);
 		rightPanel.setCellWidth(widget,width);
 	}
+	
+	public void addToBrandingPanel(Widget widget) {
+		if(widget instanceof IToolbarItem) items.add((IToolbarItem)widget);
+		brandingPanel.add(widget);
+	}
+	
+	public void addToBrandingPanel(Widget widget, String width) {
+		addToBrandingPanel(widget);
+		brandingPanel.setCellWidth(widget,width);
+		toolbarPanel.setCellWidth(brandingPanel, width);
+	}
+	
 	
 	public void registerGroup(ToolbarItemsGroup group) {
 		groups.add(group);

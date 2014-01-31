@@ -20,6 +20,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.src.CurationUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 import org.mindinformatics.gwt.framework.component.styles.src.StylesManager;
 import org.mindinformatics.gwt.framework.widget.CustomButton;
@@ -308,9 +309,11 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 							
 						}
 						
-						provenance.add(editIcon);
-						provenance.setCellWidth(editIcon, "20px");
-						provenance.setCellHorizontalAlignment(editIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+						if(SelectorUtils.isOnMultipleTargets(annotation.getSelectors()) || !(annotation instanceof MHighlightAnnotation)) {
+							provenance.add(editIcon);
+							provenance.setCellWidth(editIcon, "20px");
+							provenance.setCellHorizontalAlignment(editIcon, HasHorizontalAlignment.ALIGN_RIGHT);
+						}
 						provenance.add(deleteIcon);
 						provenance.setCellWidth(deleteIcon, "20px");
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_RIGHT);
@@ -370,19 +373,23 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 					Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
 				Resources resource = Domeo.resources;
 				
-				Image commentIcon = new Image(resource.littleCommentIcon());
-				commentIcon.setTitle("Comment on Item");
-				commentIcon.setStyleName(ATileComponent.tileResources.css().button());
-				commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
-				commentIcon.addClickHandler(new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						_curationPopup.hide();
-					}
-				});
-				socialBar.add(commentIcon);
-				socialBar.add(new Label("(10)"));
+				int counter = _domeo.getAnnotationPersistenceManager().getCommentsOnAnnotationCounter(annotation);
+				if(counter>0) {
+					Image commentIcon = new Image(resource.littleCommentIcon());
+					commentIcon.setTitle("Comment on Item");
+					commentIcon.setStyleName(ATileComponent.tileResources.css().button());
+					commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
+					commentIcon.addClickHandler(new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							_curationPopup.hide();
+						}
+					});
+					socialBar.add(commentIcon);
+					socialBar.add(new Label("(" + counter + ")"));
+				}
 				
+				/*
 				Image usersIcon = new Image(resource.usersIcon());
 				usersIcon.setTitle("Involved users");
 				usersIcon.setStyleName(ATileComponent.tileResources.css().button());
@@ -397,6 +404,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 				socialBar.setCellWidth(usersIcon, "24px");
 				socialBar.setCellHorizontalAlignment(usersIcon, HasHorizontalAlignment.ALIGN_RIGHT);
 				socialBar.add(new Label("(2)"));
+				*/
 			}
 		} catch (Exception e) {
 			_domeo.getLogger().exception(this, "create social bar" +  e.getMessage());
@@ -416,7 +424,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 	    }
 	    if(alreadyExisting!=null) {
 	        annotation.getAnnotatedBy().remove(alreadyExisting);
-	        _domeo.getPersistenceManager().removeAnnotation(alreadyExisting); 
+	        _domeo.getPersistenceManager().removeAnnotation(alreadyExisting, false); 
 	    }
         
         MCurationToken ann = CurationFactory.createCurationToken(_domeo, 

@@ -3,7 +3,6 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.persistence.testing;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
-import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.APersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetHandler;

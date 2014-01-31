@@ -1,7 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.lens;
 
-import java.util.Date;
-
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationRightsPopup;
@@ -42,6 +40,7 @@ public class DiscussionSummaryListLens extends Composite implements ILensRefresh
 	private DiscussionSummaryListLens _this;
 	private CommentSidePanel _parent;
 	
+	
 	@UiField VerticalPanel body;
 	@UiField FocusPanel wrapper;
 	@UiField Label nameEditableField;
@@ -61,14 +60,14 @@ public class DiscussionSummaryListLens extends Composite implements ILensRefresh
 		
 		initWidget(binder.createAndBindUi(this));
 		
-		/*
+		
 		wrapper.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				parent.displayAannotationSetInfo(_set);
+				parent.displayCommentsSetInfo(_set);
 			}
 		});
-		*/
+		
 		
 		/*
 		nameEditableField.addValueChangeHandler(new ValueChangeHandler<String>() {

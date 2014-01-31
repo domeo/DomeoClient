@@ -56,6 +56,22 @@ public class ApplicationUtils {
 	    window.open (url,"mywindow");
 	}-*/;
 	
+	public native static String getDefaultSetPrivacy() /*-{
+		return $wnd.defaultSetPrivacy;
+	}-*/;
+	
+	public native static String getProvideExamplesUrls() /*-{
+		return $wnd.provideExamplesUrls;
+	}-*/;
+	
+	public native static String getDebugActivated() /*-{
+		return $wnd.debugActivated;
+	}-*/;
+	
+	public native static String getProxyProtocol() /*-{
+		return $wnd.proxyProtocol;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;

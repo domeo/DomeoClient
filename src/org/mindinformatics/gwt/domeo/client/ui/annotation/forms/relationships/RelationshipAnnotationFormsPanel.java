@@ -289,4 +289,9 @@ public class RelationshipAnnotationFormsPanel extends AFormsManager implements I
 	@Override
 	public void reportException(String message) {
 	}
+	
+	@Override
+	public int getContainerWidth() {
+		return main.getOffsetWidth();
+	}
 }

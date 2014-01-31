@@ -92,12 +92,14 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 			//type.setText("Claim:");
 			_domeo.getLogger().debug(this, "t00 ");
 			text.setHTML(_annotation.getMicroPublication().getArgues().getText());
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			_domeo.getLogger().debug(this, "t01 ");
 			int statementsCounter = 0;
 			int dataCounter = 0;

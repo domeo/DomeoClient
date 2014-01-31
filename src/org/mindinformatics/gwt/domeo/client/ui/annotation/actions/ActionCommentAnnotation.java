@@ -32,7 +32,7 @@ public class ActionCommentAnnotation {
 			@Override
 			public void onClick(ClickEvent event) {
 				domeo.getLogger().command(AnnotationFrameWrapper.LOG_CATEGORY_COMMENT_ANNOTATION, clazz, "Item " + annotation.getClass().getName() + "-"+annotation.getLocalId());
-				ASideTab tab = domeo.getDiscussionSideTab();
+				ASideTab tab = domeo.getLinearCommentsSideTab();//.getDiscussionSideTab();
 				ASidePanel panel = domeo.getSidePanelsFacade().getPanelForTab(tab);
 				List<MAnnotation> annotations = new ArrayList<MAnnotation>();
 				//annotations.add(annotation);

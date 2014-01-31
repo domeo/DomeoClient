@@ -37,6 +37,7 @@ public class TermsSearch extends Composite {
 	 
 	 @UiField TextBox searchBox;
 	 @UiField Image rightSide;
+	 @UiField Image optionsList;
 	 @UiField Label numberResults;
 	 @UiField Label filterLabel;
 	 @UiField ListBox sourcesLabels;
@@ -64,6 +65,12 @@ public class TermsSearch extends Composite {
 		rightSide.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				_widget.performSearch(searchBox.getText());
+			}
+		});
+		
+		optionsList.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				_widget.visualizeAvailableVocabularies();
 			}
 		});
 		 

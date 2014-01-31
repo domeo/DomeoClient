@@ -26,8 +26,8 @@ public class AnnotationSetViewerSidePanelTopbar  extends Composite {
 	private AnnotationForSetSidePanel _annotationSidePanel;
 	
 	@UiField Label titleLabel;
-	@UiField SimplePanel explorePanel;
-	@UiField Label exploreLabel;
+	//@UiField SimplePanel explorePanel;
+	//@UiField Label exploreLabel;
 	@UiField SimplePanel closePanel;
 
 	public AnnotationSetViewerSidePanelTopbar(IDomeo domeo, final AnnotationForSetSidePanel annotationSidePanel,
@@ -47,13 +47,13 @@ public class AnnotationSetViewerSidePanelTopbar  extends Composite {
 				
 			}
 		});
-		exploreLabel.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				Window.alert("Explore to be implemented");	
-			}
-		});
-		explorePanel.add(exploreIcon);
+//		exploreLabel.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				Window.alert("Explore to be implemented");	
+//			}
+//		});
+//		explorePanel.add(exploreIcon);
 		//printPanel.add(new Image(Domeo.resources.printLittleIcon()));
 		Image closeIcon = new Image(Domeo.resources.closeLittleIcon());
 		closeIcon.addClickHandler(new ClickHandler() {

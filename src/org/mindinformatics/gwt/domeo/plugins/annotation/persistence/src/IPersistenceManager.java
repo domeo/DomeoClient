@@ -11,6 +11,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MBibliographicSet;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.model.JsAnnotationSetSummary;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
@@ -25,10 +26,16 @@ public interface IPersistenceManager {
 	public boolean addAnnotation(MAnnotation annotation, boolean newSet);
 	public boolean addAnnotation(MAnnotation annotation, MAnnotationSet set);
 	public boolean addAnnotationOfAnnotation(MCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set);
+	public boolean addAnnotationOfAnnotation(MLinearCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set);
+	public int getCommentsOnAnnotationCounter(MAnnotation target);
 	public boolean addAnnotationOfAnnotation(MAnnotation annotation, MAnnotation tagetAnnotation, MAnnotationSet set);
 	public void bindAnnotationOfAnnotation(MAnnotation annotation, MAnnotation targetAnnotation);
 	
+	public Set<MAnnotation> getListOfAnnotationCommentedOn();
 	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set);
+	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set, boolean isPublic);
+	
+	
 	public Collection<Long> getAnnotationOfTargetResource();
 	public int getAnnotationOfTargetResourceSize();
 	
@@ -44,11 +51,13 @@ public interface IPersistenceManager {
 	public boolean isCurrentSet();
 	public MAnnotationSet getCurrentSet();
 	public ArrayList<MAnnotationSet> getAllUserSets();
+	public boolean isAnnotationSetLoaded(String setId);
 	public ArrayList<MAnnotationSet> getAllDiscussionSets();
 	public ArrayList<MLinkedResource> getAllTerms();
 	public boolean updateAnnotationAnnotationSet(MAnnotation annotation, MAnnotationSet set);
-	public void removeAnnotation(MAnnotation annotation);
+	public void removeAnnotation(MAnnotation annotation, boolean mark);
 	public void removeAnnotationSet(MAnnotationSet annotationSet);
+	public void removeDiscussionSet(MAnnotationSet annotationSet);
 	public MAnnotationSet getSetByLocalId();
 	public MAnnotation getAnnotationByLocalId(Long localId);
 	public MAnnotation getAnnotationByUri(String uri);

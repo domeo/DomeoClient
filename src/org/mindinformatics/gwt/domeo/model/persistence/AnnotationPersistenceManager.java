@@ -19,10 +19,17 @@ import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MBibliographicSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
+import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
+import org.mindinformatics.gwt.framework.component.ICommentsRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.persistance.src.PersistenceManager;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.component.ui.east.ASidePanel;
+import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.user.client.Element;
 
@@ -104,8 +111,12 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	private HashMap<String, MLinkedResource> termsByUrl =
 		new  HashMap<String, MLinkedResource>();
 	
-	private HashMap<Long, Integer> annotationsOfAnnotationsCounter =
-			new  HashMap<Long, Integer>();
+	
+	public HashMap<MAnnotation, ArrayList<MLinearCommentAnnotation>> commentsOnAnnotationCache 
+		= new HashMap<MAnnotation, ArrayList<MLinearCommentAnnotation>>();
+	
+//	private HashMap<Long, Integer> annotationsOfAnnotationsCounter =
+//			new  HashMap<Long, Integer>();
 	
 	/**
 	 * Constructor
@@ -141,10 +152,22 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 				annotation.setNewVersion(false);
 				annotation.setVersionNumber("<test>");
 			}
-			//set.setHasChanged(false);
+			set.setHasChanged(false);
 			set.setVersionNumber("<test>");
 			set.setLastSavedOn(new Date());
 		}
+		
+		for(MAnnotationSet set:allDiscussionsSets) {
+			for(MAnnotation annotation: set.getAnnotations()) {
+				annotation.setHasChanged(false);
+				annotation.setNewVersion(false);
+				annotation.setVersionNumber("<test>");
+			}
+			set.setHasChanged(false);
+			set.setVersionNumber("<test>");
+			set.setLastSavedOn(new Date());
+		}
+		
 		((IDomeo)_application).refreshAnnotationComponents();
 	}
 	
@@ -180,6 +203,17 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	
 	public ArrayList<MAnnotationSet> getAllUserSets() {
 		return allUserSets;
+	}
+	
+	public boolean isAnnotationSetLoaded(String setId) {
+		_application.getLogger().debug(this, "isAnnotationSetLoaded 1: " + setId);
+		for(MAnnotationSet userSet: allUserSets) {
+			_application.getLogger().debug(this, "isAnnotationSetLoaded 2 " + userSet.getIndividualUri());
+			if(userSet.getIndividualUri().equals(setId)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public ArrayList<MAnnotationSet> getAllDiscussionSets() {
@@ -231,8 +265,12 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	}
 	
 	private void setDefaultAnnotationSetAccessPolicy(MAnnotationSet set) {
-		//TODO Check default access policy in the preferences
-		((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPublic(set);
+		String defaultSetPrivacy = ApplicationUtils.getDefaultSetPrivacy();
+		if(defaultSetPrivacy!=null && defaultSetPrivacy.trim().equals("private"))
+			((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPrivate(set);
+		else 
+			((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPublic(set);
+		
 	}
 	
 	public MAnnotationSet getSetByAnnotationId(Long id) {
@@ -304,18 +342,68 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 
 	public void removeAnnotationSet(MAnnotationSet set) {
 		_application.getLogger().command("REMOVING SET", this, "with id " + set.getLocalId());
+		
+		//ArrayList<MAnnotationSet> allSets = new ArrayList<MAnnotationSet>();
+		//allSets.addAll(allDiscussionsSets);
+		//allSets.addAll(allUserSets);
+		
 		for(MAnnotationSet _set: allUserSets) {
 			if(_set.getLocalId()==set.getLocalId()) {
 				if(currentSet.getLocalId().equals(set.getLocalId())) {
 					currentSet = null;
 				}
-				((IDomeo)_application).removeAnnotationSetTab(set);
-				// reset set permissions
-				((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
-				((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set);
-				allUserSets.remove(_set);
-				((IDomeo)_application).refreshAnnotationComponents();
-				break;
+				if(_set.getLastSavedOn()==null) {
+					//Window.alert("Unsaved " + _set.getLabel());
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					// reset set permissions
+					((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, false);
+					allUserSets.remove(_set);
+					((IDomeo)_application).refreshAnnotationComponents();
+					break;
+				} else {
+					//Window.alert("Saved");
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, true);
+					_set.setIsDeleted(true);
+					_set.setHasChanged(true);
+					((IDomeo)_application).refreshAnnotationComponents();
+				}
+			}
+		}
+	}
+	
+	public void removeDiscussionSet(MAnnotationSet set) {
+		_application.getLogger().command("REMOVING SET", this, "with id " + set.getLocalId());
+		
+//		ArrayList<MAnnotationSet> allSets = new ArrayList<MAnnotationSet>();
+//		allSets.addAll(allDiscussionsSets);
+//		allSets.addAll(allUserSets);
+		
+		for(MAnnotationSet _set: allDiscussionsSets) {
+			if(_set.getLocalId()==set.getLocalId()) {
+				if(currentSet.getLocalId().equals(set.getLocalId())) {
+					currentSet = null;
+				}
+				if(_set.getLastSavedOn()==null) {
+					//Window.alert("Unsaved " + _set.getLocalId());
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					// reset set permissions
+					((IDomeo)_application).getAnnotationAccessManager().clearAnnotationSet(_set);
+					removeAnnotationOfTargetResource(_set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, false);
+					allDiscussionsSets.remove(_set);
+					
+					((IDomeo)_application).refreshAnnotationComponents();
+					break;
+				} else {
+					//Window.alert("Saved");
+					((IDomeo)_application).removeAnnotationSetTab(set);
+					((IDomeo)_application).getContentPanel().getAnnotationFrameWrapper().removeAnnotationSetAnnotation(_set, true);
+					_set.setIsDeleted(true);
+					_set.setHasChanged(true);
+					((IDomeo)_application).refreshAnnotationComponents();
+				}
 			}
 		}
 	}
@@ -329,9 +417,10 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	private void initializeAnnotationCache() {
 		annotationsByTypeCache = new  HashMap<String, HashMap<Long, MAnnotation>>();
 		annotationsByLocalIdCache = new  HashMap<Long, MAnnotation>();
+		commentsOnAnnotationCache = new HashMap<MAnnotation, ArrayList<MLinearCommentAnnotation>>();
 		annotationsOfTargetResource.clear();
 		annotationsOfAnnotations.clear();
-		annotationsOfAnnotationsCounter.clear();
+//		annotationsOfAnnotationsCounter.clear();
 		annotationsOfImages.clear();
 		
 		for(ICache c:caches.values()) {
@@ -352,8 +441,42 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	public boolean addAnnotationOfAnnotation(MCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set) {
 		//Window.alert("Cache comment");
 		//annotationsOfAnnotationsCounter.put(annotation.getLocalId(), arg1);
+		//cacheCommentOnAnnotation(targetAnnotation, annotation);
 		return addAnnotationOfAnnotation((MAnnotation)annotation, targetAnnotation, set);
 	}
+	
+	public boolean addAnnotationOfAnnotation(MLinearCommentAnnotation annotation, MAnnotation targetAnnotation, MAnnotationSet set) {
+		//Window.alert("Cache comment " + (targetAnnotation.getSelector() instanceof MTargetSelector));
+		
+		if(!(targetAnnotation.getSelector() instanceof MTargetSelector)) 
+			cacheCommentOnAnnotation(targetAnnotation, annotation);
+		return addAnnotationOfAnnotation((MAnnotation)annotation, targetAnnotation, set);
+	}
+	
+	// -------------------------------------------------------------------------------------------
+	public void cacheCommentOnAnnotation(MAnnotation target, MLinearCommentAnnotation comment) {
+		if(commentsOnAnnotationCache.containsKey(target)) {
+			ArrayList<MLinearCommentAnnotation> comments = commentsOnAnnotationCache.get(target);
+			comments.add(comment);
+		} else {
+			ArrayList<MLinearCommentAnnotation> comments = new ArrayList<MLinearCommentAnnotation>();
+			comments.add(comment);
+			commentsOnAnnotationCache.put(target, comments);
+		}
+	}
+	
+	public Set<MAnnotation> getListOfAnnotationCommentedOn() {
+		return commentsOnAnnotationCache.keySet();
+	}
+	
+	public int getCommentsOnAnnotationCounter(MAnnotation target) {
+		if(commentsOnAnnotationCache.containsKey(target)) {
+			return commentsOnAnnotationCache.get(target).size();
+		}
+		return 0;
+	}
+	// -------------------------------------------------------------------------------------------
+	
 	
 	/**
 	 * Adds an annotation item to the cache. This method indexes the item 
@@ -388,17 +511,15 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		return annotationsOfTargetResource.size();
 	}
 	
-//	public boolean addAnnotationOfTargetResource(MCommentAnnotation annotation, GenericResource targetResource, MAnnotationSet set) {
-//		//Window.alert("Cache comment");
-//		//annotationsOfAnnotationsCounter.put(annotation.getLocalId(), arg1);
-//		allDiscussionsSets.add(set);
-//		Window.alert("1 "+ allDiscussionsSets.size());
-//		return addAnnotationOfTargetResource((MAnnotation)annotation, targetResource, set);
-//	}
+	public void removeAnnotationOfTargetResource(MAnnotationSet set) {
+		for(MAnnotation ann: set.getAnnotations()) {
+			annotationsOfTargetResource.remove(ann.getLocalId());
+		}
+	}
 	
 	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set) {
 		try {
-			setDefaultAnnotationSetAccessPolicy(set);
+			//setDefaultAnnotationSetAccessPolicy(set);
 			allDiscussionsSets.add(set);
 			annotationsOfTargetResource.put(annotation.getLocalId(), targetResource);
 			return addAnnotation(annotation, set);
@@ -407,6 +528,19 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 			return false;
 		}
 	}
+	
+	public boolean addAnnotationOfTargetResource(MAnnotation annotation, MGenericResource targetResource, MAnnotationSet set, boolean isPublic) {
+		try {
+			if(isPublic) ((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPublic(set);
+			else setDefaultAnnotationSetAccessPolicy(set);
+			allDiscussionsSets.add(set);
+			annotationsOfTargetResource.put(annotation.getLocalId(), targetResource);
+			return addAnnotation(annotation, set);
+		} catch(Exception exc) {
+			_application.getLogger().exception(this, "The annotation creation failed " + annotation.getClass().getName() + "-" + annotation.getLocalId());
+			return false;
+		}
+	}		
 	
 	/**
 	 * Adds an annotation item to the cache. This method indexes the item 
@@ -502,13 +636,39 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 		return true;
 	}
 	
-	public void removeAnnotation(MAnnotation annotation) {	
+	public void removeAnnotation(MAnnotation annotation, boolean mark) {	
 		try {
+			if(annotation.getSelector() instanceof MAnnotationSelector) {
+				//Window.alert("removal " + annotation.getClass().getName());
+				if(annotation instanceof MCommentAnnotation) {
+					// Remove cross pointers if chaining is implemented
+					ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
+					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
+					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().addAll(anns);
+				} else if(annotation instanceof MLinearCommentAnnotation) {
+					ArrayList<MLinearCommentAnnotation> l = commentsOnAnnotationCache.get(((MAnnotationSelector)annotation.getSelector()).getAnnotation());
+					//Window.alert("removal b" +  l.size());
+					l.remove(annotation);
+					//Window.alert("removal a" +  l.size());
+					//Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
+					//ArrayList<MAnnotation> anns = annotation.getAnnotatedBy();
+					((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().remove(annotation);
+					//Window.alert("removal " + ((MAnnotationSelector)annotation.getSelector()).getAnnotation().getAnnotatedBy().size());
+					
+					ASideTab tab = ((IDomeo)_application).getLinearCommentsSideTab();//.getDiscussionSideTab();
+					ASidePanel panel = ((IDomeo)_application).getSidePanelsFacade().getPanelForTab(tab);
+					List<MAnnotation> annotations = new ArrayList<MAnnotation>();
+					//annotations.add(annotation);
+					ArrayList<MAnnotation>  anns= ((IDomeo)_application).getPersistenceManager().getAnnotationCascade(((MAnnotationSelector)annotation.getSelector()).getAnnotation(), true);
+					annotations.addAll(anns);
+					((ICommentsRefreshableComponent)panel).refresh(annotations);		
+				}
+			}
 			HashMap<Long, MAnnotation> annotationsByLocalId = annotationsByTypeCache.get(annotation.getClass().getName());
 			annotationsByLocalId.remove(annotation.getLocalId());
 			annotationsByLocalIdCache.remove(annotation.getLocalId());
 			MAnnotationSet set = annotationsSetsByAnnotationLocalIdCache.get(annotation.getLocalId());
-			set.removeAnnotation(annotation);
+			if(!mark) set.removeAnnotation(annotation);
 		} catch (Exception e) {
 			_application.getLogger().exception(this, e.getMessage());
 		}

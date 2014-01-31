@@ -6,7 +6,7 @@
 		.toolbar {
 			background-color: #eee;
 			/*background-color: #6D98AB;*/
-			height: 16px;
+			height: 31px;
 			width: 100%;
 			border-bottom: 2px #eee solid;
 		}
@@ -26,6 +26,10 @@
   		</g:cell>
   		<g:cell>
 	  		<g:HorizontalPanel ui:field='rightPanel' styleName='{style.rightPanel}'>
+	  		</g:HorizontalPanel>
+	  	</g:cell>
+	  	<g:cell>
+	  		<g:HorizontalPanel ui:field='brandingPanel' styleName='{style.rightPanel}'>
 	  		</g:HorizontalPanel>
 	  	</g:cell>
   	</g:HorizontalPanel>

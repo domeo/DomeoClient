@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.component.profiles.model.MProfile;
 
 import com.google.gson.JsonElement;
@@ -67,22 +68,285 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 			if(format.equals("json") && username.equals("admin")) {
 				if(request.equals("info")) {
 					PrintWriter out = resp.getWriter();
-
-					out.print("[{\"createdOn\":\"08/19/2013 09:46:12 -0400\","+
-						"\"createdBy\":[{\"@type\":\"foafx:Person\",\"foafx:name\":\"Dr. John Doe\",\"@id\":\"8a70347a4096d318014096d369480000\"}],"+
-						"\"plugins\":[{\"status\":\"disabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.qualifier\"}," +
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies\"},"+
-							"{\"status\":\"disabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.micropubs\"},"+
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.spls\"},"+
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI\"},"+
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmed\"},"+"" +
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral\"},"+
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.omim\"},"+
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.bioportal\"},"+
-							"{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.client.component.clipboard\"}],"+
-						"\"description\":\"All the tools that Domeo has to offer for biomedicine\","+
-						"\"name\":\"Complete Biomedical Profile\","+
-						"\"uuid\":\"8a70347a4096d318014096d36a5c0008\"}]");					
+			
+					out.print('[');
+					
+					out.print("{");
+					out.print("\"uuid\": \"");
+					out.print(profile.getUuid());
+					out.print("\",");
+					out.print("\"name\": \"");
+					out.print(profile.getName());
+					out.print("\",");
+					out.print("\"description\": \""); 
+					out.print(profile.getDescription());
+					out.print("\",");
+					out.print("\"createdOn\": \"");
+					out.print(dayTime.format(profile.getLastSavedOn()));
+					out.print("\",");
+					out.print("\"createdBy\": [");
+					out.print("{");
+					out.print("\"uuid\": \"");
+					out.print(profile.getLastSavedBy().getUuid());
+					out.print("\",");
+					out.print("\"@type\": \"");
+					out.print("foafx:Person");
+					out.print("\",");
+					out.print("\"name\": \"");
+					out.print(profile.getLastSavedBy().getName());
+					out.print("\"");
+					out.print("}");
+					out.print("],");
+					
+					// FEATURES
+					out.print("\"features\": [");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_ANALYZE);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_PREFERENCES);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_HELP);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_REFERENCE_SELF);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_QUALIFIERS_SELF);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_MY_BIBLIOGRAPHY);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_MY_RECOMMENDATIONS);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_BRANDING);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_SHARING);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_ADDRESSBAR);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_PRIVATE_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_GROUP_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_PUBLIC_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_EXTERNAL_ANNOTATION);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_TEXTMINING_SUMMARY);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("}");
+					
+					out.print("],");
+					
+			
+					// PLUGINS
+					out.print("\"plugins\": [");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.spls");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.micropubs");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmed");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.resource.omim");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.resource.bioportal");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.client.component.clipboard");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print(IProfile.FEATURE_QUALIFIERS_SELF);
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.feature.document.general.reference.self");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("disabled");
+					out.print("\"");
+					out.print("}");
+					out.print("]");
+					out.print("}");
+					out.print("]");
+					
 					out.flush();
 				} else if (request.equals("all")) {
 					PrintWriter out = resp.getWriter();

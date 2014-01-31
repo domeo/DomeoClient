@@ -6,4 +6,5 @@ public interface IUpdateProfileCallback {
 
 	public void updateCurrentProfile();
 	public HashMap<String, String> getPluginsStatus();
+	public HashMap<String, String> getFeaturesStatus();
 }

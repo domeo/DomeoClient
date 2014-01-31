@@ -1,7 +1,11 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+
+import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -20,23 +24,26 @@ public abstract class AUnmarshaller implements IUnmarshaller {
 	 * @param json			The JSON object to validate
 	 * @param validation	The type of validation to perform
 	 */
-	protected abstract void validation(JavaScriptObject json, String validation);
+	protected abstract void validation(JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors);
 	
 	/**
 	 * Forces unmarshalling without validation	
 	 * @param json		The JSON object to unmarshall
 	 * @return	The unmarshalled object
 	 */
-	public Object unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json) {
-		return unmarshall(manager, json, IUnmarshaller.OFF_VALIDATION);
+	public Object unmarshallWithoutValidating(JsonUnmarshallingManager manager, JavaScriptObject json, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		return unmarshall(manager, json, IUnmarshaller.OFF_VALIDATION, set, selectors);
 	}
 	
 	/*
 	 * (non-Javadoc)
 	 * @see org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.IUnmarshaller#validateInput(com.google.gwt.core.client.JavaScriptObject, java.lang.String)
 	 */
-	public void validateInput(JsonUnmarshallingManager manager, JavaScriptObject json, String validation) {
-		if(!validation.equals(IUnmarshaller.OFF_VALIDATION)) validation(json, validation);
+	public void validateInput(JsonUnmarshallingManager manager, JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		if(!validation.equals(IUnmarshaller.OFF_VALIDATION)) validation(json, validation, set, selectors);
 	}
 	
 	/**

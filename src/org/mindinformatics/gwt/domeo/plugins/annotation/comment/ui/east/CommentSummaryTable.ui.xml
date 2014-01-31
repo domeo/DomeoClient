@@ -19,7 +19,7 @@
 			padding-top: 4px;
 			padding-bottom: 4px;
 			width: 100%; 
-			border-bottom: 1px #bbb solid;
+			border-bottom: 0px #bbb solid;
 		}
 		
 		.bottomContent {
@@ -37,6 +37,13 @@
 			width: 434px;
 			border:1px solid #ddd;
 			padding: 3px;
+		}
+		
+		.buttonLabel {
+			cursor: pointer;
+			padding-left: 2px;
+			display: inline;
+			vertical-align: top;
 		}
 	</ui:style>
 

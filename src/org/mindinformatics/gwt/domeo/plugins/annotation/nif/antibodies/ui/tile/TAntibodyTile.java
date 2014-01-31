@@ -98,12 +98,14 @@ public class TAntibodyTile extends ATileComponent implements ITileComponent {
 			if(_annotation.getAntibodyUsage().getComment().trim().length()>0) 
 				note.setHTML("<b>Comment:</b>" + _annotation.getAntibodyUsage().getComment().trim());
 			link.setHTML(" <a target='_blank' href='" + _annotation.getAntibodyUsage().getAntibody().getUrl() + "'>(@AntibodyRegistry)</a>" );
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			
 			if(SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {
 				HorizontalPanel hp = new HorizontalPanel();

@@ -27,12 +27,12 @@ public class MicroPublicationFormProvider implements IFormGenerator {
 	
 	@Override
 	public AFormComponent getForm(AFormsManager manager) {
-		return new FMicroPublicationForm(_domeo, manager, true);
+		return new FMicroPublicationForm2(_domeo, manager, true);
 	}
 	
 	@Override
 	public AFormComponent getForm(AFormsManager manager, MAnnotation annotation) {
-		return new FMicroPublicationForm(_domeo,  manager, (MMicroPublicationAnnotation) annotation);
+		return new FMicroPublicationForm2(_domeo,  manager, (MMicroPublicationAnnotation) annotation);
 	}
 
 	@Override

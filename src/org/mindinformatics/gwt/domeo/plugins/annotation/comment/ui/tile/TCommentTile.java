@@ -1,3 +1,23 @@
+/*
+ * Copyright 2013 Massachusetts General Hospital
+ * 
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.tile;
 
 import java.util.Date;
@@ -94,9 +114,6 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 		try {
 			createProvenanceBar(provenance, _annotation);
 			
-			/*
-			MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(_annotation.getLocalId());
-*/
 			if(_annotation.getTitle()!=null && _annotation.getTitle().trim().length()>0) 
 				title.setText(_annotation.getTitle());
 			else 
@@ -105,12 +122,14 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 			
 			//type.setText("Comment:");
 			text.setText(_annotation.getText());
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			
 			injectButtons("", content, _annotation);
 			
@@ -152,6 +171,7 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 			showIcon.addClickHandler(ActionShowAnnotation.getClickHandler(_domeo, this, getAnnotation()));
 			step=2;
 			
+			/*
 			Image addCommentIcon = new Image(resource.addCommentIcon());
 			addCommentIcon.setTitle("Comment on item");
 			addCommentIcon.setStyleName(ATileComponent.tileResources.css().button());
@@ -173,6 +193,7 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 				}
 			});
 			step=4;
+			*/
 			
 			//final CommentsViewerPanel viewer = _viewer;
 			final MAnnotation ann = _annotation;
@@ -274,12 +295,12 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 							provenance.add(editIcon);
 							provenance.setCellWidth(editIcon, "22px");
 						}
-						provenance.add(addCommentIcon);
-						provenance.setCellHorizontalAlignment(addCommentIcon, HasHorizontalAlignment.ALIGN_LEFT);
-						provenance.setCellWidth(addCommentIcon, "22px");
-						provenance.add(commentBranchIcon);
-						provenance.setCellHorizontalAlignment(commentBranchIcon, HasHorizontalAlignment.ALIGN_LEFT);
-						provenance.setCellWidth(commentBranchIcon, "22px");
+//						provenance.add(addCommentIcon);
+//						provenance.setCellHorizontalAlignment(addCommentIcon, HasHorizontalAlignment.ALIGN_LEFT);
+//						provenance.setCellWidth(addCommentIcon, "22px");
+//						provenance.add(commentBranchIcon);
+//						provenance.setCellHorizontalAlignment(commentBranchIcon, HasHorizontalAlignment.ALIGN_LEFT);
+//						provenance.setCellWidth(commentBranchIcon, "22px");
 						provenance.add(deleteIcon);
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
 						provenance.setCellWidth(deleteIcon, "22px");
@@ -311,8 +332,8 @@ public class TCommentTile extends ATileComponent implements ITileComponent {
 					 
 					provenance.add(showIcon);
 					provenance.add(editIcon);
-					provenance.add(commentBranchIcon);
-					provenance.add(addCommentIcon);
+					//provenance.add(commentBranchIcon);
+					//provenance.add(addCommentIcon);
 					provenance.add(deleteIcon);
 				}
 			} else {

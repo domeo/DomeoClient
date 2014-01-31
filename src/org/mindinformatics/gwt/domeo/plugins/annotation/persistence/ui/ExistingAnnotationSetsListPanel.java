@@ -18,7 +18,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
@@ -70,6 +69,7 @@ public class ExistingAnnotationSetsListPanel extends Composite implements IIniti
 			toolbar.add(new GroupsAnnotationTopbar(_domeo, this));
 		}
 		
+		importButton.setEnabled(false);
 		importButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -104,6 +104,14 @@ public class ExistingAnnotationSetsListPanel extends Composite implements IIniti
 	@Override
 	public void refresh() {
 		//refresh(_application.getAnnotationPersistenceManager().getAllUserSets());
+		List<String> uuids = getSelected();
+		if(uuids.size()>0) {
+			importButton.setEnabled(true);
+			importButton.setText("Import " + uuids.size() + (uuids.size()==1?" Set":" Sets"));
+		} else {
+			importButton.setEnabled(false);
+			importButton.setText("Import");
+		}
 	}
 	
 	/**
@@ -120,9 +128,15 @@ public class ExistingAnnotationSetsListPanel extends Composite implements IIniti
 			// the panel refresh time
 			int counter=0;
 			setsList.clear();
-			for(JsoAnnotationSetSummary set: sets) {
-				JsAnnotationSetSummaryLens newLens = new JsAnnotationSetSummaryLens((IDomeo) _domeo, this, set);
+			for(JsoAnnotationSetSummary set: sets) {	
 				
+				JsAnnotationSetSummaryLens newLens;
+				if(_domeo.getAnnotationPersistenceManager().isAnnotationSetLoaded(set.getId())) {
+					newLens = new JsAnnotationSetSummaryLens((IDomeo) _domeo, this, set, true);
+				} else {
+					newLens = new JsAnnotationSetSummaryLens((IDomeo) _domeo, this, set);
+				}
+
 				setsList.add(newLens);
 				lenses.add(newLens);
 				/*

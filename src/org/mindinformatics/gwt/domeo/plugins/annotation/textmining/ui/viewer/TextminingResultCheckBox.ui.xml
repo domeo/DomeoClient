@@ -1,0 +1,23 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.outer {
+		    display:inline;
+		    white-space:nowrap;
+		    padding-right: 5px; 
+		}	 
+		.innerleft {
+			padding-left: 5px;
+		}
+		.inner {
+		    display:inline;
+		}	 
+	</ui:style>
+
+  	<g:HorizontalPanel ui:field='main' styleName='{style.outer}'>
+		<g:CheckBox ui:field="checkbox" styleName='{style.innerleft}'></g:CheckBox>
+		<g:HTML ui:field="label" styleName='{style.inner}'></g:HTML>
+  	</g:HorizontalPanel>
+</ui:UiBinder>

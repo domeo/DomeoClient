@@ -28,6 +28,18 @@ public interface Resources extends ClientBundle,
 		String tags();
 	}
 	
+	@Source("org/mindinformatics/gwt/domeo/client/icons/logo_icon16px.png")
+	ImageResource domeoLogoIcon();
+	
+	@Source("org/mindinformatics/gwt/domeo/client/icons/addCommentsIcon_16.png")
+	ImageResource adddCommentsIcon();
+	
+	@Source("org/mindinformatics/gwt/domeo/client/icons/commentsIcon_16.png")
+	ImageResource commentsIcon();
+	
+	@Source("org/mindinformatics/gwt/domeo/client/icons/commentIcon_16.png")
+	ImageResource commentIcon();
+	
 	@Source("org/mindinformatics/gwt/domeo/client/icons/domeo24x24.png")
 	ImageResource domeoLittleIcon();
 	
@@ -174,4 +186,11 @@ public interface Resources extends ClientBundle,
 	
 	@Source("org/mindinformatics/gwt/domeo/client/icons/arrow_top_left.png")
 	ImageResource annotationIcon();
+	
+	@Source("org/mindinformatics/gwt/domeo/client/icons/star-cold16x16.png")
+	ImageResource starColdIcon();
+	@Source("org/mindinformatics/gwt/domeo/client/icons/star-hot16x16.png")
+	ImageResource starHotIcon();
+	@Source("org/mindinformatics/gwt/domeo/client/icons/document-share16x16.png")
+	ImageResource shareDocumentIcon();
 }

@@ -13,11 +13,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlig
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -70,13 +67,16 @@ public class THighlightTile extends ATileComponent implements ITileComponent {
 			createProvenanceBar("", provenance, "Highlight", _annotation);
 
 			//type.setText("Highlight:");
-			text.setText("'" + SelectorUtils.getMatch(_annotation.getSelector()) + "'");
+			//text.setText("'" + SelectorUtils.getMatch(_annotation.getSelector()) + "'");
+			text.setText(SelectorUtils.getMatch(_annotation.getSelectors()));
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			
 			if(SelectorUtils.isOnMultipleTargets(_annotation.getSelectors())) {
 				HorizontalPanel hp = new HorizontalPanel();

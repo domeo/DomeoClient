@@ -6,7 +6,7 @@ import java.util.HashMap;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
-import org.mindinformatics.gwt.domeo.client.ui.east.resource.CitationReferencesPanel;
+import org.mindinformatics.gwt.domeo.client.ui.east.resource.references.CitationReferencesPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LDocumentResourceCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.model.MOpenTrialsDocument;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;

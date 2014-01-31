@@ -1,0 +1,53 @@
+Build 40
+=====================================
+ 40.0  Enhancement
+ 	Added build number in the start of the logging.
+ 
+ 40.1  Enhancement
+	Activated 'Retrieve Sets' in the 'Sets' right side panel. The resulting
+ 	panel shows only the existing sets that can be loaded and will not list 
+ 	those sets that are already loaded in the Annotator. 
+    
+ 40.2  Polishing
+ 	Commented out button 'Explore' for Annotation Set Tab as it is not yet
+ 	functional.   
+       
+ 40.3  Bug fix
+	Fixed the left border of the 'Discussion panel' and the resizing of the 
+ 	main panel so that it now takes the whole available space.
+ 	
+ 40.4  Bug fix
+    Deletion of comments now executes and updates the counter in the card
+    (popup) and refreshes the discussion side panel accordingly.
+    
+ 40.5  Enhancement
+    Yale Image finder Integration (partial)
+    
+ 40.6  Enhancement
+    Improvements for using the Qualifier Search Panel also for qualifiers 
+    targeting the full document (partial).
+   
+ 40.7  Enhancement
+   	Customizable access control. It is now possible to define which access
+   	levels are available: private, groups or public. It is in fact possible
+   	to switch off private, public and group access by adding the profile 
+   	features entries:
+   	org.mindinformatics.gwt.domeo.feature.general.access.groups = disabled
+   	org.mindinformatics.gwt.domeo.feature.general.access.private = disabled
+   	org.mindinformatics.gwt.domeo.feature.general.access.public = disabled
+   	It is important to make sure to have at least one level enabled.
+   	Also this feature interacts with the initialization default in the html
+   	page loading the annotator. Example
+   	- var defaultSetPrivacy = "public";
+   	This has to be private or public and the level has to be enabled.
+   	
+ 40.8  Integration (iCyrus) - Enhancement
+    Improved integration plugin with iCyrus that will enhance the mashups
+    in the images summary panel showing the metadata coming from the Yale
+    Image Finder. Title in bold, description and links to Yale and iCyrus.
+  
+ 40.9  Integration (iCyrus) - Enhancement
+    Increased timout to 20 seconds. Probably this should not make the 
+    pipeline wait.  
+    
+   	

@@ -1,6 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.resource.nif.search.antibodies;
 
-import java.util.HashMap;
 import java.util.Set;
 
 import com.google.gwt.core.client.GWT;

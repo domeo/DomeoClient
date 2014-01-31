@@ -42,7 +42,6 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		annotationSetJson.put(IDomeoOntology.annotates, new JSONString(annotationSet.getTargetResource().getUrl()));
 		manager.addResourceToSerialize(annotationSet.getTargetResource());
 		
-		
 		//  Creation
 		// --------------------------------------------------------------------
 		if(annotationSet.getCreatedBy()!=null) {
@@ -91,6 +90,7 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 		annotationSetJson.put(IPavOntology.lineageUri, nullable(annotationSet.getLineageUri()));
 		annotationSetJson.put(IPavOntology.versionNumber, nullable(annotationSet.getVersionNumber()));
 		annotationSetJson.put(IPavOntology.previousVersion, nullable(annotationSet.getPreviousVersion()));
+		annotationSetJson.put(IDomeoOntology.deleted, nullableBoolean(annotationSet.getIsDeleted()));
 		
 		return annotationSetJson;
 	}

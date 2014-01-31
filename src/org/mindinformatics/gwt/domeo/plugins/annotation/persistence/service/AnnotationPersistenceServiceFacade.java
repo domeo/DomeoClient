@@ -105,26 +105,29 @@ public class AnnotationPersistenceServiceFacade {
 	
 	public JsArray<JsoAnnotationSetSummary> retrieveAnnotationByDocumentUrl(String url) {
 		String json = "";
-		if(url.equals("http://www.ncbi.nlm.nih.gov/pubmed/10679938")) {
-			json =
-			    "{" +
-			    "\"pav:versionNumber\": \"1\"," +
-			    "\"domeo_number_items\": 1," +
-			    "\"pav:lineageUri\": \"urn:domeoserver:uuid:06DF988C-33C0-453C-8BFC-D23E383CFE88\"," +
-			    "\"pav:createdOn\": \"2012-09-25 11:34:26 -0400\"," +
-			    "\"rdfs:label\": \"Default Set\"," +
-			    "\"pav:createdBy\": { " +
-			            "\"screenname\": \"Dr. John Doe\"," +
-			            "\"foaf_first_name\": \"John\"," +
-			            "\"foaf_last_name\": \"Doe\"" +
-			        "}," +
-			        "\"pav:lastSavedOn\": \"2012-09-25 11:34:27 -0400\"," +
-			        "\"@id\": \"urn:domeoclient:uuid:07895920-4A47-42DE-9F0A-9A79AAA33CC7\"," +
-			        "\"dct:description\": \"The default set is created automatically by Domeo when no other set is existing.\"" +
-			    "}";	
+		if(true) { //url.equals("http://www.ncbi.nlm.nih.gov/pubmed/10679938")) {
+//			json =
+//			    "{" +
+//			    "\"pav:versionNumber\": \"1\"," +
+//			    "\"domeo_number_items\": 1," +
+//			    "\"pav:lineageUri\": \"urn:domeoserver:uuid:06DF988C-33C0-453C-8BFC-D23E383CFE88\"," +
+//			    "\"pav:createdOn\": \"2012-09-25 11:34:26 -0400\"," +
+//			    "\"rdfs:label\": \"Default Set\"," +
+//			    "\"pav:createdBy\": { " +
+//			            "\"screenname\": \"Dr. John Doe\"," +
+//			            "\"foaf_first_name\": \"John\"," +
+//			            "\"foaf_last_name\": \"Doe\"" +
+//			        "}," +
+//			        "\"pav:lastSavedOn\": \"2012-09-25 11:34:27 -0400\"," +
+//			        "\"@id\": \"urn:domeoclient:uuid:07895920-4A47-42DE-9F0A-9A79AAA33CC7\"," +
+//			        "\"dct:description\": \"The default set is created automatically by Domeo when no other set is existing.\"" +
+//			    "}";	
+			
+			json = "[{\"rdfs:label\":\"Sheede \",\"domeo:mongoUuid\":\"uNUDohDhR7KMorsRSLR2GQ\",\"@type\":\"domeo:DiscussionSet\",\"ao:numberItems\":3,\"pav:createdBy\":{\"screenname\":\"Dr. John Doe\",\"foaf_first_name\":\"John\",\"uri\":\"4028808d4185489401418548e3ca0000\",\"foaf_last_name\":\"Doe\"},\"pav:versionNumber\":\"2\",\"pav:lastSavedOn\":\"2013-10-04 17:05:15 -0400\",\"pav:lineageUri\":\"urn:domeoserver:annotationset:8B90099D-4C8C-45F5-ADBA-83D5999F5FD8\",\"pav:previousVersion\":\"urn:domeoclient:uuid:166EDE94-E8A4-4DDF-AA61-CF584F4721ED\",\"dct:description\":\"asdfsdfa\",\"permissions:accessType\":\"urn:domeo:access:public\",\"@id\":\"urn:domeoserver:annotationset:76B1FE2E-5663-4C77-9A17-5A5BDCC08407\",\"pav:createdOn\":\"2013-10-04 17:04:59 -0400\"},{\"rdfs:label\":\"Default Set\",\"domeo:mongoUuid\":\"GSQFXihqRpeY7-QbihmzGw\",\"@type\":\"ao:AnnotationSet\",\"ao:numberItems\":3,\"pav:createdBy\":{\"screenname\":\"Dr. John Doe\",\"foaf_first_name\":\"John\",\"uri\":\"4028808d4185489401418548e3ca0000\",\"foaf_last_name\":\"Doe\"},\"pav:versionNumber\":\"2\",\"pav:lastSavedOn\":\"2013-10-04 17:04:41 -0400\",\"pav:lineageUri\":\"urn:domeoserver:annotationset:DF0ED7B2-7594-4F9E-AF16-0C0DD8DE7935\",\"pav:previousVersion\":\"urn:domeoclient:uuid:580BCB7B-3A2F-410A-B106-A64B7589C7A7\",\"dct:description\":\"The default set is created automatically by Domeo when no other set is existing.\",\"permissions:accessType\":\"urn:domeo:access:public\",\"@id\":\"urn:domeoserver:annotationset:386FCC96-3486-46EF-A06E-2472084610C1\",\"pav:createdOn\":\"2013-10-04 17:04:32 -0400\"}, " 
+				   + "{\"rdfs:label\":\"Sheede \",\"domeo:mongoUuid\":\"uNUDohDhR7KMorsRSLR2GQ\",\"@type\":\"domeo:DiscussionSet\",\"ao:numberItems\":3,\"pav:createdBy\":{\"screenname\":\"Dr. John Doe\",\"foaf_first_name\":\"John\",\"uri\":\"4028808d4185489401418548e3ca0002\",\"foaf_last_name\":\"Doe\"},\"pav:versionNumber\":\"2\",\"pav:lastSavedOn\":\"2013-10-04 17:05:15 -0400\",\"pav:lineageUri\":\"urn:domeoserver:annotationset:8B90099D-4C8C-45F5-ADBA-83D5999F5FD8\",\"pav:previousVersion\":\"urn:domeoclient:uuid:166EDE94-E8A4-4DDF-AA61-CF584F4721ED\",\"dct:description\":\"asdfsdfa\",\"permissions:accessType\":\"urn:domeo:access:public\",\"@id\":\"urn:domeoserver:annotationset:76B1FE2E-5663-4C77-9A17-5A5BDCC08408\",\"pav:createdOn\":\"2013-10-04 17:04:59 -0400\"},{\"rdfs:label\":\"Default Set\",\"domeo:mongoUuid\":\"GSQFXihqRpeY7-QbihmzGw\",\"@type\":\"ao:AnnotationSet\",\"ao:numberItems\":3,\"pav:createdBy\":{\"screenname\":\"Dr. John Doe\",\"foaf_first_name\":\"John\",\"uri\":\"4028808d4185489401418548e3ca0000\",\"foaf_last_name\":\"Doe\"},\"pav:versionNumber\":\"2\",\"pav:lastSavedOn\":\"2013-10-04 17:04:41 -0400\",\"pav:lineageUri\":\"urn:domeoserver:annotationset:DF0ED7B2-7594-4F9E-AF16-0C0DD8DE7935\",\"pav:previousVersion\":\"urn:domeoclient:uuid:580BCB7B-3A2F-410A-B106-A64B7589C7A7\",\"dct:description\":\"The default set is created automatically by Domeo when no other set is existing.\",\"permissions:accessType\":\"urn:domeo:access:public\",\"@id\":\"urn:domeoserver:annotationset:386FCC96-3486-46EF-A06E-2472084610C2\",\"pav:createdOn\":\"2013-10-04 17:04:32 -0400\"}]";
 		}
 		
-		JsArray<JsoAnnotationSetSummary> sets = asArrayOfAnnotationSetSummaries2("[" + json+ "]");
+		JsArray<JsoAnnotationSetSummary> sets = asArrayOfAnnotationSetSummaries2(json);
 		return sets;
 	}
 

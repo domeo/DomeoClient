@@ -42,6 +42,7 @@ public class CAntibodyCard extends ACardComponent {
 	@UiField FlowPanel content;
 	@UiField Label type;
 	@UiField Label text;
+	@UiField HorizontalPanel socialPanel;
 	
 	public CAntibodyCard(IDomeo domeo) {
 		super(domeo);
@@ -93,6 +94,7 @@ public class CAntibodyCard extends ACardComponent {
 				}
 				content.add(hp);
 			}
+			createSocialBar(socialPanel, _annotation);
 			
 			injectButtons(AntibodyPlugin.getInstance().getPluginName(), content, _annotation);
 		} catch(Exception e) {

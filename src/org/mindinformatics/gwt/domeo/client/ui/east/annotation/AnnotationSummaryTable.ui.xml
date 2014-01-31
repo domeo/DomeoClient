@@ -16,7 +16,7 @@
 	</ui:style>
 
   	<g:ScrollPanel styleName='{style.body}' ui:field='body'>
-	        <g:VerticalPanel styleName='{style.content}' ui:field='content'/>
+	    <g:VerticalPanel styleName='{style.content}' ui:field='content'/>
 	</g:ScrollPanel>
 
 </ui:UiBinder>

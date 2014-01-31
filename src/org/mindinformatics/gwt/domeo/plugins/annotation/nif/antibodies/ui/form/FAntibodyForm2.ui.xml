@@ -1,0 +1,216 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  	<ui:style>
+	  	.outer {
+		    height: 30px;
+		    padding-left: 0px;
+		    padding-top: 0px;
+
+	 	}
+	 	
+	 	.buttonsPanel {
+			position: relative;
+			right: 20px;
+	  		/*float:right;*/
+	  		padding-top:0px;
+	  		padding-right: 0px;
+	  		height: 0px;
+	  		max-height: 20px;
+	  		display: block;
+	  	}
+	  	
+	  	.setPanel {
+	  		padding-right: 5px;	
+	  	}
+	  	
+	  	.rightColumn {
+	  		padding-left:0px;
+	  		/*padding-top: 24px;*/
+
+	  		min-width: 598px;	
+	  		height: 300px;
+	  	}
+	  	
+	  	.leftColumn {
+	  			
+	  		vertical-align: top;
+	  	}
+	  	
+	  	.panelTop {
+
+	  		vertical-align: top;
+	  		padding: 5px;
+	  		padding-top: 0px;
+	  	}
+	  	
+	  	.panel {
+
+	  		vertical-align: top;
+	  		padding: 5px;
+	  		padding-top: 0px;
+	  	}
+	  	
+	  	.provenance {
+	 		backgorund-color: gray;
+	 		padding-top: 3px;
+	 		padding-left: 10px;
+	 		cursor: pointer;
+    		cursor: hand;
+	 	}
+	 	
+	 	.subTitle {
+	 		/*width: 99%;*/
+	 		background-color: #eee;
+	 		padding-left: 4px;
+	 		padding-right: 14px;
+	 		padding-top: 2px;
+	 		padding-bottom: 2px;
+	 		font-weight: bold;
+	 		border-bottom-right-radius: 10px;
+			border-top-right-radius: 10px; 	 		
+	 	}
+	 	
+	 	.subPanel {
+	 		min-height: 40px;	
+	 	}
+	 	
+	 	.newQualifierPanel {
+	 		height: 20px;	
+	 		display: inline;
+	 	}
+	 	
+	 	.inner {
+	 		padding-top: 23px;
+	 		padding-bottom: 3px;
+    		display: inline;
+	 	}
+	 	
+	 	.leftPanelItem {
+	 		padding-top: 3px;
+	 		padding-bottom: 3px;
+/*    		width: 464px;
+    		max-width: 464px;*/
+	 	}
+	 	
+	 	.inner2 {
+	 		padding-top: 3px;
+	 		padding-bottom: 3px;
+			padding-left: 3px;
+	 	}
+	 	
+	 	.qualifiersLabel {
+	  		font-weight: bold;
+	  		padding-right:3px;
+	  		display: inline;
+	  	}
+	  	
+	  	.titlebar {
+	  		width: 460px;	
+	  		background-color:#DDDDDD;
+			border-top:3px solid white;
+			padding-left: 2px;
+			font-weight: bold;
+	  	}
+	  	
+	  	.commentBody {
+	  		padding-top: 3px;
+	  		padding-left: 3px;
+	  		color: #333;
+	  		font-style: normal;
+	  		width: 452px;
+	  		height: 100px;
+	  		font-size: 12px;
+	  	}
+	  	
+	  	.elementType {
+	  		padding-right: 2px;
+	  		display: inline;
+	  		white-space: nowrap;
+	  	}
+	  	
+	  	z.titleLeft {
+			padding-left:4px;
+	  	}	  	
+	  	
+	  	.elementTypeContainer {
+			
+	  	}
+	  	
+	  	.panelRight {
+			padding-top: 7px;
+		}
+  	</ui:style>
+  	
+  	<!--  
+  	<ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' /> 
+	-->
+
+<g:ScrollPanel ui:field='scrollContainer'>
+  	<g:VerticalPanel ui:field='container' styleName='{style.outer}'>
+  	
+ 		<g:HorizontalPanel ui:field='headerPanel' styleName='{style.panel}'>
+ 			<g:SimplePanel ui:field='buttonsPanelSpacer'>
+		  	</g:SimplePanel>
+	  		<g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
+	  			<g:SimplePanel styleName='{style.setPanel}'>
+	  		    	<g:ListBox ui:field='annotationSet'></g:ListBox>
+	  		    </g:SimplePanel>
+		  	</g:HorizontalPanel>			  	
+	  	</g:HorizontalPanel>
+
+  		<g:HTMLPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}' tag='span'></g:HTMLPanel>
+  		
+  		<g:HorizontalPanel styleName='{style.panelTop}' ui:field="leftColumnContainer">
+  			<g:cell>
+  				<g:VerticalPanel ui:field="leftColumnPanel" styleName='{style.leftColumn}'>
+  					<g:SimplePanel ui:field="protocolTitleBar" styleName='{style.titlebar}'>
+			  			<g:Label ui:field="protocolLabel" styleName='{style.titleLeft}'>Protocol:</g:Label>
+			  		</g:SimplePanel>
+			  		<g:HTMLPanel ui:field='header3' styleName='{style.leftPanelItem}' tag="span">
+			  			<g:CheckBox ui:field="methodib" name="method" styleName='{style.elementType}' text="Immunoblotting (IB)" />
+			  			<g:CheckBox ui:field="methodicc" name="method" styleName='{style.elementType}' text="Immunocytochemistry (ICC)" />
+			  			<g:CheckBox ui:field="methodid" name="method" styleName='{style.elementType}' text="Immunodiffusion (ID)" />
+			  			<g:CheckBox ui:field="methodiem" name="method" styleName='{style.elementType}' text="Immuno-Electron Microscopy (IEM)" />
+			  			<g:CheckBox ui:field="methodif" name="method" styleName='{style.elementType}' text="Immunofluorescence (IF)" />
+			  			<g:CheckBox ui:field="methodihc" name="method" styleName='{style.elementType}' text="Immunohistochemistry (IHC)" />
+			  			<g:CheckBox ui:field="methodip" name="method" styleName='{style.elementType}' text="Immunoprecipitation (IP)" />
+			  			<g:CheckBox ui:field="methodria" name="method" styleName='{style.elementType}' text="Radioimmunoassay (RIA)" />
+			  			<g:CheckBox ui:field="methodwb" name="method" styleName='{style.elementType}' text="Western Blotting (WB)" />
+			  			<g:CheckBox ui:field="methodat" name="method" styleName='{style.elementType}' text="Antibody Therapy" />
+			  		</g:HTMLPanel>
+			  		<g:SimplePanel ui:field="subjectTitleBar" styleName='{style.titlebar}'>
+			  			<g:Label ui:field="subjectLabel" styleName='{style.titleLeft}'>Subject:</g:Label>
+			  		</g:SimplePanel>
+			  		<g:HorizontalPanel ui:field='header4' styleName='{style.leftPanelItem}'>
+			  			<g:RadioButton ui:field="rat" name="element" styleName='{style.elementType}' text="Rat" />
+			  			<g:RadioButton ui:field="human" name="element" styleName='{style.elementType}' text="Human" />
+			  			<g:RadioButton ui:field="mouse" name="element" styleName='{style.elementType}' text="Mouse" />
+			  			<g:RadioButton ui:field="rabbit" name="element" styleName='{style.elementType}' text="Rabbit" />
+			  			<g:RadioButton ui:field="none" name="element" styleName='{style.elementType}' text="Not specified" />
+			  		</g:HorizontalPanel>
+			  		<g:SimplePanel ui:field="noteTitleBar" styleName='{style.titlebar}'>
+			  			<g:Label ui:field="noteLabel" styleName='{style.titleLeft}'>Note:</g:Label>
+			  		</g:SimplePanel>
+			  		<g:VerticalPanel styleName='{style.inner2}'>
+			  			<g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
+			  		</g:VerticalPanel>
+  				</g:VerticalPanel>
+  			</g:cell>
+  			<g:cell>
+  				<g:SimplePanel ui:field="panelRight" styleName='{style.panelRight}'>
+	  				<g:VerticalPanel>
+	  					<g:cell height="30px">
+					  		<g:TabBar ui:field="tabBar" height="25px"/>
+					  	</g:cell>
+					  	<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>	
+					  	</g:VerticalPanel>
+					 </g:VerticalPanel>
+				</g:SimplePanel>
+			</g:cell>
+		</g:HorizontalPanel>
+		<g:SimplePanel ui:field="panelBelow" styleName='{style.panel}'></g:SimplePanel>
+  	</g:VerticalPanel>
+  	</g:ScrollPanel>
+</ui:UiBinder>

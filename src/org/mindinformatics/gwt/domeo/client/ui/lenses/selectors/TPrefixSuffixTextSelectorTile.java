@@ -24,6 +24,7 @@ public class TPrefixSuffixTextSelectorTile extends ASelectorTileComponent {
 	interface Binder extends UiBinder<Widget, TPrefixSuffixTextSelectorTile> { }
 	private static final Binder binder = GWT.create(Binder.class);
 	
+	private boolean _single;
 	private MTextQuoteSelector _selector;
 	private MAnnotation _annotation;
 	
@@ -37,8 +38,9 @@ public class TPrefixSuffixTextSelectorTile extends ASelectorTileComponent {
 		initWidget(binder.createAndBindUi(this));
 	}
 	
-	public void initializeLens(MAnnotation annotation, MSelector selector) {
+	public void initializeLens(MAnnotation annotation, MSelector selector, boolean single) {
 		try {
+			_single = single;
 			_selector = (MTextQuoteSelector) selector;
 			_annotation = annotation;
 			refresh();
@@ -55,7 +57,7 @@ public class TPrefixSuffixTextSelectorTile extends ASelectorTileComponent {
 
 	public void refresh() {
 		try {
-			createProvenanceBar(provenance, _annotation);
+			createProvenanceBar(provenance, _annotation, _single);
 			injectButtons(content, _annotation);
 			
 			content.add(new HTML(SelectorUtils.getPrefix(_selector)+

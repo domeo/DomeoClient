@@ -165,11 +165,20 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 	@Override
 	public void textmine(
 			final ITextminingRequestCompleted completionCallback,
-			String source, String textContent, String virtualIds)
+			String source, String textContent, boolean longestOnly,
+			boolean wholeWordOnly, boolean filterNumbers,
+			boolean withDefaultStopWords, boolean isStopWordsCaseSensitive,
+			boolean scored, boolean withSynonyms)
 			throws IllegalArgumentException {
-		String url = GWT.getModuleBaseURL() + "bioportal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + "&ontologies=" + virtualIds;
+		String virtualIds = "";
+		String url = GWT.getModuleBaseURL() + "bioportal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + "&ontologies=" + virtualIds+ "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
+				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
+				"&withSynonyms=" + withSynonyms;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + "&ontologies=" + virtualIds;
+			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
+				"&ontologies=" + virtualIds + "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
+				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
+				"&withSynonyms=" + withSynonyms;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
 
@@ -188,7 +197,7 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						JsAnnotationSet set = (JsAnnotationSet) parseJson(response.getText());
-						completionCallback.returnTextminingResults(set);
+						completionCallback.returnTextminingResults(set, false);
 					} else if (503 == response.getStatusCode()) {
 						_application.getLogger().exception(this, "503: " + response.getText());
 						completionCallback.textMiningNotCompleted("Couldn't run BioPortal Annotator (503)");

@@ -23,7 +23,8 @@ import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.LinearCommentsFactory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.JsAnnotationCuration;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
@@ -68,7 +69,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
 import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
-import org.mindinformatics.gwt.framework.component.styles.src.StylesManager;
 import org.mindinformatics.gwt.framework.model.agents.IDatabase;
 import org.mindinformatics.gwt.framework.model.agents.IPerson;
 import org.mindinformatics.gwt.framework.model.agents.ISoftware;
@@ -152,12 +152,203 @@ public class JsonUnmarshallingManager {
 		return unmarshaller;
 	}
 	
+	public void unmarshallTextmining(JsAnnotationSet jsonSet, HashSet<String> acceptedIds) {
+		annotationSelectorsLazyBinding.clear();
+		creatorAgentsLazyBinding.clear();
+		
+		if(acceptedIds.size()>0) {
+		
+			try {
+				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION, null, null);
+				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
+				
+				// Unmarshalling agents
+				JsArray<JsoAgent> jsonAgents = jsonSet.getAgents();
+				for(int j=0; j<jsonAgents.length(); j++) {
+					if(getObjectType(jsonAgents.get(j)).equals(IPerson.TYPE) || 
+							getObjectType(jsonAgents.get(j)).equals(ISoftware.TYPE) || 
+								getObjectType(jsonAgents.get(j)).equals(IDatabase.TYPE)) {
+						_domeo.getAgentManager().addAgent(jsonAgents.get(j));
+					} else {
+						Window.alert("To request: " + getObjectType(jsonAgents.get(j)));
+					}
+				}
+				
+				// Unmarshalling permissions
+				if(jsonSet.getPermissions().isLocked().equals("true")) set.setIsLocked(true);
+				else set.setIsLocked(false);
+				_domeo.getAnnotationAccessManager().setAnnotationSetAccess(set, jsonSet.getPermissions().getPermissionType());
+				if(jsonSet.getPermissions().getPermissionType().equals(IPermissionsOntology.accessGroups)) {
+					Set<IUserGroup> groups = new HashSet<IUserGroup>();
+					for(int ii=0; ii<jsonSet.getPermissions().getPermissionDetails().getAllowedGroups().length(); ii++) {
+						String uuid = jsonSet.getPermissions().getPermissionDetails().getAllowedGroups().get(ii).getUuid();
+						IUserGroup group = _domeo.getUserManager().getUserGroup(uuid); 
+						if(group!=null) {
+							groups.add(group);
+						}
+					}
+					if(groups.size()>0) _domeo.getAnnotationAccessManager().setAnnotationSetGroups(set, groups);
+				}
+				
+				// Unmarshalling annotations
+				JsArray<JavaScriptObject> jsonAnnotations = jsonSet.getAnnotation();
+				for(int j=0; j<jsonAnnotations.length(); j++) {
+					_domeo.getLogger().debug(this, "" + j);
+					boolean isGeneral = false;
+					// Selectors
+					ArrayList<MSelector> selectors = new ArrayList<MSelector>();
+					JsArray<JsAnnotationTarget> targets = getTargets(jsonAnnotations.get(j));
+					for(int z=0; z<targets.length(); z++) {
+						JsAnnotationTarget target = targets.get(z);
+						if(target.getSelector()!=null) {
+							String selectorType = getObjectType(target.getSelector());
+							_domeo.getLogger().debug(this, selectorType);
+							if(selectorType.equals(MTextQuoteSelector.TYPE)) {
+								JsTextQuoteSelector sel = (JsTextQuoteSelector) target.getSelector();
+								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
+								selectors.add(selector);
+							} else if(selectorType.equals(MImageInDocumentSelector.TYPE)) {
+								JsImageInDocumentSelector sel = (JsImageInDocumentSelector) target.getSelector();
+								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
+								selector.getTarget().setUrl(getSelectorTargetUrl(target));
+								selectors.add(selector);
+							} else if(selectorType.equals(MAnnotationSelector.TYPE)) {
+								JsAnnotationSelector sel = (JsAnnotationSelector) target.getSelector();
+								MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
+								
+								// TODO to improve with a Virtual Annotation
+								MAnnotation annotation = new MPostItAnnotation();
+								annotation.setIndividualUri(sel.getAnnotation());
+								selector.setAnnotation(annotation);
+								selectors.add(selector);
+							}
+						} else {
+							String targetType = getObjectType(target);
+							_domeo.getLogger().debug(this, targetType);
+							if(targetType.equals(MTargetSelector.TYPE)) {
+								
+								MTargetSelector selector = AnnotationFactory.cloneTargetSelector(
+									target.getId(),
+									_domeo.getPersistenceManager().getCurrentResource()
+								);
+								selectors.add(selector);
+								isGeneral = true;
+							}
+						}
+					}
+	
+					// Detect annotation type
+					HashSet<String> typesSet = new HashSet<String>();
+					if(hasMultipleTypes(jsonAnnotations.get(j))) {
+						JsArrayString types = getObjectTypes(jsonAnnotations.get(j));
+						for(int k=0; k<types.length(); k++) {
+							typesSet.add(types.get(k));
+						}
+					} else {
+						typesSet.add(getObjectType(jsonAnnotations.get(j)));
+					}
+					
+					// Post it detected
+					boolean allowed = false;
+					MAnnotation ann = null;
+					if(typesSet.contains(MQualifierAnnotation.TYPE)) {
+						JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j); // TODO change
+						ann = AnnotationFactory.cloneQualifier(
+							postIt.getId(), 
+							postIt.getLineageUri(), 
+							postIt.getFormattedCreatedOn(),
+							postIt.getFormattedLastSaved(),
+							set,
+							_domeo.getAgentManager().getAgentByUri(postIt.getCreatedBy()),
+							postIt.getVersionNumber(),
+							postIt.getPreviousVersion(),
+							_domeo.getPersistenceManager().getCurrentResource(),
+							selectors,
+							postIt.getLabel()
+							);
+						
+						if(postIt.getCreatedWith()!=null && postIt.getCreatedWith().trim().length()>0) {
+							ann.setTool((ISoftware) _domeo.getAgentManager().getAgentByUri(postIt.getCreatedWith()));
+						}
+						
+						JsArray<JsoLinkedDataResource> tags = getSemanticTags(jsonAnnotations.get(j));
+						for(int k=0; k<tags.length(); k++) {
+							if(acceptedIds.contains(tags.get(k).getUrl())) {
+								allowed = true;
+								JsonGenericResource gr = tags.get(k).getSource();
+								MGenericResource r = ResourcesFactory.createGenericResource(gr.getUrl(), gr.getLabel());
+								
+								MLinkedResource ldr = ResourcesFactory.createTrustedResource(tags.get(k).getUrl(), 
+										tags.get(k).getLabel(), r);
+								ldr.setUrl(tags.get(k).getUrl());
+								ldr.setLabel(tags.get(k).getLabel());
+								ldr.setDescription(tags.get(k).getDescription());
+								//ldr.setSynonyms(tags.get(k).getSynonyms()!=null? tags.get(k).getSynonyms():"");
+		
+								((MQualifierAnnotation)ann).addTerm(ldr);
+							}
+						}
+					} 
+					if(ann!=null && allowed) {
+						for(int z=0; z<ann.getSelectors().size(); z++) {
+							try {
+								if(ann.getSelectors().get(z) instanceof MTextQuoteSelector) {
+	//								HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
+	//										((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
+	//										((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
+	//										((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
+	//										HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
+									
+									HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
+											((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
+											((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
+											((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
+											HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L),
+											_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
+								} else if(ann.getSelectors().get(z) instanceof MImageInDocumentSelector) {
+									// Place the annotation???
+									Element image = HtmlUtils.getImage(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 
+											((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl(), 
+											((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getXPath());
+									if(image!=null) {
+										ann.setY(((com.google.gwt.user.client.Element) image).getAbsoluteTop());
+										((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).setImage((com.google.gwt.user.client.Element) image);
+										_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(ann, 
+												((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget(), (com.google.gwt.user.client.Element) image);
+									}
+								} else if(ann.getSelectors().get(z) instanceof MAnnotationSelector) {
+									//Window.alert("Individual url: " + ((MAnnotationSelector) ann.getSelectors().get(z)).getAnnotation().getIndividualUri() + " - " + ann.getIndividualUri());
+									this.cacheForLazyBinding(((MAnnotationSelector) ann.getSelectors().get(z)).getAnnotation().getIndividualUri(), 
+											ann, (MAnnotationSelector) ann.getSelectors().get(z));
+								}
+							} catch(Exception e) {
+								_domeo.getLogger().exception(this, LOGGING_PREFIX, e.getMessage());
+								// TODO better tracking of terms that don't fall in text.
+							}
+						}
+	
+						// TODO include annotation of annotation (commentaries).
+						if(isGeneral) 
+							_domeo.getAnnotationPersistenceManager().addAnnotationOfTargetResource(ann, _domeo.getPersistenceManager().getCurrentResource(), set); 
+						else  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
+						set.setHasChanged(true);
+					}
+				}
+				this.completeDeserialization();
+			} catch (Exception e) {
+				_domeo.getLogger().exception(this, LOGGING_PREFIX, e.getMessage());
+				e.printStackTrace();
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
 	public void unmarshallTextmining(JsAnnotationSet jsonSet) {
 		annotationSelectorsLazyBinding.clear();
 		creatorAgentsLazyBinding.clear();
 		
 		try {
-			MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION);
+			MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.IMPORT_VALIDATION, null, null);
 			((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 			
 			// Unmarshalling agents
@@ -203,16 +394,16 @@ public class JsonUnmarshallingManager {
 						_domeo.getLogger().debug(this, selectorType);
 						if(selectorType.equals(MTextQuoteSelector.TYPE)) {
 							JsTextQuoteSelector sel = (JsTextQuoteSelector) target.getSelector();
-							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION);
+							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 							selectors.add(selector);
 						} else if(selectorType.equals(MImageInDocumentSelector.TYPE)) {
 							JsImageInDocumentSelector sel = (JsImageInDocumentSelector) target.getSelector();
-							MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION);
+							MImageInDocumentSelector selector = unmarshallImageInDocumentSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 							selector.getTarget().setUrl(getSelectorTargetUrl(target));
 							selectors.add(selector);
 						} else if(selectorType.equals(MAnnotationSelector.TYPE)) {
 							JsAnnotationSelector sel = (JsAnnotationSelector) target.getSelector();
-							MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION);
+							MAnnotationSelector selector = unmarshallAnnotationSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 							
 							// TODO to improve with a Virtual Annotation
 							MAnnotation annotation = new MPostItAnnotation();
@@ -345,7 +536,7 @@ public class JsonUnmarshallingManager {
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set get");
 				JsAnnotationSet jsonSet = (JsAnnotationSet) responseOnSets.get(i);
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set unmarshall");
-				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.LOAD_VALIDATION);
+				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.LOAD_VALIDATION, null, null);
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set loading");
 				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 				
@@ -367,6 +558,7 @@ public class JsonUnmarshallingManager {
 				if(jsonSet.getPermissions().isLocked().equals("true")) set.setIsLocked(true);
 				else set.setIsLocked(false);
 				_domeo.getAnnotationAccessManager().setAnnotationSetAccess(set, jsonSet.getPermissions().getPermissionType());
+
 				if(jsonSet.getPermissions().getPermissionType().equals(IPermissionsOntology.accessGroups)) {
 					Set<IUserGroup> groups = new HashSet<IUserGroup>();
 					for(int ii=0; ii<jsonSet.getPermissions().getPermissionDetails().getAllowedGroups().length(); ii++) {
@@ -378,13 +570,12 @@ public class JsonUnmarshallingManager {
 					}
 					if(groups.size()>0) _domeo.getAnnotationAccessManager().setAnnotationSetGroups(set, groups);
 				}
-				
+
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling annotations");
 				// Unmarshalling annotations
 				JsArray<JavaScriptObject> jsonAnnotations = jsonSet.getAnnotation();
 				for(int j=0; j<jsonAnnotations.length(); j++) {
 					boolean isGeneral = false;
-					
 					if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling annotation selector (" + j + ")");
 					// Selectors
 					ArrayList<MSelector> selectors = new ArrayList<MSelector>();
@@ -395,14 +586,14 @@ public class JsonUnmarshallingManager {
 							String selectorType = getObjectType(target.getSelector());
 							_domeo.getLogger().debug(this, selectorType);
 							if(selectorType.equals(MTextQuoteSelector.TYPE)) {
-								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 								selectors.add(selector);
 							} else if(selectorType.equals(MImageInDocumentSelector.TYPE)) {
-								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.EASY_VALIDATION);
+								MImageInDocumentSelector selector = unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.EASY_VALIDATION, null, null);
 								selector.getTarget().setUrl(getSelectorTargetUrl(target));
 								selectors.add(selector);
 							} else if(selectorType.equals(MAnnotationSelector.TYPE)) {
-								MAnnotationSelector selector = unmarshallAnnotationSelector((JsAnnotationSelector)target.getSelector(), IUnmarshaller.EASY_VALIDATION);
+								MAnnotationSelector selector = unmarshallAnnotationSelector((JsAnnotationSelector)target.getSelector(), IUnmarshaller.EASY_VALIDATION, null, null);
 								
 								// TODO to improve with a Virtual Annotation
 								// MAnnotation annotation = new MPostItAnnotation();
@@ -424,7 +615,7 @@ public class JsonUnmarshallingManager {
 							}
 						}
 					}
-					
+
 					if(Domeo.verbose) _domeo.getLogger().debug(this, "Detect annotation type (" + j + ")");
 					// Detect annotation type
 					HashSet<String> typesSet = new HashSet<String>();
@@ -441,8 +632,10 @@ public class JsonUnmarshallingManager {
 					// Post it detected
 					MAnnotation ann = null;
 					if(typesSet.contains(MHighlightAnnotation.TYPE)) {
-						JsAnnotationHighlight highlight = (JsAnnotationHighlight) jsonAnnotations.get(j);
-						ann = AnnotationFactory.cloneHighlight(
+					
+						/*
+							JsAnnotationHighlight highlight = (JsAnnotationHighlight) jsonAnnotations.get(j);
+							ann = AnnotationFactory.cloneHighlight(
 								highlight.getId(), 
 								highlight.getLineageUri(), 
 								highlight.getFormattedCreatedOn(),
@@ -456,6 +649,9 @@ public class JsonUnmarshallingManager {
 								_domeo.getPersistenceManager().getCurrentResource(),
 								selectors,
 								highlight.getLabel());
+						*/
+						
+						ann = unmarshallHighlightAnnotation((JsAnnotationHighlight) jsonAnnotations.get(j), "", set, selectors);
 						
 						// Highlight allows only text selectors at the moment
 						for(int z=0; z<ann.getSelectors().size(); z++) {
@@ -467,6 +663,7 @@ public class JsonUnmarshallingManager {
 						
 						((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
 						set.setHasChanged(false);
+						
 					} else {
 						if(typesSet.contains(MPostItAnnotation.TYPE)) {
 							PostitType postItType = null;
@@ -482,6 +679,9 @@ public class JsonUnmarshallingManager {
 								postItType = PostitType.COMMENT_TYPE;
 							}
 							if(postItType!=null) {
+								ann = unmarshallPostItAnnotation((JsAnnotationPostIt) jsonAnnotations.get(j), "", set, selectors);
+								((MPostItAnnotation)ann).setType(postItType);
+								/*
 								JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j);
 								
 								MContentAsRdf body = new MContentAsRdf();
@@ -505,6 +705,7 @@ public class JsonUnmarshallingManager {
 									body,
 									postItType
 									);
+								*/
 							}
 						} else  if(typesSet.contains(MQualifierAnnotation.TYPE)) {
 							JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j); // TODO change
@@ -557,6 +758,22 @@ public class JsonUnmarshallingManager {
 									);
 							if(postIt.getTitle()!=null && postIt.getTitle().trim().length()>0)
 								((MCommentAnnotation)ann).setTitle(postIt.getTitle());
+						} else if(typesSet.contains(MLinearCommentAnnotation.TYPE)) {
+							JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j); // TODO change
+							ann = LinearCommentsFactory.cloneLinearComment(
+									postIt.getId(), 
+									postIt.getLineageUri(), 
+									postIt.getFormattedCreatedOn(),
+									postIt.getFormattedLastSaved(),
+									postIt.getVersionNumber(),
+									postIt.getPreviousVersion(),
+									_domeo.getAgentManager().getAgentByUri(postIt.getCreatedBy()),
+									(ISoftware)_domeo.getAgentManager().getAgentByUri(postIt.getCreatedWith()),
+									selectors,
+									postIt.getBody().get(0).getChars()
+									);
+							if(postIt.getTitle()!=null && postIt.getTitle().trim().length()>0)
+								((MLinearCommentAnnotation)ann).setTitle(postIt.getTitle());
 						} else if(typesSet.contains(MCurationToken.TYPE)) {
 							JsAnnotationCuration annotationCuration = (JsAnnotationCuration) jsonAnnotations.get(j); // TODO change
 							ann = CurationFactory.cloneCurationToken(
@@ -679,7 +896,7 @@ public class JsonUnmarshallingManager {
 							}
 							_domeo.getLogger().debug(this, "0-1c");
 							JsAnnotationTarget tar = argues.getContext();	
-							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+							MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 							
 							_domeo.getLogger().debug(this, mp.getId() + " --- " + argues.getId());
 							MMicroPublication microPublication = MicroPublicationFactory.cloneMicroPublication(mp.getId(), argues.getId(), selector);
@@ -709,7 +926,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-3 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-3 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("domeo:ImageInDocumentSelector")) {
-											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											s.getTarget().setUrl(getSelectorTargetUrl(target));
 											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
 											
@@ -728,7 +945,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-4 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-4 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("ao:PrefixSuffixTextSelector")) {
-											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
 											di.setId(statement.getId());
 											di.setSelector(sss);
@@ -780,7 +997,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-3 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-3 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("domeo:ImageInDocumentSelector")) {
-											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MImageInDocumentSelector s = this.unmarshallImageInDocumentSelector((JsImageInDocumentSelector) target.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											s.getTarget().setUrl(getSelectorTargetUrl(target));
 											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
 											
@@ -799,7 +1016,7 @@ public class JsonUnmarshallingManager {
 										_domeo.getLogger().debug(this, "0-1-4 " + target.getSelector()); 
 										_domeo.getLogger().debug(this, "0-1-4 " + getObjectType(target.getSelector())); 
 										if(getObjectType(target.getSelector()).equals("ao:PrefixSuffixTextSelector")) {
-											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION);
+											MTextQuoteSelector sss = unmarshallPrefixSuffixTextSelector((JsTextQuoteSelector) tar.getSelector(), IUnmarshaller.OFF_VALIDATION, null, null);
 											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
 											di.setId(statement.getId());
 											di.setSelector(sss);
@@ -863,7 +1080,7 @@ public class JsonUnmarshallingManager {
 								}
 							}
 						}
-					
+						
 						if(Domeo.verbose) _domeo.getLogger().debug(this, "Lazy binding (" + j + ")");
 						if(ann!=null) {
 							for(int z=0; z<ann.getSelectors().size(); z++) {
@@ -909,7 +1126,7 @@ public class JsonUnmarshallingManager {
 									_domeo.getLogger().exception(this, LOGGING_PREFIX, e.getMessage());
 								}
 							}
-		
+							
 							if(isGeneral) 
 								_domeo.getAnnotationPersistenceManager().addAnnotationOfTargetResource(ann, _domeo.getPersistenceManager().getCurrentResource(), set); 
 							else  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
@@ -978,7 +1195,7 @@ public class JsonUnmarshallingManager {
 							_domeo.getLogger().debug(this, selectorType);
 							if(selectorType.equals(MTextQuoteSelector.TYPE)) {
 								JsTextQuoteSelector sel = (JsTextQuoteSelector) target.getSelector();
-								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION);
+								MTextQuoteSelector selector = unmarshallPrefixSuffixTextSelector(sel, IUnmarshaller.OFF_VALIDATION, null, null);
 								selectors.add(selector);
 							} 
 						} else {
@@ -1155,12 +1372,13 @@ public class JsonUnmarshallingManager {
 	 * @param prefixSuffixTextSelectorInJson Prefix Suffix Text Selector in json format
 	 * @return Prefix Suffix Text Selector or null if exception raised
 	 */
-	private MTextQuoteSelector unmarshallPrefixSuffixTextSelector(JsTextQuoteSelector prefixSuffixTextSelectorInJson, String validation) {
+	private MTextQuoteSelector unmarshallPrefixSuffixTextSelector(JsTextQuoteSelector prefixSuffixTextSelectorInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MTextQuoteSelector.class.getName() + 
 				" with id " + getObjectId(prefixSuffixTextSelectorInJson));
 		try {
 			IUnmarshaller unmarshaller = selectUnmarshaller(MTextQuoteSelector.class.getName());
-			return (MTextQuoteSelector) unmarshaller.unmarshall(this, prefixSuffixTextSelectorInJson, validation);
+			return (MTextQuoteSelector) unmarshaller.unmarshall(this, prefixSuffixTextSelectorInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while serializing the Prefix Suffix text Selector " + e.getMessage());
 			return null;
@@ -1172,12 +1390,13 @@ public class JsonUnmarshallingManager {
 	 * @param annotationSelectorInJson Annotation Selector in json format
 	 * @return Annotation Selector or null if exception raised
 	 */
-	private MAnnotationSelector unmarshallAnnotationSelector(JsAnnotationSelector annotationSelectorInJson, String validation) {
+	private MAnnotationSelector unmarshallAnnotationSelector(JsAnnotationSelector annotationSelectorInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MAnnotationSelector.class.getName() + 
 				" with id " + getObjectId(annotationSelectorInJson));
 		try {
 			IUnmarshaller unmarshaller = selectUnmarshaller(MAnnotationSelector.class.getName());
-			return (MAnnotationSelector) unmarshaller.unmarshall(this, annotationSelectorInJson, validation);
+			return (MAnnotationSelector) unmarshaller.unmarshall(this, annotationSelectorInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while serializing the Annotation Selector " + e.getMessage());
 			return null;
@@ -1189,12 +1408,13 @@ public class JsonUnmarshallingManager {
 	 * @param imageInDocumentSelectorInJson Image in Document Selector in json format
 	 * @return Image in Document Selector or null if exception raised
 	 */	
-	private MImageInDocumentSelector unmarshallImageInDocumentSelector(JsImageInDocumentSelector imageInDocumentSelectorInJson, String validation) {
+	private MImageInDocumentSelector unmarshallImageInDocumentSelector(JsImageInDocumentSelector imageInDocumentSelectorInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MImageInDocumentSelector.class.getName() + 
 				" with id " + getObjectId(imageInDocumentSelectorInJson));
 		try {
 			IUnmarshaller unmarshaller = selectUnmarshaller(MImageInDocumentSelector.class.getName());
-			return (MImageInDocumentSelector) unmarshaller.unmarshall(this, imageInDocumentSelectorInJson, validation);
+			return (MImageInDocumentSelector) unmarshaller.unmarshall(this, imageInDocumentSelectorInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while serializing the Image in Document Selector " + e.getMessage());
 			return null;
@@ -1206,13 +1426,42 @@ public class JsonUnmarshallingManager {
 	 * @param annotationSetInJson	Annotation set in json format
 	 * @return Annotation Set or null if exception raised
 	 */
-	private MAnnotationSet unmarshallAnnotationSet(JsAnnotationSet annotationSetInJson, String validation) {
+	private MAnnotationSet unmarshallAnnotationSet(JsAnnotationSet annotationSetInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
 		_domeo.getLogger().debug(this, "Unmarshalling " + MAnnotationSet.class.getName() + 
 			" with id " + getObjectId(annotationSetInJson));
 		IUnmarshaller unmarshaller = null;
 		try {
 			unmarshaller = selectUnmarshaller(MAnnotationSet.class.getName());
-			return (MAnnotationSet) unmarshaller.unmarshall(this, annotationSetInJson, validation);
+			return (MAnnotationSet) unmarshaller.unmarshall(this, annotationSetInJson, validation, set, selectors);
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
+			return null;
+		}
+	}
+	
+	private MHighlightAnnotation unmarshallHighlightAnnotation(JsAnnotationHighlight annotationHighlightInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		_domeo.getLogger().debug(this, "Unmarshalling " + MHighlightAnnotation.class.getName() + 
+			" with id " + getObjectId(annotationHighlightInJson));
+		IUnmarshaller unmarshaller = null;
+		try {
+			unmarshaller = selectUnmarshaller(MHighlightAnnotation.class.getName());
+			return (MHighlightAnnotation) unmarshaller.unmarshall(this, annotationHighlightInJson, validation, set, selectors);
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
+			return null;
+		}
+	}
+	
+	private MPostItAnnotation unmarshallPostItAnnotation(JsAnnotationPostIt annotationPostItInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		_domeo.getLogger().debug(this, "Unmarshalling " + MPostItAnnotation.class.getName() + 
+			" with id " + getObjectId(annotationPostItInJson));
+		IUnmarshaller unmarshaller = null;
+		try {
+			unmarshaller = selectUnmarshaller(MPostItAnnotation.class.getName());
+			return (MPostItAnnotation) unmarshaller.unmarshall(this, annotationPostItInJson, validation, set, selectors);
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
 			return null;
@@ -1233,7 +1482,9 @@ public class JsonUnmarshallingManager {
 		unmarshallers.put(MAnnotationSet.class.getName(), new AnnotationSetJsonUnmarshaller(_domeo));	
 		unmarshallers.put(MAnnotationSelector.class.getName(), new AnnotationSelectorJsonUnmarshaller(_domeo));
 		unmarshallers.put(MTextQuoteSelector.class.getName(), new TextQuoteSelectorJsonUnmarshaller(_domeo));
-		unmarshallers.put(MImageInDocumentSelector.class.getName(), new ImageInDocumentSelectorJsonUnmarshaller(_domeo));		
+		unmarshallers.put(MImageInDocumentSelector.class.getName(), new ImageInDocumentSelectorJsonUnmarshaller(_domeo));	
+		unmarshallers.put(MHighlightAnnotation.class.getName(), new HighlightJsonUnmarshaller(_domeo));
+		unmarshallers.put(MPostItAnnotation.class.getName(), new UPostitJsonUnmarshaller(_domeo));
 	}
 	
 	/**

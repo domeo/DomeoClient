@@ -1,5 +1,10 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling;
 
+import java.util.ArrayList;
+
+import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -30,7 +35,8 @@ public interface IUnmarshaller {
 	 * @param validation	The desired validation to perform
 	 * @return	The unmarshalled object
 	 */
-	public Object unmarshall(JsonUnmarshallingManager manager, JavaScriptObject obj, String validation);
+	public Object unmarshall(JsonUnmarshallingManager manager, JavaScriptObject obj, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors);
 	
 	/**
 	 * Triggers the validation of the input
@@ -38,5 +44,7 @@ public interface IUnmarshaller {
 	 * @param json		The JSON object to unmarshall
 	 * @param validation	The type of validation to perform
 	 */
-	public void validateInput(JsonUnmarshallingManager manager, JavaScriptObject json, String validation);
+	public void validateInput(JsonUnmarshallingManager manager, JavaScriptObject json, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors);
+	
 }

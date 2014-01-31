@@ -10,7 +10,9 @@ import org.mindinformatics.gwt.domeo.component.sharing.ui.SharingOptionsViewer;
 import org.mindinformatics.gwt.domeo.component.textmining.ui.TextMiningServicePicker;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
+import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
+import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarHorizontalPanel;
 import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarHorizontalTogglePanel;
 import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarItemsGroup;
 import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarPanel;
@@ -117,29 +119,28 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 			});
 		
 		highlightButtonPanel = new ToolbarHorizontalTogglePanel(
-				_domeo, new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						//_domeo.updateHighlightMode();
-						
-						if(isManualHighlightSelected()) 
-							_domeo.getLogger().command(this.getClass().getName(), "Enabling manual highlight");
-						else _domeo.getLogger().command(this.getClass().getName(), "Disabling manual highlight");
-						if(isManualAnnotationSelected()) {
-							_domeo.getLogger().debug(this, "Disabling manual annotation");
-							deselectManualAnnotation();
+			_domeo, new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+
+					if(isManualHighlightSelected()) 
+						_domeo.getLogger().command(this.getClass().getName(), "Enabling manual highlight");
+					else _domeo.getLogger().command(this.getClass().getName(), "Disabling manual highlight");
+					
+					if(isManualAnnotationSelected()) {
+						_domeo.getLogger().debug(this, "Disabling manual annotation");
+						deselectManualAnnotation();
+					} else if(isManualMultipleAnnotationSelected()) {
+						if(_domeo.getClipboardManager().getBufferedAnnotation().size()>0) {
+							_domeo.getLogger().debug(this, "Performing manual multiple highlight");
+							_domeo.getContentPanel().getAnnotationFrameWrapper().performMultipleTargetsHighlight(_domeo.getClipboardManager().getBufferedAnnotation());
 						}
-						if(isManualMultipleAnnotationSelected()) {
-							if(_domeo.getClipboardManager().getBufferedAnnotation().size()>0) {
-								_domeo.getLogger().debug(this, "Performing manual multiple highlight");
-								_domeo.getContentPanel().getAnnotationFrameWrapper().performMultipleTargetsHighlight(_domeo.getClipboardManager().getBufferedAnnotation());
-							}
-							deselectManualMultipleAnnotation();
-						}
-						if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
+						deselectManualMultipleAnnotation();
 					}
-				}, _resources.highlightLittleIcon(), 
-				_resources.highlightLittleColorIcon(), "Highlight", "Highlight");
+					else if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
+				}
+			}, _resources.highlightLittleIcon(), 
+			_resources.highlightLittleColorIcon(), "Highlight", "Highlight");
 		
 		annotateButtonPanel = new ToolbarHorizontalTogglePanel(
 			_domeo, new ClickHandler() {
@@ -169,7 +170,10 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 						}
 						deselectManualMultipleAnnotation();
 					}
-					if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) _domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
+					// If not multiple selections and text selected...
+					else if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) {
+						_domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
+					}
 				}
 			}, _resources.domeoAnnotateIcon(), 
 			_resources.domeoAnnotateColorIcon(), "Annotate", "Annotate");
@@ -326,14 +330,16 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 					public void onClick(ClickEvent event) {
 						_domeo.getLogger().command(this, "Saving annotation...");
 						_domeo.getAnnotationPersistenceManager().saveAnnotation();
-						if(_domeo.isHostedMode()) 
-							_domeo.getAnnotationPersistenceManager().mockupSavingOfTheAnnotation();
+						if(_domeo.isHostedMode()) _domeo.getAnnotationPersistenceManager().mockupSavingOfTheAnnotation();
 						//toolbar.disableToolbarItems();
 					}
 				}, _resources.saveMediumIcon().getSafeUri().asString(), "Save");
 		
-		toolbar.addToLeftPanel(homepageButton, "22");
-		toolbar.addToLeftPanel(addressBarPanel);
+		toolbar.addToLeftPanel(homepageButton, "22");	
+		
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_ADDRESSBAR)) {		
+			toolbar.addToLeftPanel(addressBarPanel);
+		}
 		//toolbar.addToLeftPanel(annotateButtonPanel);
 		//toolbar.addToLeftPanel(analyzeButtonPanel);
 		
@@ -349,7 +355,11 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 		
 		//commandsGroup.addItem(analyzeButtonPanel);
 		//commandsGroup.addItem(analyzeButtonPanel2);
-		commandsGroup.addItem(analyzeButtonPanel);
+		
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_ANALYZE)) {
+			commandsGroup.addItem(analyzeButtonPanel);
+		}
+		
 		commandsGroup.addItem(saveButton);
 		
 		toolbar.registerGroup(commandsGroup);
@@ -358,9 +368,25 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 		sp.setWidth("100px");
 		
 		toolbar.addToRightPanel(sp);
-		toolbar.addToRightPanel(shareButton);
-		toolbar.addToRightPanel(settingsButton);
-		toolbar.addToRightPanel(helpButton);
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_SHARING)) {
+			toolbar.addToRightPanel(shareButton);
+		}
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_PREFERENCES)) {
+			toolbar.addToRightPanel(settingsButton);
+		}
+		if(!_domeo.getProfileManager().getUserCurrentProfile().isFeatureDisabled(IProfile.FEATURE_HELP)) {
+			toolbar.addToRightPanel(helpButton);
+		}
+		if(_domeo.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_BRANDING)) {
+			ToolbarHorizontalPanel domeoButton = new ToolbarHorizontalPanel(
+				_domeo, new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						ApplicationUtils.openUrl("http://annotationframework.org");
+					}
+				}, Domeo.resources.domeoLogoIcon().getSafeUri().asString(), "Domeo","Domeo");		
+			toolbar.addToBrandingPanel(domeoButton, "60px");
+		}
 		
 		initWidget(toolbar);
 	}

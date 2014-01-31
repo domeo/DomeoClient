@@ -10,7 +10,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
@@ -70,6 +69,42 @@ public class JsAnnotationSetSummaryLens extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				//parent.setSelectedAnnotaitonSet(_set);	
+				parent.refresh();
+				event.stopPropagation();
+			}
+		});
+		
+		refreshLens();
+	}
+	
+	public JsAnnotationSetSummaryLens(IDomeo domeo, final ExistingAnnotationSetsListPanel parent, JsoAnnotationSetSummary set, boolean alreadyLoaded) {
+		_domeo = domeo;
+		_this = this;
+		_set = set;
+		_parent = parent;
+		
+		if(alreadyLoaded) selectionButton.setEnabled(false);
+		
+		initWidget(binder.createAndBindUi(this));
+
+		if(set.getType().equals(IDomeoOntology.discussionSet)) {
+			typeField.add(new Image(Domeo.resources.littleCommentsIcon()));
+		} else {
+			typeField.setVisible(false);
+		}
+		
+		wrapper.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				parent.displayAannotationSetInfo(_set);
+			}
+		});
+
+		selectionButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				//parent.setSelectedAnnotaitonSet(_set);	
+				parent.refresh();
 				event.stopPropagation();
 			}
 		});

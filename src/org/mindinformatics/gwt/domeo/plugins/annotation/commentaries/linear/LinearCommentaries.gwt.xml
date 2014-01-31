@@ -15,5 +15,6 @@
   <source path='info'/>
   <source path='model'/>
   <source path='search'/>
+  <source path='serialization'/>
   <source path='ui'/>
 </module>

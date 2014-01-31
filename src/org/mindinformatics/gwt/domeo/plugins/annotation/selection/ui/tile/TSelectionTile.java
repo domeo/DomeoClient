@@ -102,12 +102,14 @@ public class TSelectionTile extends ATileComponent implements ITileComponent {
 
 			type.setText("Selection:");
 			text.setText(SelectorUtils.getMatch(_annotation.getSelector()));
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 
 			injectButtons("", content, _annotation);
 			
@@ -181,8 +183,10 @@ public class TSelectionTile extends ATileComponent implements ITileComponent {
 						if(!(annotation.getSelector() instanceof MTargetSelector) && !(annotation.getSelector() instanceof MAnnotationSelector)) {
 							provenance.add(showIcon);
 							provenance.setCellWidth(showIcon, "22px");
-							provenance.add(editIcon);
-							provenance.setCellWidth(editIcon, "22px");
+							if(!(annotation instanceof MSelectionAnnotation)) {
+								provenance.add(editIcon);
+								provenance.setCellWidth(editIcon, "22px");
+							}
 						}
 						provenance.add(deleteIcon);
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);

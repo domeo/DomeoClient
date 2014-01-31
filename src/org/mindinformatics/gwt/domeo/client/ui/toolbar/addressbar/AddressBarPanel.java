@@ -2,6 +2,7 @@ package org.mindinformatics.gwt.domeo.client.ui.toolbar.addressbar;
 
 import org.mindinformatics.gwt.framework.component.ui.toolbar.IToolbarItem;
 import org.mindinformatics.gwt.framework.src.Application;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.utils.src.UrlUtils;
 
@@ -231,20 +232,22 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/SPL-annotation/Clopidogrel-1086a7b4-b89b-4bee-8120-5f752626c046.html");
 						
 		} else {
-			oracle.add("http://en.wikipedia.org/wiki/Amyloid_precursor_protein");
-			oracle.add("http://www.stembook.org/node/514");
-			oracle.add("http://www.jbiomedsem.com/content/3/S1/S1");
-			oracle.add("http://www.jbiomedsem.com/content/2/S2/S4");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3639628/");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3308009/");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059018/");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2700002/");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2799499/");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/10679938");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/17561409");
-			oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/7758106");
-			// Many citations (about 300)
-			oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2714656/");
+			if(ApplicationUtils.getProvideExamplesUrls()!=null && ApplicationUtils.getProvideExamplesUrls().trim().equals("true")) {
+				oracle.add("http://en.wikipedia.org/wiki/Amyloid_precursor_protein");
+				oracle.add("http://www.stembook.org/node/514");
+				oracle.add("http://www.jbiomedsem.com/content/3/S1/S1");
+				oracle.add("http://www.jbiomedsem.com/content/2/S2/S4");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3639628/");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3308009/");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059018/");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2700002/");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2799499/");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/10679938");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/17561409");
+				oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/7758106");
+				// Many citations (about 300)
+				oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2714656/");
+			}
 			/*
 			if(_application.isStandaloneMode()) {
 				// Not sure what to do here for copyright reasons

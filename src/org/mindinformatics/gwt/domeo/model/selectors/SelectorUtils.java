@@ -31,6 +31,20 @@ public class SelectorUtils {
 		throw new RuntimeException("Selector not for text " + selector.getClass().getName());
 	}
 	
+	public static String getMatch(ArrayList<MSelector> selectors) {
+		int counter = 0;
+		StringBuffer matches = new StringBuffer();
+		for(MSelector selector: selectors) {
+			if(selector instanceof MTextSelector) {
+				matches.append("'" + ((MTextSelector)selector).getExact() + "'");
+			} 
+			counter++;
+			if(counter<selectors.size()) matches.append(", "); 
+		}
+		return matches.toString();
+		// throw new RuntimeException("Selector not for text " + selector.getClass().getName());
+	}
+	
 	public static String getPrefix(MSelector selector) {
 		if(selector instanceof MTextSelector) {
 			if(selector instanceof MTextQuoteSelector) {

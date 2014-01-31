@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.framework.src.IResizable;
 
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
 
-public abstract class AFormComponent extends Composite implements IFormComponent {
+public abstract class AFormComponent extends Composite implements IFormComponent, IResizable {
 
 	protected IDomeo _domeo;
 	protected AFormsManager _manager;

@@ -77,7 +77,7 @@ public class AnnotationSetsSidePanelTopbar extends Composite implements IInitial
 		addSetPanel.add(hp1);
 		addSetPanel.setWidth("60px");
 		
-		Label l2 = new Label("Retreive Sets");
+		Label l2 = new Label("Retrieve Sets");
 		l2.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {

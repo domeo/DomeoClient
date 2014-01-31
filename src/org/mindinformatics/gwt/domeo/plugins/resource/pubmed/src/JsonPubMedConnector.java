@@ -1,17 +1,18 @@
 package org.mindinformatics.gwt.domeo.plugins.resource.pubmed.src;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.service.AnnotationPersistenceServiceFacade;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingBibliographySetHandler;
+import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.extractors.APubMedBibliograhyExtractorCommand;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.identities.EPubMedDatabase;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.JsoPubMedEntry;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.JsoPubmedSearchResultsWrapper;
-import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.IPubMedConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.IPubMedItemsRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.IPubMedPaginatedItemsRequestCompleted;
@@ -33,7 +34,6 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -48,9 +48,30 @@ public class JsonPubMedConnector implements IPubMedConnector {
 		_callback = callbackCompleted;
 	}
 	
+//	public static native JavaScriptObject parseJson(String jsonStr) /*-{
+//	  	return eval('('+jsonStr+')');
+//	}-*/;
+	
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-	  	return eval('('+jsonStr+')');
-	}-*/;
+	
+	try {
+		var jsonStr = jsonStr      
+    		.replace(/[\\]/g, '\\\\')
+    		.replace(/[\/]/g, '\\/')
+    		.replace(/[\b]/g, '\\b')
+    		.replace(/[\f]/g, '\\f')
+    		.replace(/[\n]/g, '\\n')
+    		.replace(/[\r]/g, '\\r')
+    		.replace(/[\t]/g, '\\t')
+    		.replace(/[\\][\"]/g, '\\\\\"')
+    		.replace(/\\'/g, "\\'");
+    	//alert(jsonStr);
+	  	return JSON.parse(jsonStr);
+	} catch (e) {
+		alert("Error while parsing the JSON message: " + e);
+	}
+}-*/;
+
 	
 	public void retrieveExistingBibliographySetByUrl(final IRetrieveExistingBibliographySetHandler handler, String url) {
 		
@@ -90,6 +111,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						try {
+							_application.getLogger().debug(this, response.getText());
 							JsArray responseOnSets = (JsArray) parseJson(response.getText());
 							handler.setExistingBibliographySetList(responseOnSets, true);			
 						} catch(Exception e) {
@@ -139,7 +161,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 			builder.setTimeoutMillis(10000);
 			
 			IDomeo _domeo = ((IDomeo)_application);
-			MPubMedDocument _resource = (MPubMedDocument) _domeo.getPersistenceManager().getCurrentResource();
+			MDocumentResource _resource = (MDocumentResource) _domeo.getPersistenceManager().getCurrentResource();
 			MPublicationArticleReference _reference = (MPublicationArticleReference)_resource.getSelfReference().getReference();
 
 			int counter = 0;
@@ -187,6 +209,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						try {
+							_application.getLogger().debug(this, response.getText());
 							JsArray responseOnSets = (JsArray) parseJson(response.getText());
 							handler.setExistingBibliographySetList(responseOnSets, true);			
 						} catch(Exception e) {
@@ -207,7 +230,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 			});
 			builder.send();
 		} catch (RequestException e) {
-			_application.getLogger().exception(this, "Couldn't save annotation");
+			_application.getLogger().exception(this, "Couldn't retrieve annotation");
 		}
 	}
 	
@@ -254,7 +277,8 @@ public class JsonPubMedConnector implements IPubMedConnector {
 							reference.setPublicationDate(pubmedEntry.getPublicationDate());
 							reference.setSource(EPubMedDatabase.getInstance());
 							reference.setJournalName(pubmedEntry.getJournalName());
-							reference.setJournalIssn(pubmedEntry.getJournalIssn());
+							reference.setJournalIssn(pubmedEntry.getJournalIssn());							
+							reference.setCreationDate(new Date());
 			
 							references.add(reference);
 						

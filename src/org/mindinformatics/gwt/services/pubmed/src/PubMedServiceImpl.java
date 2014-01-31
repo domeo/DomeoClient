@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.services.pubmed.src;
 
+import java.util.Date;
+
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.extractors.PubMedExtractSubjectCommand;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.identities.EPubMedDatabase;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.PubMedService;
@@ -23,7 +25,7 @@ public class PubMedServiceImpl extends RemoteServiceServlet implements PubMedSer
 				reference2.setTitle("An update of the mutation spectrum of the survival motor neuron gene " +
 						"(SMN1) in autosomal recessive spinal muscular atrophy (SMA).");
 				reference2.setAuthorNames("Wirth B");
-				reference2.setCreationDate("");
+				reference2.setCreationDate(new Date());
 				reference2.setJournalPublicationInfo("Hum Mutat. 2000;15(3):228-37.");
 				reference2.setPubMedCentralId("");
 				reference2.setPubMedId("10679938");
@@ -38,7 +40,7 @@ public class PubMedServiceImpl extends RemoteServiceServlet implements PubMedSer
 				reference3.setPublisherItemId("S0969-9961(07)00090-3");
 				reference3.setTitle("Abnormal motor phenotype in the SMNDelta7 mouse model of spinal muscular atrophy.");
 				reference3.setAuthorNames("Matthew ER Butchbach, Jonathan D Edwards and Arthur HM Burghes");
-				reference3.setCreationDate("");
+				reference3.setCreationDate(new Date());
 				reference3.setJournalPublicationInfo("Neurobiol Dis. 2007 Aug;27(2):207-19. Epub 2007 May 5.");
 				reference3.setPubMedCentralId("PMC2700002");
 				reference3.setPubMedId("17561409");

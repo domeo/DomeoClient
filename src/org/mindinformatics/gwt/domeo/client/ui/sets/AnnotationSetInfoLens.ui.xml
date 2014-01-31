@@ -3,7 +3,7 @@
   xmlns:g='urn:import:com.google.gwt.user.client.ui'
   xmlns:my='urn:import:org.mindinformatics.gwt.framework.widget'>
 
-	<ui:style type='org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationSetLens.SetsLensStyle'>	
+	<ui:style type='org.mindinformatics.gwt.domeo.client.ui.sets.AnnotationSetInfoLens.SetsLensStyle'>	
 		.body {
 			width: 100%;
 			padding: 0px;

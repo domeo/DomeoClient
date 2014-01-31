@@ -56,7 +56,10 @@ public class TextMiningServicePicker  extends Composite implements IContentPanel
 					annotatorDetails.add(_connector.getAnnotatorPanel());
 				}
 			});
-			if(first) button.setValue(true);
+			if(first) {
+				button.setValue(true);
+				annotatorDetails.add(_connector.getAnnotatorPanel());
+			}
 			first = false;
 			availableServices.add(button);
 			buttons.add(button);

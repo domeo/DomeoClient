@@ -39,6 +39,10 @@
 			max-height: 326px;
 			width: 480px;	
 		}
+		
+		.importBtn {
+			min-width: 100px;
+		}
 	</ui:style>
 	
 	<ui:with field='res' type='org.mindinformatics.gwt.domeo.client.Resources'/>
@@ -55,10 +59,12 @@
 			</g:cell>
 			<g:cell height="0px">
 				<g:HorizontalPanel styleName='{style.bottombar}' ui:field='bottombar' horizontalAlignment='ALIGN_RIGHT'>
-					<g:Button ui:field='importButton'>Import</g:Button>
+					<g:Button ui:field='importButton' styleName='{style.importBtn}'>Import</g:Button>
+					<!--  
 					<g:cell width="136px">
 						<g:Button>Import And Close</g:Button>
 					</g:cell>
+					-->
 				</g:HorizontalPanel>
 			</g:cell>
 		</g:VerticalPanel>

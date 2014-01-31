@@ -29,12 +29,12 @@ public class MPubMedDocument extends MDocumentResource implements ISelfReference
 	public void setSource(MAgent source) {
 		this.source = source;
 	}
-	public MLinkedResource getIsAbout() {
-		return isAbout;
-	}
-	public void setIsAbout(MLinkedResource isAbout) {
-		this.isAbout = isAbout;
-	}
+//	public MLinkedResource getIsAbout() {
+//		return isAbout;
+//	}
+//	public void setIsAbout(MLinkedResource isAbout) {
+//		this.isAbout = isAbout;
+//	}
 
 	@Override
 	public void setSelfReference(MAnnotationReference citation) {

@@ -10,13 +10,16 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationCitationReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
+import org.mindinformatics.gwt.framework.src.IResizable;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -28,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public class AnnotationSummaryTable extends Composite 
-	implements IInitializableComponent, IRefreshableComponent{
+	implements IInitializableComponent, IRefreshableComponent, IResizable {
 
 	private IDomeo _domeo;
 	private IAnnotationEditListener _listener;
@@ -47,6 +50,12 @@ public class AnnotationSummaryTable extends Composite
 		_listener = listener;
 		
 		initWidget(binder.createAndBindUi(this));
+		resized();
+	}
+	
+	@Override
+	public void resized() {
+		body.setHeight((Window.getClientHeight() - 94) + "px");
 	}
 	
 	@Override
@@ -70,7 +79,7 @@ public class AnnotationSummaryTable extends Composite
 			if(annotations!=null && annotations.size()>0) {
 				Collections.sort(annotations, new SortByVerticalPostion());
 				for(MAnnotation ann: annotations) {
-					if(ann instanceof MCommentAnnotation || ann instanceof MCurationToken || ann instanceof MAnnotationCitationReference) continue; 
+					if(ann instanceof MLinearCommentAnnotation || ann instanceof MCommentAnnotation || ann instanceof MCurationToken || ann instanceof MAnnotationCitationReference) continue; 
 					ITileComponent c = _domeo.getAnnotationTailsManager().getAnnotationTile(ann.getClass().getName(), _listener);
 					if(c==null) {
 						VerticalPanel vp = new VerticalPanel();

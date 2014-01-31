@@ -53,6 +53,7 @@ import org.mindinformatics.gwt.domeo.client.ui.east.sets.AnnotationSetsSidePanel
 import org.mindinformatics.gwt.domeo.client.ui.toolbar.DomeoToolbarPanel;
 import org.mindinformatics.gwt.domeo.component.cache.images.src.ImagesCache;
 import org.mindinformatics.gwt.domeo.component.cache.images.ui.ICachedImages;
+import org.mindinformatics.gwt.domeo.component.encoders.src.UrlEncodersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.LinkedDataDigestersManager;
 import org.mindinformatics.gwt.domeo.component.linkeddata.model.JsoLinkedDataResource;
 import org.mindinformatics.gwt.domeo.component.textmining.src.TextMiningRegistry;
@@ -61,9 +62,11 @@ import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineResource;
 import org.mindinformatics.gwt.domeo.model.accesscontrol.AnnotationAccessManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSidePanel;
-import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.east.CommentSideTab;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.ui.tile.CommentTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east.LinearCommentsSidePanel;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.east.LinearCommentsSideTab;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.tile.LinearCommentTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.ui.tile.CurationTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.info.HighlightPlugin;
@@ -90,7 +93,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetriev
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.testing.GwtPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.testing.JsonPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.testing.StandalonePersistenceManager;
-import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.ExistingAnnotationViewerPanel;
+import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.ExistingAnnotationViewerPanel2;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.info.PostitPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.search.PostItSearchComponent;
@@ -120,6 +123,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.card
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.form.expertstudy_pDDIFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.tile.expertstudy_pDDITileProvider;
 
+import org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.src.ScienceDirectUrlFilter;
+
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
@@ -136,6 +141,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.omim.model.MOmimDocument;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.info.OpenTrialsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.lenses.LOpenTrialsDocumentCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.model.MOpenTrialsDocument;
+import org.mindinformatics.gwt.domeo.plugins.resource.pmcimages.src.PmcImagesMetadataCache;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.info.PubMedPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.LPubMedDocumentCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.model.MPubMedDocument;
@@ -205,22 +211,15 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 
 	public static final boolean verbose = false;
 	public static final boolean pathfinder = true;
-
+	
 	public static String APP_NAME = "Domeo";
-	public static String APP_VERSION = "b31";
-	public static String APP_VERSION_LABEL = "build 31";
 
-	public String getApplicationName() {
-		return APP_NAME;
-	}
-
-	public String getApplicationVersion() {
-		return APP_VERSION;
-	}
-
-	public String getApplicationVersionLabel() {
-		return APP_VERSION_LABEL;
-	}
+	public static String APP_VERSION = "b40";
+	public static String APP_VERSION_LABEL = "build 40";
+	
+	public String getApplicationName() { return APP_NAME; }
+	public String getApplicationVersion() { return APP_VERSION; }
+	public String getApplicationVersionLabel() { return APP_VERSION_LABEL; }
 
 	public static final String PREF_ANN_MULTIPLE_TARGETS = "Annotation of multPiple targets";
 	public static final String PREF_WRAP_TABLES = AnnotationFrameWrapper.PREF_WRAP_TABLES;
@@ -246,6 +245,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	 */
 	public static final Resources resources = GWT.create(Resources.class);
 
+	public static Domeo _domeo = null;
+
 	private JsonUnmarshallingManager jsonUnmarshallingManager;
 
 	// UI
@@ -259,11 +260,14 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 
 	ImagesCache imagesCache;
 
-	// AnnotationPersistenceManager persistenceManager;
+	PmcImagesMetadataCache pmcImagesCache;
+	
+	//AnnotationPersistenceManager persistenceManager;
 	AnnotationAccessManager accessManager;
 	ContentExtractorsManager extractorsManager;
 	ClipboardManager clipboardManager;
-
+	UrlEncodersManager urlEncodersManager;
+	
 	// ========================================================================
 	// Annotation Tails Manager
 	// ========================================================================
@@ -332,7 +336,12 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	public ASideTab getDiscussionSideTab() {
 		return discussionSideTab;
 	}
-
+	
+	private ASideTab commentsSideTab;
+	public  ASideTab getLinearCommentsSideTab() {
+		return commentsSideTab;
+	}
+	
 	public Domeo _this;
 
 	/**
@@ -341,8 +350,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	 * completed, the method completeInitialization() is called
 	 */
 	public void onModuleLoad() {
-		this.logger.info(this, "Creating Domeo " + getStartingMode());
-		_this = this;
+		_domeo = this;
+		this.logger.info(this, "Creating Domeo (" + Domeo.APP_VERSION+ ") " + getStartingMode());
+		_this=this;
+
 		Window.addWindowClosingHandler(new Window.ClosingHandler() {
 
 			@Override
@@ -381,7 +392,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 		// Images Cache
 		imagesCache = new ImagesCache(this);
 		componentsManager.addComponent(imagesCache);
-
+		// Images mashup
+		pmcImagesCache = new PmcImagesMetadataCache(this);
+		
 		// Resources
 		componentsManager.addComponent(resourcesManager);
 
@@ -573,9 +586,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 		annotationCardsManager.registerAnnotationCard(
 				MMicroPublicationAnnotation.class.getName(),
 				new MicroPublicationCardProvider(this));
-		getAnnotationPersistenceManager().registerCache(
-				new MicroPublicationCache());
-
+		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
+		
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class
 				.getName(), new CommentTileProvider(this));
@@ -603,7 +615,13 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 		// }	
 		annotationTailsManager.registerAnnotationTile(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDITileProvider(this));
 		annotationCardsManager.registerAnnotationCard(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDICardProvider(this));
-
+		
+		// Comments
+		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 
+				new CommentTileProvider(this));
+		annotationTailsManager.registerAnnotationTile(MLinearCommentAnnotation.class.getName(), 
+				new LinearCommentTileProvider(this));
+		
 		// Digesters
 		linkedDataDigestersManager
 				.registerLnkedDataDigester(new NifStandardDigester());
@@ -611,48 +629,42 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				.registerLnkedDataDigester(new BioPortalTermsDigester());
 
 		sideTabPanel = sidePanelsFacade.getSideTabsContainer();
-		final ASideTab annotationsSideTab = new AnnotationSideTab(this,
-				sidePanelsFacade);
-		final ASideTab resourceSideTab = new ResourceSideTab(this,
-				sidePanelsFacade);
-		final ASideTab annotationSetsSideTab2 = new AnnotationSetSideTab(this,
-				sidePanelsFacade);
-		final ASideTab clipboardSideTab = new ClipboardSideTab(this,
-				sidePanelsFacade);
+
+		final ASideTab annotationsSideTab = new AnnotationSideTab(this, sidePanelsFacade);
+		final ASideTab resourceSideTab = new ResourceSideTab(this, sidePanelsFacade);
+		final ASideTab annotationSetsSideTab2 = new AnnotationSetSideTab(this, sidePanelsFacade);
+		final ASideTab clipboardSideTab = new ClipboardSideTab(this, sidePanelsFacade);
+			
+		AnnotationSidePanel annotationSidePanel = new AnnotationSidePanel(this, sidePanelsFacade, annotationsSideTab);
+		ResourceSidePanel resourceSidePanel = new ResourceSidePanel(this, sidePanelsFacade, resourceSideTab);
+		AnnotationSetsSidePanel annotationSetsSidePanel2 = new AnnotationSetsSidePanel(this, sidePanelsFacade, annotationSetsSideTab2);
+		ClipboardSidePanel clipboardSidePanel = new ClipboardSidePanel(this, sidePanelsFacade, clipboardSideTab);
+		
+		sidePanelsFacade.registerSideComponent(resourceSideTab, resourceSidePanel, (ResourceSideTab.HEIGHT+16) + "px");
+		sidePanelsFacade.registerSideComponent(annotationsSideTab, annotationSidePanel, (AnnotationSideTab.HEIGHT+16) + "px");
+		sidePanelsFacade.registerSideComponent(annotationSetsSideTab2, annotationSetsSidePanel2,  (AnnotationSetSideTab.HEIGHT+16) + "px");
+		
+		/*
 		discussionSideTab = new CommentSideTab(this, sidePanelsFacade);
-
-		AnnotationSidePanel annotationSidePanel = new AnnotationSidePanel(this,
-				sidePanelsFacade, annotationsSideTab);
-		ResourceSidePanel resourceSidePanel = new ResourceSidePanel(this,
-				sidePanelsFacade, resourceSideTab);
-		AnnotationSetsSidePanel annotationSetsSidePanel2 = new AnnotationSetsSidePanel(
-				this, sidePanelsFacade, annotationSetsSideTab2);
-		ClipboardSidePanel clipboardSidePanel = new ClipboardSidePanel(this,
-				sidePanelsFacade, clipboardSideTab);
-
-		sidePanelsFacade.registerSideComponent(resourceSideTab,
-				resourceSidePanel, (ResourceSideTab.HEIGHT + 16) + "px");
-		sidePanelsFacade.registerSideComponent(annotationsSideTab,
-				annotationSidePanel, (AnnotationSideTab.HEIGHT + 16) + "px");
-		sidePanelsFacade.registerSideComponent(annotationSetsSideTab2,
-				annotationSetsSidePanel2, (AnnotationSetSideTab.HEIGHT + 16)
-						+ "px");
-
-		if (((BooleanPreference) getPreferences().getPreferenceItem(
-				Domeo.class.getName(), Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
-			CommentSidePanel commentSidePanel = new CommentSidePanel(this,
-					sidePanelsFacade, discussionSideTab);
-			sidePanelsFacade.registerSideComponent(discussionSideTab,
-					commentSidePanel, (CommentSideTab.HEIGHT + 16) + "px");
+		//
+		if(((BooleanPreference)getPreferences().getPreferenceItem(Domeo.class.getName(), 
+				Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
+			CommentSidePanel commentSidePanel = new CommentSidePanel(this, sidePanelsFacade, discussionSideTab);
+			sidePanelsFacade.registerSideComponent(discussionSideTab, commentSidePanel,  (CommentSideTab.HEIGHT+16) + "px");
 		}
-
-		if (((BooleanPreference) this.getPreferences().getPreferenceItem(
-				Application.class.getName(), Domeo.PREF_ANN_MULTIPLE_TARGETS)) != null
-				&& ((BooleanPreference) this.getPreferences()
-						.getPreferenceItem(Application.class.getName(),
-								Domeo.PREF_ANN_MULTIPLE_TARGETS)).getValue()) {
-			sidePanelsFacade.registerSideComponent(clipboardSideTab,
-					clipboardSidePanel, (ClipboardSideTab.HEIGHT + 16) + "px");
+		*/
+		
+		commentsSideTab = new LinearCommentsSideTab(this, sidePanelsFacade);
+		if(((BooleanPreference)getPreferences().getPreferenceItem(Domeo.class.getName(), 
+				Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
+			LinearCommentsSidePanel commentsSidePanel = new LinearCommentsSidePanel(this, sidePanelsFacade, discussionSideTab);
+			sidePanelsFacade.registerSideComponent(commentsSideTab, commentsSidePanel,  (LinearCommentsSideTab.HEIGHT+16) + "px");
+		}
+		
+		if(((BooleanPreference)this.getPreferences().
+				getPreferenceItem(Application.class.getName(), Domeo.PREF_ANN_MULTIPLE_TARGETS))!=null &&
+				((BooleanPreference)this.getPreferences().getPreferenceItem(Application.class.getName(), Domeo.PREF_ANN_MULTIPLE_TARGETS)).getValue()) {
+			sidePanelsFacade.registerSideComponent(clipboardSideTab, clipboardSidePanel,  (ClipboardSideTab.HEIGHT+16) + "px");
 		}
 
 		if (((BooleanPreference) getPreferences().getPreferenceItem(
@@ -669,6 +681,11 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 					annotationDebugSidePanel,
 					(AnnotationDebugSideTab.HEIGHT + 16) + "px");
 		}
+		
+		// Filters
+        urlEncodersManager = new UrlEncodersManager();
+        urlEncodersManager.registerFilter(new ScienceDirectUrlFilter());
+		
 
 		// -----------------------------------
 		// TEXT MINING SERVICES REGISTRATION
@@ -1007,21 +1024,34 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url);
 			}
 		} else {
-			if (isLocalResources()) {
-				getLogger().info(this, "Attempting to open a local resoruce");
-				getContentPanel().getAnnotationFrameWrapper().setUrl(url, url);
-			} else {
-				getLogger().info(this, "Attempting to open a remote resoruce");
-				String PROXY = "http://"
-						+ ApplicationUtils
-								.getHostname(GWT.getHostPageBaseURL())
-						+ "/proxy/";
-				getContentPanel().getAnnotationFrameWrapper().setUrl(
-						PROXY + url, url);
-			}
-		}
 
-		//
+		    if(isLocalResources()) {
+		        getLogger().info(this, "Attempting to open a local resoruce");
+		        getContentPanel().getAnnotationFrameWrapper().setUrl(url, url);
+		    } else {
+		        getLogger().info(this, "Attempting to open a remote resoruce " + url);
+		        
+		    	// Filters: can modify the requested URL to reach an appropriate version of the resource
+		        String filteredUrl = urlEncodersManager.filter(url);
+		        getLogger().info(this, "Filtered URL " + filteredUrl);
+		        String proxyUrl = (filteredUrl.equals(url))?url:filteredUrl;
+		        
+		        getLogger().info(this, "Proxy URL " + proxyUrl);
+		        
+		        String proxyProtocol = ApplicationUtils.getProxyProtocol();
+		        proxyProtocol = (proxyProtocol.trim().equals("http")||proxyProtocol.trim().equals("https"))?proxyProtocol:"http";
+		        if(!url.endsWith(".pdf")) {
+	    			String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + proxyUrl, url);
+	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
+		        } else {
+		        	String PREFIX = ApplicationUtils.getUrlBase(ApplicationUtils.getUrlString()) + "web/pdf?pdf=";
+		        	String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + proxyUrl, url);
+	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
+		        }
+		    }
+		}
 	}
 
 	/**
@@ -1030,9 +1060,20 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	 */
 	private long documentPipelineTimer;
 
+
+	// For PDF 
+	public static void notifyDocumentLoadedStageOneStatic() {
+		if(_domeo!=null) _domeo.notifyDocumentLoadedStageOneAfter();
+	}
+	
+	// For PDF 
 	@Override
-	public void notifyDocumentLoadedStageOne() { // Document loaded in the
-													// browser
+	public void notifyDocumentLoadedStageOne() {
+		if(!getContentPanel().getAnnotationFrameWrapper().getUrl().endsWith(".pdf")) notifyDocumentLoadedStageOneAfter();
+	}
+	
+	private void notifyDocumentLoadedStageOneAfter() { // Document loaded in the browser
+
 		try {
 			documentPipelineTimer = System.currentTimeMillis();
 			this.getLogger().debug(this, "AFTER DOCUMENT",
@@ -1300,9 +1341,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 
 	public void checkForExistingAnnotationSets() {
 		documentPipelineTimer = System.currentTimeMillis();
-		this.getLogger().debug(this, "AFTER DOCUMENT",
-				"Executing checkForExistingAnnotationSets()");
-		this.getDialogPanel().hide();
+
+		this.getLogger().debug(this, "AFTER DOCUMENT", "Executing checkForExistingAnnotationSets()");
+		if(this.getDialogPanel()!=null) this.getDialogPanel().hide();
+
 		this.getPersistenceManager().retrieveExistingAnnotationSetList(this);
 
 		// ExistingAnnotationViewerPanel lwp = new
@@ -1327,11 +1369,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 		} else {
 			this.getProgressPanelContainer().hide();
 			try {
-				ExistingAnnotationViewerPanel lwp = new ExistingAnnotationViewerPanel(
-						this, responseOnSets);
-				new EnhancedGlassPanel(this, lwp, lwp.getTitle(), false, false,
-						false);
-				// _dialogPanel.hide();
+
+				ExistingAnnotationViewerPanel2 lwp = new ExistingAnnotationViewerPanel2(this, responseOnSets);
+				new EnhancedGlassPanel(this, lwp, lwp.getTitle(), false, false, false);
+				//_dialogPanel.hide();
 			} catch (Exception e) {
 				this.getLogger().exception(this,
 						"Exeption in visualizing existing annotation");
@@ -1489,6 +1530,11 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	public ImagesCache getImagesCache() {
 		return imagesCache;
 	}
+
+	public PmcImagesMetadataCache getPmcImagesCache() {
+		return pmcImagesCache;
+	}
+	
 
 	public final native String getAnnotationType(Object obj) /*-{ return obj['@type']; }-*/;
 

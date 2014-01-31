@@ -7,6 +7,7 @@ import java.util.List;
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.service.AnnotationPersistenceServiceFacade;
@@ -301,6 +302,11 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 				}
 				jsonSet.put(IDomeoOntology.agents, agents);
 				
+				JSONValue selfReference = jsonSerializerManager.serializeSelfReference();
+				if(selfReference!=null) {
+					jsonSet.put("domeo:reference", selfReference);
+				}
+				
 				int jsonResourcesCounter = 0;
 				JSONArray resources = new JSONArray();
 				for(MGenericResource resource: jsonSerializerManager.getResourcesToSerialize()) {
@@ -322,9 +328,10 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 						MGenericResource gResource = (MGenericResource) resource;
 						JSONObject r = new JSONObject();
 						r.put("url", new JSONString(gResource.getUrl()));
-						r.put("label", new JSONString(gResource.getLabel()));
+						r.put("label", new JSONString(gResource.getLabel()));				
 						resources.set(jsonResourcesCounter++, r);
 					} 
+					 
 				}
 				jsonSet.put(IDomeoOntology.resources, resources);
 				
@@ -385,6 +392,11 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 					}
 				}
 				jsonSet.put(IDomeoOntology.agents, agents);
+				
+				JSONValue selfReference = jsonSerializerManager.serializeSelfReference();
+				if(selfReference!=null) {
+					jsonSet.put("domeo:reference", selfReference);
+				}
 				
 				int jsonResourcesCounter = 0;
 				JSONArray resources = new JSONArray();

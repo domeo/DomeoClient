@@ -3,6 +3,7 @@
   xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <ui:image field='rightSideImage' src='right-search-bar2.gif' />
+  <ui:image field='optionsListImage' src='edit-list.png' />
 
   <ui:style>
   	.outer {
@@ -52,6 +53,15 @@
     	cursor: hand;
   	}
   	
+  	.optionsList {
+  		border:0;
+  		padding:0;
+  		margin-top:3px;
+  		margin-left:3px;
+  		cursor: pointer;
+    	cursor: hand;
+  	}
+  	
   	.numberResults {
   		padding-top: 3px;
   		padding-left: 16px;
@@ -81,7 +91,9 @@
   		<!-- g:Image ui:field='leftSide' resource='{leftSideImage}' styleName='{style.leftSide}'></g:Image -->
 	  	<g:TextBox ui:field='searchBox' styleName='{style.searchBox}'></g:TextBox>
 	  	<g:Image ui:field='rightSide' resource='{rightSideImage}'  styleName='{style.rightSide}'></g:Image>
+	  	<g:Image ui:field='optionsList' resource='{optionsListImage}' styleName='{style.optionsList}' title='Vocabularies list'></g:Image>
 	  	<g:Label ui:field='numberResults' styleName='{style.numberResults}'></g:Label>
+	  	
 	  	<g:HorizontalPanel styleName='{style.filter}'>
 	  		<g:Label ui:field='filterLabel' styleName='{style.filterLabel}'>Display: </g:Label>
 	  		<g:ListBox ui:field='sourcesLabels'></g:ListBox>

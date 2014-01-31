@@ -3,11 +3,10 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 
-public class JsonPublicationArticleReferenceSerializer implements ISerializer {
+public class JsonPublicationArticleReferenceSerializer extends ASerializer implements ISerializer {
 
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {
 		MPublicationArticleReference ref = (MPublicationArticleReference) obj;
@@ -29,7 +28,7 @@ public class JsonPublicationArticleReferenceSerializer implements ISerializer {
 			reference.put(IPavOntology.providedBy, manager.serialize(ref.getProvidedBy()));
 			manager.addAgentToSerialize(ref.getProvidedBy());
 		}
-		if(ref.getImportedOn()!=null) reference.put(IPavOntology.importedOn, new JSONString(ref.getImportedOn()));
+		if(ref.getImportedOn()!=null) reference.put(IPavOntology.importedOn, nonNullable((ref.getImportedOn())));
 	
 		return reference;
 	}

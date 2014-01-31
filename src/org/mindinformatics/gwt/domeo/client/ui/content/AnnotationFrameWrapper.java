@@ -435,7 +435,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 							// If there are potential subject for creating structured relationships
 							// between annotation item, the method is called
 							if(items.size()>0) {
-								performAnnotation(items);
+								//performAnnotation(items);
 							}
 							
 							resetSelection();
@@ -492,7 +492,6 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 										suffix,
 										(Node) anchorNode, items));
 										*/
-						
 						
 						clearSelection(doc);
 						
@@ -986,6 +985,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 					try {
 						HtmlUtils.performHighlight(Long.toString(annotation.getLocalId()), match, prefix, suffix, node, StylesManager.JUST_SELECTED);
 						int y = HtmlUtils.getVerticalPositionOfElementWithId(_frame.getElement(), annotation.getLocalId().toString());
+						
 						annotation.setY(y);
 					
 						_domeo.getLogger().info(LOG_CATEGORY_TEXT_BUFFERED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
@@ -1037,7 +1037,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 						_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, 
 								prefix + " $ " + matchText + " $ " + suffix + " $$$$ " + e.getMessage());
 						Window.alert("FIXME: annotation could not be completed: " + prefix + matchText + suffix);
-						_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+						_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 					}
 				} else {
 					_domeo.getLogger().exception(LOG_CATEGORY_ANNOTATION_FAILED, this, "Something went wrong while caching new annotation item.");
@@ -1066,7 +1066,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		}  catch(Exception e) {
 			// TODO Add notification to user
 			_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, e.getMessage());
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 		}
 	}
 	
@@ -1087,13 +1087,18 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				}
 				annotation.addSelector(target.getSelector());
 			}			
+			
+			_domeo.getLogger().debug(AnnotationFrameWrapper.LOG_CATEGORY_TARGETS_ANNOTATION, this, "Clear selection");
+			clearSelection();
+			resetSelection("");
+			
 			_domeo.getLogger().info(LOG_CATEGORY_TEXT_ANNOTATED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
 			_domeo.getContentPanel().getAnnotationFrameWrapper().clearTemporaryAnnotations();
 			_domeo.refreshAnnotationComponents();
 		}  catch(Exception e) {
 			// TODO Add notification to user
 			_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, e.getMessage());
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 		}
 	}
 	
@@ -1121,13 +1126,18 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				}
 				annotation.addSelector(target.getSelector());
 			}			
+			
+			_domeo.getLogger().debug(AnnotationFrameWrapper.LOG_CATEGORY_TARGETS_ANNOTATION, this, "Clear selection");
+			clearSelection();
+			resetSelection("");
+			
 			_domeo.getLogger().info(LOG_CATEGORY_TEXT_ANNOTATED, this, matchText + " in (ms) " + (System.currentTimeMillis()-start));
 			_domeo.getContentPanel().getAnnotationFrameWrapper().clearTemporaryAnnotations();
 			_domeo.refreshAnnotationComponents();
 		}  catch(Exception e) {
 			// TODO Add notification to user
 			_domeo.getLogger().exception(LOG_CATEGORY_TEXT_HIGHLIGHT, this, e.getMessage());
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, false);
 		}
 	}
 	
@@ -1191,6 +1201,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		} else {
 			Set<com.google.gwt.dom.client.Element> spans = HtmlUtils.getElementsByAnnotationId(
 					_frame.getElement(), annotation.getLocalId().toString());
+			//Window.alert(annotation.getLocalId().toString() + " - " + spans.size());
 			for (com.google.gwt.dom.client.Element span : spans) {
 				HtmlUtils.scrollToElement(_frame.getElement(), span);
 				final com.google.gwt.dom.client.Element _span = span;
@@ -1226,7 +1237,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		}
 	}
 	
-	public void removeAnnotationSetAnnotation(MAnnotationSet set) {
+	public void removeAnnotationSetAnnotation(MAnnotationSet set, boolean mark) {
 		long start=System.currentTimeMillis();
 		_domeo.getLogger().debug(this, "Starting set with id " + set.getLocalId() + " annotation removal");
 		
@@ -1234,13 +1245,13 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		toRemove.addAll(set.getAnnotations());
 		Iterator<MAnnotation> it = toRemove.iterator();
 		while(it.hasNext()) {
-			removeAnnotation(it.next());
+			removeAnnotation(it.next(), mark);
 		}
 		
 		_domeo.getLogger().info(LOG_CATEGORY_ANNOTATION_DELETED, this, "Set " + set.getLocalId() + " annotation removed in(ms):"+(System.currentTimeMillis()-start));
 	}
 	
-	public void removeAnnotation(MAnnotation annotation) {
+	public void removeAnnotation(MAnnotation annotation, boolean mark) {
 		long start=System.currentTimeMillis();
 		_domeo.getLogger().debug(this, "Starting annotation removal " + annotation.getClass().getName() + "-" + annotation.getLocalId());
 		
@@ -1259,7 +1270,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 			_domeo.getClipboardManager().removeAnnotation((MSelectionAnnotation)annotation);
 			_domeo.refreshClipboardComponents();
 		} else {
-			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation);
+			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, mark);
 			_domeo.refreshAnnotationComponents();
 		}
 		
@@ -1471,12 +1482,16 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 	public void setUrl(String url) {
 		currentUrl = url;
 		_frame.setUrl(currentUrl);
+		_domeo.getLogger().debug(this, "registerPdfLoadedNotification");
+		registerPdfLoadedNotification();
 	}
 	
 	public void setUrl(String url, String realUrl) {
 		currentUrl = realUrl;
 		_domeo.getLogger().debug(this, "Setting up url " + realUrl);
 		_frame.setUrl(url);
+		_domeo.getLogger().debug(this, "registerPdfLoadedNotification");
+		registerPdfLoadedNotification();
 	}
 	
 	public String getUrl(String dummy) {
@@ -1749,6 +1764,14 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 					foo.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::notProxiedDocumentLoaded()();				
 				}
 			};
+		}
+	}-*/;
+	
+	public native void registerPdfLoadedNotification() /*-{
+		try {
+	   		$doc.getElementById($wnd.FRAME_ID).contentWindow.window.pdfLoaded = $entry(@org.mindinformatics.gwt.domeo.client.Domeo::notifyDocumentLoadedStageOneStatic());
+		} catch(e) {
+			alert(e);
 		}
 	}-*/;
 	

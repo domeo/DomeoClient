@@ -16,4 +16,5 @@ public abstract class AFormsManager extends Composite {
 	public abstract MGenericResource getResource();
 	public abstract ArrayList<MAnnotation> getTargets();
 	public abstract void hideContainer();
+	public abstract int getContainerWidth();
 }

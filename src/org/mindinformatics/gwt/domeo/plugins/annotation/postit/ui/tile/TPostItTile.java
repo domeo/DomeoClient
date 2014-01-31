@@ -14,11 +14,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -82,12 +79,14 @@ public class TPostItTile extends ATileComponent implements ITileComponent {
 			
 			//type.setText(_annotation.getType().getName()+":");
 			text.setText(_annotation.getText());
+			/*
 			text.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
+			*/
 			/*
 			highlight.addMouseOverHandler(new MouseOverHandler() {
 				@Override

@@ -24,6 +24,7 @@ import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.IRefreshableComponent;
 import org.mindinformatics.gwt.framework.component.ui.east.ASidePanel;
 import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
+import org.mindinformatics.gwt.framework.src.IResizable;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -35,7 +36,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -50,12 +50,14 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
 public class CommentSummaryTable extends Composite 
-	implements IInitializableComponent, IRefreshableComponent{
+	implements IInitializableComponent, IRefreshableComponent, IResizable{
 
 	private IDomeo _domeo;
 	private IAnnotationEditListener _listener;
 	private CommentSidePanel _parentPanel;
 	private MAnnotation _root;
+	
+	private int numberComments;
 	
 	@UiField ScrollPanel body;
 	@UiField VerticalPanel content;
@@ -69,6 +71,7 @@ public class CommentSummaryTable extends Composite
 	interface LocalCss extends CssResource {
 		String formArea();
 		String formBox();
+		String buttonLabel();
 	}
 	
 	@UiField LocalCss style;
@@ -82,12 +85,18 @@ public class CommentSummaryTable extends Composite
 		_parentPanel = parentPanel;
 		
 		initWidget(binder.createAndBindUi(this));
+		resized();
 	}
 	
 	@Override
 	public void init() {		
 		topContent.clear();
 		bottomContent.clear();
+	}
+	
+	@Override
+	public void resized() {
+		body.setHeight((Window.getClientHeight() - 94) + "px");
 	}
 	
 	@Override
@@ -116,6 +125,7 @@ public class CommentSummaryTable extends Composite
 			bottomContent.clear();
 			if(annotations!=null){  
 				if(annotations.size()>0) {
+					numberComments = annotations.size();
 					_root = annotations.get(0);
 					int counter = 0;
 					for(MAnnotation ann: annotations) {
@@ -144,9 +154,6 @@ public class CommentSummaryTable extends Composite
 									}
 								} else {
 									if(ann instanceof MCommentAnnotation || ann instanceof MCurationToken) { // Remove for simple commenting
-										//ITileComponent cc = new TCommentViewerTile(_domeo, _listener);
-										//cc.initializeLens(ann);
-										//Widget w = cc.getTile();
 										c.initializeLens(ann);
 										Widget w = c.getTile();
 										topContent.add(w);
@@ -189,6 +196,7 @@ public class CommentSummaryTable extends Composite
 						@Override
 						public void onClick(ClickEvent event) {
 							if(ta.getText().trim().length()==0) return; 
+							// Decide if an annotation has to react to the main annotation of the thread or if reacts to the previous one in the list
 							MAnnotationSelector selector = AnnotationFactory.createAnnotationSelector(_domeo.getAgentManager().getUserPerson(), 
 									_domeo.getPersistenceManager().getCurrentResource(), _annotations.get(_annotations.size()-1));
 							MCommentAnnotation annotation = AnnotationFactory.createComment(_domeo.getPersistenceManager().getCurrentSet(), _domeo.getAgentManager().getUserPerson(), 
@@ -210,7 +218,9 @@ public class CommentSummaryTable extends Composite
 					});
 					commands.add(bu);
 					bottomContent.add(commands);					
-				} 
+				} else {
+					numberComments = 0;
+				}
 			}
 			if(isGeneralComment)
 				_parentPanel.updateStatistics(annotations, annotations.size(), usersIds.size(), threadsCounter);
@@ -222,6 +232,10 @@ public class CommentSummaryTable extends Composite
 			_domeo.getLogger().exception(this, e.getMessage());
 		}
 		_domeo.getLogger().debug(this, "Comments summary panel refreshed in (ms):" + (System.currentTimeMillis()-start));
+	}
+	
+	public int getNumberComments() {
+		return numberComments;
 	}
 	
 	public void displayThread(Long id) {
@@ -249,15 +263,20 @@ public class CommentSummaryTable extends Composite
 		
 	}
 	
-	public void listGeneralThreads() {
+	public int listGeneralThreads() {
+		int counter = 0;
 		if(_domeo.getAnnotationPersistenceManager().getAnnotationOfTargetResourceSize()>0) {
 			topContent.clear();
 			bottomContent.clear();
 			Collection<Long> annLocalIds = _domeo.getAnnotationPersistenceManager().getAnnotationOfTargetResource();
 			for(Long id: annLocalIds) {
-				DiscussionSummaryListLens lens2 = new DiscussionSummaryListLens(_domeo, _parentPanel, _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(id),
-						((MCommentAnnotation)_domeo.getAnnotationPersistenceManager().getAnnotationByLocalId(id)));
 				MAnnotationSet set = _domeo.getAnnotationPersistenceManager().getSetByAnnotationId(id);
+				//Window.alert(set.getLabel() + " " + set.getIsDeleted());
+				if(set.getIsDeleted()) continue;
+				counter++;
+				DiscussionSummaryListLens lens2 = new DiscussionSummaryListLens(_domeo, _parentPanel, set,
+						((MCommentAnnotation)_domeo.getAnnotationPersistenceManager().getAnnotationByLocalId(id)));
+				
 				_domeo.getComponentsManager().registerObjectLens(set, lens2);
 				bottomContent.add(lens2);
 				/*
@@ -278,16 +297,24 @@ public class CommentSummaryTable extends Composite
  			topContent.clear();
  			topContent.setVisible(true);
  			bottomContent.clear();
- 			Label l = new Label("Create the first discussion thread");
+ 			Label l = new Label("Create the first general discussion thread");
+ 			l.setStyleName(style.buttonLabel());
  			l.addClickHandler(new ClickHandler() {
  				@Override
  				public void onClick(ClickEvent event) {
  					createNewGeneralThread();
  				}
  			});
- 			topContent.add(l);
- 			createNewThreadForm(topContent);
+ 			
+ 			FlowPanel fp = new FlowPanel();
+ 			fp.setStyleName(style.buttonLabel());
+ 			fp.add(new Image(Domeo.resources.littleAddIcon()));
+ 			fp.add(l);
+ 			
+ 			topContent.add(fp);
+ 			//createNewThreadForm(topContent);
  		}
+		return counter;
 	}
 	
 	private void createNewThreadForm(VerticalPanel content) {
@@ -334,8 +361,8 @@ public class CommentSummaryTable extends Composite
 		//privacy.setWidth("150px");
 		privacy.setHeight("30px");
 		privacy.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		privacy.add(new Image(Domeo.resources.publicLittleIcon()));
-		privacy.add(new HTML("Public"));
+		//privacy.add(new Image(Domeo.resources.publicLittleIcon()));
+		//privacy.add(new HTML("Public"));
 		
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(bu);

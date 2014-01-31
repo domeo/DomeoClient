@@ -47,7 +47,10 @@ public class FPostItForm extends AFormComponent implements IResizable, IAllowsMu
 	
 	private MPostItAnnotation _item;
 	
+	//@UiField SimplePanel buttonsPanelWrapper;
+	@UiField HorizontalPanel headerPanel;
 	@UiField HorizontalPanel buttonsPanel;
+	@UiField HorizontalPanel buttonsPanelSpacer;
 	@UiField TextArea annotationBody;
 	@UiField ListBox annotationSet;
 	@UiField ListBox postitTypes;
@@ -158,7 +161,6 @@ public class FPostItForm extends AFormComponent implements IResizable, IAllowsMu
 		buttonsPanel.add(yesButton);
 		
 		this.setHeight("100px");
-		
 		/*
 		buttonsPanel.add(yesButton);
 		typeNote.setValue(true);
@@ -312,5 +314,17 @@ public class FPostItForm extends AFormComponent implements IResizable, IAllowsMu
 
 	@Override
 	public void resized() {
+		//_domeo.getLogger().exception(this, Window.getClientWidth() + " - "+_manager.getContainerWidth() + " - " + Math.max(0, (_manager.getContainerWidth()-320)) + "px");
+		// buttonsPanelSpacer.clear();
+		// buttonsPanelSpacer.add(new HTML(Window.getClientWidth() + " - "+_manager.getContainerWidth() + " - " + Math.max(0, (_manager.getContainerWidth()-300)) + "px"));
+		//buttonsPanelSpacer.setWidth(((Window.getClientWidth()-_manager.getContainerWidth())-70) + "px");
+		//_domeo.getLogger().exception(this, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		buttonsPanelSpacer.setWidth(Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		//_domeo.getLogger().exception(this, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		buttonsPanel.setWidth(Math.max(0, (_manager.getContainerWidth()-320)) + "px");
+		
+		headerPanel.setCellWidth(buttonsPanelSpacer, Math.max(0, (_manager.getContainerWidth()-300)) + "px");
+		//buttonsPanel.setWidth((Window.getClientWidth() - 140) + "px");
+		//buttonsPanelWrapper.setWidth("10px");
 	}
 }
