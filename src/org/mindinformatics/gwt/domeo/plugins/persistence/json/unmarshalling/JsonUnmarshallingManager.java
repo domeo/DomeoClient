@@ -670,9 +670,9 @@ public class JsonUnmarshallingManager {
 						
 					} else if (typesSet.contains(MSPLsAnnotation.TYPE)){
 						SPLType splType = null;
-						if(typesSet.contains(SPLType.PHARMGX)) {
-							splType = SPLType.PHARMGX_TYPE;
-						}
+						//if(typesSet.contains(SPLType.PHARMGX)) { //TODO: test with the conditional operational
+							splType = SPLType.PHARMGX_TYPE; //TODO: possibly add multiple types like Post It has (e.g., pharmgx, ddis, ades, etc)
+						//}
 						if(splType!=null) {
 							ann = unmarshallSPLAnnotation((JsAnnotationSPL) jsonAnnotations.get(j), "", set, selectors);
 							((MSPLsAnnotation)ann).setType(splType);
