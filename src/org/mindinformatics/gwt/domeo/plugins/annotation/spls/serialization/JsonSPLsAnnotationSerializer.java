@@ -1,6 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.serialization;
 
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.IPharmgxOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonAnnotationSerializer;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonSerializerManager;
@@ -16,7 +17,7 @@ import com.google.gwt.json.client.JSONString;
 /**
  * This class provides the serialization aspects peculiar to the SPLs pharmacogenomics annotation.
  * 
- * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
+ * @author Richard Boyce <rdb20@pitt.edu>
  */
 public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 

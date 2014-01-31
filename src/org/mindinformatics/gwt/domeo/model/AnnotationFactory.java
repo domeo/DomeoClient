@@ -17,6 +17,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnno
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLType;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgent;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
@@ -807,6 +809,104 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setText(text);
 		ann.setNewVersion(true);
 		ann.setTool(tool);
+		return ann;
+	}
+
+	
+	//  SPLs  -----------------------------------------------------------
+	// uses createContentAsRdf, createTargetSelector, cloneTargetSelector defined above
+	// -----------------------------------------------------------------------
+	public static MSPLsAnnotation createSPLs(
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			MGenericResource target, MSelector selector,
+			SPLType type, String body) 
+	{
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		ann.setSelector(selector);
+		ann.setType(type);
+		ann.setBody(createContentAsRdf(body));
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+
+
+	public static MSPLsAnnotation createSPLs(
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			SPLType type, String body) 
+	{
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		ann.setType(type);
+		ann.setBody(createContentAsRdf(body));
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+
+	public static MSPLsAnnotation createSPLs(IDomeo domeo,
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			MGenericResource target, 
+			SPLType type, String body) 
+	{
+		MImageInDocumentSelector selector = new MImageInDocumentSelector();
+		selector.setCreator(creator);
+		selector.setCreatedOn(new Date());
+		selector.setTarget(target);
+		selector.setLocalId(getLocalId());
+		selector.setUuid(getUuid());
+		selector.setUri(getUrn(selector.getUuid()));
+		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
+
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+
+		//ann.setTarget(target);
+		//ann.setSelector(createTargetSelector(creator, target));
+		ann.setSelector(selector);
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		ann.setType(type);
+		ann.setBody(createContentAsRdf(body));
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+
+	public static MSPLsAnnotation cloneSPLs(
+			String individualUri, String lineageUri,
+			Date createdOn, Date lastSavedOn, 
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			String versionNumber, String previousVersion,
+			MGenericResource target, ArrayList<MSelector> selectors,
+			String label, MContentAsRdf body, SPLType type) 
+	{
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid("");
+		ann.setLineageUri(lineageUri);
+		ann.setIndividualUri(individualUri);
+		ann.setCreator(creator);
+		ann.setCreatedOn(createdOn);
+		ann.setLastSavedOn(lastSavedOn);
+		ann.setVersionNumber(versionNumber);
+		ann.setPreviousVersion(previousVersion);
+		ann.getSelectors().addAll(selectors);
+		ann.setBody(body);
+		ann.setType(type);
+		ann.setTool(tool);
+		ann.setHasChanged(false);
 		return ann;
 	}
 

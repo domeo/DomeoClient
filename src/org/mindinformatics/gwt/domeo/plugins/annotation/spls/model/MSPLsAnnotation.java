@@ -3,6 +3,8 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.model;
 import java.util.Set;
 
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLType;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
 /**
@@ -12,6 +14,24 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
     public class MSPLsAnnotation extends MAnnotation implements IPharmgxOntology{
 
 	private MSPLPharmgxUsage pharmgxUsage;
+	private SPLType type;
+	private MContentAsRdf body;
+	
+	public SPLType getType() {
+		return type;
+	}
+	
+	public void setType(SPLType type) {
+		this.type = type;
+	}
+	
+	public MContentAsRdf getBody() {
+		return body;
+	}
+	
+	public void setBody(MContentAsRdf body) {
+		this.body = body;
+	}
 	
 	public MLinkedResource getDrugOfInterest() {
 		return pharmgxUsage.getDrugOfInterest();
