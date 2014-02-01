@@ -674,11 +674,15 @@ public class JsonUnmarshallingManager {
 							splType = SPLType.PHARMGX_TYPE; //TODO: possibly add multiple types like Post It has (e.g., pharmgx, ddis, ades, etc)
 						//}
 						if(splType!=null) {
-							_domeo.getLogger().debug(this, "Calling unmarshallSPLAnnotatin with selectors: " + selectors.toString());
+							_domeo.getLogger().debug(this, "Calling unmarshallSPLAnnotation with selector 0 prefix: " + 
+									((MTextQuoteSelector)selectors.get(1)).getPrefix() + " suffix: " + 
+									((MTextQuoteSelector)selectors.get(1)).getSuffix());
 							ann = unmarshallSPLAnnotation((JsAnnotationSPL) jsonAnnotations.get(j), "", set, selectors);
-							((MSPLsAnnotation)ann).setType(splType);
+							((MSPLsAnnotation) ann).setType(splType);
 							
-							_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation: " + ann.toString());							
+							_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation. Some tests values: getDrugOfInterest" + 
+									((MSPLsAnnotation) ann).getDrugOfInterest() + "getBiomarkers" + 
+									((MSPLsAnnotation) ann).getBiomarkers());							
 						}
 					} else {
 						if(typesSet.contains(MPostItAnnotation.TYPE)) {
