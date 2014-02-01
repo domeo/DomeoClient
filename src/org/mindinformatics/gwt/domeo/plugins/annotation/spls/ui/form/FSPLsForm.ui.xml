@@ -23,16 +23,7 @@
 	
 	.setPanel {
 		padding-left: 5px;
-	}
-	
-	/*.rightColumn {*/
-		/*padding-left: 0px;*/
-		/*padding-top: 24px;*/
-		/*width: 100%;*/
-		/*min-width: 400px;*/
-		/*height: 300px;*/
-	/*}*/
-
+	}	
 			
 	.leftColumn {
 		width: 350px;
@@ -66,31 +57,7 @@
 		vertical-align: top;
 		padding-top: 8px;
 	}
-	
-	.provenance {
-		backgorund-color: gray;
-		padding-top: 3px;
-		padding-left: 10px;
-		cursor: pointer;
-		cursor: hand;
-	}
-	
-	.subTitle {
-		/*width: 99%;*/
-		background-color: #eee;
-		padding-left: 4px;
-		padding-right: 14px;
-		padding-top: 2px;
-		padding-bottom: 2px;
-		font-weight: bold;
-		border-bottom-right-radius: 10px;
-		border-top-right-radius: 10px;
-	}
-	
-	.subPanel {
-		min-height: 40px;
-	}
-	
+		
 	.newQualifierPanel {
 		min-height: 26px;
 		display: inline;
@@ -115,9 +82,10 @@
 		padding-right: 12px;
 	}
 	
-	.qualifiersLabel {
-		font-weight: bold;
+	.qualifiersLabel {		
 		padding-right: 3px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
 	}
 	
 	.titlebar {
@@ -386,7 +354,7 @@
 						<g:RadioButton ui:field="descriptpkni" name="descriptpk"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpknone" name="descriptpk"
-							checked="true">No mention</g:RadioButton>
+							checked="false">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
 					<!-- PD Impact -->
@@ -415,11 +383,29 @@
 						<g:RadioButton ui:field="descriptpdni" name="descriptpd"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpdnone" name="descriptpd"
-							checked="true">No mention</g:RadioButton>
+							checked="false">No mention</g:RadioButton>
+					</g:HorizontalPanel>					
+					
+					<!-- Alleles and medical conditions textareas -->
+					
+					<g:HorizontalPanel>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="180px">
+							<g:Label ui:field="alleles" styleName='{style.qualifiersLabel}'>Alleles:</g:Label>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="150px">
+							<g:Label ui:field="medcondit" styleName='{style.qualifiersLabel}'>Medical Conditions:</g:Label>
+						</g:cell>
 					</g:HorizontalPanel>
-
-					<g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Comments on this Annotation:</g:Label>
-					<g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
+					<g:HorizontalPanel>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="180px">
+							<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="150px">
+							<g:TextArea ui:field='medconditbody' styleName='{style.medical}'></g:TextArea>
+						</g:cell>
+					</g:HorizontalPanel>
+					
+					
 					
 				</g:VerticalPanel>
 			</g:cell>
@@ -465,7 +451,7 @@
 						  </g:cell>
 						  <g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdsnone" name="descriptds"
-									checked="true">No mention</g:RadioButton>
+									checked="false">No mention</g:RadioButton>
 						  </g:cell>
 						</g:HorizontalPanel>
 
@@ -506,7 +492,7 @@
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdrnone" name="descriptdr"
-								checked="true">No mention</g:RadioButton>
+								checked="false">No mention</g:RadioButton>
 						</g:cell>
 						</g:HorizontalPanel>
 						
@@ -540,7 +526,7 @@
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptmcnone" name="descriptmr"
-								checked="true">No mention</g:RadioButton>
+								checked="false">No mention</g:RadioButton>
 						</g:cell>
 						</g:HorizontalPanel>
 						
@@ -576,7 +562,7 @@
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">					
 							<g:RadioButton ui:field="descripttnone" name="descripttst"
-								checked="true">No mention</g:RadioButton>
+								checked="false">No mention</g:RadioButton>
 						</g:cell>						
 						</g:HorizontalPanel>				
 																
@@ -668,29 +654,9 @@
 							<g:TextArea ui:field='descriptstsbody' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 
-						<g:HorizontalPanel styleName='{style.panel}'>
-							<g:VerticalPanel>
-
-								<!-- Alleles textarea -->
-								<g:HorizontalPanel>
-									<g:Label ui:field="alleles" styleName='{style.qualifiersLabel}'>Alleles:</g:Label>
-								</g:HorizontalPanel>
-								<g:HorizontalPanel>
-									<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
-								</g:HorizontalPanel>
-							</g:VerticalPanel>
-							<!-- Medcondit textarea -->
-							<g:VerticalPanel>
-								<g:HorizontalPanel>
-									<g:Label ui:field="medcondit" styleName='{style.qualifiersLabel}'>Medical
-										Conditions:</g:Label>
-								</g:HorizontalPanel>
-								<g:HorizontalPanel>
-									<g:TextArea ui:field='medconditbody' styleName='{style.medical}'></g:TextArea>
-								</g:HorizontalPanel>
-
-							</g:VerticalPanel>
-						</g:HorizontalPanel>
+						<g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Comments on this Annotation:</g:Label>
+						<g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
+						
 				</g:VerticalPanel>
 			</g:cell>
 
