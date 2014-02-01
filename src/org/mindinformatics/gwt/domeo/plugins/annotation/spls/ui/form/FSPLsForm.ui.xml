@@ -25,17 +25,40 @@
 		padding-left: 5px;
 	}
 	
-	.rightColumn {
-		padding-left: 0px;
+	/*.rightColumn {*/
+		/*padding-left: 0px;*/
 		/*padding-top: 24px;*/
-		width: 100%;
-		min-width: 400px;
-		height: 300px;
+		/*width: 100%;*/
+		/*min-width: 400px;*/
+		/*height: 300px;*/
+	/*}*/
+
+			
+	.leftColumn {
+		width: 350px;
+		vertical-align: top;
 	}
 	
-	.leftColumn {
-		width: 380px;
+	.centerColumn {
+		width: 330px;
 		vertical-align: top;
+	}
+	
+	.titlebarcenter {
+		width: 330px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
+	}
+	
+	.rightColumn {
+		width: 330px;
+		vertical-align: top;
+	}
+	
+	.titlebarright {
+		width: 330px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
 	}
 	
 	.panel {
@@ -103,19 +126,13 @@
 		border-top: 3px solid white;
 	}
 	
-	.titlebarright {
-		width: 480px;
-		background-color: #DDDDDD;
-		border-top: 3px solid white;
-	}
-	
 	.commentBody {
 		padding-top: 3px;
 		padding-left: 3px;
 		color: #333;
 		font-style: normal;
 		width: 360px;
-		height: 100px;
+		height: 60px;
 		font-size: 12px;
 	}
 	
@@ -167,7 +184,7 @@
 
 
 		<g:HorizontalPanel styleName='{style.panel}'>
-			<g:cell width="400px">
+			<g:cell width="370px">
 
 				<g:VerticalPanel styleName='{style.leftColumn}'>
 
@@ -329,7 +346,7 @@
 					</g:HorizontalPanel>
 
 
-					<!-- PK Impact -->
+	     			<!-- PK Impact -->
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="pkLabel" styleName='{style.titleLeft}'>Pharmacokinetic Impact:</g:Label>
@@ -369,7 +386,7 @@
 						<g:RadioButton ui:field="descriptpkni" name="descriptpk"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpknone" name="descriptpk"
-							checked="false">No mention</g:RadioButton>
+							checked="true">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
 					<!-- PD Impact -->
@@ -398,137 +415,194 @@
 						<g:RadioButton ui:field="descriptpdni" name="descriptpd"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpdnone" name="descriptpd"
-							checked="false">No mention</g:RadioButton>
+							checked="true">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
-
-
-					<g:VerticalPanel styleName='{style.panel}'>
-						<g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Note:</g:Label>
-						<g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
-					</g:VerticalPanel>
-
-
+					<g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Comments on this Annotation:</g:Label>
+					<g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
+					
 				</g:VerticalPanel>
 			</g:cell>
 
 
-			<g:cell>
-				<g:VerticalPanel>
-					<!-- <g:cell height="0px"> <g:TabBar ui:field="tabBar" height="0px"/> 
-						</g:cell> -->
-
-					<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
-
+			<g:cell width="330px">
+			    <g:VerticalPanel ui:field='centerColumn' styleName='{style.centerColumn}'>
 
 						<!-- drug selection -->
 
-						<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:HorizontalPanel styleName='{style.titlebarcenter}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:Label ui:field="selection" styleName='{style.titleLeft}'>Drug Selection Recommendation:</g:Label>
-						</g:HorizontalPanel>
-
-						<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
-							<g:RadioButton ui:field="descriptdsal" name="descriptds"
-								checked="false" text="Alternative" />
-							<g:RadioButton ui:field="descriptdsca" name="descriptds"
-								checked="false" text="Change Administration" />
-							<g:RadioButton ui:field="descriptdsam" name="descriptds"
-								checked="false" text="Add medication" />
+						</g:cell>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
-
-							<g:RadioButton ui:field="descriptdsnr" name="descriptds"
-								checked="false" text="Not restart" />
-							<g:RadioButton ui:field="descriptdsnc" name="descriptds"
-								checked="false" text="Not change" />
-							<g:RadioButton ui:field="descriptdsnone" name="descriptds"
-								checked="false" text="No mention" />
+							<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">						 
+							<g:RadioButton ui:field="descriptdsal" name="descriptds"
+								checked="false">Alternative</g:RadioButton>
+							</g:cell>
+							<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+						   	<g:RadioButton ui:field="descriptdsca" name="descriptds"
+								checked="false">Change Administration</g:RadioButton>
+						   	</g:cell>
 						</g:HorizontalPanel>
 
+						<g:HorizontalPanel styleName='{style.panel}'>
+						  <g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdsam" name="descriptds"
+								checked="false">Add medication</g:RadioButton>
+						  </g:cell>
+						 <g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdsnr" name="descriptds"
+								checked="false">Do Not restart</g:RadioButton>
+						  	</g:cell>
+						</g:HorizontalPanel>
+						
+						<g:HorizontalPanel styleName='{style.panel}'>
+						  <g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdsnc" name="descriptds"
+									checked="false">Do Not change</g:RadioButton>
+						  </g:cell>
+						  <g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdsnone" name="descriptds"
+									checked="true">No mention</g:RadioButton>
+						  </g:cell>
+						</g:HorizontalPanel>
 
 						<!-- dose -->
 
-						<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:HorizontalPanel styleName='{style.titlebarcenter}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:Label ui:field="doseLabel" styleName='{style.titleLeft}'>Dose Recommendation:</g:Label>
+						</g:cell>
 						</g:HorizontalPanel>
 
-						<g:HorizontalPanel ui:field='header5' styleName='{style.panel}'>
-							<g:RadioButton ui:field="descriptdrdfb" name="descriptdr"
-								checked="false" text="Decrease from baseline" />
+						<g:HorizontalPanel styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdrifb" name="descriptdr"
-								checked="false" text="Increase from baseline" />
+								checked="false">Increase from baseline</g:RadioButton>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdrdfb" name="descriptdr"
+								checked="false">Decrease from baseline</g:RadioButton>
+						</g:cell>												
+						</g:HorizontalPanel>
+
+						<g:HorizontalPanel styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdrnc" name="descriptdr"
-								checked="false" text="Not change" />
-						</g:HorizontalPanel>
-
-						<g:HorizontalPanel ui:field='header6' styleName='{style.panel}'>
-
+								checked="false">Do Not change</g:RadioButton>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdrus" name="descriptdr"
-								checked="false" text="Use specific" />
-							<g:RadioButton ui:field="descriptdrcs" name="descriptdr"
-								checked="false" text="Change schedule" />
-							<g:RadioButton ui:field="descriptdrnone" name="descriptdr"
-								checked="false" text="No mention" />
+								checked="false">Use specific</g:RadioButton>	
+						</g:cell>						
 						</g:HorizontalPanel>
+						
+						<g:HorizontalPanel  styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdrcs" name="descriptdr"
+								checked="false">Change schedule</g:RadioButton>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdrnone" name="descriptdr"
+								checked="true">No mention</g:RadioButton>
+						</g:cell>
+						</g:HorizontalPanel>
+						
 						<!-- monitoring -->
-
-
-						<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:HorizontalPanel styleName='{style.titlebarcenter}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:Label ui:field="monitLabel" styleName='{style.titleLeft}'>Monitoring
 								Recommendation:</g:Label>
+						</g:cell>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptmreq" name="descriptmr"
-								checked="false" text="Required" />
+								checked="false">Required</g:RadioButton>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptmrec" name="descriptmr"
-								checked="false" text="Recommended" />
+								checked="false">Recommended</g:RadioButton>		
+						</g:cell>			
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptmnc" name="descriptmr"
-								checked="false" text="Not necessary" />
+								checked="false">Not necessary</g:RadioButton>	
+						</g:cell>		
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptmcms" name="descriptmr"
-								checked="false" text="Change monitoring strategy" />
+								checked="false">Change monitoring strategy</g:RadioButton>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptmcnone" name="descriptmr"
-								checked="false" text="No mention" />
+								checked="true">No mention</g:RadioButton>
+						</g:cell>
 						</g:HorizontalPanel>
+						
+						
 
 						<!-- test -->
 
-						<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:HorizontalPanel styleName='{style.titlebarcenter}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:Label ui:field="TestLabel" styleName='{style.titleLeft}'>Test Recommendation:</g:Label>
+						</g:cell>
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descripttreq" name="descripttst"
 								checked="false">Required</g:RadioButton>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descripttrec" name="descripttst"
-								checked="false">Recommended</g:RadioButton>
-							<g:RadioButton ui:field="descriptttna" name="descripttst"
-								checked="false">Take note that avaliable</g:RadioButton>
-
+								checked="false">Recommended</g:RadioButton>		
+						</g:cell>				
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descripttnn" name="descripttst"
+								checked="false">Not necessary</g:RadioButton>	
+						</g:cell>	
 						</g:HorizontalPanel>
 
 						<g:HorizontalPanel styleName='{style.panel}'>
-							<g:RadioButton ui:field="descripttnn" name="descripttst"
-								checked="false">Not necessary</g:RadioButton>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptttna" name="descripttst"
+								checked="false">Take note that avaliable</g:RadioButton>
+						</g:cell>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">					
 							<g:RadioButton ui:field="descripttnone" name="descripttst"
-								checked="false">No mention</g:RadioButton>
+								checked="true">No mention</g:RadioButton>
+						</g:cell>						
+						</g:HorizontalPanel>				
+																
+						
+				</g:VerticalPanel>
+			</g:cell>
+
+			<g:cell width="300px">
+				<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+						<!--Statement refers to any of the following concepts: -->						
+						
+						<g:HorizontalPanel styleName='{style.rightColumn}'>
+							<g:Label ui:field="statement" styleName='{style.titlebarright}'>Concepts that the Statement Refers To:</g:Label>
 						</g:HorizontalPanel>
 
-						<!--Statement refers to any of the following concepts: -->
-
-						<g:HorizontalPanel styleName='{style.titlebarright}'>
-							<g:Label ui:field="statement" styleName='{style.titleLeft}'>Concepts that the Statement Refers To:</g:Label>
-						</g:HorizontalPanel>
-
-						<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
+						<g:HorizontalPanel styleName='{style.panel}'>
 							<g:CheckBox ui:field="descriptsai" name="descript"
-								styleName='{style.elementType}' text="Active ingredient" />
-							<g:CheckBox ui:field="descriptsmcc" name="descript"
-								styleName='{style.elementType}' text="Concomitant medication concern" />
+								styleName='{style.elementType}' text="Active ingredient" />														
+						</g:HorizontalPanel>
+						
+						<g:HorizontalPanel styleName='{style.panel}'>
+							<g:CheckBox ui:field="descriptsmcc" name="descript" 
+								styleName='{style.elementType}' text="Concomitant medication concern" />							
+						</g:HorizontalPanel>
+						
+						<g:HorizontalPanel styleName='{style.panel}'>						
 							<g:CheckBox ui:field="descriptppm" name="descriptppm"
 								styleName='{style.elementType}' text="Variant Frequency" />
 						</g:HorizontalPanel>
@@ -554,7 +628,7 @@
 							</g:ListBox>
 						</g:HorizontalPanel>
 						<g:HorizontalPanel>	
-							<g:Label>Other Variants) (use commas to separate): </g:Label>
+							<g:Label>Other Variants (use commas to separate): </g:Label>
 							<g:TextArea ui:field='descriptsvtbody' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 
@@ -588,6 +662,7 @@
 
 							</g:ListBox>
 						</g:HorizontalPanel>
+						
 						<g:HorizontalPanel>
 						<g:Label>Other Test(s) (use commas to separate): </g:Label>
 							<g:TextArea ui:field='descriptstsbody' styleName='{style.alleles}'></g:TextArea>
@@ -616,11 +691,8 @@
 
 							</g:VerticalPanel>
 						</g:HorizontalPanel>
-
-					</g:VerticalPanel>
 				</g:VerticalPanel>
 			</g:cell>
-
 
 
 		</g:HorizontalPanel>

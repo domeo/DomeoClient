@@ -36,6 +36,7 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 		body.setFormat(spl.getBody().get(0).getFormat());
 		body.setChars(spl.getBody().get(0).getChars());
 		
+		_domeo.getLogger().debug(this, "Calling AnnotationFactory.cloneSPLs with body" + body.toString());
 		MSPLsAnnotation ann = AnnotationFactory.cloneSPLs(
 			spl.getId(), 
 			spl.getLineageUri(), 
