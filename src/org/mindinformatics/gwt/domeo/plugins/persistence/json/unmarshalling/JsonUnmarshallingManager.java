@@ -536,12 +536,13 @@ public class JsonUnmarshallingManager {
 		
 		if(Domeo.verbose) _domeo.getLogger().debug(this, "Before performing unmarshalling");
 		try {
+			if(Domeo.verbose) _domeo.getLogger().debug(this, "Sets to unmarshall " + responseOnSets.length());
 			for(int i=0; i<responseOnSets.length(); i++) {
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set get");
 				JsAnnotationSet jsonSet = (JsAnnotationSet) responseOnSets.get(i);
-				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set unmarshall");
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set unmarshall " + jsonSet.toString());
 				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.LOAD_VALIDATION, null, null);
-				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set loading");
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set loading " + set);
 				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 				
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling agents");
