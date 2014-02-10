@@ -90,12 +90,17 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 	@Override
 	public void refresh() {
 		try {
+
+			String annoType = _annotation.getAnnotationType();
+			int colon = annoType.indexOf(":");
+			annoType = annoType.substring(colon + 1);
+
 			createProvenanceBar(SPLsPlugin.getInstance().getPluginName(),
-					provenance, _annotation.getAnnotationType(), _annotation);
-			
-			System.out.println("***type:"+_annotation.getAnnotationType());
-			System.out.println("***ann by:"+_annotation.getAnnotatedBy());
-			System.out.println("***creator:"+_annotation.getCreator().getName());
+					provenance, annoType, _annotation);
+
+			// System.out.println("***type:"+_annotation.getAnnotationType());
+			// System.out.println("***ann by:"+_annotation.getAnnotatedBy());
+			// System.out.println("***creator:"+_annotation.getCreator().getName());
 
 			StringBuffer sb2 = new StringBuffer();
 
@@ -110,9 +115,9 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 
 			String html2 = "</table></body></html>";
 
-			String labels = "<tr bgcolor='#EEE'><td>Biomarker</td><td>PK Impact</td><td>PD Impact</td><td>Drug Rec</td>"
-					+ "<td>Dose Rec</td><td>Monitoring Rec</td><td>Test Rec</td><td>Statement</td><td>Varient</td>"
-					+ "<td>Test</td><td>Alleles</td><td>Medical Condition</td></tr>";
+			String labels = "<tr bgcolor='#EEE'><td>Bio</td><td>PK</td><td>PD</td><td>Drug</td>"
+					+ "<td>Dose</td><td>Monit</td><td>TestRec</td><td>State</td><td>Variant</td>"
+					+ "<td>Test</td><td>Alleles</td><td>Medical</td></tr>";
 
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {
@@ -209,10 +214,9 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 					+ "</td><td>" + pkimpactStr + "</td>" + "<td>"
 					+ pdimpackStr + "</td><td>" + drugRecStr + "</td><td>"
 					+ doseRecStr + "</td><td>" + monRecStr + "</td><td>"
-					+ testRecStr + "</td><td>" + statementsStr
-					+ "</td><td>" + varientStr + "</td><td>" + testStr
-					+ "</td><td>" + allelesStr + "</td><td>" + medicalStr
-					+ "</td></tr>";
+					+ testRecStr + "</td><td>" + statementsStr + "</td><td>"
+					+ varientStr + "</td><td>" + testStr + "</td><td>"
+					+ allelesStr + "</td><td>" + medicalStr + "</td></tr>";
 
 			sb2.append(html1);
 
@@ -228,112 +232,164 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			_domeo.getLogger().exception(this, e.getMessage());
 		}
 	}
-	
-	
-	public void createProvenanceBar(String plugin, HorizontalPanel provenance, String prefix, final MAnnotation annotation) {
+
+	public void createProvenanceBar(String plugin, HorizontalPanel provenance,
+			String prefix, final MAnnotation annotation) {
 		int step = 0;
 		try {
 			Resources resource = Domeo.resources;
 			Image editIcon = new Image(resource.editLittleIcon());
 			editIcon.setTitle("Edit Item");
-			if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(plugin)) {
-				editIcon.setStyleName(ATileComponent.tileResources.css().button());
-				editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(_domeo, this, _listener, getAnnotation()));
+			if (_domeo.getProfileManager().getUserCurrentProfile()
+					.isPluginEnabled(plugin)) {
+				editIcon.setStyleName(ATileComponent.tileResources.css()
+						.button());
+				editIcon.addClickHandler(ActionEditAnnotation.getClickHandler(
+						_domeo, this, _listener, getAnnotation()));
 			}
-			step=1;
-			
+			step = 1;
+
 			Image commentIcon = null;
-			if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), 
-					Domeo.PREF_ALLOW_COMMENTING)).getValue()) { 
+			if (((BooleanPreference) _domeo.getPreferences().getPreferenceItem(
+					Domeo.class.getName(), Domeo.PREF_ALLOW_COMMENTING))
+					.getValue()) {
 				commentIcon = new Image(resource.littleCommentIcon());
 				commentIcon.setTitle("Comment on Item");
-				commentIcon.setStyleName(ATileComponent.tileResources.css().button());
-				commentIcon.addClickHandler(ActionCommentAnnotation.getClickHandler(_domeo, this, annotation));
+				commentIcon.setStyleName(ATileComponent.tileResources.css()
+						.button());
+				commentIcon.addClickHandler(ActionCommentAnnotation
+						.getClickHandler(_domeo, this, annotation));
 			}
-			step=2;
-			
+			step = 2;
+
 			Image showIcon = new Image(resource.showLittleIcon());
 			showIcon.setTitle("Show Item in Context");
 			showIcon.setStyleName(ATileComponent.tileResources.css().button());
-			showIcon.addClickHandler(ActionShowAnnotation.getClickHandler(_domeo, this, getAnnotation()));
-			step=3;
-	
+			showIcon.addClickHandler(ActionShowAnnotation.getClickHandler(
+					_domeo, this, getAnnotation()));
+			step = 3;
+
 			Image deleteIcon = new Image(resource.deleteLittleIcon());
 			deleteIcon.setTitle("Delete Item");
-			deleteIcon.setStyleName(ATileComponent.tileResources.css().button());
-			deleteIcon.addClickHandler(ActionDeleteAnnotation.getClickHandler(_domeo, this, getAnnotation()));
-			step=4;
-			
+			deleteIcon
+					.setStyleName(ATileComponent.tileResources.css().button());
+			deleteIcon.addClickHandler(ActionDeleteAnnotation.getClickHandler(
+					_domeo, this, getAnnotation()));
+			step = 4;
+
 			// TODO move to an abstract tile class
-			if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE)).getValue()) {
-				if(annotation.getCreator().getUri().equals(_domeo.getAgentManager().getUserPerson().getUri())) {
-					if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_USER_PROVENANCE)).getValue()) {
+			if (((BooleanPreference) _domeo.getPreferences().getPreferenceItem(
+					Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE))
+					.getValue()) {
+				if (annotation
+						.getCreator()
+						.getUri()
+						.equals(_domeo.getAgentManager().getUserPerson()
+								.getUri())) {
+					if (((BooleanPreference) _domeo.getPreferences()
+							.getPreferenceItem(Domeo.class.getName(),
+									Domeo.PREF_DISPLAY_USER_PROVENANCE))
+							.getValue()) {
 						provenance.clear();
-						step=5;
+						step = 5;
 						// TODO Externalize the icon management to the plugins
-						if(SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) { 
-							Image ic = new Image(Domeo.resources.multipleLittleIcon());
+						if (SelectorUtils.isOnMultipleTargets(annotation
+								.getSelectors())) {
+							Image ic = new Image(
+									Domeo.resources.multipleLittleIcon());
 							ic.setTitle("Annotation on multiple targets");
 							provenance.add(ic);
 							provenance.setCellWidth(ic, "18px");
-						} else if(annotation.getSelector()!=null && annotation.getSelector().getTarget() instanceof MOnlineImage) {
-							Image ic = new Image(Domeo.resources.littleImageIcon());
+						} else if (annotation.getSelector() != null
+								&& annotation.getSelector().getTarget() instanceof MOnlineImage) {
+							Image ic = new Image(
+									Domeo.resources.littleImageIcon());
 							ic.setTitle("Annotation on image");
 							provenance.add(ic);
 							provenance.setCellWidth(ic, "18px");
 						} else {
-							if(SelectorUtils.isOnAnnotation(annotation.getSelectors())) {
-								Image ic = new Image(Domeo.resources.littleCommentIcon());
+							if (SelectorUtils.isOnAnnotation(annotation
+									.getSelectors())) {
+								Image ic = new Image(
+										Domeo.resources.littleCommentIcon());
 								ic.setTitle("Annotation on annotation");
 								provenance.add(ic);
 								provenance.setCellWidth(ic, "18px");
-							} else if(SelectorUtils.isOnResourceTarget(annotation.getSelectors())) {
-								Image ic = new Image(Domeo.resources.littleCommentsIcon());
+							} else if (SelectorUtils
+									.isOnResourceTarget(annotation
+											.getSelectors())) {
+								Image ic = new Image(
+										Domeo.resources.littleCommentsIcon());
 								ic.setTitle("Annotation on annotation");
 								provenance.add(ic);
 								provenance.setCellWidth(ic, "18px");
 							} else {
-								Image ic = new Image(Domeo.resources.littleTextIcon());
+								Image ic = new Image(
+										Domeo.resources.littleTextIcon());
 								ic.setTitle("Annotation on text");
 								provenance.add(ic);
 								provenance.setCellWidth(ic, "18px");
 							}
 						}
-						step=6;
-						
-						provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>" + prefix + " by "+annotation.getCreator().getName()+"</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
-						
+						step = 6;
+
+						provenance
+								.add(new HTML(
+										"<span style='font-weight: bold; font-size: 12px; color: #696969'>"
+												+ prefix
+												+ " by "
+												+ annotation.getCreator()
+														.getName()
+												+ "</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='"
+												+ annotation
+														.getFormattedCreationDate()
+												+ "'>"
+												+ elaspedTime((new Date())
+														.getTime()
+														- annotation
+																.getCreatedOn()
+																.getTime())
+												+ " ago</span>"));
+
 						provenance.add(commentIcon);
-						provenance.setCellHorizontalAlignment(commentIcon, HasHorizontalAlignment.ALIGN_LEFT);
+						provenance.setCellHorizontalAlignment(commentIcon,
+								HasHorizontalAlignment.ALIGN_LEFT);
 						provenance.setCellWidth(commentIcon, "22px");
-						
-						if(!(annotation.getSelector() instanceof MTargetSelector) && !(annotation.getSelector() instanceof MAnnotationSelector)) {
-							if(!SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) {
+
+						if (!(annotation.getSelector() instanceof MTargetSelector)
+								&& !(annotation.getSelector() instanceof MAnnotationSelector)) {
+							if (!SelectorUtils.isOnMultipleTargets(annotation
+									.getSelectors())) {
 								provenance.add(showIcon);
 								provenance.setCellWidth(showIcon, "22px");
 							}
-							if(SelectorUtils.isOnMultipleTargets(annotation.getSelectors()) || !(annotation instanceof MHighlightAnnotation)) {
+							if (SelectorUtils.isOnMultipleTargets(annotation
+									.getSelectors())
+									|| !(annotation instanceof MHighlightAnnotation)) {
 								provenance.add(editIcon);
 								provenance.setCellWidth(editIcon, "22px");
 							}
-						} 
+						}
 
-							
-							provenance.add(deleteIcon);
-							provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
-							provenance.setCellWidth(deleteIcon, "22px");
+						provenance.add(deleteIcon);
+						provenance.setCellHorizontalAlignment(deleteIcon,
+								HasHorizontalAlignment.ALIGN_LEFT);
+						provenance.setCellWidth(deleteIcon, "22px");
 					} else {
 						provenance.setVisible(false);
 					}
 				} else {
 					provenance.clear();
-					step=8;
-					if(SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) { 
-						Image ic = new Image(Domeo.resources.multipleLittleIcon());
+					step = 8;
+					if (SelectorUtils.isOnMultipleTargets(annotation
+							.getSelectors())) {
+						Image ic = new Image(
+								Domeo.resources.multipleLittleIcon());
 						ic.setTitle("Annotation on multiple targets");
 						provenance.add(ic);
 						provenance.setCellWidth(ic, "18px");
-					} else if(annotation.getSelector()!=null && annotation.getSelector().getTarget() instanceof MOnlineImage) {
+					} else if (annotation.getSelector() != null
+							&& annotation.getSelector().getTarget() instanceof MOnlineImage) {
 						Image ic = new Image(Domeo.resources.littleImageIcon());
 						ic.setTitle("Annotation on image");
 						provenance.add(ic);
@@ -344,15 +400,34 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 						provenance.add(ic);
 						provenance.setCellWidth(ic, "18px");
 					}
-					
-					step=9;
-					provenance.add(new HTML("<span style='font-weight: bold; font-size: 12px; color: #696969'>" + prefix + " by " + annotation.getCreator().getName() + "</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='" + annotation.getFormattedCreationDate() + "'>" + elaspedTime((new Date()).getTime() - annotation.getCreatedOn().getTime()) + " ago</span>" ));
-					//provenance.add(new Label("By " + annotation.getCreator().getName() + " on " + annotation.getFormattedCreationDate()));
-					 
+
+					step = 9;
+					provenance
+							.add(new HTML(
+									"<span style='font-weight: bold; font-size: 12px; color: #696969'>"
+											+ prefix
+											+ " by "
+											+ annotation.getCreator().getName()
+											+ "</span>  <span style='padding-left:5px; font-size: 12px; color: #696969' title='"
+											+ annotation
+													.getFormattedCreationDate()
+											+ "'>"
+											+ elaspedTime((new Date())
+													.getTime()
+													- annotation.getCreatedOn()
+															.getTime())
+											+ " ago</span>"));
+					// provenance.add(new Label("By " +
+					// annotation.getCreator().getName() + " on " +
+					// annotation.getFormattedCreationDate()));
+
 					provenance.add(commentIcon);
-					provenance.setCellHorizontalAlignment(commentIcon, HasHorizontalAlignment.ALIGN_LEFT);
+					provenance.setCellHorizontalAlignment(commentIcon,
+							HasHorizontalAlignment.ALIGN_LEFT);
 					provenance.setCellWidth(commentIcon, "22px");
-					if(!SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) provenance.add(showIcon);
+					if (!SelectorUtils.isOnMultipleTargets(annotation
+							.getSelectors()))
+						provenance.add(showIcon);
 					provenance.add(editIcon);
 					provenance.add(deleteIcon);
 				}
@@ -360,10 +435,12 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 				provenance.setVisible(false);
 			}
 		} catch (Exception e) {
-			_domeo.getLogger().exception(this, "Provenance bar generation exception @" + step + " " + e.getMessage());
+			_domeo.getLogger().exception(
+					this,
+					"Provenance bar generation exception @" + step + " "
+							+ e.getMessage());
 		}
 	}
-	
 
 	// generate each statements for variables
 	private static String addRecInHTML(String title, String label) {
