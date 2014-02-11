@@ -3,10 +3,7 @@
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
 
-  <!-- enable JS logging -->
-  <inherits name="com.google.gwt.logging.Logging"/>
-
-  <!-- Inherit the default GWT style sheet.  You can change       -->
+   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
   <!-- any one of the following lines.                            -->
   <inherits name='com.google.gwt.user.theme.clean.Clean'/>
