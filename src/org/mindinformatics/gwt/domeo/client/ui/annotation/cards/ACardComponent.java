@@ -54,6 +54,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 	
 	public ACardComponent(IDomeo domeo) {
 		_domeo = domeo;
+
 	}
 	
 	public abstract MAnnotation getAnnotation();

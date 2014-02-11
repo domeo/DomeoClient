@@ -46,7 +46,7 @@
 		}
 		
 		.provenance {
-			width: 300px;
+			width: 500px;
 			background-color: #EEE;
 			border-top-right-radius: 10px;
 			-moz-border-radius-topright: 10px;

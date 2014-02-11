@@ -1,6 +1,9 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
@@ -87,6 +90,36 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 		return this;
 	}
 
+	class Label {
+		private String name;
+		private String value;
+
+		Label(String name, String value) {
+			this.name = name;
+			this.value = value;
+		}
+
+		Label() {
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
+		}
+
+	}
+
 	@Override
 	public void refresh() {
 		try {
@@ -98,102 +131,99 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			createProvenanceBar(SPLsPlugin.getInstance().getPluginName(),
 					provenance, annoType, _annotation);
 
-			// System.out.println("***type:"+_annotation.getAnnotationType());
-			// System.out.println("***ann by:"+_annotation.getAnnotatedBy());
-			// System.out.println("***creator:"+_annotation.getCreator().getName());
-
 			StringBuffer sb2 = new StringBuffer();
 
-			/*
-			 * create html
-			 */
-
-			// Create the content to display
 			MPharmgx pharmgx = _annotation.getPharmgxUsage().getPharmgx();
+
+			ArrayList<Label> labels = new ArrayList<Label>();
 
 			String html1 = "<html><head></head> <body><table>";
 
 			String html2 = "</table></body></html>";
 
-			String labels = "<tr bgcolor='#EEE'><td>Bio</td><td>PK</td><td>PD</td><td>Drug</td>"
-					+ "<td>Dose</td><td>Monit</td><td>TestRec</td><td>State</td><td>Variant</td>"
-					+ "<td>Test</td><td>Alleles</td><td>Medical</td></tr>";
-
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {
 				biomarkerStr = pharmgx.getBiomarkers().getLabel();
-			} else {
-				biomarkerStr = "undefined";
+				Label l = new Label("bio", biomarkerStr);
+				labels.add(l);
 			}
 
 			String pkimpactStr;
 			if (pharmgx.getPkImpactResource() != null) {
 				pkimpactStr = pharmgx.getPkImpactResource().getLabel();
-			} else {
-				pkimpactStr = "undefined";
+				if (!pkimpactStr.equals("None")) {
+					Label l = new Label("pk", pkimpactStr);
+					labels.add(l);
+				}
 			}
 
 			String pdimpackStr;
 			if (pharmgx.getPdImpactResource() != null) {
 				pdimpackStr = pharmgx.getPdImpactResource().getLabel();
-			} else {
-				pdimpackStr = "undefined";
+				if (!pdimpackStr.equals("None")) {
+					Label l = new Label("pd", pdimpackStr);
+					labels.add(l);
+				}
 			}
 
 			String drugRecStr;
 			if (pharmgx.getDrugRecResource() != null) {
 				drugRecStr = pharmgx.getDrugRecResource().getLabel();
-			} else {
-				drugRecStr = "undefined";
+				if (!drugRecStr.equals("None")) {
+					Label l = new Label("drug", drugRecStr);
+					labels.add(l);
+				}
 			}
 
 			String doseRecStr;
 			if (pharmgx.getDoseRecResource() != null) {
 				doseRecStr = pharmgx.getDoseRecResource().getLabel();
-			} else {
-				doseRecStr = "undefined";
+				if (!doseRecStr.equals("None")) {
+					Label l = new Label("dose", doseRecStr);
+					labels.add(l);
+				}
 			}
 
 			String monRecStr;
 			if (pharmgx.getMonitRecResource() != null) {
 				monRecStr = pharmgx.getMonitRecResource().getLabel();
-			} else {
-				monRecStr = "undefined";
+				if (!monRecStr.equals("None")) {
+					Label l = new Label("Monit", monRecStr);
+					labels.add(l);
+				}
 			}
 
 			String testRecStr;
 			if (pharmgx.getTestRecResource() != null) {
 				testRecStr = pharmgx.getTestRecResource().getLabel();
-			} else {
-				testRecStr = "undefined";
+				if (!testRecStr.equals("None")) {
+					Label l = new Label("testRec", testRecStr);
+					labels.add(l);
+				}
 			}
 
-			String varientStr;
+			String variantStr;
 			if (pharmgx.getVarient() != null) {
-				varientStr = pharmgx.getVarient().getLabel();
-			} else {
-				varientStr = "undefined";
+				variantStr = pharmgx.getVarient().getLabel();
+				Label l = new Label("Variant", variantStr);
+				labels.add(l);
 			}
 
 			String testStr;
 			if (pharmgx.getTest() != null) {
 				testStr = pharmgx.getTest().getLabel();
-			} else {
-				testStr = "undefined";
+				Label l = new Label("test", testStr);
+				labels.add(l);
 			}
 
-			String allelesStr;
+			String allelesStr = "";
 			if (pharmgx.getAlleles() != null) {
 				allelesStr = pharmgx.getAlleles().getLabel();
-			} else {
-				allelesStr = "undefined";
 			}
 
-			String medicalStr;
+			String medicalStr = "";
 			if (pharmgx.getMedicalCondition() != null) {
 				medicalStr = pharmgx.getMedicalCondition().getLabel();
-			} else {
-				medicalStr = "undefined";
 			}
 
 			String statementsStr = "";
@@ -206,22 +236,26 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 						break;
 					count++;
 				}
-			} else {
-				statementsStr = "undefined";
+
+				Label l = new Label("state", statementsStr);
+				labels.add(l);
 			}
 
-			String values = "<tr bgcolor='#F0F8FF'><td>" + biomarkerStr
-					+ "</td><td>" + pkimpactStr + "</td>" + "<td>"
-					+ pdimpackStr + "</td><td>" + drugRecStr + "</td><td>"
-					+ doseRecStr + "</td><td>" + monRecStr + "</td><td>"
-					+ testRecStr + "</td><td>" + statementsStr + "</td><td>"
-					+ varientStr + "</td><td>" + testStr + "</td><td>"
-					+ allelesStr + "</td><td>" + medicalStr + "</td></tr>";
+			StringBuffer tdHtml = new StringBuffer();
+
+			tdHtml.append("<tr bgcolor='#F0F8FF'>");
+			for (Label label : labels) {
+				tdHtml.append("<td>" + label.getName() + "</td>");
+			}
+			if ((!allelesStr.equals("") && allelesStr != null)
+					|| (!medicalStr.equals("") && medicalStr != null)) {
+				tdHtml.append("<td>others</td>");
+			}
+			tdHtml.append("</tr>");
 
 			sb2.append(html1);
 
-			sb2.append(labels);
-			sb2.append(values);
+			sb2.append(tdHtml);
 
 			sb2.append(html2);
 			System.out.println(sb2.toString());
