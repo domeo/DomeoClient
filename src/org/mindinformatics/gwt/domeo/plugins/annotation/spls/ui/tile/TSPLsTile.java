@@ -144,7 +144,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {
 				biomarkerStr = pharmgx.getBiomarkers().getLabel();
-				Label l = new Label("bio", biomarkerStr);
+				Label l = new Label("Bio", biomarkerStr);
 				labels.add(l);
 			}
 
@@ -152,7 +152,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getPkImpactResource() != null) {
 				pkimpactStr = pharmgx.getPkImpactResource().getLabel();
 				if (!pkimpactStr.equals("None")) {
-					Label l = new Label("pk", pkimpactStr);
+					Label l = new Label("PK", pkimpactStr);
 					labels.add(l);
 				}
 			}
@@ -161,7 +161,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getPdImpactResource() != null) {
 				pdimpackStr = pharmgx.getPdImpactResource().getLabel();
 				if (!pdimpackStr.equals("None")) {
-					Label l = new Label("pd", pdimpackStr);
+					Label l = new Label("PD", pdimpackStr);
 					labels.add(l);
 				}
 			}
@@ -170,7 +170,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getDrugRecResource() != null) {
 				drugRecStr = pharmgx.getDrugRecResource().getLabel();
 				if (!drugRecStr.equals("None")) {
-					Label l = new Label("drug", drugRecStr);
+					Label l = new Label("Drug", drugRecStr);
 					labels.add(l);
 				}
 			}
@@ -179,7 +179,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getDoseRecResource() != null) {
 				doseRecStr = pharmgx.getDoseRecResource().getLabel();
 				if (!doseRecStr.equals("None")) {
-					Label l = new Label("dose", doseRecStr);
+					Label l = new Label("Dose", doseRecStr);
 					labels.add(l);
 				}
 			}
@@ -197,7 +197,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getTestRecResource() != null) {
 				testRecStr = pharmgx.getTestRecResource().getLabel();
 				if (!testRecStr.equals("None")) {
-					Label l = new Label("testRec", testRecStr);
+					Label l = new Label("TestRec", testRecStr);
 					labels.add(l);
 				}
 			}
@@ -212,7 +212,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String testStr;
 			if (pharmgx.getTest() != null) {
 				testStr = pharmgx.getTest().getLabel();
-				Label l = new Label("test", testStr);
+				Label l = new Label("Test", testStr);
 				labels.add(l);
 			}
 
@@ -237,7 +237,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 					count++;
 				}
 
-				Label l = new Label("state", statementsStr);
+				Label l = new Label("State", statementsStr);
 				labels.add(l);
 			}
 
