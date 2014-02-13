@@ -1096,6 +1096,8 @@ public class JsonUnmarshallingManager {
 								ann = unmarshallSPLAnnotation((JsAnnotationSPL) jsonAnnotations.get(j), "", set, selectors);
 								((MSPLsAnnotation) ann).setType(splType);
 								
+								_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation. Some tests values:" +
+										" PharmacokineticImpact" + ((MSPLsAnnotation) ann).getPKImpact());							
 								//_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation. Some tests values: getDrugOfInterest" + 
 								//		((MSPLsAnnotation) ann).getDrugOfInterest() + "getBiomarkers" + 
 								//		((MSPLsAnnotation) ann).getBiomarkers());							
