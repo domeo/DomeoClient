@@ -39,6 +39,8 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 		body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
 		body.put("@type", new JSONString(SPL_POC_PREFIX + "PharmacogenomicsStatement"));
 		
+		//TODO: fix this to use the SPL ontology 
+		//TODO; create resources that include all of the elements needd to create a TrustedTyped resource. See the USPLJsonUnmarshaller class where the data gets unmarshalled
 		MLinkedResource pkImpact = ann.getPKImpact(); 
 		if (pkImpact != null){
 			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX + "PharmacokineticImpact"));

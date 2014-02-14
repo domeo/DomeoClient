@@ -17,8 +17,10 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnno
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLPharmgxUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLType;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLsFactory;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgent;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
@@ -907,6 +909,11 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setType(type);
 		ann.setTool(tool);
 		ann.setHasChanged(false);
+		
+		//TODO: why not just create a constructor for the class? This step here is needed or a null expection will trigger when data is added to the annotation
+		MSPLPharmgxUsage pharmgxUsage = SPLsFactory
+				.createSPLPharmgxUsage();
+		ann.setPharmgxUsage(pharmgxUsage);
 		return ann;
 	}
 

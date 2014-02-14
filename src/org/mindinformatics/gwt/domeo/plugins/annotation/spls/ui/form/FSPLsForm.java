@@ -58,7 +58,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING SPL ANNOTATION";
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING SPL ANNOTATION";
-
+												
 	public static final String SPL_POC_PREFIX = "http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#";
 
 	interface Binder extends UiBinder<VerticalPanel, FSPLsForm> {
