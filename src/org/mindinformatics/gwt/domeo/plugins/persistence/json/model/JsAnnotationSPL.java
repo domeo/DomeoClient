@@ -77,7 +77,7 @@ public class JsAnnotationSPL extends JavaScriptObject {
 	public final native JsArray<JsAnnotationTarget> getTargets() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::hasTarget]; 
 	}-*/;
-	public final native JsArray<JsoPharmgxUsage> getBody() /*-{ 
+	public final native JsArray<JsoPharmgxUsage> getBodies() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::content]; 
 	}-*/;
 	

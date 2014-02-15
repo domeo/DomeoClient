@@ -37,8 +37,9 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 		
 		JsAnnotationSPL spl = (JsAnnotationSPL) json;
 		
+		//TODO: delete this from her and within the MSPLsAnnotation clas because its not used as far as I know
 		MContentAsRdf body = new MContentAsRdf();
-		body.setIndividualUri(spl.getBody().get(0).getId());
+		//body.setIndividualUri(spl.getBody().get(0).getId());
 		//body.setFormat(spl.getBody().get(0).getFormat());
 		//body.setChars(spl.getBody().get(0).getChars());
 		
@@ -56,29 +57,50 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			_domeo.getPersistenceManager().getCurrentResource(),
 			selectors,
 			spl.getLabel(),
-			body,
+			body, //TODO: this doesn't seem to do anything and can likely be removed from the class
 			null
 			);
 		_domeo.getLogger().debug(this, "AnnotationFactory.cloneSPLs done. ann:" + ann.toString());
-		JsArray<JsoPharmgxUsage> aus = spl.getBody();
-		JsoPharmgxUsage au = aus.get(0);		
-		String jsPkImpact = au.getPKImpact();
-		if(jsPkImpact != null) {
-			_domeo.getLogger().debug(this, "jsPkImpact is not null: " + jsPkImpact.toString());
+		
+		//unmarshall the SPL specific entities. There should be on body for each semantic tag
+		_domeo.getLogger().debug(this, "Parsing body resources and adding them to the annotation instance");
+		JsArray<JsoPharmgxUsage> aus = spl.getBodies();			
+		for(int j=0; j<aus.length(); j++) {
+			JsoPharmgxUsage au = aus.get(j);		
+		
+			// PK Impact
+			String jsPkImpact = au.getPKImpact();
+			if(jsPkImpact != null) {
+				_domeo.getLogger().debug(this, "jsPkImpact is not null: " + jsPkImpact.toString());
 
-			//TODO: throw an exception if the label or description is null 
-			String jsLabel = au.getLabel();
-			String jsDescript = au.getDescription();
+				//TODO: throw an exception if the label or description is null 
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();			
+				MLinkedResource pkImpact = ResourcesFactory.createLinkedResource(jsPkImpact, jsLabel, jsDescript);
+				_domeo.getLogger().debug(this, "pkImpact linked resource created: " + pkImpact.getLabel());
+
+				ann.setPKImpact(pkImpact);			
+				_domeo.getLogger().debug(this, "pkImpact linked resource added to annotation");									
+			} else {
+				_domeo.getLogger().debug(this, "jsPkImpact is null");
+			}
 			
-			MLinkedResource pkImpact = ResourcesFactory.createLinkedResource(jsPkImpact, jsLabel, jsDescript);
-			
-			_domeo.getLogger().debug(this, "pkImpact linked resource created: " + pkImpact.getLabel());
-			
-			//TODO: currently, we expect that the pharmgxusage class in MSPLsAnnotation is initialized, this is done in the clone methods above but its odd...find out if there is a simple way to do this
-			ann.setPKImpact(pkImpact);
-			_domeo.getLogger().debug(this, "pkImpact linked resource added to annotation");									
-		} else {
-			_domeo.getLogger().debug(this, "jsPkImpact IS null");
+			// PD Impact
+			String jsPdImpact = au.getPDImpact();
+			if(jsPdImpact != null) {
+				_domeo.getLogger().debug(this, "jsPdImpact is not null: " + jsPdImpact.toString());
+
+				//TODO: throw an exception if the label or description is null 
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();			
+				MLinkedResource pdImpact = ResourcesFactory.createLinkedResource(jsPdImpact, jsLabel, jsDescript);
+				_domeo.getLogger().debug(this, "pdImpact linked resource created: " + pdImpact.getLabel());
+
+				ann.setPdImpact(pdImpact);			
+				_domeo.getLogger().debug(this, "pdImpact linked resource added to annotation");									
+			} else {
+				_domeo.getLogger().debug(this, "jsPdImpact is null");
+			}
 		}
 		
 		return ann;

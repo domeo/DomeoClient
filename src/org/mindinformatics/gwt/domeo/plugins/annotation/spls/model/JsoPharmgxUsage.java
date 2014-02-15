@@ -39,5 +39,10 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 	public final native String getPKImpact() /*-{ 
 		return this['poc:PharmacokineticImpact']; 
 	}-*/;
+
+	// pharmacodynamic impact
+	public final native String getPDImpact() /*-{ 
+		return this['poc:PharmacodynamicImpact']; 
+	}-*/;
 	 
 }
