@@ -1,6 +1,8 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.serialization;
 
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.IPharmgxOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonAnnotationSerializer;
@@ -22,6 +24,7 @@ import com.google.gwt.json.client.JSONString;
 public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {
+		//TODO: use the IPharmgxOntology for these 
 		String SPL_URN_PREFIX = "urn:linkedspls:uuid:";
 		String SPL_POC_PREFIX = "poc:";
 		String SIO_PREFIX = "sio:";
@@ -40,11 +43,13 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 		body.put("@type", new JSONString(SPL_POC_PREFIX + "PharmacogenomicsStatement"));
 		
 		//TODO: fix this to use the SPL ontology 
-		//TODO; create resources that include all of the elements needd to create a TrustedTyped resource. See the USPLJsonUnmarshaller class where the data gets unmarshalled
+		//TODO; create resources that include all of the resources in the model. Make concordant with the USPLJsonUnmarshaller class where the data gets unmarshalled
 		MLinkedResource pkImpact = ann.getPKImpact(); 
 		if (pkImpact != null){
 			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX + "PharmacokineticImpact"));
 			body.put(SPL_POC_PREFIX + "PharmacokineticImpact", new JSONString(pkImpact.getUrl()));
+			body.put(IRdfsOntology.label, new JSONString(pkImpact.getLabel()));
+			body.put(IDublinCoreTerms.description, new JSONString(pkImpact.getDescription()));			
 		}
 		
 		bodies.set(0, body); 

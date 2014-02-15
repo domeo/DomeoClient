@@ -140,6 +140,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"LDL_Receptor", "NAT1;_NAT2", "PDGFR", "PML/RARα", "Rh_genotype",
 			"TPMT", "UGT1A1", "VKORC1" };
 
+	//TODO: get real URIs from the swat-4-med-safety project
+	String[] biomarkerUris = { "http://fakeuri.org/ApoE2", "http://fakeuri.org/BRAF", "http://fakeuri.org/C-Kit", "http://fakeuri.org/CCR5", "http://fakeuri.org/CD20_antigen", "http://fakeuri.org/CD25", "http://fakeuri.org/CD30", "http://fakeuri.org/CYP1A2", "http://fakeuri.org/CYP2C19", "http://fakeuri.org/CYP2C9", "http://fakeuri.org/CYP2D6", "http://fakeuri.org/DPD", "http://fakeuri.org/EGFR", "http://fakeuri.org/ER and PgR_receptor", "http://fakeuri.org/ER_receptor", "http://fakeuri.org/FIP1L1-PDGFRα", "http://fakeuri.org/G6PD", "http://fakeuri.org/HLA-B*1502", "http://fakeuri.org/HLA-B*5701", "http://fakeuri.org/Her2/neu", "http://fakeuri.org/IL28B", "http://fakeuri.org/KRAS", "http://fakeuri.org/LDL_Receptor", "http://fakeuri.org/NAT1;_NAT2", "http://fakeuri.org/PDGFR", "http://fakeuri.org/PML/RARα", "http://fakeuri.org/Rh_genotype", "http://fakeuri.org/TPMT", "http://fakeuri.org/UGT1A1", "http://fakeuri.org/VKORC1" }; 
+	
+	//TODO: correct the mispelling of variant throughout the project
 	String[] varient = { "poor-metabolizer", "intermediate-metabolizer",
 			"extensive-metabolizer", "ultra-metabolizer",
 			"intermediate-activity", "low-or-absent-activity", "HLA-B*1502",
@@ -155,6 +159,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"ultra-metabolizer-negative", "chromosomal-aberration-positive",
 			"chromosomal-aberration-negative" };
 
+	//TODO: get real URIs from the swat-4-med-safety project
 	String[] drugs = { "Abacivir", "Aripiprazole", "Arsenic_Trioxide",
 			"Atomoxetine", "Atorvastatin", "Azathioprine", "Boceprevir",
 			"Brentuximab_Vedotin", "Busulfan", "Capecitabine", "Carbamazepine",
@@ -184,21 +189,18 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"Trastuzumab", "Tretinoin", "Trimipramine", "Valproic_Acid",
 			"Vemurafenib", "Venlafaxine", "Voriconazole", "Warfarin" };
 
-	// Paolo this is taking care of the 'PK impact' for 'apply'
-	// I Normally create a method for each group
-	// RadioButton groups return MLinkedResource
-	// CheckBoxes groups return Set<MLinkedResource>
-	// See FAntibodyForm as an example
+	String[] drugUris = { "http://fakeuri.org/Abacivir", "http://fakeuri.org/Aripiprazole", "http://fakeuri.org/Arsenic_Trioxide", "http://fakeuri.org/Atomoxetine", "http://fakeuri.org/Atorvastatin", "http://fakeuri.org/Azathioprine", "http://fakeuri.org/Boceprevir", "http://fakeuri.org/Brentuximab_Vedotin", "http://fakeuri.org/Busulfan", "http://fakeuri.org/Capecitabine", "http://fakeuri.org/Carbamazepine", "http://fakeuri.org/Carisoprodol", "http://fakeuri.org/Carvedilol", "http://fakeuri.org/Celecoxib", "http://fakeuri.org/Cetuximab", "http://fakeuri.org/Cevimeline", "http://fakeuri.org/Chlordiazepoxide_and_Amitriptyline", "http://fakeuri.org/Chloroquine", "http://fakeuri.org/Cisplatin", "http://fakeuri.org/Citalopram", "http://fakeuri.org/Clobazam", "http://fakeuri.org/Clomiphene", "http://fakeuri.org/Clomipramine", "http://fakeuri.org/Clopidogrel", "http://fakeuri.org/Clozapine", "http://fakeuri.org/Codeine", "http://fakeuri.org/Crizotinib", "http://fakeuri.org/Dapsone", "http://fakeuri.org/Dasatinib", "http://fakeuri.org/Denileukin_Diftitox", "http://fakeuri.org/Desipramine", "http://fakeuri.org/Dexlansoprazole", "http://fakeuri.org/Dextromethorphan_and_Quinidine", "http://fakeuri.org/Diazepam", "http://fakeuri.org/Doxepin", "http://fakeuri.org/Drospirenone_and_Estradiol", "http://fakeuri.org/Erlotinib", "http://fakeuri.org/Esomeprazole", "http://fakeuri.org/Exemestane", "http://fakeuri.org/Everolimus", "http://fakeuri.org/Fluorouracil", "http://fakeuri.org/Fluoxetine", "http://fakeuri.org/Fluoxetine_and_Olanzapine", "http://fakeuri.org/Flurbiprofen", "http://fakeuri.org/Fluvoxamine", "http://fakeuri.org/Fulvestrant", "http://fakeuri.org/Galantamine", "http://fakeuri.org/Iloperidone", "http://fakeuri.org/Imatinib", "http://fakeuri.org/Imipramine", "http://fakeuri.org/Indacaterol", "http://fakeuri.org/Irinotecan", "http://fakeuri.org/Isosorbide", "http://fakeuri.org/Ivacaftor", "http://fakeuri.org/Lapatinib", "http://fakeuri.org/Lenalidomide", "http://fakeuri.org/Letrozole", "http://fakeuri.org/Maraviroc", "http://fakeuri.org/Mercaptopurine", "http://fakeuri.org/Metoprolol", "http://fakeuri.org/Modafinil", "http://fakeuri.org/Nefazodone", "http://fakeuri.org/Nilotinib", "http://fakeuri.org/Nortriptyline", "http://fakeuri.org/Omeprazole", "http://fakeuri.org/Panitumumab", "http://fakeuri.org/Pantoprazole", "http://fakeuri.org/Paroxetine", "http://fakeuri.org/Peginterferon_alfa-2b", "http://fakeuri.org/Perphenazine", "http://fakeuri.org/Pertuzumab", "http://fakeuri.org/Phenytoin", "http://fakeuri.org/Pimozide", "http://fakeuri.org/Prasugrel", "http://fakeuri.org/Pravastatin", "http://fakeuri.org/Propafenone", "http://fakeuri.org/Propranolol", "http://fakeuri.org/Protriptyline", "http://fakeuri.org/Quinidine", "http://fakeuri.org/Rabeprazole", "http://fakeuri.org/Rasburicase", "http://fakeuri.org/Rifampin", "http://fakeuri.org/Isoniazid", "http://fakeuri.org/Pyrazinamide", "http://fakeuri.org/Risperidone", "http://fakeuri.org/Sodium_Phenylacetate", "http://fakeuri.org/Sodium_Benzoate", "http://fakeuri.org/Sodium_Phenylbutyrate", "http://fakeuri.org/Tamoxifen", "http://fakeuri.org/Telaprevir", "http://fakeuri.org/Terbinafine", "http://fakeuri.org/Tetrabenazine", "http://fakeuri.org/Thioguanine", "http://fakeuri.org/Thioridazine", "http://fakeuri.org/Ticagrelor", "http://fakeuri.org/Tolterodine", "http://fakeuri.org/Tositumomab", "http://fakeuri.org/Tramadol_and_Acetaminophen", "http://fakeuri.org/Trastuzumab", "http://fakeuri.org/Tretinoin", "http://fakeuri.org/Trimipramine", "http://fakeuri.org/Valproic_Acid", "http://fakeuri.org/Vemurafenib", "http://fakeuri.org/Venlafaxine", "http://fakeuri.org/Voriconazole", "http://fakeuri.org/Warfarin" };
 
 	// drug of interest
 	public MLinkedResource getDrugOfInterest() {
 
 		int indexdoi = descriptdoi.getSelectedIndex();
-
-		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX + "",
-				descriptdoi.getItemText(indexdoi), "the drug of interest.",
-				SPL_POC_PREFIX + "Drug of Interest", SPL_POC_PREFIX,
-				"U of Pitt SPL Pharmgx Annotation");
+		
+		//TODO: fix the drug URI listing to be accurate
+		return ResourcesFactory.createLinkedResource(
+				drugUris[indexdoi],
+				descriptdoi.getItemText(indexdoi), 
+				"The drug of interest.");
 	}
 
 	// biomarkers
@@ -206,309 +208,262 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		int indexbm = descriptbm.getSelectedIndex();
 
-		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-				+ "biomarkers", descriptbm.getItemText(indexbm),
-				"the biomarkers.", SPL_POC_PREFIX + "Biomarkers",
-				SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		//TODO: fix the biomarker URI listing to be accurate
+		return ResourcesFactory.createLinkedResource(
+				biomarkerUris[indexbm], 
+				descriptbm.getItemText(indexbm),
+				"The selected biomarker.");
 	}
 
 	// pk impact
-
 	public MLinkedResource getPkImpact() {
 		if (descriptpkia.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "absorption-increase",
 							"Absorption Increase",
-							"The pharmacogenomic biomarker is associated with a increase in absorption of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with a increase in absorption of the drug."
+							);
 		} else if (descriptpkda.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "absorption-decrease",
 							"Absorption Decrease",
-							"The pharmacogenomic biomarker is associated with an decrease in absorption of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with an decrease in absorption of the drug."
+							);
 		} else if (descriptpkid.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "distribution-increase",
 							"Distribution Increase",
-							"The pharmacogenomic biomarker is associated with a increase in distribution of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with a increase in distribution of the drug."
+							);
 		} else if (descriptpkdd.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "distribution-decrease",
 							"Distribution Decrease",
-							"The pharmacogenomic biomarker is associated with an decrease in distribution of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with an decrease in distribution of the drug."
+							);
 		} else if (descriptpkim.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "metabolism-increase",
 							"Metabolism Increase",
-							"The pharmacogenomic biomarker is associated with an increase in metabolism of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with an increase in metabolism of the drug."
+							);
 		} else if (descriptpkdm.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "metabolism-decrease",
 							"Metabolism Decrease",
-							"The pharmacogenomic biomarker is associated with a decrease in metabolism of the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with a decrease in metabolism of the drug."
+							);
 		} else if (descriptpkie.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "excretion-increase",
 							"Excretion Increase",
-							"*************************** this was missing ************************",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with a increase in excretion of the drug"
+							);
 		} else if (descriptpkde.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "excretion-decrease",
 							"Excretion Decrease",
-							"*************************** this was missing ************************",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with a decrease in excretion of the drug"
+							);
 		} else if (descriptpkni.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "not-important",
 							"Not Important",
-							"The pharmacogenomic biomarker is not associated any clinically relevant pharmacokinetic with respect to the drug.",
-							SPL_POC_PREFIX + "PharmacokineticImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is not associated any clinically relevant pharmacokinetic with respect to the drug."
+							);
 
 		} else if (descriptpknone.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "none", "None", "none", SPL_POC_PREFIX
-					+ "PharmacokineticImpact", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
+					+ "none", "None", "none");
 		}
 
 		return null;
 	}
 
 	// Pharmacodynamic impact PD
-
 	public MLinkedResource getPdImpact() {
 
 		if (descriptpddt.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "drug-toxicity-risk-decreased",
 							"Decreased Toxicity Risk",
-							"The pharmacogenomic biomarker is associated with an decreased risk of toxicity.",
-							SPL_POC_PREFIX + "PharmacodynamicImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with an decreased risk of toxicity."
+							);
 		} else if (descriptpdit.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "drug-toxicity-risk-increased",
 							"Increased Toxicity Risk",
-							"The pharmacogenomic biomarker is associated with an increased risk of toxicity.",
-							SPL_POC_PREFIX + "PharmacodynamicImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with an increased risk of toxicity."
+							);
 		} else if (descriptpdir.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "influences-drug-response", "Influences Drug Response",
-					"The pharmacogenomic biomarker influences drug response",
-					SPL_POC_PREFIX + "PharmacodynamicImpact", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(
+					SPL_POC_PREFIX + "influences-drug-response", 
+					"Influences Drug Response",
+					"The pharmacogenomic biomarker influences drug response"
+					);
 		} else if (descriptpdni.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "not-important",
 							"Not Important",
-							"The pharmacogenomic biomarker is not associated with clinically relevant pharmacodynamic effect",
-							SPL_POC_PREFIX + "PharmacodynamicImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is not associated with clinically relevant pharmacodynamic effect"
+							);
 		} else if (descriptpdie.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX
-									+ "drug-efficacy-increased-from-baseline",
+					.createLinkedResource(
+							SPL_POC_PREFIX + "drug-efficacy-increased-from-baseline",
 							"Increased Efficacy",
-							"The pharmacogenomic biomarker is associated with an increase in the efficacy of the drug. ",
-							SPL_POC_PREFIX + "PharmacodynamicImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with an increase in the efficacy of the drug. "
+							);
 		} else if (descriptpdde.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX
-									+ "drug-efficacy-decreased-from-baseline",
+					.createLinkedResource(
+							SPL_POC_PREFIX + "drug-efficacy-decreased-from-baseline",
 							"Decreased Efficacy",
-							"The pharmacogenomic biomarker is associated with an decrease in the efficacy of the drug.",
-							SPL_POC_PREFIX + "PharmacodynamicImpact",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is associated with an decrease in the efficacy of the drug."
+							);
 		} else if (descriptpdnone.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "none", "None", "none.", SPL_POC_PREFIX
-					+ "PharmacodynamicImpact", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.");
 		}
 		return null;
 	}
 
 	// Recommendation drug
-
 	public MLinkedResource getDrugRec() {
 
 		if (descriptdsal.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "alternative-recommended",
 							"Alternative Recommended",
-							"The pharmacogenomic biomarker is related to a recommendation to use an alternative drug.",
-							SPL_POC_PREFIX + "DrugSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to use an alternative drug."
+							);
 		} else if (descriptdsnr.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "do-not-restart",
 							"Do not restart",
-							"The pharmacogenomic biomarker is related to a recommendation to not restart the drug",
-							SPL_POC_PREFIX + "DrugSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to not restart the drug"
+							);
 		} else if (descriptdsnc.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "no-change-necessary",
 							"Not change necessary",
-							"The pharmacogenomic biomarker is not associated with any drug selection recommendation.",
-							SPL_POC_PREFIX + "DrugSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is not associated with any drug selection recommendation."
+							);
 		} else if (descriptdsam.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "addition-of-medication",
 							"Addition of medication",
-							"The pharmacogenomic biomarker is related to a recommendation to add a concomitant medication.",
-							SPL_POC_PREFIX + "DrugSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to add a concomitant medication."
+							);
 		} else if (descriptdsca.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "change-in-route-of-admin",
 							"Change in route of administration",
-							"The pharmacogenomic biomarker is related to a recommendation to add change the route of administration for the drug.",
-							SPL_POC_PREFIX + "DrugSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to add change the route of administration for the drug."
+							);
 		} else if (descriptdsnone.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "none", "None", "none.", SPL_POC_PREFIX
-					+ "DrugSelectionRecommendation", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.");
 		}
 		return null;
 	}
 
 	// Recommendation Dose
-
 	public MLinkedResource getDoseRec() {
 
 		if (descriptdrdfb.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX
-									+ "decrease-from-recommended-baseline",
+					.createLinkedResource(
+							SPL_POC_PREFIX + "decrease-from-recommended-baseline",
 							"Decrease from baseline",
-							"The pharmacogenomic biomarker is related to a recommendation to decrease the dose of the drug from the recommended baseline.",
-							SPL_POC_PREFIX + "DoseSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to decrease the dose of the drug from the recommended baseline."
+							);
 		} else if (descriptdrifb.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX
-									+ "increase-from-recommended-baseline",
+					.createLinkedResource(
+							SPL_POC_PREFIX + "increase-from-recommended-baseline",
 							"Increase from baseline",
-							"The pharmacogenomic biomarker is related to a recommendation to increase the dose of the drug from the recommended baseline.",
-							SPL_POC_PREFIX + "DoseSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to increase the dose of the drug from the recommended baseline."
+							);
 		} else if (descriptdrnc.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX
-									+ "not-change-from-recommended-baseline",
+					.createLinkedResource(
+							SPL_POC_PREFIX + "not-change-from-recommended-baseline",
 							"Not change from baseline",
-							"The pharmacogenomic biomarker is related to a recommendation to not change the dose of the drug from the recommended baseline.",
-							SPL_POC_PREFIX + "DoseSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to not change the dose of the drug from the recommended baseline."
+							);
 		} else if (descriptdrus.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "use-specific",
 							"Use specific",
-							"The pharmacogenomic biomarker is related to a recommendation to use specific dose of the drug from the recommended baseline.",
-							SPL_POC_PREFIX + "DoseSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to use specific dose of the drug from the recommended baseline."
+							);
 		} else if (descriptdrcs.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "change-schedule",
 							"Change schedule",
-							"The pharmacogenomic biomarker is related to a recommendation to change schedule of the dose of the drug from the recommended baseline.",
-							SPL_POC_PREFIX + "DoseSelectionRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"The pharmacogenomic biomarker is related to a recommendation to change schedule of the dose of the drug from the recommended baseline."
+							);
 		} else if (descriptdrnone.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "none", "None", "none.", SPL_POC_PREFIX
-					+ "DoseSelectionRecommendation", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.");
 		}
 		return null;
 	}
 
 	// Recommendation Monitoring
-
 	public MLinkedResource getMonitRec() {
 
 		if (descriptmreq.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "required",
 							"Required",
-							"A required monitoring recommendation is related to the pharmacogenomic biomarker.",
-							SPL_POC_PREFIX + "MonitoringRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"A required monitoring recommendation is related to the pharmacogenomic biomarker."
+							);
 		} else if (descriptmrec.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "recommended",
 							"Recommended",
-							"A recommended monitoring recommendation is related to the pharmacogenomic biomarker.",
-							SPL_POC_PREFIX + "MonitoringRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"A recommended monitoring recommendation is related to the pharmacogenomic biomarker."
+							);
 		} else if (descriptmnc.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "not-necessary",
 							"Not necessary",
-							"A not necessary monitoring recommendation is related to the pharmacogenomic biomarker.",
-							SPL_POC_PREFIX + "MonitoringRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"A not necessary monitoring recommendation is related to the pharmacogenomic biomarker."
+							);
 		} else if (descriptmcms.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "change-monitoring-strategy",
 							"Change monitoring strategy",
-							"A strategy changed monitoring recommendation is related to the pharmacogenomic biomarker.",
-							SPL_POC_PREFIX + "MonitoringRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"A strategy changed monitoring recommendation is related to the pharmacogenomic biomarker."
+							);
 		} else if (descriptmcnone.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "none", "None", "none.", SPL_POC_PREFIX
-					+ "MonitoringRecommendation", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.");
 		}
 		return null;
 	}
@@ -517,43 +472,39 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	public MLinkedResource getTest_Re() {
 		if (descripttreq.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "required", "Required",
-					"A required test is related to the biomarker.",
-					SPL_POC_PREFIX + "TestRecommendation", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(
+					SPL_POC_PREFIX + "required", 
+					"Required",
+					"A required test is related to the biomarker."
+					);
+		//TODO: the label should be "Recomended", fix
 		} else if (descripttrec.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "recommend", "Recommend",
-					"A recommended test is related to the biomarker.",
-					SPL_POC_PREFIX + "TestRecommendation", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(
+					SPL_POC_PREFIX + "recommended", 
+					"Recommend",
+					"A recommended test is related to the biomarker."
+					);
 		}
 
 		else if (descriptttna.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
-							SPL_POC_PREFIX
-									+ "take-note-that-tests-are-avaliable",
+					.createLinkedResource(
+							SPL_POC_PREFIX + "take-note-that-tests-are-avaliable",
 							"Take note that tests are avaliable",
-							"Testing related to the pharmacogenomic biomarker is avaliable.",
-							SPL_POC_PREFIX + "TestRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"Testing related to the pharmacogenomic biomarker is avaliable."
+							);
 		}
 
 		else if (descripttnn.getValue()) {
 			return ResourcesFactory
-					.createTrustedTypedResource(
+					.createLinkedResource(
 							SPL_POC_PREFIX + "not-necessary",
 							"Not necessary",
-							"Testing related to the pharmacogenomic biomarker is not necessary.",
-							SPL_POC_PREFIX + "TestRecommendation",
-							SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+							"Testing related to the pharmacogenomic biomarker is not necessary."
+							);
 		} else if (descripttnone.getValue()) {
-			return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-					+ "none", "None", "none.", SPL_POC_PREFIX
-					+ "TestRecommendation", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation");
+			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
+					+ "none", "None", "none.");
 		}
 		return null;
 	}
@@ -564,28 +515,28 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		Set<MLinkedResource> statements = new HashSet<MLinkedResource>();
 
+		//TODO: this is not in the current pharmgx annotation model, add it
 		if (descriptsai.getValue()) {
-			statements.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "ingredient-active", "Active ingredient",
-					"the ingredient is active", SPL_POC_PREFIX + "Statements",
-					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+			statements.add(ResourcesFactory.createLinkedResource(
+					SPL_POC_PREFIX + "ingredient-active", 
+					"Active ingredient",
+					"the ingredient is active"));
 		}
 
+		//TODO: this is not in the current pharmgx annotation model, add it
 		if (descriptsmcc.getValue()) {
-			statements.add(ResourcesFactory.createTrustedTypedResource(
+			statements.add(ResourcesFactory.createLinkedResource(
 					SPL_POC_PREFIX + "concomitant-medication-concern",
 					"Concomitant medication concern",
-					"we should concern the concomitant medication.",
-					SPL_POC_PREFIX + "Statements", SPL_POC_PREFIX,
-					"U of Pitt SPL Pharmgx Annotation"));
+					"A concomitant medication of concern is mentioned."));
 		}
 
 		if (descriptppm.getValue()) {
 
-			statements.add(ResourcesFactory.createTrustedTypedResource(
-					SPL_POC_PREFIX + "", "Variant Frequency",
-					"variant frequency", SPL_POC_PREFIX + "Statements",
-					SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation"));
+			statements.add(ResourcesFactory.createLinkedResource(
+					SPL_POC_PREFIX + "population-frequency-mentioned", 
+					"Variant Frequency",
+					"The frequency or proportion at which a variant occurs in a specific population is mentioned."));
 		}
 
 		return statements;
@@ -596,11 +547,13 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		int indexbm = descriptsvtlb.getSelectedIndex();
 
-		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-				+ "variant", descriptsvtlb.getItemText(indexbm),
-				"it is highly possible changes with time.", SPL_POC_PREFIX
-						+ "Variant", SPL_POC_PREFIX,
-				"U of Pitt SPL Pharmgx Annotation");
+		//TODO: test for "none" to skip when encountered 
+		//TODO: get specific descriptions
+		return ResourcesFactory.createLinkedResource(
+				SPL_POC_PREFIX + descriptsvtlb.getItemText(indexbm), 
+				descriptsvtlb.getItemText(indexbm),
+				"A specific variant of a gene, including the wild-type allele, or a patient phenotype"
+				);
 	}
 
 	// Test
@@ -608,10 +561,13 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		int indexbm = descriptstslb.getSelectedIndex();
 
-		return ResourcesFactory.createTrustedTypedResource(SPL_POC_PREFIX
-				+ "test", descriptstslb.getItemText(indexbm),
-				"based on the test result. ", SPL_POC_PREFIX + "Test",
-				SPL_POC_PREFIX, "U of Pitt SPL Pharmgx Annotation");
+		//TODO: test for "none" to skip when encountered 
+		//TODO: add the descriptions for the individual test types
+		return ResourcesFactory.createLinkedResource(
+				SPL_POC_PREFIX + descriptstslb.getItemText(indexbm), 
+				descriptstslb.getItemText(indexbm),
+				"A test result that is somehow related to the biomarker."
+				);
 	}
 
 	// NEW annotation

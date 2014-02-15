@@ -61,21 +61,17 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			);
 		_domeo.getLogger().debug(this, "AnnotationFactory.cloneSPLs done. ann:" + ann.toString());
 		JsArray<JsoPharmgxUsage> aus = spl.getBody();
-		JsoPharmgxUsage au = aus.get(0);
-		//JsonGenericResource jsPkImpact = au.getPKImpact();
+		JsoPharmgxUsage au = aus.get(0);		
 		String jsPkImpact = au.getPKImpact();
 		if(jsPkImpact != null) {
 			_domeo.getLogger().debug(this, "jsPkImpact is not null: " + jsPkImpact.toString());
+
+			//TODO: throw an exception if the label or description is null 
+			String jsLabel = au.getLabel();
+			String jsDescript = au.getDescription();
 			
-			//TODO: fix the serializer class (JSONSPLsAnnotationSerializer) to place the correct resources in the JSON-LD stored on the server. All data in this resource should be from the JSON returned from the server
-			MLinkedResource pkImpact = ResourcesFactory.createTrustedTypedResource(
-					jsPkImpact, 
-					"Distribution Increase", 
-					"The pharmacogenomic biomarker is associated with a increase in distribution of the drug.", 
-					"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#PharmacokineticImpact", 
-					"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#", 
-					"DUMMY TEST");
-			// TODO: the data should have the URL, label, description, type, and source so we can use MTrustedTypedResource directly with (jsPkImpact.getUrl(), jsPkImpact.getLabel());
+			MLinkedResource pkImpact = ResourcesFactory.createLinkedResource(jsPkImpact, jsLabel, jsDescript);
+			
 			_domeo.getLogger().debug(this, "pkImpact linked resource created: " + pkImpact.getLabel());
 			
 			//TODO: currently, we expect that the pharmgxusage class in MSPLsAnnotation is initialized, this is done in the clone methods above but its odd...find out if there is a simple way to do this

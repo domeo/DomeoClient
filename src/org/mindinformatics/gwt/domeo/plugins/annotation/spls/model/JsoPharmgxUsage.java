@@ -20,9 +20,13 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 	}-*/;
 	
 	// ------------------------------------------------------------------------
-	//  Comment
+	//  General (RDFS and Dublin Core Terms)
 	// ------------------------------------------------------------------------
-	public final native String getComment() /*-{ 
+	public final native String getLabel() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::label]; 
+	}-*/;
+
+	public final native String getDescription() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms::description]; 
 	}-*/;
 	
