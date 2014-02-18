@@ -45,4 +45,8 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 		return this['poc:PharmacodynamicImpact']; 
 	}-*/;
 	 
+	// drug selection recommendation
+	public final native String getDrugRec() /*-{ 
+		return this['poc:DrugSelectionRecommendation']; 
+	}-*/;
 }

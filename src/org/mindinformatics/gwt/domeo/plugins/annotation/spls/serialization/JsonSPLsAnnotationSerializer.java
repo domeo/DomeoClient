@@ -42,10 +42,10 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 		// PK Impact
 		MLinkedResource pkImpact = ann.getPKImpact(); 
 		if (pkImpact != null){
-			JSONObject body = new JSONObject();
-			String statementUUID = UUID.uuid();
-			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX + "PharmacogenomicsStatement"));
+			JSONObject body = new JSONObject(); // common
+			String statementUUID = UUID.uuid(); // common
+			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID)); // common
+			body.put("@type", new JSONString(SPL_POC_PREFIX + "PharmacogenomicsStatement")); // common
 			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX + "PharmacokineticImpact"));
 			body.put(SPL_POC_PREFIX + "PharmacokineticImpact", new JSONString(pkImpact.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(pkImpact.getLabel()));
@@ -53,7 +53,7 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			bodies.set(idx, body);
 			idx += 1;
 		}
-		
+	
 		// PD Impact
 		MLinkedResource pdImpact = ann.getPdImpact(); 
 		if (pdImpact != null){
@@ -68,7 +68,22 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			bodies.set(idx, body);
 			idx += 1;
 		}
-				
+			
+		// Drug Selection Recommendation
+		MLinkedResource drugRec = ann.getDrugRec(); 
+		if (drugRec != null){
+			JSONObject body = new JSONObject();
+			String statementUUID = UUID.uuid();
+			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
+			body.put("@type", new JSONString(SPL_POC_PREFIX + "PharmacogenomicsStatement"));
+			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX + "DrugSelectionRecommendation"));
+			body.put(SPL_POC_PREFIX + "DrugSelectionRecommendation", new JSONString(drugRec.getUrl()));
+			body.put(IRdfsOntology.label, new JSONString(drugRec.getLabel()));
+			body.put(IDublinCoreTerms.description, new JSONString(drugRec.getDescription()));
+			bodies.set(idx, body);
+			idx += 1;
+		}
+
 		annotation.put(IDomeoOntology.content, bodies);
 
 		return annotation;

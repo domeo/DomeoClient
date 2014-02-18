@@ -86,7 +86,7 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			}
 			
 			// PD Impact
-			String jsPdImpact = au.getPDImpact();
+			String jsPdImpact = au.getDrugRec();
 			if(jsPdImpact != null) {
 				_domeo.getLogger().debug(this, "jsPdImpact is not null: " + jsPdImpact.toString());
 
@@ -100,6 +100,23 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				_domeo.getLogger().debug(this, "pdImpact linked resource added to annotation");									
 			} else {
 				_domeo.getLogger().debug(this, "jsPdImpact is null");
+			}
+			
+			// drug selection recommendation
+			String jsDrugRec= au.getDrugRec();
+			if(jsDrugRec != null) {
+				_domeo.getLogger().debug(this, "jsDrugRec is not null: " + jsDrugRec.toString());
+
+				//TODO: throw an exception if the label or description is null 
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();			
+				MLinkedResource drugRec = ResourcesFactory.createLinkedResource(jsDrugRec, jsLabel, jsDescript);
+				_domeo.getLogger().debug(this, "drugRec linked resource created: " + drugRec.getLabel());
+
+				ann.setDrugRec(drugRec);			
+				_domeo.getLogger().debug(this, "drugRec linked resource added to annotation");									
+			} else {
+				_domeo.getLogger().debug(this, "jsDrugRec is null");
 			}
 		}
 		
