@@ -203,8 +203,8 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			}
 
 			String variantStr;
-			if (pharmgx.getVarient() != null) {
-				variantStr = pharmgx.getVarient().getLabel();
+			if (pharmgx.getVariant() != null) {
+				variantStr = pharmgx.getVariant().getLabel();
 				Label l = new Label("Variant", variantStr);
 				labels.add(l);
 			}

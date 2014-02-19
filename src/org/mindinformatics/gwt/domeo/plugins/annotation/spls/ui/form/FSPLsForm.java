@@ -144,7 +144,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	String[] biomarkerUris = { "http://fakeuri.org/ApoE2", "http://fakeuri.org/BRAF", "http://fakeuri.org/C-Kit", "http://fakeuri.org/CCR5", "http://fakeuri.org/CD20_antigen", "http://fakeuri.org/CD25", "http://fakeuri.org/CD30", "http://fakeuri.org/CYP1A2", "http://fakeuri.org/CYP2C19", "http://fakeuri.org/CYP2C9", "http://fakeuri.org/CYP2D6", "http://fakeuri.org/DPD", "http://fakeuri.org/EGFR", "http://fakeuri.org/ER and PgR_receptor", "http://fakeuri.org/ER_receptor", "http://fakeuri.org/FIP1L1-PDGFRα", "http://fakeuri.org/G6PD", "http://fakeuri.org/HLA-B*1502", "http://fakeuri.org/HLA-B*5701", "http://fakeuri.org/Her2/neu", "http://fakeuri.org/IL28B", "http://fakeuri.org/KRAS", "http://fakeuri.org/LDL_Receptor", "http://fakeuri.org/NAT1;_NAT2", "http://fakeuri.org/PDGFR", "http://fakeuri.org/PML/RARα", "http://fakeuri.org/Rh_genotype", "http://fakeuri.org/TPMT", "http://fakeuri.org/UGT1A1", "http://fakeuri.org/VKORC1" }; 
 	
 	//TODO: correct the mispelling of variant throughout the project
-	String[] varient = { "poor-metabolizer", "intermediate-metabolizer",
+	String[] variant = { "poor-metabolizer", "intermediate-metabolizer",
 			"extensive-metabolizer", "ultra-metabolizer",
 			"intermediate-activity", "low-or-absent-activity", "HLA-B*1502",
 			"HLA-B*5701" };
@@ -543,7 +543,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	}
 
 	// Variant
-	public MLinkedResource getVarient() {
+	public MLinkedResource getVariant() {
 
 		int indexbm = descriptsvtlb.getSelectedIndex();
 
@@ -659,10 +659,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							_domeo.getLogger().debug(this, "SPL annotation 10");
 							pharmgxUsage.setMedconditbody(medconditbody
 									.getText());
-							pharmgxUsage.setVarient(getVarient());
+							pharmgxUsage.setVariant(getVariant());
 							pharmgxUsage.setTest(getTest());
 							pharmgxUsage.setDrugOfInterest(getDrugOfInterest());
-							pharmgxUsage.setVarientbody(descriptsvtbody
+							pharmgxUsage.setVariantbody(descriptsvtbody
 									.getText());
 							pharmgxUsage.setTestbody(descriptstsbody.getText());
 
@@ -929,15 +929,15 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 			// Variant
 
-			if (_item.getVarient() != null) {
+			if (_item.getVariant() != null) {
 
-				if (_item.getVarient().getLabel().equals("unselected")) {
+				if (_item.getVariant().getLabel().equals("unselected")) {
 					descriptsvtlb.setSelectedIndex(0);
 				}
 
-				String varientLabel = _item.getVarient().getLabel();
-				for (int i = 0; i < varient.length; i++) {
-					if (varient[i].equals(varientLabel)) {
+				String variantLabel = _item.getVariant().getLabel();
+				for (int i = 0; i < variant.length; i++) {
+					if (variant[i].equals(variantLabel)) {
 						descriptsvtlb.setSelectedIndex(i + 1);
 					}
 				}
@@ -970,9 +970,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				medconditbody.setText(_item.getMedconditbody());
 			}
 
-			// varient textarea
-			if (_item.getVarientBody() != null) {
-				descriptsvtbody.setText(_item.getVarientBody());
+			// variant textarea
+			if (_item.getVariantBody() != null) {
+				descriptsvtbody.setText(_item.getVariantBody());
 			}
 
 			// test textarea
@@ -1057,9 +1057,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					_item.setMonitRec(getMonitRec());
 					_item.setStatements(getStatements());
 					_item.setTestRec(getTest_Re());
-					_item.setVarient(getVarient());
+					_item.setVariant(getVariant());
 					_item.setTest(getTest());
-					_item.setVarientBody(descriptsvtbody.getText());
+					_item.setVariantBody(descriptsvtbody.getText());
 					_item.setTestBody(descriptstsbody.getText());
 					_item.setAllelesbody(allelesbody.getText());
 					_item.setMedconditbody(medconditbody.getText());

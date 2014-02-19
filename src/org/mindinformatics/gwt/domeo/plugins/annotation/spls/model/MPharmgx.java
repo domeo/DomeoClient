@@ -16,10 +16,10 @@ public class MPharmgx extends MTrustedResource {
 
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 			drugRecResource, monitRecResource, testRecResource, comment,
-			Alleles, biomarkers, varient, test, medicalCondition, drugOfInterest;
+			Alleles, biomarkers, variant, test, medicalCondition, drugOfInterest;
 	
-	public MLinkedResource getVarient() {
-		return varient;
+	public MLinkedResource getVariant() {
+		return variant;
 	}
 
 	public MLinkedResource getDrugOfInterest() {
@@ -30,8 +30,8 @@ public class MPharmgx extends MTrustedResource {
 		this.drugOfInterest = drugOfInterest;
 	}
 
-	public void setVarient(MLinkedResource varient) {
-		this.varient = varient;
+	public void setVariant(MLinkedResource variant) {
+		this.variant = variant;
 	}
 
 	public MLinkedResource getMedicalCondition() {

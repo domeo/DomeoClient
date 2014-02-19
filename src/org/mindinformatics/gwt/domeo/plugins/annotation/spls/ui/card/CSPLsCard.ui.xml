@@ -171,10 +171,10 @@
 			
 				<g:VerticalPanel>
 				<g:HorizontalPanel>
-					<g:Label ui:field="varientlabel" styleName='{style.tablelabel}'>Varient</g:Label>
+					<g:Label ui:field="variantlabel" styleName='{style.tablelabel}'>Variant</g:Label>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
-					<g:Label ui:field="varient" styleName='{style.tablevalue}'></g:Label>
+					<g:Label ui:field="variant" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 			

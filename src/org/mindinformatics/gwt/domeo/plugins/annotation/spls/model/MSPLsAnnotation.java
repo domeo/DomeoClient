@@ -142,12 +142,12 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    pharmgxUsage.setMedconditbody(mediconditbody);
 	}
 	
-	public MLinkedResource getVarient(){
-	    return pharmgxUsage.getVarient();
+	public MLinkedResource getVariant(){
+	    return pharmgxUsage.getVariant();
 	}
 
-	public void setVarient(MLinkedResource varient){
-	    pharmgxUsage.setVarient(varient);
+	public void setVariant(MLinkedResource variant){
+	    pharmgxUsage.setVariant(variant);
 	}
 	
 	public MLinkedResource getTest(){
@@ -158,12 +158,12 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    pharmgxUsage.setTest(test);
 	}
 	
-	public String getVarientBody() {
-	    return pharmgxUsage.getVarientbody();
+	public String getVariantBody() {
+	    return pharmgxUsage.getVariantbody();
 	}
 
-	public void setVarientBody(String varientbody) {
-	    pharmgxUsage.setVarientbody(varientbody);
+	public void setVariantBody(String variantbody) {
+	    pharmgxUsage.setVariantbody(variantbody);
 	}
 	
 	public String getTestBody() {

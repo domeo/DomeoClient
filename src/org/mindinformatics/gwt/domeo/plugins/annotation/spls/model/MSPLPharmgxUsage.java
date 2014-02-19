@@ -14,7 +14,7 @@ public class MSPLPharmgxUsage {
 	private String allelesbody;
 	private String medconditbody;
 	private String comment;
-	private String varientbody;
+	private String variantbody;
 	private String testbody;
 	
 	public Long getLocalId() {
@@ -59,12 +59,12 @@ public class MSPLPharmgxUsage {
 	// MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 	// drugRecResource, monitRecResource, testRecResource;
 
-	public MLinkedResource getVarient() {
-		return pharmgx.getVarient();
+	public MLinkedResource getVariant() {
+		return pharmgx.getVariant();
 	}
 
-	public void setVarient(MLinkedResource varient) {
-		pharmgx.setVarient(varient);
+	public void setVariant(MLinkedResource variant) {
+		pharmgx.setVariant(variant);
 	}
 
 	public MLinkedResource getTest() {
@@ -163,12 +163,12 @@ public class MSPLPharmgxUsage {
 		this.medconditbody = medconditbody;
 	}
 
-	public String getVarientbody() {
-		return varientbody;
+	public String getVariantbody() {
+		return variantbody;
 	}
 
-	public void setVarientbody(String varientbody) {
-		this.varientbody = varientbody;
+	public void setVariantbody(String variantbody) {
+		this.variantbody = variantbody;
 	}
 
 	public String getTestbody() {

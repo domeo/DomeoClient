@@ -64,7 +64,7 @@ public class CSPLsCard extends ACardComponent {
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
 			testrec, statement, biomarkers, allelesbody, medconditbody, test,
-			varient, drugOfInterest;
+			variant, drugOfInterest;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -254,22 +254,22 @@ public class CSPLsCard extends ACardComponent {
 					statement.setText("undefined");
 				}
 
-				// varient
+				// Variant
 
-				if ((dataUsage.getVarientbody() != null && !dataUsage
-						.getVarientbody().trim().equals(""))
-						|| dataUsage.getVarient() != null) {
+				if ((dataUsage.getVariantbody() != null && !dataUsage
+						.getVariantbody().trim().equals(""))
+						|| dataUsage.getVariant() != null) {
 
-					if (dataUsage.getVarientbody() != null
-							&& !dataUsage.getVarientbody().trim().equals("")) {
-						varient.setText(dataUsage.getVarientbody());
+					if (dataUsage.getVariantbody() != null
+							&& !dataUsage.getVariantbody().trim().equals("")) {
+						variant.setText(dataUsage.getVariantbody());
 
-					} else if (!dataUsage.getVarient().getLabel()
+					} else if (!dataUsage.getVariant().getLabel()
 							.equals("unselected")) {
-						varient.setText(dataUsage.getVarient().getLabel());
+						variant.setText(dataUsage.getVariant().getLabel());
 					}
 				} else
-					varient.setText("undefined");
+					variant.setText("undefined");
 
 				// test
 
