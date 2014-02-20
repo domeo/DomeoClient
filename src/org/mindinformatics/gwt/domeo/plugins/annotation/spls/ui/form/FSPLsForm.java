@@ -60,6 +60,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING SPL ANNOTATION";
 												
 	public static final String SPL_POC_PREFIX = "http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#";
+	public static final String DAILYMED_PREFIX = "http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/";
+
 
 	interface Binder extends UiBinder<VerticalPanel, FSPLsForm> {
 	}
@@ -518,7 +520,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		//TODO: this is not in the current pharmgx annotation model, add it
 		if (descriptsai.getValue()) {
 			statements.add(ResourcesFactory.createLinkedResource(
-					SPL_POC_PREFIX + "ingredient-active", 
+					DAILYMED_PREFIX + "ingredient-active", 
 					"Active ingredient",
 					"the ingredient is active"));
 		}
@@ -526,7 +528,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		//TODO: this is not in the current pharmgx annotation model, add it
 		if (descriptsmcc.getValue()) {
 			statements.add(ResourcesFactory.createLinkedResource(
-					SPL_POC_PREFIX + "concomitant-medication-concern",
+					DAILYMED_PREFIX + "concomitant-medication-concern",
 					"Concomitant medication concern",
 					"A concomitant medication of concern is mentioned."));
 		}

@@ -67,6 +67,9 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 				.debug(this,
 						"Parsing body resources and adding them to the annotation instance");
 		JsArray<JsoPharmgxUsage> aus = spl.getBodies();
+
+		Set<MLinkedResource> statements = new HashSet<MLinkedResource>();
+
 		for (int j = 0; j < aus.length(); j++) {
 			JsoPharmgxUsage au = aus.get(j);
 
@@ -296,8 +299,103 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 				_domeo.getLogger().debug(this, "jsDrug is null");
 			}
 
-			// statements
-			Set<MLinkedResource> statements = new HashSet<MLinkedResource>();
+			// alleles
+			String alleles = au.getAlleles();
+			if (alleles != null) {
+				_domeo.getLogger().debug(this,
+						"alleles is not null: " + alleles.toString());
+
+				ann.setAllelesbody(alleles);
+				_domeo.getLogger().debug(this,
+						"alleles linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "alleles is null");
+			}
+
+			// medical condition
+			String medicalCondtion = au.getMedicalCondition();
+			if (medicalCondtion != null) {
+				_domeo.getLogger().debug(
+						this,
+						"medicalCondtion is not null: "
+								+ medicalCondtion.toString());
+
+				ann.setMedconditbody(medicalCondtion);
+				_domeo.getLogger().debug(this,
+						"medicalCondtion linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "medicalCondtion is null");
+			}
+
+			// comment
+			String comment = au.getComment();
+			if (comment != null) {
+				_domeo.getLogger().debug(this,
+						"comment is not null: " + comment.toString());
+
+				ann.setComment(comment);
+				_domeo.getLogger().debug(this,
+						"comment linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "comment is null");
+			}
+
+			// Concepts that the Statement Refers To: Active ingredient &
+			// Concomitant medication concern & Variant Frequency
+
+			// active ingredient in statements
+			String jsActiveIngredient = au.getActiveIngredient();
+			if (jsActiveIngredient != null) {
+
+				_domeo.getLogger().debug(
+						this,
+						"jsActiveIngredient is not null: "
+								+ jsActiveIngredient.toString());
+
+				// TODO: throw an exception if the label or description is null
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();
+				MLinkedResource activeIngredient = ResourcesFactory
+						.createLinkedResource(jsActiveIngredient, jsLabel,
+								jsDescript);
+				_domeo.getLogger().debug(
+						this,
+						"activeIngredient linked resource created: "
+								+ activeIngredient.getLabel());
+
+				statements.add(activeIngredient);
+				_domeo.getLogger().debug(this,
+						"activeIngredient linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "jsActiveIngredient is null");
+			}
+
+			// medication concern in statements
+			String jsMediConcern = au.getMedicatConcern();
+			if (jsMediConcern != null) {
+
+				_domeo.getLogger().debug(
+						this,
+						"jsMediConcern is not null: "
+								+ jsMediConcern.toString());
+
+				// TODO: throw an exception if the label or description is null
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();
+				MLinkedResource mediConcern = ResourcesFactory
+						.createLinkedResource(jsMediConcern, jsLabel,
+								jsDescript);
+				_domeo.getLogger().debug(
+						this,
+						"mediConcern linked resource created: "
+								+ mediConcern.getLabel());
+
+				statements.add(mediConcern);
+				_domeo.getLogger().debug(this,
+						"mediConcern linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "jsMediConcern is null");
+			}
 
 			// variant frequency in statements
 			String jsVariFrequency = au.getVariantFrequency();
@@ -325,36 +423,10 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 				_domeo.getLogger().debug(this, "jsVariFrequency is null");
 			}
 
-			// medication concern in statements
-			String jsMediCondition = au.getMedicalCondition();
-			if (jsMediCondition != null) {
-				_domeo.getLogger().debug(
-						this,
-						"jsMediCondition is not null: "
-								+ jsMediCondition.toString());
-
-				// TODO: throw an exception if the label or description is null
-				String jsLabel = au.getLabel();
-				String jsDescript = au.getDescription();
-				MLinkedResource mediCondition = ResourcesFactory
-						.createLinkedResource(jsMediCondition, jsLabel,
-								jsDescript);
-				_domeo.getLogger().debug(
-						this,
-						"mediCondition linked resource created: "
-								+ mediCondition.getLabel());
-
-				statements.add(mediCondition);
-				_domeo.getLogger().debug(this,
-						"mediCondition linked resource added to annotation");
-			} else {
-				_domeo.getLogger().debug(this, "jsMediCondition is null");
-			}
-
-			if (statements != null && statements.size() > 0)
-				ann.setStatements(statements);
-
 		}
+
+		if (statements != null && statements.size() > 0)
+			ann.setStatements(statements);
 
 		return ann;
 	}

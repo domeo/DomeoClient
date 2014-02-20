@@ -204,6 +204,15 @@
 					<g:Label ui:field="medconditbody" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="commentlabel" styleName='{style.tablelabel}'>Comment</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="commentbody" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
 
 		</g:HorizontalPanel>
 

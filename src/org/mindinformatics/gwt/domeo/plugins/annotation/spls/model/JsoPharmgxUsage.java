@@ -87,6 +87,8 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 		return this['dailymed:pharmgxDrug'];
 	}-*/;
 
+	// Concepts that the Statement Refers To: Active ingredient &
+	// Concomitant medication concern & Variant Frequency
 	// variant frequency
 	public final native String getVariantFrequency() /*-{
 		return this['poc:VariantFrequency'];
@@ -94,12 +96,27 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 
 	// medication concern
 	public final native String getMedicatConcern() /*-{
-		return this['poc:MedicatConcern'];
+		return this['dailymed:ConcomitantMedicationOfConcern'];
+	}-*/;
+
+	// active ingredient
+	public final native String getActiveIngredient() /*-{
+		return this['dailymed:ActiveMoiety'];
 	}-*/;
 
 	// medical condition
 	public final native String getMedicalCondition() /*-{
 		return this['poc:MedicalCondition'];
 	}-*/;
+
+	// alleles
+	public final native String getAlleles() /*-{
+		return this['ncit:Alleles'];
+	}-*/;
+	
+	// comment
+	public final native String getComment() /*-{
+	return this['poc:Comment'];
+}-*/;
 
 }

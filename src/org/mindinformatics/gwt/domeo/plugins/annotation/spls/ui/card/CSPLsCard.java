@@ -64,7 +64,7 @@ public class CSPLsCard extends ACardComponent {
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
 			testrec, statement, biomarkers, allelesbody, medconditbody, test,
-			variant, drugOfInterest;
+			variant, drugOfInterest, commentbody;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -242,9 +242,15 @@ public class CSPLsCard extends ACardComponent {
 
 				if (dataUsage.getStatements() != null) {
 					int count = 2;
+
+					System.out.println(_annotation.getPharmgxUsage()
+							.getStatements().size());
 					for (MLinkedResource mr : _annotation.getPharmgxUsage()
 							.getStatements()) {
 						statements_str += mr.getLabel().toString() + " ";
+
+						System.out.println(count + "|" + statements_str);
+
 						if (count <= 0)
 							break;
 						count++;
@@ -292,14 +298,21 @@ public class CSPLsCard extends ACardComponent {
 					String allelesStr = dataUsage.getAllelesbody();
 					allelesbody.setText(allelesStr);
 				} else {
-					allelesbody.setText("undefined");
+					allelesbody.setText("");
 				}
 
 				if (dataUsage.getMedconditbody() != null) {
 					String medconditStr = dataUsage.getMedconditbody();
 					medconditbody.setText(medconditStr);
 				} else {
-					medconditbody.setText("undefined");
+					medconditbody.setText("");
+				}
+				
+				if (dataUsage.getComment() != null) {
+					String commentStr = dataUsage.getComment();
+					commentbody.setText(commentStr);
+				} else {
+					commentbody.setText("");
 				}
 			}
 

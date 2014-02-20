@@ -5,6 +5,7 @@ import java.util.Set;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
+import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.IPharmgxOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonAnnotationSerializer;
@@ -30,6 +31,7 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 		String SPL_POC_PREFIX = "poc:";
 		String SIO_PREFIX = "sio:";
 		String DAILYMED_PREFIX = "dailymed:";
+		String NCIT_PREFIX = "ncit:";
 
 		MSPLsAnnotation ann = (MSPLsAnnotation) obj;
 		JSONObject annotation = initializeAnnotation(manager, ann);
@@ -234,14 +236,92 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			idx += 1;
 		}
 
-		// statements: variant frequency 
+		// alleles
+		String alleles = ann.getAllelesbody();
+
+		if (alleles != null && !alleles.trim().equals("")) {
+
+			JSONObject body = new JSONObject();
+			String statementUUID = UUID.uuid();
+			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
+			body.put("@type", new JSONString(SPL_POC_PREFIX
+					+ "PharmacogenomicsStatement"));
+			body.put(
+					NCIT_PREFIX + "Alleles",
+					new JSONString(alleles));
+			body.put(IRdfsOntology.label, new JSONString("Alleles"));
+			bodies.set(idx, body);
+			idx += 1;
+		}
+		
+		// medical condition
+		String medicalCondition = ann.getMedconditbody();
+
+		if (medicalCondition != null && !medicalCondition.trim().equals("")) {
+
+			JSONObject body = new JSONObject();
+			String statementUUID = UUID.uuid();
+			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
+			body.put("@type", new JSONString(SPL_POC_PREFIX
+					+ "PharmacogenomicsStatement"));
+			body.put(
+					SPL_POC_PREFIX + "MedicalCondition",
+					new JSONString(medicalCondition));
+			body.put(IRdfsOntology.label, new JSONString("MedicalCondition"));
+			bodies.set(idx, body);
+			idx += 1;
+		}
+		
+		// comment
+				String comment = ann.getComment();
+				System.out.println("comment in seri:" + comment);
+
+				if (comment != null && !comment.trim().equals("")) {
+
+					JSONObject body = new JSONObject();
+					String statementUUID = UUID.uuid();
+					body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
+					body.put("@type", new JSONString(SPL_POC_PREFIX
+							+ "PharmacogenomicsStatement"));
+					body.put(
+							SPL_POC_PREFIX + "Comment",
+							new JSONString(comment));
+					body.put(IRdfsOntology.label, new JSONString("Comment"));
+					bodies.set(idx, body);
+					idx += 1;
+				}
+		
+
+		// Concepts that the Statement Refers To: Active ingredient &
+		// Concomitant medication concern & Variant Frequency
 		Set<MLinkedResource> statements = ann.getStatements();
 
 		if (statements != null) {
 
 			for (MLinkedResource statement : statements) {
 
-				/*if (statement.getLabel().equals(
+				// Active ingredient
+				if (statement.getLabel().equals("Active ingredient")) {
+					JSONObject body = new JSONObject();
+					String statementUUID = UUID.uuid();
+					body.put("@id", new JSONString(SPL_URN_PREFIX
+							+ statementUUID));
+					body.put("@type", new JSONString(SPL_POC_PREFIX
+							+ "PharmacogenomicsStatement"));
+					body.put(SIO_PREFIX + "SIO_000628", new JSONString(
+							DAILYMED_PREFIX + "ActiveMoiety"));
+					body.put(DAILYMED_PREFIX + "ActiveMoiety", new JSONString(
+							statement.getUrl()));
+					body.put(IRdfsOntology.label,
+							new JSONString(statement.getLabel()));
+					body.put(IDublinCoreTerms.description, new JSONString(
+							statement.getDescription()));
+					bodies.set(idx, body);
+					idx += 1;
+				}
+
+				// Concomitant medication concern
+				if (statement.getLabel().equals(
 						"Concomitant medication concern")) {
 					JSONObject body = new JSONObject();
 					String statementUUID = UUID.uuid();
@@ -249,9 +329,10 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 							+ statementUUID));
 					body.put("@type", new JSONString(SPL_POC_PREFIX
 							+ "PharmacogenomicsStatement"));
-					body.put(SIO_PREFIX + "SIO_000563", new JSONString(
-							SPL_POC_PREFIX + "MedicalCondition"));
-					body.put(SPL_POC_PREFIX + "MedicalCondition",
+					body.put(SIO_PREFIX + "SIO_000628", new JSONString(
+							DAILYMED_PREFIX + "ConcomitantMedicationOfConcern"));
+					body.put(
+							DAILYMED_PREFIX + "ConcomitantMedicationOfConcern",
 							new JSONString(statement.getUrl()));
 					body.put(IRdfsOntology.label,
 							new JSONString(statement.getLabel()));
@@ -259,8 +340,9 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 							statement.getDescription()));
 					bodies.set(idx, body);
 					idx += 1;
-				}*/
+				}
 
+				// Variant Frequency
 				if (statement.getLabel().equals("Variant Frequency")) {
 					JSONObject body = new JSONObject();
 					String statementUUID = UUID.uuid();
@@ -281,26 +363,7 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 				}
 
 			}
-			
-			// medication condition
-/*			MLinkedResource medicalCondition = ann.getMedconditbody();
-			if (medicalCondition != null && !medicalCondition.getLabel().trim().equals("")) {
-				JSONObject body = new JSONObject();
-				String statementUUID = UUID.uuid();
-				body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-				body.put("@type", new JSONString(SPL_POC_PREFIX
-						+ "PharmacogenomicsStatement"));
-				body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX
-						+ "MedicalCondition"));
-				body.put(SPL_POC_PREFIX + "MedicalCondition",
-						new JSONString(medicalCondition.getUrl()));
-				body.put(IRdfsOntology.label, new JSONString(medicalCondition.getLabel()));
-				body.put(IDublinCoreTerms.description,
-						new JSONString(medicalCondition.getDescription()));
-				bodies.set(idx, body);
-				idx += 1;
-			}
-			*/
+
 		}
 
 		annotation.put(IDomeoOntology.content, bodies);
