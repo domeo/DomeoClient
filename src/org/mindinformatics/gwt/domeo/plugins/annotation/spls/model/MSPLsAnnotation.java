@@ -20,7 +20,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	public SPLType getType() {
 		return type;
 	}
-	
 	public void setType(SPLType type) {
 		this.type = type;
 	}
@@ -158,20 +157,20 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    pharmgxUsage.setTest(test);
 	}
 	
-	public String getVariantBody() {
-	    return pharmgxUsage.getVariantbody();
+	public String getOtherVariant() {
+	    return pharmgxUsage.getOtherVariant();
 	}
 
-	public void setVariantBody(String variantbody) {
-	    pharmgxUsage.setVariantbody(variantbody);
+	public void setOtherVariant(String othervariant) {
+	    pharmgxUsage.setOtherVariant(othervariant);
 	}
 	
-	public String getTestBody() {
-	    return pharmgxUsage.getTestbody();
+	public String getOtherTest() {
+	    return pharmgxUsage.getOtherTest();
 	}
 
-	public void setTestBody(String testbody) {
-	    pharmgxUsage.setTestbody(testbody);
+	public void setOtherTest(String othertest) {
+	    pharmgxUsage.setOtherTest(othertest);
 	}
 	
 	@Override

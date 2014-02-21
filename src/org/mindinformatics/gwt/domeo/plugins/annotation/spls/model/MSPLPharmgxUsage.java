@@ -14,8 +14,8 @@ public class MSPLPharmgxUsage {
 	private String allelesbody;
 	private String medconditbody;
 	private String comment;
-	private String variantbody;
-	private String testbody;
+	private String othervariant;
+	private String othertest;
 	
 	public Long getLocalId() {
 		return localId;
@@ -163,20 +163,22 @@ public class MSPLPharmgxUsage {
 		this.medconditbody = medconditbody;
 	}
 
-	public String getVariantbody() {
-		return variantbody;
+	public String getOtherVariant() {
+		return othervariant;
 	}
 
-	public void setVariantbody(String variantbody) {
-		this.variantbody = variantbody;
+	public void setOtherVariant(String othervariant) {
+		this.othervariant = othervariant;
 	}
 
-	public String getTestbody() {
-		return testbody;
+	public String getOtherTest() {
+		return othertest;
 	}
 
-	public void setTestbody(String testbody) {
-		this.testbody = testbody;
+	public void setOtherTest(String othertest) {
+		this.othertest = othertest;
 	}
+
+
 	
 }

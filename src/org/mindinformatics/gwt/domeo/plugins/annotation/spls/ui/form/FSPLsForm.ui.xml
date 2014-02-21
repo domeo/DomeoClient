@@ -615,7 +615,7 @@
 						</g:HorizontalPanel>
 						<g:HorizontalPanel>	
 							<g:Label>Other Variants (use commas to separate): </g:Label>
-							<g:TextArea ui:field='descriptsvtbody' styleName='{style.alleles}'></g:TextArea>
+							<g:TextArea ui:field='descriptsothervt' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 
 						<!-- test -->
@@ -651,7 +651,7 @@
 						
 						<g:HorizontalPanel>
 						<g:Label>Other Test(s) (use commas to separate): </g:Label>
-							<g:TextArea ui:field='descriptstsbody' styleName='{style.alleles}'></g:TextArea>
+							<g:TextArea ui:field='descriptsotherts' styleName='{style.alleles}'></g:TextArea>
 						</g:HorizontalPanel>
 
 						<g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Comments on this Annotation:</g:Label>

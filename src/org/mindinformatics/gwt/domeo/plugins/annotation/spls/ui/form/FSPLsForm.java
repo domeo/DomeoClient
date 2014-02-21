@@ -53,7 +53,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	private static Logger logger = Logger.getLogger("");
 
-	public static final String LABEL = "SPL Annotation";
+	public static final String LABEL = "pharmacogenomics";
 	public static final String LABEL_EDIT = "EDIT SPL ANNOTATION";
 
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING SPL ANNOTATION";
@@ -132,8 +132,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	// alleles
 	@UiField
-	TextArea commentBody, allelesbody, medconditbody, descriptsvtbody,
-			descriptstsbody;
+	TextArea commentBody, allelesbody, medconditbody, descriptsothervt,
+			descriptsotherts;
 
 	String[] biomarker = { "ApoE2", "BRAF", "C-Kit", "CCR5", "CD20_antigen",
 			"CD25", "CD30", "CYP1A2", "CYP2C19", "CYP2C9", "CYP2D6", "DPD",
@@ -664,9 +664,11 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							pharmgxUsage.setVariant(getVariant());
 							pharmgxUsage.setTest(getTest());
 							pharmgxUsage.setDrugOfInterest(getDrugOfInterest());
-							pharmgxUsage.setVariantbody(descriptsvtbody
+							
+							//other variant and other test just storing in persistence manager but won't displaying in card and tile
+							pharmgxUsage.setOtherVariant(descriptsothervt
 									.getText());
-							pharmgxUsage.setTestbody(descriptstsbody.getText());
+							pharmgxUsage.setOtherTest(descriptsotherts.getText());
 
 							annotation.setPharmgxUsage(pharmgxUsage);
 
@@ -973,13 +975,13 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			}
 
 			// variant textarea
-			if (_item.getVariantBody() != null) {
-				descriptsvtbody.setText(_item.getVariantBody());
+			if (_item.getOtherVariant() != null) {
+				descriptsothervt.setText(_item.getOtherVariant());
 			}
 
 			// test textarea
-			if (_item.getTestBody() != null) {
-				descriptstsbody.setText(_item.getTestBody());
+			if (_item.getOtherTest() != null) {
+				descriptsotherts.setText(_item.getOtherTest());
 			}
 
 		} catch (Exception e) {
@@ -1061,8 +1063,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 					_item.setTestRec(getTest_Re());
 					_item.setVariant(getVariant());
 					_item.setTest(getTest());
-					_item.setVariantBody(descriptsvtbody.getText());
-					_item.setTestBody(descriptstsbody.getText());
+					_item.setOtherVariant(descriptsothervt.getText());
+					_item.setOtherTest(descriptsotherts.getText());
 					_item.setAllelesbody(allelesbody.getText());
 					_item.setMedconditbody(medconditbody.getText());
 

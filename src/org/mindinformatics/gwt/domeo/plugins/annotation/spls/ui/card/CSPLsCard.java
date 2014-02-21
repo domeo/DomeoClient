@@ -261,8 +261,16 @@ public class CSPLsCard extends ACardComponent {
 				}
 
 				// Variant
+				
+				if (dataUsage.getVariant() != null&& !dataUsage.getVariant().getLabel().equals("")) {
+					String variantStr = dataUsage.getVariant().getLabel();
+					variant.setText(variantStr);
+				} else {
+					variant.setText("undefined");
+				}
+				
 
-				if ((dataUsage.getVariantbody() != null && !dataUsage
+/*				if ((dataUsage.getVariantbody() != null && !dataUsage
 						.getVariantbody().trim().equals(""))
 						|| dataUsage.getVariant() != null) {
 
@@ -275,11 +283,17 @@ public class CSPLsCard extends ACardComponent {
 						variant.setText(dataUsage.getVariant().getLabel());
 					}
 				} else
-					variant.setText("undefined");
+					variant.setText("undefined");*/
 
 				// test
+				if (dataUsage.getTest() != null&& !dataUsage.getTest().getLabel().equals("")) {
+					String testStr = dataUsage.getTest().getLabel();
+					test.setText(testStr);
+				} else {
+					test.setText("undefined");
+				}
 
-				if ((dataUsage.getTestbody() != null && !dataUsage
+/*				if ((dataUsage.getTestbody() != null && !dataUsage
 						.getTestbody().trim().equals(""))
 						|| dataUsage.getTest() != null) {
 
@@ -292,7 +306,8 @@ public class CSPLsCard extends ACardComponent {
 						test.setText(dataUsage.getTest().getLabel());
 					}
 				} else
-					test.setText("undefined");
+					test.setText("undefined");*/
+				
 
 				if (dataUsage.getAllelesbody() != null) {
 					String allelesStr = dataUsage.getAllelesbody();
