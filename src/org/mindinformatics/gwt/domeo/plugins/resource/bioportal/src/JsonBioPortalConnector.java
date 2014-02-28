@@ -48,9 +48,9 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 			String textQuery, String virtualIds)
 			throws IllegalArgumentException {
 		
-		String url = GWT.getModuleBaseURL() + "bioportal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds;
+		String url = GWT.getModuleBaseURL() + "bioPortal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds;
+			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
 
@@ -110,10 +110,10 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 			String textQuery, String virtualIds, int pageNumber, int pageSize)
 			throws IllegalArgumentException {
 		
-		String url = GWT.getModuleBaseURL() + "bioportal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds +
+		String url = GWT.getModuleBaseURL() + "bioPortal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds +
 				"&pagenumber=" + pageNumber + "&pagesize=" + pageSize;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds +
+			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds +
 					"&pagenumber=" + pageNumber + "&pagesize=" + pageSize;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
@@ -171,11 +171,11 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 			boolean scored, boolean withSynonyms)
 			throws IllegalArgumentException {
 		String virtualIds = "";
-		String url = GWT.getModuleBaseURL() + "bioportal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + "&ontologies=" + virtualIds+ "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
+		String url = GWT.getModuleBaseURL() + "bioPortal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + "&ontologies=" + virtualIds+ "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
 				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 				"&withSynonyms=" + withSynonyms;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
+			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
 				"&ontologies=" + virtualIds + "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
 				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 				"&withSynonyms=" + withSynonyms;
