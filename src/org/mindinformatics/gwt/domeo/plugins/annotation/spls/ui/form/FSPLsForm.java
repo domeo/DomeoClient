@@ -338,7 +338,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 		} else if (descriptpdnone.getValue()) {
 			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
 					+ "none", "None", "none.");
-		}
+		} 
 		return null;
 	}
 
@@ -638,6 +638,12 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 							MSPLPharmgxUsage pharmgxUsage = SPLsFactory
 									.createSPLPharmgxUsage();
+							
+/*							if(pharmgxUsage.getPkImpact()==null){
+							descriptpknone.setValue(true);
+							System.out.println("*********1 pk**********");
+							}*/
+							
 
 							// take the form values and assign
 							_domeo.getLogger().debug(this, "SPL annotation 1");
@@ -791,6 +797,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			}
 
 			if (_item.getPKImpact() != null) {
+				
+				descriptpknone.setValue(false);
 				if (_item.getPKImpact().getLabel()
 						.equals("Metabolism Decrease"))
 					descriptpkdm.setValue(true);
@@ -822,6 +830,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			}
 
 			if (_item.getPdImpact() != null) {
+				
+				descriptpdnone.setValue(false);
 				if (_item.getPdImpact().getLabel()
 						.equals("Decreased Toxicity Risk"))
 					descriptpddt.setValue(true);
@@ -844,6 +854,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			}
 
 			if (_item.getDoseRec() != null) {
+				
+				descriptdrnone.setValue(false);
 				if (_item.getDoseRec().getLabel()
 						.equals("Decrease from baseline"))
 					descriptdrdfb.setValue(true);
@@ -863,6 +875,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			}
 
 			if (_item.getMonitRec() != null) {
+				
+				descriptmcnone.setValue(false);
 				if (_item.getMonitRec().getLabel().equals("Required"))
 					descriptmreq.setValue(true);
 				else if (_item.getMonitRec().getLabel().equals("Recommended"))
@@ -878,6 +892,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 			if (_item.getDrugRec() != null) {
 
+				descriptdsnone.setValue(false);
 				if (_item.getDrugRec().getLabel()
 						.equals("Alternative Recommended"))
 					descriptdsal.setValue(true);
@@ -897,6 +912,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 			if (_item.getTestRec() != null) {
 
+				descripttnone.setValue(false);
 				if (_item.getTestRec().getLabel().equals("Required"))
 					descripttreq.setValue(true);
 				else if (_item.getTestRec().getLabel().equals("Recommend"))

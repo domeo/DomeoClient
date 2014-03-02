@@ -354,7 +354,7 @@
 						<g:RadioButton ui:field="descriptpkni" name="descriptpk"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpknone" name="descriptpk"
-							checked="false">No mention</g:RadioButton>
+							checked="true">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
 					<!-- PD Impact -->
@@ -383,7 +383,7 @@
 						<g:RadioButton ui:field="descriptpdni" name="descriptpd"
 							checked="false">Not important</g:RadioButton>
 						<g:RadioButton ui:field="descriptpdnone" name="descriptpd"
-							checked="false">No mention</g:RadioButton>
+							checked="true">No mention</g:RadioButton>
 					</g:HorizontalPanel>					
 					
 					<!-- Alleles and medical conditions textareas -->
@@ -451,7 +451,7 @@
 						  </g:cell>
 						  <g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdsnone" name="descriptds"
-									checked="false">No mention</g:RadioButton>
+									checked="true">No mention</g:RadioButton>
 						  </g:cell>
 						</g:HorizontalPanel>
 
@@ -492,7 +492,7 @@
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdrnone" name="descriptdr"
-								checked="false">No mention</g:RadioButton>
+								checked="true">No mention</g:RadioButton>
 						</g:cell>
 						</g:HorizontalPanel>
 						
@@ -526,7 +526,7 @@
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptmcnone" name="descriptmr"
-								checked="false">No mention</g:RadioButton>
+								checked="true">No mention</g:RadioButton>
 						</g:cell>
 						</g:HorizontalPanel>
 						
@@ -562,7 +562,7 @@
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">					
 							<g:RadioButton ui:field="descripttnone" name="descripttst"
-								checked="false">No mention</g:RadioButton>
+								checked="true">No mention</g:RadioButton>
 						</g:cell>						
 						</g:HorizontalPanel>				
 																

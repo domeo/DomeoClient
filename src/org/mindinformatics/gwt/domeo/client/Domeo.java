@@ -206,20 +206,28 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 																	 * IRetrieveExistingBibliographySetHandler
 																	 * ,
 																	 */
-		IRetrieveExistingAnnotationSetHandler,
+IRetrieveExistingAnnotationSetHandler,
 		IRetrieveExistingAnnotationSetListHandler {
 
 	public static final boolean verbose = false;
 	public static final boolean pathfinder = true;
-	
+
 	public static String APP_NAME = "Domeo";
 
 	public static String APP_VERSION = "b40";
 	public static String APP_VERSION_LABEL = "build 40";
-	
-	public String getApplicationName() { return APP_NAME; }
-	public String getApplicationVersion() { return APP_VERSION; }
-	public String getApplicationVersionLabel() { return APP_VERSION_LABEL; }
+
+	public String getApplicationName() {
+		return APP_NAME;
+	}
+
+	public String getApplicationVersion() {
+		return APP_VERSION;
+	}
+
+	public String getApplicationVersionLabel() {
+		return APP_VERSION_LABEL;
+	}
 
 	public static final String PREF_ANN_MULTIPLE_TARGETS = "Annotation of multPiple targets";
 	public static final String PREF_WRAP_TABLES = AnnotationFrameWrapper.PREF_WRAP_TABLES;
@@ -261,13 +269,13 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	ImagesCache imagesCache;
 
 	PmcImagesMetadataCache pmcImagesCache;
-	
-	//AnnotationPersistenceManager persistenceManager;
+
+	// AnnotationPersistenceManager persistenceManager;
 	AnnotationAccessManager accessManager;
 	ContentExtractorsManager extractorsManager;
 	ClipboardManager clipboardManager;
 	UrlEncodersManager urlEncodersManager;
-	
+
 	// ========================================================================
 	// Annotation Tails Manager
 	// ========================================================================
@@ -336,12 +344,13 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	public ASideTab getDiscussionSideTab() {
 		return discussionSideTab;
 	}
-	
+
 	private ASideTab commentsSideTab;
-	public  ASideTab getLinearCommentsSideTab() {
+
+	public ASideTab getLinearCommentsSideTab() {
 		return commentsSideTab;
 	}
-	
+
 	public Domeo _this;
 
 	/**
@@ -351,8 +360,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	 */
 	public void onModuleLoad() {
 		_domeo = this;
-		this.logger.info(this, "Creating Domeo (" + Domeo.APP_VERSION+ ") " + getStartingMode());
-		_this=this;
+		this.logger.info(this, "Creating Domeo (" + Domeo.APP_VERSION + ") "
+				+ getStartingMode());
+		_this = this;
 
 		Window.addWindowClosingHandler(new Window.ClosingHandler() {
 
@@ -394,7 +404,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 		componentsManager.addComponent(imagesCache);
 		// Images mashup
 		pmcImagesCache = new PmcImagesMetadataCache(this);
-		
+
 		// Resources
 		componentsManager.addComponent(resourcesManager);
 
@@ -511,8 +521,23 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				MHighlightAnnotation.class.getName(),
 				new HighligthSearchComponent(this));
 
+		// SPLs
+		pluginsManager.registerPlugin(SPLsPlugin.getInstance(), true);
+		// pluginsManager.enablePlugin(SPLsPlugin.getInstance(), false);
+		// Paolo added the check to see if the PLugin is enabled
+		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+				SPLsPlugin.getInstance().getPluginName())) {
+			annotationFormsManager
+					.registerAnnotationForm(MSPLsAnnotation.class.getName(),
+							new SPLsFormProvider(this));
+		}
+		annotationTailsManager.registerAnnotationTile(
+				MSPLsAnnotation.class.getName(), new SPLsTileProvider(this));
+		annotationCardsManager.registerAnnotationCard(
+				MSPLsAnnotation.class.getName(), new SPLsCardProvider(this));
+
 		// Post It
-		pluginsManager.registerPlugin(PostitPlugin.getInstance(), true);
+		/*	pluginsManager.registerPlugin(PostitPlugin.getInstance(), true);
 		annotationFormsManager
 				.registerAnnotationForm(MPostItAnnotation.class.getName(),
 						new PostItFormProvider(this));
@@ -523,10 +548,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				.registerAnnotationCard(MPostItAnnotation.class.getName(),
 						new PostItCardProvider(this));
 		searchComponentsManager.registerAnnotationCard(MPostItAnnotation.class
-				.getName(), new PostItSearchComponent(this));
+				.getName(), new PostItSearchComponent(this));*/
 
 		// Qualifier
-		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
+		/*pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
 		// pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
 		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
 				QualifierPlugin.getInstance().getPluginName())) {
@@ -544,15 +569,15 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				MQualifierAnnotation.class.getName(),
 				new QualifierSearchComponent(this));
 
-		annotationHelpersManager.registerAnnotationHelper(MQualifierAnnotation.class.getName(), 
-				new HQualifierHelper());
-		
+		annotationHelpersManager.registerAnnotationHelper(
+				MQualifierAnnotation.class.getName(), new HQualifierHelper());*/
+
 		// Curation
-		annotationTailsManager.registerAnnotationTile(MCurationToken.class.getName(), 
-				new CurationTileProvider(this));
+		annotationTailsManager.registerAnnotationTile(
+				MCurationToken.class.getName(), new CurationTileProvider(this));
 
 		// Antibody
-		pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true);
+		/*pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true);
 		// pluginsManager.enablePlugin(AntibodyPlugin.getInstance(), true);
 		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
 				AntibodyPlugin.getInstance().getPluginName())) {
@@ -566,10 +591,11 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				.getName(), new AntibodyCardProvider(this));
 		searchComponentsManager.registerAnnotationCard(
 				MAntibodyAnnotation.class.getName(),
-				new AntibodySearchComponent(this));
+				new AntibodySearchComponent(this));*/
 
+		
 		// Micropublications
-
+/*
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(),
 				true);
 		// pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(),
@@ -586,42 +612,38 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 		annotationCardsManager.registerAnnotationCard(
 				MMicroPublicationAnnotation.class.getName(),
 				new MicroPublicationCardProvider(this));
-		getAnnotationPersistenceManager().registerCache(new MicroPublicationCache());
-		
+		getAnnotationPersistenceManager().registerCache(
+				new MicroPublicationCache());*/
+
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class
 				.getName(), new CommentTileProvider(this));
 
-		// SPLs
-		pluginsManager.registerPlugin(SPLsPlugin.getInstance(), true);
-		// pluginsManager.enablePlugin(SPLsPlugin.getInstance(), false);
-		// Paolo added the check to see if the PLugin is enabled
-		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-				SPLsPlugin.getInstance().getPluginName())) {
-			annotationFormsManager
-					.registerAnnotationForm(MSPLsAnnotation.class.getName(),
-							new SPLsFormProvider(this));
-		}
-		annotationTailsManager.registerAnnotationTile(
-				MSPLsAnnotation.class.getName(), new SPLsTileProvider(this));
-		annotationCardsManager.registerAnnotationCard(
-				MSPLsAnnotation.class.getName(), new SPLsCardProvider(this));
-
 		// expertstudy_pDDI
-		pluginsManager.registerPlugin(expertstudy_pDDIPlugin.getInstance(), true);
-		/* if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-				expertstudy_pDDIPlugin.getInstance().getPluginName())) { */		
-		annotationFormsManager.registerAnnotationForm(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDIFormProvider(this));
-		// }	
-		annotationTailsManager.registerAnnotationTile(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDITileProvider(this));
-		annotationCardsManager.registerAnnotationCard(Mexpertstudy_pDDIAnnotation.class.getName(), new expertstudy_pDDICardProvider(this));
+		/*pluginsManager.registerPlugin(expertstudy_pDDIPlugin.getInstance(),
+				true);
 		
+		 * if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+		 * expertstudy_pDDIPlugin.getInstance().getPluginName())) {
+		 
+		annotationFormsManager.registerAnnotationForm(
+				Mexpertstudy_pDDIAnnotation.class.getName(),
+				new expertstudy_pDDIFormProvider(this));
+		// }
+		annotationTailsManager.registerAnnotationTile(
+				Mexpertstudy_pDDIAnnotation.class.getName(),
+				new expertstudy_pDDITileProvider(this));
+		annotationCardsManager.registerAnnotationCard(
+				Mexpertstudy_pDDIAnnotation.class.getName(),
+				new expertstudy_pDDICardProvider(this));*/
+
 		// Comments
-		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class.getName(), 
-				new CommentTileProvider(this));
-		annotationTailsManager.registerAnnotationTile(MLinearCommentAnnotation.class.getName(), 
+		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class
+				.getName(), new CommentTileProvider(this));
+		annotationTailsManager.registerAnnotationTile(
+				MLinearCommentAnnotation.class.getName(),
 				new LinearCommentTileProvider(this));
-		
+
 		// Digesters
 		linkedDataDigestersManager
 				.registerLnkedDataDigester(new NifStandardDigester());
@@ -630,41 +652,60 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 
 		sideTabPanel = sidePanelsFacade.getSideTabsContainer();
 
-		final ASideTab annotationsSideTab = new AnnotationSideTab(this, sidePanelsFacade);
-		final ASideTab resourceSideTab = new ResourceSideTab(this, sidePanelsFacade);
-		final ASideTab annotationSetsSideTab2 = new AnnotationSetSideTab(this, sidePanelsFacade);
-		final ASideTab clipboardSideTab = new ClipboardSideTab(this, sidePanelsFacade);
-			
-		AnnotationSidePanel annotationSidePanel = new AnnotationSidePanel(this, sidePanelsFacade, annotationsSideTab);
-		ResourceSidePanel resourceSidePanel = new ResourceSidePanel(this, sidePanelsFacade, resourceSideTab);
-		AnnotationSetsSidePanel annotationSetsSidePanel2 = new AnnotationSetsSidePanel(this, sidePanelsFacade, annotationSetsSideTab2);
-		ClipboardSidePanel clipboardSidePanel = new ClipboardSidePanel(this, sidePanelsFacade, clipboardSideTab);
-		
-		sidePanelsFacade.registerSideComponent(resourceSideTab, resourceSidePanel, (ResourceSideTab.HEIGHT+16) + "px");
-		sidePanelsFacade.registerSideComponent(annotationsSideTab, annotationSidePanel, (AnnotationSideTab.HEIGHT+16) + "px");
-		sidePanelsFacade.registerSideComponent(annotationSetsSideTab2, annotationSetsSidePanel2,  (AnnotationSetSideTab.HEIGHT+16) + "px");
-		
+		final ASideTab annotationsSideTab = new AnnotationSideTab(this,
+				sidePanelsFacade);
+		final ASideTab resourceSideTab = new ResourceSideTab(this,
+				sidePanelsFacade);
+		final ASideTab annotationSetsSideTab2 = new AnnotationSetSideTab(this,
+				sidePanelsFacade);
+		final ASideTab clipboardSideTab = new ClipboardSideTab(this,
+				sidePanelsFacade);
+
+		AnnotationSidePanel annotationSidePanel = new AnnotationSidePanel(this,
+				sidePanelsFacade, annotationsSideTab);
+		ResourceSidePanel resourceSidePanel = new ResourceSidePanel(this,
+				sidePanelsFacade, resourceSideTab);
+		AnnotationSetsSidePanel annotationSetsSidePanel2 = new AnnotationSetsSidePanel(
+				this, sidePanelsFacade, annotationSetsSideTab2);
+		ClipboardSidePanel clipboardSidePanel = new ClipboardSidePanel(this,
+				sidePanelsFacade, clipboardSideTab);
+
+		sidePanelsFacade.registerSideComponent(resourceSideTab,
+				resourceSidePanel, (ResourceSideTab.HEIGHT + 16) + "px");
+		sidePanelsFacade.registerSideComponent(annotationsSideTab,
+				annotationSidePanel, (AnnotationSideTab.HEIGHT + 16) + "px");
+		sidePanelsFacade.registerSideComponent(annotationSetsSideTab2,
+				annotationSetsSidePanel2, (AnnotationSetSideTab.HEIGHT + 16)
+						+ "px");
+
 		/*
-		discussionSideTab = new CommentSideTab(this, sidePanelsFacade);
-		//
-		if(((BooleanPreference)getPreferences().getPreferenceItem(Domeo.class.getName(), 
-				Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
-			CommentSidePanel commentSidePanel = new CommentSidePanel(this, sidePanelsFacade, discussionSideTab);
-			sidePanelsFacade.registerSideComponent(discussionSideTab, commentSidePanel,  (CommentSideTab.HEIGHT+16) + "px");
-		}
-		*/
-		
+		 * discussionSideTab = new CommentSideTab(this, sidePanelsFacade); //
+		 * if(
+		 * ((BooleanPreference)getPreferences().getPreferenceItem(Domeo.class.
+		 * getName(), Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
+		 * CommentSidePanel commentSidePanel = new CommentSidePanel(this,
+		 * sidePanelsFacade, discussionSideTab);
+		 * sidePanelsFacade.registerSideComponent(discussionSideTab,
+		 * commentSidePanel, (CommentSideTab.HEIGHT+16) + "px"); }
+		 */
+
 		commentsSideTab = new LinearCommentsSideTab(this, sidePanelsFacade);
-		if(((BooleanPreference)getPreferences().getPreferenceItem(Domeo.class.getName(), 
-				Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
-			LinearCommentsSidePanel commentsSidePanel = new LinearCommentsSidePanel(this, sidePanelsFacade, discussionSideTab);
-			sidePanelsFacade.registerSideComponent(commentsSideTab, commentsSidePanel,  (LinearCommentsSideTab.HEIGHT+16) + "px");
+		if (((BooleanPreference) getPreferences().getPreferenceItem(
+				Domeo.class.getName(), Domeo.PREF_ALLOW_COMMENTING)).getValue()) {
+			LinearCommentsSidePanel commentsSidePanel = new LinearCommentsSidePanel(
+					this, sidePanelsFacade, discussionSideTab);
+			sidePanelsFacade.registerSideComponent(commentsSideTab,
+					commentsSidePanel, (LinearCommentsSideTab.HEIGHT + 16)
+							+ "px");
 		}
-		
-		if(((BooleanPreference)this.getPreferences().
-				getPreferenceItem(Application.class.getName(), Domeo.PREF_ANN_MULTIPLE_TARGETS))!=null &&
-				((BooleanPreference)this.getPreferences().getPreferenceItem(Application.class.getName(), Domeo.PREF_ANN_MULTIPLE_TARGETS)).getValue()) {
-			sidePanelsFacade.registerSideComponent(clipboardSideTab, clipboardSidePanel,  (ClipboardSideTab.HEIGHT+16) + "px");
+
+		if (((BooleanPreference) this.getPreferences().getPreferenceItem(
+				Application.class.getName(), Domeo.PREF_ANN_MULTIPLE_TARGETS)) != null
+				&& ((BooleanPreference) this.getPreferences()
+						.getPreferenceItem(Application.class.getName(),
+								Domeo.PREF_ANN_MULTIPLE_TARGETS)).getValue()) {
+			sidePanelsFacade.registerSideComponent(clipboardSideTab,
+					clipboardSidePanel, (ClipboardSideTab.HEIGHT + 16) + "px");
 		}
 
 		if (((BooleanPreference) getPreferences().getPreferenceItem(
@@ -681,11 +722,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 					annotationDebugSidePanel,
 					(AnnotationDebugSideTab.HEIGHT + 16) + "px");
 		}
-		
+
 		// Filters
-        urlEncodersManager = new UrlEncodersManager();
-        urlEncodersManager.registerFilter(new ScienceDirectUrlFilter());
-		
+		urlEncodersManager = new UrlEncodersManager();
+		urlEncodersManager.registerFilter(new ScienceDirectUrlFilter());
 
 		// -----------------------------------
 		// TEXT MINING SERVICES REGISTRATION
@@ -1017,40 +1057,52 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 				getContentPanel()
 						.getAnnotationFrameWrapper()
 						.setUrl(url,
-								url.replace(
-										"tests/SPL-annotation/",
+								url.replace("tests/SPL-annotation/",
 										"http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/"));
-			}  else {
+			} else {
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url);
 			}
 		} else {
 
-		    if(isLocalResources()) {
-		        getLogger().info(this, "Attempting to open a local resoruce");
-		        getContentPanel().getAnnotationFrameWrapper().setUrl(url, url);
-		    } else {
-		        getLogger().info(this, "Attempting to open a remote resoruce " + url);
-		        
-		    	// Filters: can modify the requested URL to reach an appropriate version of the resource
-		        String filteredUrl = urlEncodersManager.filter(url);
-		        getLogger().info(this, "Filtered URL " + filteredUrl);
-		        String proxyUrl = (filteredUrl.equals(url))?url:filteredUrl;
-		        
-		        getLogger().info(this, "Proxy URL " + proxyUrl);
-		        
-		        String proxyProtocol = ApplicationUtils.getProxyProtocol();
-		        proxyProtocol = (proxyProtocol.trim().equals("http")||proxyProtocol.trim().equals("https"))?proxyProtocol:"http";
-		        if(!url.endsWith(".pdf")) {
-	    			String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
-	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + proxyUrl, url);
-	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
-		        } else {
-		        	String PREFIX = ApplicationUtils.getUrlBase(ApplicationUtils.getUrlString()) + "web/pdf?pdf=";
-		        	String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
-	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + proxyUrl, url);
-	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
-		        }
-		    }
+			if (isLocalResources()) {
+				getLogger().info(this, "Attempting to open a local resoruce");
+				getContentPanel().getAnnotationFrameWrapper().setUrl(url, url);
+			} else {
+				getLogger().info(this,
+						"Attempting to open a remote resoruce " + url);
+
+				// Filters: can modify the requested URL to reach an appropriate
+				// version of the resource
+				String filteredUrl = urlEncodersManager.filter(url);
+				getLogger().info(this, "Filtered URL " + filteredUrl);
+				String proxyUrl = (filteredUrl.equals(url)) ? url : filteredUrl;
+
+				getLogger().info(this, "Proxy URL " + proxyUrl);
+
+				String proxyProtocol = ApplicationUtils.getProxyProtocol();
+				proxyProtocol = (proxyProtocol.trim().equals("http") || proxyProtocol
+						.trim().equals("https")) ? proxyProtocol : "http";
+				if (!url.endsWith(".pdf")) {
+					String PROXY = proxyProtocol
+							+ "://"
+							+ ApplicationUtils.getHostname(GWT
+									.getHostPageBaseURL()) + "/proxy/";
+					getContentPanel().getAnnotationFrameWrapper().setUrl(
+							PROXY + proxyUrl, url);
+					getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
+				} else {
+					String PREFIX = ApplicationUtils
+							.getUrlBase(ApplicationUtils.getUrlString())
+							+ "web/pdf?pdf=";
+					String PROXY = proxyProtocol
+							+ "://"
+							+ ApplicationUtils.getHostname(GWT
+									.getHostPageBaseURL()) + "/proxy/";
+					getContentPanel().getAnnotationFrameWrapper().setUrl(
+							PREFIX + PROXY + proxyUrl, url);
+					getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
+				}
+			}
 		}
 	}
 
@@ -1060,19 +1112,22 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	 */
 	private long documentPipelineTimer;
 
-
-	// For PDF 
+	// For PDF
 	public static void notifyDocumentLoadedStageOneStatic() {
-		if(_domeo!=null) _domeo.notifyDocumentLoadedStageOneAfter();
+		if (_domeo != null)
+			_domeo.notifyDocumentLoadedStageOneAfter();
 	}
-	
-	// For PDF 
+
+	// For PDF
 	@Override
 	public void notifyDocumentLoadedStageOne() {
-		if(!getContentPanel().getAnnotationFrameWrapper().getUrl().endsWith(".pdf")) notifyDocumentLoadedStageOneAfter();
+		if (!getContentPanel().getAnnotationFrameWrapper().getUrl()
+				.endsWith(".pdf"))
+			notifyDocumentLoadedStageOneAfter();
 	}
-	
-	private void notifyDocumentLoadedStageOneAfter() { // Document loaded in the browser
+
+	private void notifyDocumentLoadedStageOneAfter() { // Document loaded in the
+														// browser
 
 		try {
 			documentPipelineTimer = System.currentTimeMillis();
@@ -1342,8 +1397,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	public void checkForExistingAnnotationSets() {
 		documentPipelineTimer = System.currentTimeMillis();
 
-		this.getLogger().debug(this, "AFTER DOCUMENT", "Executing checkForExistingAnnotationSets()");
-		if(this.getDialogPanel()!=null) this.getDialogPanel().hide();
+		this.getLogger().debug(this, "AFTER DOCUMENT",
+				"Executing checkForExistingAnnotationSets()");
+		if (this.getDialogPanel() != null)
+			this.getDialogPanel().hide();
 
 		this.getPersistenceManager().retrieveExistingAnnotationSetList(this);
 
@@ -1370,9 +1427,11 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 			this.getProgressPanelContainer().hide();
 			try {
 
-				ExistingAnnotationViewerPanel2 lwp = new ExistingAnnotationViewerPanel2(this, responseOnSets);
-				new EnhancedGlassPanel(this, lwp, lwp.getTitle(), false, false, false);
-				//_dialogPanel.hide();
+				ExistingAnnotationViewerPanel2 lwp = new ExistingAnnotationViewerPanel2(
+						this, responseOnSets);
+				new EnhancedGlassPanel(this, lwp, lwp.getTitle(), false, false,
+						false);
+				// _dialogPanel.hide();
 			} catch (Exception e) {
 				this.getLogger().exception(this,
 						"Exeption in visualizing existing annotation");
@@ -1534,20 +1593,31 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*
 	public PmcImagesMetadataCache getPmcImagesCache() {
 		return pmcImagesCache;
 	}
-	
 
-	public final native String getAnnotationType(Object obj) /*-{ return obj['@type']; }-*/;
+	public final native String getAnnotationType(Object obj) /*-{
+		return obj['@type'];
+	}-*/;
 
-	public final native String getSelectorType(Object obj) /*-{ return obj['@type']; }-*/;
+	public final native String getSelectorType(Object obj) /*-{
+		return obj['@type'];
+	}-*/;
 
-	public final native String getSelectorTargetUrl(Object obj) /*-{ return obj['ao:annotatesResource']; }-*/;
+	public final native String getSelectorTargetUrl(Object obj) /*-{
+		return obj['ao:annotatesResource'];
+	}-*/;
 
-	public final native String getAnnotationTargetUri(Object obj) /*-{ return obj['ao:annotation']; }-*/;
+	public final native String getAnnotationTargetUri(Object obj) /*-{
+		return obj['ao:annotation'];
+	}-*/;
 
-	public final native JsArray<JsAnnotationTarget> getTargets(Object obj) /*-{ return obj['ao:context']; }-*/;
+	public final native JsArray<JsAnnotationTarget> getTargets(Object obj) /*-{
+		return obj['ao:context'];
+	}-*/;
 
 	public final native JsArray<JsoLinkedDataResource> getSemanticTags(
-			Object obj) /*-{ return obj['oax:hasSemanticTag']; }-*/;
+			Object obj) /*-{
+		return obj['oax:hasSemanticTag'];
+	}-*/;
 
 	public void jumpToLocation(float percentage) {
 		IFrameElement iframe = IFrameElement.as(contentPanel

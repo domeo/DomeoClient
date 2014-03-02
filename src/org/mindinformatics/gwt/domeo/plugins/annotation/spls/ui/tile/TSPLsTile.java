@@ -144,8 +144,10 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {
 				biomarkerStr = pharmgx.getBiomarkers().getLabel();
-				Label l = new Label("Bio", biomarkerStr);
-				labels.add(l);
+				if (!biomarkerStr.equals("unselected")) {
+					Label l = new Label("Bio", biomarkerStr);
+					labels.add(l);
+				}
 			}
 
 			String pkimpactStr;
@@ -205,15 +207,19 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String variantStr;
 			if (pharmgx.getVariant() != null) {
 				variantStr = pharmgx.getVariant().getLabel();
-				Label l = new Label("Variant", variantStr);
-				labels.add(l);
+				if (!variantStr.equals("unselected")) {
+					Label l = new Label("Variant", variantStr);
+					labels.add(l);
+				}
 			}
 
 			String testStr;
 			if (pharmgx.getTest() != null) {
 				testStr = pharmgx.getTest().getLabel();
-				Label l = new Label("Test", testStr);
-				labels.add(l);
+				if (!testStr.equals("unselected")) {
+					Label l = new Label("Test", testStr);
+					labels.add(l);
+				}
 			}
 
 			String allelesStr = "";
@@ -237,8 +243,10 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 					count++;
 				}
 
-				Label l = new Label("State", statementsStr);
-				labels.add(l);
+				if (!statementsStr.trim().equals("")) {
+					Label l = new Label("State", statementsStr);
+					labels.add(l);
+				}
 			}
 
 			StringBuffer tdHtml = new StringBuffer();
