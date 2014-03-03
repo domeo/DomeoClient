@@ -1,9 +1,11 @@
 package domeo.web.parsing.util;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-
 
 public class Test {
 
@@ -12,16 +14,54 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 
-		String url1 = "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=ab047628-67d0-4a64-8d77-36b054969b44";
-		String path1 = "/tests/spls/";
-		String filename1 = "Warfarin";
-		saveDailymedPages(url1, path1, filename1);
+//		String url1 = "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=ab047628-67d0-4a64-8d77-36b054969b44";
+//		String path1 = "/tests/spls/";
+//		String filename1 = "Warfarin";
+//		saveDailymedPages(url1, path1, filename1);
+//
+//		String url2 = "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1086a7b4-b89b-4bee-8120-5f752626c046";
+//		String path2 = "/tests/spls/";
+//		String filename2 = "Clopidogrel";
+//		saveDailymedPages(url2, path2, filename2);
+		
+		String target = "/SPL-annotation/";
+		String source = "source.txt";
+		
+		try {
+			parseDailymed (source,target);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		String url2 = "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1086a7b4-b89b-4bee-8120-5f752626c046";
-		String path2 = "/tests/spls/";
-		String filename2 = "Clopidogrel";
-		saveDailymedPages(url2, path2, filename2);
+	}
 
+	public static void parseDailymed(String source, String target) throws IOException {
+		BufferedReader br;
+
+		br = new BufferedReader(new FileReader(source));
+
+		String line;
+		while ((line = br.readLine()) != null) {
+			int index_space= line.indexOf(" ");
+			String name = line.substring(0, index_space);
+			String setid = line.substring(index_space+1);
+			
+			System.out.println(name + "|||||||||||" +setid);
+			
+			parse(target, name,  setid);
+		}
+		br.close();
+
+	}
+
+	public static void parse(String path, String name, String setid) {
+
+		String filename = name + "-" + setid;
+		String url = "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid="
+				+ setid;
+		saveDailymedPages(url, path, filename);
 	}
 
 	// save dailymed webpage to local folder
@@ -39,16 +79,16 @@ public class Test {
 			String source = fo.replaceInHtmlSource(htmlSource, "href=\"/",
 					"href=\"");
 
-			fo.createFile(source, local_dir, "\\" + filename + ".html");
+			fo.createFile(source, local_dir,  filename + ".html");
 
 			// fetch css styles
 			List<String> css_dir = wp.getCssLink(htmlSource);
 			fetchFilesFromSource(css_dir, local_dir, "css");
 
 			// fetch images
-			//List<String> image_dir = wp.getImageLink(htmlSource);
-			//List<String> temp = image_dir.subList(0, 1);
-			//fetchFilesFromSource(temp, local_dir, "png");
+			// List<String> image_dir = wp.getImageLink(htmlSource);
+			// List<String> temp = image_dir.subList(0, 1);
+			// fetchFilesFromSource(temp, local_dir, "png");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -56,7 +96,7 @@ public class Test {
 	}
 
 	// fetch files in String from html source
-	// for css javascript 
+	// for css javascript
 	public static void fetchFilesFromSource(List<String> filedir,
 			String local_dir, String fileformat) {
 		WebParsing wp = new WebParsing();
