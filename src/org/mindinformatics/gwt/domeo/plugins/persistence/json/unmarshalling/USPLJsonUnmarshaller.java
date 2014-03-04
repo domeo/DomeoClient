@@ -299,6 +299,27 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 				_domeo.getLogger().debug(this, "jsDrug is null");
 			}
 
+			// product label selection
+			String jsPLS = au.getProductLabelSelection();
+			if (jsPLS != null) {
+				_domeo.getLogger().debug(this,
+						"jsDrug is not null: " + jsPLS.toString());
+
+				// TODO: throw an exception if the label or description is null
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();
+				MLinkedResource pls = ResourcesFactory.createLinkedResource(
+						jsPLS, jsLabel, jsDescript);
+				_domeo.getLogger().debug(this,
+						"pls linked resource created: " + pls.getLabel());
+
+				ann.setProductLabelSelection(pls);
+				_domeo.getLogger().debug(this,
+						"pls linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "jsPLS is null");
+			}
+
 			// alleles
 			String alleles = au.getAlleles();
 			if (alleles != null) {

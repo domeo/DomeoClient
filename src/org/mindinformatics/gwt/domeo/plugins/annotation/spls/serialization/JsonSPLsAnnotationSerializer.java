@@ -236,6 +236,25 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			idx += 1;
 		}
 
+		// product label selection
+		MLinkedResource productls = ann.getProductLabelSelection();
+		if (productls != null && !productls.getLabel().equals("unselected")) {
+			JSONObject body = new JSONObject();
+			String statementUUID = UUID.uuid();
+			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
+			body.put("@type", new JSONString(SPL_POC_PREFIX
+					+ "PharmacogenomicsStatement"));
+			body.put(SIO_PREFIX + "SIO_000338", new JSONString(SPL_POC_PREFIX
+					+ "productLabelSelection"));
+			body.put(SPL_POC_PREFIX + "productLabelSelection", new JSONString(
+					productls.getUrl()));
+			body.put(IRdfsOntology.label, new JSONString(productls.getLabel()));
+			body.put(IDublinCoreTerms.description,
+					new JSONString(productls.getDescription()));
+			bodies.set(idx, body);
+			idx += 1;
+		}
+
 		// alleles
 		String alleles = ann.getAllelesbody();
 
@@ -246,14 +265,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
 			body.put("@type", new JSONString(SPL_POC_PREFIX
 					+ "PharmacogenomicsStatement"));
-			body.put(
-					NCIT_PREFIX + "Alleles",
-					new JSONString(alleles));
+			body.put(NCIT_PREFIX + "Alleles", new JSONString(alleles));
 			body.put(IRdfsOntology.label, new JSONString("Alleles"));
 			bodies.set(idx, body);
 			idx += 1;
 		}
-		
+
 		// medical condition
 		String medicalCondition = ann.getMedconditbody();
 
@@ -264,33 +281,29 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
 			body.put("@type", new JSONString(SPL_POC_PREFIX
 					+ "PharmacogenomicsStatement"));
-			body.put(
-					SPL_POC_PREFIX + "MedicalCondition",
-					new JSONString(medicalCondition));
+			body.put(SPL_POC_PREFIX + "MedicalCondition", new JSONString(
+					medicalCondition));
 			body.put(IRdfsOntology.label, new JSONString("MedicalCondition"));
 			bodies.set(idx, body);
 			idx += 1;
 		}
-		
+
 		// comment
-				String comment = ann.getComment();
-				System.out.println("comment in seri:" + comment);
+		String comment = ann.getComment();
+		System.out.println("comment in seri:" + comment);
 
-				if (comment != null && !comment.trim().equals("")) {
+		if (comment != null && !comment.trim().equals("")) {
 
-					JSONObject body = new JSONObject();
-					String statementUUID = UUID.uuid();
-					body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-					body.put("@type", new JSONString(SPL_POC_PREFIX
-							+ "PharmacogenomicsStatement"));
-					body.put(
-							SPL_POC_PREFIX + "Comment",
-							new JSONString(comment));
-					body.put(IRdfsOntology.label, new JSONString("Comment"));
-					bodies.set(idx, body);
-					idx += 1;
-				}
-		
+			JSONObject body = new JSONObject();
+			String statementUUID = UUID.uuid();
+			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
+			body.put("@type", new JSONString(SPL_POC_PREFIX
+					+ "PharmacogenomicsStatement"));
+			body.put(SPL_POC_PREFIX + "Comment", new JSONString(comment));
+			body.put(IRdfsOntology.label, new JSONString("Comment"));
+			bodies.set(idx, body);
+			idx += 1;
+		}
 
 		// Concepts that the Statement Refers To: Active ingredient &
 		// Concomitant medication concern & Variant Frequency

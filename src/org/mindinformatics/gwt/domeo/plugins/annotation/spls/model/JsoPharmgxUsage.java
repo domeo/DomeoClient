@@ -87,6 +87,11 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 		return this['dailymed:pharmgxDrug'];
 	}-*/;
 
+	// drug of interest
+	public final native String getProductLabelSelection() /*-{
+		return this['poc:productLabelSelection'];
+	}-*/;
+
 	// Concepts that the Statement Refers To: Active ingredient &
 	// Concomitant medication concern & Variant Frequency
 	// variant frequency
@@ -113,10 +118,10 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 	public final native String getAlleles() /*-{
 		return this['ncit:Alleles'];
 	}-*/;
-	
+
 	// comment
 	public final native String getComment() /*-{
-	return this['poc:Comment'];
-}-*/;
+		return this['poc:Comment'];
+	}-*/;
 
 }
