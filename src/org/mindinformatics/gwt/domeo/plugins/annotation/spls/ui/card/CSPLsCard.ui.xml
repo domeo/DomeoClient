@@ -105,6 +105,15 @@
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 			
+		<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="plslabel" styleName='{style.tablelabel}'>ProductLabelSelection</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="productls" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+		
 		
 			<g:VerticalPanel>
 				<g:HorizontalPanel>

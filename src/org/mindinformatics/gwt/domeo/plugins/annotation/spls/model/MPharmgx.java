@@ -16,7 +16,7 @@ public class MPharmgx extends MTrustedResource {
 
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 			drugRecResource, monitRecResource, testRecResource, comment,
-			Alleles, biomarkers, variant, test, medicalCondition, drugOfInterest;
+			Alleles, biomarkers, variant, test, medicalCondition, drugOfInterest, productLabelSelection;
 	
 	public MLinkedResource getVariant() {
 		return variant;
@@ -28,6 +28,38 @@ public class MPharmgx extends MTrustedResource {
 
 	public void setDrugOfInterest(MLinkedResource drugOfInterest) {
 		this.drugOfInterest = drugOfInterest;
+	}
+
+	public MLinkedResource getProductLabelSelection() {
+		return productLabelSelection;
+	}
+
+	public void setProductLabelSelection(MLinkedResource productLabelSelection) {
+		this.productLabelSelection = productLabelSelection;
+	}
+
+	public void setPkImpactResource(MLinkedResource pkImpactResource) {
+		this.pkImpactResource = pkImpactResource;
+	}
+
+	public void setPdImpactResource(MLinkedResource pdImpactResource) {
+		this.pdImpactResource = pdImpactResource;
+	}
+
+	public void setDoseRecResource(MLinkedResource doseRecResource) {
+		this.doseRecResource = doseRecResource;
+	}
+
+	public void setDrugRecResource(MLinkedResource drugRecResource) {
+		this.drugRecResource = drugRecResource;
+	}
+
+	public void setMonitRecResource(MLinkedResource monitRecResource) {
+		this.monitRecResource = monitRecResource;
+	}
+
+	public void setTestRecResource(MLinkedResource testRecResource) {
+		this.testRecResource = testRecResource;
 	}
 
 	public void setVariant(MLinkedResource variant) {

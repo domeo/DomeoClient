@@ -16,7 +16,7 @@ public class MSPLPharmgxUsage {
 	private String comment;
 	private String othervariant;
 	private String othertest;
-	
+
 	public Long getLocalId() {
 		return localId;
 	}
@@ -74,13 +74,21 @@ public class MSPLPharmgxUsage {
 	public void setTest(MLinkedResource test) {
 		pharmgx.setTest(test);
 	}
-	
+
 	public MLinkedResource getDrugOfInterest() {
 		return pharmgx.getDrugOfInterest();
 	}
 
 	public void setDrugOfInterest(MLinkedResource drugofinterest) {
 		pharmgx.setDrugOfInterest(drugofinterest);
+	}
+
+	public MLinkedResource getProductLabelSelection() {
+		return pharmgx.getProductLabelSelection();
+	}
+
+	public void setProductLabelSelection(MLinkedResource productlabelselection) {
+		pharmgx.setProductLabelSelection(productlabelselection);
 	}
 
 	public MLinkedResource getBiomarkers() {
@@ -179,6 +187,4 @@ public class MSPLPharmgxUsage {
 		this.othertest = othertest;
 	}
 
-
-	
 }

@@ -141,11 +141,29 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 
 			String html2 = "</table></body></html>";
 
+			String drugofInterestStr;
+			if (pharmgx.getDrugOfInterest() != null) {
+				drugofInterestStr = pharmgx.getDrugOfInterest().getLabel();
+				if (!drugofInterestStr.equals("unselected")) {
+					Label l = new Label("Drug", drugofInterestStr);
+					labels.add(l);
+				}
+			}
+
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {
 				biomarkerStr = pharmgx.getBiomarkers().getLabel();
 				if (!biomarkerStr.equals("unselected")) {
 					Label l = new Label("Bio", biomarkerStr);
+					labels.add(l);
+				}
+			}
+
+			String productlsStr;
+			if (pharmgx.getProductLabelSelection() != null) {
+				productlsStr = pharmgx.getProductLabelSelection().getLabel();
+				if (!productlsStr.equals("unselected")) {
+					Label l = new Label("PLS", productlsStr);
 					labels.add(l);
 				}
 			}
@@ -172,7 +190,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getDrugRecResource() != null) {
 				drugRecStr = pharmgx.getDrugRecResource().getLabel();
 				if (!drugRecStr.equals("None")) {
-					Label l = new Label("Drug", drugRecStr);
+					Label l = new Label("DrugRec", drugRecStr);
 					labels.add(l);
 				}
 			}
@@ -181,7 +199,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getDoseRecResource() != null) {
 				doseRecStr = pharmgx.getDoseRecResource().getLabel();
 				if (!doseRecStr.equals("None")) {
-					Label l = new Label("Dose", doseRecStr);
+					Label l = new Label("DoseRec", doseRecStr);
 					labels.add(l);
 				}
 			}
@@ -208,7 +226,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			if (pharmgx.getVariant() != null) {
 				variantStr = pharmgx.getVariant().getLabel();
 				if (!variantStr.equals("unselected")) {
-					Label l = new Label("Variant", variantStr);
+					Label l = new Label("Varit", variantStr);
 					labels.add(l);
 				}
 			}
@@ -244,7 +262,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 				}
 
 				if (!statementsStr.trim().equals("")) {
-					Label l = new Label("State", statementsStr);
+					Label l = new Label("Stat", statementsStr);
 					labels.add(l);
 				}
 			}
@@ -253,7 +271,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 
 			tdHtml.append("<tr bgcolor='#F0F8FF'>");
 			for (Label label : labels) {
-				tdHtml.append("<td>" + label.getName() + "</td>");
+				tdHtml.append("<td>" + label.getName() + "&nbsp;</td>");
 			}
 			if ((!allelesStr.equals("") && allelesStr != null)
 					|| (!medicalStr.equals("") && medicalStr != null)) {

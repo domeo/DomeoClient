@@ -40,6 +40,14 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 		pharmgxUsage.setDrugOfInterest(drugofinterest);
 	}
 	
+	public MLinkedResource getProductLabelSelection() {
+		return pharmgxUsage.getProductLabelSelection();
+	}
+
+	public void setProductLabelSelection(MLinkedResource productlabelselection) {
+		pharmgxUsage.setProductLabelSelection(productlabelselection);
+	}
+	
 	public MLinkedResource getBiomarkers() {
 		return pharmgxUsage.getBiomarkers();
 	}
