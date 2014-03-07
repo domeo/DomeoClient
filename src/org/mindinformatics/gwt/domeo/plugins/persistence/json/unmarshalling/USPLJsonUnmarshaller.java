@@ -257,6 +257,7 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 
 			// biomarker of interest
 			String jsBiomarker = au.getBiomarkers();
+			System.out.println("jsBiomarker:"+jsBiomarker);
 			if (jsBiomarker != null) {
 				_domeo.getLogger().debug(this,
 						"jsBiomarker is not null: " + jsBiomarker.toString());
@@ -280,6 +281,8 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 
 			// drug of interest
 			String jsDrug = au.getDrug();
+			System.out.println("jsDrug:"+jsDrug);
+			
 			if (jsDrug != null) {
 				_domeo.getLogger().debug(this,
 						"jsDrug is not null: " + jsDrug.toString());
@@ -299,11 +302,11 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 				_domeo.getLogger().debug(this, "jsDrug is null");
 			}
 
-			// product label selection
-			String jsPLS = au.getProductLabelSelection();
+			// product label section
+			String jsPLS = au.getProductLabelSection();
 			if (jsPLS != null) {
 				_domeo.getLogger().debug(this,
-						"jsDrug is not null: " + jsPLS.toString());
+						"jsPLS is not null: " + jsPLS.toString());
 
 				// TODO: throw an exception if the label or description is null
 				String jsLabel = au.getLabel();

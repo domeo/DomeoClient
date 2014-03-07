@@ -3,6 +3,8 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -32,19 +34,13 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
@@ -69,7 +65,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	private MSPLsAnnotation _item;
 	private MPharmgx currentPharmgx;
-	private ArrayList<Widget> tabs = new ArrayList<Widget>();
 
 	@UiField
 	VerticalPanel container;
@@ -121,11 +116,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@UiField
 	CheckBox descriptsai, descriptsmcc;
 
-	/*
-	 * @UiField ListBox descriptsmc;
-	 */
-
-	// population provalence
 	@UiField
 	CheckBox descriptppm;
 
@@ -134,33 +124,243 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	TextArea commentBody, allelesbody, medconditbody, descriptsothervt,
 			descriptsotherts;
 
-	String[] biomarker = { "ApoE2", "BRAF", "C-Kit", "CCR5", "CD20_antigen",
-			"CD25", "CD30", "CYP1A2", "CYP2C19", "CYP2C9", "CYP2D6", "DPD",
-			"EGFR", "ER and PgR_receptor", "ER_receptor", "FIP1L1-PDGFRα",
-			"G6PD", "HLA-B*1502", "HLA-B*5701", "Her2/neu", "IL28B", "KRAS",
-			"LDL_Receptor", "NAT1;_NAT2", "PDGFR", "PML/RARα", "Rh_genotype",
-			"TPMT", "UGT1A1", "VKORC1" };
+	// String[] biomarker = { "ApoE2", "BRAF", "C-Kit", "CCR5", "CD20_antigen",
+	// "CD25", "CD30", "CYP1A2", "CYP2C19", "CYP2C9", "CYP2D6", "DPD",
+	// "EGFR", "ER and PgR_receptor", "ER_receptor", "FIP1L1-PDGFRα",
+	// "G6PD", "HLA-B*1502", "HLA-B*5701", "Her2/neu", "IL28B", "KRAS",
+	// "LDL_Receptor", "NAT1;_NAT2", "PDGFR", "PML/RARα", "Rh_genotype",
+	// "TPMT", "UGT1A1", "VKORC1" };
 
-	// TODO: get real URIs from the swat-4-med-safety project
-	String[] biomarkerUris = { "http://fakeuri.org/ApoE2",
-			"http://fakeuri.org/BRAF", "http://fakeuri.org/C-Kit",
-			"http://fakeuri.org/CCR5", "http://fakeuri.org/CD20_antigen",
-			"http://fakeuri.org/CD25", "http://fakeuri.org/CD30",
-			"http://fakeuri.org/CYP1A2", "http://fakeuri.org/CYP2C19",
-			"http://fakeuri.org/CYP2C9", "http://fakeuri.org/CYP2D6",
-			"http://fakeuri.org/DPD", "http://fakeuri.org/EGFR",
-			"http://fakeuri.org/ER and PgR_receptor",
-			"http://fakeuri.org/ER_receptor",
-			"http://fakeuri.org/FIP1L1-PDGFRα", "http://fakeuri.org/G6PD",
-			"http://fakeuri.org/HLA-B*1502", "http://fakeuri.org/HLA-B*5701",
-			"http://fakeuri.org/Her2/neu", "http://fakeuri.org/IL28B",
-			"http://fakeuri.org/KRAS", "http://fakeuri.org/LDL_Receptor",
-			"http://fakeuri.org/NAT1;_NAT2", "http://fakeuri.org/PDGFR",
-			"http://fakeuri.org/PML/RARα", "http://fakeuri.org/Rh_genotype",
-			"http://fakeuri.org/TPMT", "http://fakeuri.org/UGT1A1",
-			"http://fakeuri.org/VKORC1" };
+	List<Biomarker> biomarkerUris = new ArrayList<Biomarker>() {
+		{
+			add(new Biomarker("ApoE2",
+					"http://purl.obolibrary.org/obo/PR_000004155"));
+			add(new Biomarker("BRAF",
+					"http://purl.obolibrary.org/obo/PR_000004801"));
+			add(new Biomarker("C-Kit",
+					"http://purl.obolibrary.org/obo/PR_000009345"));
+			add(new Biomarker("CCR5",
+					"http://purl.obolibrary.org/obo/PR_000001201"));
+			add(new Biomarker("CD20_antigen",
+					"http://purl.obolibrary.org/obo/PR_000001289"));
+			add(new Biomarker("CD25",
+					"http://purl.obolibrary.org/obo/PR_000001380"));
+			add(new Biomarker("CD30",
+					"http://purl.obolibrary.org/obo/PR_000001380"));
+			add(new Biomarker("CYP1A2",
+					"http://purl.obolibrary.org/obo/PR_000006102"));
+			add(new Biomarker("CYP2C19",
+					"http://purl.obolibrary.org/obo/PR_000006102"));
+			add(new Biomarker("CYP2C9",
+					"http://purl.obolibrary.org/obo/PR_000006120"));
+			add(new Biomarker("CYP2D6",
+					"http://purl.obolibrary.org/obo/PR_000006121"));
+			add(new Biomarker("DPD",
+					"http://purl.obolibrary.org/obo/PR_000006678"));
+			add(new Biomarker("EGFR",
+					"http://purl.obolibrary.org/obo/PR_000006933"));
+			add(new Biomarker(
+					"ER and PgR_receptor",
+					"http://purl.obolibrary.org/obo/PR_000012621http://purl.obolibrary.org/obo/PR_000007204http://purl.obolibrary.org/obo/PR_000007205"));
+			add(new Biomarker(
+					"ER_receptor",
+					"http://purl.obolibrary.org/obo/PR_000007204http://purl.obolibrary.org/obo/PR_000007205"));
+			// add(new Biomarker("FIP1L1-PDGFRα", ""));
+			add(new Biomarker("G6PD",
+					"http://purl.obolibrary.org/obo/PR_000007749"));
+			add(new Biomarker("HLA-B*1502",
+					"http://purl.obolibrary.org/obo/PR_000002010"));
+			add(new Biomarker("HLA-B*5701",
+					"http://purl.obolibrary.org/obo/PR_000002010"));
+			add(new Biomarker("Her2/neu",
+					"http://purl.obolibrary.org/obo/PR_000002082"));
+			add(new Biomarker("IL28B",
+					"http://purl.obolibrary.org/obo/PR_000001470"));
+			add(new Biomarker("KRAS",
+					"http://purl.obolibrary.org/obo/PR_000009442"));
+			add(new Biomarker("LDL_Receptor",
+					"http://purl.obolibrary.org/obo/PR_000009744"));
+			add(new Biomarker(
+					"NAT1;_NAT2",
+					"http://purl.obolibrary.org/obo/PR_000010994http://purl.obolibrary.org/obo/PR_000011001"));
+			add(new Biomarker("PDGFR",
+					"http://purl.obolibrary.org/obo/PR_000012492"));
+			// add(new Biomarker("PML/RARα", ""));
+			add(new Biomarker("Rh_genotype",
+					"http://purl.obolibrary.org/obo/PR_000001442"));
+			add(new Biomarker("TPMT",
+					"http://purl.obolibrary.org/obo/PR_000016583"));
+			add(new Biomarker("UGT1A1",
+					"http://purl.obolibrary.org/obo/PR_000017048"));
+			add(new Biomarker("VKORC1",
+					"http://purl.obolibrary.org/obo/PR_000017303"));
+		}
+	};
 
-	// TODO: correct the mispelling of variant throughout the project
+	class Biomarker {
+
+		Biomarker() {
+
+		}
+
+		Biomarker(String name, String uri) {
+			this.name = name;
+			this.uri = uri;
+		}
+
+		private String name;
+		private String uri;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getUri() {
+			return uri;
+		}
+
+		public void setUri(String uri) {
+			this.uri = uri;
+		}
+
+	}
+
+	private static HashMap<String, String> drugUris_FDA = new HashMap<String, String>() {
+		{
+			put("PROPAFENONE", "http://www.drugbank.ca/drugs/DB01182");
+			put("TRETINOIN", "http://www.drugbank.ca/drugs/DB00755");
+			put("EXEMESTANE", "http://www.drugbank.ca/drugs/DB00990");
+			put("FLUVOXAMINE", "http://www.drugbank.ca/drugs/DB00176");
+			put("IVACAFTOR", "http://www.drugbank.ca/drugs/DB08820");
+			put("TETRABENAZINE", "http://www.drugbank.ca/drugs/DB04844");
+			put("NORTRIPTYLINE", "http://www.drugbank.ca/drugs/DB00540");
+			put("NEFAZODONE", "http://www.drugbank.ca/drugs/DB01149");
+			put("TERBINAFINE", "http://www.drugbank.ca/drugs/DB00857");
+
+			put("ARIPIPRAZOLE", "http://www.drugbank.ca/drugs/DB01238");
+			put("TELAPREVIR", "http://www.drugbank.ca/drugs/DB05521");
+
+			put("AZATHIOPRINE", "http://www.drugbank.ca/drugs/DB00993");
+
+			put("ATORVASTATIN", "http://www.drugbank.ca/drugs/DB01076");
+			put("DAPSONE", "http://www.drugbank.ca/drugs/DB00250");
+			put("PHENYTOIN", "http://www.drugbank.ca/drugs/DB00252");
+			put("CISPLATIN", "http://www.drugbank.ca/drugs/DB00515");
+			put("GALANTAMINE", "http://www.drugbank.ca/drugs/DB00674");
+
+			put("LENALIDOMIDE", "http://www.drugbank.ca/drugs/DB00480");
+			put("RIFAMPIN", "http://www.drugbank.ca/drugs/DB01045");
+
+			put("CLOMIPRAMINE", "http://www.drugbank.ca/drugs/DB01242");
+			put("DESIPRAMINE", "http://www.drugbank.ca/drugs/DB01151");
+			put("CRIZOTINIB", "http://www.drugbank.ca/drugs/DB08700");
+			put("METOPROLOL", "http://www.drugbank.ca/drugs/DB00264");
+			put("PROPRANOLOL", "http://www.drugbank.ca/drugs/DB00571");
+			put("PIMOZIDE", "http://www.drugbank.ca/drugs/DB01100");
+			put("CODEINE", "http://www.drugbank.ca/drugs/DB00318");
+
+			put("FLURBIPROFEN", "http://www.drugbank.ca/drugs/DB00712");
+
+			put("THIORIDAZINE", "http://www.drugbank.ca/drugs/DB00679");
+
+			put("PERPHENAZINE", "http://www.drugbank.ca/drugs/DB00850");
+			put("TAMOXIFEN", "http://www.drugbank.ca/drugs/DB00675");
+
+			put("VORICONAZOLE", "http://www.drugbank.ca/drugs/DB00582");
+
+			put("PANTOPRAZOLE", "http://www.drugbank.ca/drugs/DB00213");
+			put("VENLAFAXINE", "http://www.drugbank.ca/drugs/DB00285");
+			put("RABEPRAZOLE", "http://www.drugbank.ca/drugs/DB01129");
+			put("NILOTINIB", "http://www.drugbank.ca/drugs/DB04868");
+			put("FLUOXETINE", "http://www.drugbank.ca/drugs/DB00472");
+			put("DASATINIB", "http://www.drugbank.ca/drugs/DB01254");
+			put("CETUXIMAB", "http://www.drugbank.ca/drugs/DB00002");
+			put("RISPERIDONE", "http://www.drugbank.ca/drugs/DB00734");
+			put("CLOMIPHENE", "http://www.drugbank.ca/drugs/DB00882");
+			put("TOSITUMOMAB", "http://www.drugbank.ca/drugs/DB00081");
+			put("MERCAPTOPURINE", "http://www.drugbank.ca/drugs/DB01033");
+			put("CLOBAZAM", "http://www.drugbank.ca/drugs/DB00349");
+			put("CLOZAPINE", "http://www.drugbank.ca/drugs/DB00363");
+			put("CARBAMAZEPINE", "http://www.drugbank.ca/drugs/DB00564");
+			put("PANITUMUMAB", "http://www.drugbank.ca/drugs/DB01269");
+			put("TICAGRELOR", "http://www.drugbank.ca/drugs/DB08816");
+			put("QUINIDINE", "http://www.drugbank.ca/drugs/DB00908");
+			put("WARFARIN", "http://www.drugbank.ca/drugs/DB00682");
+			put("IRINOTECAN", "http://www.drugbank.ca/drugs/DB00762");
+			put("FULVESTRANT", "http://www.drugbank.ca/drugs/DB00947");
+			put("ISONIAZID", "http://www.drugbank.ca/drugs/DB00951");
+			put("RASBURICASE", "http://www.drugbank.ca/drugs/DB00049");
+			put("BUSULFAN", "http://www.drugbank.ca/drugs/DB01008");
+			put("DIAZEPAM", "http://www.drugbank.ca/drugs/DB00829");
+			put("INDACATEROL", "http://www.drugbank.ca/drugs/DB05039");
+			put("CLOPIDOGREL", "http://www.drugbank.ca/drugs/DB00758");
+			put("MARAVIROC", "http://www.drugbank.ca/drugs/DB04835");
+			put("ERLOTINIB", "http://www.drugbank.ca/drugs/DB00530");
+			put("PAROXETINE", "http://www.drugbank.ca/drugs/DB00715");
+
+			put("FLUOROURACIL", "http://www.drugbank.ca/drugs/DB00544");
+			put("PRAVASTATIN", "http://www.drugbank.ca/drugs/DB00175");
+			put("CEVIMELINE", "http://www.drugbank.ca/drugs/DB00185");
+			put("PROTRIPTYLINE", "http://www.drugbank.ca/drugs/DB00344");
+			put("PRASUGREL", "http://www.drugbank.ca/drugs/DB06209");
+
+			put("TRIMIPRAMINE", "http://www.drugbank.ca/drugs/DB00726");
+
+			put("CARISOPRODOL", "http://www.drugbank.ca/drugs/DB00395");
+			put("EVEROLIMUS", "http://www.drugbank.ca/drugs/DB01590");
+			put("ABACAVIR", "http://www.drugbank.ca/drugs/DB01048");
+			put("THIOGUANINE", "http://www.drugbank.ca/drugs/DB00352");
+			put("CELECOXIB", "http://www.drugbank.ca/drugs/DB00482");
+			put("OMEPRAZOLE", "http://www.drugbank.ca/drugs/DB00338");
+			put("TOLTERODINE", "http://www.drugbank.ca/drugs/DB01036");
+
+			put("CAPECITABINE", "http://www.drugbank.ca/drugs/DB01101");
+			put("CITALOPRAM", "http://www.drugbank.ca/drugs/DB00215");
+			put("LAPATINIB", "http://www.drugbank.ca/drugs/DB01259");
+			put("ATOMOXETINE", "http://www.drugbank.ca/drugs/DB00289");
+
+			put("PYRAZINAMIDE", "http://www.drugbank.ca/drugs/DB00339");
+			put("DOXEPIN", "http://www.drugbank.ca/drugs/DB01142");
+			put("IMATINIB", "http://www.drugbank.ca/drugs/DB00619");
+			put("CARVEDILOL", "http://www.drugbank.ca/drugs/DB01136");
+			put("CHLOROQUINE", "http://www.drugbank.ca/drugs/DB00608");
+			put("LETROZOLE", "http://www.drugbank.ca/drugs/DB01006");
+			put("IMIPRAMINE", "http://www.drugbank.ca/drugs/DB00458");
+
+			put("ESOMEPRAZOLE", "http://www.drugbank.ca/drugs/DB00736");
+			put("MODAFINIL", "http://www.drugbank.ca/drugs/DB00745");
+			put("TRASTUZUMAB", "http://www.drugbank.ca/drugs/DB00072");
+			put("ARSENIC_TRIOXIDE", "http://www.drugbank.ca/drugs/DB01169");
+			put("BRENTUXIMAB_VEDOTIN", "http://www.drugbank.ca/drugs/DB08870");
+
+			put("CARISOPRODOL", "http://www.drugbank.ca/drugs/DB00395");
+			put("DENILEUKIN_DIFTITOX", "http://www.drugbank.ca/drugs/DB00004");
+			put("ILOPERIDONE", "http://www.drugbank.ca/drugs/DB04946");
+			put("PEGINTERFERON_ALFA-2B", "http://www.drugbank.ca/drugs/DB00022");
+			put("PERTUZUMAB", "http://www.drugbank.ca/drugs/DB06366");
+			put("VALPROIC_ACID", "http://www.drugbank.ca/drugs/DB00313");
+			put("VEMURAFENIB", "http://www.drugbank.ca/drugs/DB08881");
+			put("CHLORDIAZEPOXIDE_AND_AMITRIPTYLINE",
+					"http://www.drugbank.ca/drugs/DB00475http://www.drugbank.ca/drugs/DB00321");
+
+			put("DEXTROMETHORPHAN_AND_QUINIDINE",
+					"http://www.drugbank.ca/drugs/DB00514http://www.drugbank.ca/drugs/DB00908");
+
+			put("DROSPIRENONE_AND_ESTRADIOL",
+					"http://www.drugbank.ca/drugs/DB01395http://www.drugbank.ca/drugs/DB00783");
+
+			put("FLUOXETINE_AND_OLANZAPINE",
+					"http://www.drugbank.ca/drugs/DB00472http://www.drugbank.ca/drugs/DB00334");
+
+			put("TRAMADOL_AND_ACETAMINOPHEN",
+					"http://www.drugbank.ca/drugs/DB00193http://www.drugbank.ca/drugs/DB00316");
+		}
+	};
+
 	String[] variant = { "poor-metabolizer", "intermediate-metabolizer",
 			"extensive-metabolizer", "ultra-metabolizer",
 			"intermediate-activity", "low-or-absent-activity", "HLA-B*1502",
@@ -177,7 +377,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"chromosomal-aberration-negative" };
 
 	// TODO: get real URIs from the swat-4-med-safety project
-	String[] drugs = { "Abacivir", "Aripiprazole", "Arsenic_Trioxide",
+	// "Sodium_Phenylacetate", "Sodium_Benzoate","Sodium_Phenylbutyrate",
+	String[] drugs = { "Abacavir", "Aripiprazole", "Arsenic_Trioxide",
 			"Atomoxetine", "Atorvastatin", "Azathioprine", "Boceprevir",
 			"Brentuximab_Vedotin", "Busulfan", "Capecitabine", "Carbamazepine",
 			"Carisoprodol", "Carvedilol", "Celecoxib", "Cetuximab",
@@ -199,8 +400,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"Pimozide", "Prasugrel", "Pravastatin", "Propafenone",
 			"Propranolol", "Protriptyline", "Quinidine", "Rabeprazole",
 			"Rasburicase", "Rifampin", "Isoniazid", "Pyrazinamide",
-			"Risperidone", "Sodium_Phenylacetate", "Sodium_Benzoate",
-			"Sodium_Phenylbutyrate", "Tamoxifen", "Telaprevir", "Terbinafine",
+			"Risperidone", "Tamoxifen", "Telaprevir", "Terbinafine",
 			"Tetrabenazine", "Thioguanine", "Thioridazine", "Ticagrelor",
 			"Tolterodine", "Tositumomab", "Tramadol_and_Acetaminophen",
 			"Trastuzumab", "Tretinoin", "Trimipramine", "Valproic_Acid",
@@ -237,84 +437,25 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"WARNINGS AND PRECAUTIONS (43685-7)", "WARNINGS (34071-1)",
 			"SUPPLEMENTAL PATIENT MATERIAL (38056-8)" };
 
-	String[] drugUris = { "http://fakeuri.org/Abacivir",
-			"http://fakeuri.org/Aripiprazole",
-			"http://fakeuri.org/Arsenic_Trioxide",
-			"http://fakeuri.org/Atomoxetine",
-			"http://fakeuri.org/Atorvastatin",
-			"http://fakeuri.org/Azathioprine", "http://fakeuri.org/Boceprevir",
-			"http://fakeuri.org/Brentuximab_Vedotin",
-			"http://fakeuri.org/Busulfan", "http://fakeuri.org/Capecitabine",
-			"http://fakeuri.org/Carbamazepine",
-			"http://fakeuri.org/Carisoprodol", "http://fakeuri.org/Carvedilol",
-			"http://fakeuri.org/Celecoxib", "http://fakeuri.org/Cetuximab",
-			"http://fakeuri.org/Cevimeline",
-			"http://fakeuri.org/Chlordiazepoxide_and_Amitriptyline",
-			"http://fakeuri.org/Chloroquine", "http://fakeuri.org/Cisplatin",
-			"http://fakeuri.org/Citalopram", "http://fakeuri.org/Clobazam",
-			"http://fakeuri.org/Clomiphene", "http://fakeuri.org/Clomipramine",
-			"http://fakeuri.org/Clopidogrel", "http://fakeuri.org/Clozapine",
-			"http://fakeuri.org/Codeine", "http://fakeuri.org/Crizotinib",
-			"http://fakeuri.org/Dapsone", "http://fakeuri.org/Dasatinib",
-			"http://fakeuri.org/Denileukin_Diftitox",
-			"http://fakeuri.org/Desipramine",
-			"http://fakeuri.org/Dexlansoprazole",
-			"http://fakeuri.org/Dextromethorphan_and_Quinidine",
-			"http://fakeuri.org/Diazepam", "http://fakeuri.org/Doxepin",
-			"http://fakeuri.org/Drospirenone_and_Estradiol",
-			"http://fakeuri.org/Erlotinib", "http://fakeuri.org/Esomeprazole",
-			"http://fakeuri.org/Exemestane", "http://fakeuri.org/Everolimus",
-			"http://fakeuri.org/Fluorouracil", "http://fakeuri.org/Fluoxetine",
-			"http://fakeuri.org/Fluoxetine_and_Olanzapine",
-			"http://fakeuri.org/Flurbiprofen",
-			"http://fakeuri.org/Fluvoxamine", "http://fakeuri.org/Fulvestrant",
-			"http://fakeuri.org/Galantamine", "http://fakeuri.org/Iloperidone",
-			"http://fakeuri.org/Imatinib", "http://fakeuri.org/Imipramine",
-			"http://fakeuri.org/Indacaterol", "http://fakeuri.org/Irinotecan",
-			"http://fakeuri.org/Isosorbide", "http://fakeuri.org/Ivacaftor",
-			"http://fakeuri.org/Lapatinib", "http://fakeuri.org/Lenalidomide",
-			"http://fakeuri.org/Letrozole", "http://fakeuri.org/Maraviroc",
-			"http://fakeuri.org/Mercaptopurine",
-			"http://fakeuri.org/Metoprolol", "http://fakeuri.org/Modafinil",
-			"http://fakeuri.org/Nefazodone", "http://fakeuri.org/Nilotinib",
-			"http://fakeuri.org/Nortriptyline",
-			"http://fakeuri.org/Omeprazole", "http://fakeuri.org/Panitumumab",
-			"http://fakeuri.org/Pantoprazole", "http://fakeuri.org/Paroxetine",
-			"http://fakeuri.org/Peginterferon_alfa-2b",
-			"http://fakeuri.org/Perphenazine", "http://fakeuri.org/Pertuzumab",
-			"http://fakeuri.org/Phenytoin", "http://fakeuri.org/Pimozide",
-			"http://fakeuri.org/Prasugrel", "http://fakeuri.org/Pravastatin",
-			"http://fakeuri.org/Propafenone", "http://fakeuri.org/Propranolol",
-			"http://fakeuri.org/Protriptyline", "http://fakeuri.org/Quinidine",
-			"http://fakeuri.org/Rabeprazole", "http://fakeuri.org/Rasburicase",
-			"http://fakeuri.org/Rifampin", "http://fakeuri.org/Isoniazid",
-			"http://fakeuri.org/Pyrazinamide",
-			"http://fakeuri.org/Risperidone",
-			"http://fakeuri.org/Sodium_Phenylacetate",
-			"http://fakeuri.org/Sodium_Benzoate",
-			"http://fakeuri.org/Sodium_Phenylbutyrate",
-			"http://fakeuri.org/Tamoxifen", "http://fakeuri.org/Telaprevir",
-			"http://fakeuri.org/Terbinafine",
-			"http://fakeuri.org/Tetrabenazine",
-			"http://fakeuri.org/Thioguanine",
-			"http://fakeuri.org/Thioridazine", "http://fakeuri.org/Ticagrelor",
-			"http://fakeuri.org/Tolterodine", "http://fakeuri.org/Tositumomab",
-			"http://fakeuri.org/Tramadol_and_Acetaminophen",
-			"http://fakeuri.org/Trastuzumab", "http://fakeuri.org/Tretinoin",
-			"http://fakeuri.org/Trimipramine",
-			"http://fakeuri.org/Valproic_Acid",
-			"http://fakeuri.org/Vemurafenib", "http://fakeuri.org/Venlafaxine",
-			"http://fakeuri.org/Voriconazole", "http://fakeuri.org/Warfarin" };
-
 	// drug of interest
 	public MLinkedResource getDrugOfInterest() {
 
 		int indexdoi = descriptdoi.getSelectedIndex();
 
-		// TODO: fix the drug URI listing to be accurate
-		return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
-				+ drugUris[indexdoi], descriptdoi.getItemText(indexdoi),
-				"The drug of interest.");
+		if (indexdoi != 0) {
+			String drugname = descriptdoi.getItemText(indexdoi).toUpperCase();
+
+			String druguri = drugUris_FDA.get(drugname);
+
+			if (druguri == null || druguri.trim().equals("")) {
+				System.out.println("WARNING: DRUG URI IS NOT FOUND IN MAP");
+				druguri = "";
+			}
+
+			return ResourcesFactory.createLinkedResource(druguri,
+					descriptdoi.getItemText(indexdoi), "The drug of interest.");
+		} else
+			return null;
 	}
 
 	// biomarkers
@@ -322,9 +463,14 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		int indexbm = descriptbm.getSelectedIndex();
 
-		// TODO: fix the biomarker URI listing to be accurate
-		return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX,
-				descriptbm.getItemText(indexbm), "The selected biomarker.");
+		if (indexbm != 0) {
+			String biomarkerName = descriptbm.getItemText(indexbm);
+			String biomarkerURL = biomarkerUris.get(indexbm - 1).getUri();
+
+			return ResourcesFactory.createLinkedResource(biomarkerURL,
+					biomarkerName, "The selected biomarker.");
+		} else
+			return null;
 	}
 
 	// Product label sections
@@ -334,9 +480,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		// TODO: fix the biomarker URI listing to be accurate
 		return ResourcesFactory
-				.createLinkedResource(SPL_POC_PREFIX,
+				.createLinkedResource(
+						SPL_POC_PREFIX,
 						descriptpls.getItemText(indexbm),
-						"what section of the label Pharmacists identify clinical pharmgx statements");
+						"The section of the label where pharmacists identify clinical pharmgx statements");
 	}
 
 	// pk impact
@@ -743,12 +890,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							MSPLPharmgxUsage pharmgxUsage = SPLsFactory
 									.createSPLPharmgxUsage();
 
-							/*
-							 * if(pharmgxUsage.getPkImpact()==null){
-							 * descriptpknone.setValue(true);
-							 * System.out.println("*********1 pk**********"); }
-							 */
-
 							// take the form values and assign
 							_domeo.getLogger().debug(this, "SPL annotation 1");
 							pharmgxUsage.setBiomarkers(getBioMarkers());
@@ -898,8 +1039,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				}
 
 				String bioLabel = _item.getBiomarkers().getLabel();
-				for (int i = 0; i < biomarker.length; i++) {
-					if (biomarker[i].equals(bioLabel)) {
+				for (int i = 0; i < biomarkerUris.size(); i++) {
+					if (biomarkerUris.get(i).getName().equals(bioLabel)) {
 						descriptbm.setSelectedIndex(i + 1);
 					}
 				}
@@ -914,7 +1055,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				}
 
 				String plsLabel = _item.getProductLabelSelection().getLabel();
-				for (int i = 0; i < biomarker.length; i++) {
+				for (int i = 0; i < productLabelSections.length; i++) {
 					if (productLabelSections[i].equals(plsLabel)) {
 						descriptpls.setSelectedIndex(i + 1);
 					}

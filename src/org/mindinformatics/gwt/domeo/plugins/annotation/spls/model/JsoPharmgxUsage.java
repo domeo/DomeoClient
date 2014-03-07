@@ -87,9 +87,9 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 		return this['dailymed:pharmgxDrug'];
 	}-*/;
 
-	// drug of interest
-	public final native String getProductLabelSelection() /*-{
-		return this['poc:productLabelSelection'];
+	// product Label Section
+	public final native String getProductLabelSection() /*-{
+		return this['poc:productLabelSection'];
 	}-*/;
 
 	// Concepts that the Statement Refers To: Active ingredient &
