@@ -257,7 +257,7 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 
 			// biomarker of interest
 			String jsBiomarker = au.getBiomarkers();
-			System.out.println("jsBiomarker:"+jsBiomarker);
+			System.out.println("jsBiomarker:" + jsBiomarker);
 			if (jsBiomarker != null) {
 				_domeo.getLogger().debug(this,
 						"jsBiomarker is not null: " + jsBiomarker.toString());
@@ -281,8 +281,8 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 
 			// drug of interest
 			String jsDrug = au.getDrug();
-			System.out.println("jsDrug:"+jsDrug);
-			
+			System.out.println("jsDrug:" + jsDrug);
+
 			if (jsDrug != null) {
 				_domeo.getLogger().debug(this,
 						"jsDrug is not null: " + jsDrug.toString());
@@ -309,10 +309,20 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 						"jsPLS is not null: " + jsPLS.toString());
 
 				// TODO: throw an exception if the label or description is null
+				int index_label = jsPLS.indexOf("#");
+
+				String jsUrl = jsPLS;
 				String jsLabel = au.getLabel();
+				
+				//jsPLS = prefix + label, split as url and label
+				if (index_label > 0) {
+					jsUrl = jsPLS.substring(0, index_label);
+					jsLabel = jsPLS.substring(index_label + 1);
+				} 
+
 				String jsDescript = au.getDescription();
 				MLinkedResource pls = ResourcesFactory.createLinkedResource(
-						jsPLS, jsLabel, jsDescript);
+						jsUrl, jsLabel, jsDescript);
 				_domeo.getLogger().debug(this,
 						"pls linked resource created: " + pls.getLabel());
 

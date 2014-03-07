@@ -190,4 +190,5 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    public String getAnnotationType() {
 	    return TYPE;
 	}
+	
     }

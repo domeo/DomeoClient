@@ -23,15 +23,11 @@ import com.google.gwt.json.client.JSONString;
  * 
  * @author Richard Boyce <rdb20@pitt.edu>
  */
-public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
+public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
+		implements IPharmgxOntology {
 
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {
 		// TODO: use the IPharmgxOntology/SPL ontoogy for these
-		String SPL_URN_PREFIX = "urn:linkedspls:uuid:";
-		String SPL_POC_PREFIX = "poc:";
-		String SIO_PREFIX = "sio:";
-		String DAILYMED_PREFIX = "dailymed:";
-		String NCIT_PREFIX = "ncit:";
 
 		MSPLsAnnotation ann = (MSPLsAnnotation) obj;
 		JSONObject annotation = initializeAnnotation(manager, ann);
@@ -52,12 +48,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject(); // common
 			String statementUUID = UUID.uuid(); // common
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID)); // common
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement")); // common
-			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX
+			body.put("sio:" + "SIO_000563", new JSONString("poc:"
 					+ "PharmacokineticImpact"));
-			body.put(SPL_POC_PREFIX + "PharmacokineticImpact", new JSONString(
-					pkImpact.getUrl()));
+			body.put("poc:" + "PharmacokineticImpact",
+					new JSONString(pkImpact.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(pkImpact.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(pkImpact.getDescription()));
@@ -71,12 +67,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX
+			body.put("sio:" + "SIO_000563", new JSONString("poc:"
 					+ "PharmacodynamicImpact"));
-			body.put(SPL_POC_PREFIX + "PharmacodynamicImpact", new JSONString(
-					pdImpact.getUrl()));
+			body.put("poc:" + "PharmacodynamicImpact",
+					new JSONString(pdImpact.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(pdImpact.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(pdImpact.getDescription()));
@@ -90,12 +86,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX
+			body.put("sio:" + "SIO_000563", new JSONString("poc:"
 					+ "DrugSelectionRecommendation"));
-			body.put(SPL_POC_PREFIX + "DrugSelectionRecommendation",
-					new JSONString(drugRec.getUrl()));
+			body.put("poc:" + "DrugSelectionRecommendation", new JSONString(
+					drugRec.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(drugRec.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(drugRec.getDescription()));
@@ -109,12 +105,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX
+			body.put("sio:" + "SIO_000563", new JSONString("poc:"
 					+ "DoseSelectionRecommendation"));
-			body.put(SPL_POC_PREFIX + "DoseSelectionRecommendation",
-					new JSONString(doseRec.getUrl()));
+			body.put("poc:" + "DoseSelectionRecommendation", new JSONString(
+					doseRec.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(doseRec.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(doseRec.getDescription()));
@@ -128,12 +124,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX
+			body.put("sio:" + "SIO_000563", new JSONString("poc:"
 					+ "MonitoringRecommendation"));
-			body.put(SPL_POC_PREFIX + "MonitoringRecommendation",
-					new JSONString(monitRec.getUrl()));
+			body.put("poc:" + "MonitoringRecommendation", new JSONString(
+					monitRec.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(monitRec.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(monitRec.getDescription()));
@@ -147,12 +143,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000563", new JSONString(SPL_POC_PREFIX
+			body.put("sio:" + "SIO_000563", new JSONString("poc:"
 					+ "TestRecommendation"));
-			body.put(SPL_POC_PREFIX + "TestRecommendation", new JSONString(
-					testRec.getUrl()));
+			body.put("poc:" + "TestRecommendation",
+					new JSONString(testRec.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(testRec.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(testRec.getDescription()));
@@ -166,12 +162,10 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000628", new JSONString(SPL_POC_PREFIX
-					+ "Variant"));
-			body.put(SPL_POC_PREFIX + "Variant",
-					new JSONString(variant.getUrl()));
+			body.put("sio:" + "SIO_000628", new JSONString("poc:" + "Variant"));
+			body.put("poc:" + "Variant", new JSONString(variant.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(variant.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(variant.getDescription()));
@@ -185,12 +179,11 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000338", new JSONString(SPL_POC_PREFIX
+			body.put("sio:" + "SIO_000338", new JSONString("poc:"
 					+ "TestResult"));
-			body.put(SPL_POC_PREFIX + "TestResult",
-					new JSONString(test.getUrl()));
+			body.put("poc:" + "TestResult", new JSONString(test.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(test.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(test.getDescription()));
@@ -204,9 +197,9 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000628", new JSONString(DAILYMED_PREFIX
+			body.put("sio:" + "SIO_000628", new JSONString("dailymed:"
 					+ "pharmgxDrug"));
 
 			String drugUri = drug.getUrl();
@@ -216,13 +209,13 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			// two uri for single drug
 			if (drugUri.substring(4).contains("http://")) {
 
-				//separate uri
+				// separate uri
 				int split = drugUri.substring(4).indexOf("http://") + 4;
 				String uri1 = drugUri.substring(0, split);
 				String uri2 = drugUri.substring(split);
 
-				//use the drug name as key to put jsonObject
-				//drugname1_and_drugname2
+				// use the drug name as key to put jsonObject
+				// drugname1_and_drugname2
 				String drugname1 = drug.getLabel().substring(0,
 						drug.getLabel().indexOf("_"));
 
@@ -230,13 +223,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 				while (drugname2.contains("_")) {
 					drugname2 = drugname2.substring(drugname2.indexOf("_") + 1);
 				}
-				
-				//put name-uri mapping to jsonObject
-				body.put(DAILYMED_PREFIX + drugname1, new JSONString(uri1));
-				body.put(DAILYMED_PREFIX + drugname2, new JSONString(uri2));
+
+				// put name-uri mapping to jsonObject
+				body.put("dailymed:" + drugname1, new JSONString(uri1));
+				body.put("dailymed:" + drugname2, new JSONString(uri2));
 			} else {
-				body.put(DAILYMED_PREFIX + "pharmgxDrug", new JSONString(
-						drugUri));
+				body.put("dailymed:" + "pharmgxDrug", new JSONString(drugUri));
 			}
 
 			body.put(IRdfsOntology.label, new JSONString(drug.getLabel()));
@@ -252,28 +244,29 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SIO_PREFIX + "SIO_000628", new JSONString(DAILYMED_PREFIX
+			body.put("sio:" + "SIO_000628", new JSONString("dailymed:"
 					+ "pharmgxBiomarker"));
-			
-			//process multiple uris for a single biomarker
+
+			// process multiple uris for a single biomarker
 			String Uri = biomarkers.getUrl();
 			int count = 1;
-			
-			System.out.println("Uri"+Uri);
-			while(Uri.substring(4).contains("http://")){
-				int end = Uri.substring(4).indexOf("http://")+4;
+
+			System.out.println("Uri" + Uri);
+			while (Uri.substring(4).contains("http://")) {
+				int end = Uri.substring(4).indexOf("http://") + 4;
 				String subUri = Uri.substring(0, end);
-				
-				//System.out.println("subUri:"+subUri);
-				
-				body.put(DAILYMED_PREFIX + "pharmgxBiomarker"+count++, new JSONString(subUri));
+
+				// System.out.println("subUri:"+subUri);
+
+				body.put("dailymed:" + "pharmgxBiomarker" + count++,
+						new JSONString(subUri));
 				Uri = Uri.substring(end);
 			}
-			//System.out.println("last Uri"+Uri);
-			body.put(DAILYMED_PREFIX + "pharmgxBiomarker", new JSONString(Uri));
-			
+			// System.out.println("last Uri"+Uri);
+			body.put("dailymed:" + "pharmgxBiomarker", new JSONString(Uri));
+
 			body.put(IRdfsOntology.label, new JSONString(biomarkers.getLabel()));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(biomarkers.getDescription()));
@@ -287,13 +280,17 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			//body.put(SIO_PREFIX + "SIO_000111", new JSONString(SPL_POC_PREFIX + "productLabelSelection"));
-			body.put(SIO_PREFIX + "SIO_000111",
+
+			body.put("sio:" + "SIO_000111",
 					new JSONString(productls.getLabel()));
-			body.put(SPL_POC_PREFIX + "productLabelSection", new JSONString(productls.getLabel()));
-			body.put(IRdfsOntology.label, new JSONString("SPL Section "));
+
+			// made up a url = poc prefix + label
+			body.put("poc:" + "productLabelSection", new JSONString(
+					SPL_POC_PREFIX + productls.getLabel()));
+
+			body.put(IRdfsOntology.label, new JSONString("SPL Section"));
 			body.put(IDublinCoreTerms.description,
 					new JSONString(productls.getDescription()));
 			bodies.set(idx, body);
@@ -308,7 +305,7 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
 			body.put(NCIT_PREFIX + "Alleles", new JSONString(alleles));
 			body.put(IRdfsOntology.label, new JSONString("Alleles"));
@@ -324,9 +321,9 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SPL_POC_PREFIX + "MedicalCondition", new JSONString(
+			body.put("poc:" + "MedicalCondition", new JSONString(
 					medicalCondition));
 			body.put(IRdfsOntology.label, new JSONString("MedicalCondition"));
 			bodies.set(idx, body);
@@ -342,9 +339,9 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();
 			body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
-			body.put("@type", new JSONString(SPL_POC_PREFIX
+			body.put("@type", new JSONString("poc:"
 					+ "PharmacogenomicsStatement"));
-			body.put(SPL_POC_PREFIX + "Comment", new JSONString(comment));
+			body.put("poc:" + "Comment", new JSONString(comment));
 			body.put(IRdfsOntology.label, new JSONString("Comment"));
 			bodies.set(idx, body);
 			idx += 1;
@@ -364,13 +361,14 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 					String statementUUID = UUID.uuid();
 					body.put("@id", new JSONString(SPL_URN_PREFIX
 							+ statementUUID));
-					body.put("@type", new JSONString(SPL_POC_PREFIX
+					body.put("@type", new JSONString("poc:"
 							+ "PharmacogenomicsStatement"));
-					body.put(SIO_PREFIX + "SIO_000628", new JSONString(
-							DAILYMED_PREFIX + "ActiveMoiety"));
-					// body.put(DAILYMED_PREFIX + "ActiveMoiety", new
-					// JSONString(
-					// statement.getUrl()));
+					body.put("sio:" + "SIO_000628", new JSONString("dailymed:"
+							+ "ActiveMoiety"));
+
+					body.put("dailymed:" + "ActiveMoiety", new JSONString(
+							statement.getUrl()));
+
 					body.put(IRdfsOntology.label,
 							new JSONString(statement.getLabel()));
 					body.put(IDublinCoreTerms.description, new JSONString(
@@ -386,12 +384,11 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 					String statementUUID = UUID.uuid();
 					body.put("@id", new JSONString(SPL_URN_PREFIX
 							+ statementUUID));
-					body.put("@type", new JSONString(SPL_POC_PREFIX
+					body.put("@type", new JSONString("poc:"
 							+ "PharmacogenomicsStatement"));
-					body.put(SIO_PREFIX + "SIO_000628", new JSONString(
-							DAILYMED_PREFIX + "ConcomitantMedicationOfConcern"));
-					body.put(
-							DAILYMED_PREFIX + "ConcomitantMedicationOfConcern",
+					body.put("sio:" + "SIO_000628", new JSONString("dailymed:"
+							+ "ConcomitantMedicationOfConcern"));
+					body.put("dailymed:" + "ConcomitantMedicationOfConcern",
 							new JSONString(SPL_POC_PREFIX
 									+ "concomitant-medication-concern"));
 					body.put(IRdfsOntology.label,
@@ -408,13 +405,12 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 					String statementUUID = UUID.uuid();
 					body.put("@id", new JSONString(SPL_URN_PREFIX
 							+ statementUUID));
-					body.put("@type", new JSONString(SPL_POC_PREFIX
+					body.put("@type", new JSONString("poc:"
 							+ "PharmacogenomicsStatement"));
-					body.put(SIO_PREFIX + "SIO_000563", new JSONString(
-							SPL_POC_PREFIX + "VariantFrequency"));
-					body.put(SPL_POC_PREFIX + "VariantFrequency",
-							new JSONString(SPL_POC_PREFIX
-									+ "population-frequency-mentioned"));
+					body.put("sio:" + "SIO_000563", new JSONString("poc:"
+							+ "VariantFrequency"));
+					body.put("poc:" + "VariantFrequency", new JSONString(
+							SPL_POC_PREFIX + "population-frequency-mentioned"));
 					body.put(IRdfsOntology.label,
 							new JSONString(statement.getLabel()));
 					body.put(IDublinCoreTerms.description, new JSONString(
@@ -431,4 +427,5 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer {
 
 		return annotation;
 	}
+
 }
