@@ -220,6 +220,9 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 						drug.getLabel().indexOf("_"));
 
 				String drugname2 = drug.getLabel();
+				
+				System.out.println("drugname1:"+drugname1+"|drugname2"+drugname2);
+				
 				while (drugname2.contains("_")) {
 					drugname2 = drugname2.substring(drugname2.indexOf("_") + 1);
 				}

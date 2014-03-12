@@ -162,7 +162,7 @@
 						<g:ListBox ui:field="descriptdoi" name="descriptdoi"
 							visibleItemCount='1' styleName='{style.listbox}'>
 							<g:item value="0">unselected</g:item>
-							<g:item value="1">Abacivir</g:item>
+							<g:item value="1">Abacavir</g:item>
 							<g:item value="2">Aripiprazole</g:item>
 							<g:item value="3">Arsenic_Trioxide</g:item>
 							<g:item value="4">Atomoxetine</g:item>
