@@ -1,0 +1,19 @@
+// This plugin info file was created by the plugin-builder
+public class @PLUGIN_NAME@Plugin extends APlugin {
+
+    public static final String VERSION = "@VERSION@";
+    public static final String TYPE = "Annotation";
+    public static final String SUB_TYPE = "@SUB-TYPE@";
+    public static final String PLUGIN = @PLUGIN_NAME@.class.getName().substring(0, @PLUGIN_NAME@.class.getName().indexOf(".info"));
+
+    private static @PLUGIN_NAME@Plugin instance;
+    private @PLUGIN_NAME@Plugin() {}
+
+    public static @PLUGIN_NAME@Plugin getInstance() {
+         if(instance==null) instance = new @PLUGIN_NAME@Plugin();
+         return instance;
+    }
+
+    // TODO: add custom get methods for this plugin
+    
+}

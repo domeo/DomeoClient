@@ -1,0 +1,179 @@
+<ui:UiBinder
+    xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <ui:style>
+    .outer {
+    height: 30px;
+    padding-left: 0px;
+    padding-top: 0px;
+    width: 100%;
+    }
+    
+    .buttonsPanel {
+    position: absolute;
+    right: 20px;
+    float:right;
+    padding-top:4px;
+    padding-right: 0px;
+    padding-left: 2px;
+    height: 0px;
+    max-height: 20px;
+    display: block;
+    }
+    
+    .setPanel {
+    padding-left: 5px;	
+    }
+    
+    .rightColumn {
+    padding-left:0px;
+    /*padding-top: 24px;*/
+    width: 100%;
+    min-width: 400px;	
+    height: 300px;
+    }
+    
+    .leftColumn {
+    width: 380px;	
+    vertical-align: top;
+    }
+    
+    .panel {
+    width: 100%;
+    vertical-align: top;
+    padding-top: 10px;
+    }
+    
+    .provenance {
+    backgorund-color: gray;
+    padding-top: 3px;
+    padding-left: 10px;
+    cursor: pointer;
+    cursor: hand;
+    }
+    
+    .subTitle {
+    /*width: 99%;*/
+    background-color: #eee;
+    padding-left: 4px;
+    padding-right: 14px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-weight: bold;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px; 	 		
+    }
+    
+    .subPanel {
+    min-height: 40px;	
+    }
+    
+    .newQualifierPanel {
+    min-height: 26px;	
+    display: inline;
+    }
+    
+    .inner {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    cursor: pointer;
+    cursor: hand;
+    }
+    
+    .inner2 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    }
+    
+    .qualifiersLabel {
+    font-weight: bold;
+    padding-right:3px;
+    }
+    
+    .titlebar {
+    width: 360px;	
+    background-color:#DDDDDD;
+    border-top:3px solid white;
+    }
+    
+    .titlebarright {
+    width: 420px;	
+    background-color:#DDDDDD;
+    border-top:3px solid white;
+    }
+    
+    .commentBody {
+    padding-top: 3px;
+    padding-left: 3px;
+    color: #333;
+    font-style: normal;
+    width: 360px;
+    height: 100px;
+    font-size: 12px;
+    }
+    
+    .elementType {
+    padding-right: 2px;
+    display: inline;
+    white-space: nowrap;
+    }
+    
+    z.titleLeft {
+    padding-left:4px;
+    }	  	
+  </ui:style>
+  
+  <!--  
+       <ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' /> 
+  -->
+
+  <g:VerticalPanel ui:field='container' styleName='{style.outer}'>
+    <g:HorizontalPanel ui:field='buttonsPanel' styleName='{style.buttonsPanel}'>
+      <g:SimplePanel styleName='{style.setPanel}'>
+	<g:ListBox ui:field='annotationSet'></g:ListBox>
+      </g:SimplePanel>
+    </g:HorizontalPanel>
+    <g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
+      <g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>@PLUGIN_NAME@ Annotation:</g:Label>
+      <g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
+    </g:HorizontalPanel>
+
+    
+    <g:HorizontalPanel styleName='{style.panel}'>
+      <g:cell width="400px">
+      
+	<g:VerticalPanel styleName='{style.leftColumn}'>
+	
+	
+
+	 
+	  <g:VerticalPanel styleName='{style.panel}'>
+	    <g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Note:</g:Label>
+	    <g:TextArea ui:field='commentBody' styleName='{style.commentBody}'></g:TextArea>
+	  </g:VerticalPanel>
+	  
+	  
+	</g:VerticalPanel>
+	
+	
+      </g:cell>
+      
+      <g:cell>
+	<g:VerticalPanel>
+	
+	
+	  <g:cell height="0px">
+	    <g:TabBar ui:field="tabBar" height="0px"/>
+	  </g:cell>
+	
+	
+	  <g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+
+	  </g:VerticalPanel>
+	</g:VerticalPanel>
+      </g:cell>
+    </g:HorizontalPanel>
+  </g:VerticalPanel>
+</ui:UiBinder>

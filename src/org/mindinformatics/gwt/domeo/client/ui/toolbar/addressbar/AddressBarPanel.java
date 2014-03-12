@@ -206,28 +206,31 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 	// ==================
 	private void addOracleSuggestions(MultiWordSuggestOracle oracle) {
 		if(_application.isHostedMode()) {
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/index.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/gene6606.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/OMIM253300.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/OMIM600354.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PM10679938.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PM17561409.html");
-			
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3308009_v082012.html");
-			
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3639628.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2759694.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2759694_v062012.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2700002.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2700002_v062012.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2799499.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2799499_v062012.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2714656.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2714656_v062012.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT000001549.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT00368199.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT01136213.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/ImagesTest.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/index.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/gene6606.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/OMIM253300.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/OMIM600354.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PM10679938.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PM17561409.html");
+//			
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3308009_v082012.html");
+//			
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3639628.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2759694.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2759694_v062012.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2700002.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2700002_v062012.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2799499.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2799499_v062012.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2714656.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2714656_v062012.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT000001549.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT00368199.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT01136213.html");
+//			oracle.add(UrlUtils.getUrlAndRoot() + "tests/ImagesTest.html");
+			oracle.add(UrlUtils.getUrlAndRoot() + "tests/SPL-annotation/Warfarin-ab047628-67d0-4a64-8d77-36b054969b44.html");
+			oracle.add(UrlUtils.getUrlAndRoot() + "tests/SPL-annotation/Clopidogrel-1086a7b4-b89b-4bee-8120-5f752626c046.html");
+						
 		} else {
 			if(ApplicationUtils.getProvideExamplesUrls()!=null && ApplicationUtils.getProvideExamplesUrls().trim().equals("true")) {
 				oracle.add("http://en.wikipedia.org/wiki/Amyloid_precursor_protein");

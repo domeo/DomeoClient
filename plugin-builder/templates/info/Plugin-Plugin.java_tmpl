@@ -1,0 +1,45 @@
+package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.info;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.plugins.APlugin;
+
+// This plugin info file was created by the plugin-builder
+public class @PLUGIN_NAME@Plugin extends APlugin {
+
+    public static final String VERSION = "@VERSION@";
+    public static final String TYPE = "Annotation";
+    public static final String SUB_TYPE = "@SUB-TYPE@";
+    public static final String PLUGIN = @PLUGIN_NAME@Plugin.class.getName().substring(0, @PLUGIN_NAME@Plugin.class.getName().indexOf(".info"));
+
+    private static @PLUGIN_NAME@Plugin instance;
+    private @PLUGIN_NAME@Plugin() {}
+
+    public static @PLUGIN_NAME@Plugin getInstance() {
+         if(instance==null) instance = new @PLUGIN_NAME@Plugin();
+         return instance;
+    }
+
+    @Override
+    public String getPluginName() {
+	return PLUGIN;
+    }
+	
+    @Override
+    public String getType() {
+	return TYPE;
+    }
+
+    @Override
+    public String getSubType() {
+	return SUB_TYPE;
+    }
+
+    @Override
+    public Boolean getMandatory() {
+	return false;
+    }
+
+    @Override
+    public String getVersion() {
+	return VERSION;
+    }
+
+}

@@ -1,0 +1,47 @@
+package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.ui.form;
+
+import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormComponent;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormsManager;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.IFormGenerator;
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model.M@PLUGIN_NAME@Annotation;
+
+/**
+ * @author Richard Boyce <rdb20@pitt.edu>
+ */
+public class @PLUGIN_NAME@FormProvider implements IFormGenerator {
+
+	// By contract 
+	private IDomeo _domeo;
+
+	public @PLUGIN_NAME@FormProvider(IDomeo domeo) {
+		_domeo = domeo;
+	}
+	
+	@Override
+	public boolean isFormSupported(String annotationName) {
+		if(annotationName.equals(M@PLUGIN_NAME@Annotation.class.getName())) 
+				return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public AFormComponent getForm(AFormsManager manager) {
+		return new F@PLUGIN_NAME@Form(_domeo, manager);
+	}
+	
+	@Override
+	public AFormComponent getForm(AFormsManager manager, MAnnotation annotation) {
+		return new F@PLUGIN_NAME@Form(_domeo,  manager, (M@PLUGIN_NAME@Annotation) annotation);
+	}
+
+	@Override
+	public AFormComponent getForm(String annotationName, AFormsManager manager) {
+		if(isFormSupported(annotationName)) 
+			return new F@PLUGIN_NAME@Form(_domeo,  manager);
+		else 
+			return null;
+	}
+}

@@ -1,0 +1,250 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.body {
+			width: 100%;
+			padding-top: 4px;
+		}
+		
+		.icon {
+			padding-right: 1px;
+		}
+		
+		.clickable {
+			pointer: hand;
+			cursor: pointer;
+		}
+		
+		.content {
+			background-color: #F0F8FF;
+			border-top-right-radius: 10px;
+			-moz-border-radius-topright: 10px;
+			border-bottom-right-radius: 10px;
+			-moz-border-radius-bottomright: 10px;
+			padding: 3px 5px 3px 3px;
+		}
+		
+		.panel {
+			width: 100%;
+			vertical-align: top;
+			padding-top: 8px;
+		}
+		
+		.contentItem {
+			display: inline;
+		}
+		
+		.contentItemType {
+			font-weight: bold;
+			display: inline;
+			padding-right: 4px;
+		}
+		
+		.contentFrame {
+			padding: 0px 1px 4px 0px;
+		}
+		
+		.provenance {
+			width: 500px;
+			background-color: #EEE;
+			border-top-right-radius: 10px;
+			-moz-border-radius-topright: 10px;
+			border-bottom-right-radius: 10px;
+			-moz-border-radius-bottomright: 10px;
+			padding: 3px 5px 3px 3px;
+		}
+		
+		.provenanceFrame {
+			padding: 0px 1px 0px 0px;
+		}
+		
+		.tablelabel {
+			background-color: #EEE;
+			padding: 3px 5px 3px 3px;
+		}
+		
+		.tablevalue {
+			background-color: #F0F8FF;
+			padding: 3px 5px 3px 3px;
+		}
+	</ui:style>
+
+	<g:VerticalPanel styleName='{style.body}' ui:field='body'>
+
+		<g:HorizontalPanel styleName='{style.provenance}'
+			ui:field='provenance'>
+		</g:HorizontalPanel>
+
+
+		<g:HorizontalPanel styleName='{style.contentFrame}'>
+			<g:FlowPanel styleName='{style.content}' ui:field='content'>
+				<g:Label ui:field='type' styleName='{style.contentItemType}'></g:Label>
+				<g:Label ui:field='text' styleName='{style.contentItem}'></g:Label>
+			</g:FlowPanel>
+		</g:HorizontalPanel>
+
+		<g:HorizontalPanel>
+		
+		<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="drugOIlabel" styleName='{style.tablelabel}'>Drug of Interest</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="drugOfInterest" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+		
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="biomarkerslabel" styleName='{style.tablelabel}'>Biomarkers</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="biomarkers" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+		<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="plslabel" styleName='{style.tablelabel}'>ProductLabelSelection</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="productls" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+		
+		
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pkimpactlabel" styleName='{style.tablelabel}'>PK Impact</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pkimpact" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pdimpactlabel" styleName='{style.tablelabel}'>PD Impact</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="pdimpact" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdruglabel" styleName='{style.tablelabel}'>drug</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdrug" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdoselabel" styleName='{style.tablelabel}'>dose</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recdose" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recmonitoringlabel" styleName='{style.tablelabel}'>monitoring</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="recmonitoring" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="testreclabel" styleName='{style.tablelabel}'>Test Rec</g:Label>
+				</g:HorizontalPanel>
+			 	<g:HorizontalPanel>
+					<g:Label ui:field="testrec" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel> 
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="statementlabel" styleName='{style.tablelabel}'>Statement</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="statement" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+				<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="variantlabel" styleName='{style.tablelabel}'>Variant</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="variant" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="testlabel" styleName='{style.tablelabel}'>Test</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="test" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="alleleslabel" styleName='{style.tablelabel}'>Alleles</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="allelesbody" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="medconditlabel" styleName='{style.tablelabel}'>Medical Condition</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="medconditbody" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+			<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="commentlabel" styleName='{style.tablelabel}'>Comment</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="commentbody" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+
+		</g:HorizontalPanel>
+
+
+
+		<g:HorizontalPanel>
+
+			<g:VerticalPanel>
+				<g:Image ui:field="rightIcon" styleName='{style.clickable}' />
+			</g:VerticalPanel>
+			<g:VerticalPanel>
+				<g:Label styleName='{style.contentItem}'>Agree  </g:Label>
+			</g:VerticalPanel>
+
+			<g:VerticalPanel>
+				<g:Image ui:field="wrongIcon" styleName='{style.clickable}' />
+			</g:VerticalPanel>
+			<g:VerticalPanel>
+				<g:Label styleName='{style.contentItem}'>Disagree  </g:Label>
+			</g:VerticalPanel>
+
+
+		</g:HorizontalPanel>
+
+	</g:VerticalPanel>
+</ui:UiBinder>

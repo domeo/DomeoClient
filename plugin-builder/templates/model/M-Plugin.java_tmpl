@@ -1,0 +1,31 @@
+package org.mindinformatics.gwt.domeo.plugins.annotation.@PLUGIN_NAME@.model;
+
+import java.util.Set;
+
+import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
+
+/**
+ * @author Richard Boyce <rdb20@pitt.edu>
+ */
+@SuppressWarnings("serial")
+public class M@PLUGIN_NAME@ extends MTrustedResource {
+
+	MLinkedResource  comment;
+	
+	public MLinkedResource getComment() {
+		return comment;
+	}
+
+	public void setComment(MLinkedResource comment) {
+		this.comment = comment;
+	}
+
+	Set<MLinkedResource> statementsResource;
+
+	public M@PLUGIN_NAME@(String url, String label, MGenericResource source) {
+		super(url, label, source);
+	}
+
+}

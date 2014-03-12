@@ -1,0 +1,91 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+		.body {
+			width: 100%;
+			padding-top: 4px;
+		}
+		
+		.icon {
+			padding-right: 1px;
+		}
+		
+		.clickable {
+			pointer: hand;
+			cursor: pointer;
+		}
+		
+		.content {
+			background-color: #F0F8FF;
+			/*
+													-moz-border-radius: 15px;
+													border-radius: 15px;
+													*/
+			border-top-right-radius: 10px;
+			-moz-border-radius-topright: 10px;
+			border-bottom-right-radius: 10px;
+			-moz-border-radius-bottomright: 10px;
+			padding: 3px 5px 3px 3px;
+		}
+		
+		.contentItem {
+			display: inline;
+		}
+		
+		.contentItemType {
+			font-weight: bold;
+			display: inline;
+			padding-right: 4px;
+		}
+		
+		.contentFrame {
+			padding: 0px 1px 4px 0px;
+		}
+		
+		.provenance {
+			width: 100%;
+			background-color: #EEE;
+			border-top-right-radius: 10px;
+			-moz-border-radius-topright: 10px;
+			border-bottom-right-radius: 10px;
+			-moz-border-radius-bottomright: 10px;
+			padding: 3px 5px 3px 3px;
+		}
+		
+		.provenanceFrame {
+			padding: 0px 1px 0px 0px;
+		}
+	</ui:style>
+
+	<g:VerticalPanel styleName='{style.body}' ui:field='body'>
+
+		<g:HorizontalPanel styleName='{style.provenance}'
+			ui:field='provenance'>
+		</g:HorizontalPanel>
+
+
+		<g:HorizontalPanel styleName='{style.contentFrame}'>
+			<g:FlowPanel styleName='{style.content}' ui:field='content'>
+				<g:Label ui:field='type' styleName='{style.contentItemType}'></g:Label>
+				<g:Label ui:field='text' styleName='{style.contentItem}'></g:Label>
+			</g:FlowPanel>
+		</g:HorizontalPanel>
+
+		<g:HorizontalPanel>
+			<g:Label ui:field="pkimpact" styleName='{style.contentItem}'></g:Label>
+		</g:HorizontalPanel>
+
+		<g:HorizontalPanel>
+
+			<g:SimplePanel ui:field="acceptIcon" styleName='{style.clickable}' />
+			<g:Label styleName='{style.contentItem}'>Correct  </g:Label>
+			<g:SimplePanel ui:field="broadIcon" styleName='{style.clickable}' />
+			<g:Label styleName='{style.contentItem}'>Broad  </g:Label>
+			<g:SimplePanel ui:field="wrongIcon" styleName='{style.clickable}' />
+			<g:Label styleName='{style.contentItem}'>Wrong </g:Label>
+
+		</g:HorizontalPanel>
+
+	</g:VerticalPanel>
+</ui:UiBinder>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Domeo_TaskNov16"
+  id="myeclipse.1384820532331"
+  context-root="/Domeo_TaskNov16"
+  j2ee-spec="5.0"
+  archive="Domeo_TaskNov16.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

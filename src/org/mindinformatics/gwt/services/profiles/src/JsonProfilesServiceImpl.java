@@ -68,8 +68,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 			if(format.equals("json") && username.equals("admin")) {
 				if(request.equals("info")) {
 					PrintWriter out = resp.getWriter();
-					//out.print("[{\"createdOn\":\"08/19/2013 09:46:12 -0400\",\"createdBy\":[{\"@type\":\"foafx:Person\",\"foafx:name\":\"Dr. John Doe\",\"@id\":\"8a70347a4096d318014096d369480000\"}],\"plugins\":[{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.qualifier\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.micropubs\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmed\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.omim\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.bioportal\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.client.component.clipboard\"}],\"description\":\"All the tools that Domeo has to offer for biomedicine\",\"name\":\"Complete Biomedical Profile\",\"uuid\":\"8a70347a4096d318014096d36a5c0008\"}]");					
-					
+			
 					out.print('[');
 					
 					out.print("{");
@@ -245,6 +244,24 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					
 					out.print("{");
 					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.spls");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier");
 					out.print("\",");
 					out.print("\"status\": \"");
@@ -334,8 +351,10 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 				} else if (request.equals("all")) {
 					PrintWriter out = resp.getWriter();
 					
-					out.print("[{\"createdOn\":\"08/19/2013 09:46:12 -0400\",\"createdBy\":[{\"@type\":\"foafx:Person\",\"foafx:name\":\"Dr. John Doe\",\"@id\":\"8a70347a4096d318014096d369480000\"}],\"plugins\":[{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.qualifier\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.micropubs\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmed\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.omim\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.bioportal\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.client.component.clipboard\"}],\"description\":\"All the tools that Domeo has to offer for biomedicine\",\"name\":\"Complete Biomedical Profile\",\"uuid\":\"8a70347a4096d318014096d36a5c0008\"},{\"createdOn\":\"08/19/2013 09:46:12 -0400\",\"createdBy\":[{\"@type\":\"foafx:Person\",\"foafx:name\":\"Dr. John Doe\",\"@id\":\"8a70347a4096d318014096d369480000\"}],\"plugins\":[],\"description\":\"Simple profile: notes and commenting\",\"name\":\"Simple profile\",\"uuid\":\"8a70347a4096d318014096d36b1b0009\"}]");
-
+					out.print("[{\"createdOn\":\"08/19/2013 09:46:12 -0400\","+
+						"\"createdBy\":[{\"@type\":\"foafx:Person\",\"foafx:name\":\"Dr. John Doe\",\"@id\":\"8a70347a4096d318014096d369480000\"}],"+
+						"\"plugins\":[{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.qualifier\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.annotation.micropubs\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmed\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.omim\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.plugins.resource.bioportal\"},{\"status\":\"enabled\",\"name\":\"org.mindinformatics.gwt.domeo.client.component.clipboard\"}],\"description\":\"All the tools that Domeo has to offer for biomedicine\",\"name\":\"Complete Biomedical Profile\",\"uuid\":\"8a70347a4096d318014096d36a5c0008\"},{\"createdOn\":\"08/19/2013 09:46:12 -0400\",\"createdBy\":[{\"@type\":\"foafx:Person\",\"foafx:name\":\"Dr. John Doe\",\"@id\":\"8a70347a4096d318014096d369480000\"}],\"plugins\":[],\"description\":\"Simple profile: notes and commenting\",\"name\":\"Simple profile\",\"uuid\":\"8a70347a4096d318014096d36b1b0009\"}]");
+				
 					out.flush();
 				}
 			} else {
@@ -359,9 +378,12 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.opentrials", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies", MProfile.PLUGIN_ENABLED);
+		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.spls", MProfile.PLUGIN_ENABLED);
+		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.omim", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmed", MProfile.PLUGIN_ENABLED);
+		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.bioportal", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.bioportal", MProfile.PLUGIN_ENABLED);
 		return profile;
 	}

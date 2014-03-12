@@ -17,6 +17,10 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnno
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLPharmgxUsage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLType;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLsFactory;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgent;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
@@ -38,36 +42,36 @@ public class AnnotationFactory implements IInitializableComponent {
 
 	private static final String DOMEO_URN_PREFIX = "urn:domeoclient:uuid:";
 	private static final String NEW_SET_LABEL = "New set";
-	
+
 	private static Long localIdsCounter = 0L;
 	private static Long newSetsCounter = 0L;
-	
+
 	public void init() {
 		localIdsCounter = 0L;
 		newSetsCounter = 0L;
 	}
-	
+
 	public static Long getLocalId() {
 		Long buffer = localIdsCounter;
 		localIdsCounter++;
 		return buffer;
 	}
-	
+
 	// TODO manage collisions
 	protected static String getUuid() {
 		return UUID.uuid();
 	}
-	
+
 	protected static String getUrn(String uuid) {
 		return DOMEO_URN_PREFIX + uuid;
 	}
-	
+
 	protected static Long getNewSetCounter() {
 		Long buffer = newSetsCounter;
 		newSetsCounter++;
 		return buffer;
 	}
-	
+
 	// IMAGES
 	// TODO move this somewhere else (Resources manager?)
 	public static MOnlineImage cloneOnlineImage(String label,
@@ -78,7 +82,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		image.setUrl(url);
 		return image;
 	}
-	
+
 	//  SETS -----------------------------------------------------------------
 	// -----------------------------------------------------------------------
 	public static MBibliographicSet createBibliographicSet(ISoftware createdWith, IPerson editor, 
@@ -96,7 +100,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		set.setCreatedOn(new Date());
 		return set;
 	}
-	
+
 	public static MAnnotationSet createAnnotationSet(ISoftware createdWith, IPerson editor, 
 			MGenericResource target, String label, String description) 
 	{
@@ -112,7 +116,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		set.setCreatedOn(new Date());
 		return set;
 	}
-	
+
 	public static MAnnotationSet createNewAnnotationSet(ISoftware createdWith, IPerson editor, 
 			MGenericResource target) 
 	{
@@ -128,28 +132,28 @@ public class AnnotationFactory implements IInitializableComponent {
 		set.setCreatedOn(new Date());
 		return set;
 	}
-	
-//	public static MAnnotationSet cloneAnnotationSet(String individualUri, String lineageUri,
-//			Date createdOn, Date lastSavedOn, ISoftware createdWith, IAgent editor, String versionNumber, String previousVersion,
-//			GenericResource target, String label, String description) 
-//	{
-//		MAnnotationSet set = new MAnnotationSet();
-//		set.setLocalId(getLocalId());
-//		set.setUuid("");
-//		set.setLineageUri(lineageUri);
-//		set.setIndividualUri(individualUri);
-//		set.setTargetResource(target);
-//		set.setLabel(label);
-//		set.setDescription(description);
-//		set.setTool(createdWith);
-//		set.setEditor(editor);
-//		set.setCreatedOn(createdOn);
-//		set.setLastSavedOn(lastSavedOn);
-//		set.setVersionNumber(versionNumber);
-//		set.setPreviousVersion(previousVersion);
-//		return set;
-//	}
-	
+
+	//	public static MAnnotationSet cloneAnnotationSet(String individualUri, String lineageUri,
+	//			Date createdOn, Date lastSavedOn, ISoftware createdWith, IAgent editor, String versionNumber, String previousVersion,
+	//			GenericResource target, String label, String description) 
+	//	{
+	//		MAnnotationSet set = new MAnnotationSet();
+	//		set.setLocalId(getLocalId());
+	//		set.setUuid("");
+	//		set.setLineageUri(lineageUri);
+	//		set.setIndividualUri(individualUri);
+	//		set.setTargetResource(target);
+	//		set.setLabel(label);
+	//		set.setDescription(description);
+	//		set.setTool(createdWith);
+	//		set.setEditor(editor);
+	//		set.setCreatedOn(createdOn);
+	//		set.setLastSavedOn(lastSavedOn);
+	//		set.setVersionNumber(versionNumber);
+	//		set.setPreviousVersion(previousVersion);
+	//		return set;
+	//	}
+
 	/**
 	 * Annotation Set cloning used by unmarshallers. Tool and creator are not initialized as they
 	 * are defined through lazy binding.
@@ -180,7 +184,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		set.setPreviousVersion(previousVersion);
 		return set;
 	}
-	
+
 	//  CITATION & REFERENCES ------------------------------------------------
 	// -----------------------------------------------------------------------
 	private static void createAnnotationReference(
@@ -199,7 +203,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		annotationReference.setTool(tool);
 		//set.addAnnotation(annotationReference);
 	}
-	
+
 	public static MAnnotationReference createCitation(
 			MAgent creator, ISoftware tool, MReference reference, 
 			MGenericResource target) 
@@ -208,7 +212,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		AnnotationFactory.createAnnotationReference(ref, creator, tool, reference, target);
 		return ref;
 	}
-	
+
 	public static MAnnotationReference cloneCitation(
 			String individualUri,
 			IAgent creator, ISoftware tool, Date createdOn, MReference reference, 
@@ -226,7 +230,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		annotationReference.setTool(tool);
 		return annotationReference;
 	}
-	
+
 	public static MAnnotationCitationReference cloneReference(
 			String individualUri,
 			IAgent creator, ISoftware tool, Date createdOn, Integer referenceIndex, 
@@ -247,7 +251,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ref.setTool(tool);
 		return ref;
 	}
-	
+
 	public static MAnnotationCitationReference createReference(
 			MAgent creator, ISoftware tool, Integer referenceIndex, 
 			MReference reference, MGenericResource target, 
@@ -260,7 +264,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ref.setReferenceSelector(referenceSelector);
 		return ref;
 	}
-	
+
 	public static MAnnotationCitationReference createCitationReference(
 			MAgent creator, ISoftware tool,Integer referenceIndex, 
 			MReference reference, MGenericResource target, 
@@ -272,7 +276,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ref.setReferenceSelector(referenceSelector);
 		return ref;
 	}
-	
+
 	public static MAnnotationCitationReference createCitationReference(
 			MAgent creator, ISoftware tool, Integer referenceIndex, 
 			MReference reference, MGenericResource target, 
@@ -285,7 +289,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ref.setReferenceSelector(referenceSelector);
 		return ref;
 	}
-	
+
 	//  SELECTORS ------------------------------------------------------------
 	// -----------------------------------------------------------------------
 	/**
@@ -304,7 +308,7 @@ public class AnnotationFactory implements IInitializableComponent {
 			String prefix, String suffix) 
 	{
 		MTextQuoteSelector sel = new MTextQuoteSelector();
-		
+
 		sel.setLocalId(getLocalId());
 		sel.setUuid("");
 		sel.setUri(individualUri);
@@ -315,7 +319,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setTarget(target);
 		return sel;
 	}
-	
+
 	public static MTextQuoteSelector createPrefixSuffixTextSelector(
 			IAgent creator, MGenericResource target, String exact,
 			String prefix, String suffix) 
@@ -332,7 +336,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setTarget(target);
 		return sel;
 	}
-	
+
 	public static MAnnotationSelector createAnnotationSelector(
 			IAgent creator, MGenericResource target, MAnnotation annotation) 
 	{
@@ -346,7 +350,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setTarget(target);
 		return sel;
 	}
-	
+
 	public static MAnnotationSelector cloneAnnotationSelector(
 			String individualUri, Date createdOn,
 			IAgent creator, MGenericResource target) 
@@ -360,7 +364,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setTarget(target);
 		return sel;
 	}
-	
+
 	/**
 	 * Creation of the MAnnotationSelector used by unmarshallers.
 	 * @param individualUri	The uri of the selector
@@ -380,7 +384,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setTarget(target);
 		return sel;
 	}
-	
+
 	public static MImageInDocumentSelector cloneImageInDocumentSelector(
 			String individualUri, Date createdOn,
 			IAgent creator, MGenericResource target, MGenericResource context) 
@@ -394,7 +398,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setContext(context);
 		return sel;
 	}
-	
+
 	/**
 	 * 
 	 * @param individualUri
@@ -416,7 +420,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setContext(context);
 		return sel;
 	}
-	
+
 	//  HIGHLIGHTS -----------------------------------------------------------
 	// -----------------------------------------------------------------------
 	public static MHighlightAnnotation createHighlight(
@@ -434,7 +438,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MHighlightAnnotation createHighlight(
 			MAnnotationSet set, IAgent creator, ISoftware tool) 
 	{
@@ -448,7 +452,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MHighlightAnnotation cloneHighlight(
 			String individualUri, String lineageUri,
 			Date createdOn, Date lastSavedOn, 
@@ -472,7 +476,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	//  TEMPORARY ------------------------------------------------------------
 	// -----------------------------------------------------------------------
 	public static MSelectionAnnotation createTemporary(
@@ -487,7 +491,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setSelector(selector);
 		return ann;
 	}
-	
+
 	//  POST ITS -----------------------------------------------------------
 	// -----------------------------------------------------------------------
 	public static MPostItAnnotation createPostIt(
@@ -508,7 +512,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MContentAsRdf createContentAsRdf(String text) {
 		MContentAsRdf body = new MContentAsRdf();
 		body.setIndividualUri(getUuid());
@@ -516,7 +520,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		body.setChars(text);
 		return body;
 	}
-	
+
 	public static MTargetSelector createTargetSelector(IAgent creator, 
 			MGenericResource target) {
 		MTargetSelector selector = new MTargetSelector();
@@ -528,9 +532,9 @@ public class AnnotationFactory implements IInitializableComponent {
 		selector.setUri(getUrn(selector.getUuid()));
 		return selector;
 	}
-	
+
 	public static MTargetSelector cloneTargetSelector(
-		String individualUri, MGenericResource target) 
+			String individualUri, MGenericResource target) 
 	{
 		MTargetSelector sel = new MTargetSelector();
 		sel.setLocalId(getLocalId());
@@ -539,7 +543,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		sel.setTarget(target);
 		return sel;
 	}
-	
+
 	public static MPostItAnnotation createPostIt(
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			PostitType type, String body) 
@@ -556,7 +560,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MPostItAnnotation createPostIt(IDomeo domeo,
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target, 
@@ -570,7 +574,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		selector.setUuid(getUuid());
 		selector.setUri(getUrn(selector.getUuid()));
 		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
-		
+
 		MPostItAnnotation ann = new MPostItAnnotation();
 		ann.setLocalId(getLocalId());
 		ann.setUuid(getUuid());
@@ -587,7 +591,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MPostItAnnotation clonePostIt(
 			String individualUri, String lineageUri,
 			Date createdOn, Date lastSavedOn, 
@@ -613,7 +617,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setHasChanged(false);
 		return ann;
 	}
-	
+
 	//  QUALIFIER ------------------------------------------------------------
 	// -----------------------------------------------------------------------
 	public static MQualifierAnnotation createQualifier(
@@ -634,7 +638,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MQualifierAnnotation createQualifier(
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target, MSelector selector) 
@@ -651,7 +655,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MQualifierAnnotation createQualifier(IDomeo domeo,
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target, 
@@ -665,12 +669,12 @@ public class AnnotationFactory implements IInitializableComponent {
 		selector.setUuid(getUuid());
 		selector.setUri(getUrn(selector.getUuid()));
 		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
-		
+
 		MQualifierAnnotation ann = new MQualifierAnnotation();
 		ann.setLocalId(getLocalId());
 		ann.setUuid(getUuid());
 		ann.setIndividualUri(getUrn(ann.getUuid()));
-		
+
 		//ann.setTarget(target);
 		ann.setSelector(selector);
 		ann.setCreator(creator);
@@ -680,7 +684,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MImageInDocumentSelector createImageSelector(IDomeo domeo, IAgent creator, MGenericResource target) {
 		MImageInDocumentSelector selector = new MImageInDocumentSelector();
 		selector.setCreator(creator);
@@ -692,28 +696,28 @@ public class AnnotationFactory implements IInitializableComponent {
 		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
 		return selector;
 	}
-	
+
 	public static MQualifierAnnotation createQualifier(IDomeo domeo,
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target) 
 	{
-		
+
 		MImageInDocumentSelector selector = createImageSelector(domeo, creator, target);
-		
-//		MImageInDocumentSelector selector = new MImageInDocumentSelector();
-//		selector.setCreator(creator);
-//		selector.setCreatedOn(new Date());
-//		selector.setTarget(target);
-//		selector.setLocalId(getLocalId());
-//		selector.setUuid(getUuid());
-//		selector.setUri(getUrn(selector.getUuid()));
-//		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
-		
+
+		//		MImageInDocumentSelector selector = new MImageInDocumentSelector();
+		//		selector.setCreator(creator);
+		//		selector.setCreatedOn(new Date());
+		//		selector.setTarget(target);
+		//		selector.setLocalId(getLocalId());
+		//		selector.setUuid(getUuid());
+		//		selector.setUri(getUrn(selector.getUuid()));
+		//		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
+
 		MQualifierAnnotation ann = new MQualifierAnnotation();
 		ann.setLocalId(getLocalId());
 		ann.setUuid(getUuid());
 		ann.setIndividualUri(getUrn(ann.getUuid()));
-		
+
 		//ann.setTarget(target);
 		ann.setSelector(selector);
 		ann.setCreator(creator);
@@ -722,7 +726,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MQualifierAnnotation cloneQualifier(
 			String individualUri, String lineageUri,
 			Date createdOn, Date lastSavedOn, 
@@ -745,7 +749,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setHasChanged(false);
 		return ann;
 	}
-	
+
 	//  COMMENTS ------------------------------------------------------------
 	// -----------------------------------------------------------------------
 	public static MCommentAnnotation cloneComment(
@@ -772,7 +776,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MCommentAnnotation createComment(
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target, MSelector selector,
@@ -791,7 +795,7 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
-	
+
 	public static MCommentAnnotation createComment(
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target, 
@@ -809,4 +813,108 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setTool(tool);
 		return ann;
 	}
+
+	
+	//  SPLs  -----------------------------------------------------------
+	// uses createContentAsRdf, createTargetSelector, cloneTargetSelector defined above
+	// -----------------------------------------------------------------------
+	public static MSPLsAnnotation createSPLs(
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			MGenericResource target, MSelector selector,
+			SPLType type, String body) 
+	{
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		ann.setSelector(selector);
+		ann.setType(type);
+		ann.setBody(createContentAsRdf(body));
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+
+
+	public static MSPLsAnnotation createSPLs(
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			SPLType type, String body) 
+	{
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		ann.setType(type);
+		ann.setBody(createContentAsRdf(body));
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+
+	public static MSPLsAnnotation createSPLs(IDomeo domeo,
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			MGenericResource target, 
+			SPLType type, String body) 
+	{
+		MImageInDocumentSelector selector = new MImageInDocumentSelector();
+		selector.setCreator(creator);
+		selector.setCreatedOn(new Date());
+		selector.setTarget(target);
+		selector.setLocalId(getLocalId());
+		selector.setUuid(getUuid());
+		selector.setUri(getUrn(selector.getUuid()));
+		selector.setContext(domeo.getAnnotationPersistenceManager().getCurrentResource());
+
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+
+		//ann.setTarget(target);
+		//ann.setSelector(createTargetSelector(creator, target));
+		ann.setSelector(selector);
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		ann.setType(type);
+		ann.setBody(createContentAsRdf(body));
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+
+	public static MSPLsAnnotation cloneSPLs(
+			String individualUri, String lineageUri,
+			Date createdOn, Date lastSavedOn, 
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			String versionNumber, String previousVersion,
+			MGenericResource target, ArrayList<MSelector> selectors,
+			String label, MContentAsRdf body, SPLType type) 
+	{
+		MSPLsAnnotation ann = new MSPLsAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid("");
+		ann.setLineageUri(lineageUri);
+		ann.setIndividualUri(individualUri);
+		ann.setCreator(creator);
+		ann.setCreatedOn(createdOn);
+		ann.setLastSavedOn(lastSavedOn);
+		ann.setVersionNumber(versionNumber);
+		ann.setPreviousVersion(previousVersion);
+		ann.getSelectors().addAll(selectors);
+		ann.setBody(body);
+		ann.setType(type);
+		ann.setTool(tool);
+		ann.setHasChanged(false);
+		
+		//TODO: why not just create a constructor for the class? This step here is needed or a null expection will trigger when data is added to the annotation
+		MSPLPharmgxUsage pharmgxUsage = SPLsFactory
+				.createSPLPharmgxUsage();
+		ann.setPharmgxUsage(pharmgxUsage);
+		return ann;
+	}
+
 }

@@ -44,6 +44,9 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.Antibodies"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.relationship.Relationship"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.MicroPublications"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.spls.SPLs"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.expertstudy_pDDI"/>
+
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.textmining.Textmining"/>
   
   <!-- Extractors  -->

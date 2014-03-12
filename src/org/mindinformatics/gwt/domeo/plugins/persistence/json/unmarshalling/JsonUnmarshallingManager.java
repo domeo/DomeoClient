@@ -53,9 +53,13 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.Nif
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MPharmgx;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLType;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationHighlight;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationPostIt;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationReference;
+import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSPL;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
@@ -665,7 +669,7 @@ public class JsonUnmarshallingManager {
 						((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
 						set.setHasChanged(false);
 						
-					} else {
+					}  else {
 						if(typesSet.contains(MPostItAnnotation.TYPE)) {
 							PostitType postItType = null;
 							if(typesSet.contains(PostitType.NOTE)) {
@@ -708,7 +712,7 @@ public class JsonUnmarshallingManager {
 									);
 								*/
 							}
-						} else  if(typesSet.contains(MQualifierAnnotation.TYPE)) {
+						}  else  if(typesSet.contains(MQualifierAnnotation.TYPE)) {
 							JsAnnotationPostIt postIt = (JsAnnotationPostIt) jsonAnnotations.get(j); // TODO change
 							ann = AnnotationFactory.cloneQualifier(
 								postIt.getId(), 
@@ -1052,7 +1056,7 @@ public class JsonUnmarshallingManager {
 										rr.setCreationDate(rel.getFormattedCreatedOn());
 										microPublication.getEvidence().add(rr);
 									}
-								}
+								} 
 							}
 							
 							if(argues.isQualifiers()) {
@@ -1079,6 +1083,23 @@ public class JsonUnmarshallingManager {
 									rr.setCreationDate(rel.getFormattedCreatedOn());
 									microPublication.getQualifiers().add(rr);
 								}
+							}
+						} else if (typesSet.contains(MSPLsAnnotation.TYPE)){
+							SPLType splType = null;
+							//if(typesSet.contains(SPLType.PHARMGX)) { //TODO: test with the conditional operational
+								splType = SPLType.PHARMGX_TYPE; //TODO: possibly add multiple types like Post It has (e.g., pharmgx, ddis, ades, etc)
+							//}
+							if(splType!=null) {
+								_domeo.getLogger().debug(this, "Calling unmarshallSPLAnnotation with selector 0 prefix: " + 
+										((MTextQuoteSelector)selectors.get(0)).getPrefix() + " suffix: " + 
+										((MTextQuoteSelector)selectors.get(0)).getSuffix());
+								ann = unmarshallSPLAnnotation((JsAnnotationSPL) jsonAnnotations.get(j), "", set, selectors);
+								if(ann == null){
+									_domeo.getLogger().debug(this, "something is wrong, annotation is null");
+								}
+								((MSPLsAnnotation) ann).setType(splType);
+								_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation. Some tests values:" +
+										" PharmacokineticImpact" + ((MSPLsAnnotation) ann).getPKImpact());																						
 							}
 						}
 						
@@ -1469,6 +1490,20 @@ public class JsonUnmarshallingManager {
 		}
 	}
 	
+	private MSPLsAnnotation unmarshallSPLAnnotation(JsAnnotationSPL annotationSPLInJson, String validation, MAnnotationSet set, 
+			ArrayList<MSelector> selectors) {
+		_domeo.getLogger().debug(this, "Unmarshalling " + MSPLsAnnotation.class.getName() + 
+			" with id " + getObjectId(annotationSPLInJson));
+		IUnmarshaller unmarshaller = null;
+		try {
+			unmarshaller = selectUnmarshaller(MSPLsAnnotation.class.getName());
+			return (MSPLsAnnotation) unmarshaller.unmarshall(this, annotationSPLInJson, validation, set, selectors);
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
+			return null;
+		}
+	}
+	
 // ------------------------------------------------------------------------
 //  Cache for lazy binding
 // ------------------------------------------------------------------------
@@ -1486,6 +1521,7 @@ public class JsonUnmarshallingManager {
 		unmarshallers.put(MImageInDocumentSelector.class.getName(), new ImageInDocumentSelectorJsonUnmarshaller(_domeo));	
 		unmarshallers.put(MHighlightAnnotation.class.getName(), new HighlightJsonUnmarshaller(_domeo));
 		unmarshallers.put(MPostItAnnotation.class.getName(), new UPostitJsonUnmarshaller(_domeo));
+		unmarshallers.put(MSPLsAnnotation.class.getName(), new USPLJsonUnmarshaller(_domeo));
 	}
 	
 	/**
