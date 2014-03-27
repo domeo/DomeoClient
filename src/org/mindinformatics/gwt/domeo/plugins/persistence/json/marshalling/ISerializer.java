@@ -1,6 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONObject;
 
 /**
