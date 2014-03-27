@@ -15,7 +15,7 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
   
   <inherits name="org.mindinformatics.gwt.framework.Framework"/> 
-  
+  <inherits name='com.google.gwt.query.Query'/>
   
   <!-- Components -->
   <inherits name="org.mindinformatics.gwt.domeo.component.bibliography.Bibliography"/>
@@ -27,6 +27,7 @@
   
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotation.persistence.Persistence"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.persistence.json.JsonPersistence"/>
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.Annotopia"/>
   
   <!-- Filters  -->
   <inherits name="org.mindinformatics.gwt.domeo.component.encoders.Encoders"/>
