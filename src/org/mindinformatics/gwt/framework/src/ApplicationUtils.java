@@ -7,6 +7,7 @@ import com.google.gwt.regexp.shared.RegExp;
 
 public class ApplicationUtils {
 
+	public static DateTimeFormat fullfmt = DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss Z"); // "2012-09-24T19:57:13Z"
 	public static DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy h:mma");
 	public static DateTimeFormat day = DateTimeFormat.getFormat("MM/dd/yyyy Z");
 	
