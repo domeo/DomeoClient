@@ -111,6 +111,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.selection.info.Selection
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.ui.tile.SelectionTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.src.ScienceDirectUrlFilter;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.src.AnnotopiaPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
@@ -188,8 +189,10 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetrieveExistingBibliographySetHandler,*/ IRetrieveExistingAnnotationSetHandler, IRetrieveExistingAnnotationSetListHandler {
 	
-	public static final boolean verbose = false;
+	public static final boolean verbose = true;
 	public static final boolean pathfinder = true;
+	
+	public static final boolean annotopia = false;
 	
 	public static String APP_NAME = "Domeo";
 	public static String APP_VERSION = "b40";
@@ -759,7 +762,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			return new StandalonePersistenceManager(this, null);
 		} else {
 			if (isHostedMode()) {
-				if(isJsonFormat()) {
+				if(annotopia) {
+					return new AnnotopiaPersistenceManager(this, null);
+				} else if(isJsonFormat()) {
 					return new JsonPersistenceManager(this, null);
 				} else {
 					return new GwtPersistenceManager(this, null);
@@ -1035,7 +1040,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			List<String> uuids = new ArrayList<String>();
 			uuids.add(ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("setId")));
 			((DialogGlassPanel)_dialogPanel).hide();
-			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
+			this.getProgressPanelContainer().setProgressMessage("Retrieving existing annotation");
 			((DialogGlassPanel)_dialogPanel).hideSoon();
 			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
 			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.encodeUrlComponent(ApplicationUtils.getUrlParameter("url")));
