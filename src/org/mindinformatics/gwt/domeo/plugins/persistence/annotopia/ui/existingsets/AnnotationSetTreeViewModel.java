@@ -346,11 +346,11 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 
 			// Add the name and address.
 			sb.appendHtmlConstant("<td style='font-size:95%;'>");
-			sb.appendEscaped(value.getLabel());
+			sb.appendEscaped(value.annotationSet.getLabel());
 			sb.appendHtmlConstant("</td><td width='70px' align='right'>");
 			sb.appendEscaped(value.annotationSet.getNumberAnnoations() +(value.annotationSet.getNumberAnnoations()==1?" item":" items"));
 			sb.appendHtmlConstant("</td></tr><tr><td>");
-			sb.appendHtmlConstant("By "); //+ value.annotationSet.getCreatedBy().getScreenName() +" on " + value.annotationSet.getFormattedCreatedOn());
+			sb.appendHtmlConstant("By " + value.annotationSet.getCreatedBy().getName()); // +" on " + value.annotationSet.getFormattedCreatedOn());
 			sb.appendHtmlConstant("</td><td align='right'>");
 			//sb.appendHtmlConstant("<a target='_blank' href='" + value.annotationSet.getCreatedBy().getUri() + "'><img src='"+ 
 			//		Domeo.resources.browseLittleIcon().getSafeUri().asString() +"'></a>");

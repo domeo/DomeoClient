@@ -23,9 +23,28 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public interface IAnnotopia {
+public class MAnnotopiaPerson implements IAnnotopiaAgent {
 
-	public static final String ANNOTATION_SET_ID = "AnnotationSet";
-	public static final String ANNOTATION_SET = "http://purl.org/annotopia#" + ANNOTATION_SET_ID;
-	public static final String ANNOTATIONS    = "http://purl.org/annotopia#annotations";
+	private String id;
+	private String type;
+	private String name;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 }

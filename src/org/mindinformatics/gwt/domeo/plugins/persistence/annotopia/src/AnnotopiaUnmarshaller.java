@@ -24,16 +24,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraphs;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaPerson;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.Window;
 
 /**
@@ -49,11 +50,12 @@ public class AnnotopiaUnmarshaller {
 	public List<MAnnotopiaAnnotationSet> unmarshallAnnotationSetsList(JsAnnotopiaSetsResultWrapper wrapper) {
 		List<MAnnotopiaAnnotationSet> sets = new ArrayList<MAnnotopiaAnnotationSet>();
 		
+		
 		MAnnotopiaAnnotationSet set = new MAnnotopiaAnnotationSet();
 		JsArray<JsAnnotopiaAnnotationSetGraphs>  jsSets = wrapper.getResult().getSets();
 		for(int i=0; i<jsSets.length(); i++) {
 			JsArray<JavaScriptObject> graphs = jsSets.get(i).getGraphs();
-			for(int j=0; j<graphs.length(); j++) {
+			for(int j=0; j<graphs.length(); j++) {	
 				JavaScriptObject jsItem = graphs.get(j);
 				
 				// Extract types
@@ -67,21 +69,22 @@ public class AnnotopiaUnmarshaller {
 					typesSet.add(getObjectType(jsItem));
 				}
 				
-				if(typesSet.contains(IAnnotopia.ANNOTATION_SET)) {
+				if(typesSet.contains("at:AnnotationSet")) {
 					JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
 					set.setId(getObjectId(jsItem));
+					
 					set.setLabel(jsSet.getLabel());
 					set.setDescription(jsSet.getDescription());
 					set.setNumberAnnoations(jsSet.getNumberOfAnnotationItems());
-
-					// Label
-					// Description
-					// Created With
-					// Created By
+					set.setCreatedOn(jsSet.getFormattedCreatedOn());
+					MAnnotopiaPerson createdBy = new MAnnotopiaPerson();
+					createdBy.setId(jsSet.getCreatedBy().getId());
+					createdBy.setName(jsSet.getCreatedBy().getName());
+					set.setCreatedBy(createdBy);
 				}
 			}
 			
-			set.setType(IAnnotopia.ANNOTATION_SET);
+			set.setType(IAnnotopia.ANNOTATION_SET_ID);
 			set.setLocked(false);
 			set.setVisible(true);
 			

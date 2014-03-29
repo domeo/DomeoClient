@@ -20,12 +20,17 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public interface IAnnotopia {
+public class JsAnnotopiaAgent extends JavaScriptObject {
 
-	public static final String ANNOTATION_SET_ID = "AnnotationSet";
-	public static final String ANNOTATION_SET = "http://purl.org/annotopia#" + ANNOTATION_SET_ID;
-	public static final String ANNOTATIONS    = "http://purl.org/annotopia#annotations";
+	protected JsAnnotopiaAgent() {}
+	
+	public final native String getId() /*-{ return this['@id'];  }-*/;
+	public final native String getType() /*-{ return this['@type']; }-*/;
+	
+	public final native String getName() /*-{ return this.name; }-*/;
 }

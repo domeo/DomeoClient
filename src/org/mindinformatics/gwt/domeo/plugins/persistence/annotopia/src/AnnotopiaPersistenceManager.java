@@ -79,32 +79,28 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 				.setUrl(url)
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
-		        .setData(GQuery.$$("apiKey: testkey")) // parameters for the query-string
+		        .setData(GQuery.$$("apiKey: testkey,outCmd:frame")) // parameters for the query-string
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
-		    			//Window.alert(getDataProperties().toJsonString());
 		    			JsAnnotopiaSetsResultWrapper wrapper = 
 		    				(JsAnnotopiaSetsResultWrapper) parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaUnmarshaller unmarshalelr = new AnnotopiaUnmarshaller();
-		    			List<MAnnotopiaAnnotationSet> sets = unmarshalelr.unmarshallAnnotationSetsList(wrapper);
-		    			
-		    			//_application.getLogger().debug(this, "Completed Execution of checkForExistingAnnotationSets() in " + (System.currentTimeMillis()-documentPipelineTimer)+ "ms");
+		    			List<MAnnotopiaAnnotationSet> sets = unmarshalelr.unmarshallAnnotationSetsList(wrapper);	    			
+		    			_application.getLogger().debug(this, "Completed Execution of checkForExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 
 		    			if(sets.size()==0) {
 		    				// TODO message no annotation found
 		    				_application.getLogger().info(this, "No annotation sets found");
-		    				//this.getProgressPanelContainer().setCompletionMessage("No annotation exist for this document");
+		    				_application.getProgressPanelContainer().setCompletionMessage("No annotation exist for this document");
 		    			} else {
-		    				//this.getProgressPanelContainer().hide();
+		    				_application.getProgressPanelContainer().hide();
 		    				try {
 		    					ExistingAnnotationViewerPanel lwp = new ExistingAnnotationViewerPanel((IDomeo)_application, sets);
 		    					new EnhancedGlassPanel((IDomeo)_application, lwp, lwp.getTitle(), false, false, false);
-		    					//_dialogPanel.hide();
 		    				} catch (Exception e) {
 		    					_application.getLogger().exception(this, "Exeption in visualizing existing annotation");
-		    					//_dialogPanel.hide();
 		    				}		
 		    			}
 		    			//Window.alert(responseOnSets.getStatus() + " " + responseOnSets.getResult().getDuration());

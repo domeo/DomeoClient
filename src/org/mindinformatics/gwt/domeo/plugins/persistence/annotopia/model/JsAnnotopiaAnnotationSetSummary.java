@@ -22,7 +22,6 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
 import java.util.Date;
 
-import org.mindinformatics.gwt.framework.component.users.model.JsoUser;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -47,7 +46,7 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	}
 	
 	public final native int getNumberOfAnnotationItems() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia::ANNOTATIONS].length;
+		return this.annotations.length;
 	}-*/;
 	
 	// ------------------------------------------------------------------------
@@ -61,10 +60,10 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	//  General (RDFS and Dublin Core Terms
 	// ------------------------------------------------------------------------
 	public final native String getLabel() /*-{ 
-		return this['http://www.w3.org/2000/01/rdf-schema#label']; 
+		return this.label; 
 	}-*/;
 	public final native String getDescription() /*-{ 
-		return this['http://purl.org/dc/terms/description']; 
+		return this.description; 
 	}-*/;
 	
 	// ------------------------------------------------------------------------
@@ -73,14 +72,14 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	public final native String getCreatedOn() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology::createdOn]; 
 	}-*/;
-	public final native JsoUser getCreatedBy() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology::createdBy]; 
+	public final native JsAnnotopiaAgent getCreatedBy() /*-{ 
+		return this.createdBy; 
 	}-*/;
 	public final native String getLastSavedOn() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology::lastSavedOn]; 
 	}-*/;
-	public final native JsoUser getLastSavedBy() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology::createdBy]; 
+	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 
+		return this.createdBy; 
 	}-*/;
 	
 	public final Date getFormattedCreatedOn() {

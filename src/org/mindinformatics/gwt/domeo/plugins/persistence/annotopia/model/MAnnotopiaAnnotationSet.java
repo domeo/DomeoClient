@@ -37,7 +37,10 @@ public class MAnnotopiaAnnotationSet {
 	private boolean isLocked;
 	private boolean isVisible;
 	
+	private Date createdOn;
 	private Date lastSavedOn;
+	
+	private IAnnotopiaAgent createdBy;
 	
 	public String getId() {
 		return id;
@@ -75,6 +78,12 @@ public class MAnnotopiaAnnotationSet {
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
 	public Date getLastSavedOn() {
 		return lastSavedOn;
 	}
@@ -87,5 +96,10 @@ public class MAnnotopiaAnnotationSet {
 	public void setNumberAnnoations(int numberAnnoations) {
 		this.numberAnnoations = numberAnnoations;
 	}
-	
+	public IAnnotopiaAgent getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(IAnnotopiaAgent createdBy) {
+		this.createdBy = createdBy;
+	}
 }
