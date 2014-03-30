@@ -1094,6 +1094,10 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		//this.getPersistenceManager().retrieveExistingAnnotationSetList();
 	}
 	
+	public long getDocumentPipelineTimer() {
+		return documentPipelineTimer;
+	}
+	
 	public void setExistingAnnotationSetList(JsArray responseOnSets) {
 		//_dialogPanel.hide();
 		this.getLogger().debug(this, "Completed Execution of checkForExistingAnnotationSets() in " + (System.currentTimeMillis()-documentPipelineTimer)+ "ms");

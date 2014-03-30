@@ -76,4 +76,5 @@ public interface IDomeo extends IContentHandler, IApplication {
 	public PmcImagesMetadataCache getPmcImagesCache();
 	
 	public void jumpToLocation(float percentage);
+	public long getDocumentPipelineTimer();
 }
