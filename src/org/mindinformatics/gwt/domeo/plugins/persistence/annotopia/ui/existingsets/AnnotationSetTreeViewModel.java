@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
+import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 
 import com.google.gwt.cell.client.AbstractCell;
@@ -340,7 +340,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 			sb.appendHtmlConstant("<table>");
 
 			// Add the contact image.
-			sb.appendHtmlConstant("<tr><td rowspan='3'>");
+			sb.appendHtmlConstant("<tr><td rowspan='2'>");
 			sb.appendHtmlConstant(imageHtml);
 			sb.appendHtmlConstant("</td>");
 
@@ -350,10 +350,12 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 			sb.appendHtmlConstant("</td><td width='70px' align='right'>");
 			sb.appendEscaped(value.annotationSet.getNumberAnnoations() +(value.annotationSet.getNumberAnnoations()==1?" item":" items"));
 			sb.appendHtmlConstant("</td></tr><tr><td>");
-			sb.appendHtmlConstant("By " + value.annotationSet.getCreatedBy().getName()); // +" on " + value.annotationSet.getFormattedCreatedOn());
+			sb.appendHtmlConstant("By " + value.annotationSet.getCreatedBy().getName() +" on " + value.annotationSet.getFormattedCreationDate());
 			sb.appendHtmlConstant("</td><td align='right'>");
-			//sb.appendHtmlConstant("<a target='_blank' href='" + value.annotationSet.getCreatedBy().getUri() + "'><img src='"+ 
-			//		Domeo.resources.browseLittleIcon().getSafeUri().asString() +"'></a>");
+			sb.appendHtmlConstant("<a target='_blank' href='" + value.annotationSet.getCreatedBy().getId() + "'><img src='"+ 
+					Domeo.resources.browseLittleIcon().getSafeUri().asString() +"'></a>");
+			sb.appendHtmlConstant("</td></tr><tr><td colspan='3' align='left'>");
+			sb.appendHtmlConstant("Saved by " + value.annotationSet.getLastSavedBy().getName() +" on " + value.annotationSet.getFormattedLastSavedDate());
 			sb.appendHtmlConstant("</td></tr></table>");
 		}
 		

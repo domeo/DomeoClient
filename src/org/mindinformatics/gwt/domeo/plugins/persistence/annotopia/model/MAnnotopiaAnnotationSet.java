@@ -22,6 +22,8 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
 import java.util.Date;
 
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
@@ -39,8 +41,12 @@ public class MAnnotopiaAnnotationSet {
 	
 	private Date createdOn;
 	private Date lastSavedOn;
-	
 	private IAnnotopiaAgent createdBy;
+	private IAnnotopiaAgent createdWith;
+	private IAnnotopiaAgent lastSavedBy;
+	
+	private String versionNumber;
+	private String previousVersion;	  // computed by the server and saved
 	
 	public String getId() {
 		return id;
@@ -84,11 +90,19 @@ public class MAnnotopiaAnnotationSet {
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
+	public String getFormattedCreationDate() {
+		return ApplicationUtils.fmt.format(createdOn);
+	}
 	public Date getLastSavedOn() {
 		return lastSavedOn;
 	}
 	public void setLastSavedOn(Date lastSavedOn) {
 		this.lastSavedOn = lastSavedOn;
+	}
+	public String getFormattedLastSavedDate() {
+		if(lastSavedOn!=null)
+			return ApplicationUtils.fmt.format(lastSavedOn);
+		return "";
 	}
 	public int getNumberAnnoations() {
 		return numberAnnoations;
@@ -101,5 +115,29 @@ public class MAnnotopiaAnnotationSet {
 	}
 	public void setCreatedBy(IAnnotopiaAgent createdBy) {
 		this.createdBy = createdBy;
+	}
+	public String getVersionNumber() {
+		return versionNumber;
+	}
+	public void setVersionNumber(String versionNumber) {
+		this.versionNumber = versionNumber;
+	}
+	public String getPreviousVersion() {
+		return previousVersion;
+	}
+	public void setPreviousVersion(String previousVersion) {
+		this.previousVersion = previousVersion;
+	}
+	public IAnnotopiaAgent getCreatedWith() {
+		return createdWith;
+	}
+	public void setCreatedWith(IAnnotopiaAgent createdWith) {
+		this.createdWith = createdWith;
+	}
+	public IAnnotopiaAgent getLastSavedBy() {
+		return lastSavedBy;
+	}
+	public void setLastSavedBy(IAnnotopiaAgent lastSavedBy) {
+		this.lastSavedBy = lastSavedBy;
 	}
 }

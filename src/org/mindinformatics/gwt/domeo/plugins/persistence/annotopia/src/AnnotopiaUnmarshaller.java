@@ -24,17 +24,18 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraphs;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaPerson;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaSoftware;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.Window;
 
 /**
@@ -42,6 +43,16 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaUnmarshaller {
 
+	IDomeo _domeo;
+	
+	/**
+	 * Constructor
+	 * @param domeo	The main application pointer
+	 */
+	public AnnotopiaUnmarshaller(IDomeo domeo) {
+		_domeo = domeo;
+	}
+	
 	/**
 	 * Unmarshalls the annotation sets list summaries ignoring
 	 * the sets details.
@@ -50,13 +61,11 @@ public class AnnotopiaUnmarshaller {
 	public List<MAnnotopiaAnnotationSet> unmarshallAnnotationSetsList(JsAnnotopiaSetsResultWrapper wrapper) {
 		List<MAnnotopiaAnnotationSet> sets = new ArrayList<MAnnotopiaAnnotationSet>();
 		
-		
-		MAnnotopiaAnnotationSet set = new MAnnotopiaAnnotationSet();
 		JsArray<JsAnnotopiaAnnotationSetGraphs>  jsSets = wrapper.getResult().getSets();
-		for(int i=0; i<jsSets.length(); i++) {
+		for(int i=0; i<jsSets.length(); i++) {			
 			JsArray<JavaScriptObject> graphs = jsSets.get(i).getGraphs();
-			for(int j=0; j<graphs.length(); j++) {	
-				JavaScriptObject jsItem = graphs.get(j);
+			if(graphs.length()==1) {	
+				JavaScriptObject jsItem = graphs.get(0);
 				
 				// Extract types
 				HashSet<String> typesSet = new HashSet<String>();
@@ -69,50 +78,117 @@ public class AnnotopiaUnmarshaller {
 					typesSet.add(getObjectType(jsItem));
 				}
 				
-				if(typesSet.contains("at:AnnotationSet")) {
-					JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
-					set.setId(getObjectId(jsItem));
-					
-					set.setLabel(jsSet.getLabel());
-					set.setDescription(jsSet.getDescription());
-					set.setNumberAnnoations(jsSet.getNumberOfAnnotationItems());
-					set.setCreatedOn(jsSet.getFormattedCreatedOn());
-					MAnnotopiaPerson createdBy = new MAnnotopiaPerson();
-					createdBy.setId(jsSet.getCreatedBy().getId());
-					createdBy.setName(jsSet.getCreatedBy().getName());
-					set.setCreatedBy(createdBy);
+				try {
+					if(typesSet.contains(IAnnotopia.ANNOTATION_SET_NS)) {
+						MAnnotopiaAnnotationSet set = new MAnnotopiaAnnotationSet();
+						set.setType(IAnnotopia.ANNOTATION_SET_ID);
+						set.setLocked(false);
+						set.setVisible(true);
+						
+						JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
+						set.setId(notNullableString("id", jsSet.getId()));	
+						set.setLabel(notNullableString("label", jsSet.getLabel()));
+						set.setDescription(nullableString("description", jsSet.getDescription()));
+						
+						set.setNumberAnnoations(jsSet.getNumberOfAnnotationItems());
+						
+						// Created on
+						if(jsSet.getCreatedOn()!=null && !jsSet.getCreatedOn().isEmpty()) {
+							try {
+								set.setCreatedOn(jsSet.getFormattedCreatedOn());
+							} catch (Exception e) {
+								_domeo.getLogger().exception(this, "Problems in parsing createdOn " 
+									+ jsSet.getCreatedOn() + " - " + e.getMessage());
+							}
+						}
+						// Created by
+						if(jsSet.getCreatedBy()!=null
+								&& jsSet.getCreatedBy().getId()!=null && !jsSet.getCreatedBy().getId().isEmpty()
+								&& jsSet.getCreatedBy().getName()!=null && !jsSet.getCreatedBy().getName().isEmpty()) {
+							MAnnotopiaPerson createdBy = new MAnnotopiaPerson();
+							createdBy.setId(jsSet.getCreatedBy().getId());
+							createdBy.setName(jsSet.getCreatedBy().getName());
+							set.setCreatedBy(createdBy);
+						} else {
+							_domeo.getLogger().exception(this, "No createdOn detected for set " + jsSet.getId());
+						}
+						
+						// Created with
+						if(jsSet.getCreatedWith()!=null
+								&& jsSet.getCreatedWith().getId()!=null && !jsSet.getCreatedWith().getId().isEmpty()
+								&& jsSet.getCreatedWith().getName()!=null && !jsSet.getCreatedWith().getName().isEmpty()) {
+							MAnnotopiaSoftware createdWith = new MAnnotopiaSoftware();
+							createdWith.setId(jsSet.getCreatedWith().getId());
+							createdWith.setName(jsSet.getCreatedWith().getName());
+							set.setCreatedWith(createdWith);
+						} else {
+							_domeo.getLogger().exception(this, "No createdWith detected for set " + jsSet.getId());
+						}
+						
+						// Last saved on
+						if(jsSet.getLastSavedOn()!=null && !jsSet.getLastSavedOn().isEmpty()) {
+							try {
+								set.setLastSavedOn(jsSet.getFormattedLastSavedOn());
+							} catch (Exception e) {
+								_domeo.getLogger().exception(this, "Problems in parsing lastSavedOn " 
+									+ jsSet.getLastSavedOn() + " - " + e.getMessage());
+							}
+						}
+						// Last saved by
+						if(jsSet.getCreatedBy()!=null
+								&& jsSet.getCreatedBy().getId()!=null && !jsSet.getCreatedBy().getId().isEmpty()
+								&& jsSet.getCreatedBy().getName()!=null && !jsSet.getCreatedBy().getName().isEmpty()) {
+							MAnnotopiaPerson lastSavedBy = new MAnnotopiaPerson();
+							lastSavedBy.setId(jsSet.getLastSavedBy().getId());
+							lastSavedBy.setName(jsSet.getLastSavedBy().getName());
+							set.setLastSavedBy(lastSavedBy);
+						} else {
+							_domeo.getLogger().exception(this, "No lastSavedBy detected for set " + jsSet.getId());
+						}
+
+						// Versioning
+						set.setPreviousVersion(jsSet.getPreviousVersion());
+						set.setVersionNumber(jsSet.getVersionNumber());
+						
+						sets.add(set);
+					} else {
+						_domeo.getLogger().warn(this, "Item does not contain a recognized Set type " + typesSet);
+					}
+				} catch(Exception e) {
+					_domeo.getLogger().exception(this, e.getMessage());
 				}
-			}
-			
-			set.setType(IAnnotopia.ANNOTATION_SET_ID);
-			set.setLocked(false);
-			set.setVisible(true);
-			
-			
-//			set.setCreatedBy(createdBy);
-//			set.setCreatedWith(createdWith);
-//			set.setCreatedOn(createdOn);
-//			set.setLineageUri(lineageUri);
-//			set.setVersionNumber(versionNumber);
-//			set.setPreviousVersion(previousVersion);
-			sets.add(set);
+			} else {
+				_domeo.getLogger().exception(this, "Unrecognized format");
+			}			
 		}		
 		return sets;
 	}
 	
+	private String notNullableString(String fieldLabel, String fieldValue) {
+		if(fieldValue==null || fieldValue.isEmpty()) {
+			throw new RuntimeException("Null variable: " + fieldLabel);
+		} else return fieldValue;
+	}
+	
+	private String nullableString(String fieldLabel, String fieldValue) {
+		if(fieldValue==null || fieldValue.isEmpty()) {
+			_domeo.getLogger().debug(this, "Found empty: " + fieldLabel);
+			return "<empty>";
+		} else return fieldValue;
+	}
+
 	// ------------------------------------------------------------------------
-	//  General
+	//  General: Identifier and Types
 	// ------------------------------------------------------------------------
 	private final native String getObjectId(Object obj) /*-{ 
 		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalId]; 
 	}-*/;
-	
-	private final native boolean hasMultipleTypes(Object obj) /*-{ 
-		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType] instanceof Array; 
-	}-*/;
 	private final native String getObjectType(Object obj) /*-{ 
 		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType]; 
 	}-*/;
+	private final native boolean hasMultipleTypes(Object obj) /*-{ 
+		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType] instanceof Array; 
+	}-*/;	
 	private final native JsArrayString getObjectTypes(Object obj) /*-{ 
 		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType]; 
 	}-*/;

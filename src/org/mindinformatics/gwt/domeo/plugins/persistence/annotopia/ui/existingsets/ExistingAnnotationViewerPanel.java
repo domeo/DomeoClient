@@ -41,7 +41,7 @@ import com.google.gwt.view.client.TreeViewModel;
  */
 public class ExistingAnnotationViewerPanel extends Composite implements IContainerPanel, IContentPanel, IResizable {
 
-	private static final String TITLE = "Import of Existing Annotation Sets";
+	private static final String TITLE = "Import of Existing Annotation Sets from Annotopia";
 	
 	interface Binder extends UiBinder<HorizontalPanel, ExistingAnnotationViewerPanel> { }	
 	private static final Binder binder = GWT.create(Binder.class);

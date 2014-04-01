@@ -69,7 +69,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 
 	@Override
 	public void retrieveExistingAnnotationSetList(IRetrieveExistingAnnotationSetListHandler handler) {
-		_application.getLogger().debug(this, "Beginning retrieving list of existing annotation sets...");
+		_application.getLogger().debug(this, "Retrieving list of existing annotation sets...");
 		_application.getProgressPanelContainer().setProgressMessage("Retrieving list of existing annotation sets from Annotopia...");
 		
 		String url = "http://127.0.0.1:8080/s/annotationset";
@@ -86,7 +86,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		    			IDomeo _domeo = ((IDomeo)_application);
 		    			JsAnnotopiaSetsResultWrapper wrapper = 
 		    				(JsAnnotopiaSetsResultWrapper) parseJson(getDataProperties().toJsonString());
-		    			AnnotopiaUnmarshaller unmarshalelr = new AnnotopiaUnmarshaller();
+		    			AnnotopiaUnmarshaller unmarshalelr = new AnnotopiaUnmarshaller(_domeo);
 		    			List<MAnnotopiaAnnotationSet> sets = unmarshalelr.unmarshallAnnotationSetsList(wrapper);	    			
 		    			_application.getLogger().debug(this, "Completed Execution of checkForExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 

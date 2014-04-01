@@ -65,28 +65,41 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	public final native String getDescription() /*-{ 
 		return this.description; 
 	}-*/;
+	public final native String getDescription2() /*-{ 
+		return this.description2; 
+	}-*/;
 	
 	// ------------------------------------------------------------------------
 	//  PAV (Provenance, Authoring and Versioning) Ontology
 	// ------------------------------------------------------------------------
 	public final native String getCreatedOn() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology::createdOn]; 
+		return this.createdAt; 
 	}-*/;
 	public final native JsAnnotopiaAgent getCreatedBy() /*-{ 
 		return this.createdBy; 
 	}-*/;
+	public final native JsAnnotopiaAgent getCreatedWith() /*-{ 
+		return this.createdWith; 
+	}-*/;
 	public final native String getLastSavedOn() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology::lastSavedOn]; 
+		return this.lastSavedOn; 
 	}-*/;
 	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 
 		return this.createdBy; 
 	}-*/;
 	
 	public final Date getFormattedCreatedOn() {
-		return ApplicationUtils.fullfmt.parse(getCreatedOn());
+		return ApplicationUtils.fullfmt2.parse(getCreatedOn().trim());
 	} 
 	
-	public final Date getFormattedLastSaved() {
-		return ApplicationUtils.fullfmt.parse(getLastSavedOn());
+	public final Date getFormattedLastSavedOn() {
+		return ApplicationUtils.fullfmt2.parse(getLastSavedOn());
 	} 
+	
+	public final native String getVersionNumber() /*-{ 
+		return this.versionNumber; 
+	}-*/;
+	public final native String getPreviousVersion() /*-{ 
+		return this.previousVersion; 
+	}-*/;
 }
