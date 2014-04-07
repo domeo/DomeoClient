@@ -25,18 +25,22 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
+import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraph;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraphs;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaPerson;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaSoftware;
+import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
+import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -90,7 +94,7 @@ public class AnnotopiaUnmarshaller {
 						set.setLabel(notNullableString("label", jsSet.getLabel()));
 						set.setDescription(nullableString("description", jsSet.getDescription()));
 						
-						set.setNumberAnnoations(jsSet.getNumberOfAnnotationItems());
+						set.setNumberAnnotations(jsSet.getNumberOfAnnotationItems());
 						
 						// Created on
 						if(jsSet.getCreatedOn()!=null && !jsSet.getCreatedOn().isEmpty()) {
@@ -133,17 +137,19 @@ public class AnnotopiaUnmarshaller {
 								_domeo.getLogger().exception(this, "Problems in parsing lastSavedOn " 
 									+ jsSet.getLastSavedOn() + " - " + e.getMessage());
 							}
+						} else {
+							_domeo.getLogger().exception(this, "No lastSavedOn detected for set " + jsSet.getId() + " - using createdOn (TODO ?)");
 						}
 						// Last saved by
-						if(jsSet.getCreatedBy()!=null
-								&& jsSet.getCreatedBy().getId()!=null && !jsSet.getCreatedBy().getId().isEmpty()
-								&& jsSet.getCreatedBy().getName()!=null && !jsSet.getCreatedBy().getName().isEmpty()) {
+						if(jsSet.getLastSavedBy()!=null
+								&& jsSet.getLastSavedBy().getId()!=null && !jsSet.getLastSavedBy().getId().isEmpty()
+								&& jsSet.getLastSavedBy().getName()!=null && !jsSet.getLastSavedBy().getName().isEmpty()) {
 							MAnnotopiaPerson lastSavedBy = new MAnnotopiaPerson();
 							lastSavedBy.setId(jsSet.getLastSavedBy().getId());
 							lastSavedBy.setName(jsSet.getLastSavedBy().getName());
 							set.setLastSavedBy(lastSavedBy);
 						} else {
-							_domeo.getLogger().exception(this, "No lastSavedBy detected for set " + jsSet.getId());
+							_domeo.getLogger().exception(this, "No lastSavedBy detected for set " + jsSet.getId() + " - using createdBy (TODO ?)");
 						}
 
 						// Versioning
@@ -162,6 +168,128 @@ public class AnnotopiaUnmarshaller {
 			}			
 		}		
 		return sets;
+	}
+	
+	public MAnnotationSet unmarshallAnnotationSet(JsAnnotopiaAnnotationSetGraph wrapper) {		
+		JsArray<JavaScriptObject> graphs = wrapper.getGraphs();
+		if(graphs.length()==1) {	
+			JavaScriptObject jsItem = graphs.get(0);
+			
+			// Extract types
+			HashSet<String> typesSet = new HashSet<String>();
+			if(hasMultipleTypes(jsItem)) {
+				JsArrayString types = getObjectTypes(jsItem);
+				for(int k=0; k<types.length(); k++) {
+					typesSet.add(types.get(k));
+				}
+			} else {
+				typesSet.add(getObjectType(jsItem));
+			}
+			
+			try {
+				if(typesSet.contains(IAnnotopia.ANNOTATION_SET_NS)) {
+					MAnnotopiaAnnotationSet set = new MAnnotopiaAnnotationSet();
+					set.setType(IAnnotopia.ANNOTATION_SET_ID);
+					set.setLocked(false);
+					set.setVisible(true);
+					
+					JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
+					set.setId(notNullableString("id", jsSet.getId()));	
+					set.setLabel(notNullableString("label", jsSet.getLabel()));
+					set.setDescription(nullableString("description", jsSet.getDescription()));
+					
+					set.setNumberAnnotations(jsSet.getNumberOfAnnotationItems());
+					
+					// Created on
+					if(jsSet.getCreatedOn()!=null && !jsSet.getCreatedOn().isEmpty()) {
+						try {
+							set.setCreatedOn(jsSet.getFormattedCreatedOn());
+						} catch (Exception e) {
+							_domeo.getLogger().exception(this, "Problems in parsing createdOn " 
+								+ jsSet.getCreatedOn() + " - " + e.getMessage());
+						}
+					}
+					// Created by
+					if(jsSet.getCreatedBy()!=null
+							&& jsSet.getCreatedBy().getId()!=null && !jsSet.getCreatedBy().getId().isEmpty()
+							&& jsSet.getCreatedBy().getName()!=null && !jsSet.getCreatedBy().getName().isEmpty()) {
+						MAnnotopiaPerson createdBy = new MAnnotopiaPerson();
+						createdBy.setId(jsSet.getCreatedBy().getId());
+						createdBy.setName(jsSet.getCreatedBy().getName());
+						set.setCreatedBy(createdBy);
+					} else {
+						_domeo.getLogger().exception(this, "No createdOn detected for set " + jsSet.getId());
+					}
+					
+					// Created with
+					if(jsSet.getCreatedWith()!=null
+							&& jsSet.getCreatedWith().getId()!=null && !jsSet.getCreatedWith().getId().isEmpty()
+							&& jsSet.getCreatedWith().getName()!=null && !jsSet.getCreatedWith().getName().isEmpty()) {
+						MAnnotopiaSoftware createdWith = new MAnnotopiaSoftware();
+						createdWith.setId(jsSet.getCreatedWith().getId());
+						createdWith.setName(jsSet.getCreatedWith().getName());
+						set.setCreatedWith(createdWith);
+					} else {
+						_domeo.getLogger().exception(this, "No createdWith detected for set " + jsSet.getId());
+					}
+					
+					// Last saved on
+					if(jsSet.getLastSavedOn()!=null && !jsSet.getLastSavedOn().isEmpty()) {
+						try {
+							set.setLastSavedOn(jsSet.getFormattedLastSavedOn());
+						} catch (Exception e) {
+							_domeo.getLogger().exception(this, "Problems in parsing lastSavedOn " 
+								+ jsSet.getLastSavedOn() + " - " + e.getMessage());
+						}
+					} else {
+						_domeo.getLogger().exception(this, "No lastSavedOn detected for set " + jsSet.getId() + " - using createdOn (TODO ?)");
+					}
+					// Last saved by
+					if(jsSet.getLastSavedBy()!=null
+							&& jsSet.getLastSavedBy().getId()!=null && !jsSet.getLastSavedBy().getId().isEmpty()
+							&& jsSet.getLastSavedBy().getName()!=null && !jsSet.getLastSavedBy().getName().isEmpty()) {
+						MAnnotopiaPerson lastSavedBy = new MAnnotopiaPerson();
+						lastSavedBy.setId(jsSet.getLastSavedBy().getId());
+						lastSavedBy.setName(jsSet.getLastSavedBy().getName());
+						set.setLastSavedBy(lastSavedBy);
+					} else {
+						_domeo.getLogger().exception(this, "No lastSavedBy detected for set " + jsSet.getId() + " - using createdBy (TODO ?)");
+					}
+
+					// Versioning
+					set.setPreviousVersion(jsSet.getPreviousVersion());
+					set.setVersionNumber(jsSet.getVersionNumber());
+					
+					
+					// Translation to the old internal formats
+					
+					// 
+					MAgentSoftware createdWith = new MAgentSoftware();
+					createdWith.setUri(set.getCreatedWith().getId());
+					createdWith.setName(set.getCreatedWith().getName());
+					
+					MAgentPerson createdBy = new MAgentPerson();
+					createdBy.setUri(set.getCreatedBy().getId());
+					createdBy.setName(set.getCreatedBy().getName());
+					
+					// Annotation Set
+					MAnnotationSet aSet = AnnotationFactory.createAnnotationSet(set.getId(), set.getId(), set.getCreatedOn(), set.getVersionNumber(), set.getPreviousVersion(),
+							 _domeo.getPersistenceManager().getCurrentResource(), set.getLabel(), set.getDescription());		
+					aSet.setCreatedWith(createdWith);
+					aSet.setCreatedBy(createdBy);
+					aSet.setCreatedOn(set.getCreatedOn());
+					
+					return aSet;
+				} else {
+					_domeo.getLogger().warn(this, "Item does not contain a recognized Set type " + typesSet);
+				}
+			} catch(Exception e) {
+				_domeo.getLogger().exception(this, e.getMessage());
+			}
+		} else {
+			_domeo.getLogger().exception(this, "Unrecognized format");
+		}	
+		return null;
 	}
 	
 	private String notNullableString(String fieldLabel, String fieldValue) {

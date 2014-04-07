@@ -348,14 +348,18 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 			sb.appendHtmlConstant("<td style='font-size:95%;'>");
 			sb.appendEscaped(value.annotationSet.getLabel());
 			sb.appendHtmlConstant("</td><td width='70px' align='right'>");
-			sb.appendEscaped(value.annotationSet.getNumberAnnoations() +(value.annotationSet.getNumberAnnoations()==1?" item":" items"));
+			sb.appendEscaped(value.annotationSet.getNumberAnnotations() +(value.annotationSet.getNumberAnnotations()==1?" item":" items"));
 			sb.appendHtmlConstant("</td></tr><tr><td>");
 			sb.appendHtmlConstant("By " + value.annotationSet.getCreatedBy().getName() +" on " + value.annotationSet.getFormattedCreationDate());
 			sb.appendHtmlConstant("</td><td align='right'>");
 			sb.appendHtmlConstant("<a target='_blank' href='" + value.annotationSet.getCreatedBy().getId() + "'><img src='"+ 
 					Domeo.resources.browseLittleIcon().getSafeUri().asString() +"'></a>");
 			sb.appendHtmlConstant("</td></tr><tr><td colspan='3' align='left'>");
-			sb.appendHtmlConstant("Saved by " + value.annotationSet.getLastSavedBy().getName() +" on " + value.annotationSet.getFormattedLastSavedDate());
+			
+			if(value.annotationSet.getLastSavedBy()!=null) 
+				sb.appendHtmlConstant("Saved by " + value.annotationSet.getLastSavedBy().getName());
+			if(!value.annotationSet.getFormattedLastSavedDate().isEmpty()) 
+				sb.appendHtmlConstant(" on " + value.annotationSet.getFormattedLastSavedDate());
 			sb.appendHtmlConstant("</td></tr></table>");
 		}
 		

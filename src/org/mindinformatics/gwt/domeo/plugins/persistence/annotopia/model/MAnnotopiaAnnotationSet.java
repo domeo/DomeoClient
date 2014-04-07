@@ -34,7 +34,7 @@ public class MAnnotopiaAnnotationSet {
 	private String label;
 	private String description;
 	
-	int numberAnnoations;
+	int numberAnnotations;
 	
 	private boolean isLocked;
 	private boolean isVisible;
@@ -104,11 +104,11 @@ public class MAnnotopiaAnnotationSet {
 			return ApplicationUtils.fmt.format(lastSavedOn);
 		return "";
 	}
-	public int getNumberAnnoations() {
-		return numberAnnoations;
+	public int getNumberAnnotations() {
+		return numberAnnotations;
 	}
-	public void setNumberAnnoations(int numberAnnoations) {
-		this.numberAnnoations = numberAnnoations;
+	public void setNumberAnnotations(int numberAnnotations) {
+		this.numberAnnotations = numberAnnotations;
 	}
 	public IAnnotopiaAgent getCreatedBy() {
 		return createdBy;

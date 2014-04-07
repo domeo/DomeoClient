@@ -85,7 +85,7 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 		return this.lastSavedOn; 
 	}-*/;
 	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 
-		return this.createdBy; 
+		return this.lastSavedBy; 
 	}-*/;
 	
 	public final Date getFormattedCreatedOn() {
