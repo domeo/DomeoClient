@@ -595,7 +595,6 @@ IRetrieveExistingAnnotationSetHandler,
 
 		
 		// Micropublications
-/*
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(),
 				true);
 		// pluginsManager.enablePlugin(MicroPublicationsPlugin.getInstance(),
@@ -613,7 +612,7 @@ IRetrieveExistingAnnotationSetHandler,
 				MMicroPublicationAnnotation.class.getName(),
 				new MicroPublicationCardProvider(this));
 		getAnnotationPersistenceManager().registerCache(
-				new MicroPublicationCache());*/
+				new MicroPublicationCache());
 
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class
