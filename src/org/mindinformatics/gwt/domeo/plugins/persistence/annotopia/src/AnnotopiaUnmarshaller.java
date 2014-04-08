@@ -176,7 +176,6 @@ public class AnnotopiaUnmarshaller {
 		for(int i=0; i<jsSet.getAnnotations().length(); i++) {
 			JavaScriptObject a = jsSet.getAnnotations().get(i);
 			if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
-				
 				// Unmarshall annotatedBy
 				JsOpenAnnotation annotation = (JsOpenAnnotation) a;
 				if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByString()) {
@@ -192,7 +191,12 @@ public class AnnotopiaUnmarshaller {
 					for(int t=0; t<jsTargets.length(); t++) {
 						JavaScriptObject jsTarget = jsTargets.get(t);
 						if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
-							Window.alert("yolo 1in");
+							JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
+							if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+								targetSources.put(jsSpecificResource.getId(), jsSpecificResource.getHasSourceAsString());
+							} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+								targets.put(jsSpecificResource.getHasSourceAsObject().getId(), jsSpecificResource.getHasSourceAsObject());
+							}
 						}
 					}
 				} else {
@@ -206,9 +210,6 @@ public class AnnotopiaUnmarshaller {
 						}
 					}
 				}
-				
-				Window.alert(getObjectType(annotation));
-				Window.alert(getMotivation(annotation));
 			} else {
 				_domeo.getLogger().warn(this, "Item not qualified as annotation... skipped" + jsSet.getId());
 			}
@@ -218,7 +219,43 @@ public class AnnotopiaUnmarshaller {
 		for(int i=0; i<jsSet.getAnnotations().length(); i++) {
 			JavaScriptObject a = jsSet.getAnnotations().get(i);
 			if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
+				JsOpenAnnotation annotation = (JsOpenAnnotation) a;
 				
+				// AnnotatedBy
+				JsAnnotopiaAgent annotatedBy = null;
+				if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByString()) {
+					annotatedBy = agents.get(annotationAgents.get(annotation.getId()));
+				} else if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByObject()) {
+					annotatedBy = agents.get(annotationAgents.get(annotation.getAnnotatedByAsObject().getId()));
+				}
+				
+				// Unmarshall targets
+				ArrayList<JsSpecificResource> specificResources = new ArrayList<JsSpecificResource>();
+				boolean multipleTargets = annotation.hasMultipleTargets();
+				if(multipleTargets) {
+					JsArray<JavaScriptObject> jsTargets = annotation.getTargets();
+					for(int t=0; t<jsTargets.length(); t++) {
+						JavaScriptObject jsTarget = jsTargets.get(t);
+						if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
+							JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
+							if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+								targets.get(targetSources.get(jsSpecificResource.getId()));
+							} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+								targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
+							}
+						}
+					}
+				} else {
+					JavaScriptObject jsTarget = annotation.getTarget();
+					if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
+						JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
+						if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+							targets.get(targetSources.get(jsSpecificResource.getId()));
+						} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+							targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
+						}
+					}
+				}
 			}
 		}
 		
