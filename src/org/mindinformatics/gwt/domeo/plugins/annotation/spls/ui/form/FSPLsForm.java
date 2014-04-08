@@ -3,6 +3,8 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -18,6 +20,7 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.IPharmgxOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MPharmgx;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLPharmgxUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
@@ -32,24 +35,19 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
  */
-public class FSPLsForm extends AFormComponent implements IResizable {
+public class FSPLsForm extends AFormComponent implements IResizable,
+		IPharmgxOntology {
 
 	private static Logger logger = Logger.getLogger("");
 
@@ -59,9 +57,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING SPL ANNOTATION";
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING SPL ANNOTATION";
 
-	public static final String SPL_POC_PREFIX = "http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#";
-	public static final String DAILYMED_PREFIX = "http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/";
-
 	interface Binder extends UiBinder<VerticalPanel, FSPLsForm> {
 	}
 
@@ -69,7 +64,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 	private MSPLsAnnotation _item;
 	private MPharmgx currentPharmgx;
-	private ArrayList<Widget> tabs = new ArrayList<Widget>();
+
+	// for uri mapping: providing a instance of MPharmgx
+	private MPharmgx pharmgxmodel = new MPharmgx("", "", null);
 
 	@UiField
 	VerticalPanel container;
@@ -121,11 +118,6 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	@UiField
 	CheckBox descriptsai, descriptsmcc;
 
-	/*
-	 * @UiField ListBox descriptsmc;
-	 */
-
-	// population provalence
 	@UiField
 	CheckBox descriptppm;
 
@@ -134,33 +126,13 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 	TextArea commentBody, allelesbody, medconditbody, descriptsothervt,
 			descriptsotherts;
 
-	String[] biomarker = { "ApoE2", "BRAF", "C-Kit", "CCR5", "CD20_antigen",
-			"CD25", "CD30", "CYP1A2", "CYP2C19", "CYP2C9", "CYP2D6", "DPD",
-			"EGFR", "ER and PgR_receptor", "ER_receptor", "FIP1L1-PDGFRα",
-			"G6PD", "HLA-B*1502", "HLA-B*5701", "Her2/neu", "IL28B", "KRAS",
-			"LDL_Receptor", "NAT1;_NAT2", "PDGFR", "PML/RARα", "Rh_genotype",
-			"TPMT", "UGT1A1", "VKORC1" };
+	// String[] biomarker = { "ApoE2", "BRAF", "C-Kit", "CCR5", "CD20_antigen",
+	// "CD25", "CD30", "CYP1A2", "CYP2C19", "CYP2C9", "CYP2D6", "DPD",
+	// "EGFR", "ER and PgR_receptor", "ER_receptor", "FIP1L1-PDGFRα",
+	// "G6PD", "HLA-B*1502", "HLA-B*5701", "Her2/neu", "IL28B", "KRAS",
+	// "LDL_Receptor", "NAT1;_NAT2", "PDGFR", "PML/RARα", "Rh_genotype",
+	// "TPMT", "UGT1A1", "VKORC1" };
 
-	// TODO: get real URIs from the swat-4-med-safety project
-	String[] biomarkerUris = { "http://fakeuri.org/ApoE2",
-			"http://fakeuri.org/BRAF", "http://fakeuri.org/C-Kit",
-			"http://fakeuri.org/CCR5", "http://fakeuri.org/CD20_antigen",
-			"http://fakeuri.org/CD25", "http://fakeuri.org/CD30",
-			"http://fakeuri.org/CYP1A2", "http://fakeuri.org/CYP2C19",
-			"http://fakeuri.org/CYP2C9", "http://fakeuri.org/CYP2D6",
-			"http://fakeuri.org/DPD", "http://fakeuri.org/EGFR",
-			"http://fakeuri.org/ER and PgR_receptor",
-			"http://fakeuri.org/ER_receptor",
-			"http://fakeuri.org/FIP1L1-PDGFRα", "http://fakeuri.org/G6PD",
-			"http://fakeuri.org/HLA-B*1502", "http://fakeuri.org/HLA-B*5701",
-			"http://fakeuri.org/Her2/neu", "http://fakeuri.org/IL28B",
-			"http://fakeuri.org/KRAS", "http://fakeuri.org/LDL_Receptor",
-			"http://fakeuri.org/NAT1;_NAT2", "http://fakeuri.org/PDGFR",
-			"http://fakeuri.org/PML/RARα", "http://fakeuri.org/Rh_genotype",
-			"http://fakeuri.org/TPMT", "http://fakeuri.org/UGT1A1",
-			"http://fakeuri.org/VKORC1" };
-
-	// TODO: correct the mispelling of variant throughout the project
 	String[] variant = { "poor-metabolizer", "intermediate-metabolizer",
 			"extensive-metabolizer", "ultra-metabolizer",
 			"intermediate-activity", "low-or-absent-activity", "HLA-B*1502",
@@ -177,7 +149,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"chromosomal-aberration-negative" };
 
 	// TODO: get real URIs from the swat-4-med-safety project
-	String[] drugs = { "Abacivir", "Aripiprazole", "Arsenic_Trioxide",
+	// "Sodium_Phenylacetate", "Sodium_Benzoate","Sodium_Phenylbutyrate",
+	String[] drugs = { "Abacavir", "Aripiprazole", "Arsenic_Trioxide",
 			"Atomoxetine", "Atorvastatin", "Azathioprine", "Boceprevir",
 			"Brentuximab_Vedotin", "Busulfan", "Capecitabine", "Carbamazepine",
 			"Carisoprodol", "Carvedilol", "Celecoxib", "Cetuximab",
@@ -199,8 +172,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"Pimozide", "Prasugrel", "Pravastatin", "Propafenone",
 			"Propranolol", "Protriptyline", "Quinidine", "Rabeprazole",
 			"Rasburicase", "Rifampin", "Isoniazid", "Pyrazinamide",
-			"Risperidone", "Sodium_Phenylacetate", "Sodium_Benzoate",
-			"Sodium_Phenylbutyrate", "Tamoxifen", "Telaprevir", "Terbinafine",
+			"Risperidone", "Tamoxifen", "Telaprevir", "Terbinafine",
 			"Tetrabenazine", "Thioguanine", "Thioridazine", "Ticagrelor",
 			"Tolterodine", "Tositumomab", "Tramadol_and_Acetaminophen",
 			"Trastuzumab", "Tretinoin", "Trimipramine", "Valproic_Acid",
@@ -237,94 +209,48 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 			"WARNINGS AND PRECAUTIONS (43685-7)", "WARNINGS (34071-1)",
 			"SUPPLEMENTAL PATIENT MATERIAL (38056-8)" };
 
-	String[] drugUris = { "http://fakeuri.org/Abacivir",
-			"http://fakeuri.org/Aripiprazole",
-			"http://fakeuri.org/Arsenic_Trioxide",
-			"http://fakeuri.org/Atomoxetine",
-			"http://fakeuri.org/Atorvastatin",
-			"http://fakeuri.org/Azathioprine", "http://fakeuri.org/Boceprevir",
-			"http://fakeuri.org/Brentuximab_Vedotin",
-			"http://fakeuri.org/Busulfan", "http://fakeuri.org/Capecitabine",
-			"http://fakeuri.org/Carbamazepine",
-			"http://fakeuri.org/Carisoprodol", "http://fakeuri.org/Carvedilol",
-			"http://fakeuri.org/Celecoxib", "http://fakeuri.org/Cetuximab",
-			"http://fakeuri.org/Cevimeline",
-			"http://fakeuri.org/Chlordiazepoxide_and_Amitriptyline",
-			"http://fakeuri.org/Chloroquine", "http://fakeuri.org/Cisplatin",
-			"http://fakeuri.org/Citalopram", "http://fakeuri.org/Clobazam",
-			"http://fakeuri.org/Clomiphene", "http://fakeuri.org/Clomipramine",
-			"http://fakeuri.org/Clopidogrel", "http://fakeuri.org/Clozapine",
-			"http://fakeuri.org/Codeine", "http://fakeuri.org/Crizotinib",
-			"http://fakeuri.org/Dapsone", "http://fakeuri.org/Dasatinib",
-			"http://fakeuri.org/Denileukin_Diftitox",
-			"http://fakeuri.org/Desipramine",
-			"http://fakeuri.org/Dexlansoprazole",
-			"http://fakeuri.org/Dextromethorphan_and_Quinidine",
-			"http://fakeuri.org/Diazepam", "http://fakeuri.org/Doxepin",
-			"http://fakeuri.org/Drospirenone_and_Estradiol",
-			"http://fakeuri.org/Erlotinib", "http://fakeuri.org/Esomeprazole",
-			"http://fakeuri.org/Exemestane", "http://fakeuri.org/Everolimus",
-			"http://fakeuri.org/Fluorouracil", "http://fakeuri.org/Fluoxetine",
-			"http://fakeuri.org/Fluoxetine_and_Olanzapine",
-			"http://fakeuri.org/Flurbiprofen",
-			"http://fakeuri.org/Fluvoxamine", "http://fakeuri.org/Fulvestrant",
-			"http://fakeuri.org/Galantamine", "http://fakeuri.org/Iloperidone",
-			"http://fakeuri.org/Imatinib", "http://fakeuri.org/Imipramine",
-			"http://fakeuri.org/Indacaterol", "http://fakeuri.org/Irinotecan",
-			"http://fakeuri.org/Isosorbide", "http://fakeuri.org/Ivacaftor",
-			"http://fakeuri.org/Lapatinib", "http://fakeuri.org/Lenalidomide",
-			"http://fakeuri.org/Letrozole", "http://fakeuri.org/Maraviroc",
-			"http://fakeuri.org/Mercaptopurine",
-			"http://fakeuri.org/Metoprolol", "http://fakeuri.org/Modafinil",
-			"http://fakeuri.org/Nefazodone", "http://fakeuri.org/Nilotinib",
-			"http://fakeuri.org/Nortriptyline",
-			"http://fakeuri.org/Omeprazole", "http://fakeuri.org/Panitumumab",
-			"http://fakeuri.org/Pantoprazole", "http://fakeuri.org/Paroxetine",
-			"http://fakeuri.org/Peginterferon_alfa-2b",
-			"http://fakeuri.org/Perphenazine", "http://fakeuri.org/Pertuzumab",
-			"http://fakeuri.org/Phenytoin", "http://fakeuri.org/Pimozide",
-			"http://fakeuri.org/Prasugrel", "http://fakeuri.org/Pravastatin",
-			"http://fakeuri.org/Propafenone", "http://fakeuri.org/Propranolol",
-			"http://fakeuri.org/Protriptyline", "http://fakeuri.org/Quinidine",
-			"http://fakeuri.org/Rabeprazole", "http://fakeuri.org/Rasburicase",
-			"http://fakeuri.org/Rifampin", "http://fakeuri.org/Isoniazid",
-			"http://fakeuri.org/Pyrazinamide",
-			"http://fakeuri.org/Risperidone",
-			"http://fakeuri.org/Sodium_Phenylacetate",
-			"http://fakeuri.org/Sodium_Benzoate",
-			"http://fakeuri.org/Sodium_Phenylbutyrate",
-			"http://fakeuri.org/Tamoxifen", "http://fakeuri.org/Telaprevir",
-			"http://fakeuri.org/Terbinafine",
-			"http://fakeuri.org/Tetrabenazine",
-			"http://fakeuri.org/Thioguanine",
-			"http://fakeuri.org/Thioridazine", "http://fakeuri.org/Ticagrelor",
-			"http://fakeuri.org/Tolterodine", "http://fakeuri.org/Tositumomab",
-			"http://fakeuri.org/Tramadol_and_Acetaminophen",
-			"http://fakeuri.org/Trastuzumab", "http://fakeuri.org/Tretinoin",
-			"http://fakeuri.org/Trimipramine",
-			"http://fakeuri.org/Valproic_Acid",
-			"http://fakeuri.org/Vemurafenib", "http://fakeuri.org/Venlafaxine",
-			"http://fakeuri.org/Voriconazole", "http://fakeuri.org/Warfarin" };
-
 	// drug of interest
 	public MLinkedResource getDrugOfInterest() {
 
 		int indexdoi = descriptdoi.getSelectedIndex();
 
-		// TODO: fix the drug URI listing to be accurate
-		return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
-				+ drugUris[indexdoi], descriptdoi.getItemText(indexdoi),
-				"The drug of interest.");
+		if (indexdoi != 0) {
+			String drugname = descriptdoi.getItemText(indexdoi).toUpperCase();
+
+			// String druguri = drugUris_FDA.get(drugname);
+
+			String druguri = pharmgxmodel.getDrugUri(drugname);
+
+			if (druguri == null || druguri.trim().equals("")) {
+				System.out.println("WARNING: DRUG URI IS NOT FOUND IN MAP");
+				druguri = "";
+			}
+
+			return ResourcesFactory.createLinkedResource(druguri,
+					descriptdoi.getItemText(indexdoi), "The drug of interest.");
+		} else
+			return null;
 	}
 
 	// biomarkers
 	public MLinkedResource getBioMarkers() {
 
 		int indexbm = descriptbm.getSelectedIndex();
+		System.out.println("getBioMarkers:" + indexbm);
+		if (indexbm != 0) {
+			String biomarkerName = descriptbm.getItemText(indexbm);
 
-		// TODO: fix the biomarker URI listing to be accurate
-		return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX,
-				descriptbm.getItemText(indexbm), "The selected biomarker.");
+			System.out.println("getBioMarkers name:" + biomarkerName);
+			System.out.println("currentPharmgx:" + pharmgxmodel);
+			System.out.println("len:" + pharmgxmodel.getLengthOfBioList());
+			String biomarkerURL = pharmgxmodel.getBioUri(indexbm - 1);
+
+			System.out.println("getBioMarkers url:" + biomarkerURL);
+
+			return ResourcesFactory.createLinkedResource(biomarkerURL,
+					biomarkerName, "The selected biomarker.");
+		} else
+			return null;
 	}
 
 	// Product label sections
@@ -334,9 +260,10 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 
 		// TODO: fix the biomarker URI listing to be accurate
 		return ResourcesFactory
-				.createLinkedResource(SPL_POC_PREFIX,
+				.createLinkedResource(
+						SPL_POC_PREFIX,
 						descriptpls.getItemText(indexbm),
-						"what section of the label Pharmacists identify clinical pharmgx statements");
+						"The section of the label where pharmacists identify clinical pharmgx statements");
 	}
 
 	// pk impact
@@ -743,14 +670,9 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 							MSPLPharmgxUsage pharmgxUsage = SPLsFactory
 									.createSPLPharmgxUsage();
 
-							/*
-							 * if(pharmgxUsage.getPkImpact()==null){
-							 * descriptpknone.setValue(true);
-							 * System.out.println("*********1 pk**********"); }
-							 */
-
 							// take the form values and assign
 							_domeo.getLogger().debug(this, "SPL annotation 1");
+							System.out.println("bio");
 							pharmgxUsage.setBiomarkers(getBioMarkers());
 							_domeo.getLogger().debug(this, "SPL annotation 2");
 							pharmgxUsage.setPkImpact(getPkImpact());
@@ -898,8 +820,8 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				}
 
 				String bioLabel = _item.getBiomarkers().getLabel();
-				for (int i = 0; i < biomarker.length; i++) {
-					if (biomarker[i].equals(bioLabel)) {
+				for (int i = 0; i < pharmgxmodel.getLengthOfBioList(); i++) {
+					if (pharmgxmodel.getBioName(i).equals(bioLabel)) {
 						descriptbm.setSelectedIndex(i + 1);
 					}
 				}
@@ -914,7 +836,7 @@ public class FSPLsForm extends AFormComponent implements IResizable {
 				}
 
 				String plsLabel = _item.getProductLabelSelection().getLabel();
-				for (int i = 0; i < biomarker.length; i++) {
+				for (int i = 0; i < productLabelSections.length; i++) {
 					if (productLabelSections[i].equals(plsLabel)) {
 						descriptpls.setSelectedIndex(i + 1);
 					}
