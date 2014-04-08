@@ -25,6 +25,7 @@ import java.util.Date;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -47,6 +48,10 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	
 	public final native int getNumberOfAnnotationItems() /*-{ 
 		return this.annotations.length;
+	}-*/;
+	
+	public final native JsArray<JavaScriptObject> getAnnotations() /*-{  
+		return this['annotations']; 
 	}-*/;
 	
 	// ------------------------------------------------------------------------

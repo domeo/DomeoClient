@@ -20,12 +20,32 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public interface IOpenAnnotation {
+public class JsSpecificResource extends JavaScriptObject {
 
-	public static final String ANNOTATION = "oa:Annotation";
-	public static final String CONTENT_AS_TEXT = "cnt:ContentAsText";
-	public static final String SPECIFIC_RESOURCE = "oa:SpecificResource";
+	protected JsSpecificResource() {}
+	
+	public final native String getId() /*-{ return this['@id'];  }-*/;
+	public final native String getType() /*-{ return this['@type']; }-*/;
+	
+	// Has source
+	public final native Object getHasSource() /*-{ 
+		return this.hasSource; 
+	}-*/;
+	public final native boolean isHasSourceString() /*-{ 
+		return this.hasSource.constructor === String;
+	}-*/;
+	public final native String getHasSourceAsString() /*-{ 
+		return this.hasSource; 
+	}-*/;
+	public final native boolean isHasSourceObject() /*-{ 
+		return this.hasSource.constructor === Object;
+	}-*/;
+	public final native JsAnnotopiaAgent getHasSourceAsObject() /*-{ 
+		return this.hasSource; 
+	}-*/;
 }
