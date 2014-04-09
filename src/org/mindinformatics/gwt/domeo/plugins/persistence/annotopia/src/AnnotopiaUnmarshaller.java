@@ -158,7 +158,7 @@ public class AnnotopiaUnmarshaller {
 					return aSet;
 				}
 			} catch(Exception e) {
-				_domeo.getLogger().exception(this, e.getMessage());
+				_domeo.getLogger().exception(this, "unmarshallAnnotationSet(): " + e.getMessage());
 			}
 		} else {
 			_domeo.getLogger().exception(this, "Unrecognized format");
@@ -180,6 +180,8 @@ public class AnnotopiaUnmarshaller {
 	}
 	
 	private void unmarshallAnnotations(MAnnotationSet aSet, MAnnotopiaAnnotationSet set, JavaScriptObject jsItem) {
+		_domeo.getLogger().debug(this, "Unmarshalling Annotations");
+		
 		HashMap<String, JsAnnotopiaAgent> agents = new HashMap<String, JsAnnotopiaAgent>();
 		HashMap<String, String> annotationAgents = new HashMap<String, String>();
 		
@@ -190,6 +192,7 @@ public class AnnotopiaUnmarshaller {
 		
 		// Unmarshalling agents
 		for(int i=0; i<jsSet.getAnnotations().length(); i++) {
+			_domeo.getLogger().debug(this, "Unmarshalling Annotation: " + i);
 			JavaScriptObject a = jsSet.getAnnotations().get(i);
 			if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
 				// Unmarshall annotatedBy
@@ -200,6 +203,7 @@ public class AnnotopiaUnmarshaller {
 					agents.put(annotation.getAnnotatedByAsObject().getId(), annotation.getAnnotatedByAsObject());
 				}
 				
+				_domeo.getLogger().debug(this, "Unmarshalling Targets: " + i);
 				// Unmarshall targets
 				boolean multipleTargets = annotation.hasMultipleTargets();
 				if(multipleTargets) {
@@ -233,6 +237,7 @@ public class AnnotopiaUnmarshaller {
 		
 		// Creation of annotation items
 		for(int i=0; i<jsSet.getAnnotations().length(); i++) {
+			_domeo.getLogger().debug(this, "Creating annotation: " + i);
 			JavaScriptObject a = jsSet.getAnnotations().get(i);
 			if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
 				JsOpenAnnotation annotation = (JsOpenAnnotation) a;
@@ -244,6 +249,7 @@ public class AnnotopiaUnmarshaller {
 				} else if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByObject()) {
 					jsAnnotatedBy = agents.get(annotation.getAnnotatedByAsObject().getId());
 				}
+				_domeo.getLogger().debug(this, "Annotated by: " + jsAnnotatedBy.getId());
 				
 				// Unmarshall targets
 				ArrayList<MSelector> selectors = new ArrayList<MSelector>();
@@ -251,10 +257,12 @@ public class AnnotopiaUnmarshaller {
 				//ArrayList<JsSpecificResource> specificResources = new ArrayList<JsSpecificResource>();
 				boolean multipleTargets = annotation.hasMultipleTargets();
 				if(multipleTargets) {
+					_domeo.getLogger().debug(this, "Multiple targets");
 					JsArray<JavaScriptObject> jsTargets = annotation.getTargets();
 					for(int t=0; t<jsTargets.length(); t++) {
 						JavaScriptObject jsTarget = jsTargets.get(t);
 						if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
+							_domeo.getLogger().debug(this, "Specific Resource");
 							JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
 							if(getObjectType(jsSpecificResource.getSelector()).contains(IOpenAnnotation.TEXT_QUOTE_SELECTOR)) {
 								JsTextQuoteSelector selector = (JsTextQuoteSelector) jsSpecificResource.getSelector();
@@ -263,8 +271,9 @@ public class AnnotopiaUnmarshaller {
 								if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
 									resource = targets.get(targetSources.get(jsSpecificResource.getId()));
 								} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
-									resource = targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
+									resource = targets.get(jsSpecificResource.getHasSourceAsObject().getId());
 								}
+								_domeo.getLogger().debug(this, "Resource " + resource.getId());
 								
 								MSelector sel = AnnotationFactory.createPrefixSuffixTextSelector(
 										_domeo.getAgentManager().getUserPerson(), 
@@ -277,19 +286,21 @@ public class AnnotopiaUnmarshaller {
 						}
 					}
 				} else {
+					_domeo.getLogger().debug(this, "Single target");
 					JavaScriptObject jsTarget = annotation.getTarget();
 					if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
 						JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
 						if(getObjectType(jsSpecificResource.getSelector()).contains(IOpenAnnotation.TEXT_QUOTE_SELECTOR)) {
+							_domeo.getLogger().debug(this, "Specific Resource");
 							JsTextQuoteSelector selector = (JsTextQuoteSelector) jsSpecificResource.getSelector();
-							
 							JsResource resource = null;
 							if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
 								resource = targets.get(targetSources.get(jsSpecificResource.getId()));
 							} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
-								resource = targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
+								resource = targets.get(jsSpecificResource.getHasSourceAsObject().getId());
 							}
-							
+							_domeo.getLogger().debug(this, "Resource " + resource.getId());
+
 							MSelector sel = AnnotationFactory.createPrefixSuffixTextSelector(_domeo.getAgentManager().getUserPerson(), 
 									new MGenericResource(resource.getId(), ""), 
 									selector.getExact(), selector.getPrefix(), selector.getSuffix());
@@ -297,6 +308,7 @@ public class AnnotopiaUnmarshaller {
 						}	
 					}
 				}
+				_domeo.getLogger().debug(this, "Selectors: " + selectors.size());
 				
 				MAgentPerson annotatedBy = new MAgentPerson();
 				annotatedBy.setUri(jsAnnotatedBy.getId());

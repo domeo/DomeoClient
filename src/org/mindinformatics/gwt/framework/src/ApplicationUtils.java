@@ -74,6 +74,14 @@ public class ApplicationUtils {
 		return $wnd.proxyProtocol;
 	}-*/;
 	
+	public native static String getIsAnnotopiaEnabled() /*-{
+		return $wnd.enableAnnotopia;
+	}-*/;
+	
+	public native static String getAnnotopiaLocation() /*-{
+		return $wnd.annotopiaLocation;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;

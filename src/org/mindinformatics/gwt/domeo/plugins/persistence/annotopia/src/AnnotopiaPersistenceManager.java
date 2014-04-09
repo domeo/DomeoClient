@@ -48,10 +48,11 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaPersistenceManager extends APersistenceManager implements IPersistenceManager {
 
-	public static final String URL = "http://127.0.0.1:8080/s/annotationset";
+	public String URL = "http://127.0.0.1:8080/s/annotationset";
 	
-	public AnnotopiaPersistenceManager(IDomeo domeo, ICommandCompleted callback) {
+	public AnnotopiaPersistenceManager(IDomeo domeo, String url, ICommandCompleted callback) {
 		super(domeo, callback);
+		if(url!=null) URL = url;
 	}
 	
 	public static native JavaScriptObject parseJson(String jsonStr) /*-{
@@ -80,7 +81,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		
 		try {
 			Ajax.ajax(Ajax.createSettings()
-				.setUrl(URL)
+				.setUrl(URL+"s/annotationset")
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
 		        .setData(GQuery.$$("apiKey: testkey,outCmd:frame")) // parameters for the query-string
@@ -92,7 +93,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		    				(JsAnnotopiaSetsResultWrapper) parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaUnmarshaller unmarshaller = new AnnotopiaUnmarshaller(_domeo);
 		    			List<MAnnotopiaAnnotationSet> sets = unmarshaller.unmarshallAnnotationSetsList(wrapper);	    			
-		    			_application.getLogger().debug(this, "Completed Execution of checkForExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
+		    			_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSetList() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 
 		    			if(sets.size()==0) {
 		    				// TODO message no annotation found
@@ -151,7 +152,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    			} else {	
 			    				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 			    				_application.getProgressPanelContainer().hide();
-			    				_application.getLogger().debug(this, "Completed Execution of checkForExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
+			    				_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 			    				_domeo.refreshAllComponents();
 			    			}
 			    		}

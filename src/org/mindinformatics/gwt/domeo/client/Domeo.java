@@ -192,7 +192,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public static final boolean verbose = true;
 	public static final boolean pathfinder = true;
 	
-	public static final boolean annotopia = false;
+	public static final boolean annotopia = false; // Only in hosted mode
 	
 	public static String APP_NAME = "Domeo";
 	public static String APP_VERSION = "b40";
@@ -763,7 +763,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		} else {
 			if (isHostedMode()) {
 				if(annotopia) {
-					return new AnnotopiaPersistenceManager(this, null);
+					return new AnnotopiaPersistenceManager(this, null, null);
 				} else if(isJsonFormat()) {
 					return new JsonPersistenceManager(this, null);
 				} else {
@@ -771,7 +771,9 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				}
 			} else {
 				// Real service
-				return new JsonPersistenceManager(this, null);
+				if(ApplicationUtils.getIsAnnotopiaEnabled().equals("true")) {
+					return new AnnotopiaPersistenceManager(this, ApplicationUtils.getAnnotopiaLocation(), null);
+				} else return new JsonPersistenceManager(this, null);
 				//throw new RuntimeException("PersistenceManager not implemented for a real situation");
 			}
 		}
