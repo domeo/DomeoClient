@@ -27,9 +27,15 @@ import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
+import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
@@ -50,11 +56,12 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnoto
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
+import org.mindinformatics.gwt.utils.src.HtmlUtils;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.dom.client.Element;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -235,13 +242,13 @@ public class AnnotopiaUnmarshaller {
 				if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByString()) {
 					jsAnnotatedBy = agents.get(annotationAgents.get(annotation.getId()));
 				} else if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByObject()) {
-					jsAnnotatedBy = agents.get(annotationAgents.get(annotation.getAnnotatedByAsObject().getId()));
+					jsAnnotatedBy = agents.get(annotation.getAnnotatedByAsObject().getId());
 				}
 				
 				// Unmarshall targets
 				ArrayList<MSelector> selectors = new ArrayList<MSelector>();
-				ArrayList<String> resources = new ArrayList<String>(); 
-				ArrayList<JsSpecificResource> specificResources = new ArrayList<JsSpecificResource>();
+				//ArrayList<String> resources = new ArrayList<String>(); 
+				//ArrayList<JsSpecificResource> specificResources = new ArrayList<JsSpecificResource>();
 				boolean multipleTargets = annotation.hasMultipleTargets();
 				if(multipleTargets) {
 					JsArray<JavaScriptObject> jsTargets = annotation.getTargets();
@@ -310,14 +317,64 @@ public class AnnotopiaUnmarshaller {
 					for(MSelector selector: selectors) {
 						postIt.addSelector(selector);
 					}	
+					performAnnotation(postIt);
 					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
+					aSet.setHasChanged(false);
+				} else if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_HIGHLIGHTED)) {
+					MHighlightAnnotation highlight = AnnotationFactory.createHighlight(aSet, annotatedBy, aSet.getCreatedWith());
+					for(MSelector selector: selectors) {
+						highlight.addSelector(selector);
+					}	
+					performAnnotation(highlight);
+					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
 					aSet.setHasChanged(false);
 				}
 			}
 		}
-		
-		Window.alert("Agents: " + agents.size());
-		Window.alert("Sources: " + targets.size());
+	}
+	
+	private void performAnnotation(MAnnotation ann) {
+		for(int z=0; z<ann.getSelectors().size(); z++) {
+			try {
+				if(ann.getSelectors().get(z) instanceof MTextQuoteSelector) {
+					HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
+							((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
+							((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
+							((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
+							HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L),
+							_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
+				} 
+				
+				/*
+				else if(ann.getSelectors().get(z) instanceof MImageInDocumentSelector) {
+					// Place the annotation???
+					_domeo.getLogger().info(this, "image;;;" + ((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl());
+					Element image = HtmlUtils.getImage(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 
+							((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl(), 
+							((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getXPath());
+					if(image!=null) {
+						ann.setY(((com.google.gwt.user.client.Element) image).getAbsoluteTop());
+						((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).setImage((com.google.gwt.user.client.Element) image);
+						_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(ann, 
+								((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget(), (com.google.gwt.user.client.Element) image);
+						_domeo.getLogger().info(this, "caching annotation for image;;;" + ((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl());
+						_domeo.getAnnotationPersistenceManager().cacheAnnotationOfImage(((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl(), ann);
+					} else {
+						_domeo.getLogger().exception(this, "Image element not found!");
+					}
+
+					// TODO add to the image cache
+					
+				} else if(ann.getSelectors().get(z) instanceof MAnnotationSelector) {
+					//Window.alert("Individual url: " + ((MAnnotationSelector) ann.getSelectors().get(z)).getAnnotation().getIndividualUri() + " - " + ann.getIndividualUri());
+					//this.cacheForLazyBinding(((MAnnotationSelector) ann.getSelectors().get(z)).getAnnotation().getIndividualUri(), 
+					//		ann, (MAnnotationSelector) ann.getSelectors().get(z));
+				}
+				*/
+			} catch(Exception e) {
+				_domeo.getLogger().exception(this, e.getMessage());
+			}
+		}
 	}
 	
 	private MAnnotopiaAnnotationSet unmarshallAnnotationSet(JavaScriptObject jsItem, HashSet<String> typesSet) {
