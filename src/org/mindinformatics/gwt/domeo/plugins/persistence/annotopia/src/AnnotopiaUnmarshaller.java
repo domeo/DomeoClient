@@ -39,6 +39,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnot
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraphs;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsContentAsText;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsOpenAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsResource;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsSpecificResource;
@@ -283,7 +284,7 @@ public class AnnotopiaUnmarshaller {
 							}
 							
 							MSelector sel = AnnotationFactory.createPrefixSuffixTextSelector(_domeo.getAgentManager().getUserPerson(), 
-									new MGenericResource(resource.getId(),""), 
+									new MGenericResource(resource.getId(), ""), 
 									selector.getExact(), selector.getPrefix(), selector.getSuffix());
 							selectors.add(sel);
 						}	
@@ -295,8 +296,17 @@ public class AnnotopiaUnmarshaller {
 				annotatedBy.setName(jsAnnotatedBy.getName());
 				
 				if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_COMMENTING)) {
+					String bodyText = null;
+					boolean multipleBodies = annotation.hasMultipleBodies();
+					if(!multipleBodies) {
+						if(getObjectTypes(annotation.getBody()).toString().contains(IOpenAnnotation.CONTENT_AS_TEXT)) {
+							JsContentAsText body = (JsContentAsText) annotation.getBody();
+							bodyText = body.getChars();
+						}
+					}
+					
 					MPostItAnnotation postIt = AnnotationFactory.createPostIt(aSet, annotatedBy, 
-							aSet.getCreatedWith(), PostitType.COMMENT_TYPE, "");
+							aSet.getCreatedWith(), PostitType.COMMENT_TYPE, bodyText);
 					for(MSelector selector: selectors) {
 						postIt.addSelector(selector);
 					}	
