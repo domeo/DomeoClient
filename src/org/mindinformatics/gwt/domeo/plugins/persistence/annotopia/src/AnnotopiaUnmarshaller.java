@@ -28,6 +28,10 @@ import java.util.List;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
+import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IOpenAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAgent;
@@ -36,12 +40,15 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnot
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsOpenAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsResource;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsSpecificResource;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaPerson;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaSoftware;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
+import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -121,8 +128,6 @@ public class AnnotopiaUnmarshaller {
 				MAnnotopiaAnnotationSet set = unmarshallAnnotationSet(jsItem, typesSet);
 				
 				if(set!=null) {
-					unmarshallAnnotations(jsItem);
-					
 					// Translation to the old internal formats
 					MAgentSoftware createdWith = new MAgentSoftware();
 					createdWith.setUri(set.getCreatedWith().getId());
@@ -139,6 +144,9 @@ public class AnnotopiaUnmarshaller {
 					aSet.setCreatedWith(createdWith);
 					aSet.setCreatedBy(createdBy);
 					aSet.setCreatedOn(set.getCreatedOn());
+					
+					unmarshallAnnotations(aSet, set, jsItem);
+					
 					return aSet;
 				}
 			} catch(Exception e) {
@@ -163,11 +171,11 @@ public class AnnotopiaUnmarshaller {
 		} else return fieldValue;
 	}
 	
-	private void unmarshallAnnotations(JavaScriptObject jsItem) {
+	private void unmarshallAnnotations(MAnnotationSet aSet, MAnnotopiaAnnotationSet set, JavaScriptObject jsItem) {
 		HashMap<String, JsAnnotopiaAgent> agents = new HashMap<String, JsAnnotopiaAgent>();
 		HashMap<String, String> annotationAgents = new HashMap<String, String>();
 		
-		HashMap<String, JsAnnotopiaAgent> targets = new HashMap<String, JsAnnotopiaAgent>();
+		HashMap<String, JsResource> targets = new HashMap<String, JsResource>();
 		HashMap<String, String> targetSources = new HashMap<String, String>();
 		
 		JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
@@ -222,14 +230,16 @@ public class AnnotopiaUnmarshaller {
 				JsOpenAnnotation annotation = (JsOpenAnnotation) a;
 				
 				// AnnotatedBy
-				JsAnnotopiaAgent annotatedBy = null;
+				JsAnnotopiaAgent jsAnnotatedBy = null;
 				if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByString()) {
-					annotatedBy = agents.get(annotationAgents.get(annotation.getId()));
+					jsAnnotatedBy = agents.get(annotationAgents.get(annotation.getId()));
 				} else if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByObject()) {
-					annotatedBy = agents.get(annotationAgents.get(annotation.getAnnotatedByAsObject().getId()));
+					jsAnnotatedBy = agents.get(annotationAgents.get(annotation.getAnnotatedByAsObject().getId()));
 				}
 				
 				// Unmarshall targets
+				ArrayList<MSelector> selectors = new ArrayList<MSelector>();
+				ArrayList<String> resources = new ArrayList<String>(); 
 				ArrayList<JsSpecificResource> specificResources = new ArrayList<JsSpecificResource>();
 				boolean multipleTargets = annotation.hasMultipleTargets();
 				if(multipleTargets) {
@@ -238,10 +248,23 @@ public class AnnotopiaUnmarshaller {
 						JavaScriptObject jsTarget = jsTargets.get(t);
 						if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
 							JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
-							if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
-								targets.get(targetSources.get(jsSpecificResource.getId()));
-							} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
-								targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
+							if(getObjectType(jsSpecificResource.getSelector()).contains(IOpenAnnotation.TEXT_QUOTE_SELECTOR)) {
+								JsTextQuoteSelector selector = (JsTextQuoteSelector) jsSpecificResource.getSelector();
+								
+								JsResource resource = null;
+								if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+									resource = targets.get(targetSources.get(jsSpecificResource.getId()));
+								} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+									resource = targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
+								}
+								
+								MSelector sel = AnnotationFactory.createPrefixSuffixTextSelector(
+										_domeo.getAgentManager().getUserPerson(), 
+										new MGenericResource(resource.getId(),""), 
+										selector.getExact(), 
+										selector.getPrefix(), 
+										selector.getSuffix());
+								selectors.add(sel);
 							}
 						}
 					}
@@ -249,12 +272,36 @@ public class AnnotopiaUnmarshaller {
 					JavaScriptObject jsTarget = annotation.getTarget();
 					if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
 						JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
-						if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
-							targets.get(targetSources.get(jsSpecificResource.getId()));
-						} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
-							targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
-						}
+						if(getObjectType(jsSpecificResource.getSelector()).contains(IOpenAnnotation.TEXT_QUOTE_SELECTOR)) {
+							JsTextQuoteSelector selector = (JsTextQuoteSelector) jsSpecificResource.getSelector();
+							
+							JsResource resource = null;
+							if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+								resource = targets.get(targetSources.get(jsSpecificResource.getId()));
+							} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+								resource = targets.get(targetSources.get(jsSpecificResource.getHasSourceAsObject().getId()));
+							}
+							
+							MSelector sel = AnnotationFactory.createPrefixSuffixTextSelector(_domeo.getAgentManager().getUserPerson(), 
+									new MGenericResource(resource.getId(),""), 
+									selector.getExact(), selector.getPrefix(), selector.getSuffix());
+							selectors.add(sel);
+						}	
 					}
+				}
+				
+				MAgentPerson annotatedBy = new MAgentPerson();
+				annotatedBy.setUri(jsAnnotatedBy.getId());
+				annotatedBy.setName(jsAnnotatedBy.getName());
+				
+				if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_COMMENTING)) {
+					MPostItAnnotation postIt = AnnotationFactory.createPostIt(aSet, annotatedBy, 
+							aSet.getCreatedWith(), PostitType.COMMENT_TYPE, "");
+					for(MSelector selector: selectors) {
+						postIt.addSelector(selector);
+					}	
+					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
+					aSet.setHasChanged(false);
 				}
 			}
 		}

@@ -25,32 +25,21 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class JsSpecificResource extends JavaScriptObject {
+public class JsTextQuoteSelector extends JavaScriptObject {
 
-	protected JsSpecificResource() {}
+	protected JsTextQuoteSelector() {}
 	
 	public final native String getId() /*-{ return this['@id'];  }-*/;
 	public final native String getType() /*-{ return this['@type']; }-*/;
 	
-	// Has source
-	public final native Object getHasSource() /*-{ 
-		return this.hasSource; 
+	// Quote
+	public final native String getExact() /*-{ 
+		return this.exact; 
 	}-*/;
-	public final native boolean isHasSourceString() /*-{ 
-		return this.hasSource.constructor === String;
+	public final native String getPrefix() /*-{ 
+		return this.prefix; 
 	}-*/;
-	public final native String getHasSourceAsString() /*-{ 
-		return this.hasSource; 
-	}-*/;
-	public final native boolean isHasSourceObject() /*-{ 
-		return this.hasSource.constructor === Object;
-	}-*/;
-	public final native JsResource getHasSourceAsObject() /*-{ 
-		return this.hasSource; 
-	}-*/;
-	
-	// Selector
-	public final native JavaScriptObject getSelector() /*-{ 
-		return this.hasSelector; 
+	public final native String getSuffix() /*-{ 
+		return this.suffix; 
 	}-*/;
 }

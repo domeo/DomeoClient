@@ -28,4 +28,7 @@ public interface IOpenAnnotation {
 	public static final String ANNOTATION = "oa:Annotation";
 	public static final String CONTENT_AS_TEXT = "cnt:ContentAsText";
 	public static final String SPECIFIC_RESOURCE = "oa:SpecificResource";
+	public static final String TEXT_QUOTE_SELECTOR = "oa:TextQuoteSelector";
+	
+	public static final String MOTIVATION_COMMENTING = "oa:commenting";
 }
