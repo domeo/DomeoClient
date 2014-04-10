@@ -1,3 +1,4 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
@@ -26,7 +27,7 @@
 	}
 	
 	.leftColumn {
-		width: 350px;
+		width: 400px;
 		vertical-align: top;
 	}
 	
@@ -36,7 +37,7 @@
 	}
 	
 	.titlebarcenter {
-		width: 330px;
+		width: 400px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
@@ -47,7 +48,7 @@
 	}
 	
 	.titlebarright {
-		width: 330px;
+		width: 400px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
@@ -83,7 +84,7 @@
 	}
 	
 	.titlebar {
-		width: 365px;
+		width: 400px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
@@ -109,7 +110,7 @@
 	}
 	
 	.listbox {
-		width: 100px;
+		width: 120px;
 	}
 	
 	.medical {
@@ -144,20 +145,20 @@
 			</g:SimplePanel>
 		</g:HorizontalPanel>
 		<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
-			<g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>Annotation of
+			<g:Label ui:field="pharmgxLabel" styleName='{style.titlebarright}'>Annotation of
 				clinical pharmacogenomics statements:</g:Label>
 			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
 		</g:HorizontalPanel>
 
 
 		<g:HorizontalPanel styleName='{style.panel}'>
-			<g:cell width="370px">
+			<g:cell width="400px">
 
 				<g:VerticalPanel styleName='{style.leftColumn}'>
 
 					<!-- Drug of Interest -->
 					<g:HorizontalPanel>
-						<g:Label>Drug of Interest: </g:Label>
+						<g:Label>Drug of Interest: &nbsp; </g:Label>
 
 						<g:ListBox ui:field="descriptdoi" name="descriptdoi"
 							visibleItemCount='1' styleName='{style.listbox}'>
@@ -269,12 +270,15 @@
 							<g:item value="0">Warfarin</g:item>
 
 						</g:ListBox>
+						
+						<g:Label>&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;required</g:Label>
+						
 					</g:HorizontalPanel>
 
 
 					<!-- HGNCGeneSymbol -->
 					<g:HorizontalPanel>
-						<g:Label>HGNCGeneSymbol</g:Label>
+						<g:Label>HGNCGeneSymbol: &nbsp;</g:Label>
 
 						<g:ListBox ui:field="descripthgs" name="descripthgs"
 							visibleItemCount='1' styleName='{style.listbox}'>
@@ -323,13 +327,15 @@
 							<g:item value="1">UGT1A1</g:item>
 							<g:item value="1">VKORC1</g:item>
 						</g:ListBox>
+						
+						<g:Label>&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;required</g:Label>
 					</g:HorizontalPanel>
 
 
 
 					<!-- Product label selections -->
 					<g:HorizontalPanel>
-						<g:Label>Product label sections:</g:Label>
+						<g:Label>Product label sections: &nbsp;</g:Label>
 						<g:Label>
 						</g:Label>
 						<g:ListBox ui:field="descriptpls" name="descriptpls"
@@ -384,18 +390,18 @@
 							<g:item value="41">WARNINGS (34071-1)</g:item>
 							<g:item value="42">SUPPLEMENTAL PATIENT MATERIAL (38056-8)</g:item>
 
-
 						</g:ListBox>
+						<g:Label>&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;required</g:Label>
 					</g:HorizontalPanel>
 
 
 					<!-- Variant -->
 					<g:HorizontalPanel>
 
-						<g:Label>Common Variant: </g:Label>
+						<g:Label>Phenotype: &nbsp; </g:Label>
 						<g:ListBox ui:field="descriptsvtlb" name="descript"
 							visibleItemCount='1' styleName='{style.listbox}'>
-							<g:item value="0">unselected</g:item>
+							<g:item value="0">not mentioned</g:item>
 							<g:item value="1">poor-metabolizer</g:item>
 							<g:item value="2">intermediate-metabolizer</g:item>
 							<g:item value="3">extensive-metabolizer</g:item>
@@ -407,21 +413,58 @@
 						</g:ListBox>
 					</g:HorizontalPanel>
 					<g:HorizontalPanel>
-						<g:Label>Other Variants (use commas to separate): </g:Label>
+						<g:Label>Other Phenotypes: </g:Label>
 						<g:TextArea ui:field='descriptsothervt' styleName='{style.alleles}'></g:TextArea>
 					</g:HorizontalPanel>
+
+					<!-- test -->
+					<g:HorizontalPanel>
+						<!-- <g:CheckBox ui:field="descriptsts" name="descript" styleName='{style.elementType}' 
+							text="Test" /> -->
+
+						<g:Label>Test Result: &nbsp; </g:Label>
+						<g:ListBox ui:field="descriptstslb" name="descript"
+							visibleItemCount='1' styleName='{style.listbox}'>
+							<g:item value="0">not mentioned</g:item>
+							<g:item value="1">gene-haplotype-positive</g:item>
+							<g:item value="2">gene-haplotype-negative</g:item>
+							<g:item value="3">gene-SNP-positive</g:item>
+							<g:item value="4">gene-SNP-negative</g:item>
+							<g:item value="5">fused-gene-positive</g:item>
+							<g:item value="6">fused-gene-negative</g:item>
+							<g:item value="7">gene-expression-level-high</g:item>
+							<g:item value="8">gene-expression-level-low</g:item>
+							<g:item value="9">biomarker-positive</g:item>
+							<g:item value="10">biomarker-negative</g:item>
+							<g:item value="11">biomarker-level-high</g:item>
+							<g:item value="12">biomarker-level-low</g:item>
+							<g:item value="13">poor-metabolizer-positive</g:item>
+							<g:item value="14">poor-metabolizer-negative</g:item>
+							<g:item value="15">ultra-metabolizer-positive</g:item>
+							<g:item value="16">ultra-metabolizer-negative</g:item>
+							<g:item value="17">chromosomal-aberration-positive</g:item>
+							<g:item value="18">chromosomal-aberration-negative</g:item>
+
+						</g:ListBox>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel>
+						<g:Label>Other test results: &nbsp; </g:Label>
+						<g:TextArea ui:field='descriptsotherts' styleName='{style.alleles}'></g:TextArea>
+					</g:HorizontalPanel>
+
 
 					<!-- Alleles textareas -->
 
 					<g:HorizontalPanel>
-						<g:Label>Alleles: </g:Label>
+						<g:Label>Alleles: &nbsp; </g:Label>
 						<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
 					</g:HorizontalPanel>
 
 
 					<!-- BioMarkers -->
 					<g:HorizontalPanel>
-						<g:Label>Biomarker: </g:Label>
+						<g:Label>Biomarker: &nbsp; </g:Label>
 
 						<g:ListBox ui:field="descriptbm" name="descriptbm"
 							visibleItemCount='1' styleName='{style.listbox}'>
@@ -505,6 +548,14 @@
 							checked="true">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
+
+				</g:VerticalPanel>
+			</g:cell>
+
+
+			<g:cell width="330px">
+				<g:VerticalPanel ui:field='centerColumn' styleName='{style.centerColumn}'>
+
 					<!-- PD Impact -->
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
@@ -535,12 +586,7 @@
 							checked="true">No mention</g:RadioButton>
 					</g:HorizontalPanel>
 
-				</g:VerticalPanel>
-			</g:cell>
 
-
-			<g:cell width="330px">
-				<g:VerticalPanel ui:field='centerColumn' styleName='{style.centerColumn}'>
 
 					<!-- drug selection -->
 
@@ -567,21 +613,24 @@
 							<g:RadioButton ui:field="descriptdsam" name="descriptds"
 								checked="false">Add medication</g:RadioButton>
 						</g:cell>
-						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
-							<g:RadioButton ui:field="descriptdsnr" name="descriptds"
-								checked="false">Do Not restart</g:RadioButton>
-						</g:cell>
-					</g:HorizontalPanel>
 
-					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptdsns" name="descriptds"
+								checked="false">Do not start</g:RadioButton>
+						</g:cell>
+
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descriptdsnc" name="descriptds"
 								checked="false">Do Not change</g:RadioButton>
 						</g:cell>
 
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
-							<g:RadioButton ui:field="descriptdsns" name="descriptds"
-								checked="false">Do Not start</g:RadioButton>
+							<g:RadioButton ui:field="descriptdsnr" name="descriptds"
+								checked="false">Discontinue/Do not restart</g:RadioButton>
 						</g:cell>
 
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
@@ -667,6 +716,12 @@
 					</g:HorizontalPanel>
 
 
+				</g:VerticalPanel>
+			</g:cell>
+
+			<g:cell width="300px">
+				<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+
 
 					<!-- test -->
 
@@ -704,16 +759,16 @@
 					</g:HorizontalPanel>
 
 
-				</g:VerticalPanel>
-			</g:cell>
-
-			<g:cell width="300px">
-				<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
 					<!--Statement refers to any of the following concepts: -->
 
 					<g:HorizontalPanel styleName='{style.rightColumn}'>
 						<g:Label ui:field="statement" styleName='{style.titlebarright}'>Concepts that the
 							Statement Refers To:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel>
+						<g:Label>Medical Conditions: &nbsp;</g:Label>
+						<g:TextArea ui:field='medconditbody' styleName='{style.alleles}'></g:TextArea>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
@@ -729,50 +784,6 @@
 					<g:HorizontalPanel styleName='{style.panel}'>
 						<g:CheckBox ui:field="descriptppm" name="descriptppm"
 							styleName='{style.elementType}' text="Variant Frequency" />
-					</g:HorizontalPanel>
-
-
-					<g:HorizontalPanel>
-					</g:HorizontalPanel>
-					<!-- test -->
-					<g:HorizontalPanel>
-						<!-- <g:CheckBox ui:field="descriptsts" name="descript" styleName='{style.elementType}' 
-							text="Test" /> -->
-
-						<g:Label>Common Test: </g:Label>
-						<g:ListBox ui:field="descriptstslb" name="descript"
-							visibleItemCount='1' styleName='{style.listbox}'>
-							<g:item value="0">unselected</g:item>
-							<g:item value="1">gene-haplotype-positive</g:item>
-							<g:item value="2">gene-haplotype-negative</g:item>
-							<g:item value="3">gene-SNP-positive</g:item>
-							<g:item value="4">gene-SNP-negative</g:item>
-							<g:item value="5">fused-gene-positive</g:item>
-							<g:item value="6">fused-gene-negative</g:item>
-							<g:item value="7">gene-expression-level-high</g:item>
-							<g:item value="8">gene-expression-level-low</g:item>
-							<g:item value="9">biomarker-positive</g:item>
-							<g:item value="10">biomarker-negative</g:item>
-							<g:item value="11">biomarker-level-high</g:item>
-							<g:item value="12">biomarker-level-low</g:item>
-							<g:item value="13">poor-metabolizer-positive</g:item>
-							<g:item value="14">poor-metabolizer-negative</g:item>
-							<g:item value="15">ultra-metabolizer-positive</g:item>
-							<g:item value="16">ultra-metabolizer-negative</g:item>
-							<g:item value="17">chromosomal-aberration-positive</g:item>
-							<g:item value="18">chromosomal-aberration-negative</g:item>
-
-						</g:ListBox>
-					</g:HorizontalPanel>
-
-					<g:HorizontalPanel>
-						<g:Label>Other Test(s) (use commas to separate): </g:Label>
-						<g:TextArea ui:field='descriptsotherts' styleName='{style.alleles}'></g:TextArea>
-					</g:HorizontalPanel>
-
-					<g:HorizontalPanel>
-						<g:Label>Medical Conditions: </g:Label>
-						<g:TextArea ui:field='medconditbody' styleName='{style.alleles}'></g:TextArea>
 					</g:HorizontalPanel>
 
 					<g:Label ui:field="commentLabel" styleName='{style.qualifiersLabel}'>Comments on this

@@ -401,8 +401,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 		} else if (descriptdsnr.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(
-							SPL_POC_PREFIX + "do-not-restart",
-							"Do not restart",
+							SPL_POC_PREFIX + "discontinue-do-not-restart",
+							"Discontinue/Do not restart",
 							"The pharmacogenomic biomarker is related to a recommendation to not restart the drug");
 		} else if (descriptdsns.getValue()) {
 			return ResourcesFactory
@@ -584,37 +584,40 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 									"Variant Frequency",
 									"The frequency or proportion at which a variant occurs in a specific population is mentioned."));
 		}
-
 		return statements;
 	}
 
-	// Variant
+	// phenotype
 	public MLinkedResource getVariant() {
 
-		int indexbm = descriptsvtlb.getSelectedIndex();
+		int indexvt = descriptsvtlb.getSelectedIndex();
 
 		// TODO: test for "none" to skip when encountered
 		// TODO: get specific descriptions
-		return ResourcesFactory
-				.createLinkedResource(
-						// SPL_POC_PREFIX + descriptsvtlb.getItemText(indexbm),
-						// url triggers url validates error
-						SPL_POC_PREFIX,
-						descriptsvtlb.getItemText(indexbm),
-						"A specific variant of a gene, including the wild-type allele, or a patient phenotype");
+
+		if (indexvt != 0)
+			return ResourcesFactory
+					.createLinkedResource(
+							SPL_POC_PREFIX + descriptsvtlb.getItemText(indexvt),
+							descriptsvtlb.getItemText(indexvt),
+							"A specific variant of a gene, including the wild-type allele, or a patient phenotype");
+		return null;
 	}
 
-	// Test
+	// Test results
 	public MLinkedResource getTest() {
 
-		int indexbm = descriptstslb.getSelectedIndex();
+		int indexts = descriptstslb.getSelectedIndex();
 
 		// TODO: test for "none" to skip when encountered
 		// TODO: add the descriptions for the individual test types
-		return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
-				+ descriptstslb.getItemText(indexbm),
-				descriptstslb.getItemText(indexbm),
-				"A test result that is somehow related to the biomarker.");
+		if (indexts != 0)
+			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
+					+ descriptstslb.getItemText(indexts),
+					descriptstslb.getItemText(indexts),
+					"A test result that is somehow related to the biomarker.");
+
+		return null;
 	}
 
 	// NEW annotation
@@ -639,6 +642,11 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 		yesButton.setText("Apply");
 		yesButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+
+				// validates required fields
+				if (!validatesRequiredFields())
+					return;
+
 				if (isContentInvalid())
 					return; // TODO: use this function to validate form elements
 							// in the UI
@@ -686,7 +694,6 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 							// take the form values and assign
 							_domeo.getLogger().debug(this, "SPL annotation 1");
-							System.out.println("bio");
 							pharmgxUsage.setBiomarkers(getBioMarkers());
 							_domeo.getLogger().debug(this, "SPL annotation 2");
 							pharmgxUsage.setPkImpact(getPkImpact());
@@ -826,8 +833,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 					}
 				}
 			}
-			
-			//HGNCGeneSymbol
+
+			// HGNCGeneSymbol
 			if (_item.getHGNCGeneSymbol() != null) {
 				if (_item.getHGNCGeneSymbol().getLabel().equals("unselected")) {
 					descripthgs.setSelectedIndex(0);
@@ -840,7 +847,6 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 					}
 				}
 			}
-
 
 			// set biomarkers
 			if (_item.getBiomarkers() != null) {
@@ -980,7 +986,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 					descriptdsam.setValue(true);
 				else if (_item.getDrugRec().getLabel().equals("Do not start"))
 					descriptdsns.setValue(true);
-				else if (_item.getDrugRec().getLabel().equals("Do not restart"))
+				else if (_item.getDrugRec().getLabel()
+						.equals("Discontinue/Do not restart"))
 					descriptdsnr.setValue(true);
 				else if (_item.getDrugRec().getLabel()
 						.equals("Not change necessary"))
@@ -1026,11 +1033,11 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 				}
 			}
 
-			// Variant
+			// Phenotype
 
 			if (_item.getVariant() != null) {
 
-				if (_item.getVariant().getLabel().equals("unselected")) {
+				if (_item.getVariant().getLabel().equals("not mentioned")) {
 					descriptsvtlb.setSelectedIndex(0);
 				}
 
@@ -1042,11 +1049,11 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 				}
 			}
 
-			// Test
+			// Test results
 
 			if (_item.getTest() != null) {
 
-				if (_item.getTest().getLabel().equals("unselected")) {
+				if (_item.getTest().getLabel().equals("not mentioned")) {
 					descriptstslb.setSelectedIndex(0);
 				}
 
@@ -1121,7 +1128,10 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 		sameVersionButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(ClickEvent event) {
-				System.out.println("onClick function triggered");
+				// validates required fields
+				if (!validatesRequiredFields())
+					return;
+
 				try {
 					if (isContentInvalid()) {
 						return; // TODO: modify this function to validate our UI
@@ -1198,6 +1208,30 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 		// rightColumn.add(tabs.get(0));
 		// resized();
+	}
+
+	public boolean validatesRequiredFields() {
+		ArrayList<String> requireds = new ArrayList<String>();
+
+		if (descriptdoi.getSelectedIndex() == 0)
+			requireds.add("drug of interest");
+		if (descripthgs.getSelectedIndex() == 0)
+			requireds.add("HGNCGeneSymbol");
+		if (descriptpls.getSelectedIndex() == 0)
+			requireds.add("Product label sections");
+
+		if (requireds.size() > 0) {
+
+			String message = "";
+			for (String str : requireds) {
+				message += str + " ,";
+			}
+			message = message.substring(0, message.length() - 1);
+
+			Window.alert(message + "are required");
+			return false;
+		}
+		return true;
 	}
 
 	public String getTitle() {

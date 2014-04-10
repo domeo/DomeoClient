@@ -159,20 +159,44 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 				}
 			}
 
-			String biomarkerStr;
-			if (pharmgx.getBiomarkers() != null) {
-				biomarkerStr = pharmgx.getBiomarkers().getLabel();
-				if (!biomarkerStr.equals("unselected")) {
-					Label l = new Label("Bio", biomarkerStr);
-					labels.add(l);
-				}
-			}
 
 			String productlsStr;
 			if (pharmgx.getProductLabelSelection() != null) {
 				productlsStr = pharmgx.getProductLabelSelection().getLabel();
 				if (!productlsStr.equals("unselected")) {
 					Label l = new Label("PLS", productlsStr);
+					labels.add(l);
+				}
+			}
+			
+			String variantStr;
+			if (pharmgx.getVariant() != null) {
+				variantStr = pharmgx.getVariant().getLabel();
+				if (!variantStr.equals("unselected")) {
+					Label l = new Label("Phe", variantStr);
+					labels.add(l);
+				}
+			}
+
+			String testStr;
+			if (pharmgx.getTest() != null) {
+				testStr = pharmgx.getTest().getLabel();
+				if (!testStr.equals("unselected")) {
+					Label l = new Label("Test", testStr);
+					labels.add(l);
+				}
+			}
+			
+			String allelesStr = "";
+			if (pharmgx.getAlleles() != null) {
+				allelesStr = pharmgx.getAlleles().getLabel();
+			}
+			
+			String biomarkerStr;
+			if (pharmgx.getBiomarkers() != null) {
+				biomarkerStr = pharmgx.getBiomarkers().getLabel();
+				if (!biomarkerStr.equals("unselected")) {
+					Label l = new Label("Bio", biomarkerStr);
 					labels.add(l);
 				}
 			}
@@ -231,28 +255,6 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 				}
 			}
 
-			String variantStr;
-			if (pharmgx.getVariant() != null) {
-				variantStr = pharmgx.getVariant().getLabel();
-				if (!variantStr.equals("unselected")) {
-					Label l = new Label("Varit", variantStr);
-					labels.add(l);
-				}
-			}
-
-			String testStr;
-			if (pharmgx.getTest() != null) {
-				testStr = pharmgx.getTest().getLabel();
-				if (!testStr.equals("unselected")) {
-					Label l = new Label("Test", testStr);
-					labels.add(l);
-				}
-			}
-
-			String allelesStr = "";
-			if (pharmgx.getAlleles() != null) {
-				allelesStr = pharmgx.getAlleles().getLabel();
-			}
 
 			String medicalStr = "";
 			if (pharmgx.getMedicalCondition() != null) {

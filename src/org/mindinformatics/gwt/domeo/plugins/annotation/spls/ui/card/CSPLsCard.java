@@ -266,7 +266,7 @@ public class CSPLsCard extends ACardComponent {
 					String variantStr = dataUsage.getVariant().getLabel();
 					variant.setText(variantStr);
 				} else {
-					variant.setText("None");
+					variant.setText("Not mentioned");
 				}
 
 				/*
@@ -290,7 +290,7 @@ public class CSPLsCard extends ACardComponent {
 					String testStr = dataUsage.getTest().getLabel();
 					test.setText(testStr);
 				} else {
-					test.setText("None");
+					test.setText("Not mentioned");
 				}
 
 				/*
