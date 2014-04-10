@@ -619,22 +619,23 @@ IRetrieveExistingAnnotationSetHandler,
 				.getName(), new CommentTileProvider(this));
 
 		// expertstudy_pDDI
-		/*pluginsManager.registerPlugin(expertstudy_pDDIPlugin.getInstance(),
+		pluginsManager.registerPlugin(expertstudy_pDDIPlugin.getInstance(),
 				true);
 		
-		 * if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-		 * expertstudy_pDDIPlugin.getInstance().getPluginName())) {
+		  if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+		  expertstudy_pDDIPlugin.getInstance().getPluginName())) {
 		 
 		annotationFormsManager.registerAnnotationForm(
 				Mexpertstudy_pDDIAnnotation.class.getName(),
 				new expertstudy_pDDIFormProvider(this));
-		// }
+		 }
+		  
 		annotationTailsManager.registerAnnotationTile(
 				Mexpertstudy_pDDIAnnotation.class.getName(),
 				new expertstudy_pDDITileProvider(this));
 		annotationCardsManager.registerAnnotationCard(
 				Mexpertstudy_pDDIAnnotation.class.getName(),
-				new expertstudy_pDDICardProvider(this));*/
+				new expertstudy_pDDICardProvider(this));
 
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class

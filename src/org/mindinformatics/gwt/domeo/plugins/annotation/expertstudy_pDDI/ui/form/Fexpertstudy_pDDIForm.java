@@ -77,8 +77,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 	ListBox annotationSet;
 	@UiField
 	VerticalPanel rightColumn;
-	@UiField
-	TabBar tabBar;
+/*	@UiField
+	TabBar tabBar;*/
 
 	
 	// NEW annotation
@@ -384,12 +384,12 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 
 	@Override
 	public void resized() {
-		this.setWidth((Window.getClientWidth() - 340) + "px");
+/*		this.setWidth((Window.getClientWidth() - 340) + "px");
 		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
 		for (Widget tab : tabs) {
 			// if(tab instanceof IResizable) ((IResizable)tab).resized();
 			tab.setWidth((Window.getClientWidth() - 615) + "px");
-		}
+		}*/
 	}
 
 	@Override
