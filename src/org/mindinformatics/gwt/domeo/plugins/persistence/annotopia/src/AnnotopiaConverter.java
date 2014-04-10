@@ -29,10 +29,7 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
-import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
-import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
-import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
@@ -61,12 +58,11 @@ import org.mindinformatics.gwt.utils.src.HtmlUtils;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.dom.client.Element;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class AnnotopiaUnmarshaller {
+public class AnnotopiaConverter {
 
 	IDomeo _domeo;
 	
@@ -74,8 +70,20 @@ public class AnnotopiaUnmarshaller {
 	 * Constructor
 	 * @param domeo	The main application pointer
 	 */
-	public AnnotopiaUnmarshaller(IDomeo domeo) {
+	public AnnotopiaConverter(IDomeo domeo) {
 		_domeo = domeo;
+	}
+	
+	/**
+	 * Marshalls the Annotation Set into Annotopia JSON.
+	 * @param set
+	 * @return
+	 */
+	public MAnnotationSet annotationSetToAnnotopiaJson(MAnnotationSet set) {	
+		
+		
+		
+		return set;
 	}
 	
 	/**

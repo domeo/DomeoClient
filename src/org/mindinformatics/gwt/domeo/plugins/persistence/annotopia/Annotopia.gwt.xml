@@ -15,8 +15,8 @@
   <source path='src'/>
   <source path='info'/>
   <source path='model'/>
-  <source path='marshalling'/>
-  <source path='unmarshalling'/>
+  <source path='serializers'/>
+  <source path='deserializers'/>
   <source path='testing'/>
   <source path='ui'/>
 </module>

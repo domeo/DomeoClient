@@ -20,6 +20,7 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.src;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
@@ -33,6 +34,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetriev
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraph;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AnnotopiaSerializerManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.ui.existingsets.ExistingAnnotationViewerPanel;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
@@ -91,7 +93,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		    			IDomeo _domeo = ((IDomeo)_application);
 		    			JsAnnotopiaSetsResultWrapper wrapper = 
 		    				(JsAnnotopiaSetsResultWrapper) parseJson(getDataProperties().toJsonString());
-		    			AnnotopiaUnmarshaller unmarshaller = new AnnotopiaUnmarshaller(_domeo);
+		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			List<MAnnotopiaAnnotationSet> sets = unmarshaller.unmarshallAnnotationSetsList(wrapper);	    			
 		    			_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSetList() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 
@@ -142,7 +144,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    			IDomeo _domeo = ((IDomeo)_application);
 			    			JsAnnotopiaAnnotationSetGraph wrapper = 
 			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
-			    			AnnotopiaUnmarshaller unmarshaller = new AnnotopiaUnmarshaller(_domeo);
+			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 			    			
 			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper);	    			
 			    			if(set==null) {
@@ -174,8 +176,66 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	
 	@Override
 	public void saveAnnotation() {
-		Window.alert("saveAnnotation");
-		// TODO Auto-generated method stub
+		_application.getLogger().debug(this, "Saving modified annotation sets...");
+		_application.getProgressPanelContainer().setProgressMessage("Saving modified annotation sets to Annotopia...");
+		
+		ArrayList<MAnnotationSet> setToSerialize = new ArrayList<MAnnotationSet>();
+		for(MAnnotationSet set: ((IDomeo)_application).getAnnotationPersistenceManager().getAllDiscussionSets()) {
+			if(set.getHasChanged() && set.getAnnotations().size()>0) 
+				setToSerialize.add(set);
+		}
+		for(MAnnotationSet set: ((IDomeo)_application).getAnnotationPersistenceManager().getAllUserSets()) {
+			if(set.getHasChanged() && set.getAnnotations().size()>0) 
+				setToSerialize.add(set);
+		}
+		
+		AnnotopiaSerializerManager manager = AnnotopiaSerializerManager.getInstance((IDomeo)_application);
+		for(MAnnotationSet annotationSet: setToSerialize) {
+			Window.alert(manager.serialize(annotationSet).toString());;
+			
+			
+			/*
+			try {
+				Ajax.ajax(Ajax.createSettings()
+					.setUrl(URL+"s/annotationset")
+			        .setDataType("json") // txt, json, jsonp, xml
+			        .setType("post")      // post, get
+			        .setData(GQuery.$$("apiKey: testkey")) // parameters for the query-string
+			        .setTimeout(10000)
+			        .setSuccess(new Function(){ // callback to be run if the request success
+			    		public void f() {
+			    			IDomeo _domeo = ((IDomeo)_application);
+			    			JsAnnotopiaAnnotationSetGraph wrapper = 
+			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
+			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
+			    			
+			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper);	    			
+			    			if(set==null) {
+			    				// TODO message no annotation found
+			    				_application.getLogger().info(this, "No annotation set found");
+			    				_application.getProgressPanelContainer().setCompletionMessage("Annotation Set not found");
+			    			} else {	
+			    				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
+			    				_application.getProgressPanelContainer().hide();
+			    				_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
+			    				_domeo.refreshAllComponents();
+			    			}
+			    		}
+			        })
+			        .setError(new Function(){ // callback to be run if the request fails
+			        	public void f() {
+			        		_application.getLogger().exception(this, 
+			        			"Couldn't complete existing annotation sets list retrieval process");
+			        		_application.getProgressPanelContainer().setErrorMessage(
+								"Couldn't complete existing annotation sets list retrieval process");
+			        	}
+			        })
+			     );
+			} catch (Exception e) {
+				_application.getLogger().exception(this, "Couldn't complete existing annotation sets list retireval");
+			}
+			*/
+		}
 	}
 
 	@Override
