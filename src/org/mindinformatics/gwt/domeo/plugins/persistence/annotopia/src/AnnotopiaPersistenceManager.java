@@ -50,7 +50,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaPersistenceManager extends APersistenceManager implements IPersistenceManager {
 
-	public String URL = "http://127.0.0.1:8080/s/annotationset";
+	public String URL = "http://127.0.0.1:8090/";
 	
 	public AnnotopiaPersistenceManager(IDomeo domeo, String url, ICommandCompleted callback) {
 		super(domeo, callback);
@@ -191,19 +191,19 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		
 		AnnotopiaSerializerManager manager = AnnotopiaSerializerManager.getInstance((IDomeo)_application);
 		for(MAnnotationSet annotationSet: setToSerialize) {
-			Window.alert(manager.serialize(annotationSet).toString());;
-			
-			
-			/*
+			String value = manager.serialize(annotationSet).toString();
+			Window.alert(value);
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(URL+"s/annotationset")
-			        .setDataType("json") // txt, json, jsonp, xml
+			        .setDataType("jsonp") // txt, json, jsonp, xml */
 			        .setType("post")      // post, get
-			        .setData(GQuery.$$("apiKey: testkey")) // parameters for the query-string
+			        .setData(GQuery.$$("apiKey: testkey, set: " + value)) // parameters for the query-string
 			        .setTimeout(10000)
 			        .setSuccess(new Function(){ // callback to be run if the request success
 			    		public void f() {
+			    			Window.alert("ended");
+			    			/*
 			    			IDomeo _domeo = ((IDomeo)_application);
 			    			JsAnnotopiaAnnotationSetGraph wrapper = 
 			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
@@ -220,21 +220,23 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    				_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 			    				_domeo.refreshAllComponents();
 			    			}
+			    			*/
 			    		}
 			        })
 			        .setError(new Function(){ // callback to be run if the request fails
 			        	public void f() {
+			        		 Window.alert("There was an error" + getDataObject());
+
 			        		_application.getLogger().exception(this, 
-			        			"Couldn't complete existing annotation sets list retrieval process");
+			        			"Couldn't complete existing annotation sets list saving");
 			        		_application.getProgressPanelContainer().setErrorMessage(
-								"Couldn't complete existing annotation sets list retrieval process");
+								"Couldn't complete existing annotation sets list saving");
 			        	}
 			        })
 			     );
 			} catch (Exception e) {
-				_application.getLogger().exception(this, "Couldn't complete existing annotation sets list retireval");
+				_application.getLogger().exception(this, "Couldn't complete existing annotation sets list saving");
 			}
-			*/
 		}
 	}
 

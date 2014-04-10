@@ -20,12 +20,16 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers;
 
+import java.util.List;
+
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
 
+import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 
@@ -100,6 +104,15 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 		annotationSetJson.put("versionNumber", nullable(annotationSet.getVersionNumber()));
 		annotationSetJson.put("previousVersion", nullable(annotationSet.getPreviousVersion()));
 		annotationSetJson.put("deleted", nullableBoolean(annotationSet.getIsDeleted()));
+		
+		// Serialization of the annotation items that have changed
+		JSONArray annotations = new JSONArray();
+		List<MAnnotation> annotationsList = annotationSet.getAnnotations();
+		for(int i=0; i<annotationsList.size(); i++) {
+			if(annotationsList.get(i).getHasChanged())
+				annotations.set(i, manager.serialize(annotationsList.get(i)));
+		}
+		annotationSetJson.put("annotations", annotations);
 		
 		return annotationSetJson;
 	}

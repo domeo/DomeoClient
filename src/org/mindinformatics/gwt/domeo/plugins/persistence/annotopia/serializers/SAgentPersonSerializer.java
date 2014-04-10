@@ -36,12 +36,18 @@ public class SAgentPersonSerializer extends SAgentSerializer implements IAnnotop
 	public JSONObject serialize(AnnotopiaSerializerManager manager, Object obj) {
 		MAgentPerson person = (MAgentPerson) obj;
 		JSONObject jsonPerson = initializeAgent(manager, person);
-		jsonPerson.put("title", new JSONString(person.getTitle()));
-		jsonPerson.put("email", new JSONString(person.getEmail()));
-		jsonPerson.put("firstname", new JSONString(person.getFirstName()));
-		jsonPerson.put("middlename", new JSONString(person.getMiddleName()));
-		jsonPerson.put("lastname", new JSONString(person.getLastName()));
-		jsonPerson.put("picture", new JSONString(person.getPicture()));
+		if((person.getTitle()!=null && !person.getTitle().isEmpty())) 
+			jsonPerson.put("title", new JSONString(person.getTitle()));
+		if((person.getEmail()!=null && !person.getEmail().isEmpty())) 
+			jsonPerson.put("email", new JSONString(person.getEmail()));
+		if((person.getFirstName()!=null && !person.getFirstName().isEmpty())) 
+			jsonPerson.put("firstname", new JSONString(person.getFirstName()));
+		if((person.getMiddleName()!=null && !person.getMiddleName().isEmpty())) 
+			jsonPerson.put("middlename", new JSONString(person.getMiddleName()));
+		if((person.getLastName()!=null && !person.getLastName().isEmpty())) 
+			jsonPerson.put("lastname", new JSONString(person.getLastName()));
+		if((person.getPicture()!=null && !person.getPicture().isEmpty())) 
+			jsonPerson.put("picture", new JSONString(person.getPicture()));
 		return jsonPerson;
 	}
 }

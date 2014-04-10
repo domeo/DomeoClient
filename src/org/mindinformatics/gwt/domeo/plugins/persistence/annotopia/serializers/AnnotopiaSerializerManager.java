@@ -23,7 +23,10 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers;
 import java.util.HashMap;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
@@ -54,7 +57,10 @@ public IDomeo _domeo;
 	}
 	
 	private void registerBasicSerializers() {
-		serializers.put(MAnnotationSet.class.getName(), new SAnnotationSetSerializer());	
+		serializers.put(MAnnotationSet.class.getName(), new SAnnotationSetSerializer());
+		serializers.put(MAnnotation.class.getName(), new SAnnotationSerializer());
+		serializers.put(MTextQuoteSelector.class.getName(), new STextQuoteSelectorSerializer());
+		// Agents
 		serializers.put(IAgent.class.getName(), new SAgentSerializer());
 		serializers.put(MAgentPerson.class.getName(), new SAgentPersonSerializer());
 		serializers.put(MAgentSoftware.class.getName(), new SAgentSoftwareSerializer());
@@ -74,6 +80,42 @@ public IDomeo _domeo;
 			}
 		} catch(Exception e) {
 			_domeo.getLogger().exception(this, "Exception while serializing the Annotation Set " + e.getMessage());
+			return new JSONObject();
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	//  ANNOTATIONS
+	// ------------------------------------------------------------------------
+	public JSONValue serialize(MAnnotation annotation) {
+		_domeo.getLogger().debug(this, "Serializing annotation with localId " + annotation.getLocalId() + " and type " + annotation.getClass().getName());
+		try {
+			IAnnotopiaSerializer serializer = (IAnnotopiaSerializer) serializers.get(annotation.getClass().getName());
+			if(serializer!=null) {
+				return serializer.serialize(this, annotation);
+			} else {
+				_domeo.getLogger().warn(this, "Dedicated serializer for Annotation "+annotation.getClass().getName()+" not found, applying default");
+				IAnnotopiaSerializer defaultSerializer = (IAnnotopiaSerializer)  serializers.get(MAnnotation.class.getName());
+				return defaultSerializer.serialize(this, annotation);
+			}
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, "Exception while serializing the Annotation " + e.getMessage());
+			return null;
+		}
+	}
+	
+	public JSONValue serialize(MSelector selector) {
+		try {
+			IAnnotopiaSerializer serializer = (IAnnotopiaSerializer) serializers.get(selector.getClass().getName());
+			if(serializer!=null) {
+				return serializer.serialize(this, selector);
+			} else {
+				_domeo.getLogger().exception(this, "Serializer for Selector not found");
+				IAnnotopiaSerializer defaultSerializer = (IAnnotopiaSerializer)  serializers.get(MSelector.class.getName());
+				return defaultSerializer.serialize(this, selector);
+			}
+		} catch(Exception e) {
+			_domeo.getLogger().exception(this, "Exception while serializing the Selector " + e.getMessage());
 			return new JSONObject();
 		}
 	}
