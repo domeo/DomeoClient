@@ -84,7 +84,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 				.setUrl(URL+"s/annotationset")
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
-		        .setData(GQuery.$$("apiKey: testkey,outCmd:frame")) // parameters for the query-string
+		        .setData(GQuery.$$("apiKey: testkey,outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
