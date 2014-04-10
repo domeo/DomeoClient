@@ -91,6 +91,14 @@ public class MSPLPharmgxUsage {
 		pharmgx.setProductLabelSelection(productlabelselection);
 	}
 
+	public MLinkedResource getHGNCGeneSymbol() {
+		return pharmgx.getHGNCGeneSymbol();
+	}
+
+	public void setHGNCGeneSymbol(MLinkedResource HGNCGeneSymbol) {
+		pharmgx.setHGNCGeneSymbol(HGNCGeneSymbol);
+	}
+
 	public MLinkedResource getBiomarkers() {
 		return pharmgx.getBiomarkers();
 	}

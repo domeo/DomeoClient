@@ -52,7 +52,7 @@ public class CSPLsCard extends ACardComponent {
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
 			testrec, statement, biomarkers, allelesbody, medconditbody, test,
-			variant, drugOfInterest, commentbody, productls;
+			variant, drugOfInterest, commentbody, productls, HGNCGeneSymbol;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -171,6 +171,13 @@ public class CSPLsCard extends ACardComponent {
 					drugOfInterest.setText(drugIStr);
 				} else {
 					drugOfInterest.setText("None");
+				}
+				
+				if (dataUsage.getHGNCGeneSymbol() != null) {
+					String geneStr = dataUsage.getHGNCGeneSymbol().getLabel();
+					HGNCGeneSymbol.setText(geneStr);
+				} else {
+					HGNCGeneSymbol.setText("None");
 				}
 
 				if (dataUsage.getBiomarkers() != null) {

@@ -95,6 +95,15 @@
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 		
+		
+		<g:VerticalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="HGNCGeneSymbollabel" styleName='{style.tablelabel}'>HGNCGeneSymbol</g:Label>
+				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+					<g:Label ui:field="HGNCGeneSymbol" styleName='{style.tablevalue}'></g:Label>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
 			
 			<g:VerticalPanel>
 				<g:HorizontalPanel>

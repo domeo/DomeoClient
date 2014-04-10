@@ -35,6 +35,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -81,7 +82,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 	// Biomarkers
 	@UiField
-	ListBox descriptbm, descriptsvtlb, descriptstslb, descriptdoi, descriptpls;
+	ListBox descriptbm, descriptsvtlb, descriptstslb, descriptdoi, descriptpls,
+			descripthgs;
 
 	// PK Impact
 	@UiField
@@ -97,7 +99,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 	// recommendation drug
 	@UiField
 	CheckBox descriptdsca, descriptdsal, descriptdsam, descriptdsnr,
-			descriptdsnc, descriptdsnone;
+			descriptdsns, descriptdsnc, descriptdsnone;
 
 	// recommendation dose
 	@UiField
@@ -116,7 +118,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 	// statements
 	@UiField
-	CheckBox descriptsai, descriptsmcc;
+	CheckBox descriptspd, descriptsmcc;
 
 	@UiField
 	CheckBox descriptppm;
@@ -126,12 +128,14 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 	TextArea commentBody, allelesbody, medconditbody, descriptsothervt,
 			descriptsotherts;
 
-	// String[] biomarker = { "ApoE2", "BRAF", "C-Kit", "CCR5", "CD20_antigen",
-	// "CD25", "CD30", "CYP1A2", "CYP2C19", "CYP2C9", "CYP2D6", "DPD",
-	// "EGFR", "ER and PgR_receptor", "ER_receptor", "FIP1L1-PDGFRα",
-	// "G6PD", "HLA-B*1502", "HLA-B*5701", "Her2/neu", "IL28B", "KRAS",
-	// "LDL_Receptor", "NAT1;_NAT2", "PDGFR", "PML/RARα", "Rh_genotype",
-	// "TPMT", "UGT1A1", "VKORC1" };
+	String[] HGNCGeneSymbols = { "ALK", "BAFF/TNFSF13B", "BCR/ABL1", "BRAF",
+			"CCR5", "CFTR", "CYB5R1-4", "CYP1A2", "CYP2C19", "CYP2C9",
+			"CYP2D6", "del (5q)", "DPYD", "EGFR", "ERBB2", "ESR1", "ESR1",
+			"PGR", "F2", "F5", "FIP1L1/PDGFRA", "G6PD", "GBA", "HLA-A",
+			"HLA-B", "HPRT1", "IFNL3", "IL2RA", "KIT", "KRAS", "LDLR", "MS4A1",
+			"NAGS", "NAGS, CPS1, ASS1, OTC, ASL, ABL2", "NAT1-2", "PDGFRB",
+			"Ph Chromosome", "PML/RARA", "POLG", "SERPINC1", "TNFRSF8", "TPMT",
+			"UGT1A1", "VKORC1" };
 
 	String[] variant = { "poor-metabolizer", "intermediate-metabolizer",
 			"extensive-metabolizer", "ultra-metabolizer",
@@ -217,8 +221,6 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 		if (indexdoi != 0) {
 			String drugname = descriptdoi.getItemText(indexdoi).toUpperCase();
 
-			// String druguri = drugUris_FDA.get(drugname);
-
 			String druguri = pharmgxmodel.getDrugUri(drugname);
 
 			if (druguri == null || druguri.trim().equals("")) {
@@ -232,22 +234,38 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 			return null;
 	}
 
+	// HGNCGeneSymbol
+	public MLinkedResource getHGNCGeneSymbol() {
+
+		int indexhgs = descripthgs.getSelectedIndex();
+		if (indexhgs != 0) {
+
+			String hgsName = descripthgs.getItemText(indexhgs);
+			System.out.println("hgs name:" + hgsName);
+			String hgsuri = pharmgxmodel.getHGNCGeneSymbolUri(hgsName);
+			System.out.println("hgs uri:" + hgsuri);
+			if (hgsuri == null || hgsuri.trim().equals("")) {
+				System.out
+						.println("WARNING: HGNCGeneSymbol URI IS NOT FOUND IN MAP");
+				hgsuri = "";
+			}
+
+			return ResourcesFactory.createLinkedResource(hgsuri, hgsName,
+					"The selected HGNCGeneSymbol.");
+		} else
+			return null;
+	}
+
 	// biomarkers
 	public MLinkedResource getBioMarkers() {
 
 		int indexbm = descriptbm.getSelectedIndex();
-		System.out.println("getBioMarkers:" + indexbm);
 		if (indexbm != 0) {
 			String biomarkerName = descriptbm.getItemText(indexbm);
 
-			System.out.println("getBioMarkers name:" + biomarkerName);
-			System.out.println("currentPharmgx:" + pharmgxmodel);
-			System.out.println("len:" + pharmgxmodel.getLengthOfBioList());
-			String biomarkerURL = pharmgxmodel.getBioUri(indexbm - 1);
+			String biomarkerURI = pharmgxmodel.getBioUri(indexbm - 1);
 
-			System.out.println("getBioMarkers url:" + biomarkerURL);
-
-			return ResourcesFactory.createLinkedResource(biomarkerURL,
+			return ResourcesFactory.createLinkedResource(biomarkerURI,
 					biomarkerName, "The selected biomarker.");
 		} else
 			return null;
@@ -256,13 +274,12 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 	// Product label sections
 	public MLinkedResource getProductLabelSection() {
 
-		int indexbm = descriptpls.getSelectedIndex();
+		int indexpls = descriptpls.getSelectedIndex();
 
-		// TODO: fix the biomarker URI listing to be accurate
 		return ResourcesFactory
 				.createLinkedResource(
 						SPL_POC_PREFIX,
-						descriptpls.getItemText(indexbm),
+						descriptpls.getItemText(indexpls),
 						"The section of the label where pharmacists identify clinical pharmgx statements");
 	}
 
@@ -323,12 +340,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 							SPL_POC_PREFIX + "not-important",
 							"Not Important",
 							"The pharmacogenomic biomarker is not associated any clinically relevant pharmacokinetic with respect to the drug.");
-
 		}
-		// else if (descriptpknone.getValue()) {
-		// return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
-		// + "none", "None", "none");
-		// }
 
 		return null;
 	}
@@ -374,10 +386,6 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 							"The pharmacogenomic biomarker is associated with an decrease in the efficacy of the drug.");
 		}
 
-		// else if (descriptpdnone.getValue()) {
-		// return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
-		// + "none", "None", "none.");
-		// }
 		return null;
 	}
 
@@ -396,6 +404,12 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 							SPL_POC_PREFIX + "do-not-restart",
 							"Do not restart",
 							"The pharmacogenomic biomarker is related to a recommendation to not restart the drug");
+		} else if (descriptdsns.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(
+							SPL_POC_PREFIX + "do-not-start",
+							"Do not start",
+							"The pharmacogenomic biomarker is not associated with any drug selection recommendation.");
 		} else if (descriptdsnc.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(
@@ -546,9 +560,9 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 		Set<MLinkedResource> statements = new HashSet<MLinkedResource>();
 
 		// TODO: this is not in the current pharmgx annotation model, add it
-		if (descriptsai.getValue()) {
+		if (descriptspd.getValue()) {
 			statements.add(ResourcesFactory.createLinkedResource(
-					DAILYMED_PREFIX + "ingredient-active", "Active ingredient",
+					DAILYMED_PREFIX + "pro-drug", "Prodrug",
 					"the ingredient is active"));
 		}
 
@@ -698,6 +712,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 							pharmgxUsage.setVariant(getVariant());
 							pharmgxUsage.setTest(getTest());
 							pharmgxUsage.setDrugOfInterest(getDrugOfInterest());
+							pharmgxUsage.setHGNCGeneSymbol(getHGNCGeneSymbol());
 
 							// other variant and other test just storing in
 							// persistence manager but won't displaying in card
@@ -811,6 +826,21 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 					}
 				}
 			}
+			
+			//HGNCGeneSymbol
+			if (_item.getHGNCGeneSymbol() != null) {
+				if (_item.getHGNCGeneSymbol().getLabel().equals("unselected")) {
+					descripthgs.setSelectedIndex(0);
+				}
+
+				String HGNCGeneSymbol = _item.getHGNCGeneSymbol().getLabel();
+				for (int i = 0; i < HGNCGeneSymbols.length; i++) {
+					if (HGNCGeneSymbols[i].equals(HGNCGeneSymbol)) {
+						descripthgs.setSelectedIndex(i + 1);
+					}
+				}
+			}
+
 
 			// set biomarkers
 			if (_item.getBiomarkers() != null) {
@@ -948,6 +978,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 					descriptdsca.setValue(true);
 				else if (_item.getDrugRec().getLabel().equals("Add medication"))
 					descriptdsam.setValue(true);
+				else if (_item.getDrugRec().getLabel().equals("Do not start"))
+					descriptdsns.setValue(true);
 				else if (_item.getDrugRec().getLabel().equals("Do not restart"))
 					descriptdsnr.setValue(true);
 				else if (_item.getDrugRec().getLabel()
@@ -979,8 +1011,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 			if (_item.getStatements() != null) {
 				for (MLinkedResource statemt : _item.getStatements()) {
 
-					if (statemt.getLabel().equals("Active ingredient")) {
-						descriptsai.setValue(true);
+					if (statemt.getLabel().equals("Prodrug")) {
+						descriptspd.setValue(true);
 					}
 					if (statemt.getLabel().equals(
 							"Concomitant medication concern")) {
@@ -1116,6 +1148,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 					_item.setComment(commentBody.getText());
 
 					_item.setDrugOfInterest(getDrugOfInterest());
+					_item.setHGNCGeneSymbol(getHGNCGeneSymbol());
 					_item.setBiomarkers(getBioMarkers());
 					_item.setProductLabelSelection(getProductLabelSection());
 					_item.setPKImpact(getPkImpact());

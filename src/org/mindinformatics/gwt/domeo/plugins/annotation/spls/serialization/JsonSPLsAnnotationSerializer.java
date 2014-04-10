@@ -240,6 +240,43 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 			bodies.set(idx, body);
 			idx += 1;
 		}
+		
+		// HGNCGeneSymbol
+				MLinkedResource HGNCGeneSymbol = ann.getHGNCGeneSymbol();
+				if (HGNCGeneSymbol != null && !HGNCGeneSymbol.getLabel().equals("unselected")) {
+					JSONObject body = new JSONObject();
+					String statementUUID = UUID.uuid();
+					body.put("@id", new JSONString(SPL_URN_PREFIX + statementUUID));
+					body.put("@type", new JSONString("poc:"
+							+ "PharmacogenomicsStatement"));
+					body.put("sio:" + "SIO_000628", new JSONString("dailymed:"
+							+ "HGNCGeneSymbol"));
+
+					// process multiple uris for a single biomarker
+					String Uri = HGNCGeneSymbol.getUrl();
+					int count = 1;
+
+					System.out.println("Uri" + Uri);
+					while (Uri.substring(4).contains("http://")) {
+						int end = Uri.substring(4).indexOf("http://") + 4;
+						String subUri = Uri.substring(0, end);
+
+						// System.out.println("subUri:"+subUri);
+
+						body.put("dailymed:" + "HGNCGeneSymbol" + count++,
+								new JSONString(subUri));
+						Uri = Uri.substring(end);
+					}
+					// System.out.println("last Uri"+Uri);
+					body.put("dailymed:" + "HGNCGeneSymbol", new JSONString(Uri));
+
+					body.put(IRdfsOntology.label, new JSONString(HGNCGeneSymbol.getLabel()));
+					body.put(IDublinCoreTerms.description,
+							new JSONString(HGNCGeneSymbol.getDescription()));
+					bodies.set(idx, body);
+					idx += 1;
+				}
+		
 
 		// Biomarkers of interest
 		MLinkedResource biomarkers = ann.getBiomarkers();

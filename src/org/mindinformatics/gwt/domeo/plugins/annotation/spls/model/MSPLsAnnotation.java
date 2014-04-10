@@ -48,6 +48,14 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 		pharmgxUsage.setProductLabelSelection(productlabelselection);
 	}
 	
+	public MLinkedResource getHGNCGeneSymbol() {
+		return pharmgxUsage.getHGNCGeneSymbol();
+	}
+
+	public void setHGNCGeneSymbol(MLinkedResource HGNCGeneSymbol) {
+		pharmgxUsage.setHGNCGeneSymbol(HGNCGeneSymbol);
+	}
+	
 	public MLinkedResource getBiomarkers() {
 		return pharmgxUsage.getBiomarkers();
 	}

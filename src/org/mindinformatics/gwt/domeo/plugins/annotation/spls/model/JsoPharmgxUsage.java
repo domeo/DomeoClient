@@ -82,6 +82,11 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 		return this['dailymed:pharmgxBiomarker'];
 	}-*/;
 
+	// HGNCGene
+	public final native String getHGNCGeneSymbol() /*-{
+		return this['dailymed:HGNCGeneSymbol'];
+	}-*/;
+
 	// drug of interest
 	public final native String getDrug() /*-{
 		return this['dailymed:pharmgxDrug'];

@@ -149,6 +149,15 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 					labels.add(l);
 				}
 			}
+			
+			String geneStr;
+			if (pharmgx.getHGNCGeneSymbol() != null) {
+				geneStr = pharmgx.getHGNCGeneSymbol().getLabel();
+				if (!geneStr.equals("unselected")) {
+					Label l = new Label("Gene", geneStr);
+					labels.add(l);
+				}
+			}
 
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {

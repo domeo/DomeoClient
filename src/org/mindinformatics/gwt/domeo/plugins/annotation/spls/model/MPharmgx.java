@@ -19,12 +19,18 @@ public class MPharmgx extends MTrustedResource {
 
 	MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 			drugRecResource, monitRecResource, testRecResource, comment,
-			Alleles, biomarkers, variant, test, medicalCondition, drugOfInterest, productLabelSelection;
-	
+			Alleles, biomarkers, variant, test, medicalCondition,
+			drugOfInterest, productLabelSelection, HGNCGeneSymbol;
 
-	
-	
-	public  List<Biomarker> biomarkerUris = new ArrayList<Biomarker>() {
+	public MLinkedResource getHGNCGeneSymbol() {
+		return HGNCGeneSymbol;
+	}
+
+	public void setHGNCGeneSymbol(MLinkedResource hGNCGeneSymbol) {
+		HGNCGeneSymbol = hGNCGeneSymbol;
+	}
+
+	public List<Biomarker> biomarkerUris = new ArrayList<Biomarker>() {
 		{
 			add(new Biomarker("ApoE2",
 					"http://purl.obolibrary.org/obo/PR_000004155"));
@@ -89,7 +95,55 @@ public class MPharmgx extends MTrustedResource {
 					"http://purl.obolibrary.org/obo/PR_000017303"));
 		}
 	};
-	
+
+	public static HashMap<String, String> HGNCGeneSymbolUris = new HashMap<String, String>() {
+		{
+			put("ALK", "http://bio2rdf.org/hgnc:427");
+			put("BAFF/TNFSF13B", "http://bio2rdf.org/hgnc:11929");
+			put("BCR/ABL1", "http://bio2rdf.org/hgnc:76");
+			put("BRAF", "http://bio2rdf.org/hgnc:1097");
+			put("CCR5", "http://bio2rdf.org/hgnc:1606");
+			put("CFTR", "http://bio2rdf.org/hgnc:1884");
+			put("CYB5R1-4", "http://bio2rdf.org/hgnc:13397");
+			put("CYP1A2", "http://bio2rdf.org/hgnc:2596");
+			put("CYP2C19", "http://bio2rdf.org/hgnc:2621");
+			put("CYP2C9", "http://bio2rdf.org/hgnc:2623");
+			put("CYP2D6", "http://bio2rdf.org/hgnc:2625");
+			put("del (5q)", "http://www.fakeuri.com");
+			put("DPYD", "http://bio2rdf.org/hgnc:3012");
+			put("EGFR", "http://bio2rdf.org/hgnc:3236");
+			put("ERBB2", "http://bio2rdf.org/hgnc:3430");
+			put("ESR1", "http://bio2rdf.org/hgnc:3467");
+			put("ESR1, PGR", "http://bio2rdf.org/hgnc:8910");
+			put("F2", "http://bio2rdf.org/hgnc:3535");
+			put("F5", "http:// bio2rdf.org/hgnc:3542");
+			put("FIP1L1/PDGFRA", "http://bio2rdf.org/hgnc:8803");
+			put("G6PD", "http://bio2rdf.org/hgnc:4057");
+			put("GBA", "http://bio2rdf.org/hgnc:4177");
+			put("HLA-A", "http://bio2rdf.org/hgnc:4931  ");
+			put("HLA-B", "http://bio2rdf.org/hgnc:4932");
+			put("HPRT1", "http://bio2rdf.org/hgnc:5157");
+			put("IFNL3", "http://www.fakeuri.com");
+			put("IL2RA", "http://bio2rdf.org/hgnc:6008");
+			put("KIT", "http://bio2rdf.org/hgnc:6342");
+			put("KRAS", "http://bio2rdf.org/hgnc:6407");
+			put("LDLR", "http://bio2rdf.org/hgnc:6547");
+			put("MS4A1", "http://bio2rdf.org/hgnc:7315");
+			put("NAGS", "http://bio2rdf.org/hgnc:17996");
+			put("NAGS, CPS1, ASS1, OTC, ASL, ABL2", "http://www.fakeuri.com");
+			put("NAT1-2", "http://www.fakeuri.com");
+			put("PDGFRB", "http://bio2rdf.org/hgnc:8804");
+			put("Ph Chromosome", "http://www.fakeuri.com");
+			put("PML/RARA", "http://bio2rdf.org/hgnc:9864");
+			put("POLG", "http://bio2rdf.org/hgnc:9179");
+			put("SERPINC1", "http://bio2rdf.org/hgnc:775");
+			put("TNFRSF8", "http://bio2rdf.org/hgnc:11923");
+			put("TPMT", "http://bio2rdf.org/hgnc:12014");
+			put("UGT1A1", "http://bio2rdf.org/hgnc:12530");
+			put("VKORC1", "http://bio2rdf.org/hgnc:23663");
+		}
+	};
+
 	public static HashMap<String, String> drugUris_FDA = new HashMap<String, String>() {
 		{
 			put("PROPAFENONE", "http://www.drugbank.ca/drugs/DB01182");
@@ -221,7 +275,7 @@ public class MPharmgx extends MTrustedResource {
 					"http://www.drugbank.ca/drugs/DB00193http://www.drugbank.ca/drugs/DB00316");
 		}
 	};
-	
+
 	class Biomarker {
 
 		Biomarker() {
@@ -254,23 +308,26 @@ public class MPharmgx extends MTrustedResource {
 
 	}
 	
-	public String getDrugUri(String drugname){
+	public String getHGNCGeneSymbolUri(String name){
+		return HGNCGeneSymbolUris.get(name);
+	}
+
+	public String getDrugUri(String drugname) {
 		return drugUris_FDA.get(drugname);
 	}
-	
-	public String getBioUri(int index){
+
+	public String getBioUri(int index) {
 		return biomarkerUris.get(index).getUri();
 	}
-	
-	public String getBioName(int index){
+
+	public String getBioName(int index) {
 		return biomarkerUris.get(index).getName();
 	}
-	
-	public int getLengthOfBioList(){
+
+	public int getLengthOfBioList() {
 		return biomarkerUris.size();
 	}
-	
-	
+
 	public MLinkedResource getVariant() {
 		return variant;
 	}
@@ -344,8 +401,6 @@ public class MPharmgx extends MTrustedResource {
 	public void setBiomarkers(MLinkedResource biomarkers) {
 		this.biomarkers = biomarkers;
 	}
-
-
 
 	public MLinkedResource getComment() {
 		return comment;

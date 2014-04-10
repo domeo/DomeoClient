@@ -255,6 +255,30 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 				_domeo.getLogger().debug(this, "jsTest is null");
 			}
 
+			// HGNCGeneSymbol
+			String jsGene = au.getHGNCGeneSymbol();
+			System.out.println("jsGene:" + jsGene);
+			if (jsGene != null) {
+				_domeo.getLogger().debug(this,
+						"jsGene is not null: " + jsGene.toString());
+
+				// TODO: throw an exception if the label or description is null
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();
+				MLinkedResource gene = ResourcesFactory
+						.createLinkedResource(jsGene, jsLabel, jsDescript);
+				_domeo.getLogger().debug(
+						this,
+						"gene linked resource created: "
+								+ gene.getLabel());
+
+				ann.setHGNCGeneSymbol(gene);
+				_domeo.getLogger().debug(this,
+						"gene linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "jsGene is null");
+			}
+
 			// biomarker of interest
 			String jsBiomarker = au.getBiomarkers();
 			System.out.println("jsBiomarker:" + jsBiomarker);
@@ -313,12 +337,12 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 
 				String jsUrl = jsPLS;
 				String jsLabel = au.getLabel();
-				
-				//jsPLS = prefix + label, split as url and label
+
+				// jsPLS = prefix + label, split as url and label
 				if (index_label > 0) {
 					jsUrl = jsPLS.substring(0, index_label);
 					jsLabel = jsPLS.substring(index_label + 1);
-				} 
+				}
 
 				String jsDescript = au.getDescription();
 				MLinkedResource pls = ResourcesFactory.createLinkedResource(
