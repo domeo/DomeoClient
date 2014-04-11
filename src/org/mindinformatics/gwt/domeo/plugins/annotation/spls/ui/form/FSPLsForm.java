@@ -822,7 +822,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 			// drug of interest
 
 			if (_item.getDrugOfInterest() != null) {
-				if (_item.getDrugOfInterest().getLabel().equals("unselected")) {
+				if (_item.getDrugOfInterest().getLabel().equals("")) {
 					descriptdoi.setSelectedIndex(0);
 				}
 
@@ -836,7 +836,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 			// HGNCGeneSymbol
 			if (_item.getHGNCGeneSymbol() != null) {
-				if (_item.getHGNCGeneSymbol().getLabel().equals("unselected")) {
+				if (_item.getHGNCGeneSymbol().getLabel().equals("")) {
 					descripthgs.setSelectedIndex(0);
 				}
 
@@ -851,7 +851,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 			// set biomarkers
 			if (_item.getBiomarkers() != null) {
 
-				if (_item.getBiomarkers().getLabel().equals("unselected")) {
+				if (_item.getBiomarkers().getLabel().equals("")) {
 					descriptbm.setSelectedIndex(0);
 				}
 

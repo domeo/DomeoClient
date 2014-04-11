@@ -162,7 +162,7 @@
 
 						<g:ListBox ui:field="descriptdoi" name="descriptdoi"
 							visibleItemCount='1' styleName='{style.listbox}'>
-							<g:item value="0">unselected</g:item>
+							<g:item value="0"></g:item>
 							<g:item value="1">Abacavir</g:item>
 							<g:item value="2">Aripiprazole</g:item>
 							<g:item value="3">Arsenic_Trioxide</g:item>
@@ -270,9 +270,9 @@
 							<g:item value="0">Warfarin</g:item>
 
 						</g:ListBox>
-						
+
 						<g:Label>&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;required</g:Label>
-						
+
 					</g:HorizontalPanel>
 
 
@@ -282,7 +282,7 @@
 
 						<g:ListBox ui:field="descripthgs" name="descripthgs"
 							visibleItemCount='1' styleName='{style.listbox}'>
-							<g:item value="0">unselected</g:item>
+							<g:item value="0"></g:item>
 							<g:item value="1">ALK</g:item>
 							<g:item value="1">BAFF/TNFSF13B</g:item>
 							<g:item value="1">BCR/ABL1</g:item>
@@ -327,7 +327,7 @@
 							<g:item value="1">UGT1A1</g:item>
 							<g:item value="1">VKORC1</g:item>
 						</g:ListBox>
-						
+
 						<g:Label>&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;required</g:Label>
 					</g:HorizontalPanel>
 
@@ -341,7 +341,7 @@
 						<g:ListBox ui:field="descriptpls" name="descriptpls"
 							visibleItemCount='1' styleName='{style.listbox}'>
 
-							<g:item value="0">unselected</g:item>
+							<g:item value="0"></g:item>
 							<g:item value="1">ABUSE (34086-9)</g:item>
 							<g:item value="2">ADVERSE REACTIONS (34084-4)</g:item>
 							<g:item value="3">BOXED WARNING (34066-1)</g:item>
@@ -395,7 +395,15 @@
 					</g:HorizontalPanel>
 
 
-					<!-- Variant -->
+					<!-- Alleles textareas -->
+
+					<g:HorizontalPanel>
+						<g:Label>Alleles: &nbsp; </g:Label>
+						<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
+					</g:HorizontalPanel>
+
+
+					<!-- Phenotype -->
 					<g:HorizontalPanel>
 
 						<g:Label>Phenotype: &nbsp; </g:Label>
@@ -413,7 +421,7 @@
 						</g:ListBox>
 					</g:HorizontalPanel>
 					<g:HorizontalPanel>
-						<g:Label>Other Phenotypes: </g:Label>
+						<g:Label>Other Phenotypes: &nbsp; </g:Label>
 						<g:TextArea ui:field='descriptsothervt' styleName='{style.alleles}'></g:TextArea>
 					</g:HorizontalPanel>
 
@@ -454,13 +462,6 @@
 					</g:HorizontalPanel>
 
 
-					<!-- Alleles textareas -->
-
-					<g:HorizontalPanel>
-						<g:Label>Alleles: &nbsp; </g:Label>
-						<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
-					</g:HorizontalPanel>
-
 
 					<!-- BioMarkers -->
 					<g:HorizontalPanel>
@@ -468,7 +469,7 @@
 
 						<g:ListBox ui:field="descriptbm" name="descriptbm"
 							visibleItemCount='1' styleName='{style.listbox}'>
-							<g:item value="0">unselected</g:item>
+							<g:item value="0"></g:item>
 							<g:item value="1">ApoE2</g:item>
 							<g:item value="2">BRAF</g:item>
 							<g:item value="3">C-Kit</g:item>

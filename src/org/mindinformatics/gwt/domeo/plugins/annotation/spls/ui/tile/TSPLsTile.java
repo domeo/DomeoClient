@@ -144,7 +144,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String drugofInterestStr;
 			if (pharmgx.getDrugOfInterest() != null) {
 				drugofInterestStr = pharmgx.getDrugOfInterest().getLabel();
-				if (!drugofInterestStr.equals("unselected")) {
+				if (!drugofInterestStr.equals("")) {
 					Label l = new Label("Drug", drugofInterestStr);
 					labels.add(l);
 				}
@@ -153,7 +153,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String geneStr;
 			if (pharmgx.getHGNCGeneSymbol() != null) {
 				geneStr = pharmgx.getHGNCGeneSymbol().getLabel();
-				if (!geneStr.equals("unselected")) {
+				if (!geneStr.equals("")) {
 					Label l = new Label("Gene", geneStr);
 					labels.add(l);
 				}
@@ -163,7 +163,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String productlsStr;
 			if (pharmgx.getProductLabelSelection() != null) {
 				productlsStr = pharmgx.getProductLabelSelection().getLabel();
-				if (!productlsStr.equals("unselected")) {
+				if (!productlsStr.equals("")) {
 					Label l = new Label("PLS", productlsStr);
 					labels.add(l);
 				}
@@ -172,7 +172,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String variantStr;
 			if (pharmgx.getVariant() != null) {
 				variantStr = pharmgx.getVariant().getLabel();
-				if (!variantStr.equals("unselected")) {
+				if (!variantStr.equals("not mentioned")) {
 					Label l = new Label("Phe", variantStr);
 					labels.add(l);
 				}
@@ -181,7 +181,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String testStr;
 			if (pharmgx.getTest() != null) {
 				testStr = pharmgx.getTest().getLabel();
-				if (!testStr.equals("unselected")) {
+				if (!testStr.equals("not mentioned")) {
 					Label l = new Label("Test", testStr);
 					labels.add(l);
 				}
@@ -195,7 +195,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			String biomarkerStr;
 			if (pharmgx.getBiomarkers() != null) {
 				biomarkerStr = pharmgx.getBiomarkers().getLabel();
-				if (!biomarkerStr.equals("unselected")) {
+				if (!biomarkerStr.equals("")) {
 					Label l = new Label("Bio", biomarkerStr);
 					labels.add(l);
 				}
