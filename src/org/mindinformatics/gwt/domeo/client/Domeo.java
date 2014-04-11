@@ -551,8 +551,8 @@ IRetrieveExistingAnnotationSetHandler,
 				.getName(), new PostItSearchComponent(this));*/
 
 		// Qualifier
-		/*pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
-		// pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
+		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
+		//pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
 		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
 				QualifierPlugin.getInstance().getPluginName())) {
 			annotationFormsManager.registerAnnotationForm(
@@ -570,7 +570,7 @@ IRetrieveExistingAnnotationSetHandler,
 				new QualifierSearchComponent(this));
 
 		annotationHelpersManager.registerAnnotationHelper(
-				MQualifierAnnotation.class.getName(), new HQualifierHelper());*/
+				MQualifierAnnotation.class.getName(), new HQualifierHelper());
 
 		// Curation
 		annotationTailsManager.registerAnnotationTile(
