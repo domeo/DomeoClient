@@ -50,7 +50,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 
 	private static Logger logger = Logger.getLogger("");
 
-	public static final String LABEL = "expertstudy_pDDI Annotation";
+	public static final String LABEL = "DDI";
 	public static final String LABEL_EDIT = "EDIT expertstudy_pDDI ANNOTATION";
 
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING expertstudy_pDDI ANNOTATION";

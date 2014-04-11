@@ -266,8 +266,7 @@
 					<!-- extra resource -->
 
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="extrarelabel" styleName='{style.titleLeft}'>Extra Resource
-							(annotator condiders are helpful):</g:Label>
+						<g:Label ui:field="extrarelabel" styleName='{style.titleLeft}'>Comment:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>

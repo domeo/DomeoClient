@@ -537,63 +537,66 @@ IRetrieveExistingAnnotationSetHandler,
 				MSPLsAnnotation.class.getName(), new SPLsCardProvider(this));
 
 		// Post It
-		/*	pluginsManager.registerPlugin(PostitPlugin.getInstance(), true);
-		annotationFormsManager
-				.registerAnnotationForm(MPostItAnnotation.class.getName(),
-						new PostItFormProvider(this));
-		annotationTailsManager
-				.registerAnnotationTile(MPostItAnnotation.class.getName(),
-						new PostItTileProvider(this));
-		annotationCardsManager
-				.registerAnnotationCard(MPostItAnnotation.class.getName(),
-						new PostItCardProvider(this));
-		searchComponentsManager.registerAnnotationCard(MPostItAnnotation.class
-				.getName(), new PostItSearchComponent(this));*/
+		/*
+		 * pluginsManager.registerPlugin(PostitPlugin.getInstance(), true);
+		 * annotationFormsManager
+		 * .registerAnnotationForm(MPostItAnnotation.class.getName(), new
+		 * PostItFormProvider(this)); annotationTailsManager
+		 * .registerAnnotationTile(MPostItAnnotation.class.getName(), new
+		 * PostItTileProvider(this)); annotationCardsManager
+		 * .registerAnnotationCard(MPostItAnnotation.class.getName(), new
+		 * PostItCardProvider(this));
+		 * searchComponentsManager.registerAnnotationCard
+		 * (MPostItAnnotation.class .getName(), new
+		 * PostItSearchComponent(this));
+		 */
 
 		// Qualifier
-		/*pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
-		// pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
-		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-				QualifierPlugin.getInstance().getPluginName())) {
-			annotationFormsManager.registerAnnotationForm(
-					MQualifierAnnotation.class.getName(),
-					new QualifierFormProvider(this));
-		}
-		annotationTailsManager.registerAnnotationTile(
-				MQualifierAnnotation.class.getName(),
-				new QualifierTileProvider(this));
-		annotationCardsManager.registerAnnotationCard(
-				MQualifierAnnotation.class.getName(),
-				new QualifierCardProvider(this));
-		searchComponentsManager.registerAnnotationCard(
-				MQualifierAnnotation.class.getName(),
-				new QualifierSearchComponent(this));
-
-		annotationHelpersManager.registerAnnotationHelper(
-				MQualifierAnnotation.class.getName(), new HQualifierHelper());*/
+		/*
+		 * pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
+		 * // pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
+		 * if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+		 * QualifierPlugin.getInstance().getPluginName())) {
+		 * annotationFormsManager.registerAnnotationForm(
+		 * MQualifierAnnotation.class.getName(), new
+		 * QualifierFormProvider(this)); }
+		 * annotationTailsManager.registerAnnotationTile(
+		 * MQualifierAnnotation.class.getName(), new
+		 * QualifierTileProvider(this));
+		 * annotationCardsManager.registerAnnotationCard(
+		 * MQualifierAnnotation.class.getName(), new
+		 * QualifierCardProvider(this));
+		 * searchComponentsManager.registerAnnotationCard(
+		 * MQualifierAnnotation.class.getName(), new
+		 * QualifierSearchComponent(this));
+		 * 
+		 * annotationHelpersManager.registerAnnotationHelper(
+		 * MQualifierAnnotation.class.getName(), new HQualifierHelper());
+		 */
 
 		// Curation
 		annotationTailsManager.registerAnnotationTile(
 				MCurationToken.class.getName(), new CurationTileProvider(this));
 
 		// Antibody
-		/*pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true);
-		// pluginsManager.enablePlugin(AntibodyPlugin.getInstance(), true);
-		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-				AntibodyPlugin.getInstance().getPluginName())) {
-			annotationFormsManager.registerAnnotationForm(
-					MAntibodyAnnotation.class.getName(),
-					new AntibodyFormProvider(this));
-		}
-		annotationTailsManager.registerAnnotationTile(MAntibodyAnnotation.class
-				.getName(), new AntibodyTileProvider(this));
-		annotationCardsManager.registerAnnotationCard(MAntibodyAnnotation.class
-				.getName(), new AntibodyCardProvider(this));
-		searchComponentsManager.registerAnnotationCard(
-				MAntibodyAnnotation.class.getName(),
-				new AntibodySearchComponent(this));*/
+		/*
+		 * pluginsManager.registerPlugin(AntibodyPlugin.getInstance(), true); //
+		 * pluginsManager.enablePlugin(AntibodyPlugin.getInstance(), true); if
+		 * (_profileManager.getUserCurrentProfile().isPluginEnabled(
+		 * AntibodyPlugin.getInstance().getPluginName())) {
+		 * annotationFormsManager.registerAnnotationForm(
+		 * MAntibodyAnnotation.class.getName(), new AntibodyFormProvider(this));
+		 * }
+		 * annotationTailsManager.registerAnnotationTile(MAntibodyAnnotation.class
+		 * .getName(), new AntibodyTileProvider(this));
+		 * annotationCardsManager.registerAnnotationCard
+		 * (MAntibodyAnnotation.class .getName(), new
+		 * AntibodyCardProvider(this));
+		 * searchComponentsManager.registerAnnotationCard(
+		 * MAntibodyAnnotation.class.getName(), new
+		 * AntibodySearchComponent(this));
+		 */
 
-		
 		// Micropublications
 		pluginsManager.registerPlugin(MicroPublicationsPlugin.getInstance(),
 				true);
@@ -621,15 +624,15 @@ IRetrieveExistingAnnotationSetHandler,
 		// expertstudy_pDDI
 		pluginsManager.registerPlugin(expertstudy_pDDIPlugin.getInstance(),
 				true);
-		
-		  if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-		  expertstudy_pDDIPlugin.getInstance().getPluginName())) {
-		 
-		annotationFormsManager.registerAnnotationForm(
-				Mexpertstudy_pDDIAnnotation.class.getName(),
-				new expertstudy_pDDIFormProvider(this));
-		 }
-		  
+
+		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+				expertstudy_pDDIPlugin.getInstance().getPluginName())) {
+
+			annotationFormsManager.registerAnnotationForm(
+					Mexpertstudy_pDDIAnnotation.class.getName(),
+					new expertstudy_pDDIFormProvider(this));
+		}
+
 		annotationTailsManager.registerAnnotationTile(
 				Mexpertstudy_pDDIAnnotation.class.getName(),
 				new expertstudy_pDDITileProvider(this));
@@ -1635,7 +1638,7 @@ IRetrieveExistingAnnotationSetHandler,
 	}
 
 	public static native int documentHeight(Document frameDocument) /*-{
-																	return frameDocument.documentElement.scrollHeight;
-																	}-*/;
+		return frameDocument.documentElement.scrollHeight;
+	}-*/;
 
 }

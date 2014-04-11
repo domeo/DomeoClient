@@ -465,7 +465,7 @@
 
 					<!-- BioMarkers -->
 					<g:HorizontalPanel>
-						<g:Label>Biomarker: &nbsp; </g:Label>
+						<g:Label>Biomarker &nbsp;(deprecated): &nbsp; </g:Label>
 
 						<g:ListBox ui:field="descriptbm" name="descriptbm"
 							visibleItemCount='1' styleName='{style.listbox}'>
