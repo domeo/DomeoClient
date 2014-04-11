@@ -1,3 +1,4 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
@@ -143,7 +144,7 @@
 		</g:HorizontalPanel>
 
 		<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
-			<g:Label ui:field="pharmgxLabel" styleName='{style.qualifiersLabel}'>PDDI Annotation:</g:Label>
+			<g:Label ui:field="label1" styleName='{style.qualifiersLabel}'>PDDI Annotation</g:Label>
 			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
 		</g:HorizontalPanel>
 
@@ -154,18 +155,23 @@
 
 				<g:VerticalPanel styleName='{style.leftColumn}'>
 
+					<!-- Drug 1 -->
+
+					<g:Label ui:field="drugLabel1" styleName='{style.qualifiersLabel}'>Drug 1:</g:Label>
+
 					<!-- Type -->
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
-						<g:Label ui:field="type" styleName='{style.titleLeft}'>Type (type of mention within the sentence for each drug):</g:Label>
+						<g:Label ui:field="type1" styleName='{style.titleLeft}'>Type (type of mention
+							within the sentence for each drug):</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="typeai" name="descriptpk"
+						<g:RadioButton ui:field="typeai1" name="descriptpk"
 							checked="false">Active Ingredient</g:RadioButton>
-						<g:RadioButton ui:field="typemb" name="descriptpk"
+						<g:RadioButton ui:field="typemb1" name="descriptpk"
 							checked="false">Metabolite</g:RadioButton>
-						<g:RadioButton ui:field="typedp" name="descriptpk"
+						<g:RadioButton ui:field="typedp1" name="descriptpk"
 							checked="false">Drug Product</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -173,27 +179,50 @@
 					<!-- Role -->
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
-						<g:Label ui:field="role" styleName='{style.titleLeft}'>Role (each drug plays within the interaction):</g:Label>
+						<g:Label ui:field="role1" styleName='{style.titleLeft}'>Role (each drug plays
+							within the interaction):</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="roleob" name="descriptpd"
+						<g:RadioButton ui:field="roleob1" name="descriptpd"
 							checked="false">Object</g:RadioButton>
-						<g:RadioButton ui:field="rolepp" name="descriptpd"
+						<g:RadioButton ui:field="rolepp1" name="descriptpd"
 							checked="false">Precipitant</g:RadioButton>
 					</g:HorizontalPanel>
 
-					<!-- Statement -->
 
+					<!-- Drug 2 -->
+
+					<g:Label ui:field="drugLabel2" styleName='{style.qualifiersLabel}'>Drug 2:</g:Label>
+
+					<!-- Type -->
 					<g:HorizontalPanel styleName='{style.titlebar}'>
-						<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement (data type that is described):</g:Label>
+						<g:Label ui:field="type2" styleName='{style.titleLeft}'>Type (type of mention
+							within the sentence for each drug):</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="statementqu" name="statementqu"
-							checked="false">quantitative</g:RadioButton>
-						<g:RadioButton ui:field="statementql" name="statementql"
-							checked="false">qualitative</g:RadioButton>
+						<g:RadioButton ui:field="typeai2" name="descriptpk"
+							checked="false">Active Ingredient</g:RadioButton>
+						<g:RadioButton ui:field="typemb2" name="descriptpk"
+							checked="false">Metabolite</g:RadioButton>
+						<g:RadioButton ui:field="typedp2" name="descriptpk"
+							checked="false">Drug Product</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+					<!-- Role -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="role2" styleName='{style.titleLeft}'>Role (each drug plays
+							within the interaction):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="roleob2" name="descriptpd"
+							checked="false">Object</g:RadioButton>
+						<g:RadioButton ui:field="rolepp2" name="descriptpd"
+							checked="false">Precipitant</g:RadioButton>
 					</g:HorizontalPanel>
 
 				</g:VerticalPanel>
@@ -204,10 +233,26 @@
 
 				<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
 
+					<!-- Statement -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement (data
+							type that is described):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="statementqu" name="statementqu"
+							checked="false">quantitative</g:RadioButton>
+						<g:RadioButton ui:field="statementql" name="statementql"
+							checked="false">qualitative</g:RadioButton>
+					</g:HorizontalPanel>
+
+
 					<!--Modality: -->
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
-						<g:Label ui:field="modality" styleName='{style.titleLeft}'>Modality (observed effect that is described):</g:Label>
+						<g:Label ui:field="modality" styleName='{style.titleLeft}'>Modality (observed
+							effect that is described):</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
@@ -221,14 +266,15 @@
 					<!-- extra resource -->
 
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="extrarelabel" styleName='{style.titleLeft}'>Extra Resource (annotator condiders are helpful):</g:Label>
+						<g:Label ui:field="extrarelabel" styleName='{style.titleLeft}'>Extra Resource
+							(annotator condiders are helpful):</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
 						<g:TextArea ui:field='extrare' styleName='{style.commentBody}'></g:TextArea>
 					</g:HorizontalPanel>
 
-					
+
 				</g:VerticalPanel>
 			</g:cell>
 
