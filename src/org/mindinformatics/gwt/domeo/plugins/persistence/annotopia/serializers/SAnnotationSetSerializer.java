@@ -49,6 +49,7 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 		
 		// These have to exist and defined
 		// TODO HIGH track exception when any of these is null or blank
+		annotationSetJson.put("@context",new JSONString("https://raw2.github.com/Annotopia/AtSmartStorage/master/web-app/data/AnnotopiaContext.json"));
 		annotationSetJson.put(IRdfsOntology.id, new JSONString(annotationSet.getIndividualUri()));
 		annotationSetJson.put(IDomeoOntology.transientLocalId, new JSONString(Long.toString(annotationSet.getLocalId())));
 		

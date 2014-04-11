@@ -196,7 +196,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(URL+"s/annotationset")
-			        .setDataType("jsonp") // txt, json, jsonp, xml */
+			        .setDataType("json") // txt, json, jsonp, xml */
 			        .setType("post")      // post, get
 			        .setData(GQuery.$$("apiKey: testkey, set: " + value)) // parameters for the query-string
 			        .setTimeout(10000)
