@@ -552,27 +552,27 @@ IRetrieveExistingAnnotationSetHandler,
 		 */
 
 		// Qualifier
-		/*
-		 * pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
-		 * // pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
-		 * if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-		 * QualifierPlugin.getInstance().getPluginName())) {
-		 * annotationFormsManager.registerAnnotationForm(
-		 * MQualifierAnnotation.class.getName(), new
-		 * QualifierFormProvider(this)); }
-		 * annotationTailsManager.registerAnnotationTile(
-		 * MQualifierAnnotation.class.getName(), new
-		 * QualifierTileProvider(this));
-		 * annotationCardsManager.registerAnnotationCard(
-		 * MQualifierAnnotation.class.getName(), new
-		 * QualifierCardProvider(this));
-		 * searchComponentsManager.registerAnnotationCard(
-		 * MQualifierAnnotation.class.getName(), new
-		 * QualifierSearchComponent(this));
-		 * 
-		 * annotationHelpersManager.registerAnnotationHelper(
-		 * MQualifierAnnotation.class.getName(), new HQualifierHelper());
-		 */
+
+		pluginsManager.registerPlugin(QualifierPlugin.getInstance(), true);
+		//pluginsManager.enablePlugin(QualifierPlugin.getInstance(), true);
+		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
+				QualifierPlugin.getInstance().getPluginName())) {
+			annotationFormsManager.registerAnnotationForm(
+					MQualifierAnnotation.class.getName(),
+					new QualifierFormProvider(this));
+		}
+		annotationTailsManager.registerAnnotationTile(
+				MQualifierAnnotation.class.getName(),
+				new QualifierTileProvider(this));
+		annotationCardsManager.registerAnnotationCard(
+				MQualifierAnnotation.class.getName(),
+				new QualifierCardProvider(this));
+		searchComponentsManager.registerAnnotationCard(
+				MQualifierAnnotation.class.getName(),
+				new QualifierSearchComponent(this));
+
+		annotationHelpersManager.registerAnnotationHelper(
+				MQualifierAnnotation.class.getName(), new HQualifierHelper());
 
 		// Curation
 		annotationTailsManager.registerAnnotationTile(
