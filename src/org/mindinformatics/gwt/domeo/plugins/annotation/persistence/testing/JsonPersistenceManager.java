@@ -553,8 +553,8 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 			_application.getProgressPanelContainer().setProgressMessage("Retrieving existing annotation...");
 
 		if(_application.isHostedMode()) {
-			//AnnotationPersistenceServiceFacade f = new AnnotationPersistenceServiceFacade();
-			//handler.setExistingBibliographySetList(f.retrieveBibliographyByDocumentUrl(((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()));
+			AnnotationPersistenceServiceFacade f = new AnnotationPersistenceServiceFacade();
+			handler.loadExistingAnnotationSetList(f.retrieveAnnotationById("id", "idType", "allowed", "username"), 1);	
 			return;
 		}
 		

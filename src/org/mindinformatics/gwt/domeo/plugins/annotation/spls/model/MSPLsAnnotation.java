@@ -20,7 +20,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	public SPLType getType() {
 		return type;
 	}
-	
 	public void setType(SPLType type) {
 		this.type = type;
 	}
@@ -39,6 +38,14 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 
 	public void setDrugOfInterest(MLinkedResource drugofinterest) {
 		pharmgxUsage.setDrugOfInterest(drugofinterest);
+	}
+	
+	public MLinkedResource getProductLabelSelection() {
+		return pharmgxUsage.getProductLabelSelection();
+	}
+
+	public void setProductLabelSelection(MLinkedResource productlabelselection) {
+		pharmgxUsage.setProductLabelSelection(productlabelselection);
 	}
 	
 	public MLinkedResource getBiomarkers() {
@@ -142,12 +149,12 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    pharmgxUsage.setMedconditbody(mediconditbody);
 	}
 	
-	public MLinkedResource getVarient(){
-	    return pharmgxUsage.getVarient();
+	public MLinkedResource getVariant(){
+	    return pharmgxUsage.getVariant();
 	}
 
-	public void setVarient(MLinkedResource varient){
-	    pharmgxUsage.setVarient(varient);
+	public void setVariant(MLinkedResource variant){
+	    pharmgxUsage.setVariant(variant);
 	}
 	
 	public MLinkedResource getTest(){
@@ -158,20 +165,20 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    pharmgxUsage.setTest(test);
 	}
 	
-	public String getVarientBody() {
-	    return pharmgxUsage.getVarientbody();
+	public String getOtherVariant() {
+	    return pharmgxUsage.getOtherVariant();
 	}
 
-	public void setVarientBody(String varientbody) {
-	    pharmgxUsage.setVarientbody(varientbody);
+	public void setOtherVariant(String othervariant) {
+	    pharmgxUsage.setOtherVariant(othervariant);
 	}
 	
-	public String getTestBody() {
-	    return pharmgxUsage.getTestbody();
+	public String getOtherTest() {
+	    return pharmgxUsage.getOtherTest();
 	}
 
-	public void setTestBody(String testbody) {
-	    pharmgxUsage.setTestbody(testbody);
+	public void setOtherTest(String othertest) {
+	    pharmgxUsage.setOtherTest(othertest);
 	}
 	
 	@Override
@@ -183,4 +190,5 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	    public String getAnnotationType() {
 	    return TYPE;
 	}
+	
     }

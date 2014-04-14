@@ -536,12 +536,13 @@ public class JsonUnmarshallingManager {
 		
 		if(Domeo.verbose) _domeo.getLogger().debug(this, "Before performing unmarshalling");
 		try {
+			if(Domeo.verbose) _domeo.getLogger().debug(this, "Sets to unmarshall " + responseOnSets.length());
 			for(int i=0; i<responseOnSets.length(); i++) {
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set get");
 				JsAnnotationSet jsonSet = (JsAnnotationSet) responseOnSets.get(i);
-				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set unmarshall");
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set unmarshall " + jsonSet.toString());
 				MAnnotationSet set = unmarshallAnnotationSet(jsonSet, IUnmarshaller.LOAD_VALIDATION, null, null);
-				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set loading");
+				if(Domeo.verbose) _domeo.getLogger().debug(this, "Annotation set loading " + set);
 				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
 				
 				if(Domeo.verbose) _domeo.getLogger().debug(this, "Unmarshalling agents");
@@ -668,23 +669,7 @@ public class JsonUnmarshallingManager {
 						((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
 						set.setHasChanged(false);
 						
-					} else if (typesSet.contains(MSPLsAnnotation.TYPE)){
-						SPLType splType = null;
-						//if(typesSet.contains(SPLType.PHARMGX)) { //TODO: test with the conditional operational
-							splType = SPLType.PHARMGX_TYPE; //TODO: possibly add multiple types like Post It has (e.g., pharmgx, ddis, ades, etc)
-						//}
-						if(splType!=null) {
-							_domeo.getLogger().debug(this, "Calling unmarshallSPLAnnotation with selector 0 prefix: " + 
-									((MTextQuoteSelector)selectors.get(1)).getPrefix() + " suffix: " + 
-									((MTextQuoteSelector)selectors.get(1)).getSuffix());
-							ann = unmarshallSPLAnnotation((JsAnnotationSPL) jsonAnnotations.get(j), "", set, selectors);
-							((MSPLsAnnotation) ann).setType(splType);
-							
-							_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation. Some tests values: getDrugOfInterest" + 
-									((MSPLsAnnotation) ann).getDrugOfInterest() + "getBiomarkers" + 
-									((MSPLsAnnotation) ann).getBiomarkers());							
-						}
-					} else {
+					}  else {
 						if(typesSet.contains(MPostItAnnotation.TYPE)) {
 							PostitType postItType = null;
 							if(typesSet.contains(PostitType.NOTE)) {
@@ -1098,6 +1083,23 @@ public class JsonUnmarshallingManager {
 									rr.setCreationDate(rel.getFormattedCreatedOn());
 									microPublication.getQualifiers().add(rr);
 								}
+							}
+						} else if (typesSet.contains(MSPLsAnnotation.TYPE)){
+							SPLType splType = null;
+							//if(typesSet.contains(SPLType.PHARMGX)) { //TODO: test with the conditional operational
+								splType = SPLType.PHARMGX_TYPE; //TODO: possibly add multiple types like Post It has (e.g., pharmgx, ddis, ades, etc)
+							//}
+							if(splType!=null) {
+								_domeo.getLogger().debug(this, "Calling unmarshallSPLAnnotation with selector 0 prefix: " + 
+										((MTextQuoteSelector)selectors.get(0)).getPrefix() + " suffix: " + 
+										((MTextQuoteSelector)selectors.get(0)).getSuffix());
+								ann = unmarshallSPLAnnotation((JsAnnotationSPL) jsonAnnotations.get(j), "", set, selectors);
+								if(ann == null){
+									_domeo.getLogger().debug(this, "something is wrong, annotation is null");
+								}
+								((MSPLsAnnotation) ann).setType(splType);
+								_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation. Some tests values:" +
+										" PharmacokineticImpact" + ((MSPLsAnnotation) ann).getPKImpact());																						
 							}
 						}
 						

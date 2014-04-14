@@ -54,6 +54,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 	
 	public ACardComponent(IDomeo domeo) {
 		_domeo = domeo;
+
 	}
 	
 	public abstract MAnnotation getAnnotation();
@@ -185,7 +186,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 							provenance.setCellWidth(ic, "18px");
 						}
 
-						provenance.add(new Label("By Me on " + annotation.getFormattedCreationDate()));
+						provenance.add(new Label("By "+annotation.getCreator().getName()+" on " + annotation.getFormattedCreationDate()));
 						if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), 
 								Domeo.PREF_ALLOW_COMMENTING)).getValue()) provenance.add(commentIcon);
 						provenance.add(editIcon);
@@ -299,7 +300,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 							provenance.setCellWidth(ic, "18px");
 						}
 
-						provenance.add(new Label("By Me on " + annotation.getFormattedCreationDate()));
+						provenance.add(new Label("By "+annotation.getCreator().getName()+" on " + annotation.getFormattedCreationDate()));
 						
 						if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), 
 								Domeo.PREF_ALLOW_COMMENTING)).getValue()) {

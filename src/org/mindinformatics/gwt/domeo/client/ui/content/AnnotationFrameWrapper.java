@@ -370,6 +370,12 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 								y = y + _frame.getAbsoluteTop() + 8;
 							}
 							
+							//ensure the card won't cut off because of unexpected long width 
+							if(dx<600){
+								x =  Window.getClientWidth()-600;
+							}
+							
+							
 							_curationPopup = new CurationPopup(_domeo);
 							_curationPopup.initialize();
 							_curationPopup.addCloseHandler(new CloseHandler<PopupPanel>() {

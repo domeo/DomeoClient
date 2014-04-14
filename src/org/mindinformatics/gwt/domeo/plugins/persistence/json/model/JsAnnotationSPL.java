@@ -2,6 +2,9 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.json.model;
 
 import java.util.Date;
 
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.JsoPharmgxUsage;
+import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -74,7 +77,7 @@ public class JsAnnotationSPL extends JavaScriptObject {
 	public final native JsArray<JsAnnotationTarget> getTargets() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::hasTarget]; 
 	}-*/;
-	public final native JsArray<JsContentAsRdf> getBody() /*-{ 
+	public final native JsArray<JsoPharmgxUsage> getBodies() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::content]; 
 	}-*/;
 	
@@ -87,4 +90,7 @@ public class JsAnnotationSPL extends JavaScriptObject {
 	
 	//public final native String getTitle() /*-{ return this.domeo_title; }-*/;
 	public final native String getType() /*-{ return this.domeo_SPLType; }-*/;
+	
 }
+
+

@@ -1,20 +1,13 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
-import org.mindinformatics.gwt.domeo.client.Resources;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.actions.ActionShowAnnotation;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.cards.ACardComponent;
 import org.mindinformatics.gwt.domeo.client.ui.popup.CurationPopup;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
-import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
-import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLPharmgxUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
@@ -25,21 +18,16 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -64,7 +52,7 @@ public class CSPLsCard extends ACardComponent {
 	@UiField
 	Label type, text, pkimpact, pdimpact, recdrug, recdose, recmonitoring,
 			testrec, statement, biomarkers, allelesbody, medconditbody, test,
-			varient, drugOfInterest;
+			variant, drugOfInterest, commentbody, productls;
 
 	@UiField
 	Image wrongIcon, rightIcon;
@@ -175,10 +163,6 @@ public class CSPLsCard extends ACardComponent {
 
 			text.setText("clinical statements from SPLs");
 
-			/*
-			 * can not skip some labels
-			 */
-
 			if (_annotation != null) {
 				MSPLPharmgxUsage dataUsage = _annotation.getPharmgxUsage();
 
@@ -186,14 +170,22 @@ public class CSPLsCard extends ACardComponent {
 					String drugIStr = dataUsage.getDrugOfInterest().getLabel();
 					drugOfInterest.setText(drugIStr);
 				} else {
-					drugOfInterest.setText("undefined");
+					drugOfInterest.setText("None");
 				}
 
 				if (dataUsage.getBiomarkers() != null) {
 					String bioStr = dataUsage.getBiomarkers().getLabel();
 					biomarkers.setText(bioStr);
 				} else {
-					biomarkers.setText("undefined");
+					biomarkers.setText("None");
+				}
+
+				if (dataUsage.getProductLabelSelection() != null) {
+					String productlsStr = dataUsage.getProductLabelSelection()
+							.getLabel();
+					productls.setText(productlsStr);
+				} else {
+					productls.setText("None");
 				}
 
 				if (dataUsage.getPkImpact() != null) {
@@ -201,7 +193,7 @@ public class CSPLsCard extends ACardComponent {
 					String pkimpactStr = dataUsage.getPkImpact().getLabel();
 					pkimpact.setText(pkimpactStr);
 				} else {
-					pkimpact.setText("undefined");
+					pkimpact.setText("None");
 				}
 
 				if (dataUsage.getPdImpact() != null) {
@@ -209,97 +201,125 @@ public class CSPLsCard extends ACardComponent {
 					String pdimpactStr = dataUsage.getPdImpact().getLabel();
 					pdimpact.setText(pdimpactStr);
 				} else {
-					pdimpact.setText("undefined");
+					pdimpact.setText("None");
 				}
 
 				if (dataUsage.getDrugRec() != null) {
 					String drugRecStr = dataUsage.getDrugRec().getLabel();
 					recdrug.setText(drugRecStr);
 				} else {
-					recdrug.setText("undefined");
+					recdrug.setText("None");
 				}
 
 				if (dataUsage.getDoseRec() != null) {
 					String doseRecStr = dataUsage.getDoseRec().getLabel();
 					recdose.setText(doseRecStr);
 				} else {
-					recdose.setText("undefined");
+					recdose.setText("None");
 				}
 
 				if (dataUsage.getMonitRec() != null) {
 					String monRecStr = dataUsage.getMonitRec().getLabel();
 					recmonitoring.setText(monRecStr);
 				} else {
-					recmonitoring.setText("undefined");
+					recmonitoring.setText("None");
 				}
 
 				if (dataUsage.getTestRec() != null) {
 					String testRec = dataUsage.getTestRec().getLabel();
 					testrec.setText(testRec);
 				} else {
-					testrec.setText("undefined");
+					testrec.setText("None");
 				}
 
 				if (dataUsage.getStatements() != null) {
 					int count = 2;
+
+					System.out.println(_annotation.getPharmgxUsage()
+							.getStatements().size());
 					for (MLinkedResource mr : _annotation.getPharmgxUsage()
 							.getStatements()) {
 						statements_str += mr.getLabel().toString() + " ";
+
+						System.out.println(count + "|" + statements_str);
+
 						if (count <= 0)
 							break;
 						count++;
 					}
 					statement.setText(statements_str);
 				} else {
-					statement.setText("undefined");
+					statement.setText("None");
 				}
 
-				// varient
+				// Variant
 
-				if ((dataUsage.getVarientbody() != null && !dataUsage
-						.getVarientbody().trim().equals(""))
-						|| dataUsage.getVarient() != null) {
+				if (dataUsage.getVariant() != null
+						&& !dataUsage.getVariant().getLabel().equals("")) {
+					String variantStr = dataUsage.getVariant().getLabel();
+					variant.setText(variantStr);
+				} else {
+					variant.setText("None");
+				}
 
-					if (dataUsage.getVarientbody() != null
-							&& !dataUsage.getVarientbody().trim().equals("")) {
-						varient.setText(dataUsage.getVarientbody());
-
-					} else if (!dataUsage.getVarient().getLabel()
-							.equals("unselected")) {
-						varient.setText(dataUsage.getVarient().getLabel());
-					}
-				} else
-					varient.setText("undefined");
+				/*
+				 * if ((dataUsage.getVariantbody() != null && !dataUsage
+				 * .getVariantbody().trim().equals("")) ||
+				 * dataUsage.getVariant() != null) {
+				 * 
+				 * if (dataUsage.getVariantbody() != null &&
+				 * !dataUsage.getVariantbody().trim().equals("")) {
+				 * variant.setText(dataUsage.getVariantbody());
+				 * 
+				 * } else if (!dataUsage.getVariant().getLabel()
+				 * .equals("unselected")) {
+				 * variant.setText(dataUsage.getVariant().getLabel()); } } else
+				 * variant.setText("undefined");
+				 */
 
 				// test
+				if (dataUsage.getTest() != null
+						&& !dataUsage.getTest().getLabel().equals("")) {
+					String testStr = dataUsage.getTest().getLabel();
+					test.setText(testStr);
+				} else {
+					test.setText("None");
+				}
 
-				if ((dataUsage.getTestbody() != null && !dataUsage
-						.getTestbody().trim().equals(""))
-						|| dataUsage.getTest() != null) {
-
-					if (dataUsage.getTestbody() != null
-							&& !dataUsage.getTestbody().trim().equals("")) {
-						test.setText(dataUsage.getTestbody());
-
-					} else if (!dataUsage.getTest().getLabel()
-							.equals("unselected")) {
-						test.setText(dataUsage.getTest().getLabel());
-					}
-				} else
-					test.setText("undefined");
+				/*
+				 * if ((dataUsage.getTestbody() != null && !dataUsage
+				 * .getTestbody().trim().equals("")) || dataUsage.getTest() !=
+				 * null) {
+				 * 
+				 * if (dataUsage.getTestbody() != null &&
+				 * !dataUsage.getTestbody().trim().equals("")) {
+				 * test.setText(dataUsage.getTestbody());
+				 * 
+				 * } else if (!dataUsage.getTest().getLabel()
+				 * .equals("unselected")) {
+				 * test.setText(dataUsage.getTest().getLabel()); } } else
+				 * test.setText("undefined");
+				 */
 
 				if (dataUsage.getAllelesbody() != null) {
 					String allelesStr = dataUsage.getAllelesbody();
 					allelesbody.setText(allelesStr);
 				} else {
-					allelesbody.setText("undefined");
+					allelesbody.setText("");
 				}
 
 				if (dataUsage.getMedconditbody() != null) {
 					String medconditStr = dataUsage.getMedconditbody();
 					medconditbody.setText(medconditStr);
 				} else {
-					medconditbody.setText("undefined");
+					medconditbody.setText("");
+				}
+
+				if (dataUsage.getComment() != null) {
+					String commentStr = dataUsage.getComment();
+					commentbody.setText(commentStr);
+				} else {
+					commentbody.setText("");
 				}
 			}
 

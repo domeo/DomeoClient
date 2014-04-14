@@ -14,9 +14,9 @@ public class MSPLPharmgxUsage {
 	private String allelesbody;
 	private String medconditbody;
 	private String comment;
-	private String varientbody;
-	private String testbody;
-	
+	private String othervariant;
+	private String othertest;
+
 	public Long getLocalId() {
 		return localId;
 	}
@@ -59,12 +59,12 @@ public class MSPLPharmgxUsage {
 	// MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 	// drugRecResource, monitRecResource, testRecResource;
 
-	public MLinkedResource getVarient() {
-		return pharmgx.getVarient();
+	public MLinkedResource getVariant() {
+		return pharmgx.getVariant();
 	}
 
-	public void setVarient(MLinkedResource varient) {
-		pharmgx.setVarient(varient);
+	public void setVariant(MLinkedResource variant) {
+		pharmgx.setVariant(variant);
 	}
 
 	public MLinkedResource getTest() {
@@ -74,13 +74,21 @@ public class MSPLPharmgxUsage {
 	public void setTest(MLinkedResource test) {
 		pharmgx.setTest(test);
 	}
-	
+
 	public MLinkedResource getDrugOfInterest() {
 		return pharmgx.getDrugOfInterest();
 	}
 
 	public void setDrugOfInterest(MLinkedResource drugofinterest) {
 		pharmgx.setDrugOfInterest(drugofinterest);
+	}
+
+	public MLinkedResource getProductLabelSelection() {
+		return pharmgx.getProductLabelSelection();
+	}
+
+	public void setProductLabelSelection(MLinkedResource productlabelselection) {
+		pharmgx.setProductLabelSelection(productlabelselection);
 	}
 
 	public MLinkedResource getBiomarkers() {
@@ -163,20 +171,20 @@ public class MSPLPharmgxUsage {
 		this.medconditbody = medconditbody;
 	}
 
-	public String getVarientbody() {
-		return varientbody;
+	public String getOtherVariant() {
+		return othervariant;
 	}
 
-	public void setVarientbody(String varientbody) {
-		this.varientbody = varientbody;
+	public void setOtherVariant(String othervariant) {
+		this.othervariant = othervariant;
 	}
 
-	public String getTestbody() {
-		return testbody;
+	public String getOtherTest() {
+		return othertest;
 	}
 
-	public void setTestbody(String testbody) {
-		this.testbody = testbody;
+	public void setOtherTest(String othertest) {
+		this.othertest = othertest;
 	}
-	
+
 }
