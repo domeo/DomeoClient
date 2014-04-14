@@ -1,0 +1,124 @@
+The code in this folder is a work-around until we can build and test a
+true SPL Connector plugin. This code uses the official Python
+interface to Elastic search
+(https://github.com/elasticsearch/elasticsearch-py/releases). Complete
+documentation for the API is here:
+http://elasticsearch-py.readthedocs.org/en/master/api.html
+
+------------------------------------------------------------
+TO GET STARTED
+
+
+1) Install the appropriate version of Elasticsearch.py (for Domeo on
+Ubuntu running Elastic search 0.90.1 use
+https://github.com/elasticsearch/elasticsearch-py/archive/0.4.5.tar.gz)
+
+2) unpack and install
+
+python setup.py build
+sudo python setup.py install
+
+
+------------------------------------------------------------
+SOME BASIC CALLS
+
+# load the library
+from elasticsearch import Elasticsearch
+
+# initialize
+es = Elasticsearch()
+
+# learn about the connection
+es.cluster.node_info()
+{u'cluster_name': u'elasticsearch', u'nodes':
+{u'DUz0-oDDTxikdVcS3K3wRA': {u'version': u'0.90.1',
+u'transport_address': u'inet[/130.49.206.86:9300]', u'name': u'NFL
+Superpro', u'hostname': u'dbmi-dt-086', u'http_address':
+u'inet[/130.49.206.86:9200]'}}, u'ok': True}
+
+# get all annotations
+v = es.search(q="annotation")
+
+# view what was returned
+v['hits']
+
+------------------------------------------------------------
+NOTES ON JSON-LD AND DOMEO
+
+Now that we have our annotators working hard, it would be nice to
+analyze the annotation data stored in ElasticSearch. Do you have any
+tips?
+
+This [ElasticSearch
+Tutorial](http://okfnlabs.org/blog/2013/07/01/elasticsearch-query-tutorial.html}
+helped me identify the schema:
+
+curl http://localhost:9200/domeo/annotation/_mapping
+
+...and pull back JSON-LD for all annotations:
+
+curl "http://localhost:9200/domeo/annotation/_search?q=annotation"
+
+Do you have any other tips for working with annotation data? Also, how
+do you handle the "!DOMEO_NS!" when re-instantiating the data as
+JSON-LD?
+
+thanks!
+-R
+
+Dear Richard, "!DOMEO_NS!" is a leftover from the first days of
+JSON-LD where I did not have a working context in place. That would
+not be necessary anymore as there are appropriate libraries that could
+map simple properties to a context now. "!DOMEO_NS!" is basically a
+placeholder for ':'. If you need to analyze the annotation you can
+probably swap that for '_'. That would make scripting a lot easier. In
+fact instead of item["pav:createdWith"] you would manage
+item.pav_createdWith. In terms on data analysis I would start by
+writing a list of questions you want to answer. Ideally it would be
+better to have those queries implemented in a Grails plugin so that
+they are automatize and maybe available for other purposes. Paolo
+
+
+------------------------------------------------------------
+NOTES ON BUILDING A CONNECTOR (for use with DomeoClient and Domeo)
+
+
+    (1) Would you please explain for me how the Connectors work and
+    what should I do to simulate using a Connector within the
+    DomeoClient?  Later on I would like to ask you how to making
+    Connectors work on the server for getting and storing data from
+    remote server but Prof Boyce suggests that we start with the
+    Client.
+
+
+Connectors are the way Domeo uses to communicate with external
+services.  Normally, besides the external web service, there are two
+components involved:
+
+a) the connector server side which connects to the external web
+service.  The goal of this connector is to send the request and shape
+the results in a way that the Domeo client can digest them. An example
+of connector is:
+https://github.com/domeo/domeo/tree/master/ConnectorNifService I've
+added some comments to the code of this one so it might be a good one
+to look at.  This particular connector services three different
+calls. I will detail this better later on.
+
+Also I've just started a new Connector here:
+https://github.com/domeo/domeo/tree/master/ConnectorEpmcService This
+is new and evolving, also could be a good example.  Also this could be
+a good example as it will do something similar to what you need to do.
+In fact EuroPMC has text mining results that have been precomputed and
+they want to make them available through Domeo. It seems very similar
+use case to yours.
+
+b) the connector client side that connect to the connector server
+side.  This is basically providing the logic (and user interfaces) for
+the user to query the external web service.  On the client the NIF
+connector code is under:
+https://github.com/domeo/DomeoClient/tree/master/src/org/mindinformatics/gwt/domeo/plugins/resource/nif
+Start looking at that structure.
+
+-- 
+Dr. Paolo Ciccarese
+http://www.paolociccarese.info/
