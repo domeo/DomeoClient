@@ -114,7 +114,6 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 				annotations.set(i, manager.serialize(annotationsList.get(i)));
 		}
 		annotationSetJson.put("annotations", annotations);
-		
 		return annotationSetJson;
 	}
 }

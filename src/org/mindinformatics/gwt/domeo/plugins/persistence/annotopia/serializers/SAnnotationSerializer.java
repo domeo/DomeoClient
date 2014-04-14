@@ -60,14 +60,16 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		
 		//jsonAnnotation.put(IPavOntology.createdBy, new JSONString(ann.getCreator()!=null?ann.getCreator().getUri():""));
 		if(ann.getCreator()!=null) {
-			jsonAnnotation.put("createdBy", manager.serialize(ann.getCreator()));
+			//jsonAnnotation.put("createdBy", manager.serialize(ann.getCreator()));
+			jsonAnnotation.put("annotatedBy", manager.serialize(ann.getCreator()));
 		}		
 		
 		//jsonAnnotation.put(IPavOntology.createdBy, serializeAgent(manager, ann.getCreator()));
 		//if(ann.getCreator()!=null) manager.addAgentToSerialize(ann.getCreator());
 		
 		if(ann.getCreatedOn()!=null) {
-			jsonAnnotation.put("createdOn", nonNullable(ann.getCreatedOn()));
+			//jsonAnnotation.put("createdOn", nonNullable(ann.getCreatedOn()));
+			jsonAnnotation.put("annotatedAt", new JSONString(dateFormatter.format(ann.getCreatedOn())));
 		}
 		
 		//jsonAnnotation.put(IPavOntology.createdWith, new JSONString(ann.getTool()!=null?ann.getTool().getUri():""));

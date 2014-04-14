@@ -59,6 +59,42 @@ public class JsAnnotationProvenance extends JavaScriptObject {
 		return this.annotatedBy; 
 	}-*/;
 	
+	public final native Object getCreatedWith() /*-{ 
+		return this.createdWith; 
+	}-*/;
+	public final native boolean isCreatedWithString() /*-{ 
+		return this.createdWith.constructor === String;
+	}-*/;
+	public final native String getCreatedWithAsString() /*-{ 
+		return this.createdWith; 
+	}-*/;
+	public final native boolean isCreatedWithObject() /*-{ 
+		return this.createdWith.constructor === Object;
+	}-*/;
+	public final native JsAnnotopiaAgent getCreatedWithAsObject() /*-{ 
+		return this.createdWith; 
+	}-*/;
+	
+	public final native String getLastSavedOn() /*-{ 
+		return this.lastSavedOn; 
+	}-*/;
+	
+	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 
+		return this.lastSavedBy; 
+	}-*/;
+	public final native boolean isLastSavedByString() /*-{ 
+		return this.lastSavedBy.constructor === String;
+	}-*/;
+	public final native String getLastSavedByAsString() /*-{ 
+		return this.lastSavedBy; 
+	}-*/;
+	public final native boolean isLastSavedByObject() /*-{ 
+		return this.lastSavedBy.constructor === Object;
+	}-*/;
+	public final native JsAnnotopiaAgent getLastSavedByAsObject() /*-{ 
+		return this.lastSavedBy; 
+	}-*/;
+	
 	
 	public final native JsAnnotopiaAgent getCreatedBy() /*-{ 
 		return this.createdBy; 
@@ -70,16 +106,16 @@ public class JsAnnotationProvenance extends JavaScriptObject {
 		return ApplicationUtils.fullfmt2.parse(getCreatedOn().trim());
 	} 
 	
-	public final native JsAnnotopiaAgent getCreatedWith() /*-{ 
-		return this.createdWith; 
-	}-*/;
-	
-	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 
-		return this.lastSavedBy; 
-	}-*/;
-	public final native String getLastSavedOn() /*-{ 
-		return this.lastSavedOn; 
-	}-*/;
+//	public final native JsAnnotopiaAgent getCreatedWith() /*-{ 
+//		return this.createdWith; 
+//	}-*/;
+//	
+//	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 
+//		return this.lastSavedBy; 
+//	}-*/;
+//	public final native String getLastSavedOn() /*-{ 
+//		return this.lastSavedOn; 
+//	}-*/;
 	public final Date getFormattedLastSavedOn() {
 		return ApplicationUtils.fullfmt2.parse(getLastSavedOn());
 	} 

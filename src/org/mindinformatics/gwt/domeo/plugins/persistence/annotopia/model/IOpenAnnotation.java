@@ -31,5 +31,5 @@ public interface IOpenAnnotation {
 	public static final String TEXT_QUOTE_SELECTOR = "oa:TextQuoteSelector";
 	
 	public static final String MOTIVATION_COMMENTING = "oa:commenting";
-	public static final String MOTIVATION_HIGHLIGHTED = "oa:highligthing";
+	public static final String MOTIVATION_HIGHLIGHTED = "oa:highlighting";
 }

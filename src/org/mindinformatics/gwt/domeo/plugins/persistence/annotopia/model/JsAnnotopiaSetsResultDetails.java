@@ -35,5 +35,5 @@ public class JsAnnotopiaSetsResultDetails extends JavaScriptObject {
 	public final native String getPages() /*-{  return this.pages; }-*/;
 	public final native String getOffset() /*-{  return this.offset; }-*/;
 	public final native String getMax() /*-{  return this.max; }-*/;
-	public final native JsArray<JsAnnotopiaAnnotationSetGraphs> getSets() /*-{  return this.sets; }-*/;
+	public final native JsArray<JsAnnotopiaAnnotationSetGraph> getSets() /*-{  return this.sets; }-*/;
 }

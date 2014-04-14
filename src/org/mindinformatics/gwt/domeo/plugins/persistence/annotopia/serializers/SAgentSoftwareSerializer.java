@@ -20,9 +20,11 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers;
 
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 
 import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONString;
 
 /**
  * This class serializes Agents to Annotopia JSON format.
@@ -34,7 +36,12 @@ public class SAgentSoftwareSerializer extends SAgentSerializer implements IAnnot
 	@Override
 	public JSONObject serialize(AnnotopiaSerializerManager manager, Object obj) {
 		MAgentSoftware software = (MAgentSoftware) obj;
+		
 		JSONObject jsonSoftware = initializeAgent(manager, software);
+		
+		// Fixing the type
+		jsonSoftware.put(IDomeoOntology.generalType, new JSONString("prov:Software"));
+		
 		jsonSoftware.put("version", nullable(software.getVersion()));
 		//jsonSoftware.put("build", nullable(software.getBuild()));
 		return jsonSoftware;

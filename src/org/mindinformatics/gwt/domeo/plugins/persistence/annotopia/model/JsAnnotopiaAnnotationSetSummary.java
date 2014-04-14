@@ -47,11 +47,12 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	}
 	
 	public final native int getNumberOfAnnotationItems() /*-{ 
-		return this.annotations.length;
+		alert(this.annotations);
+		return this.annotations.length || 0;
 	}-*/;
 	
 	public final native JsArray<JavaScriptObject> getAnnotations() /*-{  
-		return this['annotations']; 
+		return this.annotations; 
 	}-*/;
 	
 	// ------------------------------------------------------------------------
@@ -80,16 +81,55 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	public final native String getCreatedOn() /*-{ 
 		return this.createdAt; 
 	}-*/;
-	public final native JsAnnotopiaAgent getCreatedBy() /*-{ 
+	public final native Object getCreatedBy() /*-{ 
 		return this.createdBy; 
 	}-*/;
-	public final native JsAnnotopiaAgent getCreatedWith() /*-{ 
+	public final native boolean isCreatedByString() /*-{ 
+		return this.createdBy.constructor === String;
+	}-*/;
+	public final native String getCreatedByAsString() /*-{ 
+		return this.createdBy; 
+	}-*/;
+	public final native boolean isCreatedByObject() /*-{ 
+		return this.createdBy.constructor === Object;
+	}-*/;
+	public final native JsAnnotopiaAgent getCreatedByAsObject() /*-{ 
+		return this.createdBy; 
+	}-*/;
+	
+	public final native Object getCreatedWith() /*-{ 
 		return this.createdWith; 
 	}-*/;
+	public final native boolean isCreatedWithString() /*-{ 
+		return this.createdWith.constructor === String;
+	}-*/;
+	public final native String getCreatedWithAsString() /*-{ 
+		return this.createdWith; 
+	}-*/;
+	public final native boolean isCreatedWithObject() /*-{ 
+		return this.createdWith.constructor === Object;
+	}-*/;
+	public final native JsAnnotopiaAgent getCreatedWithAsObject() /*-{ 
+		return this.createdWith; 
+	}-*/;
+	
 	public final native String getLastSavedOn() /*-{ 
 		return this.lastSavedOn; 
 	}-*/;
+	
 	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 
+		return this.lastSavedBy; 
+	}-*/;
+	public final native boolean isLastSavedByString() /*-{ 
+		return this.lastSavedBy.constructor === String;
+	}-*/;
+	public final native String getLastSavedByAsString() /*-{ 
+		return this.lastSavedBy; 
+	}-*/;
+	public final native boolean isLastSavedByObject() /*-{ 
+		return this.lastSavedBy.constructor === Object;
+	}-*/;
+	public final native JsAnnotopiaAgent getLastSavedByAsObject() /*-{ 
 		return this.lastSavedBy; 
 	}-*/;
 	
@@ -99,6 +139,14 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	
 	public final Date getFormattedLastSavedOn() {
 		return ApplicationUtils.fullfmt2.parse(getLastSavedOn());
+	} 
+	
+	public final Date getFormattedCreatedOn2() {
+		return ApplicationUtils.fullfmt.parse(getCreatedOn().trim());
+	} 
+	
+	public final Date getFormattedLastSavedOn2() {
+		return ApplicationUtils.fullfmt.parse(getLastSavedOn());
 	} 
 	
 	public final native String getVersionNumber() /*-{ 

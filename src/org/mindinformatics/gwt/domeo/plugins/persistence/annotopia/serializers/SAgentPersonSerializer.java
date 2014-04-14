@@ -20,6 +20,7 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers;
 
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 
 import com.google.gwt.json.client.JSONObject;
@@ -36,6 +37,10 @@ public class SAgentPersonSerializer extends SAgentSerializer implements IAnnotop
 	public JSONObject serialize(AnnotopiaSerializerManager manager, Object obj) {
 		MAgentPerson person = (MAgentPerson) obj;
 		JSONObject jsonPerson = initializeAgent(manager, person);
+		
+		// Fixing the type
+		jsonPerson.put(IDomeoOntology.generalType, new JSONString("foaf:Person"));
+		
 		if((person.getTitle()!=null && !person.getTitle().isEmpty())) 
 			jsonPerson.put("title", new JSONString(person.getTitle()));
 		if((person.getEmail()!=null && !person.getEmail().isEmpty())) 
