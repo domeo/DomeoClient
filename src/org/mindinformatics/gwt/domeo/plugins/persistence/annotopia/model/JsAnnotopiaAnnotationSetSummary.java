@@ -47,7 +47,6 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	}
 	
 	public final native int getNumberOfAnnotationItems() /*-{ 
-		alert(this.annotations);
 		return this.annotations.length || 0;
 	}-*/;
 	

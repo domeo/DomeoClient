@@ -42,6 +42,8 @@ import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.GQuery;
+import com.google.gwt.query.client.Properties;
+import com.google.gwt.query.client.js.JsUtils;
 import com.google.gwt.query.client.plugins.ajax.Ajax;
 import com.google.gwt.user.client.Window;
 
@@ -76,6 +78,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		}
 	}-*/;
 
+	public static native  String stringify(JavaScriptObject obj) /*-{
+		return JSON.stringify(obj);
+	}-*/;
+	
 	@Override
 	public void retrieveExistingAnnotationSetList(IRetrieveExistingAnnotationSetListHandler handler) {
 		_application.getLogger().debug(this, "Retrieving list of existing annotation sets...");
@@ -169,7 +175,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			        })
 			     );
 			} catch (Exception e) {
-				_application.getLogger().exception(this, "Couldn't complete existing annotation sets list retireval");
+				_application.getLogger().exception(this, "Couldn't complete existing annotation sets list retrieval");
 			}
 		}
 	}
@@ -191,14 +197,14 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		
 		AnnotopiaSerializerManager manager = AnnotopiaSerializerManager.getInstance((IDomeo)_application);
 		for(MAnnotationSet annotationSet: setToSerialize) {
-			String value = manager.serialize(annotationSet).toString();
-			Window.alert(value);
+			JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
+			Properties v = utils.parseJSON("{\"apiKey\":\"testkey\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(URL+"s/annotationset")
 			        .setDataType("json") // txt, json, jsonp, xml */
 			        .setType("post")      // post, get
-			        .setData(GQuery.$$("apiKey: testkey, set: " + value)) // parameters for the query-string
+			        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
 			        .setTimeout(10000)
 			        .setSuccess(new Function(){ // callback to be run if the request success
 			    		public void f() {
