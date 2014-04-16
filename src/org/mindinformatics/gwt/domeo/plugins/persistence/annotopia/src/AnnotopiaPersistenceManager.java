@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.APersistenceManager;
@@ -198,7 +199,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		AnnotopiaSerializerManager manager = AnnotopiaSerializerManager.getInstance((IDomeo)_application);
 		for(MAnnotationSet annotationSet: setToSerialize) {
 			JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-			Properties v = utils.parseJSON("{\"apiKey\":\"testkey\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
+			Properties v = utils.parseJSON("{\"apiKey\":\"testkey\",\"outCmd\":\"frame\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(URL+"s/annotationset")
@@ -208,25 +209,25 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			        .setTimeout(10000)
 			        .setSuccess(new Function(){ // callback to be run if the request success
 			    		public void f() {
-			    			Window.alert("ended");
-			    			/*
 			    			IDomeo _domeo = ((IDomeo)_application);
 			    			JsAnnotopiaAnnotationSetGraph wrapper = 
 			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
 			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 			    			
-			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper);	    			
+			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper);	    
 			    			if(set==null) {
 			    				// TODO message no annotation found
-			    				_application.getLogger().info(this, "No annotation set found");
-			    				_application.getProgressPanelContainer().setCompletionMessage("Annotation Set not found");
-			    			} else {	
-			    				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
+			    				_application.getLogger().exception(this, "Annotation set not saved correctly");
+			    				_application.getProgressPanelContainer().setCompletionMessage("Annotation set not saved correctly");
+			    			} else {
+			    				Window.alert("Set: " + set.getIndividualUri() + "-" + set.getPreviousVersion() + "-" + set.getLastSavedOn().toString());
+			    				
+			    				for(MAnnotation annotation: set.getAnnotations()) {
+			    					//Window.alert("Ann: " + annotation.getIndividualUri() + "-" + annotation.getPreviousVersion() + "-" + annotation.getLastSavedOn().toString());
+			    				}
 			    				_application.getProgressPanelContainer().hide();
-			    				_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
-			    				_domeo.refreshAllComponents();
+			    				_application.getLogger().debug(this, "Completed saving of Annotation Set in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 			    			}
-			    			*/
 			    		}
 			        })
 			        .setError(new Function(){ // callback to be run if the request fails

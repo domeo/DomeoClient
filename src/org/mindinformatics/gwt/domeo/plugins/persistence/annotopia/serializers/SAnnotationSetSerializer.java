@@ -28,6 +28,7 @@ import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
@@ -67,7 +68,7 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 		}
 
 		if(annotationSet.getCreatedOn()!=null) {
-			annotationSetJson.put("createdAt", new JSONString(dateFormatter.format(annotationSet.getCreatedOn())));
+			annotationSetJson.put("createdAt", new JSONString(ApplicationUtils.fullfmt2.format(annotationSet.getCreatedOn())));
 		} else {
 			// Warning/Exception?
 		}
@@ -80,7 +81,7 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 		}
 
 		if(annotationSet.getLastSavedOn()!=null) {
-			annotationSetJson.put("lastSavedOn", new JSONString(dateFormatter.format(annotationSet.getLastSavedOn())));
+			annotationSetJson.put("lastUpdateOn", new JSONString(ApplicationUtils.fullfmt2.format(annotationSet.getLastSavedOn())));
 		}
 		
 		//  Imports
@@ -96,7 +97,7 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 			//annotationSetJson.put(IPavOntology.importedBy, serializeAgent(manager, annotationSet.getImportedBy()));
 		}
 		if(annotationSet.getImportedOn()!=null) {
-			annotationSetJson.put(IPavOntology.importedOn, new JSONString(dateFormatter.format(annotationSet.getImportedOn())));
+			annotationSetJson.put(IPavOntology.importedOn, new JSONString(ApplicationUtils.fullfmt2.format(annotationSet.getImportedOn())));
 		}
 		// These translate null values into blank strings
 		annotationSetJson.put("label", nullable(annotationSet.getLabel()));

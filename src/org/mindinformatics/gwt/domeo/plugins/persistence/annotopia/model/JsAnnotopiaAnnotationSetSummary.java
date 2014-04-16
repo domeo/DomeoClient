@@ -113,7 +113,7 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	}-*/;
 	
 	public final native String getLastSavedOn() /*-{ 
-		return this.lastSavedOn; 
+		return this.lastUpdateOn; 
 	}-*/;
 	
 	public final native JsAnnotopiaAgent getLastSavedBy() /*-{ 

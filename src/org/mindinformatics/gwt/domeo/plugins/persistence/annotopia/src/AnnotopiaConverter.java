@@ -21,6 +21,7 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.src;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -132,12 +133,11 @@ public class AnnotopiaConverter {
 					agents.put(jsSet.getLastSavedByAsObject().getId(), jsSet.getLastSavedByAsObject());
 				}
 				
-				_domeo.getLogger().debug(this, "Caching annotation agents");
 				// ----------------------------------------
 				//  Caching Annotation Agents
 				// ----------------------------------------
+				_domeo.getLogger().debug(this, "Caching annotation agents");
 				for(int i=0; i<jsSet.getAnnotations().length(); i++) {
-					_domeo.getLogger().debug(this, "Caching Annotation: " + i);
 					JavaScriptObject a = jsSet.getAnnotations().get(i);
 					if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
 						// Unmarshall annotatedBy
@@ -160,7 +160,6 @@ public class AnnotopiaConverter {
 						
 						JsOpenAnnotation annotation = (JsOpenAnnotation) a;			
 						
-						_domeo.getLogger().debug(this, "Caching Targets: " + i);
 						// Unmarshall targets
 						boolean multipleTargets = annotation.hasMultipleTargets();
 						if(multipleTargets) {
@@ -168,7 +167,6 @@ public class AnnotopiaConverter {
 							for(int t=0; t<jsTargets.length(); t++) {
 								JavaScriptObject jsTarget = jsTargets.get(t);
 								if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
-									_domeo.getLogger().debug(this, "Caching Targets: i1" + i);
 									JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
 									if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
 										targetSources.put(jsSpecificResource.getId(), jsSpecificResource.getHasSourceAsString());
@@ -180,7 +178,6 @@ public class AnnotopiaConverter {
 						} else {
 							JavaScriptObject jsTarget = annotation.getTarget();
 							if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
-								_domeo.getLogger().debug(this, "Caching Targets: i2" + i);
 								JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
 								if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
 									targetSources.put(jsSpecificResource.getId(), jsSpecificResource.getHasSourceAsString());
@@ -234,7 +231,6 @@ public class AnnotopiaConverter {
 					typesSet.add(getObjectType(jsItem));
 				}
 				
-				_domeo.getLogger().debug(this, "Unmarshalling set2");
 				try {
 					MAnnotopiaAnnotationSet set = unmarshallAnnotationSet(jsItem, typesSet, agents, entityAgents);
 					if(set!=null) sets.add(set);
@@ -291,7 +287,7 @@ public class AnnotopiaConverter {
 					
 					// Annotation Set
 					// Note: currently the lastSavedOn is forcing createdOn
-					MAnnotationSet aSet = AnnotationFactory.createAnnotationSet(set.getId(), set.getId(), set.getCreatedOn(), set.getVersionNumber(), set.getPreviousVersion(),
+					MAnnotationSet aSet = AnnotationFactory.createAnnotationSet(set.getId(), set.getId(), set.getLastSavedOn(), set.getVersionNumber(), set.getPreviousVersion(),
 							 _domeo.getPersistenceManager().getCurrentResource(), set.getLabel(), set.getDescription());		
 					aSet.setCreatedWith(createdWith);
 					aSet.setCreatedBy(createdBy);
@@ -359,6 +355,7 @@ public class AnnotopiaConverter {
 				set.setCreatedBy(createdBy);
 			} else {
 				// TODO What to do here?
+				_domeo.getLogger().warn(this, "No createdBy detected for set " + jsSet.getId());
 			}
 			
 			_domeo.getLogger().debug(this, "Unmarshalling set created with");
@@ -379,6 +376,7 @@ public class AnnotopiaConverter {
 				set.setCreatedWith(createdWith);
 			} else {
 				// TODO What to do here?
+				_domeo.getLogger().warn(this, "No createdWith detected for set " + jsSet.getId());
 			}
 			
 			_domeo.getLogger().debug(this, "Unmarshalling set last saved on");
@@ -396,13 +394,20 @@ public class AnnotopiaConverter {
 			
 			// TODO Improve
 			_domeo.getLogger().debug(this, "Unmarshalling set last saved by");
-			// Last saved by
-			if(jsSet.getLastSavedBy()!=null
-					&& jsSet.getLastSavedBy().getId()!=null && !jsSet.getLastSavedBy().getId().isEmpty()
-					&& jsSet.getLastSavedBy().getName()!=null && !jsSet.getLastSavedBy().getName().isEmpty()) {
+			// Created with
+			JsAnnotopiaAgent jsLastSavedBy = null;
+			if(jsSet.getLastSavedBy()!=null && jsSet.isLastSavedByString()) {
+				_domeo.getLogger().debug(this, "Unmarshalling set lastSaved by " + "lastSavedBy:"+jsSet.getId());
+				jsLastSavedBy = agents.get(entityAgents.get("lastSavedBy:"+jsSet.getId()));
+			} else if(jsSet.getLastSavedBy()!=null && jsSet.isLastSavedByObject()) {
+				jsLastSavedBy = agents.get(jsSet.getLastSavedByAsObject().getId());
+			}
+			_domeo.getLogger().debug(this, "Set last saved by: " + jsLastSavedBy);
+			if(jsLastSavedBy!=null) {
+				_domeo.getLogger().debug(this, "Set last saved by: " + jsLastSavedBy.getId());
 				MAnnotopiaPerson lastSavedBy = new MAnnotopiaPerson();
-				lastSavedBy.setId(jsSet.getLastSavedBy().getId());
-				lastSavedBy.setName(jsSet.getLastSavedBy().getName());
+				lastSavedBy.setId(jsLastSavedBy.getId());
+				lastSavedBy.setName(jsLastSavedBy.getName());
 				set.setLastSavedBy(lastSavedBy);
 			} else {
 				_domeo.getLogger().warn(this, "No lastSavedBy detected for set " + jsSet.getId() + " - using createdBy (TODO ?)");
@@ -457,6 +462,11 @@ public class AnnotopiaConverter {
 					jsAnnotatedBy = agents.get(annotation.getAnnotatedByAsObject().getId());
 				}
 				_domeo.getLogger().debug(this, "Annotated by: " + jsAnnotatedBy.getId());
+				
+				Date annotatedAt = new Date();
+				if(annotation.getAnnotatedAt()!=null) {
+					annotatedAt = annotation.getFormattedAnnotatedAt();
+				}
 				
 				// Unmarshall targets
 				ArrayList<MSelector> selectors = new ArrayList<MSelector>();
@@ -538,6 +548,7 @@ public class AnnotopiaConverter {
 					for(MSelector selector: selectors) {
 						postIt.addSelector(selector);
 					}	
+					postIt.setCreatedOn(annotatedAt);
 					performAnnotation(postIt);
 					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
 					aSet.setHasChanged(false);
@@ -547,6 +558,7 @@ public class AnnotopiaConverter {
 					for(MSelector selector: selectors) {
 						highlight.addSelector(selector);
 					}	
+					highlight.setCreatedOn(annotatedAt);
 					performAnnotation(highlight);
 					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
 					aSet.setHasChanged(false);

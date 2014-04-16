@@ -24,9 +24,9 @@ import java.util.List;
 
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
-import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IPavOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
@@ -69,7 +69,7 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		
 		if(ann.getCreatedOn()!=null) {
 			//jsonAnnotation.put("createdOn", nonNullable(ann.getCreatedOn()));
-			jsonAnnotation.put("annotatedAt", new JSONString(dateFormatter.format(ann.getCreatedOn())));
+			jsonAnnotation.put("annotatedAt", new JSONString(ApplicationUtils.fullfmt2.format(ann.getCreatedOn())));
 		}
 		
 		//jsonAnnotation.put(IPavOntology.createdWith, new JSONString(ann.getTool()!=null?ann.getTool().getUri():""));
@@ -80,7 +80,7 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		//jsonAnnotation.put(IPavOntology.createdWith, serializeAgent(manager, ann.getTool()));
 		//if(ann.getTool()!=null) manager.addAgentToSerialize(ann.getTool());
 			
-		jsonAnnotation.put(IPavOntology.lastSavedOn, nullable(ann.getLastSavedOn()));
+		jsonAnnotation.put("lastUpdateOn", nullable(ann.getLastSavedOn()));
 		//annotationJson.put(IPavOntology.createdWith, new JSONString(ann.getTool()!=null?ann.getTool().getUri():""));
 		//if(ann.getTool()!=null) manager.addAgentToSerialize(ann.getTool());
 		//annotationJson.put(IPavOntology.createdWith, new JSONString(ann.getTool()!=null?ann.getTool().getUri():""));
