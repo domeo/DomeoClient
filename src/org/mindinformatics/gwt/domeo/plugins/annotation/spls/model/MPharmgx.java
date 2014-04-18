@@ -116,7 +116,7 @@ public class MPharmgx extends MTrustedResource {
 			put("ESR1", "http://bio2rdf.org/hgnc:3467");
 			put("ESR1, PGR", "http://bio2rdf.org/hgnc:8910");
 			put("F2", "http://bio2rdf.org/hgnc:3535");
-			put("F5", "http:// bio2rdf.org/hgnc:3542");
+			put("F5", "http://bio2rdf.org/hgnc:3542");
 			put("FIP1L1/PDGFRA", "http://bio2rdf.org/hgnc:8803");
 			put("G6PD", "http://bio2rdf.org/hgnc:4057");
 			put("GBA", "http://bio2rdf.org/hgnc:4177");

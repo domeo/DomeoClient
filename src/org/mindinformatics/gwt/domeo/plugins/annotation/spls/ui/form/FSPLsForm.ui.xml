@@ -109,8 +109,12 @@
 		font-size: 12px;
 	}
 	
-	.listbox {
+	.listbox1 {
 		width: 120px;
+	}
+	
+	.listbox2 {
+		width: 200px;
 	}
 	
 	.medical {
@@ -161,7 +165,7 @@
 						<g:Label>Drug of Interest: &nbsp; </g:Label>
 
 						<g:ListBox ui:field="descriptdoi" name="descriptdoi"
-							visibleItemCount='1' styleName='{style.listbox}'>
+							visibleItemCount='1' styleName='{style.listbox1}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">Abacavir</g:item>
 							<g:item value="2">Aripiprazole</g:item>
@@ -281,7 +285,7 @@
 						<g:Label>HGNCGeneSymbol: &nbsp;</g:Label>
 
 						<g:ListBox ui:field="descripthgs" name="descripthgs"
-							visibleItemCount='1' styleName='{style.listbox}'>
+							visibleItemCount='1' styleName='{style.listbox1}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">ALK</g:item>
 							<g:item value="1">BAFF/TNFSF13B</g:item>
@@ -339,7 +343,7 @@
 						<g:Label>
 						</g:Label>
 						<g:ListBox ui:field="descriptpls" name="descriptpls"
-							visibleItemCount='1' styleName='{style.listbox}'>
+							visibleItemCount='1' styleName='{style.listbox1}'>
 
 							<g:item value="0"></g:item>
 							<g:item value="1">ABUSE (34086-9)</g:item>
@@ -408,7 +412,7 @@
 
 						<g:Label>Phenotype: &nbsp; </g:Label>
 						<g:ListBox ui:field="descriptsvtlb" name="descript"
-							visibleItemCount='1' styleName='{style.listbox}'>
+							visibleItemCount='1' styleName='{style.listbox2}'>
 							<g:item value="0">not mentioned</g:item>
 							<g:item value="1">poor-metabolizer</g:item>
 							<g:item value="2">intermediate-metabolizer</g:item>
@@ -432,7 +436,7 @@
 
 						<g:Label>Test Result: &nbsp; </g:Label>
 						<g:ListBox ui:field="descriptstslb" name="descript"
-							visibleItemCount='1' styleName='{style.listbox}'>
+							visibleItemCount='1' styleName='{style.listbox2}'>
 							<g:item value="0">not mentioned</g:item>
 							<g:item value="1">gene-haplotype-positive</g:item>
 							<g:item value="2">gene-haplotype-negative</g:item>
@@ -468,7 +472,7 @@
 						<g:Label>Biomarker &nbsp;(deprecated): &nbsp; </g:Label>
 
 						<g:ListBox ui:field="descriptbm" name="descriptbm"
-							visibleItemCount='1' styleName='{style.listbox}'>
+							visibleItemCount='1' styleName='{style.listbox1}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">ApoE2</g:item>
 							<g:item value="2">BRAF</g:item>
