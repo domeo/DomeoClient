@@ -50,10 +50,16 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 		return this.annotations.length || 0;
 	}-*/;
 	
+	public final native boolean isAnnotationsArray() /*-{ 
+		return Object.prototype.toString.call(this.annotations) === '[object Array]';
+	}-*/;
 	public final native JsArray<JavaScriptObject> getAnnotations() /*-{  
 		return this.annotations; 
 	}-*/;
-	
+	public final native JavaScriptObject getAnnotation() /*-{  
+		return this.annotations; 
+	}-*/;
+		
 	// ------------------------------------------------------------------------
 	//  Identity
 	// ------------------------------------------------------------------------
@@ -149,7 +155,7 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	} 
 	
 	public final native String getVersionNumber() /*-{ 
-		return this.versionNumber; 
+		return this.version; 
 	}-*/;
 	public final native String getPreviousVersion() /*-{ 
 		return this.previousVersion; 

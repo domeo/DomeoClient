@@ -103,7 +103,7 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 		annotationSetJson.put("label", nullable(annotationSet.getLabel()));
 		annotationSetJson.put("description", nullable(annotationSet.getDescription()));
 		annotationSetJson.put("lineageUri", nullable(annotationSet.getLineageUri()));
-		annotationSetJson.put("versionNumber", nullable(annotationSet.getVersionNumber()));
+		annotationSetJson.put("version", nullable(annotationSet.getVersionNumber()));
 		annotationSetJson.put("previousVersion", nullable(annotationSet.getPreviousVersion()));
 		annotationSetJson.put("deleted", nullableBoolean(annotationSet.getIsDeleted()));
 		
@@ -111,7 +111,7 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 		JSONArray annotations = new JSONArray();
 		List<MAnnotation> annotationsList = annotationSet.getAnnotations();
 		for(int i=0; i<annotationsList.size(); i++) {
-			if(annotationsList.get(i).getHasChanged())
+			//if(annotationsList.get(i).getHasChanged())
 				annotations.set(i, manager.serialize(annotationsList.get(i)));
 		}
 		annotationSetJson.put("annotations", annotations);

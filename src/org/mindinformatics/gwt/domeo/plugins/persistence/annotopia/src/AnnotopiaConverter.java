@@ -137,8 +137,13 @@ public class AnnotopiaConverter {
 				//  Caching Annotation Agents
 				// ----------------------------------------
 				_domeo.getLogger().debug(this, "Caching annotation agents");
-				for(int i=0; i<jsSet.getAnnotations().length(); i++) {
-					JavaScriptObject a = jsSet.getAnnotations().get(i);
+				
+				int max = jsSet.isAnnotationsArray() ? jsSet.getAnnotations().length() : ((jsSet.getAnnotation()!=null)?1:0);
+				for(int i=0; i<max; i++) {
+					JavaScriptObject a = null;
+					if(max==1) a = jsSet.getAnnotation();
+					else a = jsSet.getAnnotations().get(i);
+					
 					if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
 						// Unmarshall annotatedBy
 						JsAnnotationProvenance annotationProvenance = (JsAnnotationProvenance) a;
@@ -447,10 +452,19 @@ public class AnnotopiaConverter {
 		_domeo.getLogger().debug(this, "Unmarshalling Annotation Set");
 		JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
 
+		int max = jsSet.isAnnotationsArray() ? jsSet.getAnnotations().length() : ((jsSet.getAnnotation()!=null)?1:0);
+		_domeo.getLogger().debug(this, "DDDDDDD " + max);
+		//for(int i=0; i<max; i++) {
+		//	JavaScriptObject a = null;
+		//	if(max==1) a = jsSet.getAnnotation();
+		//	else a = jsSet.getAnnotations().get(i);
+		
 		// Creation of annotation items
-		for(int i=0; i<jsSet.getAnnotations().length(); i++) {
+		for(int i=0; i<max; i++) {
 			_domeo.getLogger().debug(this, "Creating annotation: " + i);
-			JavaScriptObject a = jsSet.getAnnotations().get(i);
+			JavaScriptObject a = null;
+			if(max==1) a = jsSet.getAnnotation();
+			else a = jsSet.getAnnotations().get(i);
 			if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
 				JsOpenAnnotation annotation = (JsOpenAnnotation) a;
 				
@@ -548,7 +562,9 @@ public class AnnotopiaConverter {
 					for(MSelector selector: selectors) {
 						postIt.addSelector(selector);
 					}	
+					postIt.setIndividualUri(annotation.getId());
 					postIt.setCreatedOn(annotatedAt);
+					postIt.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
 					performAnnotation(postIt);
 					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
 					aSet.setHasChanged(false);
@@ -558,7 +574,9 @@ public class AnnotopiaConverter {
 					for(MSelector selector: selectors) {
 						highlight.addSelector(selector);
 					}	
+					highlight.setIndividualUri(annotation.getId());
 					highlight.setCreatedOn(annotatedAt);
+					highlight.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
 					performAnnotation(highlight);
 					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
 					aSet.setHasChanged(false);

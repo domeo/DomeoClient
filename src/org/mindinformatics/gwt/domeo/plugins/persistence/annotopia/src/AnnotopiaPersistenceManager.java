@@ -198,13 +198,14 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		
 		AnnotopiaSerializerManager manager = AnnotopiaSerializerManager.getInstance((IDomeo)_application);
 		for(MAnnotationSet annotationSet: setToSerialize) {
+			final String operation = (annotationSet.getVersionNumber()==null || annotationSet.getVersionNumber().isEmpty())? "post":"put";
 			JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
 			Properties v = utils.parseJSON("{\"apiKey\":\"testkey\",\"outCmd\":\"frame\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(URL+"s/annotationset")
 			        .setDataType("json") // txt, json, jsonp, xml */
-			        .setType("post")      // post, get
+			        .setType(operation)      // post, get
 			        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
 			        .setTimeout(10000)
 			        .setSuccess(new Function(){ // callback to be run if the request success
@@ -218,12 +219,36 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    			if(set==null) {
 			    				// TODO message no annotation found
 			    				_application.getLogger().exception(this, "Annotation set not saved correctly");
-			    				_application.getProgressPanelContainer().setCompletionMessage("Annotation set not saved correctly");
+			    				_application.getProgressPanelContainer().setErrorMessage("Annotation set not saved correctly");
 			    			} else {
-			    				Window.alert("Set: " + set.getIndividualUri() + "-" + set.getPreviousVersion() + "-" + set.getLastSavedOn().toString());
-			    				
+			    				MAnnotationSet currentSet = null;
+			    				if(operation.equals("post")) 
+			    					currentSet = _domeo.getPersistenceManager().getAnnotationSetById(set.getPreviousVersion());	
+			    				else 
+			    					currentSet = _domeo.getPersistenceManager().getAnnotationSetById(set.getIndividualUri());	
+			    				_application.getLogger().info(this, "****000 " + currentSet );
+			    				_application.getLogger().info(this, "****001 " + set );
+			    				currentSet.setIndividualUri(set.getIndividualUri());
+			    				_application.getLogger().info(this, "Setting Set id to " + currentSet.getIndividualUri());
+			    				currentSet.setLastSavedOn(set.getLastSavedOn());
+			    				currentSet.setVersionNumber(set.getVersionNumber());
+			    				currentSet.setPreviousVersion(set.getPreviousVersion());
+			    				currentSet.setHasChanged(false);
+			    				_application.getLogger().info(this, "Set: " +currentSet.getIndividualUri());
+
 			    				for(MAnnotation annotation: set.getAnnotations()) {
-			    					//Window.alert("Ann: " + annotation.getIndividualUri() + "-" + annotation.getPreviousVersion() + "-" + annotation.getLastSavedOn().toString());
+			    					_application.getLogger().info(this, "Annotation " + annotation.getPreviousVersion());
+			    					for(MAnnotation currentAnnotation: currentSet.getAnnotations()) {
+			    						_application.getLogger().info(this, "Matching " + currentAnnotation.getIndividualUri());
+			    						if(currentAnnotation.getIndividualUri().equals(annotation.getPreviousVersion())) {
+			    							currentAnnotation.setIndividualUri(annotation.getIndividualUri());
+			    							currentAnnotation.setLastSavedOn(annotation.getLastSavedOn());
+			    							currentAnnotation.setVersionNumber(annotation.getVersionNumber());
+			    							currentAnnotation.setPreviousVersion(annotation.getPreviousVersion());
+			    							currentAnnotation.setHasChanged(false);
+			    							break;
+			    						}
+			    					}
 			    				}
 			    				_application.getProgressPanelContainer().hide();
 			    				_application.getLogger().debug(this, "Completed saving of Annotation Set in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
