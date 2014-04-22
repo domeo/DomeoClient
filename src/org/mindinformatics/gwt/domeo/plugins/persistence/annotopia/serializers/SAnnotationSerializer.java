@@ -26,6 +26,8 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
+import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.json.client.JSONArray;
@@ -97,6 +99,10 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		jsonAnnotation.put(IDomeoOntology.transientNewVersion, new JSONString(Boolean.toString(ann.getNewVersion())));
 		jsonAnnotation.put(IDomeoOntology.transientHasChanged, new JSONString(ann.getHasChanged()+"")); //???
 		
+		if(ann.getAnnotationType().equals("ao:PostIt")) {
+			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
+		}
+		
 		jsonAnnotation.put("hasTarget", encodeSelectors(manager, ann));
 		return jsonAnnotation;
 	}
@@ -114,6 +120,27 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			jsonSelectors.set(i, manager.serialize(selectorsList.get(i)));
 		}
 		return jsonSelectors;
+	}
+	
+	/**
+	 * Encodes bodies in JSON format.
+	 * @param manager	The serializer manager
+	 * @param ann		The annotation to serialize
+	 * @return The Textual Bodies in JSON format
+	 */
+	protected JSONArray encodeBodies(AnnotopiaSerializerManager manager, MAnnotation ann) {
+		MContentAsRdf body = ((MPostItAnnotation)ann).getBody();		
+		JSONArray jsonBodies = new JSONArray();
+		JSONObject jsonBody = new JSONObject();
+		jsonBody.put(IRdfsOntology.id, nonNullable("urn:body:" + body.getIndividualUri()));
+		JSONArray jsonTypes = new JSONArray();
+		jsonTypes.set(0, new JSONString("cnt:ContentAsText"));
+		jsonTypes.set(1, new JSONString("dctypes:Text"));
+		jsonBody.put(IRdfsOntology.type, jsonTypes);
+		jsonBody.put("format", new JSONString(body.getFormat()));
+		jsonBody.put("chars", new JSONString(body.getChars()));
+		jsonBodies.set(0, jsonBody);
+		return jsonBodies;
 	}
 
 	@Override

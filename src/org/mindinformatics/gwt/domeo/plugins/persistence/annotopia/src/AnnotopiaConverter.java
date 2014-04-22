@@ -59,6 +59,7 @@ import org.mindinformatics.gwt.utils.src.HtmlUtils;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -482,6 +483,12 @@ public class AnnotopiaConverter {
 					annotatedAt = annotation.getFormattedAnnotatedAt();
 				}
 				
+				Date lastSavedOn = null;
+				if(((JsAnnotationProvenance)a).getLastSavedOn()!=null) {
+					lastSavedOn = ((JsAnnotationProvenance)a).getFormattedLastSavedOn();
+				}
+				
+				
 				// Unmarshall targets
 				ArrayList<MSelector> selectors = new ArrayList<MSelector>();
 				//ArrayList<String> resources = new ArrayList<String>(); 
@@ -550,21 +557,29 @@ public class AnnotopiaConverter {
 					_domeo.getLogger().debug(this, "Comment");
 					String bodyText = null;
 					boolean multipleBodies = annotation.hasMultipleBodies();
+					_domeo.getLogger().debug(this, "Comment a");
 					if(!multipleBodies) {
+						_domeo.getLogger().debug(this, "Comment b");
 						if(getObjectTypes(annotation.getBody()).toString().contains(IOpenAnnotation.CONTENT_AS_TEXT)) {
+							_domeo.getLogger().debug(this, "Comment c");
 							JsContentAsText body = (JsContentAsText) annotation.getBody();
 							bodyText = body.getChars();
 						}
 					}
 					
+					_domeo.getLogger().debug(this, "Comment 1");
 					MPostItAnnotation postIt = AnnotationFactory.createPostIt(aSet, annotatedBy, 
 							aSet.getCreatedWith(), PostitType.COMMENT_TYPE, bodyText);
 					for(MSelector selector: selectors) {
 						postIt.addSelector(selector);
 					}	
+					_domeo.getLogger().debug(this, "Comment 2");
 					postIt.setIndividualUri(annotation.getId());
+					_domeo.getLogger().debug(this, "Comment 3");
 					postIt.setCreatedOn(annotatedAt);
+					_domeo.getLogger().debug(this, "Comment 4");
 					postIt.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
+					if(lastSavedOn!=null) postIt.setLastSavedOn(lastSavedOn); 
 					performAnnotation(postIt);
 					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
 					aSet.setHasChanged(false);
@@ -577,6 +592,7 @@ public class AnnotopiaConverter {
 					highlight.setIndividualUri(annotation.getId());
 					highlight.setCreatedOn(annotatedAt);
 					highlight.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
+					if(lastSavedOn!=null) highlight.setLastSavedOn(lastSavedOn); 
 					performAnnotation(highlight);
 					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
 					aSet.setHasChanged(false);
