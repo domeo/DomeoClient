@@ -84,7 +84,7 @@ public class Texpertstudy_pDDITile extends ATileComponent implements ITileCompon
 			 */
 
 			// Create the content to display
-			Mexpertstudy_pDDI expertstudy_pDDI = _annotation.getexpertstudy_pDDIUsage().getexpertstudy_pDDI();
+		//	Mexpertstudy_pDDI expertstudy_pDDI = _annotation.getMpDDIUsage().getexpertstudy_pDDI();
 
 			String html1 = "<html><head></head> <body><table>";
 

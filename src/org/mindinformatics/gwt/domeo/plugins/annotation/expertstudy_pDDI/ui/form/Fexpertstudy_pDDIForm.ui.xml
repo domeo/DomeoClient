@@ -167,11 +167,11 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="typeai1" name="descriptpk"
+						<g:RadioButton ui:field="typeai1" name="typer1"
 							checked="false">Active Ingredient</g:RadioButton>
-						<g:RadioButton ui:field="typemb1" name="descriptpk"
+						<g:RadioButton ui:field="typemb1" name="typer1"
 							checked="false">Metabolite</g:RadioButton>
-						<g:RadioButton ui:field="typedp1" name="descriptpk"
+						<g:RadioButton ui:field="typedp1" name="typer1"
 							checked="false">Drug Product</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -184,9 +184,9 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="roleob1" name="descriptpd"
+						<g:RadioButton ui:field="roleob1" name="roler1"
 							checked="false">Object</g:RadioButton>
-						<g:RadioButton ui:field="rolepp1" name="descriptpd"
+						<g:RadioButton ui:field="rolepp1" name="roler1"
 							checked="false">Precipitant</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -202,11 +202,11 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="typeai2" name="descriptpk"
+						<g:RadioButton ui:field="typeai2" name="typer2"
 							checked="false">Active Ingredient</g:RadioButton>
-						<g:RadioButton ui:field="typemb2" name="descriptpk"
+						<g:RadioButton ui:field="typemb2" name="typer2"
 							checked="false">Metabolite</g:RadioButton>
-						<g:RadioButton ui:field="typedp2" name="descriptpk"
+						<g:RadioButton ui:field="typedp2" name="typer2"
 							checked="false">Drug Product</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -219,9 +219,9 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="roleob2" name="descriptpd"
+						<g:RadioButton ui:field="roleob2" name="roler2"
 							checked="false">Object</g:RadioButton>
-						<g:RadioButton ui:field="rolepp2" name="descriptpd"
+						<g:RadioButton ui:field="rolepp2" name="roler2"
 							checked="false">Precipitant</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -241,9 +241,9 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="statementqu" name="statementqu"
+						<g:RadioButton ui:field="statementqu" name="statement"
 							checked="false">quantitative</g:RadioButton>
-						<g:RadioButton ui:field="statementql" name="statementql"
+						<g:RadioButton ui:field="statementql" name="statement"
 							checked="false">qualitative</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -256,9 +256,9 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
-						<g:RadioButton ui:field="modalitypt" name="modalitypt"
+						<g:RadioButton ui:field="modalitypt" name="modality"
 							checked="false">Positive</g:RadioButton>
-						<g:RadioButton ui:field="modalitynt" name="modalitynt"
+						<g:RadioButton ui:field="modalitynt" name="modality"
 							checked="false">Negative</g:RadioButton>
 					</g:HorizontalPanel>
 
@@ -266,11 +266,11 @@
 					<!-- extra resource -->
 
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="extrarelabel" styleName='{style.titleLeft}'>Comment:</g:Label>
+						<g:Label ui:field="commentlabel" styleName='{style.titleLeft}'>Comment:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
-						<g:TextArea ui:field='extrare' styleName='{style.commentBody}'></g:TextArea>
+						<g:TextArea ui:field='comment' styleName='{style.commentBody}'></g:TextArea>
 					</g:HorizontalPanel>
 
 

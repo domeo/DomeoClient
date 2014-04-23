@@ -1,10 +1,5 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.form;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +13,7 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Iexpertstudy_pDDI;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDI;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
@@ -36,6 +32,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TabBar;
@@ -46,7 +43,8 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
  */
-public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable {
+public class Fexpertstudy_pDDIForm extends AFormComponent implements
+		IResizable, Iexpertstudy_pDDI {
 
 	private static Logger logger = Logger.getLogger("");
 
@@ -64,8 +62,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 	private static final Binder binder = GWT.create(Binder.class);
 
 	private Mexpertstudy_pDDIAnnotation _item;
-	private Mexpertstudy_pDDI currentexpertstudy_pDDI;
-	private ArrayList<Widget> tabs = new ArrayList<Widget>();
+	private Mexpertstudy_pDDI currentMpDDI;
+	// private ArrayList<Widget> tabs = new ArrayList<Widget>();
 
 	@UiField
 	VerticalPanel container;
@@ -77,22 +75,169 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 	ListBox annotationSet;
 	@UiField
 	VerticalPanel rightColumn;
-/*	@UiField
-	TabBar tabBar;*/
 
-	
+	@UiField
+	Label drugLabel1, drugLabel2;
+
+	// type of drug1
+	@UiField
+	RadioButton typeai1, typemb1, typedp1;
+
+	// type of drug2
+	@UiField
+	RadioButton typeai2, typemb2, typedp2;
+
+	// role of drug1
+	@UiField
+	RadioButton roleob1, rolepp1;
+
+	// role of drug1
+	@UiField
+	RadioButton roleob2, rolepp2;
+
+	// statement
+	@UiField
+	RadioButton statementqu, statementql;
+
+	// modality
+	@UiField
+	RadioButton modalitypt, modalitynt;
+	@UiField
+	TextArea comment;
+
+	// role of drug 1 and drug 2
+
+	public MLinkedResource getRoleOfDrug1() {
+
+		if (roleob1.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX
+							+ "object-drug-of-interaction",
+							"Object drug of Interaction",
+							"Referred to the role that each drug one plays within the interaction.");
+		} else if (rolepp1.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX
+							+ "precipitant-drug-of-interaction",
+							"Precipitant drug of Interaction",
+							"Referred to the role that each drug one plays within the interaction.");
+		}
+
+		return null;
+	}
+
+	public MLinkedResource getRoleOfDrug2() {
+
+		if (roleob2.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX
+							+ "object-drug-of-interaction",
+							"Object drug of Interaction",
+							"Referred to the role that each drug two plays within the interaction.");
+		} else if (rolepp2.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX
+							+ "precipitant-drug-of-interaction",
+							"Precipitant drug of Interaction",
+							"Referred to the role that each drug two plays within the interaction.");
+		}
+		return null;
+	}
+
+	// type of drug 1 and drug 2
+
+	public MLinkedResource getTypeOfDrug1() {
+
+		if (typeai1.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient",
+							"Active ingredient",
+							"Referred to the type of the mention within the sentence for drug one.");
+		} else if (typemb1.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "metabolite",
+							"Metabolite",
+							"Referred to the type of the mention within the sentence for drug one.");
+		} else if (typedp1.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
+							"Drug product",
+							"Referred to the type of the mention within the sentence for drug one.");
+		}
+
+		return null;
+	}
+
+	public MLinkedResource getTypeOfDrug2() {
+
+		if (typeai2.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient",
+							"Active ingredient",
+							"Referred to the type of the mention within the sentence for drug two.");
+		} else if (typemb2.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "metabolite",
+							"Metabolite",
+							"Referred to the type of the mention within the sentence for drug two.");
+		} else if (typedp2.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
+							"Drug product",
+							"Referred to the type of the mention within the sentence for drug two.");
+		}
+		return null;
+	}
+
+	// statement
+
+	public MLinkedResource getStatement() {
+
+		if (statementqu.getValue()) {
+			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
+					+ "quantitative", "Quantitative",
+					"Referred to data type that is described in the sentence.");
+		} else if (statementql.getValue()) {
+			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
+					+ "qualitative", "Qualitative",
+					"Referred to data type that is described in the sentence.");
+		}
+
+		return null;
+	}
+
+	// modality
+
+	public MLinkedResource getModality() {
+
+		if (modalitypt.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(
+							SIO_PREFIX + "positive",
+							"Positive",
+							"Referred to extra sources of information that the annotator considers "
+									+ "are helpful to provide evidence for or against the existence of the pDDI.");
+		} else if (modalitynt.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(
+							SIO_PREFIX + "negative",
+							"Negative",
+							"Referred to extra sources of information that the annotator considers "
+									+ "are helpful to provide evidence for or against the existence of the pDDI.");
+		}
+
+		return null;
+	}
+
 	// NEW annotation
 	public Fexpertstudy_pDDIForm(IDomeo domeo, final AFormsManager manager) {
 		super(domeo);
+
 		_manager = manager;
 
 		initWidget(binder.createAndBindUi(this));
 
-		_domeo.getLogger().debug(this, "expertstudy_pDDI annotation widget bound to UI");
-
 		refreshAnnotationSetFilter(annotationSet, null);
-
-		_domeo.getLogger().debug(this, "expertstudy_pDDI annotation filter set refreshed");
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
 				.generalCss().applyButton());
@@ -103,8 +248,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 		yesButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (isContentInvalid())
-					return; // TODO: use this function to validate form elements
-							// in the UI
+					return;
 
 				_domeo.getLogger().debug(this,
 						"expertstudy_pDDI annotation content validated");
@@ -112,6 +256,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 				try {
 					if (_item == null) {
 						_domeo.getLogger().debug(this, "_item is null...");
+
 						if (_manager instanceof TextAnnotationFormsPanel) {
 							MTextQuoteSelector selector = AnnotationFactory
 									.createPrefixSuffixTextSelector(
@@ -144,20 +289,31 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 													.getSoftware(), _manager
 													.getResource(), selector);
 
-							_domeo.getLogger().debug(this,
-									"expertstudy_pDDI annotation factory initialized");
+							_domeo.getLogger()
+									.debug(this,
+											"expertstudy_pDDI annotation factory initialized");
 
 							Mexpertstudy_pDDIUsage expertstudy_pDDIUsage = expertstudy_pDDIFactory
 									.createexpertstudy_pDDIUsage();
 
+							expertstudy_pDDIUsage.setRole1(getRoleOfDrug1());
+							_domeo.getLogger().debug(this, "DDI annotation 1");
+							expertstudy_pDDIUsage.setRole2(getRoleOfDrug2());
+							_domeo.getLogger().debug(this, "DDI annotation 2");
+							expertstudy_pDDIUsage.setType1(getTypeOfDrug1());
+							_domeo.getLogger().debug(this, "DDI annotation 3");
+							expertstudy_pDDIUsage.setType2(getTypeOfDrug2());
+							_domeo.getLogger().debug(this, "DDI annotation 4");
+							expertstudy_pDDIUsage.setStatement(getStatement());
+							_domeo.getLogger().debug(this, "DDI annotation 5");
+							expertstudy_pDDIUsage.setModality(getModality());
+							_domeo.getLogger().debug(this, "DDI annotation 6");
+							//expertstudy_pDDIUsage.setComment(comment.getText());
 							
+							annotation.setMpDDIUsage(expertstudy_pDDIUsage);
+							annotation.setComment(comment.getText());
 							
-							
-							annotation.setexpertstudy_pDDIUsage(expertstudy_pDDIUsage);
-
-							
-
-							_domeo.getLogger().debug(this, "expertstudy_pDDI comment set");
+							_domeo.getLogger().debug(this, "annotation loaded");
 
 							if (getSelectedSet(annotationSet) == null) {
 								_domeo.getLogger()
@@ -174,19 +330,12 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 												getSelectedSet(annotationSet));
 							}
 
-							_domeo.getLogger()
-									.debug(this,
-											"Making the new expertstudy_pDDI annotation visible in the content panel");
 							_domeo.getContentPanel()
 									.getAnnotationFrameWrapper()
 									.performAnnotation(
 											annotation,
 											((TextAnnotationFormsPanel) _manager)
 													.getHighlight());
-
-							_domeo.getLogger()
-									.debug(this,
-											"expertstudy_pDDI annotation data collected. widget should close now.");
 
 							_manager.hideContainer();
 
@@ -234,8 +383,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 					.debug(this,
 							"Attempting to initialize UI with loaded annotation values");
 
-
-
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
 					this,
@@ -252,8 +399,73 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 			_domeo.getLogger().debug(this,
 					"expertstudy_pDDI annotation filter set refreshed");
 
-			currentexpertstudy_pDDI = annotation.getexpertstudy_pDDIUsage().getexpertstudy_pDDI();
+			currentMpDDI = annotation.getMpDDIUsage().getMpDDI();
 
+			// check selections of drug role
+			if (_item.getRole1() != null) {
+				if (_item.getRole1().getLabel()
+						.equals("Object drug of Interaction")) {
+					roleob1.setValue(true);
+				} else if (_item.getRole1().getLabel()
+						.equals("Precipitant drug of Interaction")) {
+					rolepp1.setValue(true);
+				}
+			}
+
+			if (_item.getRole2() != null) {
+				if (_item.getRole2().getLabel()
+						.equals("Object drug of Interaction")) {
+					roleob2.setValue(true);
+				} else if (_item.getRole2().getLabel()
+						.equals("Precipitant drug of Interaction")) {
+					rolepp2.setValue(true);
+				}
+			}
+
+			// check selections of drug type
+			if (_item.getType1() != null) {
+				if (_item.getType1().getLabel().equals("Active ingredient")) {
+					typeai1.setValue(true);
+				} else if (_item.getType1().getLabel().equals("Metabolite")) {
+					typemb1.setValue(true);
+				} else if (_item.getType1().getLabel().equals("Drug product")) {
+					typedp1.setValue(true);
+				}
+			}
+
+			if (_item.getType2() != null) {
+				if (_item.getType2().getLabel().equals("Active ingredient")) {
+					typeai2.setValue(true);
+				} else if (_item.getType2().getLabel().equals("Metabolite")) {
+					typemb2.setValue(true);
+				} else if (_item.getType2().getLabel().equals("Drug product")) {
+					typedp2.setValue(true);
+				}
+			}
+
+			// check selections of statement
+			if (_item.getStatement() != null) {
+				if (_item.getStatement().getLabel().equals("Quantitative")) {
+					statementqu.setValue(true);
+				} else if (_item.getStatement().getLabel()
+						.equals("Qualitative")) {
+					statementql.setValue(true);
+				}
+			}
+
+			// check selections of modality
+			if (_item.getModality() != null) {
+				if (_item.getModality().getLabel().equals("Positive")) {
+					modalitypt.setValue(true);
+				} else if (_item.getModality().getLabel().equals("Negative")) {
+					modalitynt.setValue(true);
+				}
+			}
+
+			if (_item.getComment() != null && !_item.getComment().equals(""))
+				comment.setText(_item.getComment());
+			
+			
 			_domeo.getLogger()
 					.debug(this,
 							"acquired the expertstudy_pDDI usage from the annotation instance passed to this method");
@@ -299,29 +511,23 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 
 					System.out.println("selector in edit: "
 							+ selector.getExact());
-					
-					
+
 					_item.setSelector(selector);
-
-					_domeo.getLogger().debug(this,
-							"expertstudy_pDDI annotation content validated (edit)");
-
-
-			
-
-					_domeo.getLogger().debug(this,
-							"expertstudy_pDDI descriptions cleared and re-loaded (edit)");
-
-					_item.getexpertstudy_pDDIUsage().setexpertstudy_pDDI(currentexpertstudy_pDDI);
+					_item.setRole1(getRoleOfDrug1());
+					_item.setRole2(getRoleOfDrug2());
+					_item.setType1(getTypeOfDrug1());
+					_item.setType2(getTypeOfDrug2());
+					_item.setStatement(getStatement());
+					_item.setModality(getModality());
+					_item.setComment(comment.getText());
+					
+					_item.getMpDDIUsage().setMpDDI(currentMpDDI);
 
 					_domeo.getContentPanel()
 							.getAnnotationFrameWrapper()
 							.updateAnnotation(_item,
 									getSelectedSet(annotationSet));
 
-					_domeo.getLogger()
-							.debug(this,
-									"expertstudy_pDDI annotation data collected. widget should close now.");
 					_manager.hideContainer();
 				} catch (Exception e) {
 					_domeo.getLogger()
@@ -361,17 +567,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 	// TODO: edit this method to validate the relevant form elements
 	@Override
 	public boolean isContentInvalid() {
-		// _manager.displayMessage("Click received!");
-		// if(currentexpertstudy_pDDI==null) {
-		// _manager.displayMessage("The body of the annotation cannot be empty!");
-		// Timer timer = new Timer() {
-		// public void run() {
-		// _manager.clearMessage();
-		// }
-		// };
-		// timer.schedule(2000);
-		// return true;
-		// }
+
 		return false;
 	}
 
@@ -384,12 +580,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements IResizable 
 
 	@Override
 	public void resized() {
-/*		this.setWidth((Window.getClientWidth() - 340) + "px");
-		tabBar.setWidth((Window.getClientWidth() - 615) + "px");
-		for (Widget tab : tabs) {
-			// if(tab instanceof IResizable) ((IResizable)tab).resized();
-			tab.setWidth((Window.getClientWidth() - 615) + "px");
-		}*/
+
 	}
 
 	@Override

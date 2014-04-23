@@ -9,42 +9,120 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
  * @author Richard Boyce <rdb20@pitt.edu>
  */
 @SuppressWarnings("serial")
-    public class Mexpertstudy_pDDIAnnotation extends MAnnotation {
-
-	public static final String LABEL = "expertstudy Annotation"; //Plugin builder error
-	public static final String TYPE = "ao:expertstudyAnnotation"; //Plugin builder error
-	public static final String BODY_TYPE = "domeo:expertstudy_pDDIUsage";
+public class Mexpertstudy_pDDIAnnotation extends MAnnotation implements Iexpertstudy_pDDI{
+	// Plugin builder error
+	public static final String LABEL = "expertstudy Annotation"; 
+	public static final String TYPE = "ao:expertstudyAnnotation"; 
 	
-	private Mexpertstudy_pDDIUsage expertstudy_pDDIUsage;
+	 public static final String BODY_TYPE = "domeo:expertstudy_pDDIUsage";
+	 private Mexpertstudy_pDDIUsage MpDDIUsage;
 
-	public Mexpertstudy_pDDIUsage getexpertstudy_pDDIUsage() {
-	    return expertstudy_pDDIUsage;
+	
+
+	public Mexpertstudy_pDDIUsage getMpDDIUsage() {
+		return MpDDIUsage;
 	}
 
-	public void setexpertstudy_pDDIUsage(Mexpertstudy_pDDIUsage expertstudy_pDDIUsage) {
-	    this.expertstudy_pDDIUsage = expertstudy_pDDIUsage;
+	public void setMpDDIUsage(Mexpertstudy_pDDIUsage MpDDI) {
+		this.MpDDIUsage = MpDDI;
 	}
 
 	public String getComment() {
-	    return expertstudy_pDDIUsage.getComment();
+		return MpDDIUsage.getComment();
 	}
 
 	public void setComment(String comment) {
-	    expertstudy_pDDIUsage.setComment(comment);
+		MpDDIUsage.setComment(comment);
+	}
+	
+	//DDI drug 1 and drug 2
+	/*
+	public MLinkedResource getDrug1() {
+		return MpDDIUsage.getDrug1();
+	}
+
+	public void setDrug1(MLinkedResource drug1) {
+		MpDDIUsage.setDrug1(drug1);
+	}
+	
+	public MLinkedResource getDrug2() {
+		return MpDDIUsage.getDrug2();
+	}
+
+	public void setDrug2(MLinkedResource drug2) {
+		MpDDIUsage.setDrug1(drug2);
+	}*/
+	
+	// DDI type of drug1 as type1 and type of drug2 as type2
+	
+	public MLinkedResource getType1() {
+		return MpDDIUsage.getType1();
+	}
+
+	public void setType1(MLinkedResource Type1) {
+		MpDDIUsage.setType1(Type1);
+	}
+	
+	public MLinkedResource getType2() {
+		return MpDDIUsage.getType2();
+	}
+
+	public void setType2(MLinkedResource Type2) {
+		MpDDIUsage.setType2(Type2);
+	}
+	
+	// DDI role of drug1 as role1 and role of drug2 as role2
+	
+	public MLinkedResource getRole1() {
+		return MpDDIUsage.getRole1();
+	}
+
+	public void setRole1(MLinkedResource role1) {
+		MpDDIUsage.setRole1(role1);
+	}
+	
+	public MLinkedResource getRole2() {
+		return MpDDIUsage.getRole2();
+	}
+
+	public void setRole2(MLinkedResource role2) {
+		MpDDIUsage.setRole2(role2);
+	}
+	
+	// statement
+	
+	public MLinkedResource getStatement() {
+		return MpDDIUsage.getStatement();
+	}
+
+	public void setStatement(MLinkedResource statement) {
+		MpDDIUsage.setStatement(statement);
+	}
+	
+	
+	// modality
+
+	public MLinkedResource getModality() {
+		return MpDDIUsage.getModality();
+	}
+
+	public void setModality(MLinkedResource modality) {
+		MpDDIUsage.setModality(modality);
+	}
+
+
+	@Override
+	public String getLabel() {
+		return LABEL;
+	}
+
+	@Override
+	public String getAnnotationType() {
+		return TYPE;
 	}
 
 	public String getText() {
-	    return expertstudy_pDDIUsage.getexpertstudy_pDDI().getLabel();
+		// TODO Auto-generated method stub
+		return "text";
 	}
-	
-	
-	@Override
-	    public String getLabel() {
-	    return LABEL;
-	}
-	
-	@Override
-	    public String getAnnotationType() {
-	    return TYPE;
-	}
-    }
+}

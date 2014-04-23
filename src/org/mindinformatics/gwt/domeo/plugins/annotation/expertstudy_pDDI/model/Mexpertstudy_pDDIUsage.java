@@ -41,25 +41,67 @@ public class Mexpertstudy_pDDIUsage {
 
 	// The Mexpertstudy_pDDI instance is a "normalized" instance that holds the
 	// model values as strings
-	Mexpertstudy_pDDI expertstudy_pDDI = new Mexpertstudy_pDDI("", "", null);
+	Mexpertstudy_pDDI MpDDI = new Mexpertstudy_pDDI("", "", null);
 
-	public Mexpertstudy_pDDI getexpertstudy_pDDI() {
-		return expertstudy_pDDI;
+	public Mexpertstudy_pDDI getMpDDI() {
+		return MpDDI;
 	}
 
-	public void setexpertstudy_pDDI(Mexpertstudy_pDDI expertstudy_pDDI) {
-		this.expertstudy_pDDI = expertstudy_pDDI;
+	public void setMpDDI(Mexpertstudy_pDDI MpDDI) {
+		this.MpDDI = MpDDI;
 	}
 
-	//type
-	public MLinkedResource getType() {
-		return expertstudy_pDDI.getType();
+	// DDI role of drug1 as role1 and role of drug2 as role2
+
+	public MLinkedResource getRole1() {
+		return MpDDI.getRole1();
 	}
 
-	public void setType(MLinkedResource type) {
-		expertstudy_pDDI.setType(type);
+	public void setRole1(MLinkedResource role1) {
+		MpDDI.setRole1(role1);
 	}
-	
-	//role, statement, modality, extraResource;
+
+	public MLinkedResource getRole2() {
+		return MpDDI.getRole2();
+	}
+
+	public void setRole2(MLinkedResource role2) {
+		MpDDI.setRole2(role2);
+	}
+
+	// DDI type of drug
+	public MLinkedResource getType1() {
+		return MpDDI.getType1();
+	}
+
+	public void setType1(MLinkedResource type1) {
+		MpDDI.setType1(type1);
+	}
+
+	public MLinkedResource getType2() {
+		return MpDDI.getType2();
+	}
+
+	public void setType2(MLinkedResource type2) {
+		MpDDI.setType2(type2);
+	}
+
+	// DDI statement
+	public MLinkedResource getStatement() {
+		return MpDDI.getStatement();
+	}
+
+	public void setStatement(MLinkedResource statement) {
+		MpDDI.setStatement(statement);
+	}
+
+	// DDI modality
+	public MLinkedResource getModality() {
+		return MpDDI.getModality();
+	}
+
+	public void setModality(MLinkedResource modality) {
+		MpDDI.setModality(modality);
+	}
 
 }
