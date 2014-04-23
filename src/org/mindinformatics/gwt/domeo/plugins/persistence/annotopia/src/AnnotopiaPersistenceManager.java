@@ -33,6 +33,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetriev
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetListHandler;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingBibliographySetHandler;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraph;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AnnotopiaSerializerManager;
@@ -211,11 +212,11 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			        .setSuccess(new Function(){ // callback to be run if the request success
 			    		public void f() {
 			    			IDomeo _domeo = ((IDomeo)_application);
-			    			JsAnnotopiaAnnotationSetGraph wrapper = 
-			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
+			    			JsAnnotopiaSetResultWrapper wrapper = 
+			    				(JsAnnotopiaSetResultWrapper) parseJson(getDataProperties().toJsonString());
 			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 			    			
-			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper);	    
+			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper.getResult().getSet().get(0));	    
 			    			if(set==null) {
 			    				// TODO message no annotation found
 			    				_application.getLogger().exception(this, "Annotation set not saved correctly");

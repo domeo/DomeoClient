@@ -21,6 +21,7 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -30,5 +31,5 @@ public class JsAnnotopiaSetResultDetails extends JavaScriptObject {
 	protected JsAnnotopiaSetResultDetails() {}
 	
 	public final native String getDuration() /*-{  return this.duration; }-*/;
-	public final native JsAnnotopiaAnnotationSetGraphs getSet() /*-{  return this.set; }-*/;
+	public final native JsArray<JsAnnotopiaAnnotationSetGraph> getSet() /*-{  return this.set; }-*/;
 }

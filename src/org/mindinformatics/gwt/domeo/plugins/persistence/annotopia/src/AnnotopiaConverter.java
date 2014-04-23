@@ -42,6 +42,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnot
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAgent;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraph;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsContentAsText;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsOpenAnnotation;
@@ -59,7 +60,6 @@ import org.mindinformatics.gwt.utils.src.HtmlUtils;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -200,7 +200,7 @@ public class AnnotopiaConverter {
 				_domeo.getLogger().exception(this, "unmarshallAnnotationSet(): " + e.getMessage());
 			}
 		} else {
-			_domeo.getLogger().exception(this, "Unrecognized format");
+			_domeo.getLogger().exception(this, "Unrecognized agents format");
 		}	
 	}
 	
@@ -250,18 +250,20 @@ public class AnnotopiaConverter {
 		return sets;
 	}
 	
-	public MAnnotationSet unmarshallAnnotationSet(JsAnnotopiaAnnotationSetGraph wrapper) {		
+	public MAnnotationSet unmarshallAnnotationSet(JsAnnotopiaAnnotationSetGraph  wrapper) {		
 		
 		// Cache for lazy binding
 		HashMap<String, JsAnnotopiaAgent> agents = new HashMap<String, JsAnnotopiaAgent>();
 		HashMap<String, String> entityAgents = new HashMap<String, String>();
 		HashMap<String, JsResource> targets = new HashMap<String, JsResource>();
 		HashMap<String, String> targetSources = new HashMap<String, String>();
+
 		// Caching of both sets and annotations
 		cacheAgents(wrapper, agents, entityAgents, targets, targetSources);
 		
 		_domeo.getLogger().debug(this, "Unmarshalling set");
 		JsArray<JavaScriptObject> graphs = wrapper.getGraphs();
+		_domeo.getLogger().debug(this, "Graphs: " + graphs.length());
 		if(graphs.length()==1) {	
 			JavaScriptObject jsItem = graphs.get(0);
 			
@@ -337,7 +339,7 @@ public class AnnotopiaConverter {
 					set.setCreatedOn(jsSet.getFormattedCreatedOn());
 				} catch (Exception e) {
 					try {
-						set.setCreatedOn(jsSet.getFormattedCreatedOn2());
+						set.setCreatedOn(jsSet.getFormattedCreatedOn2());						
 					} catch (Exception ex) {
 						_domeo.getLogger().exception(this, "Problems in parsing createdOn " 
 							+ jsSet.getCreatedOn() + " - " + e.getMessage());

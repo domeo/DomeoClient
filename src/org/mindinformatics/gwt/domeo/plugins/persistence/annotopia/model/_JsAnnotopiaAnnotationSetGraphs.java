@@ -26,9 +26,9 @@ import com.google.gwt.core.client.JsArray;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class JsAnnotopiaAnnotationSetGraphs extends JavaScriptObject {
+public class _JsAnnotopiaAnnotationSetGraphs extends JavaScriptObject {
 
-	protected JsAnnotopiaAnnotationSetGraphs() {}
+	protected _JsAnnotopiaAnnotationSetGraphs() {}
 	
 	public final native JsArray<JavaScriptObject> getGraphs() /*-{  return this['@graph']; }-*/;
 	
