@@ -52,6 +52,7 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 					+ "PharmacogenomicsStatement")); // common
 			body.put("sio:" + "SIO_000563", new JSONString("poc:"
 					+ "PharmacokineticImpact"));
+			
 			body.put("poc:" + "PharmacokineticImpact",
 					new JSONString(pkImpact.getUrl()));
 			body.put(IRdfsOntology.label, new JSONString(pkImpact.getLabel()));

@@ -51,6 +51,24 @@ public class Mexpertstudy_pDDIUsage {
 		this.MpDDI = MpDDI;
 	}
 
+	// drug 1 and drug 2
+
+	public MLinkedResource getDrug1() {
+		return MpDDI.getDrug1();
+	}
+
+	public void setDrug1(MLinkedResource drug1) {
+		MpDDI.setDrug1(drug1);
+	}
+
+	public MLinkedResource getDrug2() {
+		return MpDDI.getDrug2();
+	}
+
+	public void setDrug2(MLinkedResource drug2) {
+		MpDDI.setDrug2(drug2);
+	}
+
 	// DDI role of drug1 as role1 and role of drug2 as role2
 
 	public MLinkedResource getRole1() {

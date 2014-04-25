@@ -77,7 +77,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	VerticalPanel rightColumn;
 
 	@UiField
-	Label drugLabel1, drugLabel2;
+	TextArea drug1, drug2;
 
 	// type of drug1
 	@UiField
@@ -104,6 +104,29 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	RadioButton modalitypt, modalitynt;
 	@UiField
 	TextArea comment;
+
+	// drug 1 and drug 2
+
+	public MLinkedResource getDrug1() {
+
+		if (!drug1.getText().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(
+					RXNORM_PREFIX + drug1.getText(), drug1.getText(),
+					"Referred to the first drug in the interaction.");
+		}
+		return null;
+	}
+
+	public MLinkedResource getDrug2() {
+
+		if (!drug2.getText().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(
+					RXNORM_PREFIX + drug2.getText(), drug2.getText(),
+					"Referred to the second drug in the interaction.");
+		}
+
+		return null;
+	}
 
 	// role of drug 1 and drug 2
 
@@ -308,11 +331,14 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 							_domeo.getLogger().debug(this, "DDI annotation 5");
 							expertstudy_pDDIUsage.setModality(getModality());
 							_domeo.getLogger().debug(this, "DDI annotation 6");
-							//expertstudy_pDDIUsage.setComment(comment.getText());
-							
+							expertstudy_pDDIUsage.setDrug1(getDrug1());
+							_domeo.getLogger().debug(this, "DDI annotation 7");
+							expertstudy_pDDIUsage.setDrug2(getDrug2());
+							_domeo.getLogger().debug(this, "DDI annotation 8");
+
 							annotation.setMpDDIUsage(expertstudy_pDDIUsage);
 							annotation.setComment(comment.getText());
-							
+
 							_domeo.getLogger().debug(this, "annotation loaded");
 
 							if (getSelectedSet(annotationSet) == null) {
@@ -462,10 +488,18 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				}
 			}
 
+			// drug 1 and drug 2
+			if (_item.getDrug1() != null)
+				drug1.setText(_item.getDrug1().getLabel());
+
+			if (_item.getDrug2() != null)
+				drug2.setText(_item.getDrug2().getLabel());
+
+			// comment
+
 			if (_item.getComment() != null && !_item.getComment().equals(""))
 				comment.setText(_item.getComment());
-			
-			
+
 			_domeo.getLogger()
 					.debug(this,
 							"acquired the expertstudy_pDDI usage from the annotation instance passed to this method");
@@ -512,6 +546,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 					System.out.println("selector in edit: "
 							+ selector.getExact());
 
+					_item.setDrug1(getDrug1());
+					_item.setDrug2(getDrug2());
 					_item.setSelector(selector);
 					_item.setRole1(getRoleOfDrug1());
 					_item.setRole2(getRoleOfDrug2());
@@ -520,7 +556,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 					_item.setStatement(getStatement());
 					_item.setModality(getModality());
 					_item.setComment(comment.getText());
-					
+
 					_item.getMpDDIUsage().setMpDDI(currentMpDDI);
 
 					_domeo.getContentPanel()

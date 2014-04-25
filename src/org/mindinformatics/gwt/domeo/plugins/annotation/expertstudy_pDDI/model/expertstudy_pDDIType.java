@@ -3,6 +3,8 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model;
 import java.io.Serializable;
 
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.IPharmgxOntology;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.SPLType;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -26,6 +28,11 @@ public class expertstudy_pDDIType implements Serializable, IsSerializable {
 	public static final expertstudy_pDDIType COMMENT_TYPE = new expertstudy_pDDIType("Comment", COMMENT);
 	public static final expertstudy_pDDIType DESCRIPTION_TYPE = new expertstudy_pDDIType("Description", DESCRIPTION);
 
+	public static final String DDI = Iexpertstudy_pDDI.BODY_TYPE; 
+	
+	public static final expertstudy_pDDIType DDI_TYPE = new expertstudy_pDDIType("ddi", DDI);
+	
+	
 	private  String _name;
 	private  String _type;
 	

@@ -53,6 +53,16 @@
 		cursor: hand;
 	}
 	
+	.commonlabel {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 100px;
+		height: 13px;
+		font-size: 12px;
+	}
+	
 	.subTitle {
 		/*width: 99%;*/
 		background-color: #eee;
@@ -156,8 +166,8 @@
 				<g:VerticalPanel styleName='{style.leftColumn}'>
 
 					<!-- Drug 1 -->
-
-					<g:Label ui:field="drugLabel1" styleName='{style.qualifiersLabel}'>Drug 1:</g:Label>
+  					<g:Label ui:field="drug1label" styleName='{style.titleLeft}'>Drug 1:</g:Label>
+					<g:TextArea ui:field='drug1' styleName='{style.commonlabel}'></g:TextArea>
 
 					<!-- Type -->
 
@@ -192,8 +202,8 @@
 
 
 					<!-- Drug 2 -->
-
-					<g:Label ui:field="drugLabel2" styleName='{style.qualifiersLabel}'>Drug 2:</g:Label>
+					<g:Label ui:field="drug2label" styleName='{style.titleLeft}'>Drug 2:</g:Label>
+					<g:TextArea ui:field='drug2' styleName='{style.commonlabel}'></g:TextArea>
 
 					<!-- Type -->
 					<g:HorizontalPanel styleName='{style.titlebar}'>
