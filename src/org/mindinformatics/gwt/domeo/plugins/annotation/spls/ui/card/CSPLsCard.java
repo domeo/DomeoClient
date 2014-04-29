@@ -261,9 +261,9 @@ public class CSPLsCard extends ACardComponent {
 
 				// Variant
 
-				if (dataUsage.getVariant() != null
-						&& !dataUsage.getVariant().getLabel().equals("")) {
-					String variantStr = dataUsage.getVariant().getLabel();
+				if (dataUsage.getPhenotype() != null
+						&& !dataUsage.getPhenotype().getLabel().equals("")) {
+					String variantStr = dataUsage.getPhenotype().getLabel();
 					variant.setText(variantStr);
 				} else {
 					variant.setText("Not mentioned");

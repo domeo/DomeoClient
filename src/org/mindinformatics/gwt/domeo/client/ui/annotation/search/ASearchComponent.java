@@ -4,6 +4,7 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 
 import com.google.gwt.user.client.ui.Composite;
 
@@ -59,15 +60,14 @@ public class ASearchComponent extends Composite implements ISearchComponent {
 	@Override
 	public boolean filterByText(MAnnotation annotation, String textSearch) {
 		// TODO take into account multiple selectors
+		
 		if(SelectorUtils.isOnTextFragment(annotation.getSelectors()) && 
 			annotation.getSelector() instanceof MTextSelector) {
 				return (((MTextSelector)annotation.getSelector())
 						.getExact().contains(textSearch));
 		}
+		
 		return false;
 	}
-
-
-
 
 }

@@ -11,27 +11,28 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
  * @author Richard Boyce <rdb20@pitt.edu>
  */
 @SuppressWarnings("serial")
-    public class MSPLsAnnotation extends MAnnotation implements IPharmgxOntology{
+public class MSPLsAnnotation extends MAnnotation implements IPharmgxOntology {
 
 	private MSPLPharmgxUsage pharmgxUsage;
 	private SPLType type;
 	private MContentAsRdf body;
-	
+
 	public SPLType getType() {
 		return type;
 	}
+
 	public void setType(SPLType type) {
 		this.type = type;
 	}
-	
+
 	public MContentAsRdf getBody() {
 		return body;
 	}
-	
+
 	public void setBody(MContentAsRdf body) {
 		this.body = body;
 	}
-	
+
 	public MLinkedResource getDrugOfInterest() {
 		return pharmgxUsage.getDrugOfInterest();
 	}
@@ -39,7 +40,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	public void setDrugOfInterest(MLinkedResource drugofinterest) {
 		pharmgxUsage.setDrugOfInterest(drugofinterest);
 	}
-	
+
 	public MLinkedResource getProductLabelSelection() {
 		return pharmgxUsage.getProductLabelSelection();
 	}
@@ -47,7 +48,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	public void setProductLabelSelection(MLinkedResource productlabelselection) {
 		pharmgxUsage.setProductLabelSelection(productlabelselection);
 	}
-	
+
 	public MLinkedResource getHGNCGeneSymbol() {
 		return pharmgxUsage.getHGNCGeneSymbol();
 	}
@@ -55,7 +56,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	public void setHGNCGeneSymbol(MLinkedResource HGNCGeneSymbol) {
 		pharmgxUsage.setHGNCGeneSymbol(HGNCGeneSymbol);
 	}
-	
+
 	public MLinkedResource getBiomarkers() {
 		return pharmgxUsage.getBiomarkers();
 	}
@@ -65,80 +66,80 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	}
 
 	public MSPLPharmgxUsage getPharmgxUsage() {
-	    return pharmgxUsage;
+		return pharmgxUsage;
 	}
 
 	public void setPharmgxUsage(MSPLPharmgxUsage pharmgxUsage) {
-	    this.pharmgxUsage = pharmgxUsage;
+		this.pharmgxUsage = pharmgxUsage;
 	}
 
 	public String getComment() {
-	    return pharmgxUsage.getComment();
+		return pharmgxUsage.getComment();
 	}
 
 	public void setComment(String comment) {
-	    pharmgxUsage.setComment(comment);
+		pharmgxUsage.setComment(comment);
 	}
 
 	public String getText() {
-	    return pharmgxUsage.getPharmgx().getLabel();
-	}
-	
-	public MLinkedResource getPKImpact(){
-	    return pharmgxUsage.getPkImpact();
+		return pharmgxUsage.getPharmgx().getLabel();
 	}
 
-	public void setPKImpact(MLinkedResource pkImpact){
-	    pharmgxUsage.setPkImpact(pkImpact);
-	}
-	
-	public MLinkedResource getPdImpact(){
-	    return pharmgxUsage.getPdImpact();
+	public MLinkedResource getPKImpact() {
+		return pharmgxUsage.getPkImpact();
 	}
 
-	public void setPdImpact(MLinkedResource pdImpact){
-	    pharmgxUsage.setPdImpact(pdImpact);
-	}
-	
-	public MLinkedResource getDoseRec(){
-	    return pharmgxUsage.getDoseRec();
+	public void setPKImpact(MLinkedResource pkImpact) {
+		pharmgxUsage.setPkImpact(pkImpact);
 	}
 
-	public void setDoseRec(MLinkedResource doseRec){
-	    pharmgxUsage.setDoseRec(doseRec);
-	}
-	
-	public MLinkedResource getDrugRec(){
-	    return pharmgxUsage.getDrugRec();
+	public MLinkedResource getPdImpact() {
+		return pharmgxUsage.getPdImpact();
 	}
 
-	public void setDrugRec(MLinkedResource drugRec){
-	    pharmgxUsage.setDrugRec(drugRec);
-	}
-	
-	public MLinkedResource getMonitRec(){
-	    return pharmgxUsage.getMonitRec();
+	public void setPdImpact(MLinkedResource pdImpact) {
+		pharmgxUsage.setPdImpact(pdImpact);
 	}
 
-	public void setMonitRec(MLinkedResource monitRec){
-	    pharmgxUsage.setMonitRec(monitRec);
-	}
-	
-	public MLinkedResource getTestRec(){
-	    return pharmgxUsage.getTestRec();
+	public MLinkedResource getDoseRec() {
+		return pharmgxUsage.getDoseRec();
 	}
 
-	//statements refers to ...
-	public void setStatements(Set<MLinkedResource> statement){
-	    pharmgxUsage.setStatements(statement);
-	}
-	
-	public Set<MLinkedResource> getStatements(){
-	    return pharmgxUsage.getStatements();
+	public void setDoseRec(MLinkedResource doseRec) {
+		pharmgxUsage.setDoseRec(doseRec);
 	}
 
-	public void setTestRec(MLinkedResource testRec){
-	    pharmgxUsage.setTestRec(testRec);
+	public MLinkedResource getDrugRec() {
+		return pharmgxUsage.getDrugRec();
+	}
+
+	public void setDrugRec(MLinkedResource drugRec) {
+		pharmgxUsage.setDrugRec(drugRec);
+	}
+
+	public MLinkedResource getMonitRec() {
+		return pharmgxUsage.getMonitRec();
+	}
+
+	public void setMonitRec(MLinkedResource monitRec) {
+		pharmgxUsage.setMonitRec(monitRec);
+	}
+
+	public MLinkedResource getTestRec() {
+		return pharmgxUsage.getTestRec();
+	}
+
+	// statements refers to ...
+	public void setStatements(Set<MLinkedResource> statement) {
+		pharmgxUsage.setStatements(statement);
+	}
+
+	public Set<MLinkedResource> getStatements() {
+		return pharmgxUsage.getStatements();
+	}
+
+	public void setTestRec(MLinkedResource testRec) {
+		pharmgxUsage.setTestRec(testRec);
 	}
 
 	public String getAllelesbody() {
@@ -148,55 +149,55 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 	public void setAllelesbody(String Allelesbody) {
 		pharmgxUsage.setAllelesbody(Allelesbody);
 	}
-	
+
 	public String getMedconditbody() {
-	    return pharmgxUsage.getMedconditbody();
+		return pharmgxUsage.getMedconditbody();
 	}
 
 	public void setMedconditbody(String mediconditbody) {
-	    pharmgxUsage.setMedconditbody(mediconditbody);
-	}
-	
-	public MLinkedResource getVariant(){
-	    return pharmgxUsage.getVariant();
+		pharmgxUsage.setMedconditbody(mediconditbody);
 	}
 
-	public void setVariant(MLinkedResource variant){
-	    pharmgxUsage.setVariant(variant);
-	}
-	
-	public MLinkedResource getTest(){
-	    return pharmgxUsage.getTest();
+	public MLinkedResource getPhenotype() {
+		return pharmgxUsage.getPhenotype();
 	}
 
-	public void setTest(MLinkedResource test){
-	    pharmgxUsage.setTest(test);
-	}
-	
-	public String getOtherVariant() {
-	    return pharmgxUsage.getOtherVariant();
+	public void setPhenotype(MLinkedResource pheno) {
+		pharmgxUsage.setPhenotype(pheno);
 	}
 
-	public void setOtherVariant(String othervariant) {
-	    pharmgxUsage.setOtherVariant(othervariant);
+	public MLinkedResource getTest() {
+		return pharmgxUsage.getTest();
 	}
-	
+
+	public void setTest(MLinkedResource test) {
+		pharmgxUsage.setTest(test);
+	}
+
+	public String getOtherPhenotype() {
+		return pharmgxUsage.getOtherPheonotype();
+	}
+
+	public void setOtherPhenotype(String otherpheno) {
+		pharmgxUsage.setOtherPhenotype(otherpheno);
+	}
+
 	public String getOtherTest() {
-	    return pharmgxUsage.getOtherTest();
+		return pharmgxUsage.getOtherTest();
 	}
 
 	public void setOtherTest(String othertest) {
-	    pharmgxUsage.setOtherTest(othertest);
+		pharmgxUsage.setOtherTest(othertest);
 	}
-	
+
 	@Override
-	    public String getLabel() {
-	    return LABEL;
+	public String getLabel() {
+		return LABEL;
 	}
-	
+
 	@Override
-	    public String getAnnotationType() {
-	    return TYPE;
+	public String getAnnotationType() {
+		return TYPE;
 	}
-	
-    }
+
+}

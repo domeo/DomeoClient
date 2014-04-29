@@ -113,6 +113,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.selection.ui.tile.Select
 
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.info.SPLsPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.spls.search.SPLsSearchComponent;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card.SPLsCardProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form.SPLsFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile.SPLsTileProvider;
@@ -535,6 +536,9 @@ IRetrieveExistingAnnotationSetHandler,
 				MSPLsAnnotation.class.getName(), new SPLsTileProvider(this));
 		annotationCardsManager.registerAnnotationCard(
 				MSPLsAnnotation.class.getName(), new SPLsCardProvider(this));
+		searchComponentsManager.registerAnnotationCard(
+				MSPLsAnnotation.class.getName(),
+				new SPLsSearchComponent(this));
 
 		// Post It
 		/*

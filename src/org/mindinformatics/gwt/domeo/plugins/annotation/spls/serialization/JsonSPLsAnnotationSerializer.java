@@ -158,7 +158,7 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 		}
 
 		// Common Variant
-		MLinkedResource variant = ann.getVariant();
+		MLinkedResource variant = ann.getPhenotype();
 		if (variant != null && !variant.getLabel().equals("unselected")) {
 			JSONObject body = new JSONObject();
 			String statementUUID = UUID.uuid();

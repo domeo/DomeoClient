@@ -587,7 +587,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 	}
 
 	// phenotype
-	public MLinkedResource getVariant() {
+	public MLinkedResource getPhenotype() {
 
 		int indexvt = descriptsvtlb.getSelectedIndex();
 
@@ -715,7 +715,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 									.setProductLabelSelection(getProductLabelSection());
 							pharmgxUsage.setMedconditbody(medconditbody
 									.getText());
-							pharmgxUsage.setVariant(getVariant());
+							pharmgxUsage.setPhenotype(getPhenotype());
 							pharmgxUsage.setTest(getTest());
 							pharmgxUsage.setDrugOfInterest(getDrugOfInterest());
 							pharmgxUsage.setHGNCGeneSymbol(getHGNCGeneSymbol());
@@ -723,7 +723,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 							// other variant and other test just storing in
 							// persistence manager but won't displaying in card
 							// and tile
-							pharmgxUsage.setOtherVariant(descriptsothervt
+							pharmgxUsage.setOtherPhenotype(descriptsothervt
 									.getText());
 							pharmgxUsage.setOtherTest(descriptsotherts
 									.getText());
@@ -1034,13 +1034,13 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 			// Phenotype
 
-			if (_item.getVariant() != null) {
+			if (_item.getPhenotype() != null) {
 
-				if (_item.getVariant().getLabel().equals("not mentioned")) {
+				if (_item.getPhenotype().getLabel().equals("not mentioned")) {
 					descriptsvtlb.setSelectedIndex(0);
 				}
 
-				String variantLabel = _item.getVariant().getLabel();
+				String variantLabel = _item.getPhenotype().getLabel();
 				for (int i = 0; i < variant.length; i++) {
 					if (variant[i].equals(variantLabel)) {
 						descriptsvtlb.setSelectedIndex(i + 1);
@@ -1076,8 +1076,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 			}
 
 			// variant textarea
-			if (_item.getOtherVariant() != null) {
-				descriptsothervt.setText(_item.getOtherVariant());
+			if (_item.getOtherPhenotype() != null) {
+				descriptsothervt.setText(_item.getOtherPhenotype());
 			}
 
 			// test textarea
@@ -1167,9 +1167,9 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 					_item.setMonitRec(getMonitRec());
 					_item.setStatements(getStatements());
 					_item.setTestRec(getTest_Re());
-					_item.setVariant(getVariant());
+					_item.setPhenotype(getPhenotype());
 					_item.setTest(getTest());
-					_item.setOtherVariant(descriptsothervt.getText());
+					_item.setOtherPhenotype(descriptsothervt.getText());
 					_item.setOtherTest(descriptsotherts.getText());
 					_item.setAllelesbody(allelesbody.getText());
 					_item.setMedconditbody(medconditbody.getText());

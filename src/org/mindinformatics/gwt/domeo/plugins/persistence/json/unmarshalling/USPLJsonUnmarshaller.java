@@ -227,7 +227,7 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 						"variant linked resource created: "
 								+ variant.getLabel());
 
-				ann.setVariant(variant);
+				ann.setPhenotype(variant);
 				_domeo.getLogger().debug(this,
 						"variant linked resource added to annotation");
 			} else {

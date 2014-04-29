@@ -59,11 +59,11 @@ public class MSPLPharmgxUsage {
 	// MLinkedResource pkImpactResource, pdImpactResource, doseRecResource,
 	// drugRecResource, monitRecResource, testRecResource;
 
-	public MLinkedResource getVariant() {
+	public MLinkedResource getPhenotype() {
 		return pharmgx.getVariant();
 	}
 
-	public void setVariant(MLinkedResource variant) {
+	public void setPhenotype(MLinkedResource variant) {
 		pharmgx.setVariant(variant);
 	}
 
@@ -179,11 +179,11 @@ public class MSPLPharmgxUsage {
 		this.medconditbody = medconditbody;
 	}
 
-	public String getOtherVariant() {
+	public String getOtherPheonotype() {
 		return othervariant;
 	}
 
-	public void setOtherVariant(String othervariant) {
+	public void setOtherPhenotype(String othervariant) {
 		this.othervariant = othervariant;
 	}
 
