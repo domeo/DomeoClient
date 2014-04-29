@@ -420,8 +420,8 @@
 							<g:item value="4">ultra-metabolizer</g:item>
 							<g:item value="5">intermediate-activity</g:item>
 							<g:item value="6">low-or-absent-activity</g:item>
-							<g:item value="7">HLA-B*1502</g:item>
-							<g:item value="8">HLA-B*5701</g:item>
+<!-- 							<g:item value="7">HLA-B*1502</g:item>
+							<g:item value="8">HLA-B*5701</g:item> -->
 						</g:ListBox>
 					</g:HorizontalPanel>
 					<g:HorizontalPanel>
