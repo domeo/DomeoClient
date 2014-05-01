@@ -54,7 +54,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING expertstudy_pDDI ANNOTATION";
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING expertstudy_pDDI ANNOTATION";
 
-	public static final String expertstudy_pDDI_POC_PREFIX = "http://purl.org/net/nlprepository/expertstudy_pDDI-annotation-poc#";
+	//public static final String expertstudy_pDDI_POC_PREFIX = "http://purl.org/net/nlprepository/expertstudy_pDDI-annotation-poc#";
 
 	interface Binder extends UiBinder<VerticalPanel, Fexpertstudy_pDDIForm> {
 	}
@@ -136,13 +136,13 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX
 							+ "object-drug-of-interaction",
-							"Object drug of Interaction",
+							"object-drug-of-interaction",
 							"Referred to the role that each drug one plays within the interaction.");
 		} else if (rolepp1.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX
 							+ "precipitant-drug-of-interaction",
-							"Precipitant drug of Interaction",
+							"precipitant-drug-of-interaction",
 							"Referred to the role that each drug one plays within the interaction.");
 		}
 
@@ -155,13 +155,13 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX
 							+ "object-drug-of-interaction",
-							"Object drug of Interaction",
+							"object-drug-of-interaction",
 							"Referred to the role that each drug two plays within the interaction.");
 		} else if (rolepp2.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX
 							+ "precipitant-drug-of-interaction",
-							"Precipitant drug of Interaction",
+							"precipitant-drug-of-interaction",
 							"Referred to the role that each drug two plays within the interaction.");
 		}
 		return null;
@@ -174,17 +174,17 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		if (typeai1.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient",
-							"Active ingredient",
+							"active-ingredient",
 							"Referred to the type of the mention within the sentence for drug one.");
 		} else if (typemb1.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "metabolite",
-							"Metabolite",
+							"metabolite",
 							"Referred to the type of the mention within the sentence for drug one.");
 		} else if (typedp1.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
-							"Drug product",
+							"drug-product",
 							"Referred to the type of the mention within the sentence for drug one.");
 		}
 
@@ -196,17 +196,17 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		if (typeai2.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient",
-							"Active ingredient",
+							"active-ingredient",
 							"Referred to the type of the mention within the sentence for drug two.");
 		} else if (typemb2.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "metabolite",
-							"Metabolite",
+							"metabolite",
 							"Referred to the type of the mention within the sentence for drug two.");
 		} else if (typedp2.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
-							"Drug product",
+							"drug-product",
 							"Referred to the type of the mention within the sentence for drug two.");
 		}
 		return null;
@@ -218,7 +218,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		if (statementqu.getValue()) {
 			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
-					+ "quantitative", "Quantitative",
+					+ "quantitative", "quantitative",
 					"Referred to data type that is described in the sentence.");
 		} else if (statementql.getValue()) {
 			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
@@ -237,14 +237,14 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			return ResourcesFactory
 					.createLinkedResource(
 							SIO_PREFIX + "positive",
-							"Positive",
+							"positive",
 							"Referred to extra sources of information that the annotator considers "
 									+ "are helpful to provide evidence for or against the existence of the pDDI.");
 		} else if (modalitynt.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(
 							SIO_PREFIX + "negative",
-							"Negative",
+							"negative",
 							"Referred to extra sources of information that the annotator considers "
 									+ "are helpful to provide evidence for or against the existence of the pDDI.");
 		}
@@ -430,48 +430,48 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			// check selections of drug role
 			if (_item.getRole1() != null) {
 				if (_item.getRole1().getLabel()
-						.equals("Object drug of Interaction")) {
+						.equals("object-drug-of-interaction")) {
 					roleob1.setValue(true);
 				} else if (_item.getRole1().getLabel()
-						.equals("Precipitant drug of Interaction")) {
+						.equals("precipitant-drug-of-interaction")) {
 					rolepp1.setValue(true);
 				}
 			}
 
 			if (_item.getRole2() != null) {
 				if (_item.getRole2().getLabel()
-						.equals("Object drug of Interaction")) {
+						.equals("object-drug-of-interaction")) {
 					roleob2.setValue(true);
 				} else if (_item.getRole2().getLabel()
-						.equals("Precipitant drug of Interaction")) {
+						.equals("precipitant-drug-of-interaction")) {
 					rolepp2.setValue(true);
 				}
 			}
 
 			// check selections of drug type
 			if (_item.getType1() != null) {
-				if (_item.getType1().getLabel().equals("Active ingredient")) {
+				if (_item.getType1().getLabel().equals("active-ingredient")) {
 					typeai1.setValue(true);
-				} else if (_item.getType1().getLabel().equals("Metabolite")) {
+				} else if (_item.getType1().getLabel().equals("metabolite")) {
 					typemb1.setValue(true);
-				} else if (_item.getType1().getLabel().equals("Drug product")) {
+				} else if (_item.getType1().getLabel().equals("drug-product")) {
 					typedp1.setValue(true);
 				}
 			}
 
 			if (_item.getType2() != null) {
-				if (_item.getType2().getLabel().equals("Active ingredient")) {
+				if (_item.getType2().getLabel().equals("active-ingredient")) {
 					typeai2.setValue(true);
-				} else if (_item.getType2().getLabel().equals("Metabolite")) {
+				} else if (_item.getType2().getLabel().equals("metabolite")) {
 					typemb2.setValue(true);
-				} else if (_item.getType2().getLabel().equals("Drug product")) {
+				} else if (_item.getType2().getLabel().equals("drug-product")) {
 					typedp2.setValue(true);
 				}
 			}
 
 			// check selections of statement
 			if (_item.getStatement() != null) {
-				if (_item.getStatement().getLabel().equals("Quantitative")) {
+				if (_item.getStatement().getLabel().equals("quantitative")) {
 					statementqu.setValue(true);
 				} else if (_item.getStatement().getLabel()
 						.equals("Qualitative")) {
@@ -481,9 +481,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			// check selections of modality
 			if (_item.getModality() != null) {
-				if (_item.getModality().getLabel().equals("Positive")) {
+				if (_item.getModality().getLabel().equals("positive")) {
 					modalitypt.setValue(true);
-				} else if (_item.getModality().getLabel().equals("Negative")) {
+				} else if (_item.getModality().getLabel().equals("negative")) {
 					modalitynt.setValue(true);
 				}
 			}

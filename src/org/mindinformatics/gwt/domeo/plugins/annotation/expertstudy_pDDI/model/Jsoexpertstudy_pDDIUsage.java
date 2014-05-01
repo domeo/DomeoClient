@@ -2,6 +2,7 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model;
 
 import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
 
+import com.google.gson.JsonObject;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
@@ -46,6 +47,27 @@ public class Jsoexpertstudy_pDDIUsage extends JavaScriptObject {
 	// drug 2
 	public final native String getDrug2() /*-{
 		return this['rxnorm:drug2'];
+	}-*/;
+
+	// role 1
+	public final native String getRole1() /*-{
+		return this['dikbD2R:object-drug-of-interaction'];
+	}-*/;
+
+	// get drug
+	public final native JsArray getPKDDI() /*-{
+		return this['sio:SIO_000132'];
+	}-*/;
+	
+	
+	// statement
+	public final native String getStatement() /*-{
+		return this['dikbD2R:statement'];
+	}-*/;
+
+	// modality
+	public final native String getModality() /*-{
+		return this['dikbD2R:modality'];
 	}-*/;
 
 }
