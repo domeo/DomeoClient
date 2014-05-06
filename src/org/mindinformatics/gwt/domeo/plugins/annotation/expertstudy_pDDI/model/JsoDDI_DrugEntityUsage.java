@@ -1,17 +1,9 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model;
 
-import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
-
-import com.google.gson.JsonObject;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
 
-/**
- * @author Richard Boyce <rdb20@pitt.edu>
- */
-public class Jsoexpertstudy_pDDIUsage extends JavaScriptObject {
-
-	protected Jsoexpertstudy_pDDIUsage() {
+public class JsoDDI_DrugEntityUsage extends JavaScriptObject {
+	protected JsoDDI_DrugEntityUsage() {
 	}
 
 	// ------------------------------------------------------------------------
@@ -32,29 +24,13 @@ public class Jsoexpertstudy_pDDIUsage extends JavaScriptObject {
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms::description];
 	}-*/;
 
-	// ------------------------------------------------------------------------
-	// DDI Claims Ontology
-	// ------------------------------------------------------------------------
-
-	// TODO: add all of the other types in the model using the DDI ontology for
-	// namespaces
-
-
-
-	// get drug
-	public final native JsoDDI_PKDDIUsage getPKDDI() /*-{
-		return this['sio:SIO_000628'];
-	}-*/;
-	
-	
-	// statement
-	public final native String getStatement() /*-{
-		return this['dikbD2R:statement'];
+	// drug has role
+	public final native String getRole() /*-{
+		return this['sio:SIO_000228'];
 	}-*/;
 
-	// modality
-	public final native String getModality() /*-{
-	    return this['dikbD2R:modality'];
+	// drug has type
+	public final native String getType() /*-{
+		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType];
 	}-*/;
-
 }

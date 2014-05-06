@@ -72,8 +72,8 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		if (type1 != null && drug1 != null) {
 			
 			// get URI by term
-			String drugUri1 = findURIbyTerm(drug1.getLabel(), type1.getLabel());
-
+			//String drugUri1 = findURIbyTerm(drug1.getLabel(), type1.getLabel());
+			String drugUri1 = drug1.getUrl();
 			drug_entity1.put("@id", new JSONString(drugUri1));
 
 			// drug1 has type1
@@ -114,8 +114,8 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		if (type2 != null && drug2 != null) {
 			// get URI by term
 			
-			String drugUri2 = "";
-			drugUri2 = findURIbyTerm(drug2.getLabel(), type2.getLabel());
+			//String drugUri2 = findURIbyTerm(drug2.getLabel(), type2.getLabel());
+			String drugUri2 = drug2.getUrl();
 			
 			drug_entity2.put("@id", new JSONString(drugUri2));
 
@@ -187,7 +187,7 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		return annotation;
 	}
 
-	public String findURIbyTerm(String term, String type) {
+/*	public String findURIbyTerm(String term, String type) {
 		String uri = "";
 		if (type.equals("active-ingredient")) {
 			uri = Mexpertstudy_pDDI.getActiveIngredient_URI_map().get(
@@ -206,6 +206,6 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 			return "fake_uri";
 		}
 		
-	}
+	}*/
 	
 }

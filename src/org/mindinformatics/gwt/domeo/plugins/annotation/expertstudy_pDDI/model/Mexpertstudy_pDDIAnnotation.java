@@ -65,7 +65,7 @@ public class Mexpertstudy_pDDIAnnotation extends MAnnotation implements
 	}
 
 	public void setDrug2(MLinkedResource drug2) {
-		MpDDIUsage.setDrug1(drug2);
+		MpDDIUsage.setDrug2(drug2);
 	}
 
 	// DDI type of drug1 as type1 and type of drug2 as type2

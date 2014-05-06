@@ -54,7 +54,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING expertstudy_pDDI ANNOTATION";
 	public static final String LOG_CATEGORY_QUALIFIER_EDIT = "EDITING expertstudy_pDDI ANNOTATION";
 
-	//public static final String expertstudy_pDDI_POC_PREFIX = "http://purl.org/net/nlprepository/expertstudy_pDDI-annotation-poc#";
+	// public static final String expertstudy_pDDI_POC_PREFIX =
+	// "http://purl.org/net/nlprepository/expertstudy_pDDI-annotation-poc#";
 
 	interface Binder extends UiBinder<VerticalPanel, Fexpertstudy_pDDIForm> {
 	}
@@ -110,9 +111,18 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	public MLinkedResource getDrug1() {
 
 		if (!drug1.getText().isEmpty()) {
-			return ResourcesFactory.createLinkedResource(
-					RXNORM_PREFIX + drug1.getText(), drug1.getText(),
-					"Referred to the first drug in the interaction.");
+
+			String drugUri1 = "";
+			if (typeai1.getValue())
+				drugUri1 = findURIbyTerm(drug1.getText(), "active-ingredient");
+			else if (typemb1.getValue())
+				drugUri1 = findURIbyTerm(drug1.getText(), "metabolite");
+			else
+				drugUri1 = findURIbyTerm(drug1.getText(), "drug-product");
+
+			return ResourcesFactory.createLinkedResource(drugUri1,
+					drug1.getText(),
+					"Referred to the drug in the interaction.");
 		}
 		return null;
 	}
@@ -120,9 +130,18 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	public MLinkedResource getDrug2() {
 
 		if (!drug2.getText().isEmpty()) {
-			return ResourcesFactory.createLinkedResource(
-					RXNORM_PREFIX + drug2.getText(), drug2.getText(),
-					"Referred to the second drug in the interaction.");
+
+			String drugUri2 = "";
+			if (typeai2.getValue())
+				drugUri2 = findURIbyTerm(drug2.getText(), "active-ingredient");
+			else if (typemb2.getValue())
+				drugUri2 = findURIbyTerm(drug2.getText(), "metabolite");
+			else
+				drugUri2 = findURIbyTerm(drug2.getText(), "drug-product");
+
+			return ResourcesFactory.createLinkedResource(drugUri2,
+					drug2.getText(),
+					"Referred to the drug in the interaction.");
 		}
 
 		return null;
@@ -175,17 +194,17 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient",
 							"active-ingredient",
-							"Referred to the type of the mention within the sentence for drug one.");
+							"Referred to the type of the mention within the sentence for drug.");
 		} else if (typemb1.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "metabolite",
 							"metabolite",
-							"Referred to the type of the mention within the sentence for drug one.");
+							"Referred to the type of the mention within the sentence for drug.");
 		} else if (typedp1.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
 							"drug-product",
-							"Referred to the type of the mention within the sentence for drug one.");
+							"Referred to the type of the mention within the sentence for drug.");
 		}
 
 		return null;
@@ -625,8 +644,24 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		return false;
 	}
 
-	// @Override
-	// public void addexpertstudy_pDDI(Mexpertstudy_pDDI expertstudy_pDDI) {
-	// addAssociatedAntibody(expertstudy_pDDI);
-	// }
+	public String findURIbyTerm(String term, String type) {
+		String uri = "";
+		if (type.equals("active-ingredient")) {
+			uri = Mexpertstudy_pDDI.getActiveIngredient_URI_map().get(
+					term.toUpperCase());
+		} else if (type.equals("metabolite")) {
+			uri = Mexpertstudy_pDDI.getMetabolite_URI_map().get(
+					term.toUpperCase());
+		} else if (type.equals("drug-product")) {
+			uri = Mexpertstudy_pDDI.getDrugProduct_URI_map().get(
+					term.toUpperCase());
+		}
+
+		if (uri.length() > 4)
+			return uri;
+		else {
+			return RXNORM_PREFIX + term;
+		}
+
+	}
 }
