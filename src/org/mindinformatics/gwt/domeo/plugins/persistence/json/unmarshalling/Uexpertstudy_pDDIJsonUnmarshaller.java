@@ -70,11 +70,7 @@ IUnmarshaller, Iexpertstudy_pDDI{
 
 	  
 	    System.out.println("ddi bodies0:"+bodies.length());
-		System.out.println("ddi bodies1:"+bodies.get(0).getDrug1());
-		System.out.println("ddi bodies2:"+bodies.get(0).getDrug2());
-		System.out.println("ddi bodies3:"+bodies.get(0).getStatement());
-		System.out.println("ddi bodies4:"+bodies.get(0).getRole1());
-		System.out.println("ddi bodies5:"+bodies.get(0).getPKDDI().toString());
+
 		
 		
 		
