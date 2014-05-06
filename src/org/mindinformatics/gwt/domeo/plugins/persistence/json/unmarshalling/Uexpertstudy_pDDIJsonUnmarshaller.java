@@ -146,9 +146,7 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 				} else {
 					ann.setRole2(role);
 				}
-
 			}
-
 		}
 
 		/*
@@ -161,8 +159,6 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 			String jsDescript = "Referred to data type that is described in the sentence.";
 			String jsURI = stateScript.replace("ncit:", NCIT_PREFIX);
 			
-			System.out.println("***********"+jsURI);
-
 			MLinkedResource statement = ResourcesFactory.createLinkedResource(
 					jsURI, jsLabel, jsDescript);
 

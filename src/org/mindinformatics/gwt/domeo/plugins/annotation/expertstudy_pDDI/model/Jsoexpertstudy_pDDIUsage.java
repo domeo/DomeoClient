@@ -1,10 +1,6 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model;
 
-import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
-
-import com.google.gson.JsonObject;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
