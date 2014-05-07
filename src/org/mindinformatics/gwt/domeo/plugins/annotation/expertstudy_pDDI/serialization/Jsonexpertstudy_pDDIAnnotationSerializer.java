@@ -40,6 +40,9 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		/*
 		 * DDI statement urn
 		 */
+		JSONObject sets = new JSONObject();
+		
+		
 		JSONObject statement = new JSONObject();
 		String statementUUID = UUID.uuid();
 		statement.put("@id", new JSONString(PDDI_URN_PREFIX + statementUUID));
@@ -49,6 +52,10 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		/*
 		 * PK DDI urn
 		 */
+		//add pkddi to array
+		
+		JSONArray pkddiArray = new JSONArray();
+		
 		JSONObject pkddi = new JSONObject();
 		String pddiUUID = UUID.uuid();
 		pkddi.put("@id", new JSONString(PDDI_URN_PREFIX + pddiUUID));
@@ -149,10 +156,12 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		// drug participant in pk_ddi
 		if(drugs!=null)
 		pkddi.put(SIO_PREFIX + "SIO_000132", drugs);
+		
+		pkddiArray.set(0, pkddi);
 
 		// DDI statement refers to PDDI
 		if(pkddi!=null)
-		statement.put(SIO_PREFIX + "SIO_000628", pkddi);
+		statement.put(SIO_PREFIX + "SIO_000628", pkddiArray);
 
 		/*
 		 * create statement
@@ -181,7 +190,9 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		}
 
 		// add statement to body
-		bodies.set(0, statement);
+		
+		sets.put("sets", statement);
+		bodies.set(0, sets);
 		annotation.put(IDomeoOntology.content, bodies);
 		
 		return annotation;

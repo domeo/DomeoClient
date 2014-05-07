@@ -2,6 +2,7 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.json.model;
 
 import java.util.Date;
 
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.JsoDDI_SetsUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Jsoexpertstudy_pDDIUsage;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -69,7 +70,7 @@ public class JsAnnotationexpertstudy_pDDI extends JavaScriptObject{
 	public final native JsArray<JsAnnotationTarget> getTargets() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::hasTarget]; 
 	}-*/;
-	public final native JsArray<Jsoexpertstudy_pDDIUsage> getBodies() /*-{ 
+	public final native JsArray<JsoDDI_SetsUsage> getBodies() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::content]; 
 	}-*/;
 	

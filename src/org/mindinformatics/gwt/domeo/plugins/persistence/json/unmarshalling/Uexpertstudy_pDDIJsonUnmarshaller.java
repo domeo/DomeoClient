@@ -73,10 +73,10 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 						"Parsing body resources and adding them to the annotation instance");
 
 		// get body of annotation
-		Jsoexpertstudy_pDDIUsage ddibody = pddi.getBodies().get(0);
+		Jsoexpertstudy_pDDIUsage ddibody = pddi.getBodies().get(0).getSets();
 
 		// get DDI
-		JsoDDI_PKDDIUsage pkddi = ddibody.getPKDDI();
+		JsoDDI_PKDDIUsage pkddi = ddibody.getPKDDI().get(0);
 
 		// there are two drug participant in DDI
 		JsArray<JsoDDI_DrugEntityUsage> drugs = pkddi.getDrugs();

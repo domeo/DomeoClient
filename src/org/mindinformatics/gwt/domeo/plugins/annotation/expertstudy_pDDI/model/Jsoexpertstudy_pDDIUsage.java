@@ -1,6 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
@@ -38,7 +39,7 @@ public class Jsoexpertstudy_pDDIUsage extends JavaScriptObject {
 
 
 	// get drug
-	public final native JsoDDI_PKDDIUsage getPKDDI() /*-{
+	public final native JsArray<JsoDDI_PKDDIUsage> getPKDDI() /*-{
 		return this['sio:SIO_000628'];
 	}-*/;
 	
