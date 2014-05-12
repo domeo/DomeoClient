@@ -330,7 +330,12 @@ public class AnnotopiaConverter {
 			set.setLabel(notNullableString("label", jsSet.getLabel()));
 			set.setDescription(nullableString("description", jsSet.getDescription()));
 			
-			set.setNumberAnnotations(jsSet.getNumberOfAnnotationItems());
+			if(jsSet.isAnnotationsArray()) 
+				set.setNumberAnnotations(jsSet.getNumberOfAnnotationItems());
+			else if(jsSet.getAnnotation()!=null)	
+				set.setNumberAnnotations(1);
+			else 
+				set.setNumberAnnotations(0);
 			
 			_domeo.getLogger().debug(this, "Unmarshalling set created on");
 			// Created on
