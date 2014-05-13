@@ -249,7 +249,7 @@ public class AnnotopiaConverter {
 		return sets;
 	}
 	
-	public MAnnotationSet unmarshallAnnotationSet(JsAnnotopiaAnnotationSetGraph  wrapper) {		
+	public MAnnotationSet unmarshallAnnotationSet(JsAnnotopiaAnnotationSetGraph  wrapper, boolean persist) {		
 		
 		// Cache for lazy binding
 		HashMap<String, JsAnnotopiaAgent> agents = new HashMap<String, JsAnnotopiaAgent>();
@@ -301,7 +301,7 @@ public class AnnotopiaConverter {
 					aSet.setCreatedOn(set.getCreatedOn());
 					
 					_domeo.getLogger().debug(this, "Unmarshalling annotations");
-					unmarshallAnnotations(aSet, set, jsItem, agents, entityAgents, targets, targetSources);
+					unmarshallAnnotations(aSet, set, jsItem, agents, entityAgents, targets, targetSources, persist);
 					
 					return aSet;
 				}
@@ -454,7 +454,7 @@ public class AnnotopiaConverter {
 	
 	private void unmarshallAnnotations(MAnnotationSet aSet, MAnnotopiaAnnotationSet set, JavaScriptObject jsItem,
 			HashMap<String, JsAnnotopiaAgent> agents, HashMap<String, String> entityAgents, 
-			HashMap<String, JsResource> targets, HashMap<String, String> targetSources) 
+			HashMap<String, JsResource> targets, HashMap<String, String> targetSources, boolean persist) 
 	{
 		_domeo.getLogger().debug(this, "Unmarshalling Annotation Set");
 		JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
@@ -590,7 +590,10 @@ public class AnnotopiaConverter {
 					postIt.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
 					if(lastSavedOn!=null) postIt.setLastSavedOn(lastSavedOn); 
 					performAnnotation(postIt);
-					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
+					
+					if(persist) ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
+					else aSet.addAnnotation(postIt);
+					
 					aSet.setHasChanged(false);
 				} else if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_HIGHLIGHTED)) {
 					_domeo.getLogger().debug(this, "Highlight");
@@ -603,7 +606,10 @@ public class AnnotopiaConverter {
 					highlight.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
 					if(lastSavedOn!=null) highlight.setLastSavedOn(lastSavedOn); 
 					performAnnotation(highlight);
-					((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
+					
+					if(persist)  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
+					else aSet.addAnnotation(highlight);
+					
 					aSet.setHasChanged(false);
 				}
 			}

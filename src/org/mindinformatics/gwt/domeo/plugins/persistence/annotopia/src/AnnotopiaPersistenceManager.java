@@ -154,7 +154,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
 			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 			    			
-			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper);	    			
+			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper, true);	    			
 			    			if(set==null) {
 			    				// TODO message no annotation found
 			    				_application.getLogger().info(this, "No annotation set found");
@@ -216,7 +216,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    				(JsAnnotopiaSetResultWrapper) parseJson(getDataProperties().toJsonString());
 			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 			    			
-			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper.getResult().getSet().get(0));	    
+			    			MAnnotationSet set = unmarshaller.unmarshallAnnotationSet(wrapper.getResult().getSet().get(0), false);	    
 			    			if(set==null) {
 			    				// TODO message no annotation found
 			    				_application.getLogger().exception(this, "Annotation set not saved correctly");
@@ -227,8 +227,6 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    					currentSet = _domeo.getPersistenceManager().getAnnotationSetById(set.getPreviousVersion());	
 			    				else 
 			    					currentSet = _domeo.getPersistenceManager().getAnnotationSetById(set.getIndividualUri());	
-			    				_application.getLogger().info(this, "****000 " + currentSet );
-			    				_application.getLogger().info(this, "****001 " + set );
 			    				currentSet.setIndividualUri(set.getIndividualUri());
 			    				_application.getLogger().info(this, "Setting Set id to " + currentSet.getIndividualUri());
 			    				currentSet.setLastSavedOn(set.getLastSavedOn());
@@ -260,7 +258,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			        })
 			        .setError(new Function(){ // callback to be run if the request fails
 			        	public void f() {
-			        		 Window.alert("There was an error" + getDataObject());
+			        		 Window.alert("There was an error " + getDataObject());
 
 			        		_application.getLogger().exception(this, 
 			        			"Couldn't complete existing annotation sets list saving");
