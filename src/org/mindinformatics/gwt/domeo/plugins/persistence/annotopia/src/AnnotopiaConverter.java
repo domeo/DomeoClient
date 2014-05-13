@@ -42,7 +42,6 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnot
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAgent;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraph;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetSummary;
-import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsContentAsText;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsOpenAnnotation;
@@ -200,7 +199,7 @@ public class AnnotopiaConverter {
 				_domeo.getLogger().exception(this, "unmarshallAnnotationSet(): " + e.getMessage());
 			}
 		} else {
-			_domeo.getLogger().exception(this, "Unrecognized agents format");
+			_domeo.getLogger().exception(this, "Graph issue, unrecognized agents format");
 		}	
 	}
 	
@@ -526,6 +525,7 @@ public class AnnotopiaConverter {
 										selector.getExact(), 
 										selector.getPrefix(), 
 										selector.getSuffix());
+								sel.setUri(jsSpecificResource.getId());
 								selectors.add(sel);
 							}
 						}
@@ -546,9 +546,11 @@ public class AnnotopiaConverter {
 							}
 							_domeo.getLogger().debug(this, "Resource " + resource.getId());
 
-							MSelector sel = AnnotationFactory.createPrefixSuffixTextSelector(_domeo.getAgentManager().getUserPerson(), 
+							MSelector sel = AnnotationFactory.createPrefixSuffixTextSelector(
+									_domeo.getAgentManager().getUserPerson(), 
 									new MGenericResource(resource.getId(), ""), 
 									selector.getExact(), selector.getPrefix(), selector.getSuffix());
+							sel.setUri(jsSpecificResource.getId());
 							selectors.add(sel);
 						}	
 					}

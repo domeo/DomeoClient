@@ -247,6 +247,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    							currentAnnotation.setVersionNumber(annotation.getVersionNumber());
 			    							currentAnnotation.setPreviousVersion(annotation.getPreviousVersion());
 			    							currentAnnotation.setHasChanged(false);
+			    							// TODO: Assumes one target
+			    							currentAnnotation.getSelector().setUri(annotation.getSelector().getUri());
 			    							break;
 			    						}
 			    					}
