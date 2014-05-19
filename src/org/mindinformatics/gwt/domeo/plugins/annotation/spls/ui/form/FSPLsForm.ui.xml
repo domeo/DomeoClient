@@ -346,53 +346,53 @@
 							visibleItemCount='1' styleName='{style.listbox1}'>
 
 							<g:item value="0"></g:item>
-							<g:item value="1">ABUSE (34086-9)</g:item>
-							<g:item value="2">ADVERSE REACTIONS (34084-4)</g:item>
-							<g:item value="3">BOXED WARNING (34066-1)</g:item>
-							<g:item value="4">CARCINOGENESIS AND MUTAGENESIS AND
+							<g:item value="1">(34086-9) ABUSE</g:item>
+							<g:item value="2">(34084-4) ADVERSE REACTIONS</g:item>
+							<g:item value="3">(34066-1) BOXED WARNING</g:item>
+							<g:item value="4">(34083-6) CARCINOGENESIS AND MUTAGENESIS AND
 								IMPAIRMENT
-								OF FERTILITY (34083-6)</g:item>
-							<g:item value="5">CLINICAL PHARMACOLOGY (34090-1)</g:item>
-							<g:item value="6">CLINICAL STUDIES (34092-7)</g:item>
-							<g:item value="7">CONTRAINDICATIONS (34070-3)</g:item>
-							<g:item value="8">DEPENDENCE (34087-7)</g:item>
-							<g:item value="9">DESCRIPTION (34089-3)</g:item>
-							<g:item value="10">DOSAGE AND ADMINISTRATION (34068-7)</g:item>
-							<g:item value="11">DOSAGE FORMS AND STRENGTHS (43678-2)</g:item>
-							<g:item value="12">DRUG AND OR LABORATORY TEST INTERACTIONS
-								(34074-5)</g:item>
-							<g:item value="13">DRUG ABUSE AND DEPENDENCE (42227-9)</g:item>
-							<g:item value="14">DRUG INTERACTIONS (34073-7)</g:item>
-							<g:item value="15">GENERAL PRECAUTIONS (34072-9)</g:item>
-							<g:item value="16">GERIATRIC USE (34082-8)</g:item>
-							<g:item value="17">HOW SUPPLIED (34069-5)</g:item>
-							<g:item value="18">INDICATIONS AND USAGE (34067-9)</g:item>
-							<g:item value="19">INFORMATION FOR PATIENTS (34076-0)</g:item>
-							<g:item value="20">LABORATORY TESTS (34075-2)</g:item>
-							<g:item value="21">MECHANISM OF ACTION (43679-0)</g:item>
-							<g:item value="22">MICROBIOLOGY (49489-8)</g:item>
-							<g:item value="23">NONCLINICAL TOXICOLOGY (43680-8)</g:item>
-							<g:item value="24">NONTERATOGENIC EFFECTS (34078-6)</g:item>
-							<g:item value="25">NURSING MOTHERS (34080-2)</g:item>
-							<g:item value="26">OTHER SAFETY INFORMATION (60561-8)</g:item>
-							<g:item value="27">OVERDOSAGE (34088-5)</g:item>
-							<g:item value="28">PATIENT MEDICATION INFORMATION (68498-5)</g:item>
-							<g:item value="29">PEDIATRIC USE (34081-0)</g:item>
-							<g:item value="30">PHARMACODYNAMICS (43681-6)</g:item>
-							<g:item value="31">PHARMACOGENOMICS (66106-6)</g:item>
-							<g:item value="32">PHARMACOKINETICS (43682-4)</g:item>
-							<g:item value="33">PRECAUTIONS (42232-9)</g:item>
-							<g:item value="34">PREGNANCY (42228-7)</g:item>
-							<g:item value="35">ROUTE, METHOD AND FREQUENCY OF
-								ADMINISTRATION (60562-6)</g:item>
-							<g:item value="36">SUMMARY OF SAFETY AND EFFECTIVENESS
-								(60563-4)</g:item>
-							<g:item value="37">TERATOGENIC EFFECTS (34077-8)</g:item>
-							<g:item value="38">USE IN SPECIFIC POPULATIONS (43684-0)</g:item>
-							<g:item value="39">USER SAFETY WARNINGS (54433-8)</g:item>
-							<g:item value="40">WARNINGS AND PRECAUTIONS (43685-7)</g:item>
-							<g:item value="41">WARNINGS (34071-1)</g:item>
-							<g:item value="42">SUPPLEMENTAL PATIENT MATERIAL (38056-8)</g:item>
+								OF FERTILITY</g:item>
+							<g:item value="5">(34090-1) CLINICAL PHARMACOLOGY</g:item>
+							<g:item value="6">(34092-7) CLINICAL STUDIES</g:item>
+							<g:item value="7">(34070-3) CONTRAINDICATIONS</g:item>
+							<g:item value="8">(34087-7) DEPENDENCE</g:item>
+							<g:item value="9">(34089-3) DESCRIPTION</g:item>
+							<g:item value="10">(34068-7) DOSAGE AND ADMINISTRATION</g:item>
+							<g:item value="11">(43678-2) DOSAGE FORMS AND STRENGTHS</g:item>
+							<g:item value="12">(34074-5) DRUG AND OR LABORATORY TEST INTERACTIONS
+								</g:item>
+							<g:item value="13">(42227-9) DRUG ABUSE AND DEPENDENCE</g:item>
+							<g:item value="14">(34073-7) DRUG INTERACTIONS</g:item>
+							<g:item value="15">(34072-9) GENERAL PRECAUTIONS</g:item>
+							<g:item value="16">(34082-8) GERIATRIC USE</g:item>
+							<g:item value="17">(34069-5) HOW SUPPLIED</g:item>
+							<g:item value="18">(34067-9) INDICATIONS AND USAGE</g:item>
+							<g:item value="19">(34076-0) INFORMATION FOR PATIENTS</g:item>
+							<g:item value="20">(34075-2) LABORATORY TESTS</g:item>
+							<g:item value="21">(43679-0) MECHANISM OF ACTION</g:item>
+							<g:item value="22">(49489-8) MICROBIOLOGY</g:item>
+							<g:item value="23">(43680-8) NONCLINICAL TOXICOLOGY</g:item>
+							<g:item value="24">(34078-6) NONTERATOGENIC EFFECTS</g:item>
+							<g:item value="25">(34078-6) NURSING MOTHERS</g:item>
+							<g:item value="26">(60561-8) OTHER SAFETY INFORMATION</g:item>
+							<g:item value="27">(34088-5) OVERDOSAGE</g:item>
+							<g:item value="28">(68498-5) PATIENT MEDICATION INFORMATION</g:item>
+							<g:item value="29">(34081-0) PEDIATRIC USE</g:item>
+							<g:item value="30">(43681-6) PHARMACODYNAMICS</g:item>
+							<g:item value="31">(66106-6) PHARMACOGENOMICS</g:item>
+							<g:item value="32">(43682-4) PHARMACOKINETICS</g:item>
+							<g:item value="33">(42232-9) PRECAUTIONS</g:item>
+							<g:item value="34">(42228-7) PREGNANCY</g:item>
+							<g:item value="35">(60562-6) ROUTE, METHOD AND FREQUENCY OF
+								ADMINISTRATION</g:item>
+							<g:item value="36">(60563-4) SUMMARY OF SAFETY AND EFFECTIVENESS
+								</g:item>
+							<g:item value="37">(34077-8) TERATOGENIC EFFECTS</g:item>
+							<g:item value="38">(43684-0) USE IN SPECIFIC POPULATIONS</g:item>
+							<g:item value="39">(54433-8) USER SAFETY WARNINGS</g:item>
+							<g:item value="40">(43685-7) WARNINGS AND PRECAUTIONS</g:item>
+							<g:item value="41">(34071-1) WARNINGS</g:item>
+							<g:item value="42">(38056-8) SUPPLEMENTAL PATIENT MATERIAL</g:item>
 
 						</g:ListBox>
 						<g:Label>&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;required</g:Label>
@@ -774,6 +774,11 @@
 					<g:HorizontalPanel>
 						<g:Label>Medical Conditions: &nbsp;</g:Label>
 						<g:TextArea ui:field='medconditbody' styleName='{style.alleles}'></g:TextArea>
+					</g:HorizontalPanel>
+					
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:CheckBox ui:field="descriptsct" name="descript"
+							styleName='{style.elementType}' text="Clinical Trial" />
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>

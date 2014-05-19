@@ -110,8 +110,13 @@ public class JsoPharmgxUsage extends JavaScriptObject {
 	}-*/;
 
 	// active ingredient
-	public final native String getActiveIngredient() /*-{
-		return this['dailymed:ActiveMoiety'];
+	public final native String getProdrug() /*-{
+		return this['dailymed:Prodrug'];
+	}-*/;
+
+	// active ingredient
+	public final native String getClinicalTrial() /*-{
+		return this['dailymed:ClinicalTrial'];
 	}-*/;
 
 	// medical condition

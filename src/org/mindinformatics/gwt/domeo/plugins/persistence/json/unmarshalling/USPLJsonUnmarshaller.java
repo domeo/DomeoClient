@@ -398,35 +398,62 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 				_domeo.getLogger().debug(this, "comment is null");
 			}
 
-			// Concepts that the Statement Refers To: Active ingredient &
+			// Concepts that the Statement Refers To: Clinical Trial &
 			// Concomitant medication concern & Variant Frequency
 
-			// active ingredient in statements
-			String jsActiveIngredient = au.getActiveIngredient();
-			if (jsActiveIngredient != null) {
+			// clinical trial in statements
+			String jsClinicalTrial = au.getClinicalTrial();
+			if (jsClinicalTrial != null) {
 
 				_domeo.getLogger().debug(
 						this,
-						"jsActiveIngredient is not null: "
-								+ jsActiveIngredient.toString());
+						"jsClinicalTrial is not null: "
+								+ jsClinicalTrial.toString());
 
 				// TODO: throw an exception if the label or description is null
 				String jsLabel = au.getLabel();
 				String jsDescript = au.getDescription();
-				MLinkedResource activeIngredient = ResourcesFactory
-						.createLinkedResource(jsActiveIngredient, jsLabel,
+				MLinkedResource clinicalTrial = ResourcesFactory
+						.createLinkedResource(jsClinicalTrial, jsLabel,
 								jsDescript);
 				_domeo.getLogger().debug(
 						this,
-						"activeIngredient linked resource created: "
-								+ activeIngredient.getLabel());
+						"clinicalTrial linked resource created: "
+								+ clinicalTrial.getLabel());
 
-				statements.add(activeIngredient);
+				statements.add(clinicalTrial);
 				_domeo.getLogger().debug(this,
-						"activeIngredient linked resource added to annotation");
+						"clinicalTrial linked resource added to annotation");
 			} else {
-				_domeo.getLogger().debug(this, "jsActiveIngredient is null");
+				_domeo.getLogger().debug(this, "jsClinicalTrial is null");
 			}
+			
+			// prodrug
+			String jsProdrug = au.getProdrug();
+			if (jsProdrug != null) {
+
+				_domeo.getLogger().debug(
+						this,
+						"jsProdrug is not null: "
+								+ jsProdrug.toString());
+
+				String jsLabel = au.getLabel();
+				String jsDescript = au.getDescription();
+				MLinkedResource prodrug = ResourcesFactory
+						.createLinkedResource(jsProdrug, jsLabel,
+								jsDescript);
+				_domeo.getLogger().debug(
+						this,
+						"prodrug linked resource created: "
+								+ prodrug.getLabel());
+
+				statements.add(prodrug);
+				_domeo.getLogger().debug(this,
+						"prodrug linked resource added to annotation");
+			} else {
+				_domeo.getLogger().debug(this, "jsProdrug is null");
+			}
+			
 
 			// medication concern in statements
 			String jsMediConcern = au.getMedicatConcern();
@@ -483,6 +510,7 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 
 		}
 
+		
 		if (statements != null && statements.size() > 0)
 			ann.setStatements(statements);
 

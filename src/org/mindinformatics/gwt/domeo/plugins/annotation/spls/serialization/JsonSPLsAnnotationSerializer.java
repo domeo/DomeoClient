@@ -395,9 +395,10 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 		if (statements != null) {
 
 			for (MLinkedResource statement : statements) {
-
-				// Active ingredient
-				if (statement.getLabel().equals("Active ingredient")) {
+				
+				
+				// Clinical Trial
+				if (statement.getLabel().equals("Clinical Trial")) {
 					JSONObject body = new JSONObject();
 					String statementUUID = UUID.uuid();
 					body.put("@id", new JSONString(SPL_URN_PREFIX
@@ -405,9 +406,32 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 					body.put("@type", new JSONString("poc:"
 							+ "PharmacogenomicsStatement"));
 					body.put("sio:" + "SIO_000628", new JSONString("dailymed:"
-							+ "ActiveMoiety"));
+							+ "ClinicalTrial"));
 
-					body.put("dailymed:" + "ActiveMoiety", new JSONString(
+					body.put("dailymed:" + "ClinicalTrial", new JSONString(
+							statement.getUrl()));
+
+					body.put(IRdfsOntology.label,
+							new JSONString(statement.getLabel()));
+					body.put(IDublinCoreTerms.description, new JSONString(
+							statement.getDescription()));
+					bodies.set(idx, body);
+					idx += 1;
+				}
+				
+
+				// Prodrug
+				if (statement.getLabel().equals("Prodrug")) {
+					JSONObject body = new JSONObject();
+					String statementUUID = UUID.uuid();
+					body.put("@id", new JSONString(SPL_URN_PREFIX
+							+ statementUUID));
+					body.put("@type", new JSONString("poc:"
+							+ "PharmacogenomicsStatement"));
+					body.put("sio:" + "SIO_000628", new JSONString("dailymed:"
+							+ "Prodrug"));
+
+					body.put("dailymed:" + "Prodrug", new JSONString(
 							statement.getUrl()));
 
 					body.put(IRdfsOntology.label,

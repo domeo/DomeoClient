@@ -118,7 +118,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 	// statements
 	@UiField
-	CheckBox descriptspd, descriptsmcc;
+	CheckBox descriptspd, descriptsmcc, descriptsct;
 
 	@UiField
 	CheckBox descriptppm;
@@ -130,9 +130,10 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 	String[] HGNCGeneSymbols = { "ALK", "BAFF/TNFSF13B", "BCR/ABL1", "BRAF",
 			"CCR5", "CFTR", "CYB5R1-4", "CYP1A2", "CYP2C19", "CYP2C9",
-			"CYP2D6", "del (5q)", "DPYD", "EGFR", "ERBB2", "ESR1", "ESR1, PGR", "F2", "F5", "FIP1L1/PDGFRA", "G6PD", "GBA", "HLA-A",
-			"HLA-B", "HPRT1", "IFNL3", "IL2RA", "KIT", "KRAS", "LDLR", "MS4A1",
-			"NAGS", "NAGS, CPS1, ASS1, OTC, ASL, ABL2", "NAT1-2", "PDGFRB",
+			"CYP2D6", "del (5q)", "DPYD", "EGFR", "ERBB2", "ESR1", "ESR1, PGR",
+			"F2", "F5", "FIP1L1/PDGFRA", "G6PD", "GBA", "HLA-A", "HLA-B",
+			"HPRT1", "IFNL3", "IL2RA", "KIT", "KRAS", "LDLR", "MS4A1", "NAGS",
+			"NAGS, CPS1, ASS1, OTC, ASL, ABL2", "NAT1-2", "PDGFRB",
 			"Ph Chromosome", "PML/RARA", "POLG", "SERPINC1", "TNFRSF8", "TPMT",
 			"UGT1A1", "VKORC1" };
 
@@ -182,35 +183,35 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 			"Vemurafenib", "Venlafaxine", "Voriconazole", "Warfarin" };
 
 	String[] productLabelSections = {
-			"ABUSE (34086-9)",
-			"ADVERSE REACTIONS (34084-4)",
-			"BOXED WARNING (34066-1)",
-			"CARCINOGENESIS AND MUTAGENESIS AND IMPAIRMENT OF FERTILITY (34083-6)",
-			"CLINICAL PHARMACOLOGY (34090-1)", "CLINICAL STUDIES (34092-7)",
-			"CONTRAINDICATIONS (34070-3)", "DEPENDENCE (34087-7)",
-			"DESCRIPTION (34089-3)", "DOSAGE AND ADMINISTRATION (34068-7)",
-			"DOSAGE FORMS AND STRENGTHS (43678-2)",
-			"DRUG AND OR LABORATORY TEST INTERACTIONS (34074-5)",
-			"DRUG ABUSE AND DEPENDENCE (42227-9)",
-			"DRUG INTERACTIONS (34073-7)", "GENERAL PRECAUTIONS (34072-9)",
-			"GERIATRIC USE (34082-8)", "HOW SUPPLIED (34069-5)",
-			"INDICATIONS AND USAGE (34067-9)",
-			"INFORMATION FOR PATIENTS (34076-0)", "LABORATORY TESTS (34075-2)",
-			"MECHANISM OF ACTION (43679-0)", "MICROBIOLOGY (49489-8)",
-			"NONCLINICAL TOXICOLOGY (43680-8)",
-			"NONTERATOGENIC EFFECTS (34078-6)", "NURSING MOTHERS (34080-2)",
-			"OTHER SAFETY INFORMATION (60561-8)", "OVERDOSAGE (34088-5)",
-			"PATIENT MEDICATION INFORMATION (68498-5)",
-			"PEDIATRIC USE (34081-0)", "PHARMACODYNAMICS (43681-6)",
-			"PHARMACOGENOMICS (66106-6)", "PHARMACOKINETICS (43682-4)",
-			"PRECAUTIONS (42232-9)", "PREGNANCY (42228-7)",
-			"ROUTE,METHOD AND FREQUENCY OF ADMINISTRATION (60562-6)",
-			"SUMMARY OF SAFETY AND EFFECTIVENESS (60563-4)",
-			"TERATOGENIC EFFECTS (34077-8)",
-			"USE IN SPECIFIC POPULATIONS (43684-0)",
-			"USER SAFETY WARNINGS (54433-8)",
-			"WARNINGS AND PRECAUTIONS (43685-7)", "WARNINGS (34071-1)",
-			"SUPPLEMENTAL PATIENT MATERIAL (38056-8)" };
+			"(34086-9) ABUSE",
+			"(34084-4) ADVERSE REACTIONS",
+			"(34066-1) BOXED WARNING",
+			"(34083-6) CARCINOGENESIS AND MUTAGENESIS ANDIMPAIRMENTOF FERTILITY",
+			"(34090-1) CLINICAL PHARMACOLOGY", "(34092-7) CLINICAL STUDIES",
+			"(34070-3) CONTRAINDICATIONS", "(34087-7) DEPENDENCE",
+			"(34089-3) DESCRIPTION", "(34068-7) DOSAGE AND ADMINISTRATION",
+			"(43678-2) DOSAGE FORMS AND STRENGTHS",
+			"(34074-5) DRUG AND OR LABORATORY TEST INTERACTIONS",
+			"(42227-9) DRUG ABUSE AND DEPENDENCE",
+			"(34073-7) DRUG INTERACTIONS", "(34072-9) GENERAL PRECAUTIONS",
+			"(34082-8) GERIATRIC USE", "(34069-5) HOW SUPPLIED",
+			"(34067-9) INDICATIONS AND USAGE",
+			"(34076-0) INFORMATION FOR PATIENTS", "(34075-2) LABORATORY TESTS",
+			"(43679-0) MECHANISM OF ACTION", "(49489-8) MICROBIOLOGY",
+			"(43680-8) NONCLINICAL TOXICOLOGY",
+			"(34078-6) NONTERATOGENIC EFFECTS", "(34078-6) NURSING MOTHERS",
+			"(60561-8) OTHER SAFETY INFORMATION", "(34088-5) OVERDOSAGE",
+			"(68498-5) PATIENT MEDICATION INFORMATION",
+			"(34081-0) PEDIATRIC USE", "(43681-6) PHARMACODYNAMICS",
+			"(66106-6) PHARMACOGENOMICS", "(43682-4) PHARMACOKINETICS",
+			"(42232-9) PRECAUTIONS", "(42228-7) PREGNANCY",
+			"(60562-6) ROUTE, METHOD AND FREQUENCY OFADMINISTRATION",
+			"(60563-4) SUMMARY OF SAFETY AND EFFECTIVENESS",
+			"(34077-8) TERATOGENIC EFFECTS",
+			"(43684-0) USE IN SPECIFIC POPULATIONS",
+			"(54433-8) USER SAFETY WARNINGS",
+			"(43685-7) WARNINGS AND PRECAUTIONS", "(34071-1) WARNINGS",
+			"(38056-8) SUPPLEMENTAL PATIENT MATERIAL" };
 
 	// drug of interest
 	public MLinkedResource getDrugOfInterest() {
@@ -558,11 +559,17 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 		Set<MLinkedResource> statements = new HashSet<MLinkedResource>();
 
+		if (descriptsct.getValue()) {
+			statements.add(ResourcesFactory.createLinkedResource(
+					DAILYMED_PREFIX + "clinical-trial", "Clinical Trial",
+					"Referred to clinical trial"));
+		}
+
 		// TODO: this is not in the current pharmgx annotation model, add it
 		if (descriptspd.getValue()) {
 			statements.add(ResourcesFactory.createLinkedResource(
 					DAILYMED_PREFIX + "pro-drug", "Prodrug",
-					"the ingredient is active"));
+					"Referred to Prodrug"));
 		}
 
 		// TODO: this is not in the current pharmgx annotation model, add it
@@ -1016,6 +1023,9 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 			if (_item.getStatements() != null) {
 				for (MLinkedResource statemt : _item.getStatements()) {
+					if (statemt.getLabel().equals("Clinical Trial")) {
+						descriptsct.setValue(true);
+					}
 
 					if (statemt.getLabel().equals("Prodrug")) {
 						descriptspd.setValue(true);
