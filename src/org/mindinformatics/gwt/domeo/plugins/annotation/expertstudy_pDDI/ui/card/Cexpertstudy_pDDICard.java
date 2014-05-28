@@ -63,7 +63,6 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 		super(domeo);
 		initWidget(binder.createAndBindUi(this));
 
-		System.out.println("step2***");
 		// Resources resource = Domeo.resources;
 		// Image acceptImage = new Image(resource.acceptIcon());
 
@@ -140,7 +139,7 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 					submit.addClickHandler(new ClickHandler() {
 						@Override
 						public void onClick(ClickEvent event) {
-							System.out.println("comment: " + comment.getText());
+							//System.out.println("comment: " + comment.getText());
 							dialog.hide();
 
 						}

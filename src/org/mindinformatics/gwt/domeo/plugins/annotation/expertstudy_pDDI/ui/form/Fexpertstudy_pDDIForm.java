@@ -2,10 +2,8 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.for
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormComponent;
@@ -30,6 +28,8 @@ import org.mindinformatics.gwt.framework.widget.ButtonWithIcon;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
@@ -116,12 +116,11 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		if (indexdrug1 != 0) {
 			String drug1Str = drug1.getItemText(indexdrug1);
 
-			if (typeai1.getValue())
-				drug1Uri = findURIbyTerm(drug1Str, "active-ingredient");
-			else if (typemb1.getValue())
-				drug1Uri = findURIbyTerm(drug1Str, "metabolite");
-			else
-				drug1Uri = findURIbyTerm(drug1Str, "drug-product");
+			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drug1Str)) {
+				drug1Uri = Mexpertstudy_pDDI.getDrugEntities().get(drug1Str)
+						.getUri();
+			} else
+				drug1Uri = RXNORM_PREFIX;
 
 			return ResourcesFactory.createLinkedResource(drug1Uri, drug1Str,
 					"Referred to the drug in the interaction.");
@@ -138,12 +137,11 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		if (indexdrug2 != 0) {
 			String drug2Str = drug2.getItemText(indexdrug2);
 
-			if (typeai1.getValue())
-				drug2Uri = findURIbyTerm(drug2Str, "active-ingredient");
-			else if (typemb1.getValue())
-				drug2Uri = findURIbyTerm(drug2Str, "metabolite");
-			else
-				drug2Uri = findURIbyTerm(drug2Str, "drug-product");
+			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drug2Str)) {
+				drug2Uri = Mexpertstudy_pDDI.getDrugEntities().get(drug2Str)
+						.getUri();
+			} else
+				drug2Uri = RXNORM_PREFIX;
 
 			return ResourcesFactory.createLinkedResource(drug2Uri, drug2Str,
 					"Referred to the drug in the interaction.");
@@ -290,14 +288,17 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		 * get NER in selected text and add them into drugs (drop down list box)
 		 */
 		HashMap<Integer, String> drugs = getNERToDrugs();
-		if (drugs != null) {
+		if (drugs != null && drugs.size() != 0) {
 			for (int i = 0; i < drugs.size(); i++) {
 				drug1.addItem(drugs.get(i));
 				drug2.addItem(drugs.get(i));
 			}
 
 		}
-
+		
+		// automatically select another role when user chosen one of role
+		autoSelectRole();
+		
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
 				.generalCss().applyButton());
 		yesButton.setWidth("78px");
@@ -438,21 +439,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				"expertstudy_pDDI annotation widget bound to UI (edit)");
 
 		try {
-			_domeo.getLogger()
-					.debug(this,
-							"Attempting to initialize UI with loaded annotation values");
-
-		} catch (Exception e) {
-			_domeo.getLogger().exception(
-					this,
-					"Failed to display current annotation "
-							+ annotation.getLocalId());
-			displayDialog(
-					"Failed to properly display existing annotation "
-							+ e.getMessage(), true);
-		}
-
-		try {
 			refreshAnnotationSetFilter(annotationSet, annotation);
 
 			_domeo.getLogger().debug(this,
@@ -524,7 +510,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			// drug 1 and drug 2
 
 			HashMap<Integer, String> drugs = getNERToDrugs();
-			if (drugs != null) {
+			if (drugs != null && drugs.size() != 0) {
 				for (int i = 0; i < drugs.size(); i++) {
 					drug1.addItem(drugs.get(i));
 					drug2.addItem(drugs.get(i));
@@ -536,7 +522,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				String strdrug1 = _item.getDrug1().getLabel();
 				for (int i = 0; i < drugs.size(); i++) {
 					if (drugs.get(i).equals(strdrug1))
-						drug1.setSelectedIndex(i+1);
+						drug1.setSelectedIndex(i + 1);
 				}
 			}
 
@@ -545,7 +531,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				String strdrug2 = _item.getDrug2().getLabel();
 				for (int i = 0; i < drugs.size(); i++) {
 					if (drugs.get(i).equals(strdrug2))
-						drug2.setSelectedIndex(i+1);
+						drug2.setSelectedIndex(i + 1);
 				}
 			}
 
@@ -567,6 +553,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 							+ e.getMessage(), true);
 		}
 
+		// automatically select another role when user chosen one of role
+		autoSelectRole();
+		
 		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
 		sameVersionButton.setStyleName(Domeo.resources.generalCss()
 				.applyButton());
@@ -676,29 +665,20 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		return false;
 	}
 
-	public String findURIbyTerm(String term, String type) {
-		String uri = "";
-		if (type.equals("active-ingredient")
-				&& Mexpertstudy_pDDI.getActiveIngredient_URI_map().containsKey(
-						term)) {
-			uri = Mexpertstudy_pDDI.getActiveIngredient_URI_map().get(
-					term.toUpperCase());
-		} else if (type.equals("metabolite")
-				&& Mexpertstudy_pDDI.getMetabolite_URI_map().containsKey(term)) {
-			uri = Mexpertstudy_pDDI.getMetabolite_URI_map().get(
-					term.toUpperCase());
-		} else if (type.equals("drug-product")
-				&& Mexpertstudy_pDDI.getDrugProduct_URI_map().containsKey(term)) {
-			uri = Mexpertstudy_pDDI.getDrugProduct_URI_map().get(
-					term.toUpperCase());
-		}
-
-		if (uri.length() > 4)
-			return uri;
-		else {
-			return RXNORM_PREFIX;
-		}
-	}
+	/*
+	 * public String findURIbyTerm(String term, String type) { String uri = "";
+	 * if (type.equals("active-ingredient") &&
+	 * Mexpertstudy_pDDI.getActiveIngredient_URI_map().containsKey( term)) { uri
+	 * = Mexpertstudy_pDDI.getActiveIngredient_URI_map().get(
+	 * term.toUpperCase()); } else if (type.equals("metabolite") &&
+	 * Mexpertstudy_pDDI.getMetabolite_URI_map().containsKey(term)) { uri =
+	 * Mexpertstudy_pDDI.getMetabolite_URI_map().get( term.toUpperCase()); }
+	 * else if (type.equals("drug-product") &&
+	 * Mexpertstudy_pDDI.getDrugProduct_URI_map().containsKey(term)) { uri =
+	 * Mexpertstudy_pDDI.getDrugProduct_URI_map().get( term.toUpperCase()); }
+	 * 
+	 * if (uri.length() > 4) return uri; else { return RXNORM_PREFIX; } }
+	 */
 
 	/*
 	 * TODO: add drug names from highlight into drop down list box
@@ -710,8 +690,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		HashMap<Integer, String> ner_set = new HashMap<Integer, String>();
 
-		System.out.println("test:"+annotations.size());
-		
+		System.out.println("getNERToDrugs size of annotation: "
+				+ annotations.size());
+
 		// get expert study selected text
 		String etext = ((TextAnnotationFormsPanel) _manager).getHighlight()
 				.getExact();
@@ -730,14 +711,12 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 					MTextQuoteSelector htext = (MTextQuoteSelector) highlight
 							.getSelector();
 
-					//System.out.println("htext:" + htext.getExact());
-
-					if ((!ner_set.containsValue(htext.getExact()))
-							&& etext.contains(htext.getExact())) {
+					if (etext.contains(htext.getExact())) {
+						System.out.println("htext:" + htext.getExact());
 						ner_set.put(max, htext.getExact());
+						max++;
 					}
 
-					max++;
 					if (max >= 30)
 						break;
 				}
@@ -745,6 +724,43 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		}
 		return ner_set;
+	}
+
+	public void autoSelectRole() {
+
+		roleob1.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+
+			@Override
+			public void onValueChange(ValueChangeEvent<Boolean> event) {
+				rolepp2.setChecked(true);
+			}
+		});
+		
+		rolepp1.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+
+			@Override
+			public void onValueChange(ValueChangeEvent<Boolean> event) {
+				roleob2.setChecked(true);
+			}
+		});
+		
+		
+		rolepp2.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+
+			@Override
+			public void onValueChange(ValueChangeEvent<Boolean> event) {
+				roleob1.setChecked(true);
+			}
+		});
+		
+
+		roleob2.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+
+			@Override
+			public void onValueChange(ValueChangeEvent<Boolean> event) {
+				rolepp1.setChecked(true);
+			}
+		});
 	}
 
 }

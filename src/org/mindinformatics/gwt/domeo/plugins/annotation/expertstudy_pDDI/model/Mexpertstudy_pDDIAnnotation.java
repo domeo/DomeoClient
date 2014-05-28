@@ -135,7 +135,6 @@ public class Mexpertstudy_pDDIAnnotation extends MAnnotation implements
 	}
 
 	public String getText() {
-		// TODO Auto-generated method stub
 		return "text";
 	}
 }

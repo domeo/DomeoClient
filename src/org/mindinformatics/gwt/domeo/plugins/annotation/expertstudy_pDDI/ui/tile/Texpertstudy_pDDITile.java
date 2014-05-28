@@ -98,7 +98,7 @@ public class Texpertstudy_pDDITile extends ATileComponent implements ITileCompon
 
 
 			sb2.append(html2);
-			System.out.println(sb2.toString());
+			//System.out.println(sb2.toString());
 
 			description.setHTML(sb2.toString());
 
