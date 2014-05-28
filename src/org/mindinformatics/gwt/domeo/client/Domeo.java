@@ -539,6 +539,8 @@ IRetrieveExistingAnnotationSetHandler,
 		searchComponentsManager.registerAnnotationCard(
 				MSPLsAnnotation.class.getName(),
 				new SPLsSearchComponent(this));
+		
+		
 
 		// Post It
 		/*

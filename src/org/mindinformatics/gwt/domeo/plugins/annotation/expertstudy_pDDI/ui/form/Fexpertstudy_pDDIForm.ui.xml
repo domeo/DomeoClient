@@ -139,6 +139,14 @@
 		padding-left: 1px;
 		padding-right: 12px;
 	}
+	
+	.listbox1 {
+		width: 120px;
+	}
+	
+	.listbox2 {
+		width: 200px;
+	}
 	</ui:style>
 
 	<!-- <ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' 
@@ -165,9 +173,17 @@
 
 				<g:VerticalPanel styleName='{style.leftColumn}'>
 
-					<!-- Drug 1 -->
-  					<g:Label ui:field="drug1label" styleName='{style.titleLeft}'>Drug 1:</g:Label>
-					<g:TextArea ui:field='drug1' styleName='{style.commonlabel}'></g:TextArea>
+					<g:HorizontalPanel>
+
+						<g:Label>NER drug mentions: &nbsp; </g:Label>
+						<g:ListBox ui:field="drug1" name="descript"
+							visibleItemCount='1' styleName='{style.listbox1}'>
+							<g:item value="0"></g:item>
+						</g:ListBox>
+					</g:HorizontalPanel>
+
+					<!-- Drug 1 <g:Label ui:field="drug1label" styleName='{style.titleLeft}'>Drug 
+						1:</g:Label> <g:TextArea ui:field='drug1' styleName='{style.commonlabel}'></g:TextArea> -->
 
 					<!-- Type -->
 
@@ -202,8 +218,14 @@
 
 
 					<!-- Drug 2 -->
-					<g:Label ui:field="drug2label" styleName='{style.titleLeft}'>Drug 2:</g:Label>
-					<g:TextArea ui:field='drug2' styleName='{style.commonlabel}'></g:TextArea>
+					<g:HorizontalPanel>
+
+						<g:Label>NER Drug mentions: &nbsp; </g:Label>
+						<g:ListBox ui:field="drug2" name="descript"
+							visibleItemCount='1' styleName='{style.listbox1}'>
+							<g:item value="0"></g:item>
+						</g:ListBox>
+					</g:HorizontalPanel>
 
 					<!-- Type -->
 					<g:HorizontalPanel styleName='{style.titlebar}'>

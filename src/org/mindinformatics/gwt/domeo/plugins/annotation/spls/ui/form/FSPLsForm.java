@@ -241,9 +241,9 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 		if (indexhgs != 0) {
 
 			String hgsName = descripthgs.getItemText(indexhgs);
-			System.out.println("hgs name:" + hgsName);
+			
 			String hgsuri = pharmgxmodel.getHGNCGeneSymbolUri(hgsName);
-			System.out.println("hgs uri:" + hgsuri);
+			
 			if (hgsuri == null || hgsuri.trim().equals("")) {
 				System.out
 						.println("WARNING: HGNCGeneSymbol URI IS NOT FOUND IN MAP");

@@ -113,7 +113,7 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 			 */
 
 			String typeScript = drug.getType();
-			if (typeScript != null) {
+			if (typeScript != null && !typeScript.trim().equals("")) {
 				String typeURI = typeScript.replace("dikbD2R:", DIKBD2R_PREFIX);
 				String typeLabel = typeScript.substring(8);
 				String typeDescript = "Referred to the type of the mention within the sentence for drug.";
@@ -132,9 +132,8 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 			 * drug entity has role
 			 */
 
-			
 			String roleScript = drug.getRole();
-			if (roleScript != null) {
+			if (roleScript != null && !roleScript.trim().equals("")) {
 				String roleURI = roleScript.replace("dikbD2R:", DIKBD2R_PREFIX);
 				String roleLabel = roleScript.substring(8);
 				String roleDescript = "Referred to the role that each drug one plays within the interaction.";
@@ -154,11 +153,11 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 		 */
 
 		String stateScript = ddibody.getStatement();
-		if (stateScript != null) {
+		if (stateScript != null && !stateScript.trim().equals("")) {
 			String jsLabel = stateScript.substring(5);
 			String jsDescript = "Referred to data type that is described in the sentence.";
 			String jsURI = stateScript.replace("ncit:", NCIT_PREFIX);
-			
+
 			MLinkedResource statement = ResourcesFactory.createLinkedResource(
 					jsURI, jsLabel, jsDescript);
 
@@ -174,7 +173,7 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 		 */
 		String modalityScript = ddibody.getModality();
 
-		if (modalityScript != null) {
+		if (modalityScript != null&& !modalityScript.trim().equals("")) {
 			String jsLabel = modalityScript.substring(5);
 			String jsDescript = "Referred to extra sources of information that the annotator considers "
 					+ "are helpful to provide evidence for or against the existence of the pDDI.";

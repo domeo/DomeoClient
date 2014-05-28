@@ -1,5 +1,8 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.form;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +21,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.M
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.expertstudy_pDDIFactory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
 import org.mindinformatics.gwt.framework.src.IResizable;
@@ -73,12 +77,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	@UiField
 	HorizontalPanel buttonsPanel;
 	@UiField
-	ListBox annotationSet;
+	ListBox annotationSet, drug1, drug2;
 	@UiField
 	VerticalPanel rightColumn;
-
-	@UiField
-	TextArea drug1, drug2;
 
 	// type of drug1
 	@UiField
@@ -110,40 +111,44 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 	public MLinkedResource getDrug1() {
 
-		if (!drug1.getText().isEmpty()) {
+		int indexdrug1 = drug1.getSelectedIndex();
+		String drug1Uri = "";
+		if (indexdrug1 != 0) {
+			String drug1Str = drug1.getItemText(indexdrug1);
 
-			String drugUri1 = "";
 			if (typeai1.getValue())
-				drugUri1 = findURIbyTerm(drug1.getText(), "active-ingredient");
+				drug1Uri = findURIbyTerm(drug1Str, "active-ingredient");
 			else if (typemb1.getValue())
-				drugUri1 = findURIbyTerm(drug1.getText(), "metabolite");
+				drug1Uri = findURIbyTerm(drug1Str, "metabolite");
 			else
-				drugUri1 = findURIbyTerm(drug1.getText(), "drug-product");
+				drug1Uri = findURIbyTerm(drug1Str, "drug-product");
 
-			return ResourcesFactory.createLinkedResource(drugUri1,
-					drug1.getText(),
+			return ResourcesFactory.createLinkedResource(drug1Uri, drug1Str,
 					"Referred to the drug in the interaction.");
+
 		}
+
 		return null;
 	}
 
 	public MLinkedResource getDrug2() {
 
-		if (!drug2.getText().isEmpty()) {
+		int indexdrug2 = drug2.getSelectedIndex();
+		String drug2Uri = "";
+		if (indexdrug2 != 0) {
+			String drug2Str = drug2.getItemText(indexdrug2);
 
-			String drugUri2 = "";
-			if (typeai2.getValue())
-				drugUri2 = findURIbyTerm(drug2.getText(), "active-ingredient");
-			else if (typemb2.getValue())
-				drugUri2 = findURIbyTerm(drug2.getText(), "metabolite");
+			if (typeai1.getValue())
+				drug2Uri = findURIbyTerm(drug2Str, "active-ingredient");
+			else if (typemb1.getValue())
+				drug2Uri = findURIbyTerm(drug2Str, "metabolite");
 			else
-				drugUri2 = findURIbyTerm(drug2.getText(), "drug-product");
+				drug2Uri = findURIbyTerm(drug2Str, "drug-product");
 
-			return ResourcesFactory.createLinkedResource(drugUri2,
-					drug2.getText(),
+			return ResourcesFactory.createLinkedResource(drug2Uri, drug2Str,
 					"Referred to the drug in the interaction.");
-		}
 
+		}
 		return null;
 	}
 
@@ -281,12 +286,24 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		refreshAnnotationSetFilter(annotationSet, null);
 
+		/*
+		 * get NER in selected text and add them into drugs (drop down list box)
+		 */
+		HashMap<Integer, String> drugs = getNERToDrugs();
+		if (drugs != null) {
+			for (int i = 0; i < drugs.size(); i++) {
+				drug1.addItem(drugs.get(i));
+				drug2.addItem(drugs.get(i));
+			}
+
+		}
+
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
 				.generalCss().applyButton());
 		yesButton.setWidth("78px");
 		yesButton.setHeight("22px");
 		yesButton.setResource(Domeo.resources.acceptLittleIcon());
-		yesButton.setText("Apply");
+		yesButton.setText("OK");
 		yesButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (isContentInvalid())
@@ -315,9 +332,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 							_domeo.getLogger().debug(this,
 									"quote selector initialized");
-
-							System.out.println("selector in new: "
-									+ selector.getExact());
 
 							// TODO Register coordinate of the selection.
 							Mexpertstudy_pDDIAnnotation annotation = expertstudy_pDDIFactory
@@ -508,20 +522,40 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			}
 
 			// drug 1 and drug 2
-			if (_item.getDrug1() != null)
-				drug1.setText(_item.getDrug1().getLabel());
 
-			if (_item.getDrug2() != null)
-				drug2.setText(_item.getDrug2().getLabel());
+			HashMap<Integer, String> drugs = getNERToDrugs();
+			if (drugs != null) {
+				for (int i = 0; i < drugs.size(); i++) {
+					drug1.addItem(drugs.get(i));
+					drug2.addItem(drugs.get(i));
+				}
+			}
+
+			if (_item.getDrug1() != null) {
+
+				String strdrug1 = _item.getDrug1().getLabel();
+				for (int i = 0; i < drugs.size(); i++) {
+					if (drugs.get(i).equals(strdrug1))
+						drug1.setSelectedIndex(i+1);
+				}
+			}
+
+			if (_item.getDrug2() != null) {
+
+				String strdrug2 = _item.getDrug2().getLabel();
+				for (int i = 0; i < drugs.size(); i++) {
+					if (drugs.get(i).equals(strdrug2))
+						drug2.setSelectedIndex(i+1);
+				}
+			}
 
 			// comment
 
 			if (_item.getComment() != null && !_item.getComment().equals(""))
 				comment.setText(_item.getComment());
 
-			_domeo.getLogger()
-					.debug(this,
-							"acquired the expertstudy_pDDI usage from the annotation instance passed to this method");
+			// TODO: test to get highlight from persistence manager
+
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
 					AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION,
@@ -627,9 +661,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	}
 
 	public boolean areMethodsChanged() {
-		// if(_item.getSioDescriptions().size()!=getMethods().size()) return
-		// true;
-		// TODO check items
+
 		return false;
 	}
 
@@ -646,13 +678,17 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 	public String findURIbyTerm(String term, String type) {
 		String uri = "";
-		if (type.equals("active-ingredient")) {
+		if (type.equals("active-ingredient")
+				&& Mexpertstudy_pDDI.getActiveIngredient_URI_map().containsKey(
+						term)) {
 			uri = Mexpertstudy_pDDI.getActiveIngredient_URI_map().get(
 					term.toUpperCase());
-		} else if (type.equals("metabolite")) {
+		} else if (type.equals("metabolite")
+				&& Mexpertstudy_pDDI.getMetabolite_URI_map().containsKey(term)) {
 			uri = Mexpertstudy_pDDI.getMetabolite_URI_map().get(
 					term.toUpperCase());
-		} else if (type.equals("drug-product")) {
+		} else if (type.equals("drug-product")
+				&& Mexpertstudy_pDDI.getDrugProduct_URI_map().containsKey(term)) {
 			uri = Mexpertstudy_pDDI.getDrugProduct_URI_map().get(
 					term.toUpperCase());
 		}
@@ -660,8 +696,55 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		if (uri.length() > 4)
 			return uri;
 		else {
-			return RXNORM_PREFIX + term;
+			return RXNORM_PREFIX;
 		}
-
 	}
+
+	/*
+	 * TODO: add drug names from highlight into drop down list box
+	 */
+	public HashMap<Integer, String> getNERToDrugs() {
+
+		ArrayList<MAnnotation> annotations = _domeo.getPersistenceManager()
+				.getAllAnnotations();
+
+		HashMap<Integer, String> ner_set = new HashMap<Integer, String>();
+
+		System.out.println("test:"+annotations.size());
+		
+		// get expert study selected text
+		String etext = ((TextAnnotationFormsPanel) _manager).getHighlight()
+				.getExact();
+
+		System.out.println("etext:" + etext);
+
+		// filter ao:highlight
+		if (annotations.size() != 0 && annotations != null) {
+			int max = 0;
+			for (MAnnotation ann : annotations) {
+
+				if (ann.getAnnotationType().equals("ao:Highlight")) {
+
+					MHighlightAnnotation highlight = (MHighlightAnnotation) ann;
+
+					MTextQuoteSelector htext = (MTextQuoteSelector) highlight
+							.getSelector();
+
+					//System.out.println("htext:" + htext.getExact());
+
+					if ((!ner_set.containsValue(htext.getExact()))
+							&& etext.contains(htext.getExact())) {
+						ner_set.put(max, htext.getExact());
+					}
+
+					max++;
+					if (max >= 30)
+						break;
+				}
+			}
+
+		}
+		return ner_set;
+	}
+
 }

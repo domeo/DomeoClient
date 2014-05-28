@@ -99,14 +99,14 @@ public class CQualifierCard extends ACardComponent {
 			}
 			
 			description.setHTML(sb.toString());
-			/*
+			
 			description.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					Window.alert("Edit or display?");
 				}
 			});
-			*/
+			
 			
 			createSocialBar(socialPanel, _annotation);
 			

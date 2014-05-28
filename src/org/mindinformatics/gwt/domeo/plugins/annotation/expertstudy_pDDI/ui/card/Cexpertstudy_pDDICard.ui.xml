@@ -45,6 +45,11 @@
 		padding: 0px 1px 4px 0px;
 	}
 	
+	.content {
+		padding: 3px 5px 3px 3px;
+		white-space: nowrap;
+	}
+	
 	.provenance {
 		width: 500px;
 		background-color: #EEE;
@@ -87,74 +92,74 @@
 		<g:HorizontalPanel>
 		
 		<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="drug1label" styleName='{style.tablelabel}'>drug 1</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="drug1" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 
 			<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="role1label" styleName='{style.tablelabel}'>role of drug 1</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="role1" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 
 			<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="type1label" styleName='{style.tablelabel}'>type of drug 1</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="type1" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 			
 				<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="drug2label" styleName='{style.tablelabel}'>drug 2</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="drug2" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 			
 
 			<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="role2label" styleName='{style.tablelabel}'>role of drug 2</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="role2" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 
 			<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="type2label" styleName='{style.tablelabel}'>type of drug 2</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="type2" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 
 			<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="statementlabel" styleName='{style.tablelabel}'>Statement</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="statement" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 
 			<g:VerticalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="modalitylabel" styleName='{style.tablelabel}'>Modality</g:Label>
 				</g:HorizontalPanel>
-				<g:HorizontalPanel>
+				<g:HorizontalPanel styleName='{style.content}'>
 					<g:Label ui:field="modality" styleName='{style.tablevalue}'></g:Label>
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
@@ -168,14 +173,14 @@
 				<g:Image ui:field="rightIcon" styleName='{style.clickable}' />
 			</g:VerticalPanel>
 			<g:VerticalPanel>
-				<g:Label styleName='{style.contentItem}'>Agree  </g:Label>
+				<g:Label styleName='{style.contentItem}'>Accept  </g:Label>
 			</g:VerticalPanel>
 
 			<g:VerticalPanel>
 				<g:Image ui:field="wrongIcon" styleName='{style.clickable}' />
 			</g:VerticalPanel>
 			<g:VerticalPanel>
-				<g:Label styleName='{style.contentItem}'>Disagree  </g:Label>
+				<g:Label styleName='{style.contentItem}'>Not Accept  </g:Label>
 			</g:VerticalPanel>
 
 		</g:HorizontalPanel>

@@ -39,6 +39,9 @@
   	<g:cell horizontalAlignment='ALIGN_CENTER'>
   	<g:Button ui:field='importButton' styleName='{style.importBtn}'>Import</g:Button>
   	</g:cell>
+  	<g:cell horizontalAlignment='ALIGN_CENTER'>
+  	<g:Button ui:field='selectAllButton' styleName='{style.importBtn}'>select All Sets</g:Button>
+  	</g:cell>
   	</g:VerticalPanel>
   	</g:cell>
   	<g:cell>

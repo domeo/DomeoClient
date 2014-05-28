@@ -101,8 +101,6 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 	@Override
 	public void refresh() {
 
-		System.out.println("step1***");
-
 		try {
 			if (_index > -1)
 				createProvenanceBar(expertstudy_pDDIPlugin.getInstance()
@@ -128,7 +126,6 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 
 				@Override
 				public void onClick(ClickEvent event) {
-					System.out.println("event process.....");
 
 					Button close = new Button("Close");
 					close.addClickHandler(new ClickHandler() {
@@ -153,7 +150,7 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 					panel.add(hp1);
 
 					dialog.setWidget(panel);
-					dialog.setText("The reason of disagree:");
+					dialog.setText("The reason of revise:");
 					int left = wrongIcon.getAbsoluteLeft();
 					int top = wrongIcon.getAbsoluteTop();
 					dialog.setPopupPosition(left, top + 10);
@@ -171,56 +168,56 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 					String drug1Str = dataUsage.getDrug1().getLabel();
 					drug1.setText(drug1Str);
 				} else {
-					drug1.setText("None");
+					drug1.setText("");
 				}
 				
 				if (dataUsage.getDrug2() != null) {
 					String drug2Str = dataUsage.getDrug2().getLabel();
 					drug2.setText(drug2Str);
 				} else {
-					drug2.setText("None");
+					drug2.setText("");
 				}
 
 				if (dataUsage.getRole1() != null) {
 					String role1Str = dataUsage.getRole1().getLabel();
 					role1.setText(role1Str);
 				} else {
-					role1.setText("None");
+					role1.setText("");
 				}
 				
 				if (dataUsage.getRole2() != null) {
 					String role2Str = dataUsage.getRole2().getLabel();
 					role2.setText(role2Str);
 				} else {
-					role2.setText("None");
+					role2.setText("");
 				}
 				
 				if (dataUsage.getType1() != null) {
 					String type1Str = dataUsage.getType1().getLabel();
 					type1.setText(type1Str);
 				} else {
-					type1.setText("None");
+					type1.setText("");
 				}
 				
 				if (dataUsage.getType2() != null) {
 					String type2Str = dataUsage.getType2().getLabel();
 					type2.setText(type2Str);
 				} else {
-					type2.setText("None");
+					type2.setText("");
 				}
 				
 				if (dataUsage.getStatement() != null) {
 					String statStr = dataUsage.getStatement().getLabel();
 					statement.setText(statStr);
 				} else {
-					statement.setText("None");
+					statement.setText("");
 				}
 				
 				if (dataUsage.getModality() != null) {
 					String modalityStr = dataUsage.getModality().getLabel();
 					modality.setText(modalityStr);
 				} else {
-					modality.setText("None");
+					modality.setText("");
 				}
 
 

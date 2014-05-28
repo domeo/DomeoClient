@@ -90,7 +90,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 		hasCells.add(new HasCell<AnnotationSetInfo, Boolean>() {
 
 			private CheckboxCell cell = new CheckboxCell(true, false);
-
+            
 			public Cell<Boolean> getCell() {
 				return cell;
 			}
@@ -101,6 +101,7 @@ public class AnnotationSetTreeViewModel implements TreeViewModel {
 
 			public Boolean getValue(AnnotationSetInfo object) {
 				return selectionModel.isSelected(object);
+				
 			}
 		});
 		hasCells.add(new HasCell<AnnotationSetInfo, AnnotationSetInfo>() {
