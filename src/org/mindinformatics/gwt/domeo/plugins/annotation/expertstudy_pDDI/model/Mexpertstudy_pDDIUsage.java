@@ -27,6 +27,19 @@ public class Mexpertstudy_pDDIUsage {
 	public void setIndividualUri(String individualUri) {
 		this.individualUri = individualUri;
 	}
+	
+	// The Mexpertstudy_pDDI instance is a "normalized" instance that holds the
+		// model values as strings
+		Mexpertstudy_pDDI MpDDI = new Mexpertstudy_pDDI("", "", null);
+
+		public Mexpertstudy_pDDI getMpDDI() {
+			return MpDDI;
+		}
+
+		public void setMpDDI(Mexpertstudy_pDDI MpDDI) {
+			this.MpDDI = MpDDI;
+		}
+
 
 	// tags in the expertstudy_pDDI model are the object of SIO predicates
 	private String comment;
@@ -39,18 +52,7 @@ public class Mexpertstudy_pDDIUsage {
 		this.comment = comment;
 	}
 
-	// The Mexpertstudy_pDDI instance is a "normalized" instance that holds the
-	// model values as strings
-	Mexpertstudy_pDDI MpDDI = new Mexpertstudy_pDDI("", "", null);
-
-	public Mexpertstudy_pDDI getMpDDI() {
-		return MpDDI;
-	}
-
-	public void setMpDDI(Mexpertstudy_pDDI MpDDI) {
-		this.MpDDI = MpDDI;
-	}
-
+	
 	// drug 1 and drug 2
 
 	public MLinkedResource getDrug1() {

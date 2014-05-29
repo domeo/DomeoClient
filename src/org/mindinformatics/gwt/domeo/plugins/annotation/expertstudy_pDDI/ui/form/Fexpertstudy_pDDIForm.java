@@ -512,6 +512,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			HashMap<Integer, String> drugs = getNERToDrugs();
 			if (drugs != null && drugs.size() != 0) {
 				for (int i = 0; i < drugs.size(); i++) {
+					
+					System.out.println("add " + drugs.get(i));
 					drug1.addItem(drugs.get(i));
 					drug2.addItem(drugs.get(i));
 				}
@@ -520,15 +522,24 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			if (_item.getDrug1() != null) {
 
 				String strdrug1 = _item.getDrug1().getLabel();
+				
+				//drug1.addItem(strdrug1);
+				
+				//System.out.println("drugname1:"+strdrug1);
 				for (int i = 0; i < drugs.size(); i++) {
+					
+					//System.out.println("drug in list:"+drugs.get(i));
 					if (drugs.get(i).equals(strdrug1))
 						drug1.setSelectedIndex(i + 1);
 				}
 			}
 
 			if (_item.getDrug2() != null) {
-
+				
 				String strdrug2 = _item.getDrug2().getLabel();
+				
+				//drug2.addItem(strdrug2);
+				
 				for (int i = 0; i < drugs.size(); i++) {
 					if (drugs.get(i).equals(strdrug2))
 						drug2.setSelectedIndex(i + 1);
