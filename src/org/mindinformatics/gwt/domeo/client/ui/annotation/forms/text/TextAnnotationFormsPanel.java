@@ -315,6 +315,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 	private void setHighlightedText(String prefix, String text, String suffix) {
 		prefixText.setInnerHTML(prefix + " ");
 		matchText.setInnerHTML(text);
+		matchText.setId("exactmatch");
 		suffixText.setInnerHTML(" " + suffix);
 	}
 	

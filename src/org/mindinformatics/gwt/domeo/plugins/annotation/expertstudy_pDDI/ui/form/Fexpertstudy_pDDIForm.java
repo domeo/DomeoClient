@@ -2,6 +2,8 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.for
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindinformatics.gwt.domeo.client.Domeo;
@@ -12,6 +14,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.TextAnnotat
 import org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.model.buffers.HighlightedTextBuffer;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Iexpertstudy_pDDI;
@@ -26,12 +29,20 @@ import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.ButtonWithIcon;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.NodeList;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -39,6 +50,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -284,9 +296,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		refreshAnnotationSetFilter(annotationSet, null);
 
-		/*
-		 * get NER in selected text and add them into drugs (drop down list box)
-		 */
+		// get NER in selected text and add them into drugs (drop down list box)
+
 		HashMap<Integer, String> drugs = getNERToDrugs();
 		if (drugs != null && drugs.size() != 0) {
 			for (int i = 0; i < drugs.size(); i++) {
@@ -295,10 +306,13 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			}
 
 		}
-		
+
 		// automatically select another role when user chosen one of role
-		autoSelectRole();
-		
+		autoSelectAnotherRole();
+
+		// highlight drug
+		highlightCurrentDrug();
+
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
 				.generalCss().applyButton());
 		yesButton.setWidth("78px");
@@ -512,7 +526,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			HashMap<Integer, String> drugs = getNERToDrugs();
 			if (drugs != null && drugs.size() != 0) {
 				for (int i = 0; i < drugs.size(); i++) {
-					
+
 					System.out.println("add " + drugs.get(i));
 					drug1.addItem(drugs.get(i));
 					drug2.addItem(drugs.get(i));
@@ -522,24 +536,24 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			if (_item.getDrug1() != null) {
 
 				String strdrug1 = _item.getDrug1().getLabel();
-				
-				//drug1.addItem(strdrug1);
-				
-				//System.out.println("drugname1:"+strdrug1);
+
+				// drug1.addItem(strdrug1);
+
+				// System.out.println("drugname1:"+strdrug1);
 				for (int i = 0; i < drugs.size(); i++) {
-					
-					//System.out.println("drug in list:"+drugs.get(i));
+
+					// System.out.println("drug in list:"+drugs.get(i));
 					if (drugs.get(i).equals(strdrug1))
 						drug1.setSelectedIndex(i + 1);
 				}
 			}
 
 			if (_item.getDrug2() != null) {
-				
+
 				String strdrug2 = _item.getDrug2().getLabel();
-				
-				//drug2.addItem(strdrug2);
-				
+
+				// drug2.addItem(strdrug2);
+
 				for (int i = 0; i < drugs.size(); i++) {
 					if (drugs.get(i).equals(strdrug2))
 						drug2.setSelectedIndex(i + 1);
@@ -551,7 +565,11 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			if (_item.getComment() != null && !_item.getComment().equals(""))
 				comment.setText(_item.getComment());
 
-			// TODO: test to get highlight from persistence manager
+			// highlight drug
+			highlightCurrentDrug();
+			
+			// automatically select another role when user chosen one of role
+			autoSelectAnotherRole();
 
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
@@ -564,9 +582,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 							+ e.getMessage(), true);
 		}
 
-		// automatically select another role when user chosen one of role
-		autoSelectRole();
 		
+
 		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
 		sameVersionButton.setStyleName(Domeo.resources.generalCss()
 				.applyButton());
@@ -677,21 +694,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	}
 
 	/*
-	 * public String findURIbyTerm(String term, String type) { String uri = "";
-	 * if (type.equals("active-ingredient") &&
-	 * Mexpertstudy_pDDI.getActiveIngredient_URI_map().containsKey( term)) { uri
-	 * = Mexpertstudy_pDDI.getActiveIngredient_URI_map().get(
-	 * term.toUpperCase()); } else if (type.equals("metabolite") &&
-	 * Mexpertstudy_pDDI.getMetabolite_URI_map().containsKey(term)) { uri =
-	 * Mexpertstudy_pDDI.getMetabolite_URI_map().get( term.toUpperCase()); }
-	 * else if (type.equals("drug-product") &&
-	 * Mexpertstudy_pDDI.getDrugProduct_URI_map().containsKey(term)) { uri =
-	 * Mexpertstudy_pDDI.getDrugProduct_URI_map().get( term.toUpperCase()); }
-	 * 
-	 * if (uri.length() > 4) return uri; else { return RXNORM_PREFIX; } }
-	 */
-
-	/*
 	 * TODO: add drug names from highlight into drop down list box
 	 */
 	public HashMap<Integer, String> getNERToDrugs() {
@@ -700,36 +702,52 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				.getAllAnnotations();
 
 		HashMap<Integer, String> ner_set = new HashMap<Integer, String>();
-
-		System.out.println("getNERToDrugs size of annotation: "
-				+ annotations.size());
+		HashMap<String, DrugInText> drugs = new HashMap<String, DrugInText>();
 
 		// get expert study selected text
-		String etext = ((TextAnnotationFormsPanel) _manager).getHighlight()
-				.getExact();
+		HighlightedTextBuffer eselector = ((TextAnnotationFormsPanel) _manager)
+				.getHighlight();
+		String sentence = eselector.getExact();
 
-		System.out.println("etext:" + etext);
+		System.out.println("sentence:" + sentence);
 
 		// filter ao:highlight
 		if (annotations.size() != 0 && annotations != null) {
-			int max = 0;
+			int index = 0;
 			for (MAnnotation ann : annotations) {
 
 				if (ann.getAnnotationType().equals("ao:Highlight")) {
 
 					MHighlightAnnotation highlight = (MHighlightAnnotation) ann;
 
-					MTextQuoteSelector htext = (MTextQuoteSelector) highlight
+					MTextQuoteSelector hselector = (MTextQuoteSelector) highlight
 							.getSelector();
 
-					if (etext.contains(htext.getExact())) {
-						System.out.println("htext:" + htext.getExact());
-						ner_set.put(max, htext.getExact());
-						max++;
+					String drug = hselector.getExact();
+
+					if (sentence.contains(drug)) {
+
+						if (!drugs.containsKey(drug)) {
+
+							int num = countOcurrencesInStr(drug, sentence, 0);
+							// System.out.println("numbers of " + drug + " is "
+							// + num);
+							// System.out.println("add drug: " + drug);
+							ner_set.put(index++, drug);
+							drugs.put(drug, new DrugInText(drug, num - 1));
+
+						} else {
+
+							int n = drugs.get(drug).getNum();
+							if (n > 0) {
+								// System.out.println("add drug: " + drug);
+								ner_set.put(index++, drug);
+								drugs.get(drug).setNum(n--);
+							}
+						}
+
 					}
 
-					if (max >= 30)
-						break;
 				}
 			}
 
@@ -737,7 +755,60 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		return ner_set;
 	}
 
-	public void autoSelectRole() {
+	/*
+	 * Embedded class that represents the occurrences of drug name in highlight
+	 * text
+	 */
+	class DrugInText {
+
+		private int num = 0;
+		private String drugname;
+
+		DrugInText(String name, int n) {
+			this.num = n;
+			this.drugname = name;
+		}
+
+		public int getNum() {
+			return num;
+		}
+
+		public void setNum(int num) {
+			this.num = num;
+		}
+
+		public String getDrugname() {
+			return drugname;
+		}
+
+		public void setDrugname(String drugname) {
+			this.drugname = drugname;
+		}
+
+	}
+
+	/*
+	 * count the number of occurrences of drug name in sentence
+	 */
+
+	public static int countOcurrencesInStr(String s, String str, int num) {
+
+		int index = str.indexOf(s);
+
+		if (index >= 0) {
+			num++;
+			num = countOcurrencesInStr(s, str.substring(index + s.length()),
+					num);
+		}
+
+		return num;
+	}
+
+	/*
+	 * automatically select another drug role
+	 */
+
+	public void autoSelectAnotherRole() {
 
 		roleob1.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
@@ -746,7 +817,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				rolepp2.setChecked(true);
 			}
 		});
-		
+
 		rolepp1.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
 			@Override
@@ -754,8 +825,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				roleob2.setChecked(true);
 			}
 		});
-		
-		
+
 		rolepp2.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
 			@Override
@@ -763,7 +833,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				roleob1.setChecked(true);
 			}
 		});
-		
 
 		roleob2.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
@@ -772,6 +841,80 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				rolepp1.setChecked(true);
 			}
 		});
+	}
+
+	/*
+	 * highlight the current selection of drug in sentence span
+	 */
+	
+	public void highlightCurrentDrug(){
+		
+		// highlight drug1
+		drug1.addChangeHandler(new ChangeHandler(){
+			@Override
+			public void onChange(ChangeEvent event) {
+				highlightCurrentDrugHelper(drug1);
+			}
+		});
+
+		// highlight drug2
+		drug2.addChangeHandler(new ChangeHandler(){
+			@Override
+			public void onChange(ChangeEvent event) {
+				highlightCurrentDrugHelper(drug2);
+			}
+		});
+		
+	}
+	
+	
+
+	public void highlightCurrentDrugHelper(ListBox drug) {
+
+		int selected = drug.getSelectedIndex();
+		String currentDrug = drug.getItemText(selected);
+
+		if (currentDrug != null && !currentDrug.trim().equals("")) {
+			Element e = DOM.getElementById("exactmatch");
+			String html = e.getInnerHTML();
+
+			if (html.contains(currentDrug)) {
+
+				html = html.replaceAll(
+						"<span style=\"background-color: #FFFF00\">", "")
+						.replaceAll("</span>", "");
+
+				int occurences = 0;
+
+				for (int i = 0; i <= selected; i++) {
+					if (drug.getItemText(i).equals(currentDrug)) {
+						occurences++;
+					}
+				}
+
+				System.out.println("**************current: " + currentDrug
+						+ " | the " + occurences);
+
+				int currentMatch = html.indexOf(currentDrug);
+
+				while (currentMatch >= 0 && occurences > 1) {
+
+					System.out.println(occurences + "|" + currentMatch);
+
+					currentMatch = html.indexOf(currentDrug, currentMatch
+							+ currentDrug.length());
+					occurences--;
+
+				}
+
+				String postHtml = html.substring(0, currentMatch)
+						+ "<span style='background-color: #FFFF00'>"
+						+ currentDrug + "</span>"
+						+ html.substring(currentMatch + currentDrug.length());
+
+				e.setInnerHTML(postHtml);
+			}
+		}
 	}
 
 }

@@ -130,7 +130,7 @@
 		white-space: nowrap;
 	}
 	
-	z.titleLeft {
+	.titleLeft {
 		padding-left: 4px;
 	}
 	

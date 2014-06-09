@@ -167,23 +167,5 @@
 		</g:HorizontalPanel>
 
 
-		<g:HorizontalPanel>
-
-			<g:VerticalPanel>
-				<g:Image ui:field="rightIcon" styleName='{style.clickable}' />
-			</g:VerticalPanel>
-			<g:VerticalPanel>
-				<g:Label styleName='{style.contentItem}'>Accept  </g:Label>
-			</g:VerticalPanel>
-
-			<g:VerticalPanel>
-				<g:Image ui:field="wrongIcon" styleName='{style.clickable}' />
-			</g:VerticalPanel>
-			<g:VerticalPanel>
-				<g:Label styleName='{style.contentItem}'>Not Accept  </g:Label>
-			</g:VerticalPanel>
-
-		</g:HorizontalPanel>
-
 	</g:VerticalPanel>
 </ui:UiBinder>

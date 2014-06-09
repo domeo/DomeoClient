@@ -56,8 +56,6 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 	@UiField
 	Label drug1, drug2, type, text, role1, type1, role2, type2, statement, modality;
 
-	@UiField
-	Image wrongIcon, rightIcon;
 
 	public Cexpertstudy_pDDICard(IDomeo domeo) {
 		super(domeo);
@@ -110,9 +108,6 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 
 			type.setText("expertstudy_pDDI:");
 
-			rightIcon.setResource(Domeo.resources.acceptIcon());
-			wrongIcon.setResource(Domeo.resources.crossIcon());
-
 			final TextArea comment = new TextArea();
 			final DialogBox dialog = new DialogBox();
 			final VerticalPanel panel = new VerticalPanel();
@@ -121,45 +116,7 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 			comment.setVisibleLines(10);
 			panel.add(comment);
 
-			wrongIcon.addClickHandler(new ClickHandler() {
-
-				@Override
-				public void onClick(ClickEvent event) {
-
-					Button close = new Button("Close");
-					close.addClickHandler(new ClickHandler() {
-						@Override
-						public void onClick(ClickEvent event) {
-							dialog.hide();
-						}
-					});
-					hp1.add(close);
-
-					Button submit = new Button("submit");
-					submit.addClickHandler(new ClickHandler() {
-						@Override
-						public void onClick(ClickEvent event) {
-							//System.out.println("comment: " + comment.getText());
-							dialog.hide();
-
-						}
-					});
-					hp1.add(submit);
-
-					panel.add(hp1);
-
-					dialog.setWidget(panel);
-					dialog.setText("The reason of revise:");
-					int left = wrongIcon.getAbsoluteLeft();
-					int top = wrongIcon.getAbsoluteTop();
-					dialog.setPopupPosition(left, top + 10);
-					dialog.setHeight("150px");
-					dialog.setWidth("200px");
-					dialog.show();
-
-				}
-			});
-
+		
 			if (_annotation != null) {
 				Mexpertstudy_pDDIUsage dataUsage = _annotation.getMpDDIUsage();
 				

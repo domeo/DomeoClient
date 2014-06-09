@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetHandler;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.AnnotationSetTreeViewModel.AnnotationSetInfo;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.ui.existingsets.AnnotationSetTreeViewModel.Category;
@@ -54,22 +55,13 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 	private IDomeo _domeo;
 	private IContainerPanel _containerPanel;
 
-	// /**
-	// * The constants used in this Content Widget.
-	// */
-	// public static interface CwConstants extends Constants {
-	// String cwCellTreeDescription();
-	//
-	// String cwCellTreeName();
-	// }
-
 	// Layout
 	@UiField
 	HorizontalPanel main;
 	@UiField
 	ScrollPanel left;
 	@UiField
-	Button importButton, selectAllButton;
+	Button importButton, selectAllButton, selectMySetsButton;
 	@UiField
 	VerticalPanel preview;
 
@@ -299,7 +291,6 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 							.retrieveExistingAnnotationSets(
 									idsToLoad,
 									(IRetrieveExistingAnnotationSetHandler) _domeo);
-
 				}
 			});
 
@@ -308,19 +299,47 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 				public void onClick(ClickEvent event) {
 
 					System.out.println("select all sets.....");
-					//hide();
 
 					if (publicList != null) {
 						for (AnnotationSetInfo ann : publicList) {
-
-							//System.out.println("set " + ann.getLabel()
-							//		+ " to be selected");
 							selectionModel.setSelected(ann, true);
 						}
 					}
 				}
-
 			});
+			
+			
+			/*
+			 * 	} else if(creatorFilter.equals(ONLY_MINE) && annotation.getCreator().getUri()
+			.equals(_domeo.getAgentManager().getUserPerson().getUri())) {
+				return true;
+			 */
+			
+			selectMySetsButton.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					
+				    String currentUserURI = _domeo.getAgentManager().getUserPerson().getUri();
+		            String currentUserName = _domeo.getAgentManager().getUserPerson().getName();
+                    System.out.println("currentUserUri: "+currentUserURI);
+					if (publicList != null) {
+						
+						for (AnnotationSetInfo ann : publicList) {
+							
+							String ownerURI = "urn:person:uuid:" + ann.getAnnotationSet().getCreatedBy().getUri();
+							String ownerName = ann.getAnnotationSet().getCreatedBy().getScreenName();
+																
+							System.out.println("set owner is "+ownerURI + "|"+ownerName+"|"+currentUserName);
+							
+							if(ownerURI.equals(currentUserURI)||(currentUserName.equals(ownerName)))
+							selectionModel.setSelected(ann, true);
+						}
+						
+					}
+				}
+			});
+			
+			
 
 			CellTree.Resources res = GWT.create(CellTree.BasicResources.class);
 			CellTree cellTree = new CellTree(new AnnotationSetTreeViewModel(

@@ -25,7 +25,13 @@
       padding-left: 15px;
     }
   	
-  			.importBtn {
+  	.panel {
+		width: 100%;
+		vertical-align: top;
+		padding-top: 10px;
+	}
+	
+  	.importBtn {
 			min-width: 100px;
 		}
 </ui:style>
@@ -36,12 +42,13 @@
 	<g:VerticalPanel>
   	<g:ScrollPanel ui:field='left' styleName='{style.outer}'>
   	</g:ScrollPanel>
-  	<g:cell horizontalAlignment='ALIGN_CENTER'>
+  	
+  	<g:HorizontalPanel styleName='{style.panel}'>
   	<g:Button ui:field='importButton' styleName='{style.importBtn}'>Import</g:Button>
-  	</g:cell>
-  	<g:cell horizontalAlignment='ALIGN_CENTER'>
   	<g:Button ui:field='selectAllButton' styleName='{style.importBtn}'>select All Sets</g:Button>
-  	</g:cell>
+  	<g:Button ui:field='selectMySetsButton' styleName='{style.importBtn}'>select My Sets</g:Button>
+  	</g:HorizontalPanel>
+  	
   	</g:VerticalPanel>
   	</g:cell>
   	<g:cell>
