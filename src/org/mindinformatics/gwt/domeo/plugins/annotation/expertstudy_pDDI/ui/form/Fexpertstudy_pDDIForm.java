@@ -567,7 +567,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			// highlight drug
 			highlightCurrentDrug();
-			
+
 			// automatically select another role when user chosen one of role
 			autoSelectAnotherRole();
 
@@ -581,8 +581,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 					"Failed to properly display existing annotation "
 							+ e.getMessage(), true);
 		}
-
-		
 
 		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
 		sameVersionButton.setStyleName(Domeo.resources.generalCss()
@@ -846,75 +844,107 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	/*
 	 * highlight the current selection of drug in sentence span
 	 */
-	
-	public void highlightCurrentDrug(){
-		
+
+	public void highlightCurrentDrug() {
+
 		// highlight drug1
-		drug1.addChangeHandler(new ChangeHandler(){
+		drug1.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
-				highlightCurrentDrugHelper(drug1);
+				highlightCurrentDrugHelper(drug1, drug2);
 			}
 		});
 
 		// highlight drug2
-		drug2.addChangeHandler(new ChangeHandler(){
+		drug2.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
-				highlightCurrentDrugHelper(drug2);
+				highlightCurrentDrugHelper(drug2, drug1);
 			}
 		});
-		
+
 	}
-	
-	
 
-	public void highlightCurrentDrugHelper(ListBox drug) {
+	public void highlightCurrentDrugHelper(ListBox drugone, ListBox drugtwo) {
 
-		int selected = drug.getSelectedIndex();
-		String currentDrug = drug.getItemText(selected);
+		String finalHtml = "";
+		Element e = DOM.getElementById("exactmatch");
+		String html = e.getInnerHTML();
 
-		if (currentDrug != null && !currentDrug.trim().equals("")) {
-			Element e = DOM.getElementById("exactmatch");
-			String html = e.getInnerHTML();
+		finalHtml = html.replaceAll(
+				"<span style=\"background-color: #FFFF00\">", "").replaceAll(
+				"</span>", "");
+		System.out.println("html: " + finalHtml);
 
-			if (html.contains(currentDrug)) {
+		int selected1 = drugone.getSelectedIndex();
+		String currentDrug1 = drugone.getItemText(selected1);
 
-				html = html.replaceAll(
-						"<span style=\"background-color: #FFFF00\">", "")
-						.replaceAll("</span>", "");
+		if (finalHtml.contains(currentDrug1) && currentDrug1 != null
+				&& !currentDrug1.trim().equals("")) {
 
-				int occurences = 0;
+			int currentMatch1 = getCurrentDrugMatch(finalHtml, currentDrug1,
+					drugone);
 
-				for (int i = 0; i <= selected; i++) {
-					if (drug.getItemText(i).equals(currentDrug)) {
-						occurences++;
-					}
-				}
+			// System.out.println("match: " + currentDrug1 + " | at: " +
+			// currentMatch1);
 
-				System.out.println("**************current: " + currentDrug
-						+ " | the " + occurences);
+			finalHtml = finalHtml.substring(0, currentMatch1)
+					+ "<span style=\"background-color: #FFFF00\">"
+					+ currentDrug1
+					+ "</span>"
+					+ finalHtml
+							.substring(currentMatch1 + currentDrug1.length());
 
-				int currentMatch = html.indexOf(currentDrug);
+			int selected2 = drugtwo.getSelectedIndex();
+			String currentDrug2 = drugtwo.getItemText(selected2);
 
-				while (currentMatch >= 0 && occurences > 1) {
+			// System.out.println("post html: " + finalHtml);
 
-					System.out.println(occurences + "|" + currentMatch);
+			if ((currentDrug2 != null && !currentDrug2.trim().equals(""))
+					&& finalHtml.contains(currentDrug2)) {
 
-					currentMatch = html.indexOf(currentDrug, currentMatch
-							+ currentDrug.length());
-					occurences--;
+				int currentMatch2 = getCurrentDrugMatch(finalHtml,
+						currentDrug2, drugtwo);
 
-				}
+				// System.out.println("match: " + currentDrug2 + " | at: " +
+				// currentMatch2 +" | len: " + finalHtml.length());
 
-				String postHtml = html.substring(0, currentMatch)
+				finalHtml = finalHtml.substring(0, currentMatch2)
 						+ "<span style='background-color: #FFFF00'>"
-						+ currentDrug + "</span>"
-						+ html.substring(currentMatch + currentDrug.length());
+						+ currentDrug2
+						+ "</span>"
+						+ finalHtml.substring(currentMatch2
+								+ currentDrug2.length());
+			}
 
-				e.setInnerHTML(postHtml);
+			// System.out.println("final html: " + finalHtml);
+
+			e.setInnerHTML(finalHtml);
+		}
+	}
+
+	public int getCurrentDrugMatch(String html, String currentDrug, ListBox drug) {
+		int occurences = 0;
+
+		for (int i = 0; i <= drug.getSelectedIndex(); i++) {
+			if (drug.getItemText(i).equals(currentDrug)) {
+				occurences++;
 			}
 		}
+
+		int currentMatch = html.indexOf(currentDrug);
+
+		while (currentMatch >= 0 && occurences > 1) {
+
+			System.out.println(occurences + "|" + currentMatch);
+
+			currentMatch = html.indexOf(currentDrug,
+					currentMatch + currentDrug.length());
+			occurences--;
+
+		}
+
+		return currentMatch;
 	}
 
 }
