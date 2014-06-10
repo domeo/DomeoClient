@@ -874,7 +874,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		finalHtml = html.replaceAll(
 				"<span style=\"background-color: #FFFF00\">", "").replaceAll(
 				"</span>", "");
-		System.out.println("html: " + finalHtml);
+		//System.out.println("html: " + finalHtml);
 
 		int selected1 = drugone.getSelectedIndex();
 		String currentDrug1 = drugone.getItemText(selected1);
@@ -936,7 +936,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		while (currentMatch >= 0 && occurences > 1) {
 
-			System.out.println(occurences + "|" + currentMatch);
+			//System.out.println(occurences + "|" + currentMatch);
 
 			currentMatch = html.indexOf(currentDrug,
 					currentMatch + currentDrug.length());
