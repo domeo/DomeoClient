@@ -3,7 +3,6 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.serial
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDI;
 import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonAnnotationSerializer;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.marshalling.JsonSerializerManager;
@@ -41,30 +40,29 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		 * DDI statement urn
 		 */
 		JSONObject sets = new JSONObject();
-		
-		
+
 		JSONObject statement = new JSONObject();
 		String statementUUID = UUID.uuid();
 		statement.put("@id", new JSONString(PDDI_URN_PREFIX + statementUUID));
 		statement.put("@type", new JSONString(POC_PREFIX
 				+ "DrugDrugInteractionStatement"));
-		
+
 		/*
 		 * PK DDI urn
 		 */
-		//add pkddi to array
-		
+		// add pkddi to array
+
 		JSONArray pkddiArray = new JSONArray();
-		
+
 		JSONObject pkddi = new JSONObject();
 		String pddiUUID = UUID.uuid();
 		pkddi.put("@id", new JSONString(PDDI_URN_PREFIX + pddiUUID));
 		pkddi.put("@type", new JSONString(DIKBD2R_PREFIX + "PK_DDI"));
-		
+
 		/*
 		 * drug entity1
 		 */
-		MLinkedResource drug1 = ann.getDrug1();
+		
 
 		JSONObject drug_entity1 = new JSONObject();
 
@@ -73,43 +71,44 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		 * (RXCUI), or Jochem
 		 */
 		
-		MLinkedResource type1 = ann.getType1();
-		
-		
-		if (type1 != null && drug1 != null) {
-			
+		MLinkedResource drug1 = ann.getDrug1();
+		if (drug1 != null) {
+
 			// get URI by term
-			//String drugUri1 = findURIbyTerm(drug1.getLabel(), type1.getLabel());
+			// String drugUri1 = findURIbyTerm(drug1.getLabel(),
+			// type1.getLabel());
 			String drugUri1 = drug1.getUrl();
 			drug_entity1.put("@id", new JSONString(drugUri1));
-
-			// drug1 has type1
-
-			drug_entity1.put("@type",
-					new JSONString(DIKBD2R_PREFIX + type1.getLabel()));
 
 			drug_entity1.put(IRdfsOntology.label,
 					new JSONString(drug1.getLabel()));
 			drug_entity1.put(IDublinCoreTerms.description,
 					new JSONString(drug1.getDescription()));
-			
-			
+
+		}
+
+		// drug1 has type1
+		MLinkedResource type1 = ann.getType1();
+		if (type1 != null) {
+			drug_entity1.put("@type",
+					new JSONString(DIKBD2R_PREFIX + type1.getLabel()));
+		}
+
+		MLinkedResource role1 = ann.getRole1();
+		if (role1 != null) {
 			// drug1 has role1
-			MLinkedResource role1 = ann.getRole1();
 			if (role1 != null) {
 				drug_entity1.put(SIO_PREFIX + "SIO_000228", new JSONString(
 						DIKBD2R_PREFIX + role1.getLabel()));
 				// drug_entity1.put(DIKBD2R_PREFIX + role1.getLabel(), new
 				// JSONString(role1.getUrl()));
 			}
-	
-		} 
-		
+		}
+
 		/*
 		 * create drug entity2
 		 */
 
-		MLinkedResource drug2 = ann.getDrug2();
 
 		JSONObject drug_entity2 = new JSONObject();
 
@@ -117,32 +116,38 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		 * ID is PURL for an drug active ingredients (RXCUI), product (RXCUI),
 		 * or Jochem
 		 */
-		MLinkedResource type2 = ann.getType2();
-		if (type2 != null && drug2 != null) {
+		
+		MLinkedResource drug2 = ann.getDrug2();
+		if (drug2 != null) {
 			// get URI by term
-			
-			//String drugUri2 = findURIbyTerm(drug2.getLabel(), type2.getLabel());
+
+			// String drugUri2 = findURIbyTerm(drug2.getLabel(),
+			// type2.getLabel());
 			String drugUri2 = drug2.getUrl();
-			
+
 			drug_entity2.put("@id", new JSONString(drugUri2));
 
-			// drug2 has type
-
-			drug_entity2.put("@type",
-					new JSONString(DIKBD2R_PREFIX + type2.getLabel()));
-		
 			drug_entity2.put(IRdfsOntology.label,
 					new JSONString(drug2.getLabel()));
 			drug_entity2.put(IDublinCoreTerms.description,
 					new JSONString(drug2.getDescription()));
-			
-			// drug2 has role2
-			MLinkedResource role2 = ann.getRole2();
-			if (role2 != null) {
-				drug_entity2.put(SIO_PREFIX + "SIO_000228", new JSONString(
-						DIKBD2R_PREFIX + role2.getLabel()));
-			}
+
 		}
+
+		// drug2 has type
+		MLinkedResource type2 = ann.getType2();
+		if (type2 != null) {
+			drug_entity2.put("@type",
+					new JSONString(DIKBD2R_PREFIX + type2.getLabel()));
+		}
+
+		// drug2 has role2
+		MLinkedResource role2 = ann.getRole2();
+		if (role2 != null) {
+			drug_entity2.put(SIO_PREFIX + "SIO_000228", new JSONString(
+					DIKBD2R_PREFIX + role2.getLabel()));
+		}
+
 		/*
 		 * multiple drugs in pk_ddi
 		 */
@@ -154,19 +159,19 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		drugs.set(index_drugs++, drug_entity2);
 
 		// drug participant in pk_ddi
-		if(drugs!=null)
-		pkddi.put(SIO_PREFIX + "SIO_000132", drugs);
-		
+		if (drugs != null)
+			pkddi.put(SIO_PREFIX + "SIO_000132", drugs);
+
 		pkddiArray.set(0, pkddi);
 
 		// DDI statement refers to PDDI
-		if(pkddi!=null)
-		statement.put(SIO_PREFIX + "SIO_000628", pkddiArray);
+		if (pkddi != null)
+			statement.put(SIO_PREFIX + "SIO_000628", pkddiArray);
 
 		/*
 		 * create statement
 		 */
-		
+
 		MLinkedResource statemt = ann.getStatement();
 		if (statemt != null) {
 			// DDI statement is represented by statement
@@ -190,33 +195,26 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		}
 
 		// add statement to body
-		
+
 		sets.put("sets", statement);
 		bodies.set(0, sets);
 		annotation.put(IDomeoOntology.content, bodies);
-		
+
 		return annotation;
 	}
 
-/*	public String findURIbyTerm(String term, String type) {
-		String uri = "";
-		if (type.equals("active-ingredient")) {
-			uri = Mexpertstudy_pDDI.getActiveIngredient_URI_map().get(
-					term.toUpperCase());
-		} else if (type.equals("metabolite")) {
-			uri = Mexpertstudy_pDDI.getMetabolite_URI_map().get(
-					term.toUpperCase());
-		} else if (type.equals("drug-product")) {
-			uri = Mexpertstudy_pDDI.getDrugProduct_URI_map().get(
-					term.toUpperCase());
-		}
+	/*
+	 * public String findURIbyTerm(String term, String type) { String uri = "";
+	 * if (type.equals("active-ingredient")) { uri =
+	 * Mexpertstudy_pDDI.getActiveIngredient_URI_map().get( term.toUpperCase());
+	 * } else if (type.equals("metabolite")) { uri =
+	 * Mexpertstudy_pDDI.getMetabolite_URI_map().get( term.toUpperCase()); }
+	 * else if (type.equals("drug-product")) { uri =
+	 * Mexpertstudy_pDDI.getDrugProduct_URI_map().get( term.toUpperCase()); }
+	 * 
+	 * if (uri.length() > 4) return uri; else { return "fake_uri"; }
+	 * 
+	 * }
+	 */
 
-		if (uri.length() > 4)
-			return uri;
-		else {
-			return "fake_uri";
-		}
-		
-	}*/
-	
 }

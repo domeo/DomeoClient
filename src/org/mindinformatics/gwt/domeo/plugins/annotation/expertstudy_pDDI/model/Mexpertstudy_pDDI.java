@@ -18,18 +18,27 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 
 	/*
 	 * inner class for drug entity
+	 *
 	 */
 	public static class drugEntity {
 
 		public drugEntity(String name, String URI, String type) {
 			this.name = name;
-			this.uri = URI;
+			
 			this.type = type;
 
 		}
 
 		private String name;
-		private String uri;
+		private String rxcui;
+		public String getRxcui() {
+			return rxcui;
+		}
+
+		public void setRxcui(String rxcui) {
+			this.rxcui = rxcui;
+		}
+
 		private String type;
 
 		public String getName() {
@@ -40,14 +49,7 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 			this.name = name;
 		}
 
-		public String getUri() {
-			return uri;
-		}
-
-		public void setUri(String uri) {
-			this.uri = uri;
-		}
-
+		
 		public String getType() {
 			return type;
 		}
@@ -68,11 +70,19 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 		return drugEntitiesMap;
 	}
 
+	/*
+	 * the mappings of exact string matching and drug attributes (preferred term, type and rxcui)
+	 */
+	
 	public static HashMap<String, drugEntity> drugEntitiesMap = new HashMap<String, drugEntity>() {
 		{
 			put("adriamycin", new drugEntity("ADRIAMYCIN",
-					"http://purl.bioontology.org/ontology/RXNORM/1191140",
+					"1191140",
 					"drug product"));
+			put("warfarin", new drugEntity("warfarin",
+					"11289",
+					"Active Ingredient"));
+		
 
 			// TODO: add mappings of drug entities into model
 		}

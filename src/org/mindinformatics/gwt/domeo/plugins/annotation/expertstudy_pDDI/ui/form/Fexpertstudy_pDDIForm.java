@@ -129,8 +129,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			String drug1Str = drug1.getItemText(indexdrug1);
 
 			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drug1Str)) {
-				drug1Uri = Mexpertstudy_pDDI.getDrugEntities().get(drug1Str)
-						.getUri();
+				drug1Uri = "http://purl.bioontology.org/ontology/RXNORM/"
+						+ Mexpertstudy_pDDI.getDrugEntities().get(drug1Str)
+								.getRxcui();
 			} else
 				drug1Uri = RXNORM_PREFIX;
 
@@ -151,7 +152,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drug2Str)) {
 				drug2Uri = Mexpertstudy_pDDI.getDrugEntities().get(drug2Str)
-						.getUri();
+						.getRxcui();
 			} else
 				drug2Uri = RXNORM_PREFIX;
 
@@ -313,6 +314,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		// highlight drug
 		highlightCurrentDrug();
 
+		// preselect type
+
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
 				.generalCss().applyButton());
 		yesButton.setWidth("78px");
@@ -321,6 +324,11 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		yesButton.setText("OK");
 		yesButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+
+				// validates required fields
+				if (!validatesRequiredFields())
+					return;
+
 				if (isContentInvalid())
 					return;
 
@@ -594,6 +602,11 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			public void onClick(ClickEvent event) {
 				System.out.println("onClick function triggered");
 				try {
+
+					// validates required fields
+					if (!validatesRequiredFields())
+						return;
+
 					if (isContentInvalid()) {
 						return; // TODO: modify this function to validate our UI
 
@@ -843,22 +856,26 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 	/*
 	 * highlight the current selection of drug in sentence span
+	 * 
+	 * preselect drug type
 	 */
 
 	public void highlightCurrentDrug() {
 
-		// highlight drug1
+		// highlight drug1 and preselect type1
 		drug1.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
+				preselectDrugType(drug1, 1);
 				highlightCurrentDrugHelper(drug1, drug2);
 			}
 		});
 
-		// highlight drug2
+		// highlight drug2 and preselect type2
 		drug2.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
+				preselectDrugType(drug2, 2);
 				highlightCurrentDrugHelper(drug2, drug1);
 			}
 		});
@@ -874,7 +891,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		finalHtml = html.replaceAll(
 				"<span style=\"background-color: #FFFF00\">", "").replaceAll(
 				"</span>", "");
-		//System.out.println("html: " + finalHtml);
+		// System.out.println("html: " + finalHtml);
 
 		int selected1 = drugone.getSelectedIndex();
 		String currentDrug1 = drugone.getItemText(selected1);
@@ -936,7 +953,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		while (currentMatch >= 0 && occurences > 1) {
 
-			//System.out.println(occurences + "|" + currentMatch);
+			// System.out.println(occurences + "|" + currentMatch);
 
 			currentMatch = html.indexOf(currentDrug,
 					currentMatch + currentDrug.length());
@@ -947,4 +964,84 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		return currentMatch;
 	}
 
+	/*
+	 * preselect type when drug is defined
+	 */
+
+	public void preselectDrugType(ListBox drug, int whichDrug) {
+
+		int selectedIndex = drug.getSelectedIndex();
+		if (selectedIndex > 0 && selectedIndex < drug.getItemCount()) {
+
+			String drugExact = drug.getItemText(selectedIndex);
+
+			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drugExact)) {
+				String drugType = Mexpertstudy_pDDI.getDrugEntities()
+						.get(drugExact).getType();
+				preselectDrugTypeHelper(drugType, whichDrug);
+				// System.out.println("preselect type for drug "+whichDrug +
+				// " as " + drugType);
+			}
+		}
+
+	}
+
+	public void preselectDrugTypeHelper(String drugType, int whichDrug) {
+
+		if (whichDrug == 1) {
+			if (drugType.equals("Active Ingredient"))
+				typeai1.setValue(true);
+			else if (drugType.equals("Drug Product"))
+				typedp1.setValue(true);
+			else
+				typemb1.setValue(true);
+		} else if (whichDrug == 2) {
+			if (drugType.equals("Active Ingredient"))
+				typeai2.setValue(true);
+			else if (drugType.equals("Drug Product"))
+				typedp2.setValue(true);
+			else
+				typemb2.setValue(true);
+
+		} else
+			return;
+
+	}
+
+	/*
+	 * drug 1, drug 2 are required fields
+	 */
+	public boolean validatesRequiredFields() {
+		ArrayList<String> requireds = new ArrayList<String>();
+
+		if (drug1.getSelectedIndex() == 0)
+			requireds.add("drug 1");
+		if (drug2.getSelectedIndex() == 0)
+			requireds.add("drug 2");
+		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue())) {
+			requireds.add("drug 1 type");
+		}
+		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue())) {
+			requireds.add("drug 2 type");
+		}
+		if (!(rolepp1.getValue() || roleob1.getValue())) {
+			requireds.add("drug 1 role");
+		}
+		if (!(rolepp2.getValue() || roleob2.getValue())) {
+			requireds.add("drug 2 role");
+		}
+
+		if (requireds.size() > 0) {
+
+			String message = "";
+			for (String str : requireds) {
+				message += str + " ,";
+			}
+			message = message.substring(0, message.length() - 1);
+
+			Window.alert(message + "are required");
+			return false;
+		}
+		return true;
+	}
 }

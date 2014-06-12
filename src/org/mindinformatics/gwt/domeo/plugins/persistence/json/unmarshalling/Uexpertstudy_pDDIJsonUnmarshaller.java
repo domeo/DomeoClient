@@ -84,70 +84,78 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 		/*
 		 * drug entities
 		 */
-		for (int index = 0; index < drugs.length(); index++) {
 
-			JsoDDI_DrugEntityUsage drug = drugs.get(index);
+		if (drugs!=null) {
+			for (int index = 0; index < drugs.length(); index++) {
 
-			if (drug != null) {
-				String jsLabel = drug.getLabel();
-				String jsDescript = drug.getDescription();
-				String jsURI = drug.getId();
+				JsoDDI_DrugEntityUsage drug = drugs.get(index);
 
-				MLinkedResource drugEntity = ResourcesFactory
-						.createLinkedResource(jsURI, jsLabel, jsDescript);
+				if (drug != null) {
+					String jsLabel = drug.getLabel();
+					String jsDescript = drug.getDescription();
+					String jsURI = drug.getId();
 
-				_domeo.getLogger().debug(
-						this,
-						"drug entity " + (index + 1)
-								+ " linked resource created: " + jsLabel);
+					MLinkedResource drugEntity = ResourcesFactory
+							.createLinkedResource(jsURI, jsLabel, jsDescript);
 
-				if (index == 0) {
-					ann.setDrug1(drugEntity);
-				} else {
-					ann.setDrug2(drugEntity);
+					_domeo.getLogger().debug(
+							this,
+							"drug entity " + (index + 1)
+									+ " linked resource created: " + jsLabel);
+
+					if (index == 0) {
+						ann.setDrug1(drugEntity);
+					} else {
+						ann.setDrug2(drugEntity);
+					}
 				}
-			}
 
-			/*
-			 * drug entity has type
-			 */
+				/*
+				 * drug entity has type
+				 */
 
-			String typeScript = drug.getType();
-			if (typeScript != null && !typeScript.trim().equals("")) {
-				String typeURI = typeScript.replace("dikbD2R:", DIKBD2R_PREFIX);
-				String typeLabel = typeScript.substring(8);
-				String typeDescript = "Referred to the type of the mention within the sentence for drug.";
+				if (drug != null && !drug.getLabel().trim().equals("")) {
+					String typeScript = drug.getType();
+					if (typeScript != null && !typeScript.trim().equals("")) {
+						String typeURI = typeScript.replace("dikbD2R:",
+								DIKBD2R_PREFIX);
+						String typeLabel = typeScript.substring(8);
+						String typeDescript = "Referred to the type of the mention within the sentence for drug.";
 
-				MLinkedResource type = ResourcesFactory.createLinkedResource(
-						typeURI, typeLabel, typeDescript);
+						MLinkedResource type = ResourcesFactory
+								.createLinkedResource(typeURI, typeLabel,
+										typeDescript);
 
-				if (index == 0) {
-					ann.setType1(type);
-				} else {
-					ann.setType2(type);
-				}
-			}
+						if (index == 0) {
+							ann.setType1(type);
+						} else {
+							ann.setType2(type);
+						}
+					}
 
-			/*
-			 * drug entity has role
-			 */
+					/*
+					 * drug entity has role
+					 */
 
-			String roleScript = drug.getRole();
-			if (roleScript != null && !roleScript.trim().equals("")) {
-				String roleURI = roleScript.replace("dikbD2R:", DIKBD2R_PREFIX);
-				String roleLabel = roleScript.substring(8);
-				String roleDescript = "Referred to the role that each drug one plays within the interaction.";
+					String roleScript = drug.getRole();
+					if (roleScript != null && !roleScript.trim().equals("")) {
+						String roleURI = roleScript.replace("dikbD2R:",
+								DIKBD2R_PREFIX);
+						String roleLabel = roleScript.substring(8);
+						String roleDescript = "Referred to the role that each drug one plays within the interaction.";
 
-				MLinkedResource role = ResourcesFactory.createLinkedResource(
-						roleURI, roleLabel, roleDescript);
-				if (index == 0) {
-					ann.setRole1(role);
-				} else {
-					ann.setRole2(role);
+						MLinkedResource role = ResourcesFactory
+								.createLinkedResource(roleURI, roleLabel,
+										roleDescript);
+						if (index == 0) {
+							ann.setRole1(role);
+						} else {
+							ann.setRole2(role);
+						}
+					}
 				}
 			}
 		}
-
 		/*
 		 * statement
 		 */
@@ -173,7 +181,7 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 		 */
 		String modalityScript = ddibody.getModality();
 
-		if (modalityScript != null&& !modalityScript.trim().equals("")) {
+		if (modalityScript != null && !modalityScript.trim().equals("")) {
 			String jsLabel = modalityScript.substring(5);
 			String jsDescript = "Referred to extra sources of information that the annotator considers "
 					+ "are helpful to provide evidence for or against the existence of the pDDI.";
