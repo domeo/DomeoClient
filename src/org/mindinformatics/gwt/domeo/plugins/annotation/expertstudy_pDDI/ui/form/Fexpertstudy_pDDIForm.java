@@ -1030,6 +1030,12 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		if (!(rolepp2.getValue() || roleob2.getValue())) {
 			requireds.add("drug 2 role");
 		}
+		if (!(statementqu.getValue() || statementql.getValue())) {
+			requireds.add("statement");
+		}
+		if (!(modalitypt.getValue() || modalitynt.getValue())) {
+			requireds.add("modality");
+		}
 
 		if (requireds.size() > 0) {
 
