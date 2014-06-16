@@ -1,7 +1,6 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
@@ -18,19 +17,20 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 
 	/*
 	 * inner class for drug entity
-	 *
 	 */
 	public static class drugEntity {
 
-		public drugEntity(String name, String URI, String type) {
+		public drugEntity(String name, String rxcui, String type) {
 			this.name = name;
-			
+            this.rxcui=rxcui;
 			this.type = type;
-
+       
 		}
 
 		private String name;
 		private String rxcui;
+		private String type;
+
 		public String getRxcui() {
 			return rxcui;
 		}
@@ -38,8 +38,6 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 		public void setRxcui(String rxcui) {
 			this.rxcui = rxcui;
 		}
-
-		private String type;
 
 		public String getName() {
 			return name;
@@ -49,7 +47,6 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 			this.name = name;
 		}
 
-		
 		public String getType() {
 			return type;
 		}
@@ -71,402 +68,493 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 	}
 
 	/*
-	 * the mappings of exact string matching and drug attributes (preferred term, type and rxcui)
+	 * the mappings of exact string matching and drug attributes (preferred
+	 * term, type and rxcui)
 	 */
-	
+
 	public static HashMap<String, drugEntity> drugEntitiesMap = new HashMap<String, drugEntity>() {
 		{
-			put("adriamycin", new drugEntity("ADRIAMYCIN",
-					"1191140",
-					"drug product"));
-			put("warfarin", new drugEntity("warfarin",
-					"11289",
-					"Active Ingredient"));
-		
+			put("4-hydroxyatomoxetine", new drugEntity("4-hydroxyatomoxetine","0","Metabolite"));
 
-			// TODO: add mappings of drug entities into model
+			put("7-hydroxymethotrexate", new drugEntity("7-hydroxymethotrexate","0","Metabolite"));
+
+			put("9-hydroxyrisperidone", new drugEntity("9-hydroxyrisperidone","679314","Active Ingredient"));
+
+			put("a 10", new drugEntity("a 10","0","NAN"));
+
+			put("a 300", new drugEntity("a 300","0","NAN"));
+
+			put("a 7", new drugEntity("a 7","0","NAN"));
+
+			put("acarbose", new drugEntity("acarbose","16681","Active Ingredient"));
+
+			put("acyclovir", new drugEntity("acyclovir","281","Active Ingredient"));
+
+			put("adriamycin", new drugEntity("adriamycin","42512","Drug Product"));
+
+			put("aliskiren", new drugEntity("aliskiren","325646","Active Ingredient"));
+
+			put("alosetron", new drugEntity("alosetron","85248","Active Ingredient"));
+
+			put("alprazolam", new drugEntity("alprazolam","596","Active Ingredient"));
+
+			put("aminophylline", new drugEntity("aminophylline","689","Active Ingredient"));
+
+			put("amiodarone", new drugEntity("amiodarone","703","Active Ingredient"));
+
+			put("amitriptyline", new drugEntity("amitriptyline","704","Active Ingredient"));
+
+			put("amlodipine", new drugEntity("amlodipine","17767","Active Ingredient"));
+
+			put("amoxicillin", new drugEntity("amoxicillin","723","Active Ingredient"));
+
+			put("ampicillin", new drugEntity("ampicillin","733","Active Ingredient"));
+
+			put("angiotensinogen", new drugEntity("angiotensinogen","0","NAN"));
+
+			put("antineoplastic agents", new drugEntity("antineoplastic agents","0","NAN"));
+
+			put("aspirin", new drugEntity("aspirin","1191","Active Ingredient"));
+
+			put("atazanavir", new drugEntity("atazanavir","343047","Active Ingredient"));
+
+			put("atazanavir sulfate", new drugEntity("atazanavir sulfate","358299","Active Ingredient"));
+
+			put("atenolol 100 mg", new drugEntity("atenolol 100 mg","315436","Active Ingredient"));
+
+			put("atenolol", new drugEntity("atenolol","1202","Active Ingredient"));
+
+			put("atomoxetine", new drugEntity("atomoxetine","38400","Active Ingredient"));
+
+			put("atomoxetine hydrochloride", new drugEntity("atomoxetine hydrochloride","353103","Active Ingredient"));
+
+			put("atorvastatin", new drugEntity("atorvastatin","83367","Active Ingredient"));
+
+			put("avandia", new drugEntity("avandia","261455","Drug Product"));
+
+			put("azathioprine", new drugEntity("azathioprine","1256","Active Ingredient"));
+
+			put("azithromycin", new drugEntity("azithromycin","18631","Active Ingredient"));
+
+			put("basis", new drugEntity("basis","1046801","Drug Product"));
+
+			put("benzodiazepines", new drugEntity("benzodiazepines","0","NAN"));
+
+			put("bisoprolol fumarate", new drugEntity("bisoprolol fumarate","142146","Active Ingredient"));
+
+			put("bosentan", new drugEntity("bosentan","75207","Active Ingredient"));
+
+			put("caffeine", new drugEntity("caffeine","1886","Active Ingredient"));
+
+			put("carbamazepine", new drugEntity("carbamazepine","2002","Active Ingredient"));
+
+			put("carbamazepine 400 mg", new drugEntity("carbamazepine 400 mg","315567","Active Ingredient"));
+
+			put("carbamazepine epoxide", new drugEntity("carbamazepine epoxide","2002","Active Ingredient"));
+
+			put("celecoxib", new drugEntity("celecoxib","140587","Active Ingredient"));
+
+			put("chlorpromazine", new drugEntity("chlorpromazine","2403","Active Ingredient"));
+
+			put("cholestyramine", new drugEntity("cholestyramine","2447","Active Ingredient"));
+
+			put("cimetidine", new drugEntity("cimetidine","2541","Active Ingredient"));
+
+			put("cimetidine 400 mg", new drugEntity("cimetidine 400 mg","315680","Active Ingredient"));
+
+			put("cimetidine 600 mg", new drugEntity("cimetidine 600 mg","332843","Active Ingredient"));
+
+			put("cisapride", new drugEntity("cisapride","35255","Active Ingredient"));
+
+			put("cisplatin", new drugEntity("cisplatin","2555","Active Ingredient"));
+
+			put("citalopram", new drugEntity("citalopram","2556","Active Ingredient"));
+
+			put("citalopram 40 mg", new drugEntity("citalopram 40 mg","329445","Active Ingredient"));
+
+			put("clarithromycin", new drugEntity("clarithromycin","21212","Active Ingredient"));
+
+			put("clomipramine", new drugEntity("clomipramine","2597","Active Ingredient"));
+
+			put("clonazepam", new drugEntity("clonazepam","2598","Active Ingredient"));
+
+			put("clopidogrel", new drugEntity("clopidogrel","32968","Active Ingredient"));
+
+			put("clozapine", new drugEntity("clozapine","2626","Active Ingredient"));
+
+			put("colestipol", new drugEntity("colestipol","2685","Active Ingredient"));
+
+			put("conivaptan", new drugEntity("conivaptan","302285","Active Ingredient"));
+
+			put("conivaptan hydrochloride", new drugEntity("conivaptan hydrochloride","1294548","Active Ingredient"));
+
+			put("cortisol", new drugEntity("cortisol","5492","Active Ingredient"));
+
+			put("coumarin", new drugEntity("coumarin","2898","Active Ingredient"));
+
+			put("cyclophosphamide", new drugEntity("cyclophosphamide","3002","Active Ingredient"));
+
+			put("cyclosporine", new drugEntity("cyclosporine","3008","Active Ingredient"));
+
+			put("dalfopristin", new drugEntity("dalfopristin","229369","Active Ingredient"));
+
+			put("dapsone", new drugEntity("dapsone","3108","Active Ingredient"));
+
+			put("desipramine", new drugEntity("desipramine","3247","Active Ingredient"));
+
+			put("desmethyldiazepam", new drugEntity("desmethyldiazepam","3155","Active Ingredient"));
+
+			put("diazepam", new drugEntity("diazepam","3322","Active Ingredient"));
+
+			put("didanosine", new drugEntity("didanosine","3364","Active Ingredient"));
+
+			put("digitalis", new drugEntity("digitalis","91235","Active Ingredient"));
+
+			put("digitoxin", new drugEntity("digitoxin","3403","Active Ingredient"));
+
+			put("digoxin", new drugEntity("digoxin","3407","Active Ingredient"));
+
+			put("diltiazem", new drugEntity("diltiazem","3443","Active Ingredient"));
+
+			put("disulfiram", new drugEntity("disulfiram","3554","Active Ingredient"));
+
+			put("doxazosin", new drugEntity("doxazosin","49276","Active Ingredient"));
+
+			put("doxorubicin", new drugEntity("doxorubicin","3639","Active Ingredient"));
+
+			put("efavirenz", new drugEntity("efavirenz","195085","Active Ingredient"));
+
+			put("epoprostenol", new drugEntity("epoprostenol","8814","Active Ingredient"));
+
+			put("erythromycin", new drugEntity("erythromycin","4053","Active Ingredient"));
+
+			put("esters", new drugEntity("esters","0","NAN"));
+
+			put("ethanol", new drugEntity("ethanol","448","Active Ingredient"));
+
+			put("ethinyl estradiol", new drugEntity("ethinyl estradiol","4124","Active Ingredient"));
+
+			put("felbamate", new drugEntity("felbamate","24812","Active Ingredient"));
+
+			put("felbatol", new drugEntity("felbatol","224900","Drug Product"));
+
+			put("fexofenadine", new drugEntity("fexofenadine","87636","Active Ingredient"));
+
+			put("fexofenadine hydrochloride 120 mg", new drugEntity("fexofenadine hydrochloride 120 mg","997549","Active Ingredient"));
+
+			put("fexofenadine hydrochloride", new drugEntity("fexofenadine hydrochloride","236474","Active Ingredient"));
+
+			put("flecainide", new drugEntity("flecainide","4441","Active Ingredient"));
+
+			put("fluconazole 100 mg", new drugEntity("fluconazole 100 mg","315935","Active Ingredient"));
+
+			put("fluconazole 200 mg", new drugEntity("fluconazole 200 mg","315938","Active Ingredient"));
+
+			put("fluconazole", new drugEntity("fluconazole","4450","Active Ingredient"));
+
+			put("fluconazole 50 mg", new drugEntity("fluconazole 50 mg","315939","Active Ingredient"));
+
+			put("fluoxetine", new drugEntity("fluoxetine","4493","Active Ingredient"));
+
+			put("fluvastatin", new drugEntity("fluvastatin","41127","Active Ingredient"));
+
+			put("fluvoxamine", new drugEntity("fluvoxamine","42355","Active Ingredient"));
+
+			put("fluvoxamine maleate 100 mg", new drugEntity("fluvoxamine maleate 100 mg","903872","Active Ingredient"));
+
+			put("fluvoxamine maleate", new drugEntity("fluvoxamine maleate","203143","Active Ingredient"));
+
+			put("fosamprenavir", new drugEntity("fosamprenavir","358262","Active Ingredient"));
+
+			put("furosemide", new drugEntity("furosemide","4603","Active Ingredient"));
+
+			put("ganciclovir", new drugEntity("ganciclovir","4678","Active Ingredient"));
+
+			put("gemfibrozil", new drugEntity("gemfibrozil","4719","Active Ingredient"));
+
+			put("glimepiride", new drugEntity("glimepiride","25789","Active Ingredient"));
+
+			put("glipizide", new drugEntity("glipizide","4821","Active Ingredient"));
+
+			put("glyburide", new drugEntity("glyburide","4815","Active Ingredient"));
+
+			put("glycoprotein", new drugEntity("glycoprotein","0","NAN"));
+
+			put("hmg-coa", new drugEntity("hmg-coa","0","NAN"));
+
+			put("hydrochlorothiazide", new drugEntity("hydrochlorothiazide","5487","Active Ingredient"));
+
+			put("hypromellose", new drugEntity("hypromellose","27334","Active Ingredient"));
+
+			put("imipramine", new drugEntity("imipramine","5691","Active Ingredient"));
+
+			put("indinavir", new drugEntity("indinavir","114289","Active Ingredient"));
+
+			put("insulin", new drugEntity("insulin","5856","Active Ingredient"));
+
+			put("isoproterenol", new drugEntity("isoproterenol","6054","Active Ingredient"));
+
+			put("itraconazole 200 mg", new drugEntity("itraconazole 200 mg","992412","Active Ingredient"));
+
+			put("itraconazole", new drugEntity("itraconazole","28031","Active Ingredient"));
+
+			put("ketoconazole", new drugEntity("ketoconazole","6135","Active Ingredient"));
+
+			put("lamivudine", new drugEntity("lamivudine","68244","Active Ingredient"));
+
+			put("levodopa", new drugEntity("levodopa","6375","Active Ingredient"));
+
+			put("levonorgestrel", new drugEntity("levonorgestrel","6373","Active Ingredient"));
+
+			put("lipitor", new drugEntity("lipitor","153165","Drug Product"));
+
+			put("lithium carbonate", new drugEntity("lithium carbonate","42351","Active Ingredient"));
+
+			put("lopinavir", new drugEntity("lopinavir","195088","Active Ingredient"));
+
+			put("lorazepam", new drugEntity("lorazepam","6470","Active Ingredient"));
+
+			put("lotronex", new drugEntity("lotronex","261563","Drug Product"));
+
+			put("lovastatin", new drugEntity("lovastatin","6472","Active Ingredient"));
+
+			put("luteinizing hormone", new drugEntity("luteinizing hormone","6383","Active Ingredient"));
+
+			put("maalox", new drugEntity("maalox","29115","Drug Product"));
+
+			put("magnesium stearate", new drugEntity("magnesium stearate","1310567","Active Ingredient"));
+
+			put("magnesium trisilicate", new drugEntity("magnesium trisilicate","29170","Active Ingredient"));
+
+			put("meperidine", new drugEntity("meperidine","6754","Active Ingredient"));
+
+			put("mercaptopurine", new drugEntity("mercaptopurine","103","Active Ingredient"));
+
+			put("mesoridazine", new drugEntity("mesoridazine","6779","Active Ingredient"));
+
+			put("metformin", new drugEntity("metformin","6809","Active Ingredient"));
+
+			put("methadone", new drugEntity("methadone","6813","Active Ingredient"));
+
+			put("methotrexate", new drugEntity("methotrexate","6851","Active Ingredient"));
+
+			put("metoclopramide", new drugEntity("metoclopramide","6915","Active Ingredient"));
+
+			put("metoprolol", new drugEntity("metoprolol","6918","Active Ingredient"));
+
+			put("metoprolol succinate", new drugEntity("metoprolol succinate","221124","Active Ingredient"));
+
+			put("metronidazole", new drugEntity("metronidazole","6922","Active Ingredient"));
+
+			put("mexiletine", new drugEntity("mexiletine","6926","Active Ingredient"));
+
+			put("mexiletine hydrochloride", new drugEntity("mexiletine hydrochloride","142138","Active Ingredient"));
+
+			put("midazolam", new drugEntity("midazolam","6960","Active Ingredient"));
+
+			put("monoamine oxidase inhibitors", new drugEntity("monoamine oxidase inhibitors","0","NAN"));
+
+			put("naproxen 500 mg", new drugEntity("naproxen 500 mg","316328","Active Ingredient"));
+
+			put("n-desmethylatomoxetine", new drugEntity("n-desmethylatomoxetine","0","Metabolite"));
+
+			put("nefazodone", new drugEntity("nefazodone","31565","Active Ingredient"));
+
+			put("nelfinavir", new drugEntity("nelfinavir","134527","Active Ingredient"));
+
+			put("nifedipine 10 mg", new drugEntity("nifedipine 10 mg","316352","Active Ingredient"));
+
+			put("nifedipine", new drugEntity("nifedipine","7417","Active Ingredient"));
+
+			put("nisoldipine", new drugEntity("nisoldipine","7435","Active Ingredient"));
+
+			put("nitrofurantoin", new drugEntity("nitrofurantoin","7454","Active Ingredient"));
+
+			put("norethindrone", new drugEntity("norethindrone","7514","Active Ingredient"));
+
+			put("normeperidine", new drugEntity("normeperidine","0","Metabolite"));
+
+			put("noroxycodone", new drugEntity("noroxycodone","0","Metabolite"));
+
+			put("nortriptyline", new drugEntity("nortriptyline","7531","Active Ingredient"));
+
+			put("norverapamil", new drugEntity("norverapamil","0","Metabolite"));
+
+			put("norverapamil", new drugEntity("norverapamil","0","NAN"));
+
+			put("o-desmethylvenlafaxine", new drugEntity("o-desmethylvenlafaxine","0","Metabolite"));
+
+			put("omeprazole 20 mg", new drugEntity("omeprazole 20 mg","316408","Active Ingredient"));
+
+			put("omeprazole 40 mg", new drugEntity("omeprazole 40 mg","317451","Active Ingredient"));
+
+			put("omeprazole", new drugEntity("omeprazole","7646","Active Ingredient"));
+
+			put("oncovin", new drugEntity("oncovin","0","NAN"));
+
+			put("orlistat", new drugEntity("orlistat","37925","Active Ingredient"));
+
+			put("oxycodone", new drugEntity("oxycodone","7804","Active Ingredient"));
+
+			put("oxymorphone", new drugEntity("oxymorphone","7814","Active Ingredient"));
+
+			put("paclitaxel", new drugEntity("paclitaxel","56946","Active Ingredient"));
+
+			put("paroxetine 20 mg", new drugEntity("paroxetine 20 mg","317659","Active Ingredient"));
+
+			put("paroxetine", new drugEntity("paroxetine","32937","Active Ingredient"));
+
+			put("paroxetine hydrochloride", new drugEntity("paroxetine hydrochloride","235830","Active Ingredient"));
+
+			put("penicillins", new drugEntity("penicillins","0","NAN"));
+
+			put("phenobarbital", new drugEntity("phenobarbital","8134","Active Ingredient"));
+
+			put("phenothiazines", new drugEntity("phenothiazines","0","NAN"));
+
+			put("phenytoin", new drugEntity("phenytoin","8183","Active Ingredient"));
+
+			put("pimozide 2 mg", new drugEntity("pimozide 2 mg","316520","Active Ingredient"));
+
+			put("pimozide", new drugEntity("pimozide","8331","Active Ingredient"));
+
+			put("polydextrose", new drugEntity("polydextrose","1363053","Active Ingredient"));
+
+			put("polyethylene glycol", new drugEntity("polyethylene glycol","8516","Active Ingredient"));
+
+			put("povidone", new drugEntity("povidone","8610","Active Ingredient"));
+
+			put("pravastatin", new drugEntity("pravastatin","42463","Active Ingredient"));
+
+			put("prazosin", new drugEntity("prazosin","8629","Active Ingredient"));
+
+			put("prednisone", new drugEntity("prednisone","8640","Active Ingredient"));
+
+			put("probenecid", new drugEntity("probenecid","8698","Active Ingredient"));
+
+			put("procaine", new drugEntity("procaine","8701","Active Ingredient"));
+
+			put("procarbazine", new drugEntity("procarbazine","8702","Active Ingredient"));
+
+			put("propafenone", new drugEntity("propafenone","8754","Active Ingredient"));
+
+			put("propoxyphene", new drugEntity("propoxyphene","8785","Active Ingredient"));
+
+			put("propranolol", new drugEntity("propranolol","8787","Active Ingredient"));
+
+			put("quinidine", new drugEntity("quinidine","9068","Active Ingredient"));
+
+			put("quinidine sulfate", new drugEntity("quinidine sulfate","9069","Active Ingredient"));
+
+			put("quinupristin", new drugEntity("quinupristin","229367","Active Ingredient"));
+
+			put("ramipril", new drugEntity("ramipril","35296","Active Ingredient"));
+
+			put("ranitidine 150 mg", new drugEntity("ranitidine 150 mg","328494","Active Ingredient"));
+
+			put("ranitidine", new drugEntity("ranitidine","9143","Active Ingredient"));
+
+			put("repaglinide", new drugEntity("repaglinide","73044","Active Ingredient"));
+
+			put("revatio", new drugEntity("revatio","581642","Drug Product"));
+
+			put("reyataz", new drugEntity("reyataz","382467","Drug Product"));
+
+			put("ribavirin", new drugEntity("ribavirin","9344","Active Ingredient"));
+
+			put("rifampin", new drugEntity("rifampin","9384","Active Ingredient"));
+
+			put("risperidone", new drugEntity("risperidone","35636","Active Ingredient"));
+
+			put("ritonavir", new drugEntity("ritonavir","85762","Active Ingredient"));
+
+			put("rosiglitazone", new drugEntity("rosiglitazone","84108","Active Ingredient"));
+
+			put("rythmol", new drugEntity("rythmol","82079","Drug Product"));
+
+			put("saquinavir", new drugEntity("saquinavir","83395","Active Ingredient"));
+
+			put("septra", new drugEntity("septra","202807","Drug Product"));
+
+			put("serotonin", new drugEntity("serotonin","1311214","Active Ingredient"));
+
+			put("sertraline 200 mg", new drugEntity("sertraline 200 mg","334494","Active Ingredient"));
+
+			put("sertraline", new drugEntity("sertraline","36437","Active Ingredient"));
+
+			put("sildenafil", new drugEntity("sildenafil","136411","Active Ingredient"));
+
+			put("simvastatin", new drugEntity("simvastatin","36567","Active Ingredient"));
+
+			put("simvastatin 40 mg", new drugEntity("simvastatin 40 mg","316674","Active Ingredient"));
+
+			put("simvastatin acid", new drugEntity("simvastatin acid","36567","Active Ingredient"));
+
+			put("sirolimus", new drugEntity("sirolimus","35302","Active Ingredient"));
+
+			put("stavudine", new drugEntity("stavudine","59763","Active Ingredient"));
+
+			put("sulfinpyrazone", new drugEntity("sulfinpyrazone","10205","Active Ingredient"));
+
+			put("synercid", new drugEntity("synercid","135097","Drug Product"));
+
+			put("tacrine", new drugEntity("tacrine","10318","Active Ingredient"));
+
+			put("tacrolimus", new drugEntity("tacrolimus","42316","Active Ingredient"));
+
+			put("tenofovir disoproxil fumarate", new drugEntity("tenofovir disoproxil fumarate","322248","Active Ingredient"));
+
+			put("terfenadine", new drugEntity("terfenadine","42330","Active Ingredient"));
+
+			put("theophylline", new drugEntity("theophylline","10438","Active Ingredient"));
+
+			put("thiazide diuretics", new drugEntity("thiazide diuretics","0","NAN"));
+
+			put("thioridazine", new drugEntity("thioridazine","10502","Active Ingredient"));
+
+			put("thymidine", new drugEntity("thymidine","1372538","Active Ingredient"));
+
+			put("tizanidine", new drugEntity("tizanidine","57258","Active Ingredient"));
+
+			put("tolbutamide", new drugEntity("tolbutamide","10635","Active Ingredient"));
+
+			put("trazodone", new drugEntity("trazodone","10737","Active Ingredient"));
+
+			put("triacetin", new drugEntity("triacetin","10756","Active Ingredient"));
+
+			put("triazolam", new drugEntity("triazolam","10767","Active Ingredient"));
+
+			put("triptans", new drugEntity("triptans","0","NAN"));
+
+			put("tryptophan", new drugEntity("tryptophan","10898","Active Ingredient"));
+
+			put("valproate", new drugEntity("valproate","40254","Active Ingredient"));
+
+			put("venlafaxine", new drugEntity("venlafaxine","39786","Active Ingredient"));
+
+			put("venlafaxine 50 mg", new drugEntity("venlafaxine 50 mg","328800","Active Ingredient"));
+
+			put("venlafaxine hydrochloride", new drugEntity("venlafaxine hydrochloride","235988","Active Ingredient"));
+
+			put("verapamil", new drugEntity("verapamil","11170","Active Ingredient"));
+
+			put("verapamil hydrochloride", new drugEntity("verapamil hydrochloride","203138","Active Ingredient"));
+
+			put("vindesine", new drugEntity("vindesine","11204","Active Ingredient"));
+
+			put("voriconazole", new drugEntity("voriconazole","121243","Active Ingredient"));
+
+			put("warfarin", new drugEntity("warfarin","11289","Active Ingredient"));
+
+			put("zidovudine", new drugEntity("zidovudine","11413","Active Ingredient"));
+
+			put("zonisamide", new drugEntity("zonisamide","39998","Active Ingredient"));
+
 		}
 
 	};
 
-	/*
-	 * the mappings of drug product to purl URI (rxcui)
-	 */
-	public static HashMap<String, String> drugProduct_URI_map = new HashMap<String, String>() {
-		{
-			put("ADRIAMYCIN",
-					"http://purl.bioontology.org/ontology/RXNORM/1191140");
-			put("AVALIDE", "http://purl.bioontology.org/ontology/RXNORM/823938");
-			put("AVANDIA", "http://purl.bioontology.org/ontology/RXNORM/261242");
-			put("FELBATOL",
-					"http://purl.bioontology.org/ontology/RXNORM/209028");
-			put("LIPITOR", "http://purl.bioontology.org/ontology/RXNORM/262095");
-			put("ONCOVIN", "http://purl.bioontology.org/ontology/RXNORM/152151");
-			put("PLAVIX", "http://purl.bioontology.org/ontology/RXNORM/749196");
-			put("REYATAZ", "http://purl.bioontology.org/ontology/RXNORM/402095");
-			put("SEPTRA", "http://purl.bioontology.org/ontology/RXNORM/876429");
-			put("SYNERCID",
-					"http://purl.bioontology.org/ontology/RXNORM/261306");
-			put("VAPRISOL",
-					"http://purl.bioontology.org/ontology/RXNORM/1294552");
-		}
 
-	};
-
-	public static HashMap<String, String> getDrugProduct_URI_map() {
-		return drugProduct_URI_map;
-	}
-
-	public static HashMap<String, String> getMetabolite_URI_map() {
-		return metabolite_URI_map;
-	}
-
-	public static HashMap<String, String> getActiveIngredient_URI_map() {
-		return activeIngredient_URI_map;
-	}
-
-	/*
-	 * the mappings of metabolite to purl URI (rxcui)
-	 */
-	public static HashMap<String, String> metabolite_URI_map = new HashMap<String, String>() {
-		{
-			put("14-HYDROXY-clarithromycin",
-					"http://www.biosemantics.org/chemlist#concept:14_hydroxyclarithromycin:4260775");
-			put("2-OH-DESIPRAMINE",
-					"http://www.biosemantics.org/chemlist#concept:2_hydroxydesipramine:4256097");
-			put("2-OH-IMIPRAMINE",
-					"http://www.biosemantics.org/chemlist#concept:2_Hydroxyimipramine:4010185");
-			put("7-HYDROXYMETHOTREXATE",
-					"http://www.biosemantics.org/chemlist#concept:7_Hydroxymethotrexate:4045813");
-			put("9-HYDROXYRISPERIDONE",
-					"http://www.biosemantics.org/chemlist#concept:9_hydroxy_risperidone:4265124");
-			put("CARBAMAZEPINE EXPOXIDE",
-					"http://www.biosemantics.org/chemlist#concept:carbamazepine_epoxide:4253040");
-			put("DESIPRAMINE",
-					"http://www.biosemantics.org/chemlist#concept:desipramine:4274764");
-			put("DESMETHYLDIAZEPAM",
-					" http://www.biosemantics.org/chemlist#concept:Nordazepam:4249145");
-			put("?-HYDROXYMETOPROLOL",
-					"http://www.biosemantics.org/chemlist#concept:alpha_Hydroxymetoprolol:4125156");
-			put("M8",
-					"http://www.biosemantics.org/chemlist#concept:2_Amino_2_methyl_1_propanol:4008675");
-			put("MCPP",
-					"http://www.biosemantics.org/chemlist#concept:mecoprop:4252108");
-			put("MESORIDAZINE",
-					"http://www.biosemantics.org/chemlist#concept:Mesoridazine:4249568");
-			put("NORMEPERIDINE",
-					"http://www.biosemantics.org/chemlist#concept:normeperidine:4251009");
-			put("NORVERAPAMIL",
-					"http://www.biosemantics.org/chemlist#concept:norverapamil:4254029");
-			put("O-DESMETHYLVENLAFAXINE",
-					"http://www.biosemantics.org/chemlist#concept:O_desmethylvenlafaxine:4266016");
-			put("SULFORIADAZINE",
-					"http://www.biosemantics.org/chemlist#concept:sulforidazine:4258300");
-
-		}
-
-	};
-
-	/*
-	 * the mappings of active ingredient to purl URI (rxcui)
-	 */
-	public static HashMap<String, String> activeIngredient_URI_map = new HashMap<String, String>() {
-		{
-			put("ACARBOSE", "http://purl.bioontology.org/ontology/RXNORM/16681");
-			put("ACETAMINOPHEN",
-					"http://purl.bioontology.org/ontology/RXNORM/161");
-			put("ACYCLOVIR", "http://purl.bioontology.org/ontology/RXNORM/281");
-			put("ADRIAMYCIN",
-					"http://purl.bioontology.org/ontology/RXNORM/42512");
-			put("ALISKIREN",
-					"http://purl.bioontology.org/ontology/RXNORM/325646");
-			put("ALLOPURINOL",
-					"http://purl.bioontology.org/ontology/RXNORM/519");
-			put("ALPRAZOLAM", "http://purl.bioontology.org/ontology/RXNORM/596");
-			put("ALUMINUM",
-					"http://purl.bioontology.org/ontology/RXNORM/1311504");
-			put("ALUMINUM HYDROXIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/612");
-			put("AMITRIPTYLINE",
-					"http://purl.bioontology.org/ontology/RXNORM/704");
-			put("AMLODIPINE",
-					"http://purl.bioontology.org/ontology/RXNORM/17767");
-			put("AMOXICILLIN",
-					"http://purl.bioontology.org/ontology/RXNORM/723");
-			put("AMPICILLIN", "http://purl.bioontology.org/ontology/RXNORM/733");
-			put("ANTIPYRINE",
-					"http://purl.bioontology.org/ontology/RXNORM/1001");
-			put("ATAZANAVIR",
-					"http://purl.bioontology.org/ontology/RXNORM/343047");
-			put("ATENOLOL", "http://purl.bioontology.org/ontology/RXNORM/1202");
-			put("ATOMOXETINE",
-					"http://purl.bioontology.org/ontology/RXNORM/38400");
-			put("ATORVASTATIN",
-					"http://purl.bioontology.org/ontology/RXNORM/83367");
-			put("AZATHIOPRINE",
-					"http://purl.bioontology.org/ontology/RXNORM/1256");
-			put("AZITHROMYCIN",
-					"http://purl.bioontology.org/ontology/RXNORM/18631");
-			put("BISOPROLOL",
-					"http://purl.bioontology.org/ontology/RXNORM/19484");
-			put("BOSENTAN", "http://purl.bioontology.org/ontology/RXNORM/75207");
-			put("CAFFEINE", "http://purl.bioontology.org/ontology/RXNORM/1886");
-			put("CAPTOPRIL", "http://purl.bioontology.org/ontology/RXNORM/1998");
-			put("CARBAMAZEPINE",
-					"http://purl.bioontology.org/ontology/RXNORM/2002");
-			put("CELECOXIB",
-					"http://purl.bioontology.org/ontology/RXNORM/140587");
-			put("CHLORPROMAZINE",
-					"http://purl.bioontology.org/ontology/RXNORM/2403");
-			put("CHOLESTYRAMINE",
-					"http://purl.bioontology.org/ontology/RXNORM/2447");
-			put("CIMETIDINE",
-					"http://purl.bioontology.org/ontology/RXNORM/2541");
-			put("CISAPRIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/35255");
-			put("CISPLATIN", "http://purl.bioontology.org/ontology/RXNORM/2555");
-			put("CITALOPRAM",
-					"http://purl.bioontology.org/ontology/RXNORM/2556");
-			put("CLARITHROMYCIN",
-					"http://purl.bioontology.org/ontology/RXNORM/21212");
-			put("CLOMIPRAMINE",
-					"http://purl.bioontology.org/ontology/RXNORM/2597");
-			put("CLONAZEPAM",
-					"http://purl.bioontology.org/ontology/RXNORM/2598");
-			put("CLOPIDOGREL",
-					"http://purl.bioontology.org/ontology/RXNORM/32968");
-			put("CLOZAPINE", "http://purl.bioontology.org/ontology/RXNORM/2626");
-			put("COLESTIPOL",
-					"http://purl.bioontology.org/ontology/RXNORM/2685");
-			put("CONIVAPTAN",
-					"http://purl.bioontology.org/ontology/RXNORM/302285");
-			put("CYCLOPHOSPHAMIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/3002");
-			put("CYCLOSPORINE",
-					"http://purl.bioontology.org/ontology/RXNORM/3008");
-			put("DALFOPRISTIN",
-					"http://purl.bioontology.org/ontology/RXNORM/229369");
-			put("DAPSONE", "http://purl.bioontology.org/ontology/RXNORM/3108");
-			put("DESIPRAMINE",
-					"http://purl.bioontology.org/ontology/RXNORM/3247");
-			put("DIAZEPAM", "http://purl.bioontology.org/ontology/RXNORM/3322");
-			put("DIDANOSINE",
-					"http://purl.bioontology.org/ontology/RXNORM/3364");
-			put("DIGITOXIN", "http://purl.bioontology.org/ontology/RXNORM/3403");
-			put("DIGOXIN", "http://purl.bioontology.org/ontology/RXNORM/3407");
-			put("DILTIAZEM", "http://purl.bioontology.org/ontology/RXNORM/3443");
-			put("DISULFIRAM",
-					"http://purl.bioontology.org/ontology/RXNORM/3554");
-			put("DONEPEZIL",
-					"http://purl.bioontology.org/ontology/RXNORM/135447");
-			put("DOXAZOSIN",
-					"http://purl.bioontology.org/ontology/RXNORM/49276");
-			put("DOXORUBICIN",
-					"http://purl.bioontology.org/ontology/RXNORM/3639");
-			put("EFAVIRENZ",
-					"http://purl.bioontology.org/ontology/RXNORM/195085");
-			put("EPOPROSTENOL",
-					"http://purl.bioontology.org/ontology/RXNORM/8814");
-			put("ERYTHROMYCIN",
-					"http://purl.bioontology.org/ontology/RXNORM/4053");
-			put("ESTRADIOL", "http://purl.bioontology.org/ontology/RXNORM/4083");
-			put("ETHANOL", "http://purl.bioontology.org/ontology/RXNORM/448");
-			put("ETHINYL ESTRADIOL",
-					"http://purl.bioontology.org/ontology/RXNORM/4124");
-			put("FELBAMATE",
-					"http://purl.bioontology.org/ontology/RXNORM/24812");
-			put("FEXOFENADINE",
-					"http://purl.bioontology.org/ontology/RXNORM/87636");
-			put("FLUCONAZOLE",
-					"http://purl.bioontology.org/ontology/RXNORM/4450");
-			put("FLUOXETINE",
-					"http://purl.bioontology.org/ontology/RXNORM/4493");
-			put("FLUVASTATIN",
-					"http://purl.bioontology.org/ontology/RXNORM/41127");
-			put("FLUVOXAMINE",
-					"http://purl.bioontology.org/ontology/RXNORM/42355");
-			put("FUROSEMIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/4603");
-			put("GALANTAMINE",
-					"http://purl.bioontology.org/ontology/RXNORM/4637");
-			put("GEMFIBROZIL",
-					"http://purl.bioontology.org/ontology/RXNORM/4719");
-			put("GESTODENE",
-					"http://purl.bioontology.org/ontology/RXNORM/25734");
-			put("GLIMEPIRIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/25789");
-			put("GLIPIZIDE", "http://purl.bioontology.org/ontology/RXNORM/4821");
-			put("GLYBURIDE", "http://purl.bioontology.org/ontology/RXNORM/4815");
-			put("HALOPERIDOL",
-					"http://purl.bioontology.org/ontology/RXNORM/5093");
-			put("HYDROCHLOROTHIAZIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/5487");
-			put("IBUPROFEN", "http://purl.bioontology.org/ontology/RXNORM/5640");
-			put("IMIPRAMINE",
-					"http://purl.bioontology.org/ontology/RXNORM/5691");
-			put("INDINAVIR",
-					"http://purl.bioontology.org/ontology/RXNORM/114289");
-			put("INDOMETHACIN",
-					"http://purl.bioontology.org/ontology/RXNORM/5781");
-			put("IRBESARTAN",
-					"http://purl.bioontology.org/ontology/RXNORM/83818");
-			put("IRON", "http://purl.bioontology.org/ontology/RXNORM/90176");
-			put("ISONIAZID", "http://purl.bioontology.org/ontology/RXNORM/6038");
-			put("ITRACONAZOLE",
-					"http://purl.bioontology.org/ontology/RXNORM/28031");
-			put("KETOCONAZOLE",
-					"http://purl.bioontology.org/ontology/RXNORM/6135");
-			put("LAMIVUDINE",
-					"http://purl.bioontology.org/ontology/RXNORM/68244");
-			put("LANSOPRAZOLE",
-					"http://purl.bioontology.org/ontology/RXNORM/17128");
-			put("LEVODOPA", "http://purl.bioontology.org/ontology/RXNORM/6375");
-			put("LEVONORGESTREL",
-					"http://purl.bioontology.org/ontology/RXNORM/6373");
-			put("LIDOCAINE", "http://purl.bioontology.org/ontology/RXNORM/6387");
-			put("LITHIUM", "http://purl.bioontology.org/ontology/RXNORM/6448");
-			put("LOPINAVIR",
-					"http://purl.bioontology.org/ontology/RXNORM/195088");
-			put("LORAZEPAM", "http://purl.bioontology.org/ontology/RXNORM/6470");
-			put("LOVASTATIN",
-					"http://purl.bioontology.org/ontology/RXNORM/6472");
-			put("MAGNESIUM", "http://purl.bioontology.org/ontology/RXNORM/6574");
-			put("MAGNESIUM HYDROXIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/6581");
-			put("MEPERIDINE",
-					"http://purl.bioontology.org/ontology/RXNORM/6754");
-			put("MERCAPTOPURINE",
-					"http://purl.bioontology.org/ontology/RXNORM/103");
-			put("METFORMIN", "http://purl.bioontology.org/ontology/RXNORM/6809");
-			put("METHADONE", "http://purl.bioontology.org/ontology/RXNORM/6813");
-			put("METHOTREXATE",
-					"http://purl.bioontology.org/ontology/RXNORM/6851");
-			put("METOCLOPRAMIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/6915");
-			put("METOPROLOL",
-					"http://purl.bioontology.org/ontology/RXNORM/6918");
-			put("MEXILETINE",
-					"http://purl.bioontology.org/ontology/RXNORM/6926");
-			put("MIDAZOLAM", "http://purl.bioontology.org/ontology/RXNORM/6960");
-			put("NAPROXEN", "http://purl.bioontology.org/ontology/RXNORM/7258");
-			put("NEFAZODONE",
-					"http://purl.bioontology.org/ontology/RXNORM/31565");
-			put("NELFINAVIR",
-					"http://purl.bioontology.org/ontology/RXNORM/134527");
-			put("NIFEDIPINE",
-					"http://purl.bioontology.org/ontology/RXNORM/7417");
-			put("NISOLDIPINE",
-					"http://purl.bioontology.org/ontology/RXNORM/7435");
-			put("NITROFURANTOIN",
-					"http://purl.bioontology.org/ontology/RXNORM/7454");
-			put("NORETHINDRONE",
-					"http://purl.bioontology.org/ontology/RXNORM/7514");
-			put("NORTRIPTYLINE",
-					"http://purl.bioontology.org/ontology/RXNORM/7531");
-			put("OMEPRAZOLE",
-					"http://purl.bioontology.org/ontology/RXNORM/7646");
-			put("OXYCODONE", "http://purl.bioontology.org/ontology/RXNORM/7804");
-			put("PACLITAXEL",
-					"http://purl.bioontology.org/ontology/RXNORM/56946");
-			put("PAROXETINE",
-					"http://purl.bioontology.org/ontology/RXNORM/32937");
-			put("PHENOBARBITAL",
-					"http://purl.bioontology.org/ontology/RXNORM/8134");
-			put("PHENYTOIN", "http://purl.bioontology.org/ontology/RXNORM/8183");
-			put("PIMOZIDE", "http://purl.bioontology.org/ontology/RXNORM/8331");
-			put("PRAVASTATIN",
-					"http://purl.bioontology.org/ontology/RXNORM/42463");
-			put("PREDNISONE",
-					"http://purl.bioontology.org/ontology/RXNORM/8640");
-			put("PROBENECID",
-					"http://purl.bioontology.org/ontology/RXNORM/8698");
-			put("PROCARBAZINE",
-					"http://purl.bioontology.org/ontology/RXNORM/8702");
-			put("PROCYCLIDINE",
-					"http://purl.bioontology.org/ontology/RXNORM/8718");
-			put("PROPAFENONE",
-					"http://purl.bioontology.org/ontology/RXNORM/8754");
-			put("PROPOXYPHENE",
-					"http://purl.bioontology.org/ontology/RXNORM/8785");
-			put("PROPRANOLOL",
-					"http://purl.bioontology.org/ontology/RXNORM/8787");
-			put("QUINIDINE", "http://purl.bioontology.org/ontology/RXNORM/9068");
-			put("QUINUPRISTIN",
-					"http://purl.bioontology.org/ontology/RXNORM/229367");
-			put("RAMIPRIL", "http://purl.bioontology.org/ontology/RXNORM/35296");
-			put("RANITIDINE",
-					"http://purl.bioontology.org/ontology/RXNORM/9143");
-			put("REPAGLINIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/73044");
-			put("RIBAVIRIN", "http://purl.bioontology.org/ontology/RXNORM/9344");
-			put("RIFAMPIN", "http://purl.bioontology.org/ontology/RXNORM/9384");
-			put("RISPERIDONE",
-					"http://purl.bioontology.org/ontology/RXNORM/35636");
-			put("RITONAVIR",
-					"http://purl.bioontology.org/ontology/RXNORM/85762");
-			put("ROSIGLITAZONE",
-					"http://purl.bioontology.org/ontology/RXNORM/84108");
-			put("SAQUINAVIR",
-					"http://purl.bioontology.org/ontology/RXNORM/83395");
-			put("SERTRALINE",
-					"http://purl.bioontology.org/ontology/RXNORM/36437");
-			put("SILDENAFIL",
-					"http://purl.bioontology.org/ontology/RXNORM/136411");
-			put("SIMVASTATIN",
-					"http://purl.bioontology.org/ontology/RXNORM/36567");
-			put("SIROLIMUS",
-					"http://purl.bioontology.org/ontology/RXNORM/35302");
-			put("SOTALOL", "http://purl.bioontology.org/ontology/RXNORM/9947");
-			put("STAVUDINE",
-					"http://purl.bioontology.org/ontology/RXNORM/59763");
-			put("SUCRALFATE",
-					"http://purl.bioontology.org/ontology/RXNORM/10156");
-			put("SULFAMETHOXAZOLE",
-					"http://purl.bioontology.org/ontology/RXNORM/10180");
-			put("SULFINPYRAZONE",
-					"http://purl.bioontology.org/ontology/RXNORM/10205");
-			put("TACRINE", "http://purl.bioontology.org/ontology/RXNORM/10318");
-			put("TACROLIMUS",
-					"http://purl.bioontology.org/ontology/RXNORM/42316");
-			put("TENOFOVIR",
-					"http://purl.bioontology.org/ontology/RXNORM/117466");
-			put("TERFENADINE",
-					"http://purl.bioontology.org/ontology/RXNORM/42330");
-			put("TETRACYCLINE",
-					"http://purl.bioontology.org/ontology/RXNORM/10395");
-			put("THEOPHYLLINE",
-					"http://purl.bioontology.org/ontology/RXNORM/10438");
-			put("THIORIDAZINE",
-					"http://purl.bioontology.org/ontology/RXNORM/10502");
-			put("TOLBUTAMIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/10635");
-			put("TRAZODONE",
-					"http://purl.bioontology.org/ontology/RXNORM/10737");
-			put("TRIAZOLAM",
-					"http://purl.bioontology.org/ontology/RXNORM/10767");
-			put("TRIMETHOPRIM",
-					"http://purl.bioontology.org/ontology/RXNORM/10829");
-			put("VALPROATE",
-					"http://purl.bioontology.org/ontology/RXNORM/40254");
-			put("VALSARTAN",
-					"http://purl.bioontology.org/ontology/RXNORM/69749");
-			put("VENLAFAXINE",
-					"http://purl.bioontology.org/ontology/RXNORM/39786");
-			put("VERAPAMIL",
-					"http://purl.bioontology.org/ontology/RXNORM/11170");
-			put("VINDESINE",
-					"http://purl.bioontology.org/ontology/RXNORM/11204");
-			put("VORICONAZOLE",
-					"http://purl.bioontology.org/ontology/RXNORM/121243");
-			put("WARFARIN", "http://purl.bioontology.org/ontology/RXNORM/11289");
-			put("ZIDOVUDINE",
-					"http://purl.bioontology.org/ontology/RXNORM/11413");
-			put("ZONISAMIDE",
-					"http://purl.bioontology.org/ontology/RXNORM/39998");
-
-		}
-
-	};
 
 	public MLinkedResource getStatement() {
 		return statement;

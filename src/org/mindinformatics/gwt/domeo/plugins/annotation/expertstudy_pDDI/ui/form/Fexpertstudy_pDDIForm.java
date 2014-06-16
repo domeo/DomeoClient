@@ -2,8 +2,6 @@ package org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.for
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindinformatics.gwt.domeo.client.Domeo;
@@ -29,14 +27,10 @@ import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.ButtonWithIcon;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -44,17 +38,12 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Richard Boyce <rdb20@pitt.edu>
@@ -135,6 +124,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			} else
 				drug1Uri = RXNORM_PREFIX;
 
+			System.out.println("drug1:" + drug1Str + " |URI:" + drug1Uri + "|");
+
 			return ResourcesFactory.createLinkedResource(drug1Uri, drug1Str,
 					"Referred to the drug in the interaction.");
 
@@ -151,11 +142,13 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			String drug2Str = drug2.getItemText(indexdrug2);
 
 			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drug2Str)) {
-				drug2Uri = Mexpertstudy_pDDI.getDrugEntities().get(drug2Str)
-						.getRxcui();
+				drug2Uri = "http://purl.bioontology.org/ontology/RXNORM/"
+						+ Mexpertstudy_pDDI.getDrugEntities().get(drug2Str)
+								.getRxcui();
 			} else
 				drug2Uri = RXNORM_PREFIX;
 
+			System.out.println("drug2:" + drug2Str + " |URI:" + drug2Uri + "|");
 			return ResourcesFactory.createLinkedResource(drug2Uri, drug2Str,
 					"Referred to the drug in the interaction.");
 
@@ -993,14 +986,14 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				typeai1.setValue(true);
 			else if (drugType.equals("Drug Product"))
 				typedp1.setValue(true);
-			else
+			else if (drugType.equals("Metabolite"))
 				typemb1.setValue(true);
 		} else if (whichDrug == 2) {
 			if (drugType.equals("Active Ingredient"))
 				typeai2.setValue(true);
 			else if (drugType.equals("Drug Product"))
 				typedp2.setValue(true);
-			else
+			else if (drugType.equals("Metabolite"))
 				typemb2.setValue(true);
 
 		} else
