@@ -82,6 +82,14 @@ public class ApplicationUtils {
 		return $wnd.annotopiaLocation;
 	}-*/;
 	
+	public native static String getAnnotopiaOauthToken() /*-{
+		return $wnd.annotopiaOauthToken;
+	}-*/;
+	
+	public native static String getAnnotopiaApiKey() /*-{
+		return $wnd.annotopiaApiKey;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;

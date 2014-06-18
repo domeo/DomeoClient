@@ -39,6 +39,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnoto
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AnnotopiaSerializerManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.ui.existingsets.ExistingAnnotationViewerPanel;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -91,10 +92,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		
 		try {
 			Ajax.ajax(Ajax.createSettings()
-				.setUrl(URL+"s/annotationset")
+				.setUrl(URL+"s/annotationset" + "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken())
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
-		        .setData(GQuery.$$("apiKey: testkey,outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
+		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
@@ -142,10 +143,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		for(String url: urls) {
 			try {
 				Ajax.ajax(Ajax.createSettings()
-					.setUrl(url)
+					.setUrl(url + "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken())
 			        .setDataType("json") // txt, json, jsonp, xml
 			        .setType("get")      // post, get
-			        .setData(GQuery.$$("apiKey: testkey,outCmd:frame")) // parameters for the query-string
+			        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame")) // parameters for the query-string
 			        .setTimeout(10000)
 			        .setSuccess(new Function(){ // callback to be run if the request success
 			    		public void f() {
@@ -201,10 +202,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		for(MAnnotationSet annotationSet: setToSerialize) {
 			final String operation = (annotationSet.getVersionNumber()==null || annotationSet.getVersionNumber().isEmpty())? "post":"put";
 			JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-			Properties v = utils.parseJSON("{\"apiKey\":\"testkey\",\"outCmd\":\"frame\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
+			Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"outCmd\":\"frame\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
 			try {
 				Ajax.ajax(Ajax.createSettings()
-					.setUrl(URL+"s/annotationset")
+					.setUrl(URL+"s/annotationset" + "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken())
 			        .setDataType("json") // txt, json, jsonp, xml */
 			        .setType(operation)      // post, get
 			        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
