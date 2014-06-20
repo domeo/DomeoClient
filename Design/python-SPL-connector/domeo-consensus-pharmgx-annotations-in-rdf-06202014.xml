@@ -1,0 +1,1562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ao="http://www.w3.org/ns/oa#"
+   xmlns:dailymed="http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/"
+   xmlns:dct="http://purl.org/dc/terms/"
+   xmlns:domeo="http://www.w3.org/ns/domeo#"
+   xmlns:foafx="http://xmlns.com/foaf/0.1/"
+   xmlns:ns1="poc:"
+   xmlns:ns2="ncit:"
+   xmlns:pav="http://purl.org/pav/"
+   xmlns:permissions="http://vocab.deri.ie/cpo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:sio="http://semanticscience.org/resource/"
+>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:FE73DA30-2D2E-4D34-AC2F-B160599E5ADD">
+    <ao:context rdf:resource="urn:domeoclient:uuid:25F3F5B9-D763-4EE6-81C0-CBA4E40E9A55"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-06-09 15:37:59 -0400</pav:createdOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:3CEEBFD0-24F2-4433-95B0-B73566A1E517"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:14E6E1DC-C13E-45EC-A318-3078760B0911"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:CDF7843F-82C0-422A-B165-B0062CDC2F4D"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <domeo:belongsToSet>urn:domeoclient:uuid:C1B0D101-F22C-4842-A0E7-D8F3655CCDE0</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:990346DA-92C3-44FE-B8E1-ADFCF6753A5E"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:A664FD51-9DF9-4B80-9B4E-CC1966A161B1</domeo:belongsToSet>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:2F4DC59A-10CB-47B3-9DA6-0C7800FD11C9"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:F3F9848C-74F0-4003-BF74-38C6DB5AE771"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:A98E9CEE-72D2-4445-AF05-AAAD71E0D3F7"/>
+    <pav:lastSavedOn>2014-06-09 15:38:07 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:77D64D1A-936E-40DC-8131-9A703596FD64"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:7C1AEE0F-B930-47E9-964D-F2F0514339D5"/>
+    <pav:lastSavedOn>2014-06-09 15:38:06 -0400</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotation:82DF1557-6E2F-4DA9-9BA8-0AE086BC09B8</pav:lineageUri>
+    <pav:previousVersion></pav:previousVersion>
+    <ao:body rdf:resource="urn:linkedspls:uuid:7AF17101-95D9-4C71-8845-27ECC85F996F"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:52BB31E1-B99A-4E4A-8E77-4813CC6E61A3"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:ECB29C08-6087-4793-808C-3D4065185BD7"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:1CEDA84C-14E2-4D8B-A754-750B7AAD033F</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:0A3CA733-9487-4B87-812D-13060BE16975"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:FD886273-8735-498C-8640-EA0DDC06EF49"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:7FCAA9C7-0F38-47EA-8CB1-EC96B812DCFE">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A specific variant of a gene, including the wild-type allele, or a patient phenotype</dct:description>
+    <ns1:Variant>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer</ns1:Variant>
+    <rdfs:label>poor-metabolizer</rdfs:label>
+    <sio:SIO_000628>poc:Variant</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:F9DD4860-D0CC-4131-A99A-52C19D46C20E">
+    <ns1:MedicalCondition>hypersensitivity</ns1:MedicalCondition>
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:74DE2DC1-57B0-4111-8D1C-B736E0150D8C">
+    <domeo:deleted>false</domeo:deleted>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <permissions:permissions rdf:nodeID="N97c2588f967b480aa8cfcafd3bb6c3f2"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:2E309079-9689-468B-B68A-AA2979BC6B71"/>
+    <pav:createdOn>2014-06-02 13:27:05 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:lineageUri>urn:domeoserver:annotationset:E319F066-2C3E-4B8B-904F-5B682C614A92</pav:lineageUri>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <rdfs:label>Default Set</rdfs:label>
+    <pav:lastSavedOn>2014-06-02 13:42:04 -0400</pav:lastSavedOn>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CODEINE-fa3ed180-298a-4f9d-9d05-15182d7218bf.html</ao:annotatesResource>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:E34142C5-1680-4612-AC76-D96D8F82364F">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <ao:body rdf:resource="urn:linkedspls:uuid:90B99DCC-C578-44C8-839F-DE119DFE1A87"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:46C646EE-76CC-4501-BB5B-91B578820BBD</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1BA750D8-4CDE-4706-A679-C77C2A699FAC"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1E763572-D7CC-4A0D-92AA-A09D9BE59CB4"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <ao:body rdf:resource="urn:linkedspls:uuid:D8B3209D-96F7-4575-B1E7-D8AFF8A8D63F"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:BAACE48F-1A66-434C-B16E-A60C28CE840D"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:01472B82-6D2F-42F4-9C00-4154BBFC6AE0"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:17BBA926-B6C2-4DD9-BF54-78A37F00C0BD"/>
+    <pav:lastSavedOn>2014-04-14 13:45:58 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:65283AE5-FA5E-46AA-858C-2AB8F4546A8A"/>
+    <pav:createdOn>2014-04-14 13:45:50 -0400</pav:createdOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:F9DD4860-D0CC-4131-A99A-52C19D46C20E"/>
+    <pav:lineageUri>urn:domeoserver:annotation:513C1B7D-DC80-4B6C-992F-ED32F894A005</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:5366E6F5-B967-4E0E-BC7E-F88E7F792CF0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:9DDE5A30-59ED-49D7-B9B6-316245562477">
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:body rdf:resource="urn:linkedspls:uuid:10F8518F-693A-412D-A985-33C7EF2691C2"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:13AF37B1-4E41-4E48-8C9D-A6C3563C903E"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:CB73924A-9807-4CE0-95CC-8F873EEDCA26"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:26D17960-74B8-48DD-9689-BF7BF7C13BF9"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:A6E35E75-97BC-4DBA-9B00-68A4C04E7051"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1F4C8524-E7B6-4B6A-8F06-637A54FCA94B"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:D56A1FF6-9312-4E4E-B17B-D196CCBA7772</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:F4D01475-2047-4CBD-B0AD-E920C848C839"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:5D276A0A-3DA5-41F9-9C49-06EC7D2625B1"/>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lastSavedOn>2014-04-28 15:20:05 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:CE0E6363-C2D4-480F-8158-BDDC176A10E2"/>
+    <pav:createdOn>2014-04-28 15:20:04 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <pav:lineageUri>urn:domeoserver:annotation:9A3B5945-6E58-4504-B3A2-BB1170C76CA1</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1625A18A-CC28-4882-B2EA-0F41AD519BEF"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:6B211667-49E7-455B-9E39-F27E0ABB8F77"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:60484D7D-6C1A-43C0-B194-EE8CBCF92884"/>
+    <domeo:belongsToSet>urn:domeoclient:uuid:4461D7D2-1353-4B00-9FA5-BE7067F9E3EA</domeo:belongsToSet>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <ao:body rdf:resource="urn:linkedspls:uuid:4484FB84-F2D9-41DF-98E0-A900136DF65F"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:60151512-42F8-45B9-9A84-95F2E1D2592B"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:DFB7B1EB-E83A-45B4-B1A1-355909AF9009"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:C7BA52A8-81D4-4107-A3BD-0014E2400833"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:AC6F7990-D861-4C44-AA24-A2C060DDBFB3"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:2A84C740-4285-4260-888E-163093C00752"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:AFC75336-C9AF-46CD-8D54-9AF03B796A96</pav:lineageUri>
+    <pav:lastSavedOn>2014-04-28 15:20:06 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:DA22F966-4678-45E0-8ECB-49523BCBC1CB"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:D03D6753-24D2-4897-9947-4D727F406A9D">
+    <ao:body rdf:resource="urn:linkedspls:uuid:E17A169A-E5CE-44D6-B03F-584B032CFBBC"/>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:C0FABF20-B467-40B0-9165-BC2FF3CBEA66"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:body rdf:resource="urn:linkedspls:uuid:8304D9C5-7323-4A1D-899B-3008E72690DD"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:77834C5F-6095-4EF2-98A6-A4F713039FC6"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <ao:body rdf:resource="urn:linkedspls:uuid:851383A7-38D7-4C9F-B5FA-E4F23B737C41"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:B58DE3C3-8EED-4796-ACEA-501E306312DB"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <pav:lineageUri>urn:domeoserver:annotation:1A5FE820-1D2D-4217-8498-E6CA3F9DE39C</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:72B76170-9A26-4DE6-8096-708F36C5EBAF"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:F0ACC0F6-D267-4BFB-939F-70A922EE5E1E"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:BBE188F7-C911-4082-8C57-7FE73D886012"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-04-14 15:33:19 -0400</pav:createdOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:49DEF704-822D-4AE7-B20C-F49A907D9B1F"/>
+    <pav:lastSavedOn>2014-04-14 15:33:22 -0400</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:2B99F3B5-C69D-412C-9D44-C62A467E5BCE</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:176F6C6C-F399-4CF5-94B6-D0AE2BF2C1B8">
+    <dct:description>A recommended test is related to the biomarker.</dct:description>
+    <rdfs:label>Recommend</rdfs:label>
+    <ns1:TestRecommendation>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#recommended</ns1:TestRecommendation>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000563>poc:TestRecommendation</sio:SIO_000563>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:B965CDC7-BC26-46F9-9C92-EC7D6CEBA1F9">
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <rdfs:label>CYP2C19</rdfs:label>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:2621</dailymed:HGNCGeneSymbol>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:72B76170-9A26-4DE6-8096-708F36C5EBAF">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+    <rdfs:label>poor-metabolizer-positive</rdfs:label>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer-positive</ns1:TestResult>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:BAACE48F-1A66-434C-B16E-A60C28CE840D">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>Discontinue ZIAGEN as soon as a hypersensitivity reaction is suspected. Regardless of HLA-B*5701 status, permanently discontinue ZIAGEN if hypersensitivity cannot be ruled out, even when other diagnoses are possible.</ao:exact>
+    <ao:prefix>Patients who carry the HLA-B*5701 allele are at high risk for experiencing a hypersensitivity reaction to abacavir.  (5.1) </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ABACAVIR-6a3b10fc-4b2a-45e3-16a1-ef79187a6dfb.html</ao:hasSource>
+    <domeo:uuid>BAACE48F-1A66-434C-B16E-A60C28CE840D</domeo:uuid>
+    <pav:createdOn>2014-04-14 13:45:50 -0400</pav:createdOn>
+    <ao:suffix></ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:BAACE48F-1A66-434C-B16E-A60C28CE840D"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:D8B3209D-96F7-4575-B1E7-D8AFF8A8D63F">
+    <ns1:DrugSelectionRecommendation>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#discontinue-do-not-restart</ns1:DrugSelectionRecommendation>
+    <dct:description>The pharmacogenomic biomarker is related to a recommendation to not restart the drug</dct:description>
+    <rdfs:label>Discontinue/Do not restart</rdfs:label>
+    <sio:SIO_000563>poc:DrugSelectionRecommendation</sio:SIO_000563>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:DCF9A15D-3781-426E-B12E-C37A11772BAD">
+    <pav:lastSavedOn>2014-04-28 15:21:05 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:FDC4FE3E-09F1-4FF3-8265-E1AA66F3ABA6"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:B965CDC7-BC26-46F9-9C92-EC7D6CEBA1F9"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:D56A1FF6-9312-4E4E-B17B-D196CCBA7772</domeo:belongsToSet>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:context rdf:resource="urn:domeoclient:uuid:42E5E671-65CA-4F16-8956-F961FB95F9EA"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:A3607AC4-9F08-4BB1-B4CE-5F41AC1C1FCD"/>
+    <pav:lineageUri>urn:domeoserver:annotation:E5DB6A20-95D2-439B-B091-F66834389197</pav:lineageUri>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:body rdf:resource="urn:linkedspls:uuid:F8F2474B-A108-4369-9372-632D3CB906E6"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:45CF57BA-4151-492D-9306-26B88A9A20DC"/>
+    <pav:createdOn>2014-04-28 15:21:03 -0400</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <pav:previousVersion></pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1E0D7AF4-9843-4BB6-885D-8B3DE5199EB8">
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:8910</dailymed:HGNCGeneSymbol>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <rdfs:label>ESR1, PGR</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:CB73924A-9807-4CE0-95CC-8F873EEDCA26">
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:Comment>No discrete PK effect mentioned beyond the name of poor metabolizer.  Did not select.</ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:46C63D3B-0000-404E-BC76-FB01C42DC7B2">
+    <ao:body rdf:resource="urn:linkedspls:uuid:B34992B6-8A05-457B-A7C8-1EBA38372282"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:176F6C6C-F399-4CF5-94B6-D0AE2BF2C1B8"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1264DF5B-0857-43E2-A492-2F8ADA2C23CD"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:750840BE-ADA5-4E58-AC1B-0505ACFD5498"/>
+    <domeo:belongsToSet>urn:domeoclient:uuid:DEFF2C87-DA5E-488A-B923-FEACC99797D6</domeo:belongsToSet>
+    <pav:lastSavedOn>2014-04-21 13:17:31 -0400</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:11471233-1831-4EBD-8F98-8814CE84ACBE"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:F18C1F98-34AE-41A4-B1AC-1468C1DF5860"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:20F11C29-BC75-40DB-811A-5C4A9B60C032"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:785CCFAF-6AA9-49AE-B376-76E5CF645224"/>
+    <pav:lineageUri>urn:domeoserver:annotation:75D06F39-4898-4BEF-AF54-994B2FDE103A</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:435CF0DB-AD64-4BC3-A304-303BC2D46AFA"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1EF90B26-5C40-48DE-A84F-793FAB131292"/>
+    <pav:createdOn>2014-04-21 13:17:29 -0400</pav:createdOn>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <ao:body rdf:resource="urn:linkedspls:uuid:89572CCC-08BF-4A1C-B2F0-10A3E63A20AE"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:C0FABF20-B467-40B0-9165-BC2FF3CBEA66">
+    <pav:createdOn>2014-04-14 15:33:19 -0400</pav:createdOn>
+    <domeo:uuid>C0FABF20-B467-40B0-9165-BC2FF3CBEA66</domeo:uuid>
+    <ao:prefix>studies, CYP3A4 and CYP2D6 enzymes are responsible for dehydrogenation and hydroxylation of aripiprazole, and N-dealkylation is catalyzed by CYP3A4. Aripiprazole is the predominant drug moiety in the systemic circulation. At steady-state, dehydro-aripiprazole, the active metabolite, represents about 40% of aripiprazole AUC in plasma. </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ARIPIPRAZOLE-217e52b5-3a7b-4bbe-af3c-b18de7d426c3.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:C0FABF20-B467-40B0-9165-BC2FF3CBEA66"/>
+    <ao:suffix></ao:suffix>
+    <ao:exact>Approximately 8% of Caucasians lack the capacity to metabolize CYP2D6 substrates and are classified as poor metabolizers (PM), whereas the rest are extensive metabolizers (EM). PMs have about an 80% increase in aripiprazole exposure and about a 30% decrease in exposure to the active metabolite compared to EMs, resulting in about a 60% higher exposure to the total active moieties from a given dose of aripiprazole compared to EMs. Coadministration of ABILIFY with known inhibitors of CYP2D6, such as quinidine or fluoxetine in EMs, approximately doubles aripiprazole plasma exposure, and dose adjustment is needed [see DRUG INTERACTIONS (7.1)]. The mean elimination half-lives are about 75 hours and 146 hours for aripiprazole in EMs and PMs, respectively.</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:annotationset:46C646EE-76CC-4501-BB5B-91B578820BBD">
+    <dct:description></dct:description>
+    <ao:item rdf:resource="urn:domeoclient:uuid:E34142C5-1680-4612-AC76-D96D8F82364F"/>
+    <pav:createdOn>2014-04-14 13:34:44 -0400</pav:createdOn>
+    <pav:lineageUri>urn:domeoserver:annotationset:58174CF3-E5D8-4BEC-8857-1BD326C312E6</pav:lineageUri>
+    <pav:previousVersion>urn:domeoclient:uuid:C644D246-663B-463E-8903-47DD378189B9</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <rdfs:label>New set 0</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <domeo:deleted>false</domeo:deleted>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lastSavedOn>2014-04-14 13:45:58 -0400</pav:lastSavedOn>
+    <ao:item rdf:resource="urn:domeoclient:uuid:3D5D3473-95BD-41AF-81E6-ED19E81798E9"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ABACAVIR-6a3b10fc-4b2a-45e3-16a1-ef79187a6dfb.html</ao:annotatesResource>
+    <ao:item rdf:resource="urn:domeoclient:uuid:8CD7F86F-C041-47B7-B7D2-F7B48F523F56"/>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <permissions:permissions rdf:nodeID="Ncb8f1b7c4eb2482fb9d394916b4767d8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:39D83023-C81E-4A21-94D3-B69076335E7C">
+    <rdfs:label>Codeine</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB00318</dailymed:pharmgxDrug>
+    <dct:description>The drug of interest.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:851383A7-38D7-4C9F-B5FA-E4F23B737C41">
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:Comment>Combined all into one as really just one idea.
+
+Dose adjustment is needed? What do we pick for dose recommendation?</ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:10F8518F-693A-412D-A985-33C7EF2691C2">
+    <sio:SIO_000563>poc:PharmacodynamicImpact</sio:SIO_000563>
+    <rdfs:label>Decreased Efficacy</rdfs:label>
+    <ns1:PharmacodynamicImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#drug-efficacy-decreased-from-baseline</ns1:PharmacodynamicImpact>
+    <dct:description>The pharmacogenomic biomarker is associated with an decrease in the efficacy of the drug.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:DA22F966-4678-45E0-8ECB-49523BCBC1CB">
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer-positive</ns1:TestResult>
+    <rdfs:label>poor-metabolizer-positive</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:9B073EF8-F675-497B-A743-07D96722EF4E">
+    <rdfs:label>SPL Section</rdfs:label>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#CLINICAL PHARMACOLOGY (34090-1)</ns1:productLabelSection>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <sio:SIO_000111>CLINICAL PHARMACOLOGY (34090-1)</sio:SIO_000111>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:11471233-1831-4EBD-8F98-8814CE84ACBE">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>SERIOUS AND SOMETIMES FATAL DERMATOLOGIC REACTIONS, INCLUDING TOXIC EPIDERMAL NECROLYSIS (TEN) AND STEVENS-JOHNSON SYNDROME (SJS), HAVE BEEN REPORTED DURING TREATMENT WITH CARBAMAZEPINE. THESE REACTIONS ARE ESTIMATED TO OCCUR IN 1 TO 6 PER 10,000 NEW USERS IN COUNTRIES WITH MAINLY CAUCASIAN POPULATIONS, BUT THE RISK IN SOME ASIAN COUNTRIES IS ESTIMATED TO BE ABOUT 10 TIMES HIGHER.  </ao:prefix>
+    <ao:exact>STUDIES IN PATIENTS OF CHINESE ANCESTRY HAVE FOUND A STRONG ASSOCIATION BETWEEN THE RISK OF DEVELOPING SJS/TEN AND THE PRESENCE OF HLA-B*1502, AN INHERITED ALLELIC VARIANT OF THE HLA-B GENE. HLA-B*1502 IS FOUND ALMOST EXCLUSIVELY IN PATIENTS WITH ANCESTRY ACROSS BROAD AREAS OF ASIA. PATIENTS WITH ANCESTRY IN GENETICALLY AT-RISK POPULATIONS SHOULD BE SCREENED FOR THE PRESENCE OF HLA-B*1502 PRIOR TO INITIATING TREATMENT WITH CARBAMAZEPINE EXTENDED-RELEASE CAPSULES.</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix></ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:11471233-1831-4EBD-8F98-8814CE84ACBE"/>
+    <domeo:uuid>11471233-1831-4EBD-8F98-8814CE84ACBE</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CARBAMAZEPINE-ee15d911-73c7-4bc6-96f2-089a8aa64e18.html</ao:hasSource>
+    <pav:createdOn>2014-04-21 13:17:29 -0400</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:6AE10C30-C64E-4791-B554-73A0A451F1FA">
+    <rdfs:label>biomarker-positive</rdfs:label>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#biomarker-positive</ns1:TestResult>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:779F1EEC-A85F-421A-AEBB-471FA678C322">
+    <rdfs:label>HLA-B</rdfs:label>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:4932</dailymed:HGNCGeneSymbol>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:F8F2474B-A108-4369-9372-632D3CB906E6">
+    <rdfs:label>CYP2C19</rdfs:label>
+    <dct:description>The selected biomarker.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000006102</dailymed:pharmgxBiomarker>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:DEFF2C87-DA5E-488A-B923-FEACC99797D6">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lineageUri>urn:domeoserver:annotationset:E6148AE9-D3FF-43CD-B26E-1DDB165D61DD</pav:lineageUri>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <domeo:deleted>false</domeo:deleted>
+    <ao:item rdf:resource="urn:domeoclient:uuid:46C63D3B-0000-404E-BC76-FB01C42DC7B2"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CARBAMAZEPINE-ee15d911-73c7-4bc6-96f2-089a8aa64e18.html</ao:annotatesResource>
+    <permissions:permissions rdf:nodeID="N4291564949124082ab7484e1392ae523"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:lastSavedOn>2014-04-21 13:17:30 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <dct:description></dct:description>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <rdfs:label>New set 1</rdfs:label>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdOn>2014-04-21 13:17:29 -0400</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:2E309079-9689-468B-B68A-AA2979BC6B71">
+    <pav:lineageUri>urn:domeoserver:annotation:13EAC133-62DF-4D8B-94B6-9DA7D91E5A53</pav:lineageUri>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:8D37E719-C13F-4409-952D-CCFAA93627EE"/>
+    <pav:createdOn>2014-06-02 13:42:03 -0400</pav:createdOn>
+    <pav:lastSavedOn>2014-06-02 13:42:04 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:566403B6-DBAE-4BFB-AE8C-80AAAC20EABB"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <domeo:belongsToSet>urn:domeoclient:uuid:74DE2DC1-57B0-4111-8D1C-B736E0150D8C</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:39D83023-C81E-4A21-94D3-B69076335E7C"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:2A813731-022D-4FC3-9DEB-89846CE40F66"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:BF37D5AD-082C-4558-8D31-AD6510A9E47B"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:0965EA50-C567-4B0A-8F5A-E00AEBEBEE60"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:body rdf:resource="urn:linkedspls:uuid:597501F0-D4BF-4A7C-90E2-AB9A68293172"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:54D530A6-1708-44A2-8A58-9227C5EA2E32"/>
+    <pav:previousVersion></pav:previousVersion>
+    <ao:body rdf:resource="urn:linkedspls:uuid:F5A2670D-BC99-4D60-9BC6-E1F4A5B68F1A"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:9D9ED653-3069-45CE-8ADC-C283F86F0249"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:E28E369A-B704-4914-B5B6-0490F85C3C12"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:682CCA5D-FB25-4364-A92A-D45637C9F997">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:deleted>false</domeo:deleted>
+    <pav:lineageUri>urn:domeoserver:annotationset:6FE77A90-E5EC-4328-A3D2-DC061F509A03</pav:lineageUri>
+    <pav:lastSavedOn>2014-04-14 15:24:56 -0400</pav:lastSavedOn>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <permissions:permissions rdf:nodeID="N6ccedc2773e9445d84277c6363cf69f2"/>
+    <pav:createdOn>2014-04-14 15:24:36 -0400</pav:createdOn>
+    <dct:description></dct:description>
+    <rdfs:label>New set 0</rdfs:label>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ARIPIPRAZOLE-217e52b5-3a7b-4bbe-af3c-b18de7d426c3.html</ao:annotatesResource>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <pav:previousVersion></pav:previousVersion>
+    <ao:item rdf:resource="urn:domeoclient:uuid:063D1963-98F6-4D67-B25C-A632BFFD6F92"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:02192DCF-D28B-4B94-B7F0-28F2B839BE6D">
+    <rdfs:label>CYP2D6</rdfs:label>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:2625</dailymed:HGNCGeneSymbol>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:8CD7F86F-C041-47B7-B7D2-F7B48F523F56">
+    <ao:body rdf:resource="urn:linkedspls:uuid:159BEC1A-94C2-40B6-B567-D6333CD6DE5B"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:C28FFAA4-25F9-47EF-A667-A01FB98F6D66"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:57680457-FDF2-420C-B33B-DAC940C96E06"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:CDB8A114-C77C-4EDD-8445-8278B7C2057C"/>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:lineageUri>urn:domeoserver:annotationset:58174CF3-E5D8-4BEC-8857-1BD326C312E6</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:C5859DA8-480A-474B-85B7-59CAEC20F59E"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:BF1831BD-17A8-43CB-A2DD-ABEE3697A9BB"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:CE03FEC2-E9BA-41BD-B509-623A9188A0F2"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:05E167AD-621A-4179-A96C-7B36A8D5EE62"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:03A84E89-09C9-4C8F-9516-00606DE6BBB0"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:64910FA4-9213-4ED1-939F-29CD3C17435A"/>
+    <pav:lineageUri>urn:domeoserver:annotation:CFFE7603-65D4-4C7A-BEAB-1558142351D2</pav:lineageUri>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <ao:body rdf:resource="urn:linkedspls:uuid:D7523E21-5DE6-498D-81BE-31A18460B2CF"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:46C646EE-76CC-4501-BB5B-91B578820BBD</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:528E5010-50B8-4EEA-8390-83C85C65F3F0"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:479712BD-1EA1-459F-9754-182F1F0AE632"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:5FD9DC0F-109F-4856-B397-DE76C1A434A2"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:E03081EE-6DD2-4527-8745-6D996195EB80"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:80A63BF8-4170-4F90-B2FF-0C59BBEB486B"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:body rdf:resource="urn:linkedspls:uuid:D155D44E-B5B9-4FB2-B9DA-C40E95936FEA"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:B0E5DF82-40CB-492A-9AC3-D9C4C6A0622C"/>
+    <domeo:belongsToSet>urn:domeoclient:uuid:C644D246-663B-463E-8903-47DD378189B9</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:FAC3B807-6F93-44AB-AE74-B54B8ED3D25C"/>
+    <pav:createdOn>2014-04-14 13:34:44 -0400</pav:createdOn>
+    <pav:lastSavedOn>2014-04-14 13:34:46 -0400</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:FDC4FE3E-09F1-4FF3-8265-E1AA66F3ABA6">
+    <ns1:TestRecommendation>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#take-note-that-tests-are-avaliable</ns1:TestRecommendation>
+    <sio:SIO_000563>poc:TestRecommendation</sio:SIO_000563>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Take note that tests are avaliable</rdfs:label>
+    <dct:description>Testing related to the pharmacogenomic biomarker is avaliable.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:7C1AEE0F-B930-47E9-964D-F2F0514339D5">
+    <rdfs:label>biomarker-positive</rdfs:label>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#biomarker-positive</ns1:TestResult>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeo:software:id:Domeo-2.1alpha-050">
+    <foafx:build>050</foafx:build>
+    <foafx:name>Domeo Annotation Toolkit</foafx:name>
+    <foafx:homepage></foafx:homepage>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Software"/>
+    <rdfs:label>Domeo Annotation Toolkit</rdfs:label>
+    <foafx:version>2.1alpha</foafx:version>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:A6E35E75-97BC-4DBA-9B00-68A4C04E7051">
+    <rdfs:label>SPL Section</rdfs:label>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:B34992B6-8A05-457B-A7C8-1EBA38372282">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <dct:description>The selected biomarker.</dct:description>
+    <rdfs:label>HLA-B*1502</rdfs:label>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000002010</dailymed:pharmgxBiomarker>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:11A9222A-E743-4C38-993A-4595970A436F">
+    <dct:description>The drug of interest.</dct:description>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Letrozole</rdfs:label>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01006</dailymed:pharmgxDrug>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:CDB8A114-C77C-4EDD-8445-8278B7C2057C">
+    <domeo:uuid>CDB8A114-C77C-4EDD-8445-8278B7C2057C</domeo:uuid>
+    <ao:prefix>Hypersensitivity to abacavir is a multi-organ clinical syndrome. (5.1) </ao:prefix>
+    <pav:createdOn>2014-04-14 13:34:44 -0400</pav:createdOn>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ABACAVIR-6a3b10fc-4b2a-45e3-16a1-ef79187a6dfb.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix></ao:suffix>
+    <ao:exact>Patients who carry the HLA-B*5701 allele are at high risk for experiencing a hypersensitivity reaction to abacavir.</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:CDB8A114-C77C-4EDD-8445-8278B7C2057C"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:C644D246-663B-463E-8903-47DD378189B9">
+    <pav:createdOn>2014-04-14 13:34:44 -0400</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lastSavedOn>2014-04-14 13:34:46 -0400</pav:lastSavedOn>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:previousVersion></pav:previousVersion>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:58174CF3-E5D8-4BEC-8857-1BD326C312E6</pav:lineageUri>
+    <permissions:permissions rdf:nodeID="Na86e3ded4bee47e29aee2bade98dbc05"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:8CD7F86F-C041-47B7-B7D2-F7B48F523F56"/>
+    <domeo:deleted>false</domeo:deleted>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ABACAVIR-6a3b10fc-4b2a-45e3-16a1-ef79187a6dfb.html</ao:annotatesResource>
+    <rdfs:label>New set 0</rdfs:label>
+    <dct:description></dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:E28E369A-B704-4914-B5B6-0490F85C3C12">
+    <rdfs:label>ultra-metabolizer</rdfs:label>
+    <sio:SIO_000628>poc:Variant</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A specific variant of a gene, including the wild-type allele, or a patient phenotype</dct:description>
+    <ns1:Variant>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#ultra-metabolizer</ns1:Variant>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:5337722E-5A4D-4658-BA7A-701C7BE0AA14">
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#(34067-9) INDICATIONS AND USAGE</ns1:productLabelSection>
+    <sio:SIO_000111>(34067-9) INDICATIONS AND USAGE</sio:SIO_000111>
+    <rdfs:label>SPL Section</rdfs:label>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4291564949124082ab7484e1392ae523">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:633E71BF-5AAB-4AC7-A4A0-826BC1480FE4">
+    <ao:exact>Approximately 8% of Caucasians lack the capacity to metabolize CYP2D6 substrates and are classified as poor metabolizers (PM), whereas the rest are extensive metabolizers (EM). PMs have about an 80% increase in aripiprazole exposure and about a 30% decrease in exposure to the active metabolite compared to EMs, resulting in about a 60% higher exposure to the total active moieties from a given dose of aripiprazole compared to EMs.</ao:exact>
+    <ao:suffix></ao:suffix>
+    <pav:createdOn>2014-04-14 15:24:36 -0400</pav:createdOn>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ARIPIPRAZOLE-217e52b5-3a7b-4bbe-af3c-b18de7d426c3.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>studies, CYP3A4 and CYP2D6 enzymes are responsible for dehydrogenation and hydroxylation of aripiprazole, and N-dealkylation is catalyzed by CYP3A4. Aripiprazole is the predominant drug moiety in the systemic circulation. At steady-state, dehydro-aripiprazole, the active metabolite, represents about 40% of aripiprazole AUC in plasma. </ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:633E71BF-5AAB-4AC7-A4A0-826BC1480FE4"/>
+    <domeo:uuid>633E71BF-5AAB-4AC7-A4A0-826BC1480FE4</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:45CF57BA-4151-492D-9306-26B88A9A20DC">
+    <rdfs:label>SPL Section</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:528E5010-50B8-4EEA-8390-83C85C65F3F0">
+    <ns1:MedicalCondition>hypersensitivity</ns1:MedicalCondition>
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:5F982BBC-5DBD-4300-A5AE-3FEC095285D7">
+    <dailymed:pharmgxBiomarker1>http://purl.obolibrary.org/obo/PR_000012621</dailymed:pharmgxBiomarker1>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000007205</dailymed:pharmgxBiomarker>
+    <rdfs:label>ER and PgR_receptor</rdfs:label>
+    <dailymed:pharmgxBiomarker2>http://purl.obolibrary.org/obo/PR_000007204</dailymed:pharmgxBiomarker2>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The selected biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:42E5E671-65CA-4F16-8956-F961FB95F9EA">
+    <pav:createdOn>2014-04-28 15:21:03 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix></ao:suffix>
+    <domeo:uuid>42E5E671-65CA-4F16-8956-F961FB95F9EA</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CLOPIDOGREL-03bec9ad-cd22-44d3-9b82-2796157de1d1.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:42E5E671-65CA-4F16-8956-F961FB95F9EA"/>
+    <ao:prefix>Poor metabolizers treated with clopidogrel bisulfate at recommended doses exhibit higher cardiovascular event rates following acute coronary syndrome (ACS) or percutaneous coronary intervention (PCI) than patients with normal CYP2C19 function.  (12.5) </ao:prefix>
+    <ao:exact>Tests are available to identify a patient's CYP2C19 genotype and can be used as an aid in determining therapeutic strategy.</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:750840BE-ADA5-4E58-AC1B-0505ACFD5498">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:Comment>PD phenotype?</ns1:Comment>
+    <rdfs:label>Comment</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:0A3CA733-9487-4B87-812D-13060BE16975">
+    <rdfs:label>ESR1, PGR</rdfs:label>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:8910</dailymed:HGNCGeneSymbol>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:771B14C5-D621-45A5-A0CB-C4B13539D709">
+    <ns1:MedicalCondition>postmenopausal, early breast cancer</ns1:MedicalCondition>
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:77D64D1A-936E-40DC-8131-9A703596FD64">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:MedicalCondition>metastatic breast cancer, postmenopausal</ns1:MedicalCondition>
+    <rdfs:label>MedicalCondition</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:90B99DCC-C578-44C8-839F-DE119DFE1A87">
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000002010</dailymed:pharmgxBiomarker>
+    <rdfs:label>HLA-B*5701</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The selected biomarker.</dct:description>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:4461D7D2-1353-4B00-9FA5-BE7067F9E3EA">
+    <pav:lineageUri>urn:domeoserver:annotationset:AFC75336-C9AF-46CD-8D54-9AF03B796A96</pav:lineageUri>
+    <permissions:permissions rdf:nodeID="Ne00de54c96b34d30b649daff3eef4a32"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <domeo:deleted>false</domeo:deleted>
+    <ao:item rdf:resource="urn:domeoclient:uuid:9DDE5A30-59ED-49D7-B9B6-316245562477"/>
+    <pav:lastSavedOn>2014-04-28 15:20:05 -0400</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CLOPIDOGREL-03bec9ad-cd22-44d3-9b82-2796157de1d1.html</ao:annotatesResource>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <dct:description></dct:description>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <rdfs:label>New set 1</rdfs:label>
+    <pav:createdOn>2014-04-28 15:20:04 -0400</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B8BA0ADB-2437-4F14-9102-2EC16B13EE4C">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:body rdf:resource="urn:linkedspls:uuid:5337722E-5A4D-4658-BA7A-701C7BE0AA14"/>
+    <pav:lineageUri>urn:domeoserver:annotation:5679AE6B-A3FE-4969-8E65-B6F72C9C2D77</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:D92DF661-364D-407C-BBA7-B5910D4358D2"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:829EA72B-EF99-45DF-AACA-E57D285233BA"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdOn>2014-06-09 15:40:26 -0400</pav:createdOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:68E7021D-C55E-435D-AB25-ECC1B2121620"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:6B546A72-765D-4748-B3CC-3818C23EA734"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:A664FD51-9DF9-4B80-9B4E-CC1966A161B1</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:6D94CCC8-7FD9-4E8C-A6D1-D986F7228188"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:D8296B13-0236-40CE-85F0-A858FD5A2A01"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1E0D7AF4-9843-4BB6-885D-8B3DE5199EB8"/>
+    <pav:lastSavedOn>2014-06-09 15:40:27 -0400</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:60484D7D-6C1A-43C0-B194-EE8CBCF92884">
+    <rdfs:label>Decreased Efficacy</rdfs:label>
+    <ns1:PharmacodynamicImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#drug-efficacy-decreased-from-baseline</ns1:PharmacodynamicImpact>
+    <sio:SIO_000563>poc:PharmacodynamicImpact</sio:SIO_000563>
+    <dct:description>The pharmacogenomic biomarker is associated with an decrease in the efficacy of the drug.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:F18C1F98-34AE-41A4-B1AC-1468C1DF5860">
+    <sio:SIO_000563>poc:PharmacodynamicImpact</sio:SIO_000563>
+    <dct:description>The pharmacogenomic biomarker is associated with an increased risk of toxicity.</dct:description>
+    <rdfs:label>Increased Toxicity Risk</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:PharmacodynamicImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#drug-toxicity-risk-increased</ns1:PharmacodynamicImpact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:C1B0D101-F22C-4842-A0E7-D8F3655CCDE0">
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/LETROZOLE-63e54b62-a30d-4a56-9215-75e7a0b0bf02.html</ao:annotatesResource>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lastSavedOn>2014-06-09 15:38:06 -0400</pav:lastSavedOn>
+    <domeo:deleted>false</domeo:deleted>
+    <permissions:permissions rdf:nodeID="N3878764112c946c6a0958f3403646f3a"/>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <rdfs:label>Default Set</rdfs:label>
+    <ao:item rdf:resource="urn:domeoclient:uuid:FE73DA30-2D2E-4D34-AC2F-B160599E5ADD"/>
+    <pav:previousVersion></pav:previousVersion>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <ao:item rdf:resource="urn:domeoclient:uuid:720C5233-AF5F-4538-891A-259FD3EE6895"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:1CEDA84C-14E2-4D8B-A754-750B7AAD033F</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:createdOn>2014-06-09 15:15:26 -0400</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:64910FA4-9213-4ED1-939F-29CD3C17435A">
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:4932</dailymed:HGNCGeneSymbol>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <rdfs:label>HLA-B</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:CE0E6363-C2D4-480F-8158-BDDC176A10E2">
+    <dct:description>The selected biomarker.</dct:description>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <rdfs:label>CYP2C19</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000006102</dailymed:pharmgxBiomarker>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:77834C5F-6095-4EF2-98A6-A4F713039FC6">
+    <rdfs:label>Metabolism Decrease</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:PharmacokineticImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#metabolism-decrease</ns1:PharmacokineticImpact>
+    <dct:description>The pharmacogenomic biomarker is associated with a decrease in metabolism of the drug.</dct:description>
+    <sio:SIO_000563>poc:PharmacokineticImpact</sio:SIO_000563>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:annotationset:A664FD51-9DF9-4B80-9B4E-CC1966A161B1">
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:item rdf:resource="urn:domeoclient:uuid:FE73DA30-2D2E-4D34-AC2F-B160599E5ADD"/>
+    <pav:lastSavedOn>2014-06-09 15:40:27 -0400</pav:lastSavedOn>
+    <pav:lineageUri>urn:domeoserver:annotationset:1CEDA84C-14E2-4D8B-A754-750B7AAD033F</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:createdOn>2014-06-09 15:15:26 -0400</pav:createdOn>
+    <domeo:deleted>false</domeo:deleted>
+    <pav:previousVersion>urn:domeoclient:uuid:C1B0D101-F22C-4842-A0E7-D8F3655CCDE0</pav:previousVersion>
+    <ao:item rdf:resource="urn:domeoclient:uuid:720C5233-AF5F-4538-891A-259FD3EE6895"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/LETROZOLE-63e54b62-a30d-4a56-9215-75e7a0b0bf02.html</ao:annotatesResource>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+    <rdfs:label>Default Set</rdfs:label>
+    <ao:item rdf:resource="urn:domeoclient:uuid:B8BA0ADB-2437-4F14-9102-2EC16B13EE4C"/>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <permissions:permissions rdf:nodeID="N5d7cf4ba6b86499abe02d37e8fa167a1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:80A63BF8-4170-4F90-B2FF-0C59BBEB486B">
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>SPL Section</rdfs:label>
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:B8BD51BB-73FA-4CC1-B8A3-6C2BE7FFC4C9">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <dailymed:pharmgxBiomarker2>http://purl.obolibrary.org/obo/PR_000007204</dailymed:pharmgxBiomarker2>
+    <dct:description>The selected biomarker.</dct:description>
+    <dailymed:pharmgxBiomarker1>http://purl.obolibrary.org/obo/PR_000012621</dailymed:pharmgxBiomarker1>
+    <rdfs:label>ER and PgR_receptor</rdfs:label>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000007205</dailymed:pharmgxBiomarker>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:BBE188F7-C911-4082-8C57-7FE73D886012">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>poc:Variant</sio:SIO_000628>
+    <ns1:Variant>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer</ns1:Variant>
+    <rdfs:label>poor-metabolizer</rdfs:label>
+    <dct:description>A specific variant of a gene, including the wild-type allele, or a patient phenotype</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:D1405105-CAA2-4C23-998D-63B2C54FB48F">
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+    <rdfs:label>gene-haplotype-negative</rdfs:label>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#gene-haplotype-negative</ns1:TestResult>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:annotationset:D56A1FF6-9312-4E4E-B17B-D196CCBA7772">
+    <pav:createdOn>2014-04-28 15:20:04 -0400</pav:createdOn>
+    <ao:item rdf:resource="urn:domeoclient:uuid:9DDE5A30-59ED-49D7-B9B6-316245562477"/>
+    <domeo:deleted>false</domeo:deleted>
+    <permissions:permissions rdf:nodeID="Nfdeebf8c9ac84104abda89681b76958a"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CLOPIDOGREL-03bec9ad-cd22-44d3-9b82-2796157de1d1.html</ao:annotatesResource>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>New set 1</rdfs:label>
+    <pav:previousVersion>urn:domeoclient:uuid:4461D7D2-1353-4B00-9FA5-BE7067F9E3EA</pav:previousVersion>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:DCF9A15D-3781-426E-B12E-C37A11772BAD"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:AFC75336-C9AF-46CD-8D54-9AF03B796A96</pav:lineageUri>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <dct:description></dct:description>
+    <pav:lastSavedOn>2014-04-28 15:21:05 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:3C84FD38-FC1B-414E-A085-7A4C33BF4382">
+    <rdfs:label>Alleles</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns2:Alleles>HLA-B*5701</ns2:Alleles>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:8304D9C5-7323-4A1D-899B-3008E72690DD">
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <sio:SIO_000111>CLINICAL PHARMACOLOGY (34090-1)</sio:SIO_000111>
+    <rdfs:label>SPL Section</rdfs:label>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#CLINICAL PHARMACOLOGY (34090-1)</ns1:productLabelSection>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:56BCF18B-31BA-48FA-8820-C91421B226DD">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>Patients who carry the HLA-B*5701 allele are at high risk for experiencing a hypersensitivity reaction to abacavir.  (5.1) </ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:56BCF18B-31BA-48FA-8820-C91421B226DD"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-04-14 13:44:33 -0400</pav:createdOn>
+    <ao:suffix></ao:suffix>
+    <ao:exact>Discontinue ZIAGEN as soon as a hypersensitivity reaction is suspected. Regardless of HLA-B*5701 status, permanently discontinue ZIAGEN if hypersensitivity cannot be ruled out, even when other diagnoses are possible.</ao:exact>
+    <domeo:uuid>56BCF18B-31BA-48FA-8820-C91421B226DD</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ABACAVIR-6a3b10fc-4b2a-45e3-16a1-ef79187a6dfb.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:FAC3B807-6F93-44AB-AE74-B54B8ED3D25C">
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:4932</dailymed:HGNCGeneSymbol>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <rdfs:label>HLA-B</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:2A84C740-4285-4260-888E-163093C00752">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>poc:Variant</sio:SIO_000628>
+    <ns1:Variant>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer</ns1:Variant>
+    <rdfs:label>poor-metabolizer</rdfs:label>
+    <dct:description>A specific variant of a gene, including the wild-type allele, or a patient phenotype</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:20F11C29-BC75-40DB-811A-5C4A9B60C032">
+    <ns1:VariantFrequency>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#population-frequency-mentioned</ns1:VariantFrequency>
+    <dct:description>The frequency or proportion at which a variant occurs in a specific population is mentioned.</dct:description>
+    <sio:SIO_000563>poc:VariantFrequency</sio:SIO_000563>
+    <rdfs:label>Variant Frequency</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:0B1A6EED-B1A4-4E3F-B98E-63E1301F0B5F">
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:8910</dailymed:HGNCGeneSymbol>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>ESR1, PGR</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:annotationset:2B99F3B5-C69D-412C-9D44-C62A467E5BCE">
+    <pav:createdOn>2014-04-14 15:24:36 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:lastSavedOn>2014-04-14 15:33:22 -0400</pav:lastSavedOn>
+    <ao:item rdf:resource="urn:domeoclient:uuid:D03D6753-24D2-4897-9947-4D727F406A9D"/>
+    <domeo:deleted>false</domeo:deleted>
+    <rdfs:label>New set 0</rdfs:label>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143044e90f26014518a19cf70063"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/ARIPIPRAZOLE-217e52b5-3a7b-4bbe-af3c-b18de7d426c3.html</ao:annotatesResource>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <permissions:permissions rdf:nodeID="Nd22ab4082a9e47b2af23dfac2bb5a0f5"/>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <dct:description></dct:description>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:lineageUri>urn:domeoserver:annotationset:6FE77A90-E5EC-4328-A3D2-DC061F509A03</pav:lineageUri>
+    <pav:previousVersion>urn:domeoclient:uuid:682CCA5D-FB25-4364-A92A-D45637C9F997</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:3D5D3473-95BD-41AF-81E6-ED19E81798E9">
+    <ao:body rdf:resource="urn:linkedspls:uuid:3C84FD38-FC1B-414E-A085-7A4C33BF4382"/>
+    <pav:lineageUri>urn:domeoserver:annotation:0A3D14CB-73E4-4EA2-BF1D-DDCB84744B0D</pav:lineageUri>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:56BCF18B-31BA-48FA-8820-C91421B226DD"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:16BBCC1E-1131-4CB0-AEB2-6F78D78A8C2C"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:779F1EEC-A85F-421A-AEBB-471FA678C322"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:E69DEE5E-0B71-4D85-8225-17FC7BBE2093"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:D1405105-CAA2-4C23-998D-63B2C54FB48F"/>
+    <pav:lastSavedOn>2014-04-14 13:45:58 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:BAC5C66E-B885-4E88-8D9C-EF92A8E555FA"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:FE932446-6B5A-456A-A15F-F4FD6A7AA0A8"/>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <pav:previousVersion></pav:previousVersion>
+    <ao:body rdf:resource="urn:linkedspls:uuid:CC893565-E222-445A-A3A5-255A361F0779"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <pav:createdOn>2014-04-14 13:44:33 -0400</pav:createdOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:46C646EE-76CC-4501-BB5B-91B578820BBD</domeo:belongsToSet>
+    <ao:body rdf:resource="urn:linkedspls:uuid:9BEEF5BE-7CC5-451A-B93B-312DCEECF2D6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:17BBA926-B6C2-4DD9-BF54-78A37F00C0BD">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Alleles</rdfs:label>
+    <ns2:Alleles>HLA-B*5701</ns2:Alleles>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:54D530A6-1708-44A2-8A58-9227C5EA2E32">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <ns1:MedicalCondition>Respiratory depression, death, tonsillectomy, adenoidectomy </ns1:MedicalCondition>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:65283AE5-FA5E-46AA-858C-2AB8F4546A8A">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+    <rdfs:label>gene-haplotype-positive</rdfs:label>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#gene-haplotype-positive</ns1:TestResult>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:8D37E719-C13F-4409-952D-CCFAA93627EE">
+    <ao:prefix></ao:prefix>
+    <domeo:uuid>8D37E719-C13F-4409-952D-CCFAA93627EE</domeo:uuid>
+    <ao:suffix></ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:exact>Respiratory depression and death have occurred in children who received codeine following tonsillectomy and/or adenoidectomy and had evidence of being ultra-rapid metabolizers of codeine due to a CYP2D6 polymorphism.</ao:exact>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CODEINE-fa3ed180-298a-4f9d-9d05-15182d7218bf.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-06-02 13:42:03 -0400</pav:createdOn>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:8D37E719-C13F-4409-952D-CCFAA93627EE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:6B211667-49E7-455B-9E39-F27E0ABB8F77">
+    <dct:description>The selected biomarker.</dct:description>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000006102</dailymed:pharmgxBiomarker>
+    <rdfs:label>CYP2C19</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:FE932446-6B5A-456A-A15F-F4FD6A7AA0A8">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <ns1:MedicalCondition>hypersensitivity</ns1:MedicalCondition>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd22ab4082a9e47b2af23dfac2bb5a0f5">
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:3CEEBFD0-24F2-4433-95B0-B73566A1E517">
+    <dailymed:pharmgxBiomarker1>http://purl.obolibrary.org/obo/PR_000012621</dailymed:pharmgxBiomarker1>
+    <dailymed:pharmgxBiomarker2>http://purl.obolibrary.org/obo/PR_000007204</dailymed:pharmgxBiomarker2>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>ER and PgR_receptor</rdfs:label>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000007205</dailymed:pharmgxBiomarker>
+    <dct:description>The selected biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:C7BA52A8-81D4-4107-A3BD-0014E2400833">
+    <pav:createdOn>2014-04-28 15:20:04 -0400</pav:createdOn>
+    <ao:exact>Poor metabolizers treated with clopidogrel bisulfate at recommended doses exhibit higher cardiovascular event rates following acute coronary syndrome (ACS) or percutaneous coronary intervention (PCI) than patients with normal CYP2C19 function.</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>Effectiveness of clopidogrel bisulfate depends on activation to an active metabolite by the cytochrome P450 (CYP) system, principally CYP2C19. (5.1) </ao:prefix>
+    <domeo:uuid>C7BA52A8-81D4-4107-A3BD-0014E2400833</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/CLOPIDOGREL-03bec9ad-cd22-44d3-9b82-2796157de1d1.html</ao:hasSource>
+    <ao:suffix></ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:C7BA52A8-81D4-4107-A3BD-0014E2400833"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:B0E5DF82-40CB-492A-9AC3-D9C4C6A0622C">
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01048</dailymed:pharmgxDrug>
+    <dct:description>The drug of interest.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Abacavir</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:720C5233-AF5F-4538-891A-259FD3EE6895">
+    <pav:previousVersion></pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:A664FD51-9DF9-4B80-9B4E-CC1966A161B1</domeo:belongsToSet>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:E37C529A-77BE-4080-AB40-03D7D1BD0F2B"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <ao:body rdf:resource="urn:linkedspls:uuid:BDAC8257-399D-4FC7-AFFA-60F1E3A3A5A2"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:6F48DC3B-BF65-493E-81BA-0EC583D9F815"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:0B1A6EED-B1A4-4E3F-B98E-63E1301F0B5F"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-06-09 15:35:34 -0400</pav:createdOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:771B14C5-D621-45A5-A0CB-C4B13539D709"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:1D1D982B-0C5D-4620-8588-6EAE02477538"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:41B0AC51-A323-4AA0-B6B1-AE599D6A3243"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:C12DA0A9-B974-440F-9D8C-B873F74A828A"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:11A9222A-E743-4C38-993A-4595970A436F"/>
+    <pav:lineageUri>urn:domeoserver:annotation:9E9F8492-B70C-4640-839C-B232FF235342</pav:lineageUri>
+    <ao:body rdf:resource="urn:linkedspls:uuid:5F982BBC-5DBD-4300-A5AE-3FEC095285D7"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:6AE10C30-C64E-4791-B554-73A0A451F1FA"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:02ACE035-E5B4-4D7B-BE92-8221C05BB06F"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:572E539A-07D4-4537-BCB9-D2E4BFA14074"/>
+    <pav:lastSavedOn>2014-06-09 15:38:07 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:body rdf:resource="urn:linkedspls:uuid:B8BD51BB-73FA-4CC1-B8A3-6C2BE7FFC4C9"/>
+    <pav:lastSavedOn>2014-06-09 15:38:06 -0400</pav:lastSavedOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:A1D6DBC7-1227-43AD-B225-24F50730551E"/>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotationset:1CEDA84C-14E2-4D8B-A754-750B7AAD033F</pav:lineageUri>
+    <domeo:belongsToSet>urn:domeoclient:uuid:C1B0D101-F22C-4842-A0E7-D8F3655CCDE0</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:26D17960-74B8-48DD-9689-BF7BF7C13BF9">
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:2621</dailymed:HGNCGeneSymbol>
+    <rdfs:label>CYP2C19</rdfs:label>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5d7cf4ba6b86499abe02d37e8fa167a1">
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:6B546A72-765D-4748-B3CC-3818C23EA734">
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000007205</dailymed:pharmgxBiomarker>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The selected biomarker.</dct:description>
+    <dailymed:pharmgxBiomarker2>http://purl.obolibrary.org/obo/PR_000007204</dailymed:pharmgxBiomarker2>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <rdfs:label>ER and PgR_receptor</rdfs:label>
+    <dailymed:pharmgxBiomarker1>http://purl.obolibrary.org/obo/PR_000012621</dailymed:pharmgxBiomarker1>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:01472B82-6D2F-42F4-9C00-4154BBFC6AE0">
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:Comment>did this one twice for both directions of test result. </ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:C12DA0A9-B974-440F-9D8C-B873F74A828A">
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#(34067-9) INDICATIONS AND USAGE</ns1:productLabelSection>
+    <sio:SIO_000111>(34067-9) INDICATIONS AND USAGE</sio:SIO_000111>
+    <rdfs:label>SPL Section</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:F3F9848C-74F0-4003-BF74-38C6DB5AE771">
+    <dct:description>The selected biomarker.</dct:description>
+    <dailymed:pharmgxBiomarker2>http://purl.obolibrary.org/obo/PR_000007204</dailymed:pharmgxBiomarker2>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <rdfs:label>ER and PgR_receptor</rdfs:label>
+    <dailymed:pharmgxBiomarker1>http://purl.obolibrary.org/obo/PR_000012621</dailymed:pharmgxBiomarker1>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000007205</dailymed:pharmgxBiomarker>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:063D1963-98F6-4D67-B25C-A632BFFD6F92">
+    <pav:lineageUri>urn:domeoserver:annotationset:C11B6B8F-9C21-437D-876F-40B9FDD65488</pav:lineageUri>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:body rdf:resource="urn:linkedspls:uuid:7FCAA9C7-0F38-47EA-8CB1-EC96B812DCFE"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:02192DCF-D28B-4B94-B7F0-28F2B839BE6D"/>
+    <rdfs:label>SPL Annotation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SPLAnnotation"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:05F92B1A-A496-414E-A7BB-C4990E914C5B"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:FE7D9960-B42E-4C1A-AE62-D15B9C039F81"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:06329C94-6462-453B-8D8D-71BD5FB23D98"/>
+    <pav:lastSavedOn>2014-04-14 15:24:56 -0400</pav:lastSavedOn>
+    <pav:createdOn>2014-04-14 15:22:49 -0400</pav:createdOn>
+    <ao:body rdf:resource="urn:linkedspls:uuid:9B073EF8-F675-497B-A743-07D96722EF4E"/>
+    <pav:createdBy>urn:person:uuid:080e143044e90f26014518a19cf70063</pav:createdBy>
+    <ao:body rdf:resource="urn:linkedspls:uuid:3BDCEBE4-9EB9-45C8-A5F6-17CD3815F9D8"/>
+    <pav:previousVersion>urn:domeoserver:annotationset:A48054C8-3347-4E22-9A26-B7C15A7B1BF0</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</pav:versionNumber>
+    <ao:context rdf:resource="urn:domeoclient:uuid:633E71BF-5AAB-4AC7-A4A0-826BC1480FE4"/>
+    <ao:body rdf:resource="urn:linkedspls:uuid:E38F410F-7D9F-4676-9C0C-62165C355E64"/>
+    <domeo:belongsToSet>urn:domeoclient:uuid:682CCA5D-FB25-4364-A92A-D45637C9F997</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:25F3F5B9-D763-4EE6-81C0-CBA4E40E9A55">
+    <ao:prefix></ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:25F3F5B9-D763-4EE6-81C0-CBA4E40E9A55"/>
+    <ao:exact>Letrozole tablets are indicated for first-line treatment of postmenopausal women with hormone receptor positive or unknown, locally advanced or metastatic breast cancer. </ao:exact>
+    <domeo:uuid>25F3F5B9-D763-4EE6-81C0-CBA4E40E9A55</domeo:uuid>
+    <ao:suffix>Letrozole tablets are also indicated for the treatment of advanced breast cancer in postmenopausal women with disease progression following antiestrogen therapy </ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-06-09 15:37:59 -0400</pav:createdOn>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/LETROZOLE-63e54b62-a30d-4a56-9215-75e7a0b0bf02.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:CDF7843F-82C0-422A-B165-B0062CDC2F4D">
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:8910</dailymed:HGNCGeneSymbol>
+    <rdfs:label>ESR1, PGR</rdfs:label>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:CC893565-E222-445A-A3A5-255A361F0779">
+    <dct:description>The drug of interest.</dct:description>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01048</dailymed:pharmgxDrug>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <rdfs:label>Abacavir</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:6F48DC3B-BF65-493E-81BA-0EC583D9F815">
+    <ao:prefix></ao:prefix>
+    <pav:createdOn>2014-06-09 15:38:04 -0400</pav:createdOn>
+    <ao:suffix></ao:suffix>
+    <ao:exact>Letrozole tablets are indicated for the adjuvant treatment of postmenopausal women with hormone receptor positive early breast cancer.</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <domeo:uuid>6F48DC3B-BF65-493E-81BA-0EC583D9F815</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/LETROZOLE-63e54b62-a30d-4a56-9215-75e7a0b0bf02.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:6F48DC3B-BF65-493E-81BA-0EC583D9F815"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:0965EA50-C567-4B0A-8F5A-E00AEBEBEE60">
+    <rdfs:label>Prodrug</rdfs:label>
+    <sio:SIO_000628>dailymed:Prodrug</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:Prodrug>http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/pro-drug</dailymed:Prodrug>
+    <dct:description>Referred to Prodrug</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:06329C94-6462-453B-8D8D-71BD5FB23D98">
+    <dct:description>The selected biomarker.</dct:description>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000006121</dailymed:pharmgxBiomarker>
+    <rdfs:label>CYP2D6</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:5FD9DC0F-109F-4856-B397-DE76C1A434A2">
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000002010</dailymed:pharmgxBiomarker>
+    <rdfs:label>HLA-B*5701</rdfs:label>
+    <dct:description>The selected biomarker.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:435CF0DB-AD64-4BC3-A304-303BC2D46AFA">
+    <rdfs:label>Carbamazepine</rdfs:label>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB00564</dailymed:pharmgxDrug>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The drug of interest.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:ECB29C08-6087-4793-808C-3D4065185BD7">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <ns1:MedicalCondition>metastatic breast cancer, postmenopausal</ns1:MedicalCondition>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:159BEC1A-94C2-40B6-B567-D6333CD6DE5B">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <dct:description>The selected biomarker.</dct:description>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000002010</dailymed:pharmgxBiomarker>
+    <rdfs:label>HLA-B*5701</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:41B0AC51-A323-4AA0-B6B1-AE599D6A3243">
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <sio:SIO_000111>(34067-9) INDICATIONS AND USAGE</sio:SIO_000111>
+    <rdfs:label>SPL Section</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#(34067-9) INDICATIONS AND USAGE</ns1:productLabelSection>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:13AF37B1-4E41-4E48-8C9D-A6C3563C903E">
+    <rdfs:label>poor-metabolizer</rdfs:label>
+    <dct:description>A specific variant of a gene, including the wild-type allele, or a patient phenotype</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>poc:Variant</sio:SIO_000628>
+    <ns1:Variant>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer</ns1:Variant>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:person:uuid:080e143044e90f26014518a19cf70063">
+    <foafx:email>codehop.dev@gmail.com</foafx:email>
+    <foafx:middlename></foafx:middlename>
+    <foafx:picture>http://www.hcklab.org/images/me/paolo%20ciccarese-boston.jpg</foafx:picture>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foafx:homepage></foafx:homepage>
+    <rdfs:label>PgxConsensus</rdfs:label>
+    <foafx:title></foafx:title>
+    <foafx:name>PgxConsensus</foafx:name>
+    <foafx:firstname>Pharmgx</foafx:firstname>
+    <foafx:lastname>Consensus</foafx:lastname>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:05E167AD-621A-4179-A96C-7B36A8D5EE62">
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#gene-haplotype-positive</ns1:TestResult>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+    <rdfs:label>gene-haplotype-positive</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:572E539A-07D4-4537-BCB9-D2E4BFA14074">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:MedicalCondition>postmenopausal, early breast cancer</ns1:MedicalCondition>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1625A18A-CC28-4882-B2EA-0F41AD519BEF">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:MedicalCondition>acute coronary syndrome (ACS), percutaneous coronary intervention (PCI) </ns1:MedicalCondition>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:AC6F7990-D861-4C44-AA24-A2C060DDBFB3">
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:Comment>No discrete PK effect mentioned beyond the name of poor metabolizer.  Did not select.</ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:A98E9CEE-72D2-4445-AF05-AAAD71E0D3F7">
+    <rdfs:label>Letrozole</rdfs:label>
+    <dct:description>The drug of interest.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01006</dailymed:pharmgxDrug>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:D155D44E-B5B9-4FB2-B9DA-C40E95936FEA">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <ns1:MedicalCondition>hypersensitivity</ns1:MedicalCondition>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:E37C529A-77BE-4080-AB40-03D7D1BD0F2B">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>ESR1, PGR</rdfs:label>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:8910</dailymed:HGNCGeneSymbol>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:03A84E89-09C9-4C8F-9516-00606DE6BBB0">
+    <rdfs:label>Comment</rdfs:label>
+    <ns1:Comment>Removes genotypes from the phenotype box (HLAs).
+PD phenotypes... should they be in the phenotype box? Redundant to PD radio buttons unless something like "receptor binding change" -- but that's not how CPIC does it.</ns1:Comment>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:E03081EE-6DD2-4527-8745-6D996195EB80">
+    <rdfs:label>gene-haplotype-positive</rdfs:label>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#gene-haplotype-positive</ns1:TestResult>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:49DEF704-822D-4AE7-B20C-F49A907D9B1F">
+    <rdfs:label>CYP2D6</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000006121</dailymed:pharmgxBiomarker>
+    <dct:description>The selected biomarker.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:A1D6DBC7-1227-43AD-B225-24F50730551E">
+    <ns1:Comment>Phenotype or just test result?</ns1:Comment>
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1F4C8524-E7B6-4B6A-8F06-637A54FCA94B">
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer-positive</ns1:TestResult>
+    <rdfs:label>poor-metabolizer-positive</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:D8296B13-0236-40CE-85F0-A858FD5A2A01">
+    <domeo:uuid>D8296B13-0236-40CE-85F0-A858FD5A2A01</domeo:uuid>
+    <pav:createdOn>2014-06-09 15:40:26 -0400</pav:createdOn>
+    <ao:exact>Letrozole tablet is an aromatase inhibitor indicated for: \nAdjuvant treatment of postmenopausal women with hormone receptor positive early breast cancer (1.1)\nExtended adjuvant treatment of postmenopausal women with early breast cancer who have received prior standard adjuvant tamoxifen therapy (1.2)\nFirst and second-line treatment of postmenopausal women with hormone receptor positive or unknown advanced breast cancer</ao:exact>
+    <ao:prefix></ao:prefix>
+    <ao:suffix> (1.3</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/SPL-annotation/LETROZOLE-63e54b62-a30d-4a56-9215-75e7a0b0bf02.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:D8296B13-0236-40CE-85F0-A858FD5A2A01"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:57680457-FDF2-420C-B33B-DAC940C96E06">
+    <sio:SIO_000563>poc:PharmacodynamicImpact</sio:SIO_000563>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Increased Toxicity Risk</rdfs:label>
+    <ns1:PharmacodynamicImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#drug-toxicity-risk-increased</ns1:PharmacodynamicImpact>
+    <dct:description>The pharmacogenomic biomarker is associated with an increased risk of toxicity.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:C28FFAA4-25F9-47EF-A667-A01FB98F6D66">
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>SPL Section</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:16BBCC1E-1131-4CB0-AEB2-6F78D78A8C2C">
+    <rdfs:label>Discontinue/Do not restart</rdfs:label>
+    <sio:SIO_000563>poc:DrugSelectionRecommendation</sio:SIO_000563>
+    <ns1:DrugSelectionRecommendation>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#discontinue-do-not-restart</ns1:DrugSelectionRecommendation>
+    <dct:description>The pharmacogenomic biomarker is related to a recommendation to not restart the drug</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:F5A2670D-BC99-4D60-9BC6-E1F4A5B68F1A">
+    <rdfs:label>gene-haplotype-positive</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#gene-haplotype-positive</ns1:TestResult>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:A3607AC4-9F08-4BB1-B4CE-5F41AC1C1FCD">
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <dct:description>The drug of interest.</dct:description>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB00758</dailymed:pharmgxDrug>
+    <rdfs:label>Clopidogrel</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:E38F410F-7D9F-4676-9C0C-62165C355E64">
+    <rdfs:label>poor-metabolizer-positive</rdfs:label>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#poor-metabolizer-positive</ns1:TestResult>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1BA750D8-4CDE-4706-A679-C77C2A699FAC">
+    <rdfs:label>SPL Section</rdfs:label>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:D7523E21-5DE6-498D-81BE-31A18460B2CF">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The pharmacogenomic biomarker is associated with an increased risk of toxicity.</dct:description>
+    <sio:SIO_000563>poc:PharmacodynamicImpact</sio:SIO_000563>
+    <ns1:PharmacodynamicImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#drug-toxicity-risk-increased</ns1:PharmacodynamicImpact>
+    <rdfs:label>Increased Toxicity Risk</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:02ACE035-E5B4-4D7B-BE92-8221C05BB06F">
+    <rdfs:label>biomarker-positive</rdfs:label>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#biomarker-positive</ns1:TestResult>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:2A813731-022D-4FC3-9DEB-89846CE40F66">
+    <dct:description>The selected biomarker.</dct:description>
+    <rdfs:label>CYP2D6</rdfs:label>
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000006121</dailymed:pharmgxBiomarker>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1D1D982B-0C5D-4620-8588-6EAE02477538">
+    <ns1:Comment>Phenotype or just test result?</ns1:Comment>
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:6D94CCC8-7FD9-4E8C-A6D1-D986F7228188">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:MedicalCondition>postmenopausal, advanced breast cancer, early breast cancer</ns1:MedicalCondition>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6ccedc2773e9445d84277c6363cf69f2">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:785CCFAF-6AA9-49AE-B376-76E5CF645224">
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <rdfs:label>HLA-B</rdfs:label>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:4932</dailymed:HGNCGeneSymbol>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1264DF5B-0857-43E2-A492-2F8ADA2C23CD">
+    <rdfs:label>Alleles</rdfs:label>
+    <ns2:Alleles>HLA-B*1502</ns2:Alleles>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:9BEEF5BE-7CC5-451A-B93B-312DCEECF2D6">
+    <dailymed:pharmgxBiomarker>http://purl.obolibrary.org/obo/PR_000002010</dailymed:pharmgxBiomarker>
+    <dct:description>The selected biomarker.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>HLA-B*5701</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxBiomarker</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:4484FB84-F2D9-41DF-98E0-A900136DF65F">
+    <ns1:MedicalCondition>acute coronary syndrome (ACS), percutaneous coronary intervention (PCI) </ns1:MedicalCondition>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>MedicalCondition</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:5D276A0A-3DA5-41F9-9C49-06EC7D2625B1">
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>SPL Section</rdfs:label>
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:5366E6F5-B967-4E0E-BC7E-F88E7F792CF0">
+    <rdfs:label>HLA-B</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:4932</dailymed:HGNCGeneSymbol>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:FE7D9960-B42E-4C1A-AE62-D15B9C039F81">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The pharmacogenomic biomarker is associated with a decrease in metabolism of the drug.</dct:description>
+    <rdfs:label>Metabolism Decrease</rdfs:label>
+    <ns1:PharmacokineticImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#metabolism-decrease</ns1:PharmacokineticImpact>
+    <sio:SIO_000563>poc:PharmacokineticImpact</sio:SIO_000563>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1E763572-D7CC-4A0D-92AA-A09D9BE59CB4">
+    <rdfs:label>Abacavir</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01048</dailymed:pharmgxDrug>
+    <dct:description>The drug of interest.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:3BDCEBE4-9EB9-45C8-A5F6-17CD3815F9D8">
+    <dct:description>The drug of interest.</dct:description>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01238</dailymed:pharmgxDrug>
+    <rdfs:label>Aripiprazole</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfdeebf8c9ac84104abda89681b76958a">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:60151512-42F8-45B9-9A84-95F2E1D2592B">
+    <rdfs:label>CYP2C19</rdfs:label>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:2621</dailymed:HGNCGeneSymbol>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N97c2588f967b480aa8cfcafd3bb6c3f2">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:89572CCC-08BF-4A1C-B2F0-10A3E63A20AE">
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+    <rdfs:label>SPL Section</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:52BB31E1-B99A-4E4A-8E77-4813CC6E61A3">
+    <sio:SIO_000111>(34067-9) INDICATIONS AND USAGE</sio:SIO_000111>
+    <rdfs:label>SPL Section</rdfs:label>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#(34067-9) INDICATIONS AND USAGE</ns1:productLabelSection>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:68E7021D-C55E-435D-AB25-ECC1B2121620">
+    <rdfs:label>biomarker-positive</rdfs:label>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#biomarker-positive</ns1:TestResult>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:DFB7B1EB-E83A-45B4-B1A1-355909AF9009">
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB00758</dailymed:pharmgxDrug>
+    <dct:description>The drug of interest.</dct:description>
+    <rdfs:label>Clopidogrel</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:BDAC8257-399D-4FC7-AFFA-60F1E3A3A5A2">
+    <rdfs:label>Letrozole</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01006</dailymed:pharmgxDrug>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <dct:description>The drug of interest.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:566403B6-DBAE-4BFB-AE8C-80AAAC20EABB">
+    <ns1:PharmacodynamicImpact>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#drug-toxicity-risk-increased</ns1:PharmacodynamicImpact>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The pharmacogenomic biomarker is associated with an increased risk of toxicity.</dct:description>
+    <rdfs:label>Increased Toxicity Risk</rdfs:label>
+    <sio:SIO_000563>poc:PharmacodynamicImpact</sio:SIO_000563>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:14E6E1DC-C13E-45EC-A318-3078760B0911">
+    <ns1:Comment>Phenotype or just test result?</ns1:Comment>
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:E17A169A-E5CE-44D6-B03F-584B032CFBBC">
+    <dct:description>The drug of interest.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <rdfs:label>Aripiprazole</rdfs:label>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01238</dailymed:pharmgxDrug>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:B58DE3C3-8EED-4796-ACEA-501E306312DB">
+    <rdfs:label>CYP2D6</rdfs:label>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:2625</dailymed:HGNCGeneSymbol>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:D92DF661-364D-407C-BBA7-B5910D4358D2">
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:Comment>Phenotype or just test result?
+Should be in highlights section.</ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:F4D01475-2047-4CBD-B0AD-E920C848C839">
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB00758</dailymed:pharmgxDrug>
+    <dct:description>The drug of interest.</dct:description>
+    <rdfs:label>Clopidogrel</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:BAC5C66E-B885-4E88-8D9C-EF92A8E555FA">
+    <rdfs:label>SPL Section</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#BOXED WARNING (34066-1)</ns1:productLabelSection>
+    <sio:SIO_000111>BOXED WARNING (34066-1)</sio:SIO_000111>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:829EA72B-EF99-45DF-AACA-E57D285233BA">
+    <dct:description>The drug of interest.</dct:description>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01006</dailymed:pharmgxDrug>
+    <rdfs:label>Letrozole</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:1EF90B26-5C40-48DE-A84F-793FAB131292">
+    <rdfs:label>MedicalCondition</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:MedicalCondition>SJS, TEN, Chinese ancestry</ns1:MedicalCondition>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:FD886273-8735-498C-8640-EA0DDC06EF49">
+    <rdfs:label>Letrozole</rdfs:label>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01006</dailymed:pharmgxDrug>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <dct:description>The drug of interest.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:05F92B1A-A496-414E-A7BB-C4990E914C5B">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:VariantFrequency>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#population-frequency-mentioned</ns1:VariantFrequency>
+    <dct:description>The frequency or proportion at which a variant occurs in a specific population is mentioned.</dct:description>
+    <sio:SIO_000563>poc:VariantFrequency</sio:SIO_000563>
+    <rdfs:label>Variant Frequency</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:BF37D5AD-082C-4558-8D31-AD6510A9E47B">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Comment</rdfs:label>
+    <ns1:Comment>WRONG label section.  Should be highlights but not listed.
+
+Test result we indicated because this should come up as a test result linked item.  Haplotype because there is not phenotypic test.</ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3878764112c946c6a0958f3403646f3a">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncb8f1b7c4eb2482fb9d394916b4767d8">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:BF1831BD-17A8-43CB-A2DD-ABEE3697A9BB">
+    <rdfs:label>Abacavir</rdfs:label>
+    <sio:SIO_000628>dailymed:pharmgxDrug</sio:SIO_000628>
+    <dct:description>The drug of interest.</dct:description>
+    <dailymed:pharmgxDrug>http://www.drugbank.ca/drugs/DB01048</dailymed:pharmgxDrug>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne00de54c96b34d30b649daff3eef4a32">
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:E69DEE5E-0B71-4D85-8225-17FC7BBE2093">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Comment</rdfs:label>
+    <ns1:Comment>Do this one twice as test result states regardless of direction.  Alternative is to not do it at all, but we lose recommendations in this case.</ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:9D9ED653-3069-45CE-8ADC-C283F86F0249">
+    <rdfs:label>SPL Section</rdfs:label>
+    <sio:SIO_000111>(34066-1) BOXED WARNING</sio:SIO_000111>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#(34066-1) BOXED WARNING</ns1:productLabelSection>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:2F4DC59A-10CB-47B3-9DA6-0C7800FD11C9">
+    <ns1:Comment>Phenotype or just test result?</ns1:Comment>
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:F0ACC0F6-D267-4BFB-939F-70A922EE5E1E">
+    <sio:SIO_000628>dailymed:ConcomitantMedicationOfConcern</sio:SIO_000628>
+    <rdfs:label>Concomitant medication concern</rdfs:label>
+    <dailymed:ConcomitantMedicationOfConcern>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#concomitant-medication-concern</dailymed:ConcomitantMedicationOfConcern>
+    <dct:description>A concomitant medication of concern is mentioned.</dct:description>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:990346DA-92C3-44FE-B8E1-ADFCF6753A5E">
+    <sio:SIO_000338>poc:TestResult</sio:SIO_000338>
+    <ns1:TestResult>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#biomarker-positive</ns1:TestResult>
+    <rdfs:label>biomarker-positive</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <dct:description>A test result that is somehow related to the biomarker.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:CE03FEC2-E9BA-41BD-B509-623A9188A0F2">
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <rdfs:label>Alleles</rdfs:label>
+    <ns2:Alleles>HLA-B*5701</ns2:Alleles>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:479712BD-1EA1-459F-9754-182F1F0AE632">
+    <rdfs:label>Comment</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns1:Comment>Removes genotypes from the phenotype box (HLAs).
+PD phenotypes... should they be in the phenotype box? Redundant to PD radio buttons unless something like "receptor binding change" -- but that's not how CPIC does it.</ns1:Comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:597501F0-D4BF-4A7C-90E2-AB9A68293172">
+    <rdfs:label>CYP2D6</rdfs:label>
+    <dailymed:HGNCGeneSymbol>http://bio2rdf.org/hgnc:2625</dailymed:HGNCGeneSymbol>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <sio:SIO_000628>dailymed:HGNCGeneSymbol</sio:SIO_000628>
+    <dct:description>The selected HGNCGeneSymbol.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:C5859DA8-480A-474B-85B7-59CAEC20F59E">
+    <rdfs:label>Alleles</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+    <ns2:Alleles>HLA-B*5701</ns2:Alleles>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na86e3ded4bee47e29aee2bade98dbc05">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:linkedspls:uuid:7AF17101-95D9-4C71-8845-27ECC85F996F">
+    <ns1:productLabelSection>http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#(34067-9) INDICATIONS AND USAGE</ns1:productLabelSection>
+    <dct:description>The section of the label where pharmacists identify clinical pharmgx statements</dct:description>
+    <sio:SIO_000111>(34067-9) INDICATIONS AND USAGE</sio:SIO_000111>
+    <rdfs:label>SPL Section</rdfs:label>
+    <rdf:type rdf:resource="poc:PharmacogenomicsStatement"/>
+  </rdf:Description>
+</rdf:RDF>
