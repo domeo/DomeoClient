@@ -8,7 +8,7 @@ from elasticsearch import Elasticsearch
 
 #using plugin rdflib-jsonld we easily can transform jsonld in N3
 import json
-from rdflib import Graph, plugin, ConjunctiveGraph
+from rdflib import Graph, plugin, ConjunctiveGraph, URIRef
 from rdflib.serializer import Serializer
 from rdflib.plugins.memory import IOMemory
 
@@ -67,6 +67,7 @@ for jld in v['hits']['hits']:
 
     jldDict["@context"] = context
     jldJson = json.dumps(jldDict).replace("_!DOMEO_NS!_", ":")
+    jldJson = unicode(jldJson).encode(encoding="utf-8",errors="replace")
     print jldJson
 
     g = Graph(store=store,identifier=jld["_id"]).parse(data=jldJson, format='json-ld')
@@ -80,7 +81,7 @@ for c in cGraph.contexts():
     print("-- %s " % c)
 
 # TODO: add exception handling
-s = cGraph.serialize(format='xml', indent=4)
+s = unicode(cGraph.serialize(format='xml', indent=4), encoding="utf-8",errors="replace")
 print s
 
 # TODO: add exception handling
