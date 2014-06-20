@@ -1,5 +1,7 @@
 package org.mindinformatics.gwt.domeo.client.ui.toolbar.addressbar;
 
+import org.mindinformatics.gwt.domeo.client.Domeo;
+import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.framework.component.ui.toolbar.IToolbarItem;
 import org.mindinformatics.gwt.framework.src.Application;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
@@ -7,6 +9,7 @@ import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.utils.src.UrlUtils;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -16,6 +19,8 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -52,7 +57,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 	//private final UrlHistoryServiceAsync urlHistoryService = GWT.create(UrlHistoryService.class);
 
 	private IApplication _application;
-	
+	private IDomeo _domeo;
 	private ClickHandler _clickHandler;
 	private KeyPressHandler _keyPressHandler;
 	private SelectionHandler<Suggestion> _selectionHandler;
@@ -61,7 +66,22 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 	private HandlerRegistration addressBoxSelectionHandler;
 	private HandlerRegistration buttonHandler;
 	
+/*	Window.addWindowClosingHandler(new Window.ClosingHandler() {
 
+		@Override
+		public void onWindowClosing(ClosingEvent event) {
+
+			if (_this.getAnnotationPersistenceManager()
+					.isWorskspaceUnsaved()) {
+				Window.alert("The workspace contains unsaved annotation.\n\n"
+						+ "By selecting 'Leaving the Page', the unsaved annotations will be lost.\n\n"
+						+ "By selecting 'Stay on Page', you will have the chance to save the annotation.\n\n");
+				event.setMessage("The workspace contains unsaved annotation.");
+			}
+		}
+	});*/
+	
+	
 	public AddressBarPanel(IApplication application) {
 		_application = application;
 		
@@ -76,6 +96,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 		goButton = new Image(localResources.rightSideAddressBar().getSafeUri().asString());
 		goButton.setHeight(ITEMS_HEIGHT);
 		goButton.setTitle(LOAD_DOCUMENT_TITLE);
+		
 		
 		main.add(goButton);
 	}

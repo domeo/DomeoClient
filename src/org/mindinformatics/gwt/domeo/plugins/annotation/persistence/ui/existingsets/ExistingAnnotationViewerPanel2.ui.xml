@@ -1,15 +1,13 @@
-<ui:UiBinder
-  xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
 
-<ui:style>
+	<ui:style>
 	.outer {
-	    padding-left: 4px;
-	    padding-top: 10px;
-	    padding-bottom:16px;
-	    height: 500px;	
-	    font-size: 11px;
+		padding-left: 4px;
+		padding-top: 10px;
+		padding-bottom: 16px;
+		height: 500px;
+		font-size: 11px;
 	}
 	
 	.message {
@@ -17,49 +15,50 @@
 	}
 	
 	.tree {
-      width: 500px;
-      border: 1px solid #ccc;
-    }
-    
-    .selectedLabel {
-      padding-left: 15px;
-    }
-  	
-  	.panel {
+		width: 500px;
+		border: 1px solid #ccc;
+	}
+	
+	.selectedLabel {
+		padding-left: 15px;
+	}
+	
+	.panel {
 		width: 100%;
 		vertical-align: top;
 		padding-top: 10px;
 	}
 	
-  	.importBtn {
-			min-width: 100px;
-		}
-</ui:style>
+	.importBtn {
+		min-width: 100px;
+	}
+	</ui:style>
 
 
-<g:HorizontalPanel  ui:field='main'>
-	<g:cell width="600px">
-	<g:VerticalPanel>
-  	<g:ScrollPanel ui:field='left' styleName='{style.outer}'>
-  	</g:ScrollPanel>
-  	
-  	<g:HorizontalPanel styleName='{style.panel}'>
-  	<g:Button ui:field='importButton' styleName='{style.importBtn}'>Import</g:Button>
-  	<g:Button ui:field='selectAllButton' styleName='{style.importBtn}'>select All Sets</g:Button>
-  	<g:Button ui:field='selectMySetsButton' styleName='{style.importBtn}'>select My Sets</g:Button>
-  	</g:HorizontalPanel>
-  	
-  	</g:VerticalPanel>
-  	</g:cell>
-  	<g:cell>
-  	<g:VerticalPanel>
-  		<g:Label
-		            addStyleNames='{style.selectedLabel}'
-		            ui:field='selectedLabel' />
-		<g:VerticalPanel ui:field='preview'>
-		
-		</g:VerticalPanel>
-  	</g:VerticalPanel>
-  	</g:cell>
-  </g:HorizontalPanel>
+	<g:HorizontalPanel ui:field='main'>
+		<g:cell width="600px">
+			<g:VerticalPanel>
+				<g:ScrollPanel ui:field='left' styleName='{style.outer}'>
+				</g:ScrollPanel>
+
+				<g:HorizontalPanel styleName='{style.panel}'>
+					<g:Button ui:field='importButton' styleName='{style.importBtn}'>Import
+					</g:Button>
+					<!-- <g:Button ui:field='selectAllButton' styleName='{style.importBtn}'>select 
+						All Sets</g:Button> -->
+					<g:Button ui:field='selectMySetsButton' styleName='{style.importBtn}'>select
+						My Sets</g:Button>
+				</g:HorizontalPanel>
+
+			</g:VerticalPanel>
+		</g:cell>
+		<g:cell>
+			<g:VerticalPanel>
+				<g:Label addStyleNames='{style.selectedLabel}' ui:field='selectedLabel' />
+				<g:VerticalPanel ui:field='preview'>
+
+				</g:VerticalPanel>
+			</g:VerticalPanel>
+		</g:cell>
+	</g:HorizontalPanel>
 </ui:UiBinder>

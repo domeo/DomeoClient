@@ -33,7 +33,7 @@
 			padding: 0px 1px 4px 0px;	
 		}
 		.provenance {
-			width: 100%;
+			width: 500px;
 			background-color: #EEE;	
 			border-top-right-radius: 10px;	
 			-moz-border-radius-topright: 10px;

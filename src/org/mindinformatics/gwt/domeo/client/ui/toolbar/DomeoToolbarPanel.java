@@ -90,6 +90,17 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 			new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
+					
+					if (_domeo.getAnnotationPersistenceManager()
+							.isWorskspaceUnsaved()) {
+						Window.alert("The workspace contains unsaved annotation.\n\n"
+								+ "By selecting 'Yes', the unsaved annotations will be lost.\n\n"
+								+ "By selecting 'Cancel', you will have the chance to save the annotation.\n\n");
+						//event.setMessage("The workspace contains unsaved annotation.");
+					}
+					
+					
+					
 					if(addressBarPanel.getAddress().length()>0) 
 						_domeo.attemptContentLoading(addressBarPanel.getAddress());
 				}

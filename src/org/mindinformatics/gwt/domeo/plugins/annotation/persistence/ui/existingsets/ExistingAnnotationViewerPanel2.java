@@ -61,7 +61,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 	@UiField
 	ScrollPanel left;
 	@UiField
-	Button importButton, selectAllButton, selectMySetsButton;
+	Button importButton, selectMySetsButton; //selectAllButton
 	@UiField
 	VerticalPanel preview;
 
@@ -294,7 +294,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 				}
 			});
 
-			selectAllButton.addClickHandler(new ClickHandler() {
+		/*	selectAllButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 
@@ -306,7 +306,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 						}
 					}
 				}
-			});
+			});*/
 			
 			
 			/*

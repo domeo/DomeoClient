@@ -22,6 +22,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -29,143 +30,177 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
-public class TextAnnotationFormsPanel extends ATextFormsManager implements IContentPanel, IResizable {
+public class TextAnnotationFormsPanel extends ATextFormsManager implements
+		IContentPanel, IResizable {
 
 	private static final String TITLE = "Manual Annotation Creation";
 	private static final String TITLE_EDIT = "Manual Annotation Editing";
-	
-	interface Binder extends UiBinder<FlowPanel, TextAnnotationFormsPanel> { }
+
+	interface Binder extends UiBinder<FlowPanel, TextAnnotationFormsPanel> {
+	}
+
 	private static final Binder binder = GWT.create(Binder.class);
-	
+
 	private IDomeo _domeo;
 	private IContainerPanel _containerPanel;
 	private String _title;
-	
+
 	private HighlightedTextBuffer highlightBuffer;
-	private ArrayList<AFormComponent> forms = new ArrayList<AFormComponent>(); 
-	
-	@UiField FlowPanel main;
-	@UiField HorizontalPanel header;
-	@UiField SpanElement prefixText;
-	@UiField SpanElement matchText;
-	@UiField SpanElement suffixText;
-	@UiField Image leftBottomSide;
-	@UiField Image rightBottomSide;
-	@UiField Image leftTopSide;
-	@UiField Image rightTopSide;
-	@UiField TabLayoutPanel tabToolsPanel;
-	@UiField SpanElement footerSpan;
-	
+	private ArrayList<AFormComponent> forms = new ArrayList<AFormComponent>();
+
+	@UiField
+	FlowPanel main;
+	@UiField
+	HorizontalPanel header;
+	@UiField
+	SpanElement prefixText;
+	@UiField
+	SpanElement matchText;
+	@UiField
+	SpanElement suffixText;
+	@UiField
+	Image leftBottomSide;
+	@UiField
+	Image rightBottomSide;
+	@UiField
+	Image leftTopSide;
+	@UiField
+	Image rightTopSide;
+	@UiField
+	TabLayoutPanel tabToolsPanel;
+	@UiField
+	SpanElement footerSpan;
+
 	public TextAnnotationFormsPanel(IDomeo domeo) {
 		_domeo = domeo;
-		
+
 		initWidget(binder.createAndBindUi(this));
 	}
-	
+
 	// ------------------------------------------------------------------------
-	//  EDITING OF ANNOTATIONS OF VARIOUS KIND
+	// EDITING OF ANNOTATIONS OF VARIOUS KIND
 	// ------------------------------------------------------------------------
-	public TextAnnotationFormsPanel(IDomeo domeo,
-			final MAnnotation annotation, ArrayList<MAnnotation> existingAnnotationInTheTextSpan) {
+	public TextAnnotationFormsPanel(IDomeo domeo, final MAnnotation annotation,
+			ArrayList<MAnnotation> existingAnnotationInTheTextSpan) {
 		_domeo = domeo;
 		_title = TITLE_EDIT;
 
+		// matchText.setId("exactmatch");
+		System.out
+				.println("TextAnnotationFormsPanel - EDITING OF ANNOTATIONS OF VARIOUS KIND");
+
+		// System.out.println("matchText html: " + matchText.getInnerHTML());
 		// Buffer the potential highlighted text
-		
-		highlightBuffer = new HighlightedTextBuffer(SelectorUtils.getMatch(annotation.getSelector()), SelectorUtils.getPrefix(annotation.getSelector()), 
-			SelectorUtils.getSuffix(annotation.getSelector()), null);
-		
-		initWidget(binder.createAndBindUi(this)); 
+
+		highlightBuffer = new HighlightedTextBuffer(
+				SelectorUtils.getMatch(annotation.getSelector()),
+				SelectorUtils.getPrefix(annotation.getSelector()),
+				SelectorUtils.getSuffix(annotation.getSelector()), null);
+
+		initWidget(binder.createAndBindUi(this));
 		this.setWidth((Window.getClientWidth() - 140) + "px");
-		
+
 		refreshHighlightedText();
-		
+		System.out.println("matchText id: " + matchText.getId());
+
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
 		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
-		
-		IFormGenerator formGenerator = _domeo.getAnnotationFormsManager().getAnnotationForm(annotation.getClass().getName());
-		
-		if(formGenerator!=null) {
+
+		IFormGenerator formGenerator = _domeo.getAnnotationFormsManager()
+				.getAnnotationForm(annotation.getClass().getName());
+
+		if (formGenerator != null) {
 			AFormComponent form = formGenerator.getForm(this, annotation);
 			tabToolsPanel.add(form, form.getTitle());
 			forms.add(form);
 		}
-		
-		leftBottomSide.setVisible(false);
-//		leftBottomSide.addClickHandler(new ClickHandler() {
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				int counter = 0;
-//				String prefix = highlightBuffer.getPrefix();
-//				
-//				while(counter<prefix.length() && prefix.substring(prefix.length()-counter-2, prefix.length()-counter-1).trim().length()==0) {
-//					counter++;
-//				}
-//
-//				String buffer = prefix.substring(prefix.length()-counter-1);
-//				highlightBuffer.setPrefix(prefix.substring(0, prefix.length()-counter-1));
-//				highlightBuffer.setExact(buffer + highlightBuffer.getExact());
-//				
-//				refreshHighlightedText();
-//			}
-//		});
-		rightBottomSide.setVisible(false);
-//		rightBottomSide.addClickHandler(new ClickHandler() {
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				int counter = 0;
-//				String prefix = highlightBuffer.getPrefix();
-//				String exact = highlightBuffer.getExact();
-//				
-//				while(counter<exact.length() && exact.substring(0, counter).trim().length()==0) {
-//					counter++;
-//				}
-//				
-//				String buffer = exact.substring(0, counter);
-//				highlightBuffer.setPrefix(prefix + buffer);
-//				highlightBuffer.setExact(exact.substring(counter));
-//				
-//				refreshHighlightedText();
-//			}
-//		});
-		leftTopSide.setVisible(false);
-//		leftTopSide.addClickHandler(new ClickHandler() {
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				int counter = 0;
-//				String exact = highlightBuffer.getExact();
-//				
-//				while(counter<exact.length() && exact.substring(exact.length()-counter-2, exact.length()-counter-1).trim().length()==0) {
-//					counter++;
-//				}
-//				
-//				String buffer = exact.substring(exact.length()-counter-1);
-//				highlightBuffer.setExact(exact.substring(0, exact.length()-counter-1));
-//				highlightBuffer.setSuffix(buffer + highlightBuffer.getSuffix());
-//				
-//				refreshHighlightedText();
-//			}
-//		});
-		rightTopSide.setVisible(false);
-//		rightTopSide.addClickHandler(new ClickHandler() {
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				int counter = 0;
-//				String suffix = highlightBuffer.getSuffix();
-//				String exact = highlightBuffer.getExact();
-//				
-//				while(counter<suffix.length() && suffix.substring(0, counter).trim().length()==0) {
-//					counter++;
-//				}
-//				
-//				String buffer = suffix.substring(0, counter);
-//				highlightBuffer.setExact(exact + buffer);
-//				highlightBuffer.setSuffix(suffix.substring(counter));
-//				
-//				refreshHighlightedText();
-//			}
-//		});
-		
+
+		// leftBottomSide.setVisible(false);
+		leftBottomSide.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				int counter = 0;
+				String prefix = highlightBuffer.getPrefix();
+
+				while (counter < prefix.length()
+						&& prefix
+								.substring(prefix.length() - counter - 2,
+										prefix.length() - counter - 1).trim()
+								.length() == 0) {
+					counter++;
+				}
+
+				String buffer = prefix.substring(prefix.length() - counter - 1);
+				highlightBuffer.setPrefix(prefix.substring(0, prefix.length()
+						- counter - 1));
+				highlightBuffer.setExact(buffer + highlightBuffer.getExact());
+
+				refreshHighlightedText();
+			}
+		});
+
+		// rightBottomSide.setVisible(false);
+		rightBottomSide.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				int counter = 0;
+				String prefix = highlightBuffer.getPrefix();
+				String exact = highlightBuffer.getExact();
+
+				while (counter < exact.length()
+						&& exact.substring(0, counter).trim().length() == 0) {
+					counter++;
+				}
+
+				String buffer = exact.substring(0, counter);
+				highlightBuffer.setPrefix(prefix + buffer);
+				highlightBuffer.setExact(exact.substring(counter));
+
+				refreshHighlightedText();
+			}
+		});
+		// leftTopSide.setVisible(false);
+		leftTopSide.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				int counter = 0;
+				String exact = highlightBuffer.getExact();
+
+				while (counter < exact.length()
+						&& exact.substring(exact.length() - counter - 2,
+								exact.length() - counter - 1).trim().length() == 0) {
+					counter++;
+				}
+
+				String buffer = exact.substring(exact.length() - counter - 1);
+				highlightBuffer.setExact(exact.substring(0, exact.length()
+						- counter - 1));
+				highlightBuffer.setSuffix(buffer + highlightBuffer.getSuffix());
+
+				refreshHighlightedText();
+			}
+		});
+		// rightTopSide.setVisible(false);
+		rightTopSide.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				int counter = 0;
+				String suffix = highlightBuffer.getSuffix();
+				String exact = highlightBuffer.getExact();
+
+				while (counter < suffix.length()
+						&& suffix.substring(0, counter).trim().length() == 0) {
+					counter++;
+				}
+
+				String buffer = suffix.substring(0, counter);
+				highlightBuffer.setExact(exact + buffer);
+				highlightBuffer.setSuffix(suffix.substring(counter));
+
+				refreshHighlightedText();
+			}
+		});
+
 		Timer t = new Timer() {
 			@Override
 			public void run() {
@@ -174,22 +209,26 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 		};
 		t.schedule(200);
 	}
-	
+
 	// ------------------------------------------------------------------------
-	//  CREATION OF ANNOTATIONS OF VARIOUS KIND
+	// CREATION OF ANNOTATIONS OF VARIOUS KIND
 	// ------------------------------------------------------------------------
-	public TextAnnotationFormsPanel(IDomeo domeo,
-			final String exact, final String prefix, final String suffix, 
-			final Node node, ArrayList<MAnnotation> existingAnnotationInTheTextSpan) {
+	public TextAnnotationFormsPanel(IDomeo domeo, final String exact,
+			final String prefix, final String suffix, final Node node,
+			ArrayList<MAnnotation> existingAnnotationInTheTextSpan) {
 		_domeo = domeo;
 		_title = TITLE;
+
+		System.out
+				.println("TextAnnotationFormsPanel - CREATION OF ANNOTATIONS OF VARIOUS KIND");
+		// matchText.setId("exactmatch");
 
 		// Buffer the potential highlighted text
 		highlightBuffer = new HighlightedTextBuffer(exact, prefix, suffix, node);
 
 		// Create layout
-		initWidget(binder.createAndBindUi(this)); 
-
+		initWidget(binder.createAndBindUi(this));
+		matchText.setId("exactmatch");
 		this.setWidth((Window.getClientWidth() - 140) + "px");
 
 		refreshHighlightedText();
@@ -197,10 +236,11 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 		tabToolsPanel.setWidth((Window.getClientWidth() - 180) + "px");
 		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
 		try {
-			Collection<IFormGenerator> formGenerators = _domeo.getAnnotationFormsManager().getAnnotationFormGenerators();
+			Collection<IFormGenerator> formGenerators = _domeo
+					.getAnnotationFormsManager().getAnnotationFormGenerators();
 			Iterator<IFormGenerator> it = formGenerators.iterator();
-			while(it.hasNext()) {
-				String pluginName="";
+			while (it.hasNext()) {
+				String pluginName = "";
 				try {
 					IFormGenerator g = it.next();
 					pluginName = g.getClass().getName();
@@ -208,28 +248,35 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 					forms.add(form);
 					tabToolsPanel.add(form, form.getTitle());
 				} catch (Exception e) {
-					_domeo.getLogger().exception(this, "Exception while loading form: " + pluginName);
+					_domeo.getLogger().exception(this,
+							"Exception while loading form: " + pluginName);
 				}
-			}	
+			}
 		} catch (Exception e) {
-			_domeo.getLogger().exception(this, "Exception while loading form generators.");
-			throw new RuntimeException (e);
-		}	
+			_domeo.getLogger().exception(this,
+					"Exception while loading form generators.");
+			throw new RuntimeException(e);
+		}
 
 		leftBottomSide.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				int counter = 0;
 				String prefix = highlightBuffer.getPrefix();
-				
-				while(counter<prefix.length() && prefix.substring(prefix.length()-counter-2, prefix.length()-counter-1).trim().length()==0) {
+
+				while (counter < prefix.length()
+						&& prefix
+								.substring(prefix.length() - counter - 2,
+										prefix.length() - counter - 1).trim()
+								.length() == 0) {
 					counter++;
 				}
 
-				String buffer = prefix.substring(prefix.length()-counter-1);
-				highlightBuffer.setPrefix(prefix.substring(0, prefix.length()-counter-1));
+				String buffer = prefix.substring(prefix.length() - counter - 1);
+				highlightBuffer.setPrefix(prefix.substring(0, prefix.length()
+						- counter - 1));
 				highlightBuffer.setExact(buffer + highlightBuffer.getExact());
-				
+
 				refreshHighlightedText();
 			}
 		});
@@ -240,15 +287,16 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 				int counter = 0;
 				String prefix = highlightBuffer.getPrefix();
 				String exact = highlightBuffer.getExact();
-				
-				while(counter<exact.length() && exact.substring(0, counter).trim().length()==0) {
+
+				while (counter < exact.length()
+						&& exact.substring(0, counter).trim().length() == 0) {
 					counter++;
 				}
-				
+
 				String buffer = exact.substring(0, counter);
 				highlightBuffer.setPrefix(prefix + buffer);
 				highlightBuffer.setExact(exact.substring(counter));
-				
+
 				refreshHighlightedText();
 			}
 		});
@@ -257,15 +305,18 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 			public void onClick(ClickEvent event) {
 				int counter = 0;
 				String exact = highlightBuffer.getExact();
-				
-				while(counter<exact.length() && exact.substring(exact.length()-counter-2, exact.length()-counter-1).trim().length()==0) {
+
+				while (counter < exact.length()
+						&& exact.substring(exact.length() - counter - 2,
+								exact.length() - counter - 1).trim().length() == 0) {
 					counter++;
 				}
-				
-				String buffer = exact.substring(exact.length()-counter-1);
-				highlightBuffer.setExact(exact.substring(0, exact.length()-counter-1));
+
+				String buffer = exact.substring(exact.length() - counter - 1);
+				highlightBuffer.setExact(exact.substring(0, exact.length()
+						- counter - 1));
 				highlightBuffer.setSuffix(buffer + highlightBuffer.getSuffix());
-				
+
 				refreshHighlightedText();
 			}
 		});
@@ -275,50 +326,51 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 				int counter = 0;
 				String suffix = highlightBuffer.getSuffix();
 				String exact = highlightBuffer.getExact();
-				
-				while(counter<suffix.length() && suffix.substring(0, counter).trim().length()==0) {
+
+				while (counter < suffix.length()
+						&& suffix.substring(0, counter).trim().length() == 0) {
 					counter++;
 				}
-				
+
 				String buffer = suffix.substring(0, counter);
 				highlightBuffer.setExact(exact + buffer);
 				highlightBuffer.setSuffix(suffix.substring(counter));
-				
+
 				refreshHighlightedText();
 			}
 		});
-		
-//		Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-//	        public void execute() {
-//	            resized();
-//	        }
-//	    });
-		
+
+		// Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+		// public void execute() {
+		// resized();
+		// }
+		// });
+
 		Timer t = new Timer() {
-	      @Override
-	      public void run() {
-	    	  resized();
-	      }
-	    };
-	    t.schedule(100);
+			@Override
+			public void run() {
+				resized();
+			}
+		};
+		t.schedule(100);
 	}
-	
+
 	public void refreshHighlightedText() {
-		setHighlightedText(highlightBuffer.getPrefix(), highlightBuffer.getExact(), 
-			highlightBuffer.getSuffix());
+		setHighlightedText(highlightBuffer.getPrefix(),
+				highlightBuffer.getExact(), highlightBuffer.getSuffix());
 	}
-	
+
 	public HighlightedTextBuffer getHighlight() {
 		return highlightBuffer;
 	}
-	
+
 	private void setHighlightedText(String prefix, String text, String suffix) {
 		prefixText.setInnerHTML(prefix + " ");
 		matchText.setInnerHTML(text);
 		matchText.setId("exactmatch");
 		suffixText.setInnerHTML(" " + suffix);
 	}
-	
+
 	public String getTitle() {
 		return _title;
 	}
@@ -327,27 +379,28 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 	public void setContainer(IContainerPanel containerPanel) {
 		_containerPanel = containerPanel;
 	}
+
 	@Override
 	public IContainerPanel getContainer() {
 		return _containerPanel;
 	}
-	
+
 	public void displayMessage(String message) {
 		footerSpan.setInnerHTML(message);
 	}
-	
+
 	public void clearMessage() {
 		footerSpan.setInnerHTML("");
 	}
 
 	@Override
-	public void resized() {		
+	public void resized() {
 		this.setWidth((Window.getClientWidth() - 140) + "px");
 		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
-		
-		for(AFormComponent form: forms) {
-			((IResizable)form).resized();
+
+		for (AFormComponent form : forms) {
+			((IResizable) form).resized();
 		}
 	}
 
@@ -366,7 +419,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements ICont
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public int getContainerWidth() {
 		return main.getOffsetWidth();

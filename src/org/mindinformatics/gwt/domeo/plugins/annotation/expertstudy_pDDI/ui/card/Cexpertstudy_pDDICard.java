@@ -5,9 +5,14 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.Resources;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.actions.ActionShowAnnotation;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.cards.ACardComponent;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormsManager;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AnnotationFormsManager;
+import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.text.TextAnnotationFormsPanel;
 import org.mindinformatics.gwt.domeo.client.ui.popup.CurationPopup;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.model.buffers.HighlightedTextBuffer;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.info.AntibodyPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.MAntibodyAnnotation;
@@ -54,8 +59,8 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 	FlowPanel content;
 
 	@UiField
-	Label drug1, drug2, type, text, role1, type1, role2, type2, statement, modality;
-
+	Label drug1, drug2, type, text, role1, type1, role2, type2, statement,
+			modality;
 
 	public Cexpertstudy_pDDICard(IDomeo domeo) {
 		super(domeo);
@@ -106,27 +111,34 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 				createProvenanceBar(expertstudy_pDDIPlugin.getInstance()
 						.getPluginName(), provenance, _annotation);
 
-			type.setText("expertstudy_pDDI:");
+			MTextQuoteSelector hselector = (MTextQuoteSelector) _annotation
+					.getSelector();
+
+			String exact = hselector.getExact();
+
+			if (exact.length() > 50)
+				exact = exact.substring(0, 49) + "...";
+
+			type.setText("Sentence: " + exact);
 
 			final TextArea comment = new TextArea();
-			final DialogBox dialog = new DialogBox();
+			// final DialogBox dialog = new DialogBox();
 			final VerticalPanel panel = new VerticalPanel();
-			final HorizontalPanel hp1 = new HorizontalPanel();
+			// final HorizontalPanel hp1 = new HorizontalPanel();
 			comment.setCharacterWidth(50);
 			comment.setVisibleLines(10);
 			panel.add(comment);
 
-		
 			if (_annotation != null) {
 				Mexpertstudy_pDDIUsage dataUsage = _annotation.getMpDDIUsage();
-				
+
 				if (dataUsage.getDrug1() != null) {
 					String drug1Str = dataUsage.getDrug1().getLabel();
 					drug1.setText(drug1Str);
 				} else {
 					drug1.setText("");
 				}
-				
+
 				if (dataUsage.getDrug2() != null) {
 					String drug2Str = dataUsage.getDrug2().getLabel();
 					drug2.setText(drug2Str);
@@ -140,43 +152,41 @@ public class Cexpertstudy_pDDICard extends ACardComponent {
 				} else {
 					role1.setText("");
 				}
-				
+
 				if (dataUsage.getRole2() != null) {
 					String role2Str = dataUsage.getRole2().getLabel();
 					role2.setText(role2Str);
 				} else {
 					role2.setText("");
 				}
-				
+
 				if (dataUsage.getType1() != null) {
 					String type1Str = dataUsage.getType1().getLabel();
 					type1.setText(type1Str);
 				} else {
 					type1.setText("");
 				}
-				
+
 				if (dataUsage.getType2() != null) {
 					String type2Str = dataUsage.getType2().getLabel();
 					type2.setText(type2Str);
 				} else {
 					type2.setText("");
 				}
-				
+
 				if (dataUsage.getStatement() != null) {
 					String statStr = dataUsage.getStatement().getLabel();
 					statement.setText(statStr);
 				} else {
 					statement.setText("");
 				}
-				
+
 				if (dataUsage.getModality() != null) {
 					String modalityStr = dataUsage.getModality().getLabel();
 					modality.setText(modalityStr);
 				} else {
 					modality.setText("");
 				}
-
-
 
 			}
 
