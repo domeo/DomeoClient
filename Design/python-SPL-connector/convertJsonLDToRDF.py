@@ -16,6 +16,7 @@ store = IOMemory()
 cGraph = ConjunctiveGraph(store=store)
 
 QUERY_STR = "NLP Sets"
+MAX_RESULTS = 10000
 OUT_FILE = "domeo-annotations-in-rdf.xml"
 
 ############################################################
@@ -26,7 +27,7 @@ es = Elasticsearch()
 #es.cluster.node_info()
 
 # get all annotations
-v = es.search(q=QUERY_STR)
+v = es.search(q=QUERY_STR, size=MAX_RESULTS)
 
 # view what was returned
 #v['hits']
