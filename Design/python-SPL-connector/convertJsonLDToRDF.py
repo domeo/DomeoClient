@@ -1,6 +1,6 @@
 # convertJsonLDToRDF.py
 
-import sys
+import sys, codecs
 sys.path = sys.path + ['.']
 
 # load the library
@@ -10,7 +10,15 @@ from elasticsearch import Elasticsearch
 import json
 from rdflib import Graph, plugin, ConjunctiveGraph
 from rdflib.serializer import Serializer
+from rdflib.plugins.memory import IOMemory
 
+store = IOMemory()
+cGraph = ConjunctiveGraph(store=store)
+
+QUERY_STR = "NLP Sets"
+OUT_FILE = "domeo-annotations-in-rdf.xml"
+
+############################################################
 # initialize
 es = Elasticsearch()
 
@@ -18,7 +26,7 @@ es = Elasticsearch()
 #es.cluster.node_info()
 
 # get all annotations
-v = es.search(q="NLP Sets")
+v = es.search(q=QUERY_STR)
 
 # view what was returned
 #v['hits']
@@ -61,10 +69,26 @@ for jld in v['hits']['hits']:
     jldJson = json.dumps(jldDict).replace("_!DOMEO_NS!_", ":")
     print jldJson
 
-    g = Graph().parse(data=jldJson, format='json-ld')
-    print "\n\n\n"
-    print "######################### N3 #########"
-    print(g.serialize(format='xml', indent=4))
+    g = Graph(store=store,identifier=jld["_id"]).parse(data=jldJson, format='json-ld')
+    #print "\n\n\n"
+    #print "######################### N3 #########"
+    #print(g.serialize(format='xml', indent=4))
+
+# enumerate contexts
+print "Graph contexts stored in IO memory"
+for c in cGraph.contexts():
+    print("-- %s " % c)
+
+# TODO: add exception handling
+s = cGraph.serialize(format='xml', indent=4)
+print s
+
+# TODO: add exception handling
+f = codecs.open(OUT_FILE,'w','utf-8')
+f.write(s)
+f.close()
+
+
 
 
 ################################################################################
