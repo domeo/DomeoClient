@@ -50,7 +50,8 @@ context = {
     "siocns":"http://rdfs.org/sioc/ns#",
     "swande":"http://purl.org/swan/1.2/discourse-elements#",
     "ncbit":"http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#",
-    "dikbEvidence":"http://dbmi-icode-01.dbmi.pitt.edu/dikb-evidence/DIKB_evidence_ontology_v1.3.owl#"
+    "dikbEvidence":"http://dbmi-icode-01.dbmi.pitt.edu/dikb-evidence/DIKB_evidence_ontology_v1.3.owl#",
+    "dikbD2R":"http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/"
   }
 
 
