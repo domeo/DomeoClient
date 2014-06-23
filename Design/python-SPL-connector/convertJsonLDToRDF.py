@@ -15,7 +15,8 @@ from rdflib.plugins.memory import IOMemory
 store = IOMemory()
 cGraph = ConjunctiveGraph(store=store)
 
-QUERY_STR = "NLP Sets"
+#QUERY_STR = "NLP Sets"
+QUERY_STR = "New set"
 MAX_RESULTS = 10000
 OUT_FILE = "domeo-annotations-in-rdf.xml"
 
