@@ -16,7 +16,7 @@ import com.google.gwt.json.client.JSONString;
 /**
  * This class provides the serialization aspects peculiar to the DDI annotation.
  * 
- * @author Richard Boyce <rdb20@pitt.edu>
+ * @author Richard Boyce <rdb20@pitt.edu> 
  */
 public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		JsonAnnotationSerializer {
@@ -108,7 +108,6 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 		/*
 		 * create drug entity2
 		 */
-
 
 		JSONObject drug_entity2 = new JSONObject();
 
