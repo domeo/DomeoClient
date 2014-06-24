@@ -100,7 +100,6 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 					}
 					
 					
-					
 					if(addressBarPanel.getAddress().length()>0) 
 						_domeo.attemptContentLoading(addressBarPanel.getAddress());
 				}

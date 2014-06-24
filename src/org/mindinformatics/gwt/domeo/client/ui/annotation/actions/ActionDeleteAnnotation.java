@@ -20,6 +20,7 @@ public class ActionDeleteAnnotation {
 					domeo.getLogger().command(AnnotationFrameWrapper.LOG_CATEGORY_DELETE_ANNOTATION, clazz, "Item " + annotation.getClass().getName() + "-"+annotation.getLocalId());
 					// TODO manage deletion and undo???
 					domeo.getContentPanel().getAnnotationFrameWrapper().removeAnnotation(annotation, false);
+					//domeo.getContentPanel().getAnnotationFrameWrapper().removeAnnotation(annotation, true);
 					domeo.getProgressPanelContainer().setCompletionMessage("Annotation deleted!");
 				}
 			}
