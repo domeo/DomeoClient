@@ -321,7 +321,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 					
 				    String currentUserURI = _domeo.getAgentManager().getUserPerson().getUri();
 		            String currentUserName = _domeo.getAgentManager().getUserPerson().getName();
-                    System.out.println("currentUserUri: "+currentUserURI);
+                    //System.out.println("currentUserUri: "+currentUserURI);
 					if (publicList != null) {
 						
 						for (AnnotationSetInfo ann : publicList) {
@@ -329,7 +329,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 							String ownerURI = "urn:person:uuid:" + ann.getAnnotationSet().getCreatedBy().getUri();
 							String ownerName = ann.getAnnotationSet().getCreatedBy().getScreenName();
 																
-							System.out.println("set owner is "+ownerURI + "|"+ownerName+"|"+currentUserName);
+							//System.out.println("set owner is "+ownerURI + "|"+ownerName+"|"+currentUserName);
 							
 							if(ownerURI.equals(currentUserURI)||(currentUserName.equals(ownerName)))
 							selectionModel.setSelected(ann, true);

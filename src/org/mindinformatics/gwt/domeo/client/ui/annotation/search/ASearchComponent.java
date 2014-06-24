@@ -61,6 +61,8 @@ public class ASearchComponent extends Composite implements ISearchComponent {
 	public boolean filterByText(MAnnotation annotation, String textSearch) {
 		// TODO take into account multiple selectors
 		
+		//System.out.println("super filterByText");
+		
 		if(SelectorUtils.isOnTextFragment(annotation.getSelectors()) && 
 			annotation.getSelector() instanceof MTextSelector) {
 				return (((MTextSelector)annotation.getSelector())

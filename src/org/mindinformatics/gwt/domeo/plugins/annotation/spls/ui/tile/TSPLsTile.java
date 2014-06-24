@@ -295,7 +295,7 @@ public class TSPLsTile extends ATileComponent implements ITileComponent {
 			sb2.append(tdHtml);
 
 			sb2.append(html2);
-			System.out.println(sb2.toString());
+			//System.out.println(sb2.toString());
 
 			description.setHTML(sb2.toString());
 
