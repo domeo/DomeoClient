@@ -15,6 +15,8 @@ from rdflib.plugins.memory import IOMemory
 store = IOMemory()
 cGraph = ConjunctiveGraph(store=store)
 
+
+#QUERY_STR = "annostudy"
 #QUERY_STR = "NLP Sets"
 #QUERY_STR = "New set 0"
 QUERY_STR = "NLP Drug Mention Set"
