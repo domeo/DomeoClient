@@ -16,21 +16,21 @@ public class AnnotationSearchManager {
 
 	public List<MAnnotation> search(IDomeo domeo, String accessFilter,
 			Long setLocalId, String typeFilter, String textSearch) {
-		domeo.getLogger().debug(this, "-1|textSearch:" + textSearch);
+		//System.out.println("1**|textSearch:" + textSearch);
 		List<MAnnotation> found = new ArrayList<MAnnotation>();
 		for (MAnnotation annotation : domeo.getAnnotationPersistenceManager()
 				.getAllAnnotations()) {
 			ISearchComponent sc = domeo.getAnnotationSearchManager()
 					.getAnnotationSearchComponent(domeo,
 							annotation.getClass().getName());
-			domeo.getLogger().debug(this,
-					"0 |annotation name:" + annotation.getClass().getName());
+			
+			//System.out.println("0 |annotation name:" + annotation.getClass().getName());
 			if (sc.filterBySet(annotation, setLocalId)) {
-				domeo.getLogger().debug(this, "1");
+				//System.out.println("0 | 1");
 				if (sc.filterByType(annotation, typeFilter)) {
-					domeo.getLogger().debug(this, "2");
+					//System.out.println("0 | 2");
 					if (sc.filterByAccess(annotation, accessFilter)) {
-						domeo.getLogger().debug(this, "3");
+						//System.out.println("0 | 3");
 						if (sc.filterByText(annotation, textSearch))
 							found.add(annotation);
 					}
@@ -42,6 +42,7 @@ public class AnnotationSearchManager {
 
 	public List<MAnnotation> search(IDomeo domeo, String accessFilter,
 			String typeFilter, String textSearch) {
+		//System.out.println("2**|textSearch:" + textSearch);
 		List<MAnnotation> found = new ArrayList<MAnnotation>();
 		for (MAnnotation annotation : domeo.getAnnotationPersistenceManager()
 				.getAllAnnotations()) {
@@ -60,6 +61,7 @@ public class AnnotationSearchManager {
 
 	public List<MAnnotation> search(IDomeo domeo, String accessFilter,
 			String textSearch) {
+		//System.out.println("3**|textSearch:" + textSearch);
 		List<MAnnotation> found = new ArrayList<MAnnotation>();
 		for (MAnnotation annotation : domeo.getAnnotationPersistenceManager()
 				.getAllAnnotations()) {
