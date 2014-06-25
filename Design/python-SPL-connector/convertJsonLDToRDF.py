@@ -16,8 +16,8 @@ store = IOMemory()
 cGraph = ConjunctiveGraph(store=store)
 
 # tests
-#QUERY_STR = "annostudy"
-#QUERY_STR = "expert1"
+#QUERY_STR = "8080808046a193dd0146afe869430016" # annostudy 
+#QUERY_STR = "80808080466465c00146674fe5190024" # expert1
 
 QUERY_STR = None
 
