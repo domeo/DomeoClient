@@ -259,7 +259,10 @@ public class MPharmgx extends MTrustedResource {
 			put("PERTUZUMAB", "http://www.drugbank.ca/drugs/DB06366");
 			put("VALPROIC_ACID", "http://www.drugbank.ca/drugs/DB00313");
 			put("VEMURAFENIB", "http://www.drugbank.ca/drugs/DB08881");
-			put("CHLORDIAZEPOXIDE_AND_AMITRIPTYLINE",
+			
+			//TODO: revise model to process products have two drug URIs
+			
+	/*		put("CHLORDIAZEPOXIDE_AND_AMITRIPTYLINE",
 					"http://www.drugbank.ca/drugs/DB00475http://www.drugbank.ca/drugs/DB00321");
 
 			put("DEXTROMETHORPHAN_AND_QUINIDINE",
@@ -272,7 +275,7 @@ public class MPharmgx extends MTrustedResource {
 					"http://www.drugbank.ca/drugs/DB00472http://www.drugbank.ca/drugs/DB00334");
 
 			put("TRAMADOL_AND_ACETAMINOPHEN",
-					"http://www.drugbank.ca/drugs/DB00193http://www.drugbank.ca/drugs/DB00316");
+					"http://www.drugbank.ca/drugs/DB00193http://www.drugbank.ca/drugs/DB00316");*/
 		}
 	};
 

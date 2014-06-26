@@ -205,10 +205,10 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 
 			String drugUri = drug.getUrl();
 
-			System.out.println("uri:" + drugUri);
+			//System.out.println("uri:" + drugUri);
 
 			// two uri for single drug
-			if (drugUri.substring(4).contains("http://")) {
+		/*	if (drugUri.substring(4).contains("http://")) {
 
 				// separate uri
 				int split = drugUri.substring(4).indexOf("http://") + 4;
@@ -229,11 +229,14 @@ public class JsonSPLsAnnotationSerializer extends JsonAnnotationSerializer
 				}
 
 				// put name-uri mapping to jsonObject
-				body.put("dailymed:" + drugname1, new JSONString(uri1));
-				body.put("dailymed:" + drugname2, new JSONString(uri2));
-			} else {
+				// put two uri for combo make PLS can't brings back
+				//body.put("dailymed:" + drugname1, new JSONString(uri1));
+				//body.put("dailymed:" + drugname2, new JSONString(uri2));
+				
+				body.put("dailymed:" + "pharmgxDrug", new JSONString(uri1));
+			} else {*/
 				body.put("dailymed:" + "pharmgxDrug", new JSONString(drugUri));
-			}
+			//}
 
 			body.put(IRdfsOntology.label, new JSONString(drug.getLabel()));
 			body.put(IDublinCoreTerms.description,

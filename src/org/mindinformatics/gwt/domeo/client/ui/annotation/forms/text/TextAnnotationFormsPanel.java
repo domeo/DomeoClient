@@ -10,6 +10,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.IFormGenerator;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.buffers.HighlightedTextBuffer;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
+import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.src.IContainerPanel;
 import org.mindinformatics.gwt.framework.src.IContentPanel;
@@ -85,11 +86,8 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 		_domeo = domeo;
 		_title = TITLE_EDIT;
 
-		// matchText.setId("exactmatch");
-		System.out
-				.println("TextAnnotationFormsPanel - EDITING OF ANNOTATIONS OF VARIOUS KIND");
+		//System.out.println("TextAnnotationFormsPanel - EDITING OF ANNOTATIONS OF VARIOUS KIND");
 
-		// System.out.println("matchText html: " + matchText.getInnerHTML());
 		// Buffer the potential highlighted text
 
 		highlightBuffer = new HighlightedTextBuffer(
@@ -97,11 +95,24 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 				SelectorUtils.getPrefix(annotation.getSelector()),
 				SelectorUtils.getSuffix(annotation.getSelector()), null);
 
+		/*
+		 * high light drug mentions for DDI plugin
+		 */
+		String exact = highlightBuffer.getExact();
+		String styledText = highlightDrugMentionsForDDI(annotation, exact);
+		
+		//System.out.println("added style to sentence span:" + styledText);
+		highlightBuffer.setExact(styledText);
+		
+		
+
 		initWidget(binder.createAndBindUi(this));
 		this.setWidth((Window.getClientWidth() - 140) + "px");
 
 		refreshHighlightedText();
-		System.out.println("matchText id: " + matchText.getId());
+		
+		// removes CSS style in highlightBuffer
+		highlightBuffer.setExact(exact);
 
 		tabToolsPanel.setWidth((Window.getClientWidth() - 140) + "px");
 		tabToolsPanel.setHeight((Window.getClientHeight() - 240) + "px");
@@ -207,6 +218,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 				resized();
 			}
 		};
+
 		t.schedule(200);
 	}
 
@@ -219,8 +231,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 		_domeo = domeo;
 		_title = TITLE;
 
-		System.out
-				.println("TextAnnotationFormsPanel - CREATION OF ANNOTATIONS OF VARIOUS KIND");
+		//System.out.println("TextAnnotationFormsPanel - CREATION OF ANNOTATIONS OF VARIOUS KIND");
 		// matchText.setId("exactmatch");
 
 		// Buffer the potential highlighted text
@@ -228,7 +239,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 
 		// Create layout
 		initWidget(binder.createAndBindUi(this));
-		matchText.setId("exactmatch");
+
 		this.setWidth((Window.getClientWidth() - 140) + "px");
 
 		refreshHighlightedText();
@@ -356,6 +367,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 	}
 
 	public void refreshHighlightedText() {
+
 		setHighlightedText(highlightBuffer.getPrefix(),
 				highlightBuffer.getExact(), highlightBuffer.getSuffix());
 	}
@@ -365,9 +377,13 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 	}
 
 	private void setHighlightedText(String prefix, String text, String suffix) {
-		prefixText.setInnerHTML(prefix + " ");
-		matchText.setInnerHTML(text);
+
 		matchText.setId("exactmatch");
+
+		prefixText.setInnerHTML(prefix + " ");
+
+		matchText.setInnerHTML(text);
+
 		suffixText.setInnerHTML(" " + suffix);
 	}
 
@@ -423,5 +439,41 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 	@Override
 	public int getContainerWidth() {
 		return main.getOffsetWidth();
+	}
+
+	public String highlightDrugMentionsForDDI(MAnnotation annotation,
+			String exactText) {
+
+		if (annotation.getAnnotationType().equals("ao:expertstudyAnnotation")) {
+			Mexpertstudy_pDDIAnnotation annExpert = (Mexpertstudy_pDDIAnnotation) annotation;
+			String drug1 = annExpert.getDrug1().getLabel();
+			String drug2 = annExpert.getDrug2().getLabel();
+
+			if (drug1 != null && !drug1.trim().equals("")
+					&& exactText.toLowerCase().contains(drug1.toLowerCase())) {
+				int index1 = exactText.toLowerCase().indexOf(
+						drug1.toLowerCase());
+
+				exactText = exactText.substring(0, index1)
+						+ "<span style='background-color: #FFFF00'>" + drug1
+						+ "</span>"
+						+ exactText.substring(index1 + drug1.length());
+			}
+
+			if (drug2 != null && !drug2.trim().equals("")
+					&& exactText.toLowerCase().contains(drug2.toLowerCase())) {
+				int index2 = exactText.toLowerCase().indexOf(
+						drug2.toLowerCase());
+
+				exactText = exactText.substring(0, index2)
+						+ "<span style='background-color: #FFFF00'>" + drug2
+						+ "</span>"
+						+ exactText.substring(index2 + drug2.length());
+			}
+
+		}
+
+		return exactText;
+
 	}
 }
