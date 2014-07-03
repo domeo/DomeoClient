@@ -51,7 +51,7 @@ es = Elasticsearch()
 # get all annotations from domeo/devb30
 #res = es.get(index="domeo", doc_type='devb30',id=1)
 
-v = es.search(index="domeo",doc_type='devb301', q=QUERY_STR, size=MAX_RESULTS)
+v = es.search(index="domeo",doc_type='devb30', q=QUERY_STR, size=MAX_RESULTS)
 
 # view what was returned
 #v['hits']
@@ -83,23 +83,23 @@ context = {
 for jld in v['hits']['hits']:
     jldDict = jld['_source']
 
-    # required to enable conversion of the body resources to RDF
-    # for type devb30
-#    if jldDict.has_key("ao_!DOMEO_NS!_item"):
-#        for i in range(0,len(jldDict["ao_!DOMEO_NS!_item"])):
-#            if jldDict["ao_!DOMEO_NS!_item"][i].has_key('ao_!DOMEO_NS!_body'):
-#                for j in range(0,len(jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'])):
-#                    if jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j].has_key("sets"):
-#                        jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j]["domeo:sets"] = jldDict["ao_!DOMEO_NS!#_item"][i]['ao_!DOMEO_NS!_body'][j].pop("sets")
+    #  required to enable conversion of the body resources to RDF
+    #  for type devb30
+    if jldDict.has_key("ao_!DOMEO_NS!_item"):
+        for i in range(0,len(jldDict["ao_!DOMEO_NS!_item"])):
+            if jldDict["ao_!DOMEO_NS!_item"][i].has_key('ao_!DOMEO_NS!_body'):
+                for j in range(0,len(jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'])):
+                    if jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j].has_key("sets"):
+                        jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j]["domeo:sets"] = jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j].pop("sets")
 
     
-    # for type devb301
+    # for type devb30
     
-    if jldDict.has_key("ao_!DOMEO_NS!_body"):
-        print jldDict["ao_!DOMEO_NS!_body"]
-        for i in range(0,len(jldDict["ao_!DOMEO_NS!_body"])):
-            if jldDict["ao_!DOMEO_NS!_body"][i].has_key("sets"):
-                jldDict["ao_!DOMEO_NS!_body"][i]["domeo:sets"] = jldDict["ao_!DOMEO_NS!_body"][i].pop("sets")
+    # if jldDict.has_key("ao_!DOMEO_NS!_body"):
+    #     print jldDict["ao_!DOMEO_NS!_body"]
+    #     for i in range(0,len(jldDict["ao_!DOMEO_NS!_body"])):
+    #         if jldDict["ao_!DOMEO_NS!_body"][i].has_key("sets"):
+    #             jldDict["ao_!DOMEO_NS!_body"][i]["domeo:sets"] = jldDict["ao_!DOMEO_NS!_body"][i].pop("sets")
               
 
     jldDict["@context"] = context
