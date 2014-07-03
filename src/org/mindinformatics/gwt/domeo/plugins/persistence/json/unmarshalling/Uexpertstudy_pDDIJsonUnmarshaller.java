@@ -89,12 +89,16 @@ public class Uexpertstudy_pDDIJsonUnmarshaller extends AUnmarshaller implements
 			for (int index = 0; index < drugs.length(); index++) {
 
 				JsoDDI_DrugEntityUsage drug = drugs.get(index);
-
-				if (drug != null) {
+							
+					//String jsURI = drug.getId(); // NOTE: technically, there is UUID for the drug entity but we use the RxCUI for unmarshalling 
+					String jsURI = drug.getRxcui();
+					
+					if (drug != null) {
+					//	System.out.println("drug rxcui: " + jsURI);
+					
 					String jsLabel = drug.getLabel();
 					String jsDescript = drug.getDescription();
-					String jsURI = drug.getId();
-
+					
 					MLinkedResource drugEntity = ResourcesFactory
 							.createLinkedResource(jsURI, jsLabel, jsDescript);
 

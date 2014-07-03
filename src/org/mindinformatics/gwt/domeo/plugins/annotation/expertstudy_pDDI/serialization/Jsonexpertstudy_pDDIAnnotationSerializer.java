@@ -26,6 +26,7 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 	public final String POC_PREFIX = "poc:";
 	public final String SIO_PREFIX = "sio:";
 	public final String NCIT_PREFIX = "ncit:";
+	public final String DAILYMED_PREFIX = "dailymed:";
 
 	public JSONObject serialize(JsonSerializerManager manager, Object obj) {
 
@@ -78,8 +79,10 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 			// String drugUri1 = findURIbyTerm(drug1.getLabel(),
 			// type1.getLabel());
 			String drugUri1 = drug1.getUrl();
-			drug_entity1.put("@id", new JSONString(drugUri1));
-
+			String drug_entity1_UUID = UUID.uuid();
+			drug_entity1.put("@id", new JSONString(drug_entity1_UUID));
+			drug_entity1.put(DAILYMED_PREFIX + "activeMoietyRxCUI",
+					new JSONString(drugUri1));			
 			drug_entity1.put(IRdfsOntology.label,
 					new JSONString(drug1.getLabel()));
 			drug_entity1.put(IDublinCoreTerms.description,
@@ -123,9 +126,10 @@ public class Jsonexpertstudy_pDDIAnnotationSerializer extends
 			// String drugUri2 = findURIbyTerm(drug2.getLabel(),
 			// type2.getLabel());
 			String drugUri2 = drug2.getUrl();
-
-			drug_entity2.put("@id", new JSONString(drugUri2));
-
+			String drug_entity2_UUID = UUID.uuid();
+			drug_entity2.put("@id", new JSONString(drug_entity2_UUID));
+			drug_entity2.put(DAILYMED_PREFIX + "activeMoietyRxCUI",
+					new JSONString(drugUri2));			
 			drug_entity2.put(IRdfsOntology.label,
 					new JSONString(drug2.getLabel()));
 			drug_entity2.put(IDublinCoreTerms.description,

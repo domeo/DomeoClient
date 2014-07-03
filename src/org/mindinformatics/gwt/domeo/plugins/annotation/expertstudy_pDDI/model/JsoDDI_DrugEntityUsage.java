@@ -24,11 +24,16 @@ public class JsoDDI_DrugEntityUsage extends JavaScriptObject {
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms::description];
 	}-*/;
 
+	// drug has rxcui
+	public final native String getRxcui() /*-{
+		return this['dailymed:activeMoietyRxCUI'];
+	}-*/;
+	
 	// drug has role
 	public final native String getRole() /*-{
 		return this['sio:SIO_000228'];
 	}-*/;
-
+	
 	// drug has type
 	public final native String getType() /*-{
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType];
