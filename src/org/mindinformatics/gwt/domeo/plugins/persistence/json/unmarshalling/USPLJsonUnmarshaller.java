@@ -9,13 +9,11 @@ import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
-import org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies.model.JsoAntibodyUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.JsoPharmgxUsage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSPL;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
-import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
 import org.mindinformatics.gwt.framework.model.agents.ISoftware;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -305,7 +303,7 @@ public class USPLJsonUnmarshaller extends AUnmarshaller implements
 
 			// drug of interest
 			String jsDrug = au.getDrug();
-			System.out.println("jsDrug:" + jsDrug);
+			//System.out.println("jsDrug:" + jsDrug);
 
 			if (jsDrug != null) {
 				_domeo.getLogger().debug(this,

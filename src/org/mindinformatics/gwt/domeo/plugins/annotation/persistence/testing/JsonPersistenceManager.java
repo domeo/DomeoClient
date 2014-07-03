@@ -105,7 +105,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 			builder.setHeader("Content-Type", "application/json");
-			builder.setTimeoutMillis(10000);
+			builder.setTimeoutMillis(20000);
 			
 			if(((IDomeo)_application).getAnnotationPersistenceManager().getBibliographicSet().getHasChanged()) {
 				
@@ -357,7 +357,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 			builder.setHeader("Content-Type", "application/json");
-			builder.setTimeoutMillis(10000);
+			builder.setTimeoutMillis(20000);
 			
 			ArrayList<MAnnotationSet> setToSerialize = new ArrayList<MAnnotationSet>();
 			for(MAnnotationSet set: ((IDomeo)_application).getAnnotationPersistenceManager().getAllDiscussionSets()) {
@@ -546,6 +546,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		}
 	}
 	
+
 	public void retrieveExistingAnnotationSets(final List<String> ids, final IRetrieveExistingAnnotationSetHandler handler) {
 		
 		_application.getLogger().debug(this, "Beginning retrieving annotation sets...");
@@ -563,7 +564,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 			builder.setHeader("Content-Type", "application/json");
-			builder.setTimeoutMillis(10000);
+			builder.setTimeoutMillis(20000);
 			
 			JSONArray idsList = new JSONArray();
 			for(int j=0; j<ids.size(); j++) {
@@ -643,7 +644,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 			builder.setHeader("Content-Type", "application/json");
-			builder.setTimeoutMillis(10000);
+			builder.setTimeoutMillis(20000);
 			
 			JSONObject request = new JSONObject();
 			request.put("url", new JSONString(((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()));

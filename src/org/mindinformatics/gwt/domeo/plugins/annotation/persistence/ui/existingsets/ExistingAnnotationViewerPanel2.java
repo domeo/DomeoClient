@@ -61,7 +61,7 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 	@UiField
 	ScrollPanel left;
 	@UiField
-	Button importButton, selectMySetsButton; //selectAllButton
+	Button importButton, selectMySetsButton; // selectAllButton
 	@UiField
 	VerticalPanel preview;
 
@@ -294,52 +294,74 @@ public class ExistingAnnotationViewerPanel2 extends Composite implements
 				}
 			});
 
-		/*	selectAllButton.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event) {
-
-					System.out.println("select all sets.....");
-
-					if (publicList != null) {
-						for (AnnotationSetInfo ann : publicList) {
-							selectionModel.setSelected(ann, true);
-						}
-					}
-				}
-			});*/
-			
-			
 			/*
-			 * 	} else if(creatorFilter.equals(ONLY_MINE) && annotation.getCreator().getUri()
-			.equals(_domeo.getAgentManager().getUserPerson().getUri())) {
-				return true;
+			 * selectAllButton.addClickHandler(new ClickHandler() {
+			 * 
+			 * @Override public void onClick(ClickEvent event) {
+			 * 
+			 * System.out.println("select all sets.....");
+			 * 
+			 * if (publicList != null) { for (AnnotationSetInfo ann :
+			 * publicList) { selectionModel.setSelected(ann, true); } } } });
 			 */
-			
+
+			/*
+			 * } else if(creatorFilter.equals(ONLY_MINE) &&
+			 * annotation.getCreator().getUri()
+			 * .equals(_domeo.getAgentManager().getUserPerson().getUri())) {
+			 * return true;
+			 */
+
 			selectMySetsButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					
-				    String currentUserURI = _domeo.getAgentManager().getUserPerson().getUri();
-		            String currentUserName = _domeo.getAgentManager().getUserPerson().getName();
-                    //System.out.println("currentUserUri: "+currentUserURI);
+
+					String currentUserURI = _domeo.getAgentManager()
+							.getUserPerson().getUri();
+					String currentUserName = _domeo.getAgentManager()
+							.getUserPerson().getName();
+					// System.out.println("currentUserUri: "+currentUserURI);
 					if (publicList != null) {
-						
+
 						for (AnnotationSetInfo ann : publicList) {
-							
-							String ownerURI = "urn:person:uuid:" + ann.getAnnotationSet().getCreatedBy().getUri();
-							String ownerName = ann.getAnnotationSet().getCreatedBy().getScreenName();
-																
-							//System.out.println("set owner is "+ownerURI + "|"+ownerName+"|"+currentUserName);
-							
-							if(ownerURI.equals(currentUserURI)||(currentUserName.equals(ownerName)))
-							selectionModel.setSelected(ann, true);
+
+							String ownerURI = "urn:person:uuid:"
+									+ ann.getAnnotationSet().getCreatedBy()
+											.getUri();
+							String ownerName = ann.getAnnotationSet()
+									.getCreatedBy().getScreenName();
+
+							 System.out.println("public set owner is "+ownerURI +
+							 "|"+ownerName+"|"+currentUserName);
+
+							if (ownerURI.equals(currentUserURI)
+									|| (currentUserName.equals(ownerName)))
+								selectionModel.setSelected(ann, true);
 						}
-						
+
+					}
+
+					if (privateList != null) {
+
+						for (AnnotationSetInfo ann : privateList) {
+
+							String ownerURI = "urn:person:uuid:"
+									+ ann.getAnnotationSet().getCreatedBy()
+											.getUri();
+							String ownerName = ann.getAnnotationSet()
+									.getCreatedBy().getScreenName();
+
+							 System.out.println("private set owner is "+ownerURI +
+							 "|"+ownerName+"|"+currentUserName);
+
+							if (ownerURI.equals(currentUserURI)
+									|| (currentUserName.equals(ownerName)))
+								selectionModel.setSelected(ann, true);
+						}
+
 					}
 				}
 			});
-			
-			
 
 			CellTree.Resources res = GWT.create(CellTree.BasicResources.class);
 			CellTree cellTree = new CellTree(new AnnotationSetTreeViewModel(

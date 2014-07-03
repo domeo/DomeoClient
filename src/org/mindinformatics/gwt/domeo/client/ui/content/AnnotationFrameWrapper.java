@@ -160,6 +160,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
         else if ($wnd.getSelection() && $wnd.getSelection().anchorNode) { // Firefox
 			try {
 				txt =  $doc.getElementById("domeoframe").contentWindow.window.getSelection();
+				
 				if(txt == null || txt.anchorNode == null) {
 					x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::resetSelection(Ljava/lang/String;)("");
 					return;
@@ -633,9 +634,16 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 	}
 	
 	public void annotate() {
+		
+		
+		System.out.println("annotate() isSelectionCollapsed: "+isSelectionCollapsed);
+		
 		if (isSelectionCollapsed) return;
 		
 		IFrameElement iframe = IFrameElement.as(_frame.getElement());
+		
+		System.out.println("testing iframe:"+iframe);
+		
 		final Document frameDocument = iframe.getContentDocument();
 		Document doc = frameDocument;
 		
@@ -693,6 +701,8 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 //			else return;
 //		}
 		
+		System.out.println("AnnotationFrameWrapper-annotate():" + anchorNode+"|"+focusNode+"|"+focusOffset+"|"+anchorOffset);
+		
 		if (anchorNode == focusNode) {
 			int start = 0, stop = 0;
 			if (anchorOffset > focusOffset) {
@@ -702,6 +712,8 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				start = anchorOffset;
 				stop = focusOffset;
 			}
+			
+			System.out.println("AnnotationFrameWrapper-annotate() string:"+((Node) anchorNode).getNodeValue().toString());
 			
 			String prefix = ((Node) anchorNode).getNodeValue().toString().substring(0, start);
 			String suffix = ((Node) anchorNode).getNodeValue().toString().substring(stop, ((Node) anchorNode).getNodeValue() .toString().length());

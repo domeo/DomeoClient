@@ -154,18 +154,22 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 	// TODO: get real URIs from the swat-4-med-safety project
 	// "Sodium_Phenylacetate", "Sodium_Benzoate","Sodium_Phenylbutyrate",
+	
+	// TODO: should change model to process product that have two URIs
+	// "Chlordiazepoxide_and_Amitriptyline","Dextromethorphan_and_Quinidine",
+	// "Drospirenone_and_Estradiol",
+	// "Fluoxetine_and_Olanzapine", "Tramadol_and_Acetaminophen"
+
 	String[] drugs = { "Abacavir", "Aripiprazole", "Arsenic_Trioxide",
 			"Atomoxetine", "Atorvastatin", "Azathioprine", "Boceprevir",
 			"Brentuximab_Vedotin", "Busulfan", "Capecitabine", "Carbamazepine",
 			"Carisoprodol", "Carvedilol", "Celecoxib", "Cetuximab",
-			"Cevimeline", "Chlordiazepoxide_and_Amitriptyline", "Chloroquine",
-			"Cisplatin", "Citalopram", "Clobazam", "Clomiphene",
-			"Clomipramine", "Clopidogrel", "Clozapine", "Codeine",
-			"Crizotinib", "Dapsone", "Dasatinib", "Denileukin_Diftitox",
-			"Desipramine", "Dexlansoprazole", "Dextromethorphan_and_Quinidine",
-			"Diazepam", "Doxepin", "Drospirenone_and_Estradiol", "Erlotinib",
-			"Esomeprazole", "Exemestane", "Everolimus", "Fluorouracil",
-			"Fluoxetine", "Fluoxetine_and_Olanzapine", "Flurbiprofen",
+			"Cevimeline", "Chloroquine", "Cisplatin", "Citalopram", "Clobazam",
+			"Clomiphene", "Clomipramine", "Clopidogrel", "Clozapine",
+			"Codeine", "Crizotinib", "Dapsone", "Dasatinib",
+			"Denileukin_Diftitox", "Desipramine", "Dexlansoprazole",
+			"Diazepam", "Doxepin", "Erlotinib", "Esomeprazole", "Exemestane",
+			"Everolimus", "Fluorouracil", "Fluoxetine", "Flurbiprofen",
 			"Fluvoxamine", "Fulvestrant", "Galantamine", "Iloperidone",
 			"Imatinib", "Imipramine", "Indacaterol", "Irinotecan",
 			"Isosorbide", "Ivacaftor", "Lapatinib", "Lenalidomide",
@@ -178,9 +182,9 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 			"Rasburicase", "Rifampin", "Isoniazid", "Pyrazinamide",
 			"Risperidone", "Tamoxifen", "Telaprevir", "Terbinafine",
 			"Tetrabenazine", "Thioguanine", "Thioridazine", "Ticagrelor",
-			"Tolterodine", "Tositumomab", "Tramadol_and_Acetaminophen",
-			"Trastuzumab", "Tretinoin", "Trimipramine", "Valproic_Acid",
-			"Vemurafenib", "Venlafaxine", "Voriconazole", "Warfarin" };
+			"Tolterodine", "Tositumomab", "Trastuzumab", "Tretinoin",
+			"Trimipramine", "Valproic_Acid", "Vemurafenib", "Venlafaxine",
+			"Voriconazole", "Warfarin" };
 
 	String[] productLabelSections = {
 			"34086-9 ABUSE SECTION",
