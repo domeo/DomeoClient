@@ -104,7 +104,7 @@ for jld in v['hits']['hits']:
 
     jldDict["@context"] = context
     jldJson = json.dumps(jldDict).replace("_!DOMEO_NS!_", ":")
-    jldJson = jldJson.replace('ao:prefix": ""','ao:prefix": "<empty>"').replace('ao:suffix": ""','ao:suffix": "<empty>"').replace('statement": ""','statement": "<empty>"').replace('modality": ""','modality": "<empty>"')
+    jldJson = jldJson.replace('ao:prefix": ""','ao:prefix": "<empty>"').replace('ao:suffix": ""','ao:suffix": "<empty>"').replace('statement": ""','statement": "<empty>"').replace('modality": ""','modality": "<empty>"').replace('SIO_000228": ""','SIO_000228": "<empty>"')
     #jldJson = jldJson.replace('": ""','": "EMPTY"')
     jldJson = unicode(jldJson).encode(encoding="utf-8",errors="replace")
     if VERBOSE:
