@@ -1,0 +1,183 @@
+# DDI NLP
+# query for sets from type devb30
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R:<http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo:<http://www.w3.org/ns/domeo#>
+PREFIX pav:<http://purl.org/pav/>
+PREFIX dailymed:<http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
+
+SELECT *
+FROM <http://purl.org/net/nlprepository/original-ddi-expert1-annotation>
+WHERE {
+
+  ?annot a oa:expertstudyAnnotation;
+     oa:body ?bn1;
+     pav:versionNumber ?version;
+     oa:context ?context.
+
+  ?context oa:hasSource "http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html".
+  ?context oa:hasSelector ?selector.
+        
+  ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
+
+  ?bn1 domeo:sets ?statement.
+
+  ?statement a poc:DrugDrugInteractionStatement;
+     dikbD2R:modality ?modality;
+     dikbD2R:statement ?statementType;
+     sio:SIO_000628 ?drugsInvolved.
+
+  ?drugsInvolved a dikbD2R:PK_DDI;
+     sio:SIO_000132 ?drug1;
+     sio:SIO_000132 ?drug2.FILTER(?drug1 > ?drug2)
+ 
+  ?drug1 rdfs:label ?drug1Lab.
+  ?drug1 dailymed:activeMoietyRxCUI ?drug1rxc.
+  ?drug1 rdf:type ?drug1Type.
+  ?drug1 sio:SIO_000228 ?drug1Role.
+
+  ?drug2 rdfs:label ?drug2Lab.
+  ?drug2 dailymed:activeMoietyRxCUI ?drug2rxc.
+  ?drug2 rdf:type ?drug2Type.
+  ?drug2 sio:SIO_000228 ?drug2Role.
+}	
+
+
+# query type devb301
+
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R:<http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo:<http://www.w3.org/ns/domeo#>
+PREFIX pav:<http://purl.org/pav/>
+
+SELECT *
+FROM <http://purl.org/net/nlprepository/ddi-expert1-annotation>
+WHERE {
+
+  ?annot a oa:expertstudyAnnotation;
+     oa:body ?bn1;
+     pav:versionNumber ?version;
+     oa:context ?context.
+
+  ?context oa:hasSource "http://130.49.206.86:8080/AnnoStudy/package-insert-section-114.txt.html".
+  ?context oa:hasSelector ?selector.
+        
+  ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
+  
+  ?bn1 domeo:sets ?statement.
+
+  ?statement a poc:DrugDrugInteractionStatement;
+     dikbD2R:modality ?modality;
+     dikbD2R:statement ?statementType;
+     sio:SIO_000628 ?drugsInvolved.
+ 
+  ?drugsInvolved a dikbD2R:PK_DDI;
+     sio:SIO_000132 ?drug1;
+     sio:SIO_000132 ?drug2.FILTER(?drug1 > ?drug2)
+ 
+  ?drug1 rdf:type ?drug1Type.
+  ?drug1 sio:SIO_000228 ?drug1Role.
+
+  ?drug2 rdf:type ?drug2Type.
+  ?drug2 sio:SIO_000228 ?drug2Role.
+}	
+
+
+# DDI NLP
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R:<http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo:<http://www.w3.org/ns/domeo#>
+PREFIX pav:<http://purl.org/pav/>
+
+SELECT *
+FROM <http://purl.org/net/nlprepository/ddi-expert1-annotation>
+WHERE {
+
+  ?annot a oa:AnnotationSet.
+  ?annot pav:versionNumber ?version.
+
+  ?annot oa:item ?item.
+
+  ?item oa:body ?bn1;
+     oa:context ?context.
+
+  ?context oa:hasSource "http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html".
+  ?context oa:hasSelector ?selector.
+ 
+  ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
+  
+  ?bn1 domeo:sets ?statement.
+
+
+ ?statement a poc:DrugDrugInteractionStatement;
+     dikbD2R:modality ?modality;
+     dikbD2R:statement ?statementType;
+     sio:SIO_000628 ?drugsInvolved.
+
+  ?drugsInvolved a dikbD2R:PK_DDI;
+     sio:SIO_000132 ?drug1;
+     sio:SIO_000132 ?drug2.FILTER(?drug1 > ?drug2)
+
+  ?drug1 rdf:type ?drug1Type.
+  ?drug1 sio:SIO_000228 ?drug1Role.
+
+  ?drug2 rdf:type ?drug2Type.
+  ?drug2 sio:SIO_000228 ?drug2Role.
+}	
+		
+
+# Highlights Annotator
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFiX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT *
+FROM <http://purl.org/net/nlprepository/ddi-nlp-annotation>
+WHERE {
+  ?s a oa:Highlight;
+    oa:context ?context.
+
+  ?context a oa:PrefixSuffixTextSelector;
+    oa:hasSource 
+"http://130.49.206.86:8080/AnnoStudy/package-insert-section-114.txt.html";
+    oa:prefix ?prefixText;
+    oa:exact ?exactText;
+    oa:suffix ?suffixText.
+}
+
+
+
+# Highlights NLP (TODO: change to be like what is in Domeo)
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFiX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT *
+FROM <http://purl.org/net/nlprepository/ddi-nlp-annotation>
+WHERE {
+  ?s a oa:Highlight;
+    oa:context ?context.
+
+  ?context a oa:SpecificResource;
+    oa:hasSource "http://130.49.206.86:8080/AnnoStudy/package-insert-section-114.txt.html";
+    oa:hasSelector ?selector.
+ 
+  ?selector a oa:PrefixSuffixTextSelector;
+    oa:prefix ?prefixText;
+    oa:exact ?exactText;
+    oa:suffix ?suffixText.
+}
