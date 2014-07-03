@@ -182,6 +182,9 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 					}
 					// If not multiple selections and text selected...
 					else if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) {
+						
+						System.out.println("DomeoToolbarPanel-DomeoToolbarPanel():"+_domeo.getContentPanel().getAnnotationFrameWrapper().matchText);
+						
 						_domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
 					}
 				}

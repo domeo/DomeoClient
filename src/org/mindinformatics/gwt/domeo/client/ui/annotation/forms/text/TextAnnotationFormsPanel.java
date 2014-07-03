@@ -231,7 +231,7 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 		_domeo = domeo;
 		_title = TITLE;
 
-		//System.out.println("TextAnnotationFormsPanel - CREATION OF ANNOTATIONS OF VARIOUS KIND");
+		System.out.println("TextAnnotationFormsPanel - CREATION OF ANNOTATIONS OF VARIOUS KIND");
 		// matchText.setId("exactmatch");
 
 		// Buffer the potential highlighted text
