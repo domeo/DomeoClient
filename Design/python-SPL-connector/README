@@ -53,6 +53,22 @@ JSON-LD where the Domeo architect (Paulo Ciccarese) did not have a
 working context in place. For now, the script replaces these strings
 before rdflib-jsonld converts the data to RDF.
 
+NOTE: Elasticsearch has multiple sub-graphs under 'domeo' labeled by
+'type'. The scripts in this folder query for sets from type 'devb30'
+which appears to be the complete graphs for each annotation. The other
+types appear to be used for tracking changes. 
+
+
+------------------------------------------------------------
+TO QUERY
+
+1) load the RDF output into an RDF endpoint (e.g., Virtuoso). Give the
+graph a very specific name such as "<http://purl.org/net/nlprepository/changed-ddi-expert1-annotation"
+
+2) The queries in example-queries-NLP-DDI.txt show how to query DDI
+and Highlight annotations done for a specific source. Note that you
+might need to adjust the graph in the FROM part of the query and the
+URL in the oa:hasSource predicate. 
 
 ------------------------------------------------------------
 NOTES ON BUILDING A CONNECTOR (for use with DomeoClient and Domeo)
