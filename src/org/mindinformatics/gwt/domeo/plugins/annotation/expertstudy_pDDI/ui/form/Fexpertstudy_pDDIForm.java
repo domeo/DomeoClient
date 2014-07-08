@@ -45,6 +45,7 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextArea;
@@ -112,6 +113,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	RadioButton modalitypt, modalitynt;
 	@UiField
 	TextArea comment;
+	
+	@UiField
+	Label commentlabel;
 
 	// drug 1 and drug 2
 
@@ -319,6 +323,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			}
 		}
+		
+		commentlabel.setVisible(false);
+		comment.setVisible(false);
 
 		// automatically select another role when user chosen one of role
 		autoSelectAnotherRole();
@@ -403,7 +410,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 							_domeo.getLogger().debug(this, "DDI annotation 8");
 
 							annotation.setMpDDIUsage(expertstudy_pDDIUsage);
-							annotation.setComment(comment.getText());
+						//	annotation.setComment(comment.getText());
 
 						
 							_domeo.getLogger().debug(this, "annotation loaded");
@@ -464,7 +471,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		initWidget(binder.createAndBindUi(this));
 		
-		
+		commentlabel.setVisible(false);
+		comment.setVisible(false);
 
 		try {
 			refreshAnnotationSetFilter(annotationSet, annotation);
@@ -595,8 +603,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			// comment
 
-			if (_item.getComment() != null && !_item.getComment().equals(""))
-				comment.setText(_item.getComment());
+		//	if (_item.getComment() != null && !_item.getComment().equals(""))
+		//		comment.setText(_item.getComment());
 
 			// highlight drug
 			highlightCurrentDrug();
@@ -660,7 +668,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 					_item.setType2(getTypeOfDrug2());
 					_item.setStatement(getStatement());
 					_item.setModality(getModality());
-					_item.setComment(comment.getText());
+			//		_item.setComment(comment.getText());
 
 					_item.getMpDDIUsage().setMpDDI(currentMpDDI);
 

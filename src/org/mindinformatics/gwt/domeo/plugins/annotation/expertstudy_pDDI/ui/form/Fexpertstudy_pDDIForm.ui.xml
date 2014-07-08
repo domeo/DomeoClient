@@ -31,7 +31,7 @@
 		/*padding-top: 24px;*/
 		width: 100%;
 		min-width: 350px;
-		height: 200px;
+		height: 120px;
 	}
 	
 	.leftColumn {
@@ -217,6 +217,7 @@
 					</g:HorizontalPanel>
 
 
+                    
 					<!-- Drug 2 -->
 					<g:HorizontalPanel>
 
@@ -295,16 +296,16 @@
 					</g:HorizontalPanel>
 
 
-					<!-- extra resource -->
-
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
+					<!-- extra resource
+                    -->
+					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="commentlabel" styleName='{style.titleLeft}'>Comment:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
 						<g:TextArea ui:field='comment' styleName='{style.commentBody}'></g:TextArea>
 					</g:HorizontalPanel>
-
+                   
 
 				</g:VerticalPanel>
 			</g:cell>
