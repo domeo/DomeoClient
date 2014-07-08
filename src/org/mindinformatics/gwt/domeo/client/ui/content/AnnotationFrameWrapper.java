@@ -636,13 +636,13 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 	public void annotate() {
 		
 		
-		System.out.println("annotate() isSelectionCollapsed: "+isSelectionCollapsed);
+		//System.out.println("annotate() isSelectionCollapsed: "+isSelectionCollapsed);
 		
 		if (isSelectionCollapsed) return;
 		
 		IFrameElement iframe = IFrameElement.as(_frame.getElement());
 		
-		System.out.println("testing iframe:"+iframe);
+		//System.out.println("testing iframe:"+iframe);
 		
 		final Document frameDocument = iframe.getContentDocument();
 		Document doc = frameDocument;
@@ -701,7 +701,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 //			else return;
 //		}
 		
-		System.out.println("AnnotationFrameWrapper-annotate():" + anchorNode+"|"+focusNode+"|"+focusOffset+"|"+anchorOffset);
+		//System.out.println("AnnotationFrameWrapper-annotate():" + anchorNode+"|"+focusNode+"|"+focusOffset+"|"+anchorOffset);
 		
 		if (anchorNode == focusNode) {
 			int start = 0, stop = 0;
@@ -713,7 +713,7 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 				stop = focusOffset;
 			}
 			
-			System.out.println("AnnotationFrameWrapper-annotate() string:"+((Node) anchorNode).getNodeValue().toString());
+			//System.out.println("AnnotationFrameWrapper-annotate() string:"+((Node) anchorNode).getNodeValue().toString());
 			
 			String prefix = ((Node) anchorNode).getNodeValue().toString().substring(0, start);
 			String suffix = ((Node) anchorNode).getNodeValue().toString().substring(stop, ((Node) anchorNode).getNodeValue() .toString().length());

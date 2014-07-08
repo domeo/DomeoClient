@@ -236,7 +236,8 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 
 		// Buffer the potential highlighted text
 		highlightBuffer = new HighlightedTextBuffer(exact, prefix, suffix, node);
-
+		
+		
 		// Create layout
 		initWidget(binder.createAndBindUi(this));
 
@@ -450,9 +451,9 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 			String drug2 = annExpert.getDrug2().getLabel();
 
 			if (drug1 != null && !drug1.trim().equals("")
-					&& exactText.toLowerCase().contains(drug1.toLowerCase())) {
-				int index1 = exactText.toLowerCase().indexOf(
-						drug1.toLowerCase());
+					&& exactText.contains(drug1)) {
+				int index1 = exactText.indexOf(
+						drug1);
 
 				exactText = exactText.substring(0, index1)
 						+ "<span style='background-color: #FFFF00'>" + drug1
@@ -461,9 +462,9 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 			}
 
 			if (drug2 != null && !drug2.trim().equals("")
-					&& exactText.toLowerCase().contains(drug2.toLowerCase())) {
-				int index2 = exactText.toLowerCase().indexOf(
-						drug2.toLowerCase());
+					&& exactText.contains(drug2)) {
+				int index2 = exactText.indexOf(
+						drug2);
 
 				exactText = exactText.substring(0, index2)
 						+ "<span style='background-color: #FFFF00'>" + drug2

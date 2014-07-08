@@ -113,7 +113,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	RadioButton modalitypt, modalitynt;
 	@UiField
 	TextArea comment;
-	
+
 	@UiField
 	Label commentlabel;
 
@@ -124,12 +124,13 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		int indexdrug1 = drug1.getSelectedIndex();
 		String drug1Uri = "";
 		if (indexdrug1 != 0) {
-			String drug1Str = drug1.getItemText(indexdrug1).toLowerCase();
+			String drug1Str = drug1.getItemText(indexdrug1);
 
-			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drug1Str)) {
+			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(
+					drug1Str.toLowerCase())) {
 				drug1Uri = "http://purl.bioontology.org/ontology/RXNORM/"
-						+ Mexpertstudy_pDDI.getDrugEntities().get(drug1Str)
-								.getRxcui();
+						+ Mexpertstudy_pDDI.getDrugEntities()
+								.get(drug1Str.toLowerCase()).getRxcui();
 			} else
 				drug1Uri = RXNORM_PREFIX;
 
@@ -149,12 +150,13 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		int indexdrug2 = drug2.getSelectedIndex();
 		String drug2Uri = "";
 		if (indexdrug2 != 0) {
-			String drug2Str = drug2.getItemText(indexdrug2).toLowerCase();
+			String drug2Str = drug2.getItemText(indexdrug2);
 
-			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(drug2Str)) {
+			if (Mexpertstudy_pDDI.getDrugEntities().containsKey(
+					drug2Str.toLowerCase())) {
 				drug2Uri = "http://purl.bioontology.org/ontology/RXNORM/"
-						+ Mexpertstudy_pDDI.getDrugEntities().get(drug2Str)
-								.getRxcui();
+						+ Mexpertstudy_pDDI.getDrugEntities()
+								.get(drug2Str.toLowerCase()).getRxcui();
 			} else
 				drug2Uri = RXNORM_PREFIX;
 
@@ -295,7 +297,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	public Fexpertstudy_pDDIForm(IDomeo domeo, final AFormsManager manager) {
 		super(domeo);
 
-		//System.out.println("new annotation in form");
+		// System.out.println("new annotation in form");
 
 		_manager = manager;
 
@@ -313,8 +315,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 				int numberOfOcc = drugList.get(i).getNum();
 				String drugName = drugList.get(i).getDrugname();
 
-				//System.out.println("drugList- name:" + drugName + "| num:"
-				//		+ numberOfOcc);
+				// System.out.println("drugList- name:" + drugName + "| num:"
+				// + numberOfOcc);
 
 				for (int j = 0; j < numberOfOcc; j++) {
 					drug1.addItem(drugName);
@@ -323,7 +325,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			}
 		}
-		
+
 		commentlabel.setVisible(false);
 		comment.setVisible(false);
 
@@ -410,17 +412,16 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 							_domeo.getLogger().debug(this, "DDI annotation 8");
 
 							annotation.setMpDDIUsage(expertstudy_pDDIUsage);
-						//	annotation.setComment(comment.getText());
+							// annotation.setComment(comment.getText());
 
-						
 							_domeo.getLogger().debug(this, "annotation loaded");
 
 							if (getSelectedSet(annotationSet) == null) {
-		
+
 								_domeo.getAnnotationPersistenceManager()
 										.addAnnotation(annotation, true);
 							} else {
-							
+
 								_domeo.getAnnotationPersistenceManager()
 										.addAnnotation(annotation,
 												getSelectedSet(annotationSet));
@@ -470,18 +471,16 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		_item = annotation;
 
 		initWidget(binder.createAndBindUi(this));
-		
+
 		commentlabel.setVisible(false);
 		comment.setVisible(false);
 
 		try {
 			refreshAnnotationSetFilter(annotationSet, annotation);
-			
-			
-			//drug1.setSelectedIndex(0);
-			//drug2.setSelectedIndex(0);
-			
-		
+
+			// drug1.setSelectedIndex(0);
+			// drug2.setSelectedIndex(0);
+
 			currentMpDDI = annotation.getMpDDIUsage().getMpDDI();
 
 			// check selections of drug role
@@ -555,8 +554,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 					int numberOfOcc = drugList.get(i).getNum();
 					String drugName = drugList.get(i).getDrugname();
 
-					//System.out.println("drugList- name:" + drugName + "| num:"
-					//		+ numberOfOcc);
+					// System.out.println("drugList- name:" + drugName +
+					// "| num:"
+					// + numberOfOcc);
 
 					for (int j = 0; j < numberOfOcc; j++) {
 						drug1.addItem(drugName);
@@ -565,15 +565,17 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 				}
 			}
-			
-			//DomEvent.fireNativeEvent(Document.get().createChangeEvent(), drug1);
-			//DomEvent.fireNativeEvent(Document.get().createChangeEvent(), drug2);
+
+			// DomEvent.fireNativeEvent(Document.get().createChangeEvent(),
+			// drug1);
+			// DomEvent.fireNativeEvent(Document.get().createChangeEvent(),
+			// drug2);
 
 			if (_item.getDrug1() != null) {
 
 				String strdrug1 = _item.getDrug1().getLabel();
 
-				//System.out.println("drug1 in _item: " + strdrug1);
+				// System.out.println("drug1 in _item: " + strdrug1);
 
 				for (int i = 0; i < drug1.getItemCount(); i++) {
 					if (drug1.getItemText(i).equals(strdrug1))
@@ -589,7 +591,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 				String strdrug2 = _item.getDrug2().getLabel();
 
-				//System.out.println("drug2 in _item: " + strdrug2);
+				// System.out.println("drug2 in _item: " + strdrug2);
 
 				for (int i = 0; i < drug2.getItemCount(); i++) {
 					if (drug2.getItemText(i).equals(strdrug2))
@@ -603,8 +605,8 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			// comment
 
-		//	if (_item.getComment() != null && !_item.getComment().equals(""))
-		//		comment.setText(_item.getComment());
+			// if (_item.getComment() != null && !_item.getComment().equals(""))
+			// comment.setText(_item.getComment());
 
 			// highlight drug
 			highlightCurrentDrug();
@@ -612,7 +614,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			// automatically select another role when user chosen one of role
 			autoSelectAnotherRole();
 
-			System.out.println("highlight drug mentions and select type in EDIT..........");
+			// System.out.println("highlight drug mentions and select type in EDIT..........");
 
 		} catch (Exception e) {
 			_domeo.getLogger().exception(
@@ -668,7 +670,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 					_item.setType2(getTypeOfDrug2());
 					_item.setStatement(getStatement());
 					_item.setModality(getModality());
-			//		_item.setComment(comment.getText());
+					// _item.setComment(comment.getText());
 
 					_item.getMpDDIUsage().setMpDDI(currentMpDDI);
 
@@ -766,14 +768,38 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 					String drug = hselector.getExact();
 
-					if (sentence.contains(drug)) {
+					if (sentence.contains(drug) && drug.length() > 1) {
 
-						if (!checked.contains(drug)) {
+						/*
+						 * filter out incomplete drug highlight which is portion
+						 * of word
+						 * 
+						 * such as one character highlight
+						 */
+
+						boolean isIncompleteHighlight = false;
+						int index1 = sentence.indexOf(drug);
+						if (index1 != 0
+								&& (index1 + drug.length() < sentence.length())) {
+
+							isIncompleteHighlight = Character.isLetter(sentence
+									.charAt(index1 - 1))
+									|| Character.isLetter(sentence
+											.charAt(index1 + drug.length()));
+
+						} else if (index1 == 0
+								&& index1 + drug.length() < sentence.length()) {
+
+							isIncompleteHighlight = !(sentence.charAt(index1
+									+ drug.length()) == ' ');
+						}
+
+						if (!checked.contains(drug) && !isIncompleteHighlight) {
 
 							int num = countOcurrencesInStr(drug, sentence, 0);
 
-							//System.out.println("numbers of " + drug + " is "
-							//		+ num);
+							// System.out.println("numbers of " + drug + " is "
+							// + num);
 
 							drugInListBox.add(new DrugInText(drug, num));
 							checked.add(drug);
@@ -886,11 +912,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	public void highlightCurrentDrug() {
 
 		// highlight drug1 and preselect type1
-		
 
 		drug1.addChangeHandler(new ChangeHandler() {
-			
-			
+
 			@Override
 			public void onChange(ChangeEvent event) {
 				preselectDrugType(drug1, 1);
@@ -900,7 +924,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		// highlight drug2 and preselect type2
 		drug2.addChangeHandler(new ChangeHandler() {
-			
+
 			@Override
 			public void onChange(ChangeEvent event) {
 				preselectDrugType(drug2, 2);
@@ -970,13 +994,13 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 									+ currentDrug2.length());
 				}
 
-				// System.out.println("final html: " + finalHtml);
+				System.out.println("final html: " + finalHtml);
 
 				e.setInnerHTML(finalHtml);
 			}
 		} else {
 
-			System.out.println("DOM.getElementById('exactmatch') is " + e);
+			// System.out.println("DOM.getElementById('exactmatch') is " + e);
 		}
 	}
 
@@ -1000,7 +1024,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		} else {
 
-			System.out.println("DOM.getElementById('exactmatch') is " + e);
+			// System.out.println("DOM.getElementById('exactmatch') is " + e);
 		}
 
 	}
