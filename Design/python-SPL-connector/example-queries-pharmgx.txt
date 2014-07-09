@@ -1,0 +1,126 @@
+################################################################################
+# pharmacogenomics
+################################################################################
+
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R: <http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo: <http://www.w3.org/ns/domeo#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
+PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
+
+SELECT DISTINCT ?annot ?context ?exactText ?drugLabel ?geneLabel ?plsLabel ?produrgLabel ?allelesLabel ?testResult ?medicalCondition ?variantLabel ?medicationConcernLabel ?variantFrequencyLabel ?clinicalLabel ?commentLabel
+
+FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc>
+WHERE {
+
+  ?annot a oa:SPLAnnotation;
+     
+     pav:versionNumber ?version;
+     oa:context ?context.
+
+  ?context oa:hasSource "http://130.49.206.86:8080/SPL-annotation/WARFARIN-c95f0b0d-77ef-e753-be04-2228139df2d3.html".
+  ?context oa:hasSelector ?selector.
+        
+  ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
+  
+   OPTIONAL {
+   ?annot oa:body ?bn1.
+   ?bn1 dailymed:pharmgxDrug ?drug;
+         rdfs:label ?drugLabel.
+   }
+   
+   OPTIONAL {
+   ?annot oa:body ?bn2.
+   ?bn2 dailymed:HGNCGeneSymbol ?gene;
+         rdfs:label ?geneLabel.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn3.
+   ?bn3 dailymed:Prodrug ?produrg;
+          rdfs:label ?produrgLabel.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn4.
+   ?bn4 dailymed:ConcomitantMedicationOfConcern ?medicationConcern;
+         rdfs:label ?medicationConcernLabel.
+   }
+   
+   OPTIONAL {
+   ?annot oa:body ?bn5.
+   ?bn5 poc:VariantFrequency ?varient;
+         rdfs:label ?variantFrequencyLabel.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn6.
+   ?bn6 dailymed:ClinicalTrial ?clinical;
+          rdfs:label ?clinicalLabel.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn7.
+   ?bn7 rdfs:label "SPL Section";
+        sio:SIO_000111 ?plsLabel.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn8.
+   ?bn8 poc:Comment ?commentLabel.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn9.
+   ?bn9 ncit:Alleles ?allelesLabel.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn10.
+   ?bn10 poc:MedicalCondition ?medicalCondition.
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn11.
+   ?bn11 poc:Variant ?variant.
+   ?bn11 rdfs:label ?variantLabel
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn12.
+   ?bn12 poc:TestResult ?testResult.
+   }
+
+}	
+GROUP BY ?exactText
+ORDER BY DESC(?annot)
+
+
+
+
+
+
+################################################################################
+# IGNORE BELOW THIS LINE
+################################################################################
+
+
+"{"@id":"urn:linkedspls:uuid:FFC8415C-1E46-4AC4-88AB-DD61F5C9CB58", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000563":"poc:MonitoringRecommendation", "poc:MonitoringRecommendation":"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#change-monitoring-strategy", "rdfs:label":"Change monitoring strategy", "dct:description":"A strategy changed monitoring recommendation is related to the pharmacogenomic biomarker."}," +
+
+"{"@id":"urn:linkedspls:uuid:C1898D67-D43C-48C0-B884-6394D658F386", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000563":"poc:TestRecommendation", "poc:TestRecommendation":"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#take-note-that-tests-are-avaliable", "rdfs:label":"Take note that tests are avaliable", "dct:description":"Testing related to the pharmacogenomic biomarker is avaliable."}," +
+
+"{"@id":"urn:linkedspls:uuid:1041808D-00AE-4B84-9B71-16FD1336DD16", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000563":"poc:PharmacokineticImpact", "poc:PharmacokineticImpact":"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#absorption-increase", "rdfs:label":"Absorption Increase", "dct:description":"The pharmacogenomic biomarker is associated with a increase in absorption of the drug."}," +
+
+"{"@id":"urn:linkedspls:uuid:66FB7E34-DCD6-4B2B-8C85-D6983C10ABBC", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000563":"poc:PharmacodynamicImpact", "poc:PharmacodynamicImpact":"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#drug-toxicity-risk-increased", "rdfs:label":"Increased Toxicity Risk", "dct:description":"The pharmacogenomic biomarker is associated with an increased risk of toxicity."}," +
+
+"{"@id":"urn:linkedspls:uuid:B37E7F17-F662-4FA4-8F42-82B275708A37", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000563":"poc:DrugSelectionRecommendation", "poc:DrugSelectionRecommendation":"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#change-in-route-of-admin", "rdfs:label":"Change in route of administration", "dct:description":"The pharmacogenomic biomarker is related to a recommendation to add change the route of administration for the drug."}," +
+"{"@id":"urn:linkedspls:uuid:BEA29BD8-8E44-4C7F-87DB-A3C0377E422A", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000563":"poc:DoseSelectionRecommendation", "poc:DoseSelectionRecommendation":"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#increase-from-recommended-baseline", "rdfs:label":"Increase from baseline", "dct:description":"The pharmacogenomic biomarker is related to a recommendation to increase the dose of the drug from the recommended baseline."},"+
+
+"{"@id":"urn:linkedspls:uuid:1ACE6E1C-1971-4EB1-A317-5F0BA90C915F", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000628":"dailymed:pharmgxBiomarker", "dailymed:pharmgxBiomarker1":"http://purl.obolibrary.org/obo/PR_000012621", "dailymed:pharmgxBiomarker2":"http://purl.obolibrary.org/obo/PR_000007204", "dailymed:pharmgxBiomarker":"http://purl.obolibrary.org/obo/PR_000007205", "rdfs:label":"ER and PgR_receptor", "dct:description":"The selected biomarker."}]" +
+		
+		

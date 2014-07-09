@@ -15,9 +15,24 @@ from rdflib.plugins.memory import IOMemory
 store = IOMemory()
 cGraph = ConjunctiveGraph(store=store)
 
-QUERY_STR = "PgxConsensus"
+# query example:
+# python convertPharmgxJsonLDToRDF.py PgxConsensus domeo-consensus-pharmgx-annotations-in-rdf-07092014.xml
+
+#QUERY_STR = "PgxConsensus"
+#QUERY_STR = "ao:SPLAnnotation"
+
 MAX_RESULTS = 10000
-OUT_FILE = "domeo-consensus-pharmgx-annotations-in-rdf-06202014.xml"
+OUT_FILE = None
+
+if len(sys.argv) > 2:
+    QUERY_STR = str(sys.argv[1])
+    OUT_FILE = str(sys.argv[2])
+    if len(sys.argv) == 4:
+        VERBOSE = int(sys.argv[3])
+else:
+	print "Usage: convertJsonLDToRDF <query string> <output file name> <verbose>(optional 1=True, 0=False (default)) )"
+	sys.exit(1)
+
 
 ############################################################
 # initialize
@@ -27,7 +42,8 @@ es = Elasticsearch()
 #es.cluster.node_info()
 
 # get all annotations
-v = es.search(q=QUERY_STR, size=MAX_RESULTS)
+
+v = es.search(index="domeo",doc_type='devb30', q=QUERY_STR, size=MAX_RESULTS)
 
 # view what was returned
 #v['hits']
@@ -50,7 +66,9 @@ context = {
     "siocns":"http://rdfs.org/sioc/ns#",
     "swande":"http://purl.org/swan/1.2/discourse-elements#",
     "ncbit":"http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#",
-    "dikbEvidence":"http://dbmi-icode-01.dbmi.pitt.edu/dikb-evidence/DIKB_evidence_ontology_v1.3.owl#"
+    "dikbEvidence":"http://dbmi-icode-01.dbmi.pitt.edu/dikb-evidence/DIKB_evidence_ontology_v1.3.owl#",
+    "poc":"http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#",
+    "ncit":"http://purl.bioontology.org/ontology/NCIT#"
   }
 
 
@@ -58,18 +76,23 @@ for jld in v['hits']['hits']:
     jldDict = jld['_source']
 
     # required to enable conversion of the body resources to RDF
-    if jldDict.has_key("ao_!DOMEO_NS!_item"):
-        for i in range(0,len(jldDict["ao_!DOMEO_NS!_item"])):
-            if jldDict["ao_!DOMEO_NS!_item"][i].has_key('ao_!DOMEO_NS!_body'):
-                for j in range(0,len(jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'])):
-                    if jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j].has_key("sets"):
-                        jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j]["domeo:sets"] = jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j].pop("sets")
+#    if jldDict.has_key("ao_!DOMEO_NS!_item"):
+#        for i in range(0,len(jldDict["ao_!DOMEO_NS!_item"])):
+#            if jldDict["ao_!DOMEO_NS!_item"][i].has_key('ao_!DOMEO_NS!_body'):
+
+#                for j in range(0,len(jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'])):
+#                    if jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j].has_key("sets"):
+#                        print "test2"
+#                        jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j]["domeo:sets"] = jldDict["ao_!DOMEO_NS!#_item"][i]['ao_!DOMEO_NS!_body'][j].pop("sets")
 
 
     jldDict["@context"] = context
     jldJson = json.dumps(jldDict).replace("_!DOMEO_NS!_", ":")
+    jldJson = jldJson.replace('ao:prefix": ""','ao:prefix": "<empty>"').replace('ao:suffix": ""','ao:suffix": "<empty>"')
+
+
     jldJson = unicode(jldJson).encode(encoding="utf-8",errors="replace")
-    print jldJson
+    #print jldJson
 
     g = Graph(store=store,identifier=jld["_id"]).parse(data=jldJson, format='json-ld')
     #print "\n\n\n"
@@ -83,7 +106,7 @@ for c in cGraph.contexts():
 
 # TODO: add exception handling
 s = unicode(cGraph.serialize(format='xml', indent=4), encoding="utf-8",errors="replace")
-print s
+#print s
 
 # TODO: add exception handling
 f = codecs.open(OUT_FILE,'w','utf-8')
