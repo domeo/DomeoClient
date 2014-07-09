@@ -16,7 +16,7 @@ store = IOMemory()
 cGraph = ConjunctiveGraph(store=store)
 
 # query example:
-# python convertPharmgxJsonLDToRDF.py PgxConsensus domeo-consensus-pharmgx-annotations-in-rdf-07092014.xml
+# python convertPharmgxJsonLDToRDF.py PgxConsensus devb30 domeo-consensus-pharmgx-annotations-in-rdf-07092014.xml
 
 #QUERY_STR = "PgxConsensus"
 #QUERY_STR = "ao:SPLAnnotation"
@@ -24,13 +24,14 @@ cGraph = ConjunctiveGraph(store=store)
 MAX_RESULTS = 10000
 OUT_FILE = None
 
-if len(sys.argv) > 2:
+if len(sys.argv) > 3:
     QUERY_STR = str(sys.argv[1])
-    OUT_FILE = str(sys.argv[2])
-    if len(sys.argv) == 4:
-        VERBOSE = int(sys.argv[3])
+    COLLECTION = str(sys.argv[2])
+    OUT_FILE = str(sys.argv[3])
+    if len(sys.argv) == 5:
+        VERBOSE = int(sys.argv[4])
 else:
-	print "Usage: convertJsonLDToRDF <query string> <output file name> <verbose>(optional 1=True, 0=False (default)) )"
+	print "Usage: convertJsonLDToRDF <query string> <collection> <output file name> <verbose>(optional 1=True, 0=False (default)) )"
 	sys.exit(1)
 
 
@@ -43,7 +44,7 @@ es = Elasticsearch()
 
 # get all annotations
 
-v = es.search(index="domeo",doc_type='devb30', q=QUERY_STR, size=MAX_RESULTS)
+v = es.search(index="domeo",doc_type=COLLECTION, q=QUERY_STR, size=MAX_RESULTS)
 
 # view what was returned
 #v['hits']

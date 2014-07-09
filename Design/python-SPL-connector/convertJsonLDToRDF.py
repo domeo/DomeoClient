@@ -25,13 +25,14 @@ OUT_FILE = None
 
 VERBOSE = 0
 
-if len(sys.argv) > 2:
+if len(sys.argv) > 3:
     QUERY_STR = str(sys.argv[1])
-    OUT_FILE = str(sys.argv[2])
-    if len(sys.argv) == 4:
-        VERBOSE = int(sys.argv[3])
+    COLLECTION = str(sys.argv[2])
+    OUT_FILE = str(sys.argv[3])
+    if len(sys.argv) == 5:
+        VERBOSE = int(sys.argv[4])
 else:
-	print "Usage: convertJsonLDToRDF <query string> <output file name> <verbose>(optional 1=True, 0=False (default)) )"
+	print "Usage: convertJsonLDToRDF <query string> <collection> <output file name> <verbose>(optional 1=True, 0=False (default)) )"
 	sys.exit(1)
 
 
@@ -45,7 +46,7 @@ es = Elasticsearch()
 # get all annotations from domeo/devb30
 #res = es.get(index="domeo", doc_type='devb30',id=1)
 
-v = es.search(index="domeo",doc_type='devb30', q=QUERY_STR, size=MAX_RESULTS)
+v = es.search(index="domeo",doc_type=COLLECTION, q=QUERY_STR, size=MAX_RESULTS)
 
 # view what was returned
 #v['hits']
