@@ -29,16 +29,21 @@ https://github.com/elasticsearch/elasticsearch-py/archive/0.4.5.tar.gz)
 python setup.py build
 sudo python setup.py install
 
+3) Mysql DB config file - Domeo-DB-config.txt
+
+USERNAME=<USERNAME>;
+PASSWORD=<PASSWORD>;
+
 ------------------------------------------------------------
 TO RUN
 
 See the convertJsonLDToRDF.py usage by running it with no commandline paramaters. Currently this outputs: 
 
-"convertJsonLDToRDF <query string> <output file name> <verbose>(optional 1=True, 0=False (default)) )"
+"convertJsonLDToRDF <query string> <collection> <output file name> <old version>(1: want old versions, 0: only get last version) <verbose>(optional 1=True, 0=False (default)"
 
 Example - query for all annotations belonging to a Domeo user with ID "80808080466465c00146674fe5190024" and write them to RDF in a file called DDI-expert1.xml:
 
-$ python convertJsonLDToRDF.py 80808080466465c00146674fe5190024 DDI-expert1.xml 
+$ python convertJsonLDToRDF.py 80808080466465c00146674fe5190024 devb30 domeo-ddi-annotations-in-rdf-07092014.xml 0
 
 NOTE: results are limited to 10,000 at this time.
 

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ao="http://www.w3.org/ns/oa#"
+   xmlns:dailymed="http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/"
+   xmlns:dct="http://purl.org/dc/terms/"
+   xmlns:dikbD2R="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/"
+   xmlns:domeo="http://www.w3.org/ns/domeo#"
+   xmlns:foafx="http://xmlns.com/foaf/0.1/"
+   xmlns:pav="http://purl.org/pav/"
+   xmlns:permissions="http://vocab.deri.ie/cpo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:sio="http://semanticscience.org/resource/"
+>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:6c552dd5-211f-4b2a-8d62-eea7e218157e">
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <domeo:deleted>false</domeo:deleted>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <rdfs:label>NER Sets</rdfs:label>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lineageUri>urn:domeoserver:annotationset:a06f149c-c2bb-4820-bea5-1c9a5a725d2c</pav:lineageUri>
+    <pav:previousVersion></pav:previousVersion>
+    <ao:item rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/2f53914d-2d8f-4d5c-80a3-5303cd96316e"/>
+    <dct:description>The NER set is created automatically by NER annotation loading program.</dct:description>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <permissions:permissions rdf:nodeID="N34c6fa37fa764dc2895204785934f636"/>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:562cdf91-4341-42e8-b356-5c2bceda2821">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <domeo:belongsToSet>urn:domeoclient:uuid:3ccfbf78-951c-4421-a413-5f3c008d1c60</domeo:belongsToSet>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <pav:previousVersion></pav:previousVersion>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:lastSavedOn>2014-07-03 15:22:07 -0400</pav:lastSavedOn>
+    <ao:body rdf:nodeID="N680ad2e528214066957dfda11cf11c42"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:c1c4f3ee-ea18-42d1-b957-6f6fcbbaf263"/>
+    <pav:lineageUri>urn:domeoserver:annotation:09635033-be2d-447b-baec-e552f8043ec7</pav:lineageUri>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N633c5e21203e4ddca5163092f772cdd3">
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:d96b44fa-21a9-478d-94bf-8b0f42e581c4">
+    <rdfs:label>NER Sets</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotationset:8afa4c86-cf49-46f8-9601-c5cb9f6e4ff7</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <dct:description>The NER set is created automatically by NER annotation loading program.</dct:description>
+    <pav:previousVersion></pav:previousVersion>
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <permissions:permissions rdf:nodeID="Nfd6754a0c8964484997c7dada6bca7a4"/>
+    <ao:item rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/5f0ec5ff-ad33-4af3-9399-165e71c12211"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:deleted>false</domeo:deleted>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:person:uuid:80808080466465c00146674fe5190024">
+    <foafx:lastname>Sets</foafx:lastname>
+    <foafx:name></foafx:name>
+    <foafx:middlename></foafx:middlename>
+    <foafx:firstname>NLP</foafx:firstname>
+    <foafx:email></foafx:email>
+    <foafx:picture></foafx:picture>
+    <rdfs:label>NLP Sets</rdfs:label>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <rdfs:label>NLP Drug Mention Set</rdfs:label>
+    <foafx:homepage></foafx:homepage>
+    <foafx:title></foafx:title>
+    <foafx:lastname></foafx:lastname>
+    <foafx:firstname></foafx:firstname>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:46172ee9-f6f2-41be-8c50-eac666b6cf51">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:e3937ec4-9448-4ab0-9825-20c37d8bddfc"/>
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/4518537b-1b4a-49b3-9214-bfb603bf40bc">
+    <rdf:type rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/"/>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/613</dailymed:activeMoietyRxCUI>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <sio:SIO_000228></sio:SIO_000228>
+    <rdfs:label>aluminum hydroxide gel</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:a4d3e447-8392-49aa-9094-2076734c1feb">
+    <pav:lineageUri>urn:domeoserver:annotationset:191ab8ff-c245-492a-87f8-cf855534c7d5</pav:lineageUri>
+    <dct:description>The NER set is created automatically by NER annotation loading program.</dct:description>
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <domeo:deleted>false</domeo:deleted>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <rdfs:label>NER Sets</rdfs:label>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <pav:previousVersion></pav:previousVersion>
+    <permissions:permissions rdf:nodeID="N0edd007527f4463087591643da4d5a84"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <ao:item rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/a0be05c2-61d8-4eb8-9057-607e07ce1fcf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:a56d1ac7-6595-41a9-a850-d88ffa3bebdf">
+    <sio:SIO_000132 rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/4518537b-1b4a-49b3-9214-bfb603bf40bc"/>
+    <sio:SIO_000132 rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/351e13c4-2d00-4989-9ab4-769c4656d5dd"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:39d0db45-fcaa-476b-81c1-585c10c02743">
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:3640e1de-4f0d-4731-a78e-21cd9859db96</pav:lineageUri>
+    <ao:context rdf:resource="urn:domeoclient:uuid:46172ee9-f6f2-41be-8c50-eac666b6cf51"/>
+    <pav:lastSavedOn>2014-07-03 15:22:07 -0400</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <domeo:belongsToSet>urn:domeoclient:uuid:744301b1-a445-416c-88f4-950e4497707d</domeo:belongsToSet>
+    <ao:body rdf:nodeID="Nfce4d01834e04e3088e70c6232024899"/>
+    <pav:previousVersion></pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:cdca3974-5bbd-4e71-a4b1-a1f716cb03a6">
+    <ao:item rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/7fed3e36-4b3d-4d33-b94e-612528afc524"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <pav:lineageUri>urn:domeoserver:annotationset:d93f893e-e6ad-4cc2-9624-33ea17b94694</pav:lineageUri>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <dct:description>The NER set is created automatically by NER annotation loading program.</dct:description>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <domeo:deleted>false</domeo:deleted>
+    <permissions:permissions rdf:nodeID="N02ad1916b19d46c282e385bd9f20e950"/>
+    <rdfs:label>NER Sets</rdfs:label>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <pav:previousVersion></pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/371b7c25-5441-432b-b07e-cd7422a9244a">
+    <pav:lineageUri>urn:domeoserver:annotationset:16e165ee-e889-4921-8f6d-27cf6f34090a</pav:lineageUri>
+    <ao:context rdf:resource="urn:domeoserver:uuid:8eed2fb8-9a50-401a-b684-6f1d9373e357"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoclient:uuid:1a57a526-0ab4-40fe-b9ce-c544b5d97d93</domeo:belongsToSet>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:1b462aed-6338-4536-af2c-3d5ac55e01e4">
+    <ao:exact>cimetidine</ao:exact>
+    <ao:prefix>stration of propranolol with </ao:prefix>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix>, a non-specific CYP450 inhibi</ao:suffix>
+    <domeo:uuid>33f0a1f2-3738-41bf-8ad3-145160dd61db</domeo:uuid>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:744301b1-a445-416c-88f4-950e4497707d">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <permissions:permissions rdf:nodeID="N8478519b25944d7d8ad98c0ae9f2d4b4"/>
+    <pav:lineageUri>urn:domeoclient:uuid:489e7bd9-35c9-464e-a8ed-25856a0740df</pav:lineageUri>
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <pav:lastSavedOn>2014-07-03 15:22:07 -0400</pav:lastSavedOn>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <domeo:deleted>false</domeo:deleted>
+    <ao:item rdf:resource="urn:domeoclient:uuid:39d0db45-fcaa-476b-81c1-585c10c02743"/>
+    <rdfs:label>NLP Set</rdfs:label>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfb666d9c79ae42dc97a67ea697a4be4e">
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8478519b25944d7d8ad98c0ae9f2d4b4">
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/5f0ec5ff-ad33-4af3-9399-165e71c12211">
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoserver:uuid:1a18cc4d-9f22-43f0-b482-cad67df613c9"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <pav:lineageUri>urn:domeoserver:annotationset:8afa4c86-cf49-46f8-9601-c5cb9f6e4ff7</pav:lineageUri>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <domeo:belongsToSet>urn:domeoclient:uuid:d96b44fa-21a9-478d-94bf-8b0f42e581c4</domeo:belongsToSet>
+    <pav:previousVersion></pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:90d78cfa-c8f1-4234-951d-4f3e3ed63cfa">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>NLP Set</rdfs:label>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <ao:item rdf:resource="urn:domeoclient:uuid:a30611c1-0790-4cdc-9013-279d6576071b"/>
+    <pav:previousVersion></pav:previousVersion>
+    <permissions:permissions rdf:nodeID="Nacf785a03a0447dfa6b486151368b027"/>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lineageUri>urn:domeoclient:uuid:edaf957a-a6cd-4976-a76b-b24bdb08192e</pav:lineageUri>
+    <domeo:deleted>false</domeo:deleted>
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <pav:lastSavedOn>2014-07-03 15:22:07 -0400</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/351e13c4-2d00-4989-9ab4-769c4656d5dd">
+    <rdf:type rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/"/>
+    <sio:SIO_000228></sio:SIO_000228>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/MSH/D002927</dailymed:activeMoietyRxCUI>
+    <rdfs:label>cimetidine</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:9417de50-95b9-42af-9ec7-627a76b44215">
+    <domeo:uuid>a36d02c4-80f4-48c0-8fbe-b7534036b6d6</domeo:uuid>
+    <ao:prefix> CYP450 inhibitor, increased </ao:prefix>
+    <ao:suffix> AUC and Cmax by 46% and 35%, </ao:suffix>
+    <ao:exact>propranolol</ao:exact>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:a350454d-2296-4180-bc5a-e253667a4086">
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <dikbD2R:statement></dikbD2R:statement>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:4070c0bf-bc21-4a81-b8b5-ac364c33698b"/>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <dikbD2R:modality>ncit:positive</dikbD2R:modality>
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:fb23a3b4-6081-4b58-bb83-2c26d5f3ad97">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <domeo:uuid>ff627e33-2341-42cc-8b4f-caf8146e42e7</domeo:uuid>
+    <ao:prefix> may result in a decrease in </ao:prefix>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <ao:suffix> concentrations.</ao:suffix>
+    <ao:exact>propranolol</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:3ccfbf78-951c-4421-a413-5f3c008d1c60">
+    <permissions:permissions rdf:nodeID="N633c5e21203e4ddca5163092f772cdd3"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <rdfs:label>NLP Set</rdfs:label>
+    <domeo:deleted>false</domeo:deleted>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+    <ao:item rdf:resource="urn:domeoclient:uuid:562cdf91-4341-42e8-b356-5c2bceda2821"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:previousVersion></pav:previousVersion>
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <pav:lineageUri>urn:domeoclient:uuid:fcd6dd92-20fa-4531-9eb1-2ddf568c9903</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-03 15:22:07 -0400</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeo:software:id:Domeo-2.1alpha-050">
+    <rdfs:label>Domeo Annotation Toolkit</rdfs:label>
+    <foafx:homepage></foafx:homepage>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Software"/>
+    <foafx:version>2.1alpha</foafx:version>
+    <foafx:build>050</foafx:build>
+    <foafx:name>Domeo Annotation Toolkit</foafx:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:1a57a526-0ab4-40fe-b9ce-c544b5d97d93">
+    <dct:description>The NER set is created automatically by NER annotation loading program.</dct:description>
+    <domeo:agents rdf:resource="urn:person:uuid:80808080466465c00146674fe5190024"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <domeo:deleted>false</domeo:deleted>
+    <ao:item rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/371b7c25-5441-432b-b07e-cd7422a9244a"/>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <permissions:permissions rdf:nodeID="Nfb666d9c79ae42dc97a67ea697a4be4e"/>
+    <rdfs:label>NER Sets</rdfs:label>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <ao:annotatesResource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:annotatesResource>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:lineageUri>urn:domeoserver:annotationset:16e165ee-e889-4921-8f6d-27cf6f34090a</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:695eddce-46d4-43c6-ac4e-c9f8a1e3c39a">
+    <domeo:uuid>10c348d1-7fc5-4c27-9131-4ab981a6c954</domeo:uuid>
+    <ao:prefix></ao:prefix>
+    <ao:suffix></ao:suffix>
+    <ao:exact>Co-administration of propranolol with cimetidine, a non-specific CYP450 inhibitor, increased propranolol AUC and Cmax by 46% and 35%, respectively. Co-administration with aluminum hydroxide gel (1200 mg) may result in a decrease in propranolol concentrations.</ao:exact>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:a30611c1-0790-4cdc-9013-279d6576071b">
+    <pav:lastSavedOn>2014-07-03 15:22:07 -0400</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoclient:uuid:90d78cfa-c8f1-4234-951d-4f3e3ed63cfa</domeo:belongsToSet>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lineageUri>urn:domeoserver:annotation:4ce0293f-7375-4502-b680-db2fbd98e5d7</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <ao:body rdf:nodeID="N5452c712bcb7450190e81ea0c02fc713"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:context rdf:resource="urn:domeoclient:uuid:37dbd9a4-0129-496d-a53c-9e657d16f91b"/>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:9a541e74-25f1-45ac-a393-3becd8f8ed32">
+    <domeo:uuid>fc55d40d-a272-4138-86ba-67517dffc55d</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>propranolol</ao:exact>
+    <ao:suffix> with cimetidine, a non-specif</ao:suffix>
+    <ao:prefix>Co-administration of </ao:prefix>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N34c6fa37fa764dc2895204785934f636">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/5de81ae9-f3f2-43c3-9553-297bd04abc60">
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/MSH/D011433</dailymed:activeMoietyRxCUI>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <sio:SIO_000228></sio:SIO_000228>
+    <rdfs:label>propranolol</rdfs:label>
+    <rdf:type rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:7ca28ced-41cc-44d0-8809-b3b6de64e9c3">
+    <ao:suffix>Co-administration with aluminu</ao:suffix>
+    <ao:exact>Co-administration of propranolol with cimetidine, a non-specific CYP450 inhibitor, increased propranolol AUC and Cmax by 46% and 35%, respectively. </ao:exact>
+    <ao:prefix></ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <domeo:uuid>53f9cc10-9189-4878-9807-81cf9354a31e</domeo:uuid>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/7fed3e36-4b3d-4d33-b94e-612528afc524">
+    <pav:lineageUri>urn:domeoserver:annotationset:d93f893e-e6ad-4cc2-9624-33ea17b94694</pav:lineageUri>
+    <domeo:belongsToSet>urn:domeoclient:uuid:cdca3974-5bbd-4e71-a4b1-a1f716cb03a6</domeo:belongsToSet>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:context rdf:resource="urn:domeoserver:uuid:f37118cb-4479-45d2-85ba-52cdee44a8f6"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:37dbd9a4-0129-496d-a53c-9e657d16f91b">
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:7ca28ced-41cc-44d0-8809-b3b6de64e9c3"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:a3253307-43bd-4281-8ab9-619ce03997c3">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>aluminum hydroxide gel</ao:exact>
+    <ao:suffix> (1200 mg) may result in a dec</ao:suffix>
+    <domeo:uuid>aa0b8bdb-c7d5-4266-ab24-b49dba7ff8c1</domeo:uuid>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <ao:prefix>vely. Co-administration with </ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/2f53914d-2d8f-4d5c-80a3-5303cd96316e">
+    <domeo:belongsToSet>urn:domeoclient:uuid:6c552dd5-211f-4b2a-8d62-eea7e218157e</domeo:belongsToSet>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoserver:uuid:3b0c43f4-e4f0-45e8-95b3-f7b842ff0083"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:a06f149c-c2bb-4820-bea5-1c9a5a725d2c</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/a0be05c2-61d8-4eb8-9057-607e07ce1fcf">
+    <pav:createdBy>urn:person:uuid:80808080466465c00146674fe5190024</pav:createdBy>
+    <domeo:belongsToSet>urn:domeoclient:uuid:a4d3e447-8392-49aa-9094-2076734c1feb</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion></pav:previousVersion>
+    <pav:lineageUri>urn:domeoserver:annotationset:191ab8ff-c245-492a-87f8-cf855534c7d5</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-03 15:27:37 -0400</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-03 15:27:37 -0400</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoserver:uuid:037bff34-daf2-40ca-b258-768eab40890a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:4070c0bf-bc21-4a81-b8b5-ac364c33698b">
+    <sio:SIO_000132 rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/5c0dfa7b-3797-40fa-8b7b-1e7315bd2c1b"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+    <sio:SIO_000132 rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/5de81ae9-f3f2-43c3-9553-297bd04abc60"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/61ad2d60-2f2b-4758-bc7a-65cf11eb6a2c">
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/613</dailymed:activeMoietyRxCUI>
+    <rdf:type rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/"/>
+    <sio:SIO_000228></sio:SIO_000228>
+    <rdfs:label>aluminum hydroxide gel</rdfs:label>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:uuid:1a18cc4d-9f22-43f0-b482-cad67df613c9">
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:1b462aed-6338-4536-af2c-3d5ac55e01e4"/>
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:8669d092-7a94-4618-b91d-0a5224478117">
+    <sio:SIO_000132 rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/f5a42097-1d4d-419d-a37e-14528f02830e"/>
+    <sio:SIO_000132 rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/61ad2d60-2f2b-4758-bc7a-65cf11eb6a2c"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:64db6ac7-a1d3-40dd-a54c-d7385aabf86c">
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:8669d092-7a94-4618-b91d-0a5224478117"/>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <dikbD2R:modality>ncit:positive</dikbD2R:modality>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <dikbD2R:statement></dikbD2R:statement>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:e3937ec4-9448-4ab0-9825-20c37d8bddfc">
+    <ao:exact>Co-administration of propranolol with cimetidine, a non-specific CYP450 inhibitor, increased propranolol AUC and Cmax by 46% and 35%, respectively. Co-administration with aluminum hydroxide gel (1200 mg) may result in a decrease in propranolol concentrations.</ao:exact>
+    <ao:suffix></ao:suffix>
+    <domeo:uuid>77908b37-bd5c-44b6-ad18-742449a7c6a7</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-03 15:22:07 -0400</pav:createdOn>
+    <ao:prefix></ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/5c0dfa7b-3797-40fa-8b7b-1e7315bd2c1b">
+    <sio:SIO_000228></sio:SIO_000228>
+    <rdfs:label>cimetidine</rdfs:label>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/MSH/D002927</dailymed:activeMoietyRxCUI>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <rdf:type rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N680ad2e528214066957dfda11cf11c42">
+    <domeo:sets rdf:resource="urn:pddi:uuid:64db6ac7-a1d3-40dd-a54c-d7385aabf86c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:974f661b-197c-4797-9d73-d38fdaeac1c0">
+    <dikbD2R:modality>ncit:positive</dikbD2R:modality>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <dikbD2R:statement></dikbD2R:statement>
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:a56d1ac7-6595-41a9-a850-d88ffa3bebdf"/>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfce4d01834e04e3088e70c6232024899">
+    <domeo:sets rdf:resource="urn:pddi:uuid:974f661b-197c-4797-9d73-d38fdaeac1c0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nacf785a03a0447dfa6b486151368b027">
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:c1c4f3ee-ea18-42d1-b957-6f6fcbbaf263">
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:695eddce-46d4-43c6-ac4e-c9f8a1e3c39a"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:uuid:f37118cb-4479-45d2-85ba-52cdee44a8f6">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:fb23a3b4-6081-4b58-bb83-2c26d5f3ad97"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:uuid:8eed2fb8-9a50-401a-b684-6f1d9373e357">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:9417de50-95b9-42af-9ec7-627a76b44215"/>
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:uuid:3b0c43f4-e4f0-45e8-95b3-f7b842ff0083">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:9a541e74-25f1-45ac-a393-3becd8f8ed32"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/f5a42097-1d4d-419d-a37e-14528f02830e">
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <rdf:type rdf:resource="file:///home/PITT/yin2/Downloads/code/domeo/DomeoClient/Design/python-SPL-connector/"/>
+    <sio:SIO_000228></sio:SIO_000228>
+    <rdfs:label>propranolol</rdfs:label>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/MSH/D011433</dailymed:activeMoietyRxCUI>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0edd007527f4463087591643da4d5a84">
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:uuid:037bff34-daf2-40ca-b258-768eab40890a">
+    <ao:hasSource>http://130.49.206.86:8080/AnnoStudy/package-insert-section-129.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:a3253307-43bd-4281-8ab9-619ce03997c3"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02ad1916b19d46c282e385bd9f20e950">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfd6754a0c8964484997c7dada6bca7a4">
+    <permissions:accessType>urn:person:uuid:80808080466465c00146674fe5190024</permissions:accessType>
+    <permissions:isLocked>false</permissions:isLocked>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5452c712bcb7450190e81ea0c02fc713">
+    <domeo:sets rdf:resource="urn:pddi:uuid:a350454d-2296-4180-bc5a-e253667a4086"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -11,36 +11,77 @@ import json
 from rdflib import Graph, plugin, ConjunctiveGraph, URIRef
 from rdflib.serializer import Serializer
 from rdflib.plugins.memory import IOMemory
+from sets import Set
+import MySQLdb, sys
 
 store = IOMemory()
 cGraph = ConjunctiveGraph(store=store)
 
-# query example:
+# query examples:
 # python convertPharmgxJsonLDToRDF.py PgxConsensus devb30 domeo-consensus-pharmgx-annotations-in-rdf-07092014.xml
+# python convertPharmgxJsonLDToRDF.py PgxConsensus annotation domeo-consensus-pharmgx-annotations-in-rdf-07102014.xml
 
 #QUERY_STR = "PgxConsensus"
 #QUERY_STR = "ao:SPLAnnotation"
 
 MAX_RESULTS = 10000
 OUT_FILE = None
+DB_USER = None
+DB_PWD = None
+DB_CONFIG = "Domeo-DB-config.txt"
+OLD_VERSION = 0
 
 if len(sys.argv) > 3:
     QUERY_STR = str(sys.argv[1])
     COLLECTION = str(sys.argv[2])
     OUT_FILE = str(sys.argv[3])
     if len(sys.argv) == 5:
-        VERBOSE = int(sys.argv[4])
+        OLD_VERSION = int(sys.argv[4])
 else:
-	print "Usage: convertJsonLDToRDF <query string> <collection> <output file name> <verbose>(optional 1=True, 0=False (default)) )"
+	print "Usage: convertJsonLDToRDF <query string> <collection> <output file name> <old versions>(optional 1=True, 0=False (default)) )"
 	sys.exit(1)
 
+
+def connectMysql():
+
+    dbconfig = file = open(DB_CONFIG)
+    if dbconfig:
+        for line in dbconfig:
+            if "USERNAME" in line:
+                DB_USER = line[(line.find("USERNAME=")+len("USERNAME=")):line.find(";")]
+            elif "PASSWORD" in line:  
+                DB_PWD = line[(line.find("PASSWORD=")+len("PASSWORD=")):line.find(";")]
+
+        db = MySQLdb.connect(host= "localhost",
+                  user= DB_USER,
+                  passwd= DB_PWD,
+                  db="DomeoAlphaDev")
+    else:
+        print "Mysql config file is not found: " + dbconfig
+    return db
+
+
+def isLastVersionSetsId(mongo_uuid):
+
+    db = connectMysql()
+    cursor = db.cursor()
+
+    sql = "select * from last_annotation_set_index as last, annotation_set_index as annot where last.last_version_id = annot.id and annot.mongo_uuid = '" + mongo_uuid + "'"
+    
+    cursor.execute(sql)
+   
+    result = cursor.fetchall()
+
+    db.close
+
+    if result:
+        return True
+    else:
+        return False
 
 ############################################################
 # initialize
 es = Elasticsearch()
-
-# learn about the connection
-#es.cluster.node_info()
 
 # get all annotations
 
@@ -74,31 +115,31 @@ context = {
 
 
 for jld in v['hits']['hits']:
+
+    print jld['_id']
+
+    mongo_uuid = jld['_id']
+
+    if OLD_VERSION != 1:
+
+        if not isLastVersionSetsId(mongo_uuid):
+
+            print mongo_uuid + " is not last version"
+            continue
+         
     jldDict = jld['_source']
-
-    # required to enable conversion of the body resources to RDF
-#    if jldDict.has_key("ao_!DOMEO_NS!_item"):
-#        for i in range(0,len(jldDict["ao_!DOMEO_NS!_item"])):
-#            if jldDict["ao_!DOMEO_NS!_item"][i].has_key('ao_!DOMEO_NS!_body'):
-
-#                for j in range(0,len(jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'])):
-#                    if jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j].has_key("sets"):
-#                        print "test2"
-#                        jldDict["ao_!DOMEO_NS!_item"][i]['ao_!DOMEO_NS!_body'][j]["domeo:sets"] = jldDict["ao_!DOMEO_NS!#_item"][i]['ao_!DOMEO_NS!_body'][j].pop("sets")
-
 
     jldDict["@context"] = context
     jldJson = json.dumps(jldDict).replace("_!DOMEO_NS!_", ":")
-    jldJson = jldJson.replace('ao:prefix": ""','ao:prefix": "<empty>"').replace('ao:suffix": ""','ao:suffix": "<empty>"')
+    jldJson = jldJson.replace('ao:prefix": ""','ao:prefix": "xsd:String"').replace('ao:suffix": ""','ao:suffix": "xsd:String"').replace('pav:previousVersion": ""','pav:previousVersion": "xsd:String"')
 
 
     jldJson = unicode(jldJson).encode(encoding="utf-8",errors="replace")
-    #print jldJson
+        #print jldJson
 
     g = Graph(store=store,identifier=jld["_id"]).parse(data=jldJson, format='json-ld')
-    #print "\n\n\n"
-    #print "######################### N3 #########"
-    #print(g.serialize(format='xml', indent=4))
+
+        
 
 # enumerate contexts
 print "Graph contexts stored in IO memory"
