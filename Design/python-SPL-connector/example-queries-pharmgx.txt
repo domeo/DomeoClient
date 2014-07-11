@@ -119,15 +119,17 @@ PREFIX pav: <http://purl.org/pav/>
 PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
 PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
 
-SELECT DISTINCT ?annot ?exactText ?drugLabel ?geneLabel
+SELECT DISTINCT ?annot ?exactText ?drugLabel ?geneLabel ?testResult ?variantLabel ?commentLabel
 
-FROM <http://purl.org/net/nlprepository/spl-pharmgx-07092014>
 WHERE {
 
   ?annot a oa:SPLAnnotation;
      oa:context ?context.
 
   ?context oa:hasSelector ?selector.
+
+  ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
 
   ?annot oa:body ?bn1.
   ?bn1 poc:PharmacokineticImpact "http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#metabolism-decrease".
@@ -140,12 +142,23 @@ WHERE {
    ?bn3 dailymed:HGNCGeneSymbol ?gene;
          rdfs:label ?geneLabel.
 
-   ?selector a oa:PrefixSuffixTextSelector;
-      oa:exact ?exactText.
+      OPTIONAL {
+   ?annot oa:body ?bn4.
+   ?bn8 poc:Comment ?commentLabel.
+   }
 
+   OPTIONAL {
+   ?annot oa:body ?bn5.
+   ?bn5 poc:Variant ?variant.
+   ?bn5 rdfs:label ?variantLabel
+   }
+
+   OPTIONAL {
+   ?annot oa:body ?bn6.
+   ?bn6 poc:TestResult ?testResult.
+   }
 }	
-GROUP BY ?exactText
-ORDER BY DESC(?annot)
+
 LIMIT 10
 
 ################################################################################
