@@ -250,6 +250,7 @@ public class MPharmgx extends MTrustedResource {
 			put("MODAFINIL", "http://www.drugbank.ca/drugs/DB00745");
 			put("TRASTUZUMAB", "http://www.drugbank.ca/drugs/DB00072");
 			put("ARSENIC_TRIOXIDE", "http://www.drugbank.ca/drugs/DB01169");
+			put("BOCEPREVIR", "http://www.drugbank.ca/drugs/DB08873");
 			put("BRENTUXIMAB_VEDOTIN", "http://www.drugbank.ca/drugs/DB08870");
 
 			put("CARISOPRODOL", "http://www.drugbank.ca/drugs/DB00395");

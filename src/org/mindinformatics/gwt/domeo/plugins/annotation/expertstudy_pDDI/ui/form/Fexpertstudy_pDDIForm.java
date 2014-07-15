@@ -792,6 +792,10 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 							isIncompleteHighlight = !(sentence.charAt(index1
 									+ drug.length()) == ' ');
+
+						} else if (index1 + drug.length() == sentence.length()) {
+							isIncompleteHighlight = !(sentence
+									.charAt(index1 - 1) == ' ');
 						}
 
 						if (!checked.contains(drug) && !isIncompleteHighlight) {

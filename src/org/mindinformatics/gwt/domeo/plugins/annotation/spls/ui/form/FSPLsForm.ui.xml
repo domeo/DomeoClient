@@ -183,7 +183,7 @@
 							<g:item value="">Celecoxib</g:item>
 							<g:item value="">Cetuximab</g:item>
 							<g:item value="">Cevimeline</g:item>
-						<!-- <g:item value="">Chlordiazepoxide_and_Amitriptyline</g:item> -->
+							<!-- <g:item value="">Chlordiazepoxide_and_Amitriptyline</g:item> -->
 							<g:item value="">Chloroquine</g:item>
 							<g:item value="">Cisplatin</g:item>
 							<g:item value="">Citalopram</g:item>
@@ -199,17 +199,17 @@
 							<g:item value="">Denileukin_Diftitox</g:item>
 							<g:item value="">Desipramine</g:item>
 							<g:item value="">Dexlansoprazole</g:item>
-					<!--    <g:item value="">Dextromethorphan_and_Quinidine</g:item>  -->
+							<!-- <g:item value="">Dextromethorphan_and_Quinidine</g:item> -->
 							<g:item value="">Diazepam</g:item>
 							<g:item value="">Doxepin</g:item>
-					<!--		<g:item value="">Drospirenone_and_Estradiol</g:item>  -->
+							<!-- <g:item value="">Drospirenone_and_Estradiol</g:item> -->
 							<g:item value="">Erlotinib</g:item>
 							<g:item value="">Esomeprazole</g:item>
 							<g:item value="">Exemestane</g:item>
 							<g:item value="">Everolimus</g:item>
 							<g:item value="">Fluorouracil</g:item>
 							<g:item value="">Fluoxetine</g:item>
-					<!--		<g:item value="">Fluoxetine_and_Olanzapine</g:item>  -->
+							<!-- <g:item value="">Fluoxetine_and_Olanzapine</g:item> -->
 							<g:item value="">Flurbiprofen</g:item>
 							<g:item value="">Fluvoxamine</g:item>
 							<g:item value="">Fulvestrant</g:item>
@@ -263,7 +263,7 @@
 							<g:item value="">Ticagrelor</g:item>
 							<g:item value="">Tolterodine</g:item>
 							<g:item value="">Tositumomab</g:item>
-					<!--		<g:item value="">Tramadol_and_Acetaminophen</g:item>  -->
+							<!-- <g:item value="">Tramadol_and_Acetaminophen</g:item> -->
 							<g:item value="">Trastuzumab</g:item>
 							<g:item value="">Tretinoin</g:item>
 							<g:item value="">Trimipramine</g:item>
@@ -423,36 +423,6 @@
 						<g:Label>&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;required</g:Label>
 					</g:HorizontalPanel>
 
-
-					<!-- Alleles textareas -->
-
-					<g:HorizontalPanel>
-						<g:Label>Alleles: &nbsp; </g:Label>
-						<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
-					</g:HorizontalPanel>
-
-
-					<!-- Phenotype -->
-					<g:HorizontalPanel>
-
-						<g:Label>Phenotype: &nbsp; </g:Label>
-						<g:ListBox ui:field="descriptsvtlb" name="descript"
-							visibleItemCount='1' styleName='{style.listbox2}'>
-							<g:item value="0">not mentioned</g:item>
-							<g:item value="1">poor-metabolizer</g:item>
-							<g:item value="2">intermediate-metabolizer</g:item>
-							<g:item value="3">extensive-metabolizer</g:item>
-							<g:item value="4">ultra-metabolizer</g:item>
-							<g:item value="5">intermediate-activity</g:item>
-							<g:item value="6">low-or-absent-activity</g:item>
-							<!-- <g:item value="7">HLA-B*1502</g:item> <g:item value="8">HLA-B*5701</g:item> -->
-						</g:ListBox>
-					</g:HorizontalPanel>
-					<g:HorizontalPanel>
-						<g:Label>Other Phenotypes: &nbsp; </g:Label>
-						<g:TextArea ui:field='descriptsothervt' styleName='{style.alleles}'></g:TextArea>
-					</g:HorizontalPanel>
-
 					<!-- test -->
 					<g:HorizontalPanel>
 						<!-- <g:CheckBox ui:field="descriptsts" name="descript" styleName='{style.elementType}' 
@@ -489,6 +459,36 @@
 						<g:TextArea ui:field='descriptsotherts' styleName='{style.alleles}'></g:TextArea>
 					</g:HorizontalPanel>
 
+
+
+					<!-- Alleles textareas -->
+
+					<g:HorizontalPanel>
+						<g:Label>Alleles: &nbsp; </g:Label>
+						<g:TextArea ui:field='allelesbody' styleName='{style.alleles}'></g:TextArea>
+					</g:HorizontalPanel>
+
+
+					<!-- Phenotype -->
+					<g:HorizontalPanel>
+
+						<g:Label>Phenotype: &nbsp; </g:Label>
+						<g:ListBox ui:field="descriptsvtlb" name="descript"
+							visibleItemCount='1' styleName='{style.listbox2}'>
+							<g:item value="0">not mentioned</g:item>
+							<g:item value="1">poor-metabolizer</g:item>
+							<g:item value="2">intermediate-metabolizer</g:item>
+							<g:item value="3">extensive-metabolizer</g:item>
+							<g:item value="4">ultra-metabolizer</g:item>
+							<g:item value="5">intermediate-activity</g:item>
+							<g:item value="6">low-or-absent-activity</g:item>
+							<!-- <g:item value="7">HLA-B*1502</g:item> <g:item value="8">HLA-B*5701</g:item> -->
+						</g:ListBox>
+					</g:HorizontalPanel>
+					<g:HorizontalPanel>
+						<g:Label>Other Phenotypes: &nbsp; </g:Label>
+						<g:TextArea ui:field='descriptsothervt' styleName='{style.alleles}'></g:TextArea>
+					</g:HorizontalPanel>
 
 
 					<!-- BioMarkers -->
