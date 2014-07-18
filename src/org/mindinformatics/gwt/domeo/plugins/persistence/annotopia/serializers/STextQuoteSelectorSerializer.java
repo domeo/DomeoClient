@@ -48,6 +48,8 @@ public class STextQuoteSelectorSerializer extends AAnnotopiaSerializer implement
 		source.put(IDomeoOntology.generalType, new JSONString("dctypes:Text"));
 		jsonSpecificResource.put("hasSource", source);
 		
+		manager.serializeExpression(source);
+		
 		JSONObject sel = new JSONObject();
 		sel.put(IDomeoOntology.generalType, new JSONString("oa:TextQuoteSelector"));
 		sel.put("exact", new JSONString(selector.getExact()));

@@ -24,15 +24,19 @@ import java.util.HashMap;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
+import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 
 import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONValue;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -64,6 +68,42 @@ public IDomeo _domeo;
 		serializers.put(IAgent.class.getName(), new SAgentSerializer());
 		serializers.put(MAgentPerson.class.getName(), new SAgentPersonSerializer());
 		serializers.put(MAgentSoftware.class.getName(), new SAgentSoftwareSerializer());
+	}
+	
+	public void serializeExpression(JSONObject source) {
+		_domeo.getLogger().debug(this, "Serializing Expression");
+		
+		if(_domeo.getPersistenceManager().getBibliographicSet()!=null 
+			&& _domeo.getPersistenceManager().getBibliographicSet().getSelfReference()!=null
+			&& ((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()!=null) {
+			
+			boolean exists = false;
+			JSONObject expression = new JSONObject();
+			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getDoi()!=null) {
+				exists=true;
+				expression.put("http://prismstandard.org/namespaces/basic/2.0/doi", 
+						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getDoi()));
+			}
+			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedId()!=null) {
+				exists=true;
+				expression.put("http://purl.org/spar/fabio#hasPubMedId", 
+						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedId()));
+			}
+			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedCentralId()!=null) {
+				exists=true;
+				expression.put("http://purl.org/spar/fabio#hasPubMedCentralId", 
+						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedCentralId()));
+			}
+			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPublisherItemId()!=null) {
+				exists=true;
+				expression.put("http://purl.org/spar/fabio#hasPII", 
+						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPublisherItemId()));
+			}
+			
+			if(exists) {
+				source.put("http://purl.org/vocab/frbr/core#embodimentOf", expression);
+			}
+		}
 	}
 	
 	// ------------------------------------------------------------------------

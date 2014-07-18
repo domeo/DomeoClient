@@ -92,7 +92,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		
 		try {
 			Ajax.ajax(Ajax.createSettings()
-				.setUrl(URL+"s/annotationset" + "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken())
+				.setUrl(URL+"s/annotationset" /*+ "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken()*/)
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
 		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
@@ -143,7 +143,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		for(String url: urls) {
 			try {
 				Ajax.ajax(Ajax.createSettings()
-					.setUrl(url + "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken())
+					.setUrl(url /*+ "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken()*/)
 			        .setDataType("json") // txt, json, jsonp, xml
 			        .setType("get")      // post, get
 			        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame")) // parameters for the query-string
@@ -205,7 +205,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"outCmd\":\"frame\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
 			try {
 				Ajax.ajax(Ajax.createSettings()
-					.setUrl(URL+"s/annotationset" + "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken())
+					.setUrl(URL+"s/annotationset" /*+ "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken()*/)
 			        .setDataType("json") // txt, json, jsonp, xml */
 			        .setType(operation)      // post, get
 			        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
