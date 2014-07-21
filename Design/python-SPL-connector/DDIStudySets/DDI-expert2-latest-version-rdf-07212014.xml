@@ -1,0 +1,1865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ao="http://www.w3.org/ns/oa#"
+   xmlns:dailymed="http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/"
+   xmlns:dct="http://purl.org/dc/terms/"
+   xmlns:dikbD2R="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/"
+   xmlns:domeo="http://www.w3.org/ns/domeo#"
+   xmlns:foafx="http://xmlns.com/foaf/0.1/"
+   xmlns:pav="http://purl.org/pav/"
+   xmlns:permissions="http://vocab.deri.ie/cpo#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:sio="http://semanticscience.org/resource/"
+>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:0E16BC9B-8C2A-41C0-8769-4BEDC85D54AA">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>ethinyl estradiol</ao:exact>
+    <ao:suffix>xsd:String</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:0E16BC9B-8C2A-41C0-8769-4BEDC85D54AA"/>
+    <domeo:uuid>0E16BC9B-8C2A-41C0-8769-4BEDC85D54AA</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:38:16 -0700</pav:createdOn>
+    <ao:prefix>xsd:String</ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:000ECF07-FD94-48D3-B1A4-A7DFF8F946A5">
+    <pav:createdOn>2014-07-10 11:02:26 -0700</pav:createdOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>Highlight</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <ao:context rdf:resource="urn:domeoclient:uuid:AC0B81BC-E79E-4DD6-BC00-7FDD3A8CC01C"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:lineageUri>urn:domeoserver:annotation:DD93B09A-FE0A-4F57-A2B0-690978714BC2</pav:lineageUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:9519907C-C3B7-41BA-88BE-4F7F8BB4F41C">
+    <ao:exact>REVATIO</ao:exact>
+    <ao:suffix> Injection: The pharmacokinetic profile of </ao:suffix>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:9519907C-C3B7-41BA-88BE-4F7F8BB4F41C"/>
+    <ao:prefix>xsd:String</ao:prefix>
+    <pav:createdOn>2014-07-10 11:05:44 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:9A1E0929-D189-4198-9525-DB3463F993D4">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <ao:context rdf:resource="urn:domeoclient:uuid:8BE71386-BC2C-4D8E-AB98-E3015E4ACF5E"/>
+    <pav:createdOn>2014-07-10 11:19:34 -0700</pav:createdOn>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B0E1FA1B-0CD3-428C-9EBD-54025104080F">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:exact>REVATIO</ao:exact>
+    <pav:createdOn>2014-07-10 11:02:21 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:B0E1FA1B-0CD3-428C-9EBD-54025104080F"/>
+    <ao:suffix> is rapidly absorbed after oral administration, with a mean absolute bioavailability of 41% (25–63%). Maximum observed plasma concentrations are reached within 30 to 120 minutes (median 60 minutes) of oral dosing in the fasted state. When REVATIO is take</ao:suffix>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix>xsd:String</ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:A0FBCF53-A8BE-4D1E-A02F-CF7593209D0A">
+    <pav:createdOn>2014-07-09 13:39:33 -0700</pav:createdOn>
+    <ao:suffix>xsd:String</ao:suffix>
+    <ao:prefix>xsd:String</ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:A0FBCF53-A8BE-4D1E-A02F-CF7593209D0A"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-13.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <domeo:uuid>A0FBCF53-A8BE-4D1E-A02F-CF7593209D0A</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>lithium</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:F2128D34-BA2F-4DA1-81BD-59951F48B84B">
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/46345445-3B18-4997-871F-3A61826BF50D"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/9AE60932-F1A6-4DB0-B5F5-65F00FB5ED6D"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B06566D8-F019-423B-8456-8D68EE9F7CA7">
+    <pav:lastSavedOn>2014-07-10 14:51:03 -0400</pav:lastSavedOn>
+    <pav:createdOn>2014-07-10 11:50:56 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:253701A7-AD36-4F9E-8229-F29F696917E2"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:486C1BD4-6846-4F66-9692-2F059F84F08F</domeo:belongsToSet>
+    <rdfs:label>Highlight</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lineageUri>urn:domeoserver:annotation:5EF2B139-971C-4478-811A-70930E660672</pav:lineageUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:annotationset:486C1BD4-6846-4F66-9692-2F059F84F08F">
+    <domeo:deleted>false</domeo:deleted>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143046812afe0146812d9cb10001"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotationset:c45f856a-1050-4a0b-895a-20715d9c5eed</pav:lineageUri>
+    <dct:description>The NER set is created automatically by NER annotation loading program.</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-179.txt.html</ao:annotatesResource>
+    <ao:item rdf:resource="file:///home/yin2/python-SPL-connector/e9236edd-f625-4803-aeba-3a37f6661f0c"/>
+    <rdfs:label>NER Sets</rdfs:label>
+    <permissions:permissions rdf:nodeID="N294d44833a9b4400a316f03b5a286e19"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:B06566D8-F019-423B-8456-8D68EE9F7CA7"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <pav:createdOn>2014-07-07 05:12:14 -0700</pav:createdOn>
+    <pav:lastSavedOn>2014-07-10 14:51:03 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</pav:versionNumber>
+    <pav:previousVersion>urn:domeoclient:uuid:816ba19d-5d6c-47da-b3c6-8c0969728419</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498">
+    <ao:item rdf:resource="urn:domeoclient:uuid:AB7B11D6-C8E1-4D49-9A18-E2ED76A7142B"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:734A82AD-3BE2-4380-BE15-57DDE7EB9618"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</pav:versionNumber>
+    <ao:item rdf:resource="urn:domeoclient:uuid:000ECF07-FD94-48D3-B1A4-A7DFF8F946A5"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:A914E4CF-025A-46F3-8974-E09D9364373D"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:D4894241-DB38-427F-9257-998BC9413659"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:CBD20FD5-8E3B-4B9E-9291-ACF03D506CF1"/>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143046812afe0146812d9cb10001"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:C9741F6F-3DEA-44A5-975A-DB208B3A4A94"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:766179B4-3716-48EA-9756-4B2DF34323E3"/>
+    <domeo:deleted>false</domeo:deleted>
+    <ao:item rdf:resource="urn:domeoclient:uuid:17966803-7253-4754-AA3D-F5DC857C2CBE"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:B808B31F-1B92-4FBC-90A9-FA0AF9F11345"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:C093855E-BBA5-4F85-AC4E-DECDA3E1D17F"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:annotatesResource>
+    <ao:item rdf:resource="urn:domeoclient:uuid:87B67720-8BF3-40C3-B373-88CB3A627886"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:37BCD6FE-9FA0-43AA-8C57-C621877743EC"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:39520741-4142-41C7-AE4F-F176DB9F9736"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:3C95F0D4-BB51-4844-8752-129ECF34023A"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:F6A79CA3-AC42-48F2-87E8-781E95F58A13"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:F4408CD0-1B82-404B-A95A-804B7F161194"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:item rdf:resource="urn:domeoclient:uuid:42C5450E-07C3-42A8-8C32-4B6F72F88BE3"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:A59055BF-64DC-4014-BEDE-2ECE018994CC"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:item rdf:resource="urn:domeoclient:uuid:2A38FB5F-D606-42BE-89C0-42BB7BF3470D"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:ADDB8D6E-6365-4DC0-A82A-1F4CE32AF0E7"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:909AB07E-B9C2-4FDD-9CB2-BBD6F6B450CC"/>
+    <permissions:permissions rdf:nodeID="N5262890a22814e6e98d441bb3b4a3671"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:793074FA-A766-4304-A84E-DF22F70F41D8"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:AA09D89F-067A-41A5-87CD-FEA0DB518FC3"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:343AA017-14F3-494D-807B-0826C1117C4B"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:163E8958-F6A0-495A-96E9-BDEBD153E9C8"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:20975CBC-7EAF-47D4-BCA0-98BBE58D8F93"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:D359B02A-1286-40F3-878D-94721D8E10FA"/>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+    <ao:item rdf:resource="urn:domeoclient:uuid:7F042DC2-4FC6-4364-89CA-FB33EDE74790"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:BF28D464-4C6C-41E1-8446-B8CED9CABDDD"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:248E98BB-25E9-4B73-9B13-3DC214489485"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:7DDE2095-CF7B-44EA-87F5-B595A55151A9"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:A62139F6-EA47-437C-8214-8FD2E06C550C"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:7B641232-600C-4C46-819D-15F0048C53D7"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:360EC168-0FCD-42AE-99A6-6B2E328010E9"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:CABF7723-C15C-472E-85F9-2820279527F2"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:50B93CCD-E6C3-4E0E-A9E4-6C7A85661A4B"/>
+    <rdfs:label>Default Set</rdfs:label>
+    <ao:item rdf:resource="urn:domeoclient:uuid:3B4828D5-325E-45ED-B33B-E20AE210FD8A"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:6B6B6A1A-CF58-4164-85A8-69D5CFFB7B4D"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:E2254E09-1FC4-4FFD-BB13-70EEA6EF9758"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:A3A64764-4915-47B4-9F32-1DBDB3BD820D"/>
+    <pav:createdOn>2014-07-10 10:59:32 -0700</pav:createdOn>
+    <ao:item rdf:resource="urn:domeoclient:uuid:9A1E0929-D189-4198-9525-DB3463F993D4"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <ao:item rdf:resource="urn:domeoclient:uuid:ECBAEBD8-AC10-4705-AB9F-EFA70519EE0D"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:BAEC7C92-41EA-4D5C-AF4C-9CC5D2C24495"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:0CCDD091-5A17-4D7A-90C1-64053A6C9A0D"/>
+    <pav:lastSavedOn>2014-07-10 14:38:42 -0400</pav:lastSavedOn>
+    <ao:item rdf:resource="urn:domeoclient:uuid:B2A9BFEB-3647-4EEB-9B41-311D4A74322F"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:079E0A47-AEBA-45A1-B032-A1BA9CB8E9D4"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:869A0745-234F-4CD0-A7D5-3E506727BE10"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:545AE437-D61A-45B4-91DF-CCB837DF962D"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:9D467B21-2529-4EB8-960B-0032ECBA3ABF"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:4FD0E402-4CE9-4CFD-A371-2722ABB879E0"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:D7C4DE6D-4C00-4394-BF2F-831FB1AC498D"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:5D9CE3E9-EC57-4428-82FE-D461E986DE9A"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:377BD599-FB01-4DDD-BBA5-83E6846CCD54"/>
+    <pav:previousVersion>urn:domeoserver:annotationset:D5FA3BCD-4099-4CFD-91EE-2C7B5F3F20D6</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:A3A64764-4915-47B4-9F32-1DBDB3BD820D">
+    <pav:createdOn>2014-07-10 11:00:56 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:19C4EDD3-D3D3-4AB9-8969-E372AA9DDBCB</pav:lineageUri>
+    <ao:context rdf:resource="urn:domeoclient:uuid:E4DC8610-DE20-4A3E-A2E5-230FAD5F4480"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:37BCD6FE-9FA0-43AA-8C57-C621877743EC">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdOn>2014-07-10 11:05:27 -0700</pav:createdOn>
+    <pav:lineageUri>urn:domeoserver:annotation:71B5E3D1-E047-4303-923D-545C38D4E95F</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:49E84AE6-4E74-4BD4-A91B-2780261C0487"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:C552D39F-D5D2-4965-803A-250A1ACC4EA7">
+    <ao:prefix> or </ao:prefix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <domeo:uuid>C552D39F-D5D2-4965-803A-250A1ACC4EA7</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>atorvastatin</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:19:59 -0700</pav:createdOn>
+    <ao:suffix>.</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:C552D39F-D5D2-4965-803A-250A1ACC4EA7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:6BB21DF0-81FA-4680-B493-22E2C6325BFD">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-13.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <domeo:uuid>6BB21DF0-81FA-4680-B493-22E2C6325BFD</domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:6BB21DF0-81FA-4680-B493-22E2C6325BFD"/>
+    <ao:prefix> levels or the renal clearance of </ao:prefix>
+    <ao:suffix>xsd:String</ao:suffix>
+    <pav:createdOn>2014-07-09 13:39:39 -0700</pav:createdOn>
+    <ao:exact>lithium</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:24bff56d-3657-4ce3-aa6b-eb13ff321253">
+    <ao:suffix> and increase its serum levels</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <domeo:uuid></domeo:uuid>
+    <ao:exact>carbamazepine</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>wn to slow the metabolism of </ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:24bff56d-3657-4ce3-aa6b-eb13ff321253"/>
+    <pav:createdOn>2014-07-07 05:12:14 -0700</pav:createdOn>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-179.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:1F5B6E6A-FECF-4555-A065-E48E4D3F9E3A">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:23FE2D06-09D2-4DE4-91C4-EA09168AD769</domeo:belongsToSet>
+    <pav:createdOn>2014-07-09 13:39:29 -0700</pav:createdOn>
+    <pav:lineageUri>urn:domeoserver:annotationset:03E0125F-30F9-4054-840B-90653C7BA465</pav:lineageUri>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:76176659-12A0-4518-BA8C-8F396037B595"/>
+    <pav:lastSavedOn>2014-07-09 13:39:36 -0700</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:ECBAEBD8-AC10-4705-AB9F-EFA70519EE0D">
+    <pav:lineageUri>urn:domeoserver:annotation:D743035B-D331-4123-9000-B21E3B8EB5C5</pav:lineageUri>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <ao:context rdf:resource="urn:domeoclient:uuid:431EEAB9-F50F-4252-ACE9-037154359283"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <ao:body rdf:nodeID="N661167a3c9684abe89282c7d01c2bf56"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:10:45 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:163E8958-F6A0-495A-96E9-BDEBD153E9C8">
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:0E16BC9B-8C2A-41C0-8769-4BEDC85D54AA"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:lineageUri>urn:domeoserver:annotation:6B62DF54-1CE4-42DD-97B3-55DC7F2B59F2</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:38:16 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lastSavedOn>2014-07-10 14:38:42 -0400</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:CED32E21-273A-43EA-B2E7-68D3A052FA7A">
+    <pav:createdOn>2014-07-10 11:19:58 -0700</pav:createdOn>
+    <ao:suffix> or atorvastatin.</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:CED32E21-273A-43EA-B2E7-68D3A052FA7A"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <domeo:uuid>CED32E21-273A-43EA-B2E7-68D3A052FA7A</domeo:uuid>
+    <ao:prefix> did not alter the pharmacokinetics of either </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:6BA8BAB1-B26B-492C-B7CA-C19B12FFE422">
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:6BA8BAB1-B26B-492C-B7CA-C19B12FFE422"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:08:32 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>, a CYP3A inhibitor, at steady state (500 mg BID for 5 days), there was a 182% increase in </ao:prefix>
+    <ao:suffix> systemic exposure (AUC).</ao:suffix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:734A82AD-3BE2-4380-BE15-57DDE7EB9618">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lineageUri>urn:domeoserver:annotation:26548A50-5163-40E8-8930-600E3A774634</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:06:13 -0700</pav:createdOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:FC8ABB37-8C2A-4327-8D86-5AF0BBABE98A"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:28B6D8F1-1B59-4CFA-8010-5A3F28E95BD7">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-10 11:02:32 -0700</pav:createdOn>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:28B6D8F1-1B59-4CFA-8010-5A3F28E95BD7"/>
+    <ao:suffix> and its major circulating N-desmethyl metabolite are both approximately 96% bound to plasma proteins. Protein binding is independent of total drug concentrations.</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>n with a high-fat meal, the rate of absorption is reduced, with a mean delay in Tmax of 60 minutes and a mean reduction in Cmax of 29%. The mean steady state volume of distribution (Vss) for sildenafil is 105 L, indicating distribution into the tissues. </ao:prefix>
+    <ao:exact>Sildenafil</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <domeo:uuid></domeo:uuid>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:0F21C845-ECC5-467F-A4A1-EF23AD70D01A">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>sildenafil</ao:exact>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:0F21C845-ECC5-467F-A4A1-EF23AD70D01A"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>When a single 100 mg dose of </ao:prefix>
+    <ao:suffix> was co-administered with erythromycin, a CYP3A inhibitor, at steady state (500 mg BID for 5 days), there was a 182% increase in sildenafil systemic exposure (AUC).</ao:suffix>
+    <pav:createdOn>2014-07-10 11:08:23 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:81AD874B-B485-4B8B-8F62-C391269CA322">
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdOn>2014-07-09 13:39:27 -0700</pav:createdOn>
+    <pav:lastSavedOn>2014-07-09 13:39:36 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>Highlight</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:context rdf:resource="urn:domeoclient:uuid:69E42250-384D-467C-B618-C47BCC460718"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:23FE2D06-09D2-4DE4-91C4-EA09168AD769</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotationset:03E0125F-30F9-4054-840B-90653C7BA465</pav:lineageUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:8BE71386-BC2C-4D8E-AB98-E3015E4ACF5E">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:19:34 -0700</pav:createdOn>
+    <domeo:uuid>8BE71386-BC2C-4D8E-AB98-E3015E4ACF5E</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix>. Sildenafil had no impact on the plasma levels of oral contraceptives (ethinyl estradiol 30 mcg and levonorgestrel 150 mcg).</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:8BE71386-BC2C-4D8E-AB98-E3015E4ACF5E"/>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix> 150 mcg) did not affect the pharmacokinetics of </ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B2A9BFEB-3647-4EEB-9B41-311D4A74322F">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:20:15 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:B33ABAB5-2AFB-493B-BD99-0B13B7CCDFE8"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:D4894241-DB38-427F-9257-998BC9413659">
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:6F09780E-4821-49A3-AFC8-199A1DEC2CDC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:6BA8BAB1-B26B-492C-B7CA-C19B12FFE422"/>
+    <pav:createdOn>2014-07-10 11:08:32 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:F4408CD0-1B82-404B-A95A-804B7F161194">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdOn>2014-07-10 11:02:32 -0700</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotation:AAFB8A91-1BEE-4C52-88D3-0D700CFD6CC2</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:28B6D8F1-1B59-4CFA-8010-5A3F28E95BD7"/>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdfs:label>Highlight</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:AC0B81BC-E79E-4DD6-BC00-7FDD3A8CC01C">
+    <domeo:uuid></domeo:uuid>
+    <pav:createdOn>2014-07-10 11:02:26 -0700</pav:createdOn>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:AC0B81BC-E79E-4DD6-BC00-7FDD3A8CC01C"/>
+    <ao:exact>REVATIO</ao:exact>
+    <ao:suffix> is taken with a high-fat meal, the rate of absorption is reduced, with a mean delay in Tmax of 60 minutes and a mean reduction in Cmax of 29%. The mean steady state volume of distribution (Vss) for sildenafil is 105 L, indicating distribution into the t</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix> is rapidly absorbed after oral administration, with a mean absolute bioavailability of 41% (25–63%). Maximum observed plasma concentrations are reached within 30 to 120 minutes (median 60 minutes) of oral dosing in the fasted state. When </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:A914E4CF-025A-46F3-8974-E09D9364373D">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:877DD4C4-81FD-41D5-9B43-4C3FFC50AC26</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:05:52 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:26A178FD-5EE9-43FC-8624-2080B7B46E57"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:2AB42DB5-874F-4A42-B124-4C73702A71C6">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact> REVATIO</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix> on Vision</ao:suffix>
+    <ao:prefix>Effects of</ao:prefix>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-10 11:01:59 -0700</pav:createdOn>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:2AB42DB5-874F-4A42-B124-4C73702A71C6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:9D467B21-2529-4EB8-960B-0032ECBA3ABF">
+    <pav:lineageUri>urn:domeoserver:annotation:F6DDBA62-2522-46D8-BA0F-9047F1BE9F0C</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:0FA382F2-1E41-4C99-AF64-E36BC4B44D0F"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:01:07 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:35EDBBFB-FD34-42B3-8BBE-C8EF1C2C6CC2">
+    <ao:exact>aspirin</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:20:09 -0700</pav:createdOn>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <domeo:uuid>35EDBBFB-FD34-42B3-8BBE-C8EF1C2C6CC2</domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:35EDBBFB-FD34-42B3-8BBE-C8EF1C2C6CC2"/>
+    <ao:prefix> (50 mg) did not potentiate the increase in bleeding time caused by </ao:prefix>
+    <ao:suffix> (150 mg).</ao:suffix>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/e9236edd-f625-4803-aeba-3a37f6661f0c">
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotationset:c45f856a-1050-4a0b-895a-20715d9c5eed</pav:lineageUri>
+    <ao:context rdf:resource="urn:domeoclient:uuid:24bff56d-3657-4ce3-aa6b-eb13ff321253"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:lastSavedOn>2014-07-07 05:12:14 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-07 05:12:14 -0700</pav:createdOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:486C1BD4-6846-4F66-9692-2F059F84F08F</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:CABF7723-C15C-472E-85F9-2820279527F2">
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-10 11:05:41 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:419A83DB-CE21-419F-BDFD-5307137F226A"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lineageUri>urn:domeoserver:annotation:7A9713BA-C0A9-4E67-A4A9-345CDCF0EF33</pav:lineageUri>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:23B7975D-DA65-4B7D-A572-B201AD26417A">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:19:55 -0700</pav:createdOn>
+    <domeo:uuid>23B7975D-DA65-4B7D-A572-B201AD26417A</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>Concomitant administration of a single 100 mg dose of </ao:prefix>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:suffix> with 10 mg of atorvastatin did not alter the pharmacokinetics of either sildenafil or atorvastatin.</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:23B7975D-DA65-4B7D-A572-B201AD26417A"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:F5BE90AC-C4D1-4F7E-A498-0457D757CC84">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:19:31 -0700</pav:createdOn>
+    <ao:suffix> 150 mcg) did not affect the pharmacokinetics of sildenafil. Sildenafil had no impact on the plasma levels of oral contraceptives (ethinyl estradiol 30 mcg and levonorgestrel 150 mcg).</ao:suffix>
+    <domeo:uuid>F5BE90AC-C4D1-4F7E-A498-0457D757CC84</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix> 30 mcg and </ao:prefix>
+    <ao:exact>levonorgestrel</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:F5BE90AC-C4D1-4F7E-A498-0457D757CC84"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:909AB07E-B9C2-4FDD-9CB2-BBD6F6B450CC">
+    <pav:createdOn>2014-07-10 11:20:05 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <ao:context rdf:resource="urn:domeoclient:uuid:B1EC559E-910A-4B46-B2D5-DAA1CD123F36"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:person:uuid:080e143046812afe0146812d9cb10001">
+    <foafx:homepage></foafx:homepage>
+    <foafx:email>expert2@gmail.com</foafx:email>
+    <foafx:picture>http://www.hcklab.org/images/me/paolo%20ciccarese-boston.jpg</foafx:picture>
+    <foafx:lastname>2</foafx:lastname>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <rdfs:label>expert2</rdfs:label>
+    <foafx:firstname>expert</foafx:firstname>
+    <foafx:middlename></foafx:middlename>
+    <foafx:title>expert2</foafx:title>
+    <foafx:name>expert2</foafx:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:BF28D464-4C6C-41E1-8446-B8CED9CABDDD">
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:0F21C845-ECC5-467F-A4A1-EF23AD70D01A"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lineageUri>urn:domeoserver:annotation:8619B4A1-571F-4044-94A7-1C4DD5147415</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:08:23 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeo:software:id:Domeo-2.1alpha-050">
+    <rdfs:label>Domeo Annotation Toolkit</rdfs:label>
+    <foafx:version>2.1alpha</foafx:version>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Software"/>
+    <foafx:name>Domeo Annotation Toolkit</foafx:name>
+    <foafx:homepage></foafx:homepage>
+    <foafx:build>050</foafx:build>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:69E42250-384D-467C-B618-C47BCC460718">
+    <ao:exact>lithium</ao:exact>
+    <ao:prefix> did not significantly alter steady-state </ao:prefix>
+    <domeo:uuid>69E42250-384D-467C-B618-C47BCC460718</domeo:uuid>
+    <pav:createdOn>2014-07-09 13:39:27 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:69E42250-384D-467C-B618-C47BCC460718"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix>xsd:String</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-13.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:3C95F0D4-BB51-4844-8752-129ECF34023A">
+    <pav:createdOn>2014-07-10 11:19:35 -0700</pav:createdOn>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:12B4C8A1-FA99-46D7-A96C-4A91A48DA9BC"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoserver:annotationset:23FE2D06-09D2-4DE4-91C4-EA09168AD769">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <permissions:permissions rdf:nodeID="N8b20cfb4a16e4d7fb75e966397da05d6"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#AnnotationSet"/>
+    <domeo:agents rdf:resource="urn:domeo:software:id:Domeo-2.1alpha-050"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:81AD874B-B485-4B8B-8F62-C391269CA322"/>
+    <pav:previousVersion>urn:domeoclient:uuid:C041958D-2CEA-4AE4-BD33-D98D12A48F8B</pav:previousVersion>
+    <pav:lastSavedOn>2014-07-09 16:56:03 -0400</pav:lastSavedOn>
+    <ao:item rdf:resource="urn:domeoclient:uuid:BB3BF5F0-8853-4EC0-B3C9-B9CA3DA1532D"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:9C6AD5DD-A2D6-4B8D-9A19-A3F0465EFFCC"/>
+    <pav:createdOn>2014-07-09 13:29:50 -0700</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <dct:description>The default set is created automatically by Domeo when no other set is existing.</dct:description>
+    <rdfs:label>Default Set</rdfs:label>
+    <ao:item rdf:resource="urn:domeoclient:uuid:1F5B6E6A-FECF-4555-A065-E48E4D3F9E3A"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:8769E371-4D6C-4A31-92CE-A1E050197E02"/>
+    <ao:annotatesResource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-13.txt.html</ao:annotatesResource>
+    <pav:lineageUri>urn:domeoserver:annotationset:03E0125F-30F9-4054-840B-90653C7BA465</pav:lineageUri>
+    <domeo:agents rdf:resource="urn:person:uuid:080e143046812afe0146812d9cb10001"/>
+    <ao:item rdf:resource="urn:domeoclient:uuid:8CD78569-3470-4DEE-8EAB-34E3BF5A064C"/>
+    <domeo:deleted>false</domeo:deleted>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:C9741F6F-3DEA-44A5-975A-DB208B3A4A94">
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:body rdf:nodeID="N6936ad6e14a148698ac5605b88fa9c81"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:E865DB4B-9C1E-4C13-A654-D494ECD358FA"/>
+    <pav:lineageUri>urn:domeoserver:annotation:9B7BB542-E10F-4D2D-8E89-92BAB86714E2</pav:lineageUri>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdOn>2014-07-10 11:25:45 -0700</pav:createdOn>
+    <pav:lastSavedOn>2014-07-10 14:38:42 -0400</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:6B6B6A1A-CF58-4164-85A8-69D5CFFB7B4D">
+    <pav:lineageUri>urn:domeoserver:annotation:C6FA5C63-14F9-4197-97FA-5E4BD6184E91</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-10 11:01:29 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:CBC2DD4D-2708-41F6-BD69-5DB0FE5A7ACF"/>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:BB3BF5F0-8853-4EC0-B3C9-B9CA3DA1532D">
+    <pav:lineageUri>urn:domeoserver:annotationset:03E0125F-30F9-4054-840B-90653C7BA465</pav:lineageUri>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:23FE2D06-09D2-4DE4-91C4-EA09168AD769</domeo:belongsToSet>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdOn>2014-07-09 13:39:39 -0700</pav:createdOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lastSavedOn>2014-07-09 13:39:36 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:6BB21DF0-81FA-4680-B493-22E2C6325BFD"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:E2254E09-1FC4-4FFD-BB13-70EEA6EF9758">
+    <pav:createdOn>2014-07-10 11:02:21 -0700</pav:createdOn>
+    <pav:lineageUri>urn:domeoserver:annotation:6FE37A39-44A3-4F4A-AEC6-C3AE02B17C17</pav:lineageUri>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:B0E1FA1B-0CD3-428C-9EBD-54025104080F"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:42C5450E-07C3-42A8-8C32-4B6F72F88BE3">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdOn>2014-07-10 11:01:50 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:1447386F-AA7E-4CE2-B1EC-C89A795E8D54</pav:lineageUri>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:748D7190-4267-4F90-9658-B3E45507F1B1"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:5D9CE3E9-EC57-4428-82FE-D461E986DE9A">
+    <ao:context rdf:resource="urn:domeoclient:uuid:E358BD40-B40B-4F1C-A623-CC064673AE46"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:03:03 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:lineageUri>urn:domeoserver:annotation:0971964D-36D1-4A41-B156-5908BFB9FD2C</pav:lineageUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:87A1B6F6-C14D-419F-B62B-2DDA2AB8A098">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:exact>levonorgestrel</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:87A1B6F6-C14D-419F-B62B-2DDA2AB8A098"/>
+    <domeo:uuid>87A1B6F6-C14D-419F-B62B-2DDA2AB8A098</domeo:uuid>
+    <ao:suffix> 150 mcg).</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix> 30 mcg and </ao:prefix>
+    <pav:createdOn>2014-07-10 11:20:46 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:748D7190-4267-4F90-9658-B3E45507F1B1">
+    <pav:createdOn>2014-07-10 11:01:50 -0700</pav:createdOn>
+    <ao:prefix>After chronic dosing of 80 mg TID </ao:prefix>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:748D7190-4267-4F90-9658-B3E45507F1B1"/>
+    <ao:suffix> to patients with systemic hypertension, the mean change from baseline in systolic and diastolic blood pressures was a decrease of 9.4 mmHg and 9.1 mmHg, respectively.</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:3698C453-70AE-48BC-9958-7E04D41DE8BF">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:3698C453-70AE-48BC-9958-7E04D41DE8BF"/>
+    <pav:createdOn>2014-07-10 11:02:14 -0700</pav:createdOn>
+    <ao:suffix> on visual acuity, intraocular pressure, or pupillometry.</ao:suffix>
+    <ao:prefix>-hue test, with peak effects near the time of peak plasma levels. This finding is consistent with the inhibition of PDE6, which is involved in phototransduction in the retina. An evaluation of visual function at doses up to 200 mg revealed no effects of </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>REVATIO</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:3B4828D5-325E-45ED-B33B-E20AE210FD8A">
+    <pav:lineageUri>urn:domeoserver:annotation:C0D5B7AA-D183-47E7-B1BF-FE97B9D664F8</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 14:38:42 -0400</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:1F02A098-BCB2-4E87-A4B5-7FB8F3B84B23"/>
+    <pav:createdOn>2014-07-10 11:26:23 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <ao:body rdf:nodeID="Ndafc68b3d9814104b25ca1b03493e63e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/77DA79EE-5F32-4117-87DC-62BD7B8B5BFF">
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/83367</dailymed:activeMoietyRxCUI>
+    <rdfs:label>atorvastatin</rdfs:label>
+    <sio:SIO_000228>dikbD2R:precipitant-drug-of-interaction</sio:SIO_000228>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:431EEAB9-F50F-4252-ACE9-037154359283">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-10 11:10:45 -0700</pav:createdOn>
+    <domeo:uuid></domeo:uuid>
+    <ao:suffix>xsd:String</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:431EEAB9-F50F-4252-ACE9-037154359283"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>When a single 100 mg dose of sildenafil was co-administered with erythromycin, a CYP3A inhibitor, at steady state (500 mg BID for 5 days), there was a 182% increase in sildenafil systemic exposure (AUC)</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>xsd:String</ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:CBD20FD5-8E3B-4B9E-9291-ACF03D506CF1">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:38146163-6772-4CC1-8C3E-78A9237A4A05"/>
+    <pav:lineageUri>urn:domeoserver:annotation:CC522107-7E62-4A84-AB42-C2B167C5AFDA</pav:lineageUri>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdOn>2014-07-10 11:06:59 -0700</pav:createdOn>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:AAAFAE39-13CB-41CA-AEF7-A05DF88E090C">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>s metabolite has a phosphodiesterase selectivity profile similar to sildenafil and an in vitro potency for PDE5 approximately 50% of the parent drug. In healthy volunteers, plasma concentrations of this metabolite are approximately 40% of those seen for </ao:prefix>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:suffix>, so that the metabolite accounts for about 20% of sildenafil's pharmacologic effects. In patients with pulmonary arterial hypertension, however, the ratio of the metabolite to sildenafil is higher. Both sildenafil and the active metabolite have terminal</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:AAAFAE39-13CB-41CA-AEF7-A05DF88E090C"/>
+    <pav:createdOn>2014-07-10 11:02:58 -0700</pav:createdOn>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:F6A79CA3-AC42-48F2-87E8-781E95F58A13">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lineageUri>urn:domeoserver:annotation:BF077128-94FE-467B-8EFC-0C31CA1FD6E4</pav:lineageUri>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <ao:context rdf:resource="urn:domeoclient:uuid:3085192E-F8D6-4376-A230-E8EB6CAE3BDF"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdOn>2014-07-10 11:08:26 -0700</pav:createdOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:38146163-6772-4CC1-8C3E-78A9237A4A05">
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:38146163-6772-4CC1-8C3E-78A9237A4A05"/>
+    <pav:createdOn>2014-07-10 11:06:59 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>xsd:String</ao:prefix>
+    <ao:suffix> and other CYP3A Inhibitors</ao:suffix>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>Ritonavir</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:377BD599-FB01-4DDD-BBA5-83E6846CCD54">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:02:58 -0700</pav:createdOn>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lineageUri>urn:domeoserver:annotation:DC780A26-47D4-4F2F-9683-7A39FA90EDF6</pav:lineageUri>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:AAAFAE39-13CB-41CA-AEF7-A05DF88E090C"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:FC8ABB37-8C2A-4327-8D86-5AF0BBABE98A">
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:06:13 -0700</pav:createdOn>
+    <ao:exact>Sildenafil </ao:exact>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:FC8ABB37-8C2A-4327-8D86-5AF0BBABE98A"/>
+    <ao:prefix>xsd:String</ao:prefix>
+    <ao:suffix>(50 mg) did not potentiate the hypotensive effect of alcohol in healthy volunteers with mean maximum blood alcohol levels of 0.08%.</ao:suffix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:E4DC8610-DE20-4A3E-A2E5-230FAD5F4480">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:00:56 -0700</pav:createdOn>
+    <ao:prefix>Studies in vitro have shown that </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:suffix> is selective for PDE5. Its effect is more potent on PDE5 than on other known phosphodiesterases (10-fold for PDE6, &gt; 80-fold for PDE1, &gt; 700-fold for PDE2, PDE3, PDE4, PDE7, PDE8, PDE9, PDE10, and PDE11). The approximately 4,000-fold selectivity for PDE</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:E4DC8610-DE20-4A3E-A2E5-230FAD5F4480"/>
+    <domeo:uuid></domeo:uuid>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:17966803-7253-4754-AA3D-F5DC857C2CBE">
+    <ao:body rdf:nodeID="N05753ad44eb24d16886c7ed0a50975ee"/>
+    <pav:lineageUri>urn:domeoserver:annotation:8F59E443-3AB0-45E1-A4A9-2A4CB714EBA9</pav:lineageUri>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:61037332-099A-4C87-A4EF-ED6727BB9BC4"/>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <pav:lastSavedOn>2014-07-10 14:38:42 -0400</pav:lastSavedOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdOn>2014-07-10 11:25:19 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/46345445-3B18-4997-871F-3A61826BF50D">
+    <rdfs:label>sildenafil</rdfs:label>
+    <sio:SIO_000228>dikbD2R:object-drug-of-interaction</sio:SIO_000228>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/136411</dailymed:activeMoietyRxCUI>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:0FA382F2-1E41-4C99-AF64-E36BC4B44D0F">
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:0FA382F2-1E41-4C99-AF64-E36BC4B44D0F"/>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>Sildenafil </ao:exact>
+    <ao:suffix>is only about 10-fold as potent for PDE5 compared to PDE6, an enzyme found in the retina and involved in the phototransduction pathway of the retina. This lower selectivity is thought to be the basis for abnormalities related to color vision observed wit</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>terases (10-fold for PDE6, &gt; 80-fold for PDE1, &gt; 700-fold for PDE2, PDE3, PDE4, PDE7, PDE8, PDE9, PDE10, and PDE11). The approximately 4,000-fold selectivity for PDE5 versus PDE3 is important because PDE3 is involved in control of cardiac contractility. </ao:prefix>
+    <pav:createdOn>2014-07-10 11:01:07 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:343AA017-14F3-494D-807B-0826C1117C4B">
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdOn>2014-07-10 10:59:32 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:AFA88AF9-54AD-4C16-A771-EFB93BA3CB06"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotation:6D88619B-5A78-4013-BA13-23194DE3A638</pav:lineageUri>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:26A178FD-5EE9-43FC-8624-2080B7B46E57">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>This metabolite</ao:exact>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:26A178FD-5EE9-43FC-8624-2080B7B46E57"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:05:52 -0700</pav:createdOn>
+    <ao:suffix> has a phosphodiesterase selectivity profile similar to sildenafil and an in vitro potency for PDE5 approximately 50% of the parent drug. In healthy volunteers, plasma concentrations of this metabolite are approximately 40% of those seen for </ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>, and is, itself, further metabolized. </ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:2DAC6537-50A5-435D-98A6-4CF530C09E91">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:06:17 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>xsd:String</ao:prefix>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:2DAC6537-50A5-435D-98A6-4CF530C09E91"/>
+    <ao:exact>Sildenafil</ao:exact>
+    <ao:suffix> (50 mg) did not potentiate the increase in bleeding time caused by aspirin (150 mg).</ao:suffix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B33ABAB5-2AFB-493B-BD99-0B13B7CCDFE8">
+    <pav:createdOn>2014-07-10 11:20:15 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix> levels of 0.08%.</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:B33ABAB5-2AFB-493B-BD99-0B13B7CCDFE8"/>
+    <ao:exact>alcohol</ao:exact>
+    <ao:prefix> in healthy volunteers with mean maximum blood </ao:prefix>
+    <domeo:uuid>B33ABAB5-2AFB-493B-BD99-0B13B7CCDFE8</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:1AE099E4-C1F3-41E0-98EE-D5010AF4A38D">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-10 11:19:56 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>atorvastatin</ao:exact>
+    <ao:suffix> did not alter the pharmacokinetics of either sildenafil or atorvastatin.</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:1AE099E4-C1F3-41E0-98EE-D5010AF4A38D"/>
+    <ao:prefix> with 10 mg of </ao:prefix>
+    <domeo:uuid>1AE099E4-C1F3-41E0-98EE-D5010AF4A38D</domeo:uuid>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:824531EF-5990-4E38-A1B7-68BC77F422EE">
+    <ao:exact>sildenafil</ao:exact>
+    <pav:createdOn>2014-07-10 11:02:47 -0700</pav:createdOn>
+    <ao:suffix>, and is, itself, further metabolized. This metabolite has a phosphodiesterase selectivity profile similar to sildenafil and an in vitro potency for PDE5 approximately 50% of the parent drug. In healthy volunteers, plasma concentrations of this metabolit</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:824531EF-5990-4E38-A1B7-68BC77F422EE"/>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix> is cleared predominantly by the CYP3A (major route) and cytochrome P450 2C9 (CYP2C9, minor route) hepatic microsomal isoenzymes. The major circulating metabolite results from N-desmethylation of </ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:ADDB8D6E-6365-4DC0-A82A-1F4CE32AF0E7">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:2DAC6537-50A5-435D-98A6-4CF530C09E91"/>
+    <pav:lineageUri>urn:domeoserver:annotation:F37ACBA1-8E1D-4600-8369-01D46FC0FBA4</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:06:17 -0700</pav:createdOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdfs:label>Highlight</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:8CD78569-3470-4DEE-8EAB-34E3BF5A064C">
+    <pav:createdOn>2014-07-09 13:39:24 -0700</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-09 13:39:36 -0700</pav:lastSavedOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:0E1B584A-E881-40F8-86FB-0928C818A6EF"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>Highlight</rdfs:label>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:23FE2D06-09D2-4DE4-91C4-EA09168AD769</domeo:belongsToSet>
+    <pav:lineageUri>urn:domeoserver:annotationset:03E0125F-30F9-4054-840B-90653C7BA465</pav:lineageUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:D35919F2-BB8A-4B11-9A8C-A0DC6482246E">
+    <ao:suffix>, therefore, increases cGMP within pulmonary vascular smooth muscle cells resulting in relaxation. In patients with pulmonary hypertension, this can lead to vasodilation of the pulmonary vascular bed and, to a lesser degree, vasodilatation in the systemi</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:D35919F2-BB8A-4B11-9A8C-A0DC6482246E"/>
+    <ao:exact>Sildenafil</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix> is an inhibitor of cGMP specific phosphodiesterase type-5 (PDE5) in the smooth muscle of the pulmonary vasculature, where PDE5 is responsible for degradation of cGMP. </ao:prefix>
+    <pav:createdOn>2014-07-10 11:00:08 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:39520741-4142-41C7-AE4F-F176DB9F9736">
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:905E19A6-0E1B-42DA-9A70-C2F5C2FEF6D8"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:7D01ACB9-B8C4-45C4-AE1C-1B7DE2B7016A</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:01:53 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B808B31F-1B92-4FBC-90A9-FA0AF9F11345">
+    <pav:createdOn>2014-07-10 11:00:08 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <ao:context rdf:resource="urn:domeoclient:uuid:D35919F2-BB8A-4B11-9A8C-A0DC6482246E"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotation:9248CE4C-7123-4978-9CCC-EFE450182D0E</pav:lineageUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:E358BD40-B40B-4F1C-A623-CC064673AE46">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix> pharmacologic effects. In patients with pulmonary arterial hypertension, however, the ratio of the metabolite to sildenafil is higher. Both sildenafil and the active metabolite have terminal half-lives of about 4 hours.</ao:suffix>
+    <ao:exact>sildenafil's</ao:exact>
+    <pav:createdOn>2014-07-10 11:03:03 -0700</pav:createdOn>
+    <ao:prefix>, so that the metabolite accounts for about 20% of </ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:E358BD40-B40B-4F1C-A623-CC064673AE46"/>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:A59055BF-64DC-4014-BEDE-2ECE018994CC">
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lineageUri>urn:domeoserver:annotation:26CAF6E1-BB1F-48CA-B4C8-7C0E30762735</pav:lineageUri>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdOn>2014-07-10 11:01:59 -0700</pav:createdOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:2AB42DB5-874F-4A42-B124-4C73702A71C6"/>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:360EC168-0FCD-42AE-99A6-6B2E328010E9">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdOn>2014-07-10 11:20:14 -0700</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:F22E7621-86EB-4EC7-85E0-A9AEFD7280D0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:92FEEDAB-E660-4B4C-92D6-81AD7985A01D">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-10 11:21:07 -0700</pav:createdOn>
+    <ao:prefix> had no impact on the plasma levels of oral contraceptives (</ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:92FEEDAB-E660-4B4C-92D6-81AD7985A01D"/>
+    <domeo:uuid>92FEEDAB-E660-4B4C-92D6-81AD7985A01D</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:exact>ethinyl estradiol</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix> 30 mcg and</ao:suffix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:A62139F6-EA47-437C-8214-8FD2E06C550C">
+    <ao:context rdf:resource="urn:domeoclient:uuid:386B5882-0FCC-4B9E-AAE7-86905E22CF53"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:074A4131-2B18-479F-9DD4-F92DC3EE74A2</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:03:13 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/95563DA9-F883-4E6D-93E3-EDD13DD14BAA">
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/4053</dailymed:activeMoietyRxCUI>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <sio:SIO_000228>dikbD2R:precipitant-drug-of-interaction</sio:SIO_000228>
+    <rdfs:label>erythromycin</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/AD221F6A-BC99-44BC-B89C-8B4389E67153">
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <sio:SIO_000228>dikbD2R:precipitant-drug-of-interaction</sio:SIO_000228>
+    <rdfs:label>sildenafil</rdfs:label>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/136411</dailymed:activeMoietyRxCUI>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:CBC2DD4D-2708-41F6-BD69-5DB0FE5A7ACF">
+    <ao:suffix>, therefore the effects are not related to dose or plasma levels within this dosage range. Larger effects were recorded among patients receiving concomitant nitrates [see Contraindications (4)].</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:CBC2DD4D-2708-41F6-BD69-5DB0FE5A7ACF"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:01:29 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>iastolic blood pressure of 8/5 mmHg). The decrease in blood pressure was most notable approximately 1–2 hours after dosing, and was not different from placebo at 8 hours. Similar effects on blood pressure were noted with 25 mg, 50 mg and 100 mg doses of </ao:prefix>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>sildenafil</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:E951397F-E604-4C69-9AA3-707A691DC593">
+    <ao:prefix>xsd:String</ao:prefix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-13.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix>xsd:String</ao:suffix>
+    <domeo:uuid>E951397F-E604-4C69-9AA3-707A691DC593</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>In a placebo-controlled trial in normal volunteers, the administration of two doses of sertraline did not significantly alter steady-state lithium levels or the renal clearance of lithium</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:E951397F-E604-4C69-9AA3-707A691DC593"/>
+    <pav:createdOn>2014-07-09 13:55:53 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:C6C3F41D-585A-4BE3-B613-01435786FAB8">
+    <dikbD2R:modality>ncit:negative</dikbD2R:modality>
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <dikbD2R:statement>ncit:quantitative</dikbD2R:statement>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:4AAEF611-1424-4DAA-B6C1-0BC22FB55208"/>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:BAEC7C92-41EA-4D5C-AF4C-9CC5D2C24495">
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <ao:body rdf:nodeID="Ncdaf403df62942c5a2fa85919cb8ea09"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:createdOn>2014-07-10 11:24:29 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:D4B3A7A2-F237-4D25-A5CF-70A203D0A2C5"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:50B93CCD-E6C3-4E0E-A9E4-6C7A85661A4B">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:C552D39F-D5D2-4965-803A-250A1ACC4EA7"/>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <pav:createdOn>2014-07-10 11:19:59 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:C093855E-BBA5-4F85-AC4E-DECDA3E1D17F">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>Highlight</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:lineageUri>urn:domeoserver:annotation:6CE95583-7B1C-4ECA-899C-41D8B64930F4</pav:lineageUri>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <ao:context rdf:resource="urn:domeoclient:uuid:EBEF99F1-5B5E-431E-B324-7B56A562A8F4"/>
+    <pav:createdOn>2014-07-10 11:05:38 -0700</pav:createdOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:079E0A47-AEBA-45A1-B032-A1BA9CB8E9D4">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:46E564B4-779B-412E-92A4-3BAFEC1BC263"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdOn>2014-07-10 11:06:49 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:B49B5C0B-10C6-4445-91B9-BF3799167007</pav:lineageUri>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B21AFBB0-32F4-420E-A821-758EC606CAD7">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:B21AFBB0-32F4-420E-A821-758EC606CAD7"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix> up to 100 mg in healthy volunteers produced no clinically relevant effects on ECG. After chronic dosing of 80 mg TID to patients with pulmonary arterial hypertension, no clinically relevant effects on ECG were reported.</ao:suffix>
+    <ao:prefix>Single oral doses of </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:01:36 -0700</pav:createdOn>
+    <domeo:uuid></domeo:uuid>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:D4B3A7A2-F237-4D25-A5CF-70A203D0A2C5">
+    <ao:exact>Concomitant administration of oral contraceptives (ethinyl estradiol 30 mcg and levonorgestrel 150 mcg) did not affect the pharmacokinetics of sildenafil</ao:exact>
+    <ao:suffix>xsd:String</ao:suffix>
+    <pav:createdOn>2014-07-10 11:24:29 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:D4B3A7A2-F237-4D25-A5CF-70A203D0A2C5"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix>xsd:String</ao:prefix>
+    <domeo:uuid>D4B3A7A2-F237-4D25-A5CF-70A203D0A2C5</domeo:uuid>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:E865DB4B-9C1E-4C13-A654-D494ECD358FA">
+    <pav:createdOn>2014-07-10 11:25:45 -0700</pav:createdOn>
+    <domeo:uuid>E865DB4B-9C1E-4C13-A654-D494ECD358FA</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix>xsd:String</ao:suffix>
+    <ao:exact>Concomitant administration of oral contraceptives (ethinyl estradiol 30 mcg and levonorgestrel 150 mcg) did not affect the pharmacokinetics of sildenafil</ao:exact>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix>xsd:String</ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:E865DB4B-9C1E-4C13-A654-D494ECD358FA"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:3085192E-F8D6-4376-A230-E8EB6CAE3BDF">
+    <ao:prefix> was co-administered with </ao:prefix>
+    <pav:createdOn>2014-07-10 11:08:26 -0700</pav:createdOn>
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:suffix>, a CYP3A inhibitor, at steady state (500 mg BID for 5 days), there was a 182% increase in sildenafil systemic exposure (AUC).</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:3085192E-F8D6-4376-A230-E8EB6CAE3BDF"/>
+    <ao:exact>erythromycin</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:793074FA-A766-4304-A84E-DF22F70F41D8">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:5B72860B-5014-47C3-83C7-DB9E9F6094C2"/>
+    <pav:createdOn>2014-07-10 11:33:44 -0700</pav:createdOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:lineageUri>urn:domeoserver:annotation:5A3DF7C7-CFD3-45C7-9A14-FDB6AFB630CE</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:body rdf:nodeID="Ne3663e58f59f405f87c8549c60d5f1b2"/>
+    <pav:lastSavedOn>2014-07-10 14:38:42 -0400</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:386B5882-0FCC-4B9E-AAE7-86905E22CF53">
+    <ao:suffix> and the active metabolite have terminal half-lives of about 4 hours.</ao:suffix>
+    <pav:createdOn>2014-07-10 11:03:13 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix> is higher. Both </ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:386B5882-0FCC-4B9E-AAE7-86905E22CF53"/>
+    <ao:exact>sildenafil</ao:exact>
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:A0F83BFA-7EDF-46CF-BAFC-48A0A427FDEC">
+    <pav:createdOn>2014-07-10 11:03:09 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix> pharmacologic effects. In patients with pulmonary arterial hypertension, however, the ratio of the metabolite to </ao:prefix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix> is higher. Both sildenafil and the active metabolite have terminal half-lives of about 4 hours.</ao:suffix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:A0F83BFA-7EDF-46CF-BAFC-48A0A427FDEC"/>
+    <ao:exact>sildenafil</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:1F02A098-BCB2-4E87-A4B5-7FB8F3B84B23">
+    <ao:prefix>xsd:String</ao:prefix>
+    <ao:exact>Sildenafil had no impact on the plasma levels of oral contraceptives (ethinyl estradiol 30 mcg and levonorgestrel 150 mcg)</ao:exact>
+    <domeo:uuid>1F02A098-BCB2-4E87-A4B5-7FB8F3B84B23</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:1F02A098-BCB2-4E87-A4B5-7FB8F3B84B23"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix>xsd:String</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:26:23 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:253701A7-AD36-4F9E-8229-F29F696917E2">
+    <domeo:uuid>253701A7-AD36-4F9E-8229-F29F696917E2</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:50:56 -0700</pav:createdOn>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:253701A7-AD36-4F9E-8229-F29F696917E2"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix> levels should be determined prior to concurrent administration with </ao:prefix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-179.txt.html</ao:hasSource>
+    <ao:suffix>, signs and symptoms of</ao:suffix>
+    <ao:exact>isonia-\n\nzid</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:AB7B11D6-C8E1-4D49-9A18-E2ED76A7142B">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:lineageUri>urn:domeoserver:annotation:E6557E8C-069B-4879-9CAF-5373D4BADE75</pav:lineageUri>
+    <ao:context rdf:resource="urn:domeoclient:uuid:DDAB98F4-9501-4C13-8C74-3400C20A775B"/>
+    <pav:createdOn>2014-07-10 11:01:48 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:8769E371-4D6C-4A31-92CE-A1E050197E02">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lastSavedOn>2014-07-09 13:39:36 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:23FE2D06-09D2-4DE4-91C4-EA09168AD769</domeo:belongsToSet>
+    <pav:lineageUri>urn:domeoserver:annotationset:03E0125F-30F9-4054-840B-90653C7BA465</pav:lineageUri>
+    <ao:context rdf:resource="urn:domeoclient:uuid:A0FBCF53-A8BE-4D1E-A02F-CF7593209D0A"/>
+    <pav:createdOn>2014-07-09 13:39:33 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:66A17D9A-F29A-42B3-9401-9E3E8D11A5E3">
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:F10E4EED-C3FF-49EB-9346-64AAAFFA3A1F"/>
+    <dikbD2R:modality>ncit:negative</dikbD2R:modality>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <dikbD2R:statement>ncit:quantitative</dikbD2R:statement>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:20975CBC-7EAF-47D4-BCA0-98BBE58D8F93">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:1AE099E4-C1F3-41E0-98EE-D5010AF4A38D"/>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <pav:createdOn>2014-07-10 11:19:56 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:D359B02A-1286-40F3-878D-94721D8E10FA">
+    <pav:lineageUri>urn:domeoserver:annotation:01F7C237-511E-4E07-A61B-93F9E3E6C8CA</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:2C8C6BAA-B30B-4698-9F8D-4867346A6EAC"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdOn>2014-07-10 11:02:39 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:2C8C6BAA-B30B-4698-9F8D-4867346A6EAC">
+    <ao:suffix> is cleared predominantly by the CYP3A (major route) and cytochrome P450 2C9 (CYP2C9, minor route) hepatic microsomal isoenzymes. The major circulating metabolite results from N-desmethylation of sildenafil, and is, itself, further metabolized. This meta</ao:suffix>
+    <ao:prefix>xsd:String</ao:prefix>
+    <pav:createdOn>2014-07-10 11:02:39 -0700</pav:createdOn>
+    <ao:exact>Sildenafil</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:2C8C6BAA-B30B-4698-9F8D-4867346A6EAC"/>
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:766179B4-3716-48EA-9756-4B2DF34323E3">
+    <pav:createdOn>2014-07-10 11:20:00 -0700</pav:createdOn>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <rdfs:label>Highlight</rdfs:label>
+    <ao:context rdf:resource="urn:domeoclient:uuid:007E4CDA-DFFA-4E6F-A508-B96BED56B3D7"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:2A38FB5F-D606-42BE-89C0-42BB7BF3470D">
+    <pav:lineageUri>urn:domeoserver:annotation:8851E939-9DC6-4BE0-AFF1-B18C79CB721D</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:06:51 -0700</pav:createdOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdfs:label>Highlight</rdfs:label>
+    <ao:context rdf:resource="urn:domeoclient:uuid:0D3DBE9A-46E1-4750-8AC9-14B3B63DC024"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:B1EC559E-910A-4B46-B2D5-DAA1CD123F36">
+    <ao:exact>magnesium hydroxide/aluminum hydroxide</ao:exact>
+    <domeo:uuid>B1EC559E-910A-4B46-B2D5-DAA1CD123F36</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix>) did not affect the bioavailability of </ao:suffix>
+    <pav:createdOn>2014-07-10 11:20:05 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>Single doses of antacid (</ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:B1EC559E-910A-4B46-B2D5-DAA1CD123F36"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:7DDE2095-CF7B-44EA-87F5-B595A55151A9">
+    <pav:lineageUri>urn:domeoserver:annotation:AA7F5327-85CE-411B-B5DE-D5DC585B7804</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:05:44 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:9519907C-C3B7-41BA-88BE-4F7F8BB4F41C"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:D7C4DE6D-4C00-4394-BF2F-831FB1AC498D">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdOn>2014-07-10 11:19:31 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <ao:context rdf:resource="urn:domeoclient:uuid:F5BE90AC-C4D1-4F7E-A498-0457D757CC84"/>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:545AE437-D61A-45B4-91DF-CCB837DF962D">
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:35EDBBFB-FD34-42B3-8BBE-C8EF1C2C6CC2"/>
+    <pav:createdOn>2014-07-10 11:20:09 -0700</pav:createdOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:3F2527DF-96D5-40C7-9776-730862C927BD">
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <dikbD2R:modality>ncit:negative</dikbD2R:modality>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:B6F653CD-4FAA-4920-850B-661F53D754A8"/>
+    <dikbD2R:statement>ncit:Qualitative</dikbD2R:statement>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N661167a3c9684abe89282c7d01c2bf56">
+    <domeo:sets rdf:resource="urn:pddi:uuid:BC6619EE-C664-418E-907B-520216A89527"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:5B72860B-5014-47C3-83C7-DB9E9F6094C2">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:exact>Concomitant administration of a single 100 mg dose of sildenafil with 10 mg of atorvastatin did not alter the pharmacokinetics of either sildenafil or atorvastatin</ao:exact>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:33:44 -0700</pav:createdOn>
+    <ao:suffix>xsd:String</ao:suffix>
+    <domeo:uuid>5B72860B-5014-47C3-83C7-DB9E9F6094C2</domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:5B72860B-5014-47C3-83C7-DB9E9F6094C2"/>
+    <ao:prefix>xsd:String</ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:0E1B584A-E881-40F8-86FB-0928C818A6EF">
+    <ao:exact>sertraline</ao:exact>
+    <ao:suffix>xsd:String</ao:suffix>
+    <domeo:uuid>0E1B584A-E881-40F8-86FB-0928C818A6EF</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>xsd:String</ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-13.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-09 13:39:24 -0700</pav:createdOn>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:0E1B584A-E881-40F8-86FB-0928C818A6EF"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:76176659-12A0-4518-BA8C-8F396037B595">
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix>xsd:String</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <domeo:uuid>76176659-12A0-4518-BA8C-8F396037B595</domeo:uuid>
+    <ao:prefix>xsd:String</ao:prefix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-13.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:76176659-12A0-4518-BA8C-8F396037B595"/>
+    <ao:exact>lithium</ao:exact>
+    <pav:createdOn>2014-07-09 13:39:29 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:248E98BB-25E9-4B73-9B13-3DC214489485">
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <ao:context rdf:resource="urn:domeoclient:uuid:CED32E21-273A-43EA-B2E7-68D3A052FA7A"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <pav:createdOn>2014-07-10 11:19:58 -0700</pav:createdOn>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N05753ad44eb24d16886c7ed0a50975ee">
+    <domeo:sets rdf:resource="urn:pddi:uuid:66A17D9A-F29A-42B3-9401-9E3E8D11A5E3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:DDAB98F4-9501-4C13-8C74-3400C20A775B">
+    <pav:createdOn>2014-07-10 11:01:48 -0700</pav:createdOn>
+    <ao:suffix> to healthy volunteers, the largest mean change from baseline in supine systolic and supine diastolic blood pressures was a decrease of 9.0 mmHg and 8.4 mmHg, respectively.</ao:suffix>
+    <ao:exact>sildenafil</ao:exact>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:DDAB98F4-9501-4C13-8C74-3400C20A775B"/>
+    <ao:prefix>After chronic dosing of 80 mg TID </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:AA09D89F-067A-41A5-87CD-FEA0DB518FC3">
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdOn>2014-07-10 11:21:07 -0700</pav:createdOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <ao:context rdf:resource="urn:domeoclient:uuid:92FEEDAB-E660-4B4C-92D6-81AD7985A01D"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:0D3DBE9A-46E1-4750-8AC9-14B3B63DC024">
+    <ao:exact>Sildenafil</ao:exact>
+    <pav:createdOn>2014-07-10 11:06:51 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>xsd:String</ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:0D3DBE9A-46E1-4750-8AC9-14B3B63DC024"/>
+    <ao:suffix> metabolism is principally mediated by the CYP3A (major route) and CYP2C9 (minor route) cytochrome P450 isoforms. Therefore, inhibitors of these isoenzymes may reduce sildenafil clearance and inducers of these isoenzymes may increase sildenafil clearance</ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <domeo:uuid></domeo:uuid>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:DACA9314-A751-40FA-BC0F-343576BA8384">
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:F2128D34-BA2F-4DA1-81BD-59951F48B84B"/>
+    <dikbD2R:modality>ncit:negative</dikbD2R:modality>
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <dikbD2R:statement>ncit:quantitative</dikbD2R:statement>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:AFA88AF9-54AD-4C16-A771-EFB93BA3CB06">
+    <ao:suffix> is an inhibitor of cGMP specific phosphodiesterase type-5 (PDE5) in the smooth muscle of the pulmonary vasculature, where PDE5 is responsible for degradation of cGMP. Sildenafil, therefore, increases cGMP within pulmonary vascular smooth muscle cells re</ao:suffix>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-10 10:59:32 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>xsd:String</ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:exact>Sildenafil</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:AFA88AF9-54AD-4C16-A771-EFB93BA3CB06"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N294d44833a9b4400a316f03b5a286e19">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:person:uuid:080e143046812afe0146812d9cb10001</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:12B4C8A1-FA99-46D7-A96C-4A91A48DA9BC">
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:exact>Sildenafil</ao:exact>
+    <pav:createdOn>2014-07-10 11:19:35 -0700</pav:createdOn>
+    <domeo:uuid>12B4C8A1-FA99-46D7-A96C-4A91A48DA9BC</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:suffix> had no impact on the plasma levels of oral contraceptives (ethinyl estradiol 30 mcg and levonorgestrel 150 mcg).</ao:suffix>
+    <ao:prefix>. </ao:prefix>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:12B4C8A1-FA99-46D7-A96C-4A91A48DA9BC"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:492F290C-1A7C-43CE-812F-8A4B764A7BD1">
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/01AED907-F1AC-4549-B948-9DB96D6D6FBB"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/496BB464-C6C3-45C1-8CC3-A96D4E4752BB"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/9AE60932-F1A6-4DB0-B5F5-65F00FB5ED6D">
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <sio:SIO_000228>dikbD2R:precipitant-drug-of-interaction</sio:SIO_000228>
+    <rdfs:label>levonorgestrel</rdfs:label>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/6373</dailymed:activeMoietyRxCUI>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:905E19A6-0E1B-42DA-9A70-C2F5C2FEF6D8">
+    <ao:suffix> to patients with pulmonary arterial hypertension, lesser reductions than above in systolic and diastolic blood pressures were observed (a decrease in both of 2 mmHg).</ao:suffix>
+    <pav:createdOn>2014-07-10 11:01:53 -0700</pav:createdOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>After chronic dosing of 80 mg TID </ao:prefix>
+    <ao:exact>sildenafil</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:905E19A6-0E1B-42DA-9A70-C2F5C2FEF6D8"/>
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/496BB464-C6C3-45C1-8CC3-A96D4E4752BB">
+    <sio:SIO_000228>dikbD2R:precipitant-drug-of-interaction</sio:SIO_000228>
+    <rdfs:label>ethinyl estradiol</rdfs:label>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/4124</dailymed:activeMoietyRxCUI>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:4FD0E402-4CE9-4CFD-A371-2722ABB879E0">
+    <pav:createdOn>2014-07-10 11:03:09 -0700</pav:createdOn>
+    <ao:context rdf:resource="urn:domeoclient:uuid:A0F83BFA-7EDF-46CF-BAFC-48A0A427FDEC"/>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotation:32081B4C-133D-4840-8696-E6DD22840059</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/A1068FBA-A656-49E7-8B76-5BCB4BC09955">
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <rdfs:label>levonorgestrel</rdfs:label>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/6373</dailymed:activeMoietyRxCUI>
+    <sio:SIO_000228>dikbD2R:object-drug-of-interaction</sio:SIO_000228>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:9C6AD5DD-A2D6-4B8D-9A19-A3F0465EFFCC">
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdfs:label>expertstudy Annotation</rdfs:label>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <ao:context rdf:resource="urn:domeoclient:uuid:E951397F-E604-4C69-9AA3-707A691DC593"/>
+    <pav:createdOn>2014-07-09 13:55:53 -0700</pav:createdOn>
+    <ao:body rdf:nodeID="N07ddb820226642f4aeaf0a2d880bd125"/>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:23FE2D06-09D2-4DE4-91C4-EA09168AD769</domeo:belongsToSet>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotation:A6F2A4DA-8B72-4A8B-BC57-4F31FD8E86DA</pav:lineageUri>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#expertstudyAnnotation"/>
+    <pav:lastSavedOn>2014-07-09 16:56:03 -0400</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:49E84AE6-4E74-4BD4-A91B-2780261C0487">
+    <ao:exact>N-desmethyl metabolite</ao:exact>
+    <ao:suffix> are both approximately 96% bound to plasma proteins. Protein binding is independent of total drug concentrations.</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix> and its major circulating </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:49E84AE6-4E74-4BD4-A91B-2780261C0487"/>
+    <pav:createdOn>2014-07-10 11:05:27 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:87B67720-8BF3-40C3-B373-88CB3A627886">
+    <pav:createdOn>2014-07-10 11:02:14 -0700</pav:createdOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lineageUri>urn:domeoserver:annotation:DF8CDB93-4DB5-4F26-9EDF-A18DA5C3DB8E</pav:lineageUri>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <rdfs:label>Highlight</rdfs:label>
+    <ao:context rdf:resource="urn:domeoclient:uuid:3698C453-70AE-48BC-9958-7E04D41DE8BF"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:007E4CDA-DFFA-4E6F-A508-B96BED56B3D7">
+    <ao:exact>sildenafil</ao:exact>
+    <ao:suffix>.</ao:suffix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:007E4CDA-DFFA-4E6F-A508-B96BED56B3D7"/>
+    <pav:createdOn>2014-07-10 11:20:00 -0700</pav:createdOn>
+    <domeo:uuid>007E4CDA-DFFA-4E6F-A508-B96BED56B3D7</domeo:uuid>
+    <ao:prefix>Single doses of antacid (magnesium hydroxide/aluminum hydroxide) did not affect the bioavailability of </ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:B6F653CD-4FAA-4920-850B-661F53D754A8">
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/80C693CC-C71F-41CB-9CC7-47DD4740651B"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/ED4DE9B9-8E4D-4916-AE77-FCCD269D3204"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/E731B404-8E79-4693-B64D-B6103DB6072E">
+    <rdfs:label>sildenafil</rdfs:label>
+    <sio:SIO_000228>dikbD2R:object-drug-of-interaction</sio:SIO_000228>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/136411</dailymed:activeMoietyRxCUI>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:869A0745-234F-4CD0-A7D5-3E506727BE10">
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <pav:createdOn>2014-07-10 11:20:46 -0700</pav:createdOn>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <ao:context rdf:resource="urn:domeoclient:uuid:87A1B6F6-C14D-419F-B62B-2DDA2AB8A098"/>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:7F042DC2-4FC6-4364-89CA-FB33EDE74790">
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:createdOn>2014-07-10 11:01:36 -0700</pav:createdOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <ao:context rdf:resource="urn:domeoclient:uuid:B21AFBB0-32F4-420E-A821-758EC606CAD7"/>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:lineageUri>urn:domeoserver:annotation:A95EE4C8-26F9-476D-A0E8-3060F38ED7B7</pav:lineageUri>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:BC6619EE-C664-418E-907B-520216A89527">
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <dikbD2R:modality>ncit:positive</dikbD2R:modality>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:0B076053-9243-441F-828B-3712E466B9F3"/>
+    <dikbD2R:statement>ncit:quantitative</dikbD2R:statement>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:7B641232-600C-4C46-819D-15F0048C53D7">
+    <pav:lastSavedOn>2014-07-10 11:24:35 -0700</pav:lastSavedOn>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <ao:context rdf:resource="urn:domeoclient:uuid:23B7975D-DA65-4B7D-A572-B201AD26417A"/>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+    <pav:lineageUri>urn:domeoserver:annotationset:520624D6-D337-4923-B877-B11162BA01FC</pav:lineageUri>
+    <rdfs:label>Highlight</rdfs:label>
+    <pav:createdOn>2014-07-10 11:19:55 -0700</pav:createdOn>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</pav:versionNumber>
+    <pav:previousVersion>urn:domeoclient:uuid:9A1B8482-2339-464A-9513-943284EDDD9E</pav:previousVersion>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/7A2F6C32-3164-4D45-A686-1A0C327334D2">
+    <sio:SIO_000228>dikbD2R:object-drug-of-interaction</sio:SIO_000228>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/136411</dailymed:activeMoietyRxCUI>
+    <rdfs:label>sildenafil</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:F22E7621-86EB-4EC7-85E0-A9AEFD7280D0">
+    <ao:prefix>(50 mg) did not potentiate the hypotensive effect of </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <pav:createdOn>2014-07-10 11:20:14 -0700</pav:createdOn>
+    <ao:exact>alcohol</ao:exact>
+    <ao:suffix> in healthy volunteers with mean maximum blood alcohol levels of 0.08%.</ao:suffix>
+    <domeo:uuid>F22E7621-86EB-4EC7-85E0-A9AEFD7280D0</domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:F22E7621-86EB-4EC7-85E0-A9AEFD7280D0"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:61037332-099A-4C87-A4EF-ED6727BB9BC4">
+    <pav:createdOn>2014-07-10 11:25:19 -0700</pav:createdOn>
+    <ao:suffix>xsd:String</ao:suffix>
+    <domeo:uuid>61037332-099A-4C87-A4EF-ED6727BB9BC4</domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:61037332-099A-4C87-A4EF-ED6727BB9BC4"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:exact>Sildenafil had no impact on the plasma levels of oral contraceptives (ethinyl estradiol 30 mcg and levonorgestrel 150 mcg)</ao:exact>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:prefix>xsd:String</ao:prefix>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:980E9EE7-937B-40DA-A25D-A236CE1EA9A8">
+    <dikbD2R:modality>ncit:negative</dikbD2R:modality>
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:492F290C-1A7C-43CE-812F-8A4B764A7BD1"/>
+    <dikbD2R:statement>ncit:quantitative</dikbD2R:statement>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:EBEF99F1-5B5E-431E-B324-7B56A562A8F4">
+    <ao:exact>REVATIO</ao:exact>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:EBEF99F1-5B5E-431E-B324-7B56A562A8F4"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <ao:suffix> Injection is predicted to provide a pharmacological effect of sildenafil and its N-desmethyl metabolite equivalent to that of a 20 mg oral dose.</ao:suffix>
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:prefix>REVATIO Injection: The pharmacokinetic profile of REVATIO has been characterized following intravenous administration. A 10 mg dose of </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <pav:createdOn>2014-07-10 11:05:38 -0700</pav:createdOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/B77E689A-7486-4FDB-91D1-418C379B34FE">
+    <rdfs:label>sildenafil</rdfs:label>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/136411</dailymed:activeMoietyRxCUI>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <sio:SIO_000228>dikbD2R:precipitant-drug-of-interaction</sio:SIO_000228>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:0CCDD091-5A17-4D7A-90C1-64053A6C9A0D">
+    <pav:lineageUri>urn:domeoserver:annotation:6C2A81D5-4514-4576-A245-3C6A711282DB</pav:lineageUri>
+    <ao:context rdf:resource="urn:domeoclient:uuid:824531EF-5990-4E38-A1B7-68BC77F422EE"/>
+    <rdfs:label>Highlight</rdfs:label>
+    <domeo:belongsToSet>urn:domeoserver:annotationset:4B3AF004-7916-4AC1-AC2F-4405E8D3D498</domeo:belongsToSet>
+    <pav:versionNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</pav:versionNumber>
+    <pav:previousVersion>xsd:String</pav:previousVersion>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#Highlight"/>
+    <pav:lastSavedOn>2014-07-10 11:16:37 -0700</pav:lastSavedOn>
+    <pav:createdOn>2014-07-10 11:02:47 -0700</pav:createdOn>
+    <pav:createdWith>urn:domeo:software:id:Domeo-2.1alpha-050</pav:createdWith>
+    <pav:createdBy>urn:person:uuid:080e143046812afe0146812d9cb10001</pav:createdBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:0B076053-9243-441F-828B-3712E466B9F3">
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/7A2F6C32-3164-4D45-A686-1A0C327334D2"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/95563DA9-F883-4E6D-93E3-EDD13DD14BAA"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/ED4DE9B9-8E4D-4916-AE77-FCCD269D3204">
+    <rdfs:label>lithium</rdfs:label>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <sio:SIO_000228>dikbD2R:object-drug-of-interaction</sio:SIO_000228>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/</dailymed:activeMoietyRxCUI>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8b20cfb4a16e4d7fb75e966397da05d6">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:796EDA69-14CA-4822-9F3F-242EE4DCFBD1">
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/E731B404-8E79-4693-B64D-B6103DB6072E"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/77DA79EE-5F32-4117-87DC-62BD7B8B5BFF"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/80C693CC-C71F-41CB-9CC7-47DD4740651B">
+    <sio:SIO_000228>dikbD2R:precipitant-drug-of-interaction</sio:SIO_000228>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <rdfs:label>sertraline</rdfs:label>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/36437</dailymed:activeMoietyRxCUI>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncdaf403df62942c5a2fa85919cb8ea09">
+    <domeo:sets rdf:resource="urn:pddi:uuid:980E9EE7-937B-40DA-A25D-A236CE1EA9A8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:4AAEF611-1424-4DAA-B6C1-0BC22FB55208">
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/B77E689A-7486-4FDB-91D1-418C379B34FE"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/A1068FBA-A656-49E7-8B76-5BCB4BC09955"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:66BF47A2-21A3-45D6-974C-D515225F3406">
+    <dikbD2R:statement>ncit:quantitative</dikbD2R:statement>
+    <rdf:type rdf:resource="http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#DrugDrugInteractionStatement"/>
+    <dikbD2R:modality>ncit:negative</dikbD2R:modality>
+    <sio:SIO_000563>dikbD2R:modality</sio:SIO_000563>
+    <sio:SIO_000628 rdf:resource="urn:pddi:uuid:796EDA69-14CA-4822-9F3F-242EE4DCFBD1"/>
+    <sio:SIO_000205>dikbD2R:statement</sio:SIO_000205>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:419A83DB-CE21-419F-BDFD-5307137F226A">
+    <domeo:uuid></domeo:uuid>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:419A83DB-CE21-419F-BDFD-5307137F226A"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:prefix>REVATIO Injection: The pharmacokinetic profile of </ao:prefix>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:suffix> has been characterized following intravenous administration. A 10 mg dose of </ao:suffix>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <pav:createdOn>2014-07-10 11:05:41 -0700</pav:createdOn>
+    <ao:exact>REVATIO</ao:exact>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:pddi:uuid:F10E4EED-C3FF-49EB-9346-64AAAFFA3A1F">
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/AD221F6A-BC99-44BC-B89C-8B4389E67153"/>
+    <sio:SIO_000132 rdf:resource="file:///home/yin2/python-SPL-connector/12F6D1E9-CF19-4F4C-84C6-1DFF504C1092"/>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/PK_DDI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:domeoclient:uuid:46E564B4-779B-412E-92A4-3BAFEC1BC263">
+    <ao:prefix>xsd:String</ao:prefix>
+    <pav:createdOn>2014-07-10 11:06:49 -0700</pav:createdOn>
+    <ao:exact>Sildenafil</ao:exact>
+    <domeo:uuid></domeo:uuid>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#PrefixSuffixTextSelector"/>
+    <ao:hasSource>http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-155.txt.html</ao:hasSource>
+    <rdf:type rdf:resource="http://www.w3.org/ns/oa#SpecificResource"/>
+    <ao:hasSelector rdf:resource="urn:domeoclient:uuid:46E564B4-779B-412E-92A4-3BAFEC1BC263"/>
+    <ao:suffix> is a weak inhibitor of the cytochrome P450 isoforms 1A2, 2C9, 2C19, 2D6, 2E1 and 3A (IC50 &gt;150 µM).</ao:suffix>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/12F6D1E9-CF19-4F4C-84C6-1DFF504C1092">
+    <sio:SIO_000228>dikbD2R:object-drug-of-interaction</sio:SIO_000228>
+    <rdfs:label>ethinyl estradiol</rdfs:label>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/4124</dailymed:activeMoietyRxCUI>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5262890a22814e6e98d441bb3b4a3671">
+    <permissions:isLocked>false</permissions:isLocked>
+    <permissions:accessType>urn:domeo:access:public</permissions:accessType>
+  </rdf:Description>
+  <rdf:Description rdf:about="file:///home/yin2/python-SPL-connector/01AED907-F1AC-4549-B948-9DB96D6D6FBB">
+    <rdfs:label>sildenafil</rdfs:label>
+    <sio:SIO_000228>dikbD2R:object-drug-of-interaction</sio:SIO_000228>
+    <dct:description>Referred to the drug in the interaction.</dct:description>
+    <dailymed:activeMoietyRxCUI>http://purl.bioontology.org/ontology/RXNORM/136411</dailymed:activeMoietyRxCUI>
+    <rdf:type rdf:resource="http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/active-ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6936ad6e14a148698ac5605b88fa9c81">
+    <domeo:sets rdf:resource="urn:pddi:uuid:DACA9314-A751-40FA-BC0F-343576BA8384"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N07ddb820226642f4aeaf0a2d880bd125">
+    <domeo:sets rdf:resource="urn:pddi:uuid:3F2527DF-96D5-40C7-9776-730862C927BD"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne3663e58f59f405f87c8549c60d5f1b2">
+    <domeo:sets rdf:resource="urn:pddi:uuid:66BF47A2-21A3-45D6-974C-D515225F3406"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndafc68b3d9814104b25ca1b03493e63e">
+    <domeo:sets rdf:resource="urn:pddi:uuid:C6C3F41D-585A-4BE3-B613-01435786FAB8"/>
+  </rdf:Description>
+</rdf:RDF>
