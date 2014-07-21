@@ -1,0 +1,9 @@
+amitriptyline e454fe56-0896-4d40-862c-95ef0fc0bc82
+capecitabine 5753679a-506c-4ac4-b8b2-b27c664d1d40
+Peginterferon_alfa-2b 0a8f3137-0e3a-4a60-a872-cb7d761b30e1
+Phenytoin 8848de76-8d74-4620-bcc7-a86a596e5dd9
+Rasburicase 0ae10bc4-6b65-402f-9db5-2d7753054922
+Voriconazole 08d08721-1f4c-478a-8abf-d9c402d50553
+Ivacaftor 0ab0c9f8-3eee-4e0f-9f3f-c1e16aaffe25
+Irinotecan e518dfc6-7e93-4fee-a66c-51e1ab71c056
+Imatinib 211ef2da-2868-4a77-8055-1cb2cd78e24b
