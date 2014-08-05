@@ -92,7 +92,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		
 		try {
 			Ajax.ajax(Ajax.createSettings()
-				.setUrl(URL+"s/annotationset" /*+ "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken()*/)
+				.setUrl(URL+"s/annotationset")
+				.setHeaders(getAnnotopiaOAuthToken( ))
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
 		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
@@ -143,7 +144,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		for(String url: urls) {
 			try {
 				Ajax.ajax(Ajax.createSettings()
-					.setUrl(url /*+ "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken()*/)
+					.setUrl(url)
+					.setHeaders(getAnnotopiaOAuthToken( ))
 			        .setDataType("json") // txt, json, jsonp, xml
 			        .setType("get")      // post, get
 			        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame")) // parameters for the query-string
@@ -205,7 +207,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"outCmd\":\"frame\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
 			try {
 				Ajax.ajax(Ajax.createSettings()
-					.setUrl(URL+"s/annotationset" /*+ "?access_token=" + ApplicationUtils.getAnnotopiaOauthToken()*/)
+					.setUrl(URL+"s/annotationset")
+					.setHeaders(getAnnotopiaOAuthToken( ))
 			        .setDataType("json") // txt, json, jsonp, xml */
 			        .setType(operation)      // post, get
 			        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
@@ -283,4 +286,15 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	public void saveBibliography() {
 		// TODO Auto-generated method stub		
 	}
+	
+	/** Return the user Annotopia OAuth token if it is enabled.
+	 * @return The user Annotopia OAuth token if it is enabled. */
+	private Properties getAnnotopiaOAuthToken( ) {
+		if(ApplicationUtils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
+			return Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken( ));
+		} else {
+			return Properties.create("Authorization: Bearer none");
+		}
+	}
+	
 }
