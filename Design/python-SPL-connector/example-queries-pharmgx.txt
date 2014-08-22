@@ -1,6 +1,7 @@
-################################################################################
-# get all pharmacogenomics data
-################################################################################
+####################################################################################################################
+# Get all pharmacogenomics data
+# This one is slow but pulls back well format table with link, the last column, back to source of annotation 
+####################################################################################################################
 
 PREFIX fn:<http://www.w3.org/2005/xpath-functions#>
 PREFIX oa:<http://www.w3.org/ns/oa#>
@@ -123,10 +124,11 @@ GROUP BY ?text
 ORDER BY DESC(?item)
 
 
-
-################################################################################
-# specified pk to get all pharmacogenomics data
-################################################################################
+####################################################################################################################
+# Get all pharmacogenomics data
+# This one is faster than the first query
+# duplicates in text
+####################################################################################################################
 
 PREFIX oa:<http://www.w3.org/ns/oa#>
 PREFIX sio: <http://semanticscience.org/resource/>
@@ -138,7 +140,7 @@ PREFIX pav: <http://purl.org/pav/>
 PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
 PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
 
-SELECT DISTINCT ?annot ?text ?drugLabel ?gene ?section ?pd ?monitRec ?testRec ?drugRec ?doseRec ?variant ?prodrug ?medicationConcern ?variantFreq ?clinical ?medicalCondition ?testResult ?alleles ?comment 
+SELECT ?text ?body ?drugLabel ?gene ?section ?pk ?pd ?monitRec ?testRec ?drugRec ?doseRec ?variant ?prodrug ?medicationConcern ?variantFreq ?clinical ?medicalCondition ?testResult ?alleles ?comment
 FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc-07112014>
 WHERE {
 
@@ -150,155 +152,85 @@ WHERE {
   ?selector a oa:PrefixSuffixTextSelector;
       oa:exact ?text.
 
-  ?annot oa:body ?bn1.
-  ?bn1 poc:PharmacokineticImpact "http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#metabolism-decrease".
+  ?annot ?p1 ?body.
 
-   ?annot oa:body ?bn2.
-   ?bn2 dailymed:pharmgxDrug ?drug;
+   FILTER EXISTS { ?s oa:body ?body }
+
+   OPTIONAL {
+   ?body dailymed:pharmgxDrug ?drug;
          rdfs:label ?drugLabel.
-   
-   ?annot oa:body ?bn3.
-   ?bn3 dailymed:HGNCGeneSymbol ?g;
+   }
+
+   OPTIONAL {
+   ?body dailymed:HGNCGeneSymbol ?g;
          rdfs:label ?gene.
-         
-   ?annot oa:body ?bn4.
-   ?bn4 rdfs:label "SPL Section";
-        sio:SIO_000111 ?section.
-
-   OPTIONAL {
-   ?annot oa:body ?bn5.
-   ?bn5 poc:PharmacodynamicImpact ?pd.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn6.
-   ?bn6 poc:MonitoringRecommendation ?monitRec.
+   ?body sio:SIO_000111 ?section.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn7.
-   ?bn7 poc:TestRecommendation ?testRec.
+   ?body poc:PharmacokineticImpact ?pk.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn8.
-   ?bn8 poc:DrugSelectionRecommendation ?drugRec.
+   ?body poc:PharmacodynamicImpact ?pd.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn9.
-   ?bn9 poc:DoseSelectionRecommendation ?doseRec.
+   ?body poc:MonitoringRecommendation ?monitRec.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn10.
-   ?bn10 dailymed:ConcomitantMedicationOfConcern ?medicationConcern.
-   }
-   
-   OPTIONAL {
-   ?annot oa:body ?bn11.
-   ?bn11 poc:VariantFrequency ?variantFreq.
+   ?body poc:TestRecommendation ?testRec.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn12.
-   ?bn12 dailymed:ClinicalTrial ?clinical.
+   ?body poc:DrugSelectionRecommendation ?drugRec.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn13.
-   ?bn13 poc:MedicalCondition ?medicalCondition.
+   ?body poc:DoseSelectionRecommendation ?doseRec.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn14.
-   ?bn14 poc:Variant ?variant.
+   ?body dailymed:ConcomitantMedicationOfConcern ?medicationConcern.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn15.
-   ?bn15 poc:TestResult ?testResult.
+   ?body poc:VariantFrequency ?variantFreq.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn16.
-   ?bn16 dailymed:Prodrug ?prodrug.
+   ?body dailymed:ClinicalTrial ?clinical.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn17.
-   ?bn17 poc:Comment ?comment.
+   ?body poc:MedicalCondition ?medicalCondition.
    }
 
    OPTIONAL {
-   ?annot oa:body ?bn18.
-   ?bn18 ncit:Alleles ?alleles.
+   ?body poc:Variant ?variant.
    }
 
+   OPTIONAL {
+   ?body poc:TestResult ?testResult.
+   }
+
+   OPTIONAL {
+   ?body dailymed:Prodrug ?prodrug.
+   }
+
+   OPTIONAL {
+   ?body poc:Comment ?comment.
+   }
+
+   OPTIONAL {
+   ?body ncit:Alleles ?alleles.
+   }
+ 
 }	
 GROUP BY ?text
 ORDER BY DESC(?annot)
-LIMIT 10
-  
-
-
-################################################################################
-# pharmacogenomics, tested in public server yet
-# get text, drug name, biomarker/gene and product label section
-################################################################################
-
-PREFIX oa:<http://www.w3.org/ns/oa#>
-PREFIX sio: <http://semanticscience.org/resource/>
-PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dikbD2R: <http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
-PREFIX domeo: <http://www.w3.org/ns/domeo#>
-PREFIX pav: <http://purl.org/pav/>
-PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
-PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
-
-SELECT DISTINCT ?annot ?text ?drugLabel ?gene ?section
-FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc-07112014>
-WHERE {
-
-  ?annot a oa:SPLAnnotation;
-     oa:context ?context.
-
-  ?context oa:hasSelector ?selector.
-
-  ?selector a oa:PrefixSuffixTextSelector;
-      oa:exact ?text.
-
-  ?annot oa:body ?bn1.
-  ?bn1 poc:PharmacokineticImpact "http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#metabolism-decrease".
-
-   ?annot oa:body ?bn2.
-   ?bn2 dailymed:pharmgxDrug ?drug;
-         rdfs:label ?drugLabel.
-   
-   ?annot oa:body ?bn3.
-   ?bn3 dailymed:HGNCGeneSymbol ?g;
-         rdfs:label ?gene.
-         
-   OPTIONAL {
-   ?annot oa:body ?bn4.
-   ?bn7 rdfs:label "SPL Section";
-        sio:SIO_000111 ?section.
-   }
-}   
-GROUP BY ?exactText
-ORDER BY DESC(?annot)
-LIMIT 10
-################################################################################
-# IGNORE BELOW THIS LINE
-################################################################################
-
-
-
-
-
-
-
-"{"@id":"urn:linkedspls:uuid:1ACE6E1C-1971-4EB1-A317-5F0BA90C915F", "@type":"poc:PharmacogenomicsStatement", "sio:SIO_000628":"dailymed:pharmgxBiomarker", "dailymed:pharmgxBiomarker1":"http://purl.obolibrary.org/obo/PR_000012621", "dailymed:pharmgxBiomarker2":"http://purl.obolibrary.org/obo/PR_000007204", "dailymed:pharmgxBiomarker":"http://purl.obolibrary.org/obo/PR_000007205", "rdfs:label":"ER and PgR_receptor", "dct:description":"The selected biomarker."}]" +
-		
 		
