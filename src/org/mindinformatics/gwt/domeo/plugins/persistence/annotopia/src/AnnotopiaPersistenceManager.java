@@ -293,7 +293,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		if(ApplicationUtils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
 			return Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken( ));
 		} else {
-			return Properties.create("Authorization: Bearer none");
+			return Properties.create( );
 		}
 	}
 	
