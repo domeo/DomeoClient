@@ -192,7 +192,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 	public static final boolean verbose = true;
 	public static final boolean pathfinder = true;
 	
-	public static final boolean annotopia = false; // Only in hosted mode
+	public static final boolean annotopia = true; // Only in hosted mode
 	public boolean isAnnotopiaEnabled() {
 		return annotopia;
 	}
