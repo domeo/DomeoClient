@@ -363,6 +363,8 @@ public class JsonUnmarshallingManager {
 				}
 			}
 			
+			//Window.alert("Agents: " + _domeo.getAgentManager().getNumberOfAgents());
+			
 			// Unmarshalling permissions
 			if(jsonSet.getPermissions().isLocked().equals("true")) set.setIsLocked(true);
 			else set.setIsLocked(false);
@@ -474,6 +476,7 @@ public class JsonUnmarshallingManager {
 						((MQualifierAnnotation)ann).addTerm(ldr);
 					}
 				} 
+				
 				if(ann!=null) {
 					for(int z=0; z<ann.getSelectors().size(); z++) {
 						try {
@@ -483,7 +486,7 @@ public class JsonUnmarshallingManager {
 //										((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
 //										((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
 //										HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
-								
+																
 								HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
 										((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
 										((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 

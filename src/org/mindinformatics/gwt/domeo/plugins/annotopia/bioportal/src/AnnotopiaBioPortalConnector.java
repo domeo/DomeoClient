@@ -193,8 +193,6 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 			boolean scored, boolean withSynonyms)
 			throws IllegalArgumentException {
 		
-		Window.alert("textmine");
-		
 		JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
 		Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"text\":\"" + textContent + "\"}");
 		try {
@@ -207,7 +205,6 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
-		        		Window.alert(getDataObject().toString());
 		        		JsAnnotationSet set = (JsAnnotationSet) parseJson(getDataProperties().toJsonString());
 						completionCallback.returnTextminingResults(set, false);
 		        	}
