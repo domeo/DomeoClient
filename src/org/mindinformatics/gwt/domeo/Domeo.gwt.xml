@@ -55,6 +55,8 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.opentrials.OpenTrialsResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.document.GenericDocumentResourcePlugin"/> 
 
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.bioportal.BioPortalAnnotopiaPlugin"/>
+  
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.bioportal.BioPortalResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.nif.NifResourcePlugin"/>
   

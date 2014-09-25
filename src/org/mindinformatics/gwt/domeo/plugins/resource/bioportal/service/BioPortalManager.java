@@ -23,12 +23,14 @@ package org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.component.textmining.src.ITextMiningConnector;
 import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
+import org.mindinformatics.gwt.domeo.plugins.annotopia.bioportal.src.AnnotopiaBioPortalConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.annotator.FBioPortalAnnotatorParametrizationForm;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.annotator.PBioPortalAnnotatorParameters;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.GwtBioPortalServiceConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.StandaloneBioPortalConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.src.JsonBioPortalConnector;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -52,7 +54,9 @@ public class BioPortalManager implements ITextMiningConnector {
 		if(domeo.isStandaloneMode()) {
 			_connector = new StandaloneBioPortalConnector();
 		} else {
-			if (domeo.isHostedMode()) {
+			if(domeo.isAnnotopiaEnabled()) {
+				_connector = new AnnotopiaBioPortalConnector(domeo, null);
+			} else if (domeo.isHostedMode()) {
 				_connector = new GwtBioPortalServiceConnector();
 			} else {
 				// Real service

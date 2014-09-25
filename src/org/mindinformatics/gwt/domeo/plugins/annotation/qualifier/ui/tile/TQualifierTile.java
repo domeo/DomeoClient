@@ -1,16 +1,10 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.ui.tile;
 
-import java.util.List;
-
-import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.actions.IAnnotationEditListener;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ATileComponent;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.tiles.ITileComponent;
-import org.mindinformatics.gwt.domeo.component.linkeddata.digesters.ITrustedResourceDigester;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
-import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.info.QualifierPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
@@ -18,7 +12,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
