@@ -9,6 +9,7 @@ import org.mindinformatics.gwt.domeo.client.ui.toolbar.addressbar.AddressBarPane
 import org.mindinformatics.gwt.domeo.component.sharing.ui.SharingOptionsViewer;
 import org.mindinformatics.gwt.domeo.component.textmining.ui.TextMiningServicePicker;
 import org.mindinformatics.gwt.framework.component.IInitializableComponent;
+import org.mindinformatics.gwt.framework.component.logging.ui.LogViewerPanel;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 import org.mindinformatics.gwt.framework.component.profiles.model.IProfile;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
@@ -288,6 +289,13 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 						public void onClick(ClickEvent event) {
 							PluginsViewerPanel lwp = new PluginsViewerPanel(_domeo);
 							new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), 850, false, false, false);
+						}
+					});
+					popup.addButtonPanel("Display log", new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							LogViewerPanel lwp = new LogViewerPanel(_domeo);
+							new EnhancedGlassPanel(_domeo, lwp, lwp.getTitle(), true, true, true);
 						}
 					});
 					popup.show();
