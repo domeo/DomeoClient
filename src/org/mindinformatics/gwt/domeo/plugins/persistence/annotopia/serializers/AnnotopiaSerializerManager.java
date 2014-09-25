@@ -100,6 +100,13 @@ public IDomeo _domeo;
 						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPublisherItemId()));
 			}
 			
+			// Title 
+			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getTitle()!=null) {
+				exists=true;
+				expression.put("http://purl.org/dc/terms/title", 
+						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getTitle()));
+			}
+			
 			if(exists) {
 				source.put("http://purl.org/vocab/frbr/core#embodimentOf", expression);
 			}
