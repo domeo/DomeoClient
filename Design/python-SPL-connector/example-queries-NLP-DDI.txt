@@ -69,6 +69,8 @@ WHERE {
      oa:context ?context;
      pav:createdOn ?createdOn;
      pav:lastSavedOn ?lastSavedOn.FILTER(?lastSavedOn > ?createdOn)
+     
+     ?context oa:hasSource "http://dbmi-icode-01.dbmi.pitt.edu:2020/AnnoStudy/package-insert-section-4.txt.html".
 
   ?context oa:hasSelector ?selector.
         
@@ -99,6 +101,58 @@ WHERE {
 GROUP BY ?exactText
 ORDER BY DESC(?annot)
 
+################################################################################
+# DDI NLP
+# filter to get all filled NLP DDI 
+################################################################################
+
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R:<http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo:<http://www.w3.org/ns/domeo#>
+PREFIX pav:<http://purl.org/pav/>
+PREFIX dailymed:<http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
+
+SELECT ?annot ?source ?exactText ?modality ?statementType ?drug1Lab ?drug1Type ?drug1Role ?drug2Lab ?drug2Type ?drug2Role
+
+WHERE {
+
+  ?annot a oa:expertstudyAnnotation;
+     oa:body ?bn1;
+     pav:versionNumber ?version;
+     oa:context ?context.
+
+  ?context oa:hasSelector ?selector;
+           oa:hasSource ?source.
+        
+  ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
+
+  ?bn1 domeo:sets ?statement.
+
+  ?statement a poc:DrugDrugInteractionStatement;
+     dikbD2R:modality ?modality;
+     dikbD2R:statement ?statementType;
+     sio:SIO_000628 ?drugsInvolved.
+
+  ?drugsInvolved a dikbD2R:PK_DDI;
+     sio:SIO_000132 ?drug1;
+     sio:SIO_000132 ?drug2.FILTER(?drug1 > ?drug2)
+ 
+  ?drug1 rdfs:label ?drug1Lab.
+  ?drug1 dailymed:activeMoietyRxCUI ?drug1rxc.
+  ?drug1 rdf:type ?drug1Type.
+  ?drug1 sio:SIO_000228 ?drug1Role.FILTER(?drug1Role!="xsd:String")
+
+  ?drug2 rdfs:label ?drug2Lab.
+  ?drug2 dailymed:activeMoietyRxCUI ?drug2rxc.
+  ?drug2 rdf:type ?drug2Type.
+  ?drug2 sio:SIO_000228 ?drug2Role.
+}    
+GROUP BY ?exactText
+ORDER BY DESC(?annot)
 ################################################################################
 # IGNORE BELOW THIS LINE
 ################################################################################
