@@ -1,5 +1,213 @@
 ####################################################################################################################
-# Get all pharmacogenomics data
+# The query using "construct" to reformat the structure of graph
+# assign fields directly on each item by specified predicates to replace the structure that multiple bodies on each item
+
+# purpose: the reformat graph will be easy to query
+####################################################################################################################
+
+PREFIX fn:<http://www.w3.org/2005/xpath-functions#>
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R: <http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo: <http://www.w3.org/ns/domeo#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
+PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
+
+construct {
+
+?item rdf:type oa:SPLAnnotation;
+      oa:hasSource ?source;
+      oa:exact ?text;
+      dailymed:pharmgxDrug ?drugLabel;
+      dailymed:drugURI ?drug;
+      dailymed:HGNCGeneSymbol ?gene;
+      dailymed:pharmgxBiomarker ?biomarker;
+      sio:SIO_000111 ?section;
+      poc:PharmacokineticImpact ?pk;
+      poc:PharmacodynamicImpact ?pd;
+      poc:MonitoringRecommendation ?monitRec;
+      poc:TestRecommendation ?testRec;
+      poc:DrugSelectionRecommendation ?drugRec;
+      poc:DoseSelectionRecommendation ?doseRec;
+      dailymed:ConcomitantMedicationOfConcern ?medicationConcern;
+      poc:VariantFrequency ?variantFreq;
+      dailymed:ClinicalTrial ?clinical;
+      poc:MedicalCondition ?medicalCondition;
+      poc:Variant ?variant;
+      poc:TestResult ?testResult;
+      dailymed:Prodrug ?prodrug;
+      poc:Comment ?comment;
+      ncit:Alleles ?alleles.
+
+}
+
+FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc-09162014>
+WHERE {
+
+  ?item a oa:SPLAnnotation;
+       oa:context ?context.
+
+  ?context oa:hasSelector ?selector.
+
+  ?selector a oa:PrefixSuffixTextSelector;
+      oa:hasSource ?source;
+      oa:exact ?text.
+
+   ?item oa:body ?bn0.
+   ?bn0 dailymed:pharmgxDrug ?drug;
+         rdfs:label ?drugLabel.
+   
+   ?item oa:body ?bn1.
+   ?bn1 rdfs:label "SPL Section";
+        sio:SIO_000111 ?section.
+
+   OPTIONAL {
+   ?item oa:body ?bn2.
+   ?bn2 dailymed:HGNCGeneSymbol ?g;
+         rdfs:label ?gene.         
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn3.
+   ?bn3 dailymed:pharmgxBiomarker ?b;
+         rdfs:label ?biomarker.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn4.
+   ?bn4 poc:PharmacokineticImpact ?pk.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn5.
+   ?bn5 poc:PharmacodynamicImpact ?pd.
+   }
+
+
+   OPTIONAL {
+   ?item oa:body ?bn6.
+   ?bn6 poc:MonitoringRecommendation ?monitRec.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn7.
+   ?bn7 poc:TestRecommendation ?testRec.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn8.
+   ?bn8 poc:DrugSelectionRecommendation ?drugRec.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn9.
+   ?bn9 poc:DoseSelectionRecommendation ?doseRec.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn10.
+   ?bn10 dailymed:ConcomitantMedicationOfConcern ?medicationConcern.
+  
+   }
+   
+   OPTIONAL {
+   ?item oa:body ?bn11.
+   ?bn11 poc:VariantFrequency ?variantFreq.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn12.
+   ?bn12 dailymed:ClinicalTrial ?clinical.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn13.
+   ?bn13 poc:MedicalCondition ?medicalCondition.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn14.
+   ?bn14 poc:Variant ?variant.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn15.
+   ?bn15 poc:TestResult ?testResult.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn16.
+   ?bn16 dailymed:Prodrug ?prodrug.
+   }
+
+ 
+   OPTIONAL {
+   ?item oa:body ?bn17.
+   ?bn17 poc:Comment ?comment.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn18.
+   ?bn18 ncit:Alleles ?alleles.
+   }
+
+}	
+
+
+####################################################################################################################
+# the query pulls all pgx consensus data from reconsturcted graph
+####################################################################################################################
+
+PREFIX fn:<http://www.w3.org/2005/xpath-functions#>
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R: <http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo: <http://www.w3.org/ns/domeo#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
+PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
+
+SELECT *
+FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc-10062014>
+WHERE {
+
+  ?item a oa:SPLAnnotation;
+      oa:hasSource ?source;
+      oa:exact ?text;
+      dailymed:pharmgxDrug ?drugLabel;
+      dailymed:drugURI ?drug;
+      sio:SIO_000111 ?section.
+
+      OPTIONAL {?item dailymed:HGNCGeneSymbol ?gene. }
+      OPTIONAL {?item dailymed:pharmgxBiomarker ?biomarker. }
+      OPTIONAL {?item poc:PharmacokineticImpact ?pk. }
+      OPTIONAL {?item poc:PharmacodynamicImpact ?pd. }
+      OPTIONAL {?item poc:MonitoringRecommendation ?monitRec. }
+      OPTIONAL {?item poc:TestRecommendation ?testRec. }
+      OPTIONAL {?item poc:DrugSelectionRecommendation ?drugRec. }
+      OPTIONAL {?item poc:DoseSelectionRecommendation ?doseRec. }
+      OPTIONAL {?item dailymed:ConcomitantMedicationOfConcern ?medicationConcern. }
+      OPTIONAL {?item poc:VariantFrequency ?variantFreq. }
+      OPTIONAL {?item dailymed:ClinicalTrial ?clinical. }
+      OPTIONAL {?item poc:MedicalCondition ?medicalCondition. }
+      OPTIONAL {?item poc:Variant ?variant. }
+      OPTIONAL {?item poc:TestResult ?testResult. }
+      OPTIONAL {?item dailymed:Prodrug ?prodrug. }
+      OPTIONAL {?item poc:Comment ?comment. }
+      OPTIONAL {?item ncit:Alleles ?alleles. }
+            
+}	
+GROUP BY ?item
+ORDER BY DESC(?item)
+
+
+####################################################################################################################
+# Get all pharmacogenomics data directly on the rdf from elastico dump out
 # This one is slow but pulls back well format table with link, the last column, back to source of annotation 
 ####################################################################################################################
 
@@ -127,7 +335,7 @@ ORDER BY DESC(?item)
 ####################################################################################################################
 # Get all pharmacogenomics data
 # This one is faster than the first query
-# duplicates in text
+# but duplicates in text
 ####################################################################################################################
 
 PREFIX oa:<http://www.w3.org/ns/oa#>
