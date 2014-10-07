@@ -17,11 +17,11 @@ PREFIX pav: <http://purl.org/pav/>
 PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
 PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
 
-construct {
+CONSTRUCT {
 
-?body rdf:type oa:SPLAnnotation;
-       oa:context ?context;
-       oa:body ?body;
+?item rdf:type oa:SPLAnnotation;
+       oa:hasTarget ?context;
+       oa:hasBody ?body;
        pav:createdOn ?annCreatedOn;
        pav:createdBy ?annCreatedBy;
        pav:createdWith ?createdWith.
@@ -34,13 +34,15 @@ construct {
        oa:exact ?text.
 
   ?body rdf:type poc:PharmacogenomicsStatement;
-      dailymed:pharmgxDrug ?drugLabel;
-      dailymed:drugURI ?drug;
-      dailymed:HGNCGeneSymbol ?gene;
       dailymed:pharmgxBiomarker ?biomarker;
+      dailymed:pharmgxBiomarkerURI ?biomarkerURI;
+      dailymed:HGNCGeneSymbol ?gene;
+      dailymed:HGNCGeneSymbolURI ?geneURI;
+      dailymed:pharmgxDrug ?drug;
+      dailymed:pharmgxDrugURI ?drugURI;
       sio:SIO_000111 ?section;
-      poc:PharmacokineticImpact ?pk;
-      poc:PharmacodynamicImpact ?pd;
+      poc:PharmacokineticImpact ?pkImpact;
+      poc:PharmacodynamicImpact ?pdImpact;
       poc:MonitoringRecommendation ?monitRec;
       poc:TestRecommendation ?testRec;
       poc:DrugSelectionRecommendation ?drugRec;
@@ -57,10 +59,11 @@ construct {
 
 }
 
-FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc-09162014>
+
+FROM <http://purl.org/net/nlprepository/original-pgx-consensus-09162014>
 WHERE {
 
-  ?body a oa:SPLAnnotation;
+  ?item a oa:SPLAnnotation;
        oa:context ?context;
     pav:createdOn ?annCreatedOn;
     pav:createdBy ?annCreatedBy;
@@ -72,105 +75,115 @@ WHERE {
       oa:hasSource ?source;
       oa:exact ?text.
 
-   ?body oa:body ?body.
-   ?body dailymed:pharmgxDrug ?drug;
-         rdfs:label ?drugLabel.
+   ?item oa:body ?body.
+   ?body dailymed:pharmgxDrug ?drugURI;
+         rdfs:label ?drug.
    
-   ?body oa:body ?bn1.
+   ?item oa:body ?bn1.
    ?bn1 rdfs:label "SPL Section";
         sio:SIO_000111 ?section.
 
    OPTIONAL {
-   ?body oa:body ?bn2.
-   ?bn2 dailymed:HGNCGeneSymbol ?g;
+   ?item oa:body ?bn2.
+   ?bn2 dailymed:HGNCGeneSymbol ?geneURI;
          rdfs:label ?gene.         
    }
 
    OPTIONAL {
-   ?body oa:body ?bn3.
-   ?bn3 dailymed:pharmgxBiomarker ?b;
+   ?item oa:body ?bn3.
+   ?bn3 dailymed:pharmgxBiomarker ?biomarkerURI;
          rdfs:label ?biomarker.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn4.
-   ?bn4 poc:PharmacokineticImpact ?pk.
+   ?item oa:body ?bn4.
+   ?bn4 poc:PharmacokineticImpact ?pkURI;
+        rdfs:label ?pkImpact.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn5.
-   ?bn5 poc:PharmacodynamicImpact ?pd.
+   ?item oa:body ?bn5.
+   ?bn5 poc:PharmacodynamicImpact ?pdURI;
+        rdfs:label ?pdImpact.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn6.
-   ?bn6 poc:MonitoringRecommendation ?monitRec.
+   ?item oa:body ?bn6.
+   ?bn6 poc:TestRecommendation ?testRecURI;
+        rdfs:label ?testRec.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn7.
-   ?bn7 poc:TestRecommendation ?testRec.
+   ?item oa:body ?bn7.
+   ?bn7 poc:MonitoringRecommendation ?monitRecURI;
+        rdfs:label ?monitRec.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn8.
-   ?bn8 poc:DrugSelectionRecommendation ?drugRec.
+   ?item oa:body ?bn8.
+   ?bn8 poc:DrugSelectionRecommendation ?drugRecURI;
+        rdfs:label ?drugRec.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn9.
-   ?bn9 poc:DoseSelectionRecommendation ?doseRec.
+   ?item oa:body ?bn9.
+   ?bn9 poc:DoseSelectionRecommendation ?doseRecURI;
+        rdfs:label ?doseRec.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn10.
-   ?bn10 dailymed:ConcomitantMedicationOfConcern ?medicationConcern.
-  
+   ?item oa:body ?bn10.
+   ?bn10 dailymed:ConcomitantMedicationOfConcern ?medicationConcernURI;
+         rdfs:label ?medicationConcern.
    }
    
    OPTIONAL {
-   ?body oa:body ?bn11.
-   ?bn11 poc:VariantFrequency ?variantFreq.
+   ?item oa:body ?bn11.
+   ?bn11 poc:VariantFrequency ?variantFreqURI;
+         rdfs:label ?variantFreq.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn12.
-   ?bn12 dailymed:ClinicalTrial ?clinical.
+   ?item oa:body ?bn12.
+   ?bn12 dailymed:ClinicalTrial ?clinicalURI;
+         rdfs:label ?clinical.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn13.
-   ?bn13 poc:MedicalCondition ?medicalCondition.
+   ?item oa:body ?bn13.
+   ?bn13 poc:MedicalCondition ?medicalConditionURI;
+         rdfs:label ?medicalCondition.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn14.
-   ?bn14 poc:Variant ?variant.
+   ?item oa:body ?bn14.
+   ?bn14 poc:Variant ?variantURI;
+         rdfs:label ?variant.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn15.
-   ?bn15 poc:TestResult ?testResult.
+   ?item oa:body ?bn15.
+   ?bn15 poc:TestResult ?testResultURI;
+         rdfs:label ?testResult.     
    }
 
    OPTIONAL {
-   ?body oa:body ?bn16.
-   ?bn16 dailymed:Prodrug ?prodrug.
+   ?item oa:body ?bn16.
+   ?bn16 dailymed:Prodrug ?prodrugURI;
+         rdfs:label ?prodrug.
    }
  
    OPTIONAL {
-   ?body oa:body ?bn17.
+   ?item oa:body ?bn17.
    ?bn17 poc:Comment ?comment.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn18.
+   ?item oa:body ?bn18.
    ?bn18 ncit:Alleles ?alleles.
    }
 
 }	
-
-
 
 
 ####################################################################################################################
@@ -189,26 +202,27 @@ PREFIX pav: <http://purl.org/pav/>
 PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
 PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
 
-SELECT *
-FROM <http://purl.org/net/nlprepository/spl-pgx-consensus-oa-10062014>
+SELECT ?item ?source ?text ?drug ?section ?gene ?biomarker ?pkImpact ?pdImpact ?drugRec ?doseRec ?testRec ?monitRec 
+?variant ?prodrug ?medicationConcern ?variantFreq ?clinical ?medicalCondition ?testResult ?alleles ?comment
+
 WHERE {
 
 ?item rdf:type oa:SPLAnnotation;
-       oa:context ?context;
-       oa:body ?body.
+       oa:hasTarget ?target;
+       oa:hasBody ?body.
 
-  ?context oa:hasSelector ?selector.
+  ?target oa:hasSelector ?selector.
 
   ?selector oa:hasSource ?source;
        oa:exact ?text.
 
-  ?body dailymed:pharmgxDrug ?drugLabel;
+  ?body dailymed:pharmgxDrug ?drug;
         sio:SIO_000111 ?section.
 
       OPTIONAL {?body dailymed:HGNCGeneSymbol ?gene. }
       OPTIONAL {?body dailymed:pharmgxBiomarker ?biomarker. }
-      OPTIONAL {?body poc:PharmacokineticImpact ?pk. }
-      OPTIONAL {?body poc:PharmacodynamicImpact ?pd. }
+      OPTIONAL {?body poc:PharmacokineticImpact ?pkImpact. }
+      OPTIONAL {?body poc:PharmacodynamicImpact ?pdImpact. }
       OPTIONAL {?body poc:MonitoringRecommendation ?monitRec. }
       OPTIONAL {?body poc:TestRecommendation ?testRec. }
       OPTIONAL {?body poc:DrugSelectionRecommendation ?drugRec. }
@@ -227,7 +241,7 @@ GROUP BY ?text
 ORDER BY DESC(?item)
 
 ####################################################################################################################
-# Get all pharmacogenomics data directly on the rdf from elastico dump out
+# Get all pharmacogenomics data directly from the rdf from elastico dump out
 # This one is slow but pulls back well format table with link, the last column, back to source of annotation 
 ####################################################################################################################
 
@@ -242,15 +256,17 @@ PREFIX pav: <http://purl.org/pav/>
 PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
 PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
 
-SELECT ?annot ?body ?source ?text ?drugLabel ?gene ?section ?pk ?pd ?monitRec ?testRec ?drugRec ?doseRec ?variant ?prodrug ?medicationConcern ?variantFreq ?clinical ?medicalCondition ?testResult ?alleles ?comment (str(fn:concat("http://dbmi-icode-01.dbmi.pitt.edu:2020/Domeo/web/domeo?url=",?source,"&setId=",?annot)) AS ?browse)
-FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc-07112014>
+SELECT ?item ?source ?text ?drug ?drugURI ?section ?gene ?geneURI ?biomarker ?biomarkerURI ?pkImpact ?pdImpact ?drugRec ?doseRec ?testRec ?monitRec 
+?variant ?prodrug ?medicationConcern ?variantFreq ?clinical ?medicalCondition ?testResult ?alleles ?comment
+
+FROM <http://purl.org/net/nlprepository/original-pgx-consensus-09162014>
 WHERE {
 
-  ?annot a oa:AnnotationSet.
-
-  ?annot oa:item ?body.
-
-  ?body oa:context ?context.
+  ?item a oa:SPLAnnotation;
+       oa:context ?context;
+    pav:createdOn ?annCreatedOn;
+    pav:createdBy ?annCreatedBy;
+    pav:createdWith ?createdWith.
 
   ?context oa:hasSelector ?selector.
 
@@ -258,98 +274,116 @@ WHERE {
       oa:hasSource ?source;
       oa:exact ?text.
 
-   ?body oa:body ?bn1.
-   ?bn1 dailymed:pharmgxDrug ?drug;
-         rdfs:label ?drugLabel.
+   ?item oa:body ?body.
+   ?body dailymed:pharmgxDrug ?drugURI;
+         rdfs:label ?drug.
    
-   ?body oa:body ?bn2.
-   ?bn2 dailymed:HGNCGeneSymbol ?g;
-         rdfs:label ?gene.
-         
-   ?body oa:body ?bn3.
-   ?bn3 rdfs:label "SPL Section";
+   ?item oa:body ?bn1.
+   ?bn1 rdfs:label "SPL Section";
         sio:SIO_000111 ?section.
 
    OPTIONAL {
-   ?body oa:body ?bn4.
-   ?bn4 poc:PharmacokineticImpact ?pk.
+   ?item oa:body ?bn2.
+   ?bn2 dailymed:HGNCGeneSymbol ?geneURI;
+         rdfs:label ?gene.         
    }
 
    OPTIONAL {
-   ?body oa:body ?bn5.
-   ?bn5 poc:PharmacodynamicImpact ?pd.
+   ?item oa:body ?bn3.
+   ?bn3 dailymed:pharmgxBiomarker ?biomarkerURI;
+         rdfs:label ?biomarker.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn6.
-   ?bn6 poc:MonitoringRecommendation ?monitRec.
+   ?item oa:body ?bn4.
+   ?bn4 poc:PharmacokineticImpact ?pkURI;
+        rdfs:label ?pkImpact.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn7.
-   ?bn7 poc:TestRecommendation ?testRec.
+   ?item oa:body ?bn5.
+   ?bn5 poc:PharmacodynamicImpact ?pdURI;
+        rdfs:label ?pdImpact.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn8.
-   ?bn8 poc:DrugSelectionRecommendation ?drugRec.
+   ?item oa:body ?bn6.
+   ?bn6 poc:TestRecommendation ?testRecURI;
+        rdfs:label ?testRec.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn9.
-   ?bn9 poc:DoseSelectionRecommendation ?doseRec.
+   ?item oa:body ?bn7.
+   ?bn7 poc:MonitoringRecommendation ?monitRecURI;
+        rdfs:label ?monitRec.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn10.
-   ?bn10 dailymed:ConcomitantMedicationOfConcern ?medicationConcern.
-  
+   ?item oa:body ?bn8.
+   ?bn8 poc:DrugSelectionRecommendation ?drugRecURI;
+        rdfs:label ?drugRec.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn9.
+   ?bn9 poc:DoseSelectionRecommendation ?doseRecURI;
+        rdfs:label ?doseRec.
+   }
+
+   OPTIONAL {
+   ?item oa:body ?bn10.
+   ?bn10 dailymed:ConcomitantMedicationOfConcern ?medicationConcernURI;
+         rdfs:label ?medicationConcern.
    }
    
    OPTIONAL {
-   ?body oa:body ?bn11.
-   ?bn11 poc:VariantFrequency ?variantFreq.
+   ?item oa:body ?bn11.
+   ?bn11 poc:VariantFrequency ?variantFreqURI;
+         rdfs:label ?variantFreq.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn12.
-   ?bn12 dailymed:ClinicalTrial ?clinical.
+   ?item oa:body ?bn12.
+   ?bn12 dailymed:ClinicalTrial ?clinicalURI;
+         rdfs:label ?clinical.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn13.
-   ?bn13 poc:MedicalCondition ?medicalCondition.
+   ?item oa:body ?bn13.
+   ?bn13 poc:MedicalCondition ?medicalConditionURI;
+         rdfs:label ?medicalCondition.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn14.
-   ?bn14 poc:Variant ?variant.
+   ?item oa:body ?bn14.
+   ?bn14 poc:Variant ?variantURI;
+         rdfs:label ?variant.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn15.
-   ?bn15 poc:TestResult ?testResult.
+   ?item oa:body ?bn15.
+   ?bn15 poc:TestResult ?testResultURI;
+         rdfs:label ?testResult.     
    }
 
    OPTIONAL {
-   ?body oa:body ?bn16.
-   ?bn16 dailymed:Prodrug ?prodrug.
+   ?item oa:body ?bn16.
+   ?bn16 dailymed:Prodrug ?prodrugURI;
+         rdfs:label ?prodrug.
    }
-
  
    OPTIONAL {
-   ?body oa:body ?bn17.
+   ?item oa:body ?bn17.
    ?bn17 poc:Comment ?comment.
    }
 
    OPTIONAL {
-   ?body oa:body ?bn18.
+   ?item oa:body ?bn18.
    ?bn18 ncit:Alleles ?alleles.
    }
 
 }	
-GROUP BY ?text
-ORDER BY DESC(?body)
+
 
 
 ####################################################################################################################
@@ -463,82 +497,6 @@ GROUP BY ?text
 ORDER BY DESC(?annot)
 
 
-####################################################################################################################
-# Get all pharmacogenomics consensus data
-# For getting results in FDA table
-####################################################################################################################
 
-PREFIX fn:<http://www.w3.org/2005/xpath-functions#>
-PREFIX oa:<http://www.w3.org/ns/oa#>
-PREFIX sio: <http://semanticscience.org/resource/>
-PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dikbD2R: <http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
-PREFIX domeo: <http://www.w3.org/ns/domeo#>
-PREFIX pav: <http://purl.org/pav/>
-PREFIX dailymed: <http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
-PREFIX ncit:<http://purl.bioontology.org/ontology/NCIT#>
-
-SELECT ?annot ?source ?text ?drugLabel ?gene ?section ?pk ?pd ?monitRec ?testRec ?drugRec ?doseRec
-FROM <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc-09162014>
-WHERE {
-
-  ?annot a oa:AnnotationSet.
-
-  ?annot oa:item ?body.
-
-  ?body oa:context ?context.
-
-  ?context oa:hasSelector ?selector.
-
-  ?selector a oa:PrefixSuffixTextSelector;
-      oa:hasSource ?source;
-      oa:exact ?text.
-
-   ?body oa:body ?bn1.
-   ?bn1 dailymed:pharmgxDrug ?drug;
-         rdfs:label ?drugLabel.
-   
-   ?body oa:body ?bn2.
-   ?bn2 dailymed:HGNCGeneSymbol ?g;
-         rdfs:label ?gene.
-         
-   ?body oa:body ?bn3.
-   ?bn3 rdfs:label "SPL Section";
-        sio:SIO_000111 ?section.
-
-   OPTIONAL {
-   ?body oa:body ?bn4.
-   ?bn4 poc:PharmacokineticImpact ?pk.
-   }
-
-   OPTIONAL {
-   ?body oa:body ?bn5.
-   ?bn5 poc:PharmacodynamicImpact ?pd.
-   }
-
-   OPTIONAL {
-   ?body oa:body ?bn6.
-   ?bn6 poc:MonitoringRecommendation ?monitRec.
-   }
-
-   OPTIONAL {
-   ?body oa:body ?bn7.
-   ?bn7 poc:TestRecommendation ?testRec.
-   }
-
-   OPTIONAL {
-   ?body oa:body ?bn8.
-   ?bn8 poc:DrugSelectionRecommendation ?drugRec.
-   }
-
-   OPTIONAL {
-   ?body oa:body ?bn9.
-   ?bn9 poc:DoseSelectionRecommendation ?doseRec.
-   }
-
-}	
-GROUP BY ?text
-ORDER BY DESC(?body)
 
 		
