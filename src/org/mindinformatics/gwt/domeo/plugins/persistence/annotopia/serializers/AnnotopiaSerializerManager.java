@@ -113,6 +113,17 @@ public IDomeo _domeo;
 		}
 	}
 	
+	public void serializeTitle(JSONObject source) {
+		if(_domeo.getPersistenceManager().getBibliographicSet()!=null 
+				&& _domeo.getPersistenceManager().getBibliographicSet().getSelfReference()!=null
+				&& ((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference() instanceof MPublicationArticleReference
+				&& ((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getTitle()!=null) {
+			source.put("http://purl.org/dc/terms/title", 
+					new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getTitle()));		
+		}
+	}
+	
+	
 	// ------------------------------------------------------------------------
 	//  ANNOTATION SET
 	// ------------------------------------------------------------------------
