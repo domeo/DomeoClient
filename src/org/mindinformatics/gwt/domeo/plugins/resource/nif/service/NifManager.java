@@ -3,6 +3,7 @@ package org.mindinformatics.gwt.domeo.plugins.resource.nif.service;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.component.textmining.src.ITextMiningConnector;
 import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
+import org.mindinformatics.gwt.domeo.plugins.annotopia.nif.src.AnnotopiaNifConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.annotator.FNifAnnotatorParametrizationForm;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.annotator.PNifAnnotatorParameters;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.src.NifJsonConnector;
@@ -31,7 +32,9 @@ public class NifManager implements ITextMiningConnector{
 		if(domeo.isStandaloneMode()) {
 			_connector = new StandaloneNifConnector();
 		} else {
-			if (domeo.isHostedMode()) {
+			if(domeo.isAnnotopiaEnabled()) {
+				_connector = new AnnotopiaNifConnector(domeo, null);
+			} else if (domeo.isHostedMode()) {
 				_connector = new StandaloneNifConnector();
 			} else {
 				// Real service
