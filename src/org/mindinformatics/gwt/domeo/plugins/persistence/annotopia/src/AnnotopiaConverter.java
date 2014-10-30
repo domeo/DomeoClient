@@ -589,7 +589,7 @@ public class AnnotopiaConverter {
 					_domeo.getLogger().debug(this, "Comment 4");
 					postIt.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
 					if(lastSavedOn!=null) postIt.setLastSavedOn(lastSavedOn); 
-					performAnnotation(postIt);
+					if(persist) performAnnotation(postIt);
 					
 					if(persist) ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(postIt, aSet);
 					else aSet.addAnnotation(postIt);
@@ -605,7 +605,7 @@ public class AnnotopiaConverter {
 					highlight.setCreatedOn(annotatedAt);
 					highlight.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
 					if(lastSavedOn!=null) highlight.setLastSavedOn(lastSavedOn); 
-					performAnnotation(highlight);
+					if(persist) performAnnotation(highlight);
 					
 					if(persist)  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
 					else aSet.addAnnotation(highlight);

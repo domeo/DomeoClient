@@ -51,6 +51,7 @@ public class AgentsFactory {
 		if(getObjectType(agent).equals(IPerson.TYPE)) {
 			MAgentPerson a = new MAgentPerson();
 			a.setUri(agent.getUri());
+			a.setUrl(agent.getUri());
 			a.setEmail(agent.getEmail());
 			a.setTitle(agent.getTitle());
 			a.setName(agent.getName());

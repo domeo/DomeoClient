@@ -230,7 +230,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    				if(operation.equals("post")) 
 			    					currentSet = _domeo.getPersistenceManager().getAnnotationSetById(set.getPreviousVersion());	
 			    				else 
-			    					currentSet = _domeo.getPersistenceManager().getAnnotationSetById(set.getIndividualUri());	
+			    					currentSet = _domeo.getPersistenceManager().getAnnotationSetById(set.getIndividualUri());
+			    				
 			    				currentSet.setIndividualUri(set.getIndividualUri());
 			    				_application.getLogger().info(this, "Setting Set id to " + currentSet.getIndividualUri());
 			    				currentSet.setLastSavedOn(set.getLastSavedOn());
@@ -244,6 +245,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			    					for(MAnnotation currentAnnotation: currentSet.getAnnotations()) {
 			    						_application.getLogger().info(this, "Matching " + currentAnnotation.getIndividualUri());
 			    						if(currentAnnotation.getIndividualUri().equals(annotation.getPreviousVersion())) {
+			    							
+			    							_application.getLogger().info(this, "Matched");
 			    							currentAnnotation.setIndividualUri(annotation.getIndividualUri());
 			    							currentAnnotation.setLastSavedOn(annotation.getLastSavedOn());
 			    							currentAnnotation.setVersionNumber(annotation.getVersionNumber());
