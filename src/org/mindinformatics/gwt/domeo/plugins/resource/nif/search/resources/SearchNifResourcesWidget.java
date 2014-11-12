@@ -27,12 +27,12 @@ public class SearchNifResourcesWidget extends SearchTermsWidget implements INifD
         resultsContainerPanel.clear();
         resultsContainerPanel.add(new Image(_resources.littleProgressIcon()));
         
-        if(_domeo.isHostedMode()) {
+        /*if(_domeo.isHostedMode()) {
             Window.alert("Live search not available in hosted mode: " + textQuery + "-" + resource);
             NifManager nifManager = NifManager.getInstance();
             nifManager.selectConnector(_domeo);
             nifManager.searchData(this, textQuery, "", "", resource, 0, 0);
-        } else {
+        } else {*/
             try {
                 NifManager nifManager = NifManager.getInstance();
                 nifManager.selectConnector(_domeo);
@@ -41,7 +41,7 @@ public class SearchNifResourcesWidget extends SearchTermsWidget implements INifD
             } catch(Exception e) {
                 _domeo.getLogger().exception(this, "Nif Manager terminated with exception: " + e.getMessage());
             }            
-        }
+        //}
     }
 
     @Override

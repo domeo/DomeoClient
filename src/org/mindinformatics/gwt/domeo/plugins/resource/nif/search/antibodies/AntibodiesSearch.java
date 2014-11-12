@@ -117,7 +117,9 @@ public class AntibodiesSearch extends Composite {
 		Set<String> keys = _widget.getSearchTermsResultSources();
 		sourcesLabels.addItem(ALL_LABEL, ALL_URI);
 		for (String key : keys) {
-			sourcesLabels.addItem(((key.length()>30)?(key.substring(0, 30)+"..."):key), key);
+			if(key != null) {
+				sourcesLabels.addItem(((key.length()>30)?(key.substring(0, 30)+"..."):key), key);
+			}
 		}
 	}
 	 

@@ -93,7 +93,7 @@ public class AntibodiesSearchWidget extends Composite implements IWidget, IAntib
 		resultsContainerPanel.add(new Image(_resources.littleProgressIcon()));
 		
 		// Ajax call in demo mode
-		if(_annotator.isHostedMode()) {
+		/*if(_annotator.isHostedMode()) {
 			
 			Window.alert("Live search not available in hosted mode: " + textQuery + " typeQuery:" + typeQuery + " vendor:" + vendor );
 			NifManager nifManager = NifManager.getInstance();
@@ -115,7 +115,7 @@ public class AntibodiesSearchWidget extends Composite implements IWidget, IAntib
 //			((ServiceDefTarget) antibodyRegistryService).setServiceEntryPoint( 
 //					GWT.getModuleBaseURL() + "antibodyRetrieval");
 //			antibodyRegistryService.findAntibodies("", "", "", callback);
-		} else {
+		} else {*/
 			try {
 				NifManager nifManager = NifManager.getInstance();
 				nifManager.selectConnector(_annotator);
@@ -123,7 +123,7 @@ public class AntibodiesSearchWidget extends Composite implements IWidget, IAntib
 			} catch(Exception e) {
 				_annotator.getLogger().exception(this, "Nif Manager terminated with exception: " + e.getMessage());
 			}
-		}
+		//}
 	}
 	
 	public void filterBySource(String sourceId) {
