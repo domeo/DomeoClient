@@ -328,6 +328,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 												entry.getDescription( )
 										);
 										linkedResource.setSource(normalised);
+										data.add(linkedResource);
 									}									
 								}
 							}
