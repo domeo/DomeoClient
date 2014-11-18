@@ -1,0 +1,17 @@
+
+Documentation:
+http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search.html
+
+
+Get example:
+curl -XGET 'http://localhost:9200/domeo/annotation/_search?rounting=http://www.w3.org/ns/oa#SPLAnnotation'
+
+curl -XGET 'http://localhost:9200/domeo/annotation/_search?rounting=ao:SPLAnnotation'
+
+
+
+python convertPharmgxJsonLDToRDF.py "ao\:SPLAnnotation" annotation domeo-consensus-all-annotations-in-rdf-11132014.xml
+
+
+Namespaces: 
+dailymed" = "http://bio2rdf/dailymed_vocalulary:"
