@@ -34,8 +34,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 	private static final String ANTIBODIES_SEARCH = "nif-0000-07730-1";
 	
 	private static final String ORGANISATION_SEARCH = "nlx_144509-1";
-	
-	private static final String INTEGRATED_ANIMAL_SEARCH = "nif-0000-08137-1";
+	private static final String INTEGRATED_ANIMAL_SEARCH = "nlx_154697-1";
 	
 	protected IApplication _application;
 
@@ -322,6 +321,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 										antibody.setCatalog(entry.getCatalog( ));
 										data.add(antibody);
 									} else if(resource.equals(ORGANISATION_SEARCH) || resource.equals(INTEGRATED_ANIMAL_SEARCH)) {
+										Window.alert(entry.getDescription( ));
 										MLinkedResource linkedResource = new MLinkedResource(
 												entry.getUri( ), 
 												entry.getLabel( ), 

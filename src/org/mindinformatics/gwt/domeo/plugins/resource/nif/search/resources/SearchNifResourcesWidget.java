@@ -65,5 +65,4 @@ public class SearchNifResourcesWidget extends SearchTermsWidget implements INifD
             ArrayList<MGenericResource> data) {
         // TODO Auto-generated method stub
     }
-
 }
