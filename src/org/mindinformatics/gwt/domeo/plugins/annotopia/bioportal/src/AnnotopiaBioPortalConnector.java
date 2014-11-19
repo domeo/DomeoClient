@@ -77,7 +77,9 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 				.setHeaders(getAnnotopiaOAuthToken( ))
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
-		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",format:domeo,q:"+textQuery)) // parameters for the query-string
+		        .setData(GQuery.$$(
+		        		"apiKey: " + ApplicationUtils.getAnnotopiaApiKey()  + ","
+		        		+ "format:domeo,q:"+textQuery)) // parameters for the query-string
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
