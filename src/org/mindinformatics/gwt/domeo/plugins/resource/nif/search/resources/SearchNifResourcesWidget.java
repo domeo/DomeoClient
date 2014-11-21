@@ -12,7 +12,6 @@ import org.mindinformatics.gwt.framework.component.qualifiers.ui.SearchTermsWidg
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Image;
 
 public class SearchNifResourcesWidget extends SearchTermsWidget implements INifDataRequestCompleted {

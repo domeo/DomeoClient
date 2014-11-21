@@ -195,6 +195,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
 		        		JsAnnotationSet set = (JsAnnotationSet) parseJson(getDataProperties().toJsonString());
+		        		_application.getProgressPanelContainer().setCompletionMessage("Text mining completed");
 						completionCallback.returnTextminingResults(set, false);
 		        	}
 	        	})
@@ -321,7 +322,6 @@ public class AnnotopiaNifConnector implements INifConnector {
 										antibody.setCatalog(entry.getCatalog( ));
 										data.add(antibody);
 									} else if(resource.equals(ORGANISATION_SEARCH) || resource.equals(INTEGRATED_ANIMAL_SEARCH)) {
-										Window.alert(entry.getDescription( ));
 										MLinkedResource linkedResource = new MLinkedResource(
 												entry.getUri( ), 
 												entry.getLabel( ), 
@@ -335,6 +335,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 							
 							// return the results
 							_application.getLogger( ).debug(this, "Number of NIF results: " + data.size( ));
+							_application.getProgressPanelContainer().setCompletionMessage(data.size( )+ " Results");
 							completionCallback.returnData(data);
 						}
 					})

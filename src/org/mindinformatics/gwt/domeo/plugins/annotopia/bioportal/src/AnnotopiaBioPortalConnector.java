@@ -96,16 +96,18 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 								term.setDescription(bioportalEntry.getDescription());
 								terms.add(term);
 							}
-						}						
+						}		
+						_application.getProgressPanelContainer().setCompletionMessage(terms.size() + " Results");
 						completionCallback.returnTerms(terms);
 		    		}
 		        })
 		        .setError(new Function(){ // callback to be run if the request fails
 		        	public void f() {
+		        		Window.alert(getDataObject()+"");
 		        		_application.getLogger().exception(this, 
-		        			"Couldn't complete BioPortal search process");
+		        			"Couldn't complete BioPortal search process: " + getDataObject());
 		        		_application.getProgressPanelContainer().setErrorMessage(
-							"Couldn't complete BioPortal search process");
+							"Couldn't complete BioPortal search process: " + getDataObject());
 		        	}
 		        })
 		     );
@@ -154,15 +156,16 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 						int pageSize = Integer.parseInt(bioportalSearchResultsWrapper.getPageSize())>=0 ? Integer.parseInt(bioportalSearchResultsWrapper.getPageSize()): -1;
 
 						//completionCallback.returnTerms(terms);
+						_application.getProgressPanelContainer().setCompletionMessage(terms.size() + " Results");
 						completionCallback.returnTerms(totalPages, pageSize, pageNumber, terms);
 		    		}
 		        })
 		        .setError(new Function(){ // callback to be run if the request fails
 		        	public void f() {
 		        		_application.getLogger().exception(this, 
-		        			"Couldn't complete BioPortal search process");
+		        			"Couldn't complete BioPortal search process: " + getDataObject());
 		        		_application.getProgressPanelContainer().setErrorMessage(
-							"Couldn't complete BioPortal search process");
+							"Couldn't complete BioPortal search process:" + getDataObject());
 		        	}
 		        })
 		     );
@@ -194,17 +197,16 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
 		        		JsAnnotationSet set = (JsAnnotationSet) parseJson(getDataProperties().toJsonString());
+		        		_application.getProgressPanelContainer().setCompletionMessage("Text mining completed");
 						completionCallback.returnTextminingResults(set, false);
 		        	}
 	        	})
 		        .setError(new Function(){ // callback to be run if the request fails
 		        	public void f() {
-		        		 Window.alert("There was an error " + getDataObject());
-
 		        		_application.getLogger().exception(this, 
-		        			"Couldn't complete existing annotation sets list saving");
+		        			"Couldn't complete existing annotation sets list saving: " + getDataObject());
 		        		_application.getProgressPanelContainer().setErrorMessage(
-							"Couldn't complete existing annotation sets list saving");
+							"Couldn't complete existing annotation sets list saving:" + getDataObject());
 		        	}
 		        })
 		     );
