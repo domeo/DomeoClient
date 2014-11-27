@@ -8,7 +8,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.plugins.APlugin;
 public class NifPortalPlugin extends APlugin {
 
 	public static final String VERSION = "0.1";
-	public static final String TYPE = "Annoopia";
+	public static final String TYPE = "Annotopia";
 	public static final String SUB_TYPE = "Search";
 	public static final String PLUGIN = NifPortalPlugin.class.getName().substring(0, NifPortalPlugin.class.getName().indexOf(".info"));
 
