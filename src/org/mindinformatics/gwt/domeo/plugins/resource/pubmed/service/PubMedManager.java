@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingBibliographySetHandler;
+import org.mindinformatics.gwt.domeo.plugins.annotopia.pubmed.src.AnnotopiaPubMedConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.test.GwtPubMedServiceConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.test.StandalonePubMedConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.src.JsonPubMedConnector;
@@ -43,19 +44,22 @@ public class PubMedManager {
 	}
 	
 	public IPubMedConnector selectPubMedConnector(IDomeo domeo, IPubMedItemsRequestCompleted callbackCompleted) {
+		
 		if(_connector!=null) return _connector;
 		if(domeo.isStandaloneMode()) {
 			_connector = new StandalonePubMedConnector();
 		} else {
-			if (domeo.isHostedMode()) {
+			if(domeo.isAnnotopiaEnabled()) {
+				_connector = new AnnotopiaPubMedConnector(domeo, null);
+			} else if (domeo.isHostedMode()) {
 				_connector = new GwtPubMedServiceConnector();
 			} else {
+				// Real service
 				_connector = new JsonPubMedConnector(domeo, callbackCompleted);
 			}
 		}
-		
-		domeo.getLogger().debug(this, "PubMed Connector selected: " + _connector.getClass().getName());
-		
+
+		domeo.getLogger().debug(this, "PubMed Connector selected: " + _connector.getClass().getName());		
 		return _connector;
 	} 
 	

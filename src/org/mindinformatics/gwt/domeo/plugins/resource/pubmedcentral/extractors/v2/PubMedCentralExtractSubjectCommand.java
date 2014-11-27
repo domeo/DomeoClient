@@ -133,7 +133,7 @@ public class PubMedCentralExtractSubjectCommand extends APubMedBibliograhyExtrac
 			try {
 				MAnnotationReference annotation = AnnotationFactory.createCitation(
 						EPubMedCentralExtractor.getInstance(), _domeo.getAgentManager().getSoftware(), citations.get(0), _domeo.getPersistenceManager().getCurrentResource());
-				
+
 				((MPubMedDocument)_domeo.getPersistenceManager().getCurrentResource()).setSelfReference(annotation);
 				((AnnotationPersistenceManager)_domeo.getPersistenceManager()).getBibliographicSet().addAnnotation(annotation);
 				

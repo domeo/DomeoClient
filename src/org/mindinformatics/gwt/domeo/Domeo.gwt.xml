@@ -57,6 +57,7 @@
 
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.bioportal.BioPortalAnnotopiaPlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.nif.NifAnnotopiaPlugin"/>
+   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.pubmed.PubMedAnnotopiaPlugin"/>
   
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.bioportal.BioPortalResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.nif.NifResourcePlugin"/>
