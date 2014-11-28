@@ -30,7 +30,6 @@ import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.Gwt
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.StandaloneBioPortalConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.src.JsonBioPortalConnector;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
