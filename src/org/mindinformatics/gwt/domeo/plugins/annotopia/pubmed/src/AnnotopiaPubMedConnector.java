@@ -316,6 +316,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 			return;
 		}
 		String requestUrl = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
+		handler.bibliographySetListNotCreated("Could not retrieve existing bibliography (not implemented)");
 
 //		try {
 //			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, requestUrl);
