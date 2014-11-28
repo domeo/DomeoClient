@@ -120,6 +120,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.BioPorta
 import org.mindinformatics.gwt.domeo.plugins.resource.document.info.DocumentPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.lenses.LDocumentResourceCardPanel;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
+import org.mindinformatics.gwt.domeo.plugins.resource.ebi.service.EbiManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.digesters.NifStandardDigester;
 import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.NifManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.info.OmimPlugin;
@@ -594,6 +595,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		// ===================================
 		TextMiningRegistry.getInstance(this).registerTextMiningService(BioPortalManager.getInstance());
 		TextMiningRegistry.getInstance(this).registerTextMiningService(NifManager.getInstance());
+		TextMiningRegistry.getInstance(this).registerTextMiningService(EbiManager.getInstance());
 		
 		RootPanel rpp = RootPanel.get();
 		rpp.add(sideTabPanel);
