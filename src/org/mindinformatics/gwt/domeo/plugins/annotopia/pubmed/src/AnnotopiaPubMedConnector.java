@@ -8,7 +8,6 @@ import java.util.List;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.service.AnnotationPersistenceServiceFacade;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingBibliographySetHandler;
-import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.extractors.APubMedBibliograhyExtractorCommand;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.identities.EPubMedDatabase;
