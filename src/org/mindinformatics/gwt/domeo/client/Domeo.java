@@ -849,6 +849,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2714656/");
 			} else if(url.endsWith("tests/PMC2714656_v062012.html")) {
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2714656/");
+			} else if(url.endsWith("tests/PMC1240580.html")) {
+				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1240580/");
 			} else if(url.endsWith("tests/ImagesTest.html")) {
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://www.foaffy.org/gallery2/main.php");
 			} else if(url.endsWith("tests/NCT000001549.html")) {
