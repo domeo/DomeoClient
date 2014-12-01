@@ -88,8 +88,11 @@ public class CQualifierCard extends ACardComponent {
 			StringBuffer sb = new StringBuffer();
 			for(int j=0; j<_annotation.getTerms().size(); j++) {
 				sb.append("<img src='" + Domeo.resources.tagIcon().getSafeUri().asString() + "'/>" + "<b>" + _annotation.getTerms().get(j).getLabel()+"</b> from "+
-						_annotation.getTerms().get(j).getSource().getLabel()+", "+
+						_annotation.getTerms().get(j).getSource().getLabel());
+				if(_annotation.getTerms().get(j).getDescription()!=null) {
+					sb.append(", "+
 						_annotation.getTerms().get(j).getDescription());
+				}
 				List<ITrustedResourceDigester> digesters = _domeo.getLinkedDataDigestersManager().getLnkedDataDigesters(_annotation.getTerms().get(j));
 				for(ITrustedResourceDigester digester: digesters) {
 					if(digester.getLinkLabel(_annotation.getTerms().get(j)).trim().length()>0) 
