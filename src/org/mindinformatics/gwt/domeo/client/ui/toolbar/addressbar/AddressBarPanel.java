@@ -215,6 +215,8 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 			
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3308009_v082012.html");
 			
+			oracle.add(UrlUtils.getUrlAndRoot() + "tests/EPMC1240580.html");
+			
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC1240580.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3639628.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2759694.html");
