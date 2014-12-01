@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.extractor.GenericDocumentPipeline;
+import org.mindinformatics.gwt.domeo.plugins.resource.europubmedcentral.extractors.EuroPubMedDocumentPipeline;
+import org.mindinformatics.gwt.domeo.plugins.resource.europubmedcentral.info.EuroPmcPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.extractors.OmimDocumentPipeline;
 import org.mindinformatics.gwt.domeo.plugins.resource.omim.info.OmimPlugin;
 import org.mindinformatics.gwt.domeo.plugins.resource.opentrials.extractor.OpenTrialsDocumentPipeline;
@@ -51,6 +53,10 @@ public class ContentExtractorsManager implements IExtractorsManager, IInitializa
 			if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(PmcPlugin.getInstance().getPluginName())) {
 				registerExtractor(new PubMedCentralDocumentPipeline(_domeo));
 			}
+		}
+		// EURO PUBMED CENTRAL PIPELINE
+		if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(EuroPmcPlugin.getInstance().getPluginName())) {
+			registerExtractor(new EuroPubMedDocumentPipeline(_domeo));			
 		}
 		// OPENTRIALS PIPELINE
 		if(_domeo.getProfileManager().getUserCurrentProfile().isPluginEnabled(OpenTrialsPlugin.getInstance().getPluginName())) {

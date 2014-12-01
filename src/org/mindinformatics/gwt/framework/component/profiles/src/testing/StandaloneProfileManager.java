@@ -47,6 +47,7 @@ public class StandaloneProfileManager extends AProfileManager {
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.omim", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmed", MProfile.PLUGIN_ENABLED);
+		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.europubmedcentral", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.bioportal", MProfile.PLUGIN_ENABLED);
 		return profile;
 	}

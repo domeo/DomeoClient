@@ -278,6 +278,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print("enabled");
 					out.print("\"");
 					out.print("},");
+					
 					out.print("{");
 					out.print("\"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral");
@@ -286,6 +287,16 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					out.print("enabled");
 					out.print("\"");
 					out.print("},");
+					
+					out.print("{");
+					out.print("\"name\": \"");
+					out.print("org.mindinformatics.gwt.domeo.plugins.resource.europubmedcentral");
+					out.print("\",");
+					out.print("\"status\": \"");
+					out.print("enabled");
+					out.print("\"");
+					out.print("},");
+					
 					out.print("{");
 					out.print("\"name\": \"");
 					out.print("org.mindinformatics.gwt.domeo.plugins.resource.omim");
