@@ -782,11 +782,17 @@
 								checked="false">Take note that avaliable</g:RadioButton>
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
+							<g:RadioButton ui:field="descriptidi" name="descripttst"
+								checked="false">Is drug indication</g:RadioButton>
+						</g:cell>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:cell horizontalAlignment="ALIGN_LEFT" width="330px">
 							<g:RadioButton ui:field="descripttnone" name="descripttst"
 								checked="true">No mention</g:RadioButton>
 						</g:cell>
 					</g:HorizontalPanel>
-
 
 					<!--Statement refers to any of the following concepts: -->
 
@@ -794,7 +800,7 @@
 						<g:Label ui:field="statement" styleName='{style.titlebarright}'>Concepts that the
 							Statement Refers To:</g:Label>
 					</g:HorizontalPanel>
-
+					
 					<g:HorizontalPanel>
 						<g:Label>Medical Conditions: &nbsp;</g:Label>
 						<g:TextArea ui:field='medconditbody' styleName='{style.alleles}'></g:TextArea>

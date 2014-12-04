@@ -113,7 +113,7 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 
 	// test section
 	@UiField
-	CheckBox descripttreq, descripttrec, descriptttna, descripttnn,
+	CheckBox descripttreq, descripttrec, descriptttna, descripttnn, descriptidi,
 			descripttnone;
 
 	// statements
@@ -553,7 +553,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 	}
 
 	// test section
-
+	
+	
 	public MLinkedResource getTest_Re() {
 		if (descripttreq.getValue()) {
 			return ResourcesFactory.createLinkedResource(SPL_POC_PREFIX
@@ -574,6 +575,14 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 							"Testing related to the pharmacogenomic biomarker is avaliable.");
 		}
 
+		else if (descriptidi.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(SPL_POC_PREFIX
+							+ "is-drug-indication",
+							"Is drug indication",
+							"Testing related to the pharmacogenomic biomarker is drug indication.");
+		}
+		
 		else if (descripttnn.getValue()) {
 			return ResourcesFactory
 					.createLinkedResource(SPL_POC_PREFIX + "not-necessary",
@@ -1047,6 +1056,8 @@ public class FSPLsForm extends AFormComponent implements IResizable,
 				else if (_item.getTestRec().getLabel()
 						.equals("Take note that tests are avaliable"))
 					descriptttna.setValue(true);
+				else if (_item.getTestRec().getLabel().equals("Is drug indication"))
+					descriptidi.setValue(true);
 				else if (_item.getTestRec().getLabel().equals("Not necessary"))
 					descripttnn.setValue(true);
 				else if (_item.getTestRec().getLabel().equals("None"))
