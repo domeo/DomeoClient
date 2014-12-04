@@ -54,6 +54,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnoto
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
+import org.mindinformatics.gwt.framework.model.agents.IAgent;
 import org.mindinformatics.gwt.utils.src.HtmlUtils;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -535,8 +536,10 @@ public class AnnotopiaConverter {
 					JavaScriptObject jsTarget = annotation.getTarget();
 					if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
 						JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
-						if(getObjectType(jsSpecificResource.getSelector()).contains(IOpenAnnotation.TEXT_QUOTE_SELECTOR)) {
-							_domeo.getLogger().debug(this, "Specific Resource");
+						if(jsSpecificResource.getSelector()!=null &&
+								getObjectType(jsSpecificResource.getSelector())!=null && 
+								getObjectType(jsSpecificResource.getSelector()).contains(IOpenAnnotation.TEXT_QUOTE_SELECTOR)) {
+							_domeo.getLogger().debug(this, "Specific Resource with Text Quote Selector");
 							JsTextQuoteSelector selector = (JsTextQuoteSelector) jsSpecificResource.getSelector();
 							JsResource resource = null;
 							if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
@@ -552,7 +555,23 @@ public class AnnotopiaConverter {
 									selector.getExact(), selector.getPrefix(), selector.getSuffix());
 							sel.setUri(jsSpecificResource.getId());
 							selectors.add(sel);
-						}	
+						} else if(jsSpecificResource.getSelector()==null) {
+							_domeo.getLogger().debug(this, "Specific Resource");
+							JsResource resource = null;
+							if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+								resource = targets.get(targetSources.get(jsSpecificResource.getId()));
+							} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+								resource = targets.get(jsSpecificResource.getHasSourceAsObject().getId());
+							}
+							_domeo.getLogger().debug(this, "Resource " + resource.getId());
+							
+							MSelector sel = AnnotationFactory.createImageSelector(
+								_domeo.getAgentManager().getUserPerson(),  
+								new MGenericResource(resource.getId(), ""), 
+								_domeo.getPersistenceManager().getCurrentResource());
+							sel.setUri(jsSpecificResource.getId());
+							selectors.add(sel);
+						}
 					}
 				}
 				_domeo.getLogger().debug(this, "Selectors: " + selectors.size());

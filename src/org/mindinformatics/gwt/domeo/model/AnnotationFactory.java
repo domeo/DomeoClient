@@ -693,6 +693,20 @@ public class AnnotationFactory implements IInitializableComponent {
 		return selector;
 	}
 	
+	public static MImageInDocumentSelector createImageSelector(
+			IAgent creator, MGenericResource target, MGenericResource scope) 
+	{
+		MImageInDocumentSelector sel = new MImageInDocumentSelector();
+		sel.setLocalId(getLocalId());
+		sel.setUuid(getUuid());
+		sel.setUri(getUrn(sel.getUuid()));
+		sel.setCreatedOn(new Date());
+		sel.setCreator(creator);
+		sel.setTarget(target);
+		sel.setContext(scope);
+		return sel;
+	}
+	
 	public static MQualifierAnnotation createQualifier(IDomeo domeo,
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target) 
