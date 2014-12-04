@@ -189,7 +189,7 @@ public class JsonUnmarshallingManager {
 					}
 					if(groups.size()>0) _domeo.getAnnotationAccessManager().setAnnotationSetGroups(set, groups);
 				}
-				
+								
 				// Unmarshalling annotations
 				JsArray<JavaScriptObject> jsonAnnotations = jsonSet.getAnnotation();
 				for(int j=0; j<jsonAnnotations.length(); j++) {

@@ -26,6 +26,7 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
@@ -36,7 +37,6 @@ import org.mindinformatics.gwt.framework.model.references.MPublicationArticleRef
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONValue;
-import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -64,6 +64,7 @@ public IDomeo _domeo;
 		serializers.put(MAnnotationSet.class.getName(), new SAnnotationSetSerializer());
 		serializers.put(MAnnotation.class.getName(), new SAnnotationSerializer());
 		serializers.put(MTextQuoteSelector.class.getName(), new STextQuoteSelectorSerializer());
+		serializers.put(MImageInDocumentSelector.class.getName(), new SImageInDocumentSelectorSerializer());
 		// Agents
 		serializers.put(IAgent.class.getName(), new SAgentSerializer());
 		serializers.put(MAgentPerson.class.getName(), new SAgentPersonSerializer());
@@ -163,6 +164,7 @@ public IDomeo _domeo;
 	}
 	
 	public JSONValue serialize(MSelector selector) {
+		_domeo.getLogger().debug(this, "Serializing selector " + selector.getClass().getName());
 		try {
 			IAnnotopiaSerializer serializer = (IAnnotopiaSerializer) serializers.get(selector.getClass().getName());
 			if(serializer!=null) {

@@ -20,6 +20,7 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
@@ -28,6 +29,8 @@ import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.json.client.JSONArray;
@@ -51,10 +54,14 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 	protected JSONObject initializeAnnotation(AnnotopiaSerializerManager manager, MAnnotation ann) {
 		JSONObject jsonAnnotation = new JSONObject();
 		jsonAnnotation.put(IRdfsOntology.type, new JSONString("oa:Annotation"));
+		jsonAnnotation.put("serializedBy",new JSONString("urn:application:domeo"));
+		
 		if(ann.getAnnotationType().equals("ao:Highlight"))
 			jsonAnnotation.put("motivatedBy", new JSONString("oa:highlighting"));
 		else if(ann.getAnnotationType().equals("ao:PostIt")) {
 			jsonAnnotation.put("motivatedBy", new JSONString("oa:commenting"));
+		} else if(ann.getAnnotationType().equals("ao:Qualifier")) {
+			jsonAnnotation.put("motivatedBy", new JSONString("oa:tagging"));
 		}
 		
 		jsonAnnotation.put(IRdfsOntology.id, nonNullable(ann.getIndividualUri()));
@@ -101,6 +108,8 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		
 		if(ann.getAnnotationType().equals("ao:PostIt")) {
 			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
+		} if(ann.getAnnotationType().equals("ao:Qualifier")) {
+			//jsonAnnotation.put("hasBody", encodeTags(manager, ann));
 		}
 		
 		jsonAnnotation.put("hasTarget", encodeSelectors(manager, ann));
@@ -140,6 +149,33 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		jsonBody.put("format", new JSONString(body.getFormat()));
 		jsonBody.put("chars", new JSONString(body.getChars()));
 		jsonBodies.set(0, jsonBody);
+		return jsonBodies;
+	}
+	
+	/**
+	 * Encodes bodies in JSON format.
+	 * @param manager	The serializer manager
+	 * @param ann		The annotation to serialize
+	 * @return The Textual Bodies in JSON format
+	 */
+	protected JSONArray encodeTags(AnnotopiaSerializerManager manager, MAnnotation ann) {
+		ArrayList<MLinkedResource> terms = ((MQualifierAnnotation)ann).getTerms();	
+		
+		JSONArray jsonBodies = new JSONArray();
+		
+		for(MLinkedResource term: terms) {
+			JSONObject jsonBody = new JSONObject();
+			jsonBody.put(IRdfsOntology.id, nonNullable(term.getUrl()));
+			jsonBody.put(IRdfsOntology.type, nonNullable("oa:SemanticTag"));
+			jsonBody.put(IRdfsOntology.label, nonNullable(term.getLabel()));
+			
+			JSONObject source = new JSONObject();
+			source.put(IRdfsOntology.id, nonNullable(term.getSource().getUrl()));
+			source.put(IRdfsOntology.label, nonNullable(term.getSource().getLabel()));
+			jsonBody.put("at:source", source);
+			
+			jsonBodies.set(0, jsonBody);
+		}
 		return jsonBodies;
 	}
 

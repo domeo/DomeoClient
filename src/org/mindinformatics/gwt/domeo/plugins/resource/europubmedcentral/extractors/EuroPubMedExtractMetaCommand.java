@@ -41,3 +41,4 @@ public class EuroPubMedExtractMetaCommand implements ICommand {
 		}
 	}
 }
+

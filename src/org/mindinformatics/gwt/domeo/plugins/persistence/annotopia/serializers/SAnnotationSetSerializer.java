@@ -47,12 +47,13 @@ public class SAnnotationSetSerializer extends AAnnotopiaSerializer implements IA
 		MAnnotationSet annotationSet = (MAnnotationSet) obj;
 		JSONObject annotationSetJson = new JSONObject();
 		annotationSetJson.put(IRdfsOntology.type, new JSONString(IAnnotopia.ANNOTATION_SET));
-		
+
 		// These have to exist and defined
 		// TODO HIGH track exception when any of these is null or blank
 		annotationSetJson.put("@context",new JSONString(ApplicationUtils.getAnnotopiaContextPath( )));
 		annotationSetJson.put(IRdfsOntology.id, new JSONString(annotationSet.getIndividualUri()));
 		annotationSetJson.put(IDomeoOntology.transientLocalId, new JSONString(Long.toString(annotationSet.getLocalId())));
+		annotationSetJson.put("serializedBy",new JSONString("urn:application:domeo"));
 		
 		//annotationSetJson.put(IDomeoOntology.annotates, new JSONString(annotationSet.getTargetResource().getUrl()));
 		//manager.addResourceToSerialize(annotationSet.getTargetResource());

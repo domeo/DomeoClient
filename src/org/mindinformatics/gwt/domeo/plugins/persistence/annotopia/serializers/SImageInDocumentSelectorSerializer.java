@@ -21,7 +21,7 @@
 package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers;
 
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
-import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
+import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
@@ -31,11 +31,11 @@ import com.google.gwt.json.client.JSONString;
  * 
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class STextQuoteSelectorSerializer extends AAnnotopiaSerializer implements IAnnotopiaSerializer {
+public class SImageInDocumentSelectorSerializer extends AAnnotopiaSerializer implements IAnnotopiaSerializer {
 
 	@Override
 	public JSONObject serialize(AnnotopiaSerializerManager manager, Object obj) {
-		MTextQuoteSelector selector = (MTextQuoteSelector) obj;
+		MImageInDocumentSelector selector = (MImageInDocumentSelector) obj;
 		
 		JSONObject jsonSpecificResource = new JSONObject();
 		
@@ -45,20 +45,16 @@ public class STextQuoteSelectorSerializer extends AAnnotopiaSerializer implement
 		
 		JSONObject source = new JSONObject();
 		source.put(IDomeoOntology.generalId, new JSONString(selector.getTarget().getUrl()));
-		source.put(IDomeoOntology.generalType, new JSONString("dctypes:Text"));		
-		source.put("format", new JSONString("text/html"));		
+		source.put(IDomeoOntology.generalType, new JSONString("dctypes:StillImage"));		
+		source.put("format", new JSONString("image/jpeg"));		
 		manager.serializeTitle(source);
 		
 		jsonSpecificResource.put("hasSource", source);
 		
 		manager.serializeExpression(source);
 		
-		JSONObject sel = new JSONObject();
-		sel.put(IDomeoOntology.generalType, new JSONString("oa:TextQuoteSelector"));
-		sel.put("exact", new JSONString(selector.getExact()));
-		sel.put("prefix", new JSONString(selector.getPrefix()));
-		sel.put("suffix", new JSONString(selector.getSuffix()));
-		jsonSpecificResource.put("hasSelector", sel);
+
+		jsonSpecificResource.put("hasScope", new JSONString(selector.getContext().getUrl()));
 
 		return jsonSpecificResource;
 	}
