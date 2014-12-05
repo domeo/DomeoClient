@@ -109,7 +109,7 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		if(ann.getAnnotationType().equals("ao:PostIt")) {
 			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
 		} if(ann.getAnnotationType().equals("ao:Qualifier")) {
-			//jsonAnnotation.put("hasBody", encodeTags(manager, ann));
+			jsonAnnotation.put("hasBody", encodeTags(manager, ann));
 		}
 		
 		jsonAnnotation.put("hasTarget", encodeSelectors(manager, ann));
@@ -163,6 +163,7 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		
 		JSONArray jsonBodies = new JSONArray();
 		
+		int counter = 0;
 		for(MLinkedResource term: terms) {
 			JSONObject jsonBody = new JSONObject();
 			jsonBody.put(IRdfsOntology.id, nonNullable(term.getUrl()));
@@ -174,7 +175,7 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			source.put(IRdfsOntology.label, nonNullable(term.getSource().getLabel()));
 			jsonBody.put("at:source", source);
 			
-			jsonBodies.set(0, jsonBody);
+			jsonBodies.set(counter++, jsonBody);
 		}
 		return jsonBodies;
 	}
