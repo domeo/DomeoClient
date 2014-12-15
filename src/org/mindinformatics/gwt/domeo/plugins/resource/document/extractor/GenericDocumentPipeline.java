@@ -47,6 +47,13 @@ public class GenericDocumentPipeline extends APipeline implements IContentExtrac
 				(IContentExtractorCallback) application.getPersistenceManager(), this));
 		_stages.add(imagesStage);
 		
+		IStage doiStage = new Stage(new GenericDocumentExtractDOICommand(
+				application,
+				(IContentExtractorCallback)application.getPersistenceManager( ),
+				this
+		));
+		_stages.add(doiStage);
+		
 		if(!application.isHostedMode()) {
 			if(application.getProfileManager().getUserCurrentProfile().isFeatureEnabled(IProfile.FEATURE_REFERENCE_SELF)) {
 				IStage retrieveBibliographyByUrlStage = new Stage(new PubMedCentralRetrieveBibliographyByUrlCommand(application, this));
