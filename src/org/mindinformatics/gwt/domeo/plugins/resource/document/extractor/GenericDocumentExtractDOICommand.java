@@ -50,9 +50,9 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 	
 	@Override
 	public void execute( ) {
-		domeo.getLogger( ).debug(PubMedCentralDocumentPipeline.LOGGER, this, "Extracting document DOI if available");
+		domeo.getLogger( ).info(this, "Searching for document DOI.");
 		((ProgressMessagePanel)((DialogGlassPanel)domeo.getDialogPanel( )).getPanel( )).setMessage(
-				"Extracting document DOI if available"
+				"Searching for document DOI"
 		);
 		
 		IFrameElement iframe = IFrameElement.as(
@@ -63,7 +63,7 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 			doiList = new ArrayList<String>( );
 			String body = iframe.getContentDocument( ).getDocumentElement( ).getInnerHTML( );
 			RegExp regExp = RegExp.compile(
-					"(10[.][0-9]{4,}[0-9:.-/a-z]+)",
+					"(10[.][0-9]{4,}[0-9:.\\-/a-z]+)",
 					"gi"
 			);
 			MatchResult matcher;
@@ -103,6 +103,7 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 					// compare the document title with the version in PubMed
 					if(stringSimilarity(docTitle, pubMedTitle)) {
 						// we have a match, use this DOI
+						domeo.getLogger( ).info(this, "Found matching DOI " + doiList.get(currentDoi));
 						currentDoi = doiList.size( );
 						((MDocumentResource)domeo.getPersistenceManager( ).getCurrentResource( )).setSelfReference(annotation);
 						((AnnotationPersistenceManager)domeo.getPersistenceManager( )).getBibliographicSet( ).addAnnotation(annotation);
@@ -127,7 +128,8 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 		// not required		
 	}
 	
-	/** Attempt to retrieve the title information for the next DOI. */
+	/** Attempt to retrieve the title information for the next DOI from the document and compare
+	 * against the title for this document to identify if they are the same. */
 	private void nextDoi( ) {
 		currentDoi++;
 		if(currentDoi >= doiList.size( )) {
@@ -149,8 +151,8 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 	
 	/** Return whether the two strings are similar enough to indicate that the titles are the same.
 	 * Algorithm based on http://www.ibm.com/developerworks/library/j-seqalign/
-	 * @param str1 The first string from the document.
-	 * @param str2 The second string from the PubMed query for the DOI.
+	 * @param str1 The first title string from the document.
+	 * @param str2 The second title string from the PubMed query for the DOI.
 	 * @return Whether the strings are similar enough. */
 	private boolean stringSimilarity(final String str1, final String str2) {
 		int[ ][ ] matrix = new int[str1.length( )][str2.length( )];
