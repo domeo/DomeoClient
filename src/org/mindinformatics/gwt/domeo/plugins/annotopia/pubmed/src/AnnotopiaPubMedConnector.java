@@ -108,9 +108,10 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
-						JsoPubMedEntry pubmedEntry = (JsoPubMedEntry) ((JsArray)parseJson(getDataProperties( ).toJsonString( ))).get(0);
+		        		ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
+						
 						try {
-							ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
+							JsoPubMedEntry pubmedEntry = (JsoPubMedEntry) ((JsArray)parseJson(getDataProperties( ).toJsonString( ))).get(0);
 	
 							MPublicationArticleReference reference = new MPublicationArticleReference();
 							reference.setUrl(pubmedEntry.getUrl());

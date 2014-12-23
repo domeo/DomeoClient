@@ -71,6 +71,7 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 				for(int i = 0; i < matcher.getGroupCount( ); i++) {
 					if(!doiList.contains(matcher.getGroup(i))) {
 						// add this DOI to the list to compare against PubMed
+						domeo.getLogger( ).debug(this, "Found " + matcher.getGroup(i));
 						doiList.add(matcher.getGroup(i));
 					}
 				}
@@ -99,12 +100,14 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 				String pubMedTitle = citations.get(0).getTitle( );
 				if(pubMedTitle != null) {
 					pubMedTitle = pubMedTitle.toLowerCase( ).trim( );
-					
+					domeo.getLogger( ).debug(this, "docTitle: " + docTitle);
+					domeo.getLogger( ).debug(this, "pubMedTitle: " + pubMedTitle);
 					// compare the document title with the version in PubMed
 					if(stringSimilarity(docTitle, pubMedTitle)) {
 						// we have a match, use this DOI
 						domeo.getLogger( ).info(this, "Found matching DOI " + doiList.get(currentDoi));
 						currentDoi = doiList.size( );
+						domeo.getLogger( ).debug(this, "Accepted: " + citations.get(0).getDoi());
 						((MDocumentResource)domeo.getPersistenceManager( ).getCurrentResource( )).setSelfReference(annotation);
 						((AnnotationPersistenceManager)domeo.getPersistenceManager( )).getBibliographicSet( ).addAnnotation(annotation);
 					}
@@ -120,24 +123,27 @@ public class GenericDocumentExtractDOICommand extends APubMedBibliograhyExtracto
 
 	@Override
 	public void bibliographyObjectNotFound( ) {
-		// not required
+		domeo.getLogger( ).warn(this, "bibliographyObjectNotFound");
+		nextDoi( );
 	}
 
 	@Override
 	public void bibliographyObjectNotFound(final String message) {
-		// not required		
+		domeo.getLogger( ).warn(this, "bibliographyObjectNotFound " + message);
+		nextDoi( );		
 	}
 	
 	/** Attempt to retrieve the title information for the next DOI from the document and compare
 	 * against the title for this document to identify if they are the same. */
 	private void nextDoi( ) {
 		currentDoi++;
-		if(currentDoi >= doiList.size( )) {
+		if(currentDoi >= doiList.size( ) || currentDoi>2) {
 			// iterated over all the discovered DOIs
 			completionCallback.notifyStageCompletion( );
 			return;
 		}
 		
+		domeo.getLogger( ).debug(this, "checking doi: " + doiList.get(currentDoi));
 		// Submit a request to PubMed for information relation to the current DOI
 		try {
 			PubMedManager pubMedManager = PubMedManager.getInstance( );
