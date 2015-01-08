@@ -59,6 +59,14 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	public final native JavaScriptObject getAnnotation() /*-{  
 		return this.annotations; 
 	}-*/;
+	public final native boolean hasAnnotation() /*-{  
+		return this.annotations!=null; 
+	}-*/;
+	public final native int annotationCounts() /*-{  
+		if(Object.prototype.toString.call(this.annotations) === '[object Array]') return this.annotation.length; 
+		if(this.annotations!=null)  return 1
+		return 0
+	}-*/;
 		
 	// ------------------------------------------------------------------------
 	//  Identity

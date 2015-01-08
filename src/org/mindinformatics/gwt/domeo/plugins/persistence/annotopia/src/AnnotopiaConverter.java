@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
@@ -53,8 +54,8 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnoto
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaSoftware;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
+import org.mindinformatics.gwt.framework.component.agents.src.AgentsFactory;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
-import org.mindinformatics.gwt.framework.model.agents.IAgent;
 import org.mindinformatics.gwt.utils.src.HtmlUtils;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -86,7 +87,7 @@ public class AnnotopiaConverter {
 	 */
 	private void cacheAgents(JsAnnotopiaAnnotationSetGraph wrapper, 
 			HashMap<String, JsAnnotopiaAgent> agents, HashMap<String, String> entityAgents, 
-			HashMap<String, JsResource> targets, HashMap<String, String> targetSources) 
+			HashMap<String, JsResource> targets, HashMap<String, String> targetSources, boolean parseAnnotations) 
 	{	
 		JsArray<JavaScriptObject> graphs = wrapper.getGraphs();
 		if(graphs.length()==1) {	
@@ -111,10 +112,13 @@ public class AnnotopiaConverter {
 				
 				_domeo.getLogger().debug(this, "Caching createdBy");
 				// Annotation Set: createdBy
+				_domeo.getLogger().debug(this, "Caching createdBy " + jsSet.isCreatedByString());
 				if(jsSet.getCreatedBy()!=null && jsSet.isCreatedByString()) {
 					entityAgents.put("createdBy:"+jsSet.getId(), jsSet.getCreatedByAsString());
+					_domeo.getLogger().debug(this, "Caching createdBy [" + "createdBy:"+jsSet.getId() + ":" + jsSet.getCreatedByAsString() + "]");
 				} else if(jsSet.getCreatedBy()!=null && jsSet.isCreatedByObject()) {
 					agents.put(jsSet.getCreatedByAsObject().getId(), jsSet.getCreatedByAsObject());
+					_domeo.getLogger().debug(this, "Caching createdBy [" + "createdBy:"+jsSet.getId() + ":" + jsSet.getCreatedByAsObject().getId() + "]");
 				}
 				
 				_domeo.getLogger().debug(this, "Caching createdWith");
@@ -137,41 +141,54 @@ public class AnnotopiaConverter {
 				// ----------------------------------------
 				//  Caching Annotation Agents
 				// ----------------------------------------
-				_domeo.getLogger().debug(this, "Caching annotation agents");
-				
-				int max = jsSet.isAnnotationsArray() ? jsSet.getAnnotations().length() : ((jsSet.getAnnotation()!=null)?1:0);
-				for(int i=0; i<max; i++) {
-					JavaScriptObject a = null;
-					if(max==1) a = jsSet.getAnnotation();
-					else a = jsSet.getAnnotations().get(i);
-					
-					if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
-						// Unmarshall annotatedBy
-						JsAnnotationProvenance annotationProvenance = (JsAnnotationProvenance) a;
-						if(annotationProvenance.getAnnotatedBy()!=null && annotationProvenance.isAnnotatedByString()) {
-							entityAgents.put(annotationProvenance.getId(), annotationProvenance.getAnnotatedByAsString());
-						} else if(annotationProvenance.getAnnotatedBy()!=null && annotationProvenance.isAnnotatedByObject()) {
-							agents.put(annotationProvenance.getAnnotatedByAsObject().getId(), annotationProvenance.getAnnotatedByAsObject());
-						}
-						if(annotationProvenance.getCreatedWith()!=null && annotationProvenance.isCreatedWithString()) {
-							entityAgents.put(annotationProvenance.getId(), annotationProvenance.getCreatedWithAsString());
-						} else if(annotationProvenance.getCreatedWith()!=null && annotationProvenance.isCreatedWithObject()) {
-							agents.put(annotationProvenance.getCreatedWithAsObject().getId(), annotationProvenance.getCreatedWithAsObject());
-						}
-						if(annotationProvenance.getLastSavedBy()!=null && annotationProvenance.isLastSavedByString()) {
-							entityAgents.put(annotationProvenance.getId(), annotationProvenance.getLastSavedByAsString());
-						} else if(annotationProvenance.getLastSavedBy()!=null && annotationProvenance.isLastSavedByObject()) {
-							agents.put(annotationProvenance.getLastSavedByAsObject().getId(), annotationProvenance.getLastSavedByAsObject());
-						}
-						
-						JsOpenAnnotation annotation = (JsOpenAnnotation) a;			
-						
-						// Unmarshall targets
-						boolean multipleTargets = annotation.hasMultipleTargets();
-						if(multipleTargets) {
-							JsArray<JavaScriptObject> jsTargets = annotation.getTargets();
-							for(int t=0; t<jsTargets.length(); t++) {
-								JavaScriptObject jsTarget = jsTargets.get(t);
+				if(parseAnnotations) {
+					_domeo.getLogger().debug(this, "Caching annotation agents");
+					int max = jsSet.isAnnotationsArray() ? jsSet.getAnnotations().length() : (jsSet.hasAnnotation()?1:0);
+					_domeo.getLogger().debug(this, "Detected annotations: " + max);
+					for(int i=0; i<max; i++) {			
+						JavaScriptObject a = null;
+						if(max==1) a = jsSet.getAnnotation();
+						else a = jsSet.getAnnotations().get(i);
+						if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
+							// Unmarshall annotatedBy
+							JsAnnotationProvenance annotationProvenance = (JsAnnotationProvenance) a;
+							if(annotationProvenance.getAnnotatedBy()!=null && annotationProvenance.isAnnotatedByString()) {
+								entityAgents.put("createdBy:"+annotationProvenance.getId(), annotationProvenance.getAnnotatedByAsString());
+								_domeo.getLogger().debug(this, "PUT: " + annotationProvenance.getId() + "-" +  annotationProvenance.getAnnotatedByAsString());
+							} else if(annotationProvenance.getAnnotatedBy()!=null && annotationProvenance.isAnnotatedByObject()) {
+								agents.put(annotationProvenance.getAnnotatedByAsObject().getId(), annotationProvenance.getAnnotatedByAsObject());
+								_domeo.getLogger().debug(this, "PUT: " + annotationProvenance.getAnnotatedByAsObject().getId() + "-" +  annotationProvenance.getAnnotatedByAsObject().getName());
+							}
+							if(annotationProvenance.getCreatedWith()!=null && annotationProvenance.isCreatedWithString()) {
+								entityAgents.put("createdWith:"+annotationProvenance.getId(), annotationProvenance.getCreatedWithAsString());
+							} else if(annotationProvenance.getCreatedWith()!=null && annotationProvenance.isCreatedWithObject()) {
+								agents.put(annotationProvenance.getCreatedWithAsObject().getId(), annotationProvenance.getCreatedWithAsObject());
+							}
+							if(annotationProvenance.getLastSavedBy()!=null && annotationProvenance.isLastSavedByString()) {
+								entityAgents.put("lastSavedBy:"+annotationProvenance.getId(), annotationProvenance.getLastSavedByAsString());
+							} else if(annotationProvenance.getLastSavedBy()!=null && annotationProvenance.isLastSavedByObject()) {
+								agents.put(annotationProvenance.getLastSavedByAsObject().getId(), annotationProvenance.getLastSavedByAsObject());
+							}
+							
+							JsOpenAnnotation annotation = (JsOpenAnnotation) a;			
+							
+							// Unmarshall targets
+							boolean multipleTargets = annotation.hasMultipleTargets();
+							if(multipleTargets) {
+								JsArray<JavaScriptObject> jsTargets = annotation.getTargets();
+								for(int t=0; t<jsTargets.length(); t++) {
+									JavaScriptObject jsTarget = jsTargets.get(t);
+									if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
+										JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
+										if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+											targetSources.put(jsSpecificResource.getId(), jsSpecificResource.getHasSourceAsString());
+										} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+											targets.put(jsSpecificResource.getHasSourceAsObject().getId(), jsSpecificResource.getHasSourceAsObject());
+										}
+									}
+								}
+							} else {
+								JavaScriptObject jsTarget = annotation.getTarget();
 								if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
 									JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
 									if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
@@ -182,20 +199,21 @@ public class AnnotopiaConverter {
 								}
 							}
 						} else {
-							JavaScriptObject jsTarget = annotation.getTarget();
-							if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
-								JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
-								if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
-									targetSources.put(jsSpecificResource.getId(), jsSpecificResource.getHasSourceAsString());
-								} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
-									targets.put(jsSpecificResource.getHasSourceAsObject().getId(), jsSpecificResource.getHasSourceAsObject());
-								}
-							}
+							_domeo.getLogger().warn(this, "Item not qualified as annotation... skipped" + jsSet.getId());
 						}
-					} else {
-						_domeo.getLogger().warn(this, "Item not qualified as annotation... skipped" + jsSet.getId());
-					}
-				}			
+					}		
+				}
+				
+				/*
+				Set<String> agentsKeys = agents.keySet();
+				for(String agentsKey: agentsKeys) {
+					_domeo.getLogger().debug(this, "AGENT: " + agentsKey + "-" + agents.get(agentsKey).getName());
+				}
+				Set<String> agentEntityKeys = entityAgents.keySet();
+				for(String agentEntityKey: agentEntityKeys) {
+					_domeo.getLogger().debug(this, "AGENTENTITY: " + agentEntityKey + "-" + entityAgents.get(agentEntityKey));
+				}
+				*/
 			} catch(Exception e) {
 				_domeo.getLogger().exception(this, "unmarshallAnnotationSet(): " + e.getMessage());
 			}
@@ -220,7 +238,7 @@ public class AnnotopiaConverter {
 			HashMap<String, JsResource> targets = new HashMap<String, JsResource>();
 			HashMap<String, String> targetSources = new HashMap<String, String>();
 			// Caching of both sets and annotations
-			cacheAgents(jsSets.get(i), agents, entityAgents, targets, targetSources);
+			cacheAgents(jsSets.get(i), agents, entityAgents, targets, targetSources, false);
 			
 			JsArray<JavaScriptObject> graphs = jsSets.get(i).getGraphs();
 			if(graphs.length()==1) {	
@@ -259,7 +277,7 @@ public class AnnotopiaConverter {
 		HashMap<String, String> targetSources = new HashMap<String, String>();
 
 		// Caching of both sets and annotations
-		cacheAgents(wrapper, agents, entityAgents, targets, targetSources);
+		cacheAgents(wrapper, agents, entityAgents, targets, targetSources, true);
 		
 		_domeo.getLogger().debug(this, "Unmarshalling set");
 		JsArray<JavaScriptObject> graphs = wrapper.getGraphs();
@@ -330,12 +348,15 @@ public class AnnotopiaConverter {
 			set.setLabel(notNullableString("label", jsSet.getLabel()));
 			set.setDescription(nullableString("description", jsSet.getDescription()));
 			
+			/*
 			if(jsSet.isAnnotationsArray()) 
 				set.setNumberAnnotations(jsSet.getNumberOfAnnotationItems());
 			else if(jsSet.getAnnotation()!=null)	
 				set.setNumberAnnotations(1);
 			else 
 				set.setNumberAnnotations(0);
+				*/
+			set.setNumberAnnotations(jsSet.annotationCounts());
 			
 			_domeo.getLogger().debug(this, "Unmarshalling set created on");
 			// Created on
@@ -461,11 +482,17 @@ public class AnnotopiaConverter {
 		JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
 
 		int max = jsSet.isAnnotationsArray() ? jsSet.getAnnotations().length() : ((jsSet.getAnnotation()!=null)?1:0);
-		_domeo.getLogger().debug(this, "DDDDDDD " + max);
-		//for(int i=0; i<max; i++) {
-		//	JavaScriptObject a = null;
-		//	if(max==1) a = jsSet.getAnnotation();
-		//	else a = jsSet.getAnnotations().get(i);
+
+		/*
+		Set<String> agentsKeys = agents.keySet();
+		for(String agentsKey: agentsKeys) {
+			_domeo.getLogger().debug(this, "AGENT: " + agentsKey + "-" + agents.get(agentsKey).getName());
+		}
+		Set<String> agentEntityKeys = entityAgents.keySet();
+		for(String agentEntityKey: agentEntityKeys) {
+			_domeo.getLogger().debug(this, "AGENTENTITY: " + agentEntityKey + "-" + entityAgents.get(agentEntityKey));
+		}
+		*/
 		
 		// Creation of annotation items
 		for(int i=0; i<max; i++) {
@@ -479,9 +506,13 @@ public class AnnotopiaConverter {
 				// AnnotatedBy
 				JsAnnotopiaAgent jsAnnotatedBy = null;
 				if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByString()) {
-					jsAnnotatedBy = agents.get(entityAgents.get(annotation.getId()));
+					jsAnnotatedBy = agents.get(entityAgents.get("createdBy:"+annotation.getId()));
+//					_domeo.getLogger().debug(this, "By string " + annotation.getId() + "-" + agents.get(entityAgents.get("createdBy:"+annotation.getId())).getId() + "-" + agents.get(entityAgents.get("createdBy:"+annotation.getId())).getName());
+//					_domeo.getLogger().debug(this, "By string " + jsAnnotatedBy.getId());
 				} else if(annotation.getAnnotatedBy()!=null && annotation.isAnnotatedByObject()) {
 					jsAnnotatedBy = agents.get(annotation.getAnnotatedByAsObject().getId());
+//					_domeo.getLogger().debug(this, "By object " + annotation.getId() + "-" + annotation.getAnnotatedByAsObject().getId() + "-" + agents.get(annotation.getAnnotatedByAsObject().getId()).getName());
+
 				}
 				_domeo.getLogger().debug(this, "Annotated by: " + jsAnnotatedBy.getId());
 				
@@ -576,10 +607,9 @@ public class AnnotopiaConverter {
 				}
 				_domeo.getLogger().debug(this, "Selectors: " + selectors.size());
 				
-				MAgentPerson annotatedBy = new MAgentPerson();
-				annotatedBy.setUri(jsAnnotatedBy.getId());
-				annotatedBy.setName(jsAnnotatedBy.getName());
-				
+				AgentsFactory factory = new AgentsFactory();
+				MAgentPerson annotatedBy = factory.createAgentPerson(jsAnnotatedBy.getId(), "", "", jsAnnotatedBy.getName(), "", "", "", "");
+
 				_domeo.getLogger().debug(this, "Motivation: " + getMotivation(annotation));
 				if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_COMMENTING)) {
 					_domeo.getLogger().debug(this, "Comment");
@@ -598,6 +628,8 @@ public class AnnotopiaConverter {
 					_domeo.getLogger().debug(this, "Comment 1");
 					MPostItAnnotation postIt = AnnotationFactory.createPostIt(aSet, annotatedBy, 
 							aSet.getCreatedWith(), PostitType.COMMENT_TYPE, bodyText);
+					//_domeo.getLogger().debug(this, "+++++++"+postIt);
+					//_domeo.getLogger().debug(this, "++++++"+postIt.getCreator());
 					for(MSelector selector: selectors) {
 						postIt.addSelector(selector);
 					}	
@@ -617,6 +649,8 @@ public class AnnotopiaConverter {
 				} else if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_HIGHLIGHTED)) {
 					_domeo.getLogger().debug(this, "Highlight");
 					MHighlightAnnotation highlight = AnnotationFactory.createHighlight(aSet, annotatedBy, aSet.getCreatedWith());
+					//_domeo.getLogger().debug(this, "+++++++"+highlight);
+					//_domeo.getLogger().debug(this, "+++++++"+highlight.getCreator());
 					for(MSelector selector: selectors) {
 						highlight.addSelector(selector);
 					}	

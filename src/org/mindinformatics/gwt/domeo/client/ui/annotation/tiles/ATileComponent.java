@@ -115,6 +115,11 @@ public abstract class ATileComponent extends Composite {
 			deleteIcon.addClickHandler(ActionDeleteAnnotation.getClickHandler(_domeo, this, getAnnotation()));
 			step=4;
 			
+			_domeo.getLogger().info(this, "1> " + (((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE)).getValue().toString()));
+			//_domeo.getLogger().info(this, "2> " + annotation.getCreator());
+			_domeo.getLogger().info(this, "3> " + annotation.getCreator().getUri());
+			_domeo.getLogger().info(this, "5> " + Boolean.toString(annotation.getCreator().getUri().equals(_domeo.getAgentManager().getUserPerson().getUri())));
+			
 			// TODO move to an abstract tile class
 			if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), Domeo.PREF_DISPLAY_PROVENANCE)).getValue()) {
 				if(annotation.getCreator().getUri().equals(_domeo.getAgentManager().getUserPerson().getUri())) {
