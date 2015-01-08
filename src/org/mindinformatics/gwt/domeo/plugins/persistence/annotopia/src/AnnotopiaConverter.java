@@ -628,6 +628,7 @@ public class AnnotopiaConverter {
 					_domeo.getLogger().debug(this, "Comment 1");
 					MPostItAnnotation postIt = AnnotationFactory.createPostIt(aSet, annotatedBy, 
 							aSet.getCreatedWith(), PostitType.COMMENT_TYPE, bodyText);
+					postIt.setHasChanged(false);
 					//_domeo.getLogger().debug(this, "+++++++"+postIt);
 					//_domeo.getLogger().debug(this, "++++++"+postIt.getCreator());
 					for(MSelector selector: selectors) {
@@ -649,6 +650,7 @@ public class AnnotopiaConverter {
 				} else if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_HIGHLIGHTED)) {
 					_domeo.getLogger().debug(this, "Highlight");
 					MHighlightAnnotation highlight = AnnotationFactory.createHighlight(aSet, annotatedBy, aSet.getCreatedWith());
+					highlight.setHasChanged(false);
 					//_domeo.getLogger().debug(this, "+++++++"+highlight);
 					//_domeo.getLogger().debug(this, "+++++++"+highlight.getCreator());
 					for(MSelector selector: selectors) {

@@ -63,7 +63,7 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 		return this.annotations!=null; 
 	}-*/;
 	public final native int annotationCounts() /*-{  
-		if(Object.prototype.toString.call(this.annotations) === '[object Array]') return this.annotation.length; 
+		if(Object.prototype.toString.call(this.annotations) === '[object Array]') return this.annotations.length; 
 		if(this.annotations!=null)  return 1
 		return 0
 	}-*/;

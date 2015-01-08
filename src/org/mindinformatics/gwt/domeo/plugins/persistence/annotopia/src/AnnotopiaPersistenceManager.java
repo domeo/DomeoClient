@@ -204,7 +204,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		for(MAnnotationSet annotationSet: setToSerialize) {
 			final String operation = (annotationSet.getVersionNumber()==null || annotationSet.getVersionNumber().isEmpty())? "post":"put";
 			JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-			Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"outCmd\":\"frame\",\"set\":" + manager.serialize(annotationSet).toString() + "}");
+			Properties v = utils.parseJSON(
+					"{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  
+					"\",\"outCmd\":\"frame\",\"set\":" + 
+					manager.serialize(annotationSet).toString() + "}");
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(URL+"s/annotationset")
