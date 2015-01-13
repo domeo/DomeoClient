@@ -29,6 +29,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.annotato
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.GwtBioPortalServiceConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.service.test.StandaloneBioPortalConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.src.JsonBioPortalConnector;
+import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -54,7 +55,7 @@ public class BioPortalManager implements ITextMiningConnector {
 			_connector = new StandaloneBioPortalConnector();
 		} else {
 			if(domeo.isAnnotopiaEnabled()) {
-				_connector = new AnnotopiaBioPortalConnector(domeo, null);
+				_connector = new AnnotopiaBioPortalConnector(domeo, ApplicationUtils.getAnnotopiaLocation());
 			} else if (domeo.isHostedMode()) {
 				_connector = new GwtBioPortalServiceConnector();
 			} else {

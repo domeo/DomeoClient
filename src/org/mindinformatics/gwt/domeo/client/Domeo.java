@@ -768,7 +768,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		} else {
 			if (isHostedMode()) {
 				if(annotopia) {
-					return new AnnotopiaPersistenceManager(this, null, null);
+					return new AnnotopiaPersistenceManager(this, ApplicationUtils.getAnnotopiaLocation(), null);
 				} else if(isJsonFormat()) {
 					return new JsonPersistenceManager(this, null);
 				} else {
@@ -827,6 +827,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://omim.org/entry/600354");
 			} else if(url.endsWith("tests/gene6606.html")) {
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://www.ncbi.nlm.nih.gov/gene/6606");
+			} else if(url.endsWith("tests/s4.html")) {
+				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://www.jbiomedsem.com/content/2/S2/S4");
 			} else if(url.endsWith("tests/EPMC1240580.html")) {
 				getContentPanel().getAnnotationFrameWrapper().setUrl(url, "http://europepmc.org/articles/PMC1240580");
 			} else if(url.endsWith("tests/PM10679938.html")) {

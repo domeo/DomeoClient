@@ -50,9 +50,10 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 	protected IApplication _application;
 	private IPubMedItemsRequestCompleted _callback;
 
-	public AnnotopiaPubMedConnector(IApplication application, IPubMedItemsRequestCompleted callbackCompleted) {
+	public AnnotopiaPubMedConnector(IApplication application, IPubMedItemsRequestCompleted callbackCompleted, String url ) {
 		_application = application;
 		_callback = callbackCompleted;
+		if(url!=null) URL = url;
 	}
 	
 //	public static native JavaScriptObject parseJson(String jsonStr) /*-{
