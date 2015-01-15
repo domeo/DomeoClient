@@ -27,6 +27,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
@@ -36,6 +37,7 @@ import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.user.client.Window;
 
 /**
  * This class serializes Agents to Annotopia JSON format.
@@ -62,6 +64,8 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			jsonAnnotation.put("motivatedBy", new JSONString("oa:commenting"));
 		} else if(ann.getAnnotationType().equals("ao:Qualifier")) {
 			jsonAnnotation.put("motivatedBy", new JSONString("oa:tagging"));
+		} else if(ann.getAnnotationType().equals("ao:LinearComment")) {
+			jsonAnnotation.put("motivatedBy", new JSONString("oa:commenting"));
 		}
 		
 		jsonAnnotation.put(IRdfsOntology.id, nonNullable(ann.getIndividualUri()));
@@ -108,9 +112,13 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		
 		if(ann.getAnnotationType().equals("ao:PostIt")) {
 			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
-		} if(ann.getAnnotationType().equals("ao:Qualifier")) {
+		} 
+		if(ann.getAnnotationType().equals("ao:Qualifier")) {
 			jsonAnnotation.put("hasBody", encodeTags(manager, ann));
 		}
+		if(ann.getAnnotationType().equals("ao:LinearComment")) {
+			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
+		} 
 		
 		jsonAnnotation.put("hasTarget", encodeSelectors(manager, ann));
 		return jsonAnnotation;
@@ -138,18 +146,33 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 	 * @return The Textual Bodies in JSON format
 	 */
 	protected JSONArray encodeBodies(AnnotopiaSerializerManager manager, MAnnotation ann) {
-		MContentAsRdf body = ((MPostItAnnotation)ann).getBody();		
-		JSONArray jsonBodies = new JSONArray();
-		JSONObject jsonBody = new JSONObject();
-		jsonBody.put(IRdfsOntology.id, nonNullable("urn:body:" + body.getIndividualUri()));
-		JSONArray jsonTypes = new JSONArray();
-		jsonTypes.set(0, new JSONString("cnt:ContentAsText"));
-		jsonTypes.set(1, new JSONString("dctypes:Text"));
-		jsonBody.put(IRdfsOntology.type, jsonTypes);
-		jsonBody.put("format", new JSONString(body.getFormat()));
-		jsonBody.put("chars", new JSONString(body.getChars()));
-		jsonBodies.set(0, jsonBody);
-		return jsonBodies;
+		if(ann instanceof MPostItAnnotation) {
+			MContentAsRdf body = ((MPostItAnnotation)ann).getBody();		
+			JSONArray jsonBodies = new JSONArray();
+			JSONObject jsonBody = new JSONObject();
+			jsonBody.put(IRdfsOntology.id, nonNullable("urn:body:" + body.getIndividualUri()));
+			JSONArray jsonTypes = new JSONArray();
+			jsonTypes.set(0, new JSONString("cnt:ContentAsText"));
+			jsonTypes.set(1, new JSONString("dctypes:Text"));
+			jsonBody.put(IRdfsOntology.type, jsonTypes);
+			jsonBody.put("format", new JSONString(body.getFormat()));
+			jsonBody.put("chars", new JSONString(body.getChars()));
+			jsonBodies.set(0, jsonBody);
+			return jsonBodies;
+		} else if(ann instanceof MLinearCommentAnnotation) {
+			MLinearCommentAnnotation annotation = (MLinearCommentAnnotation) ann;
+			JSONArray jsonBodies = new JSONArray();
+			JSONObject jsonBody = new JSONObject();
+			//jsonBody.put(IRdfsOntology.id, nonNullable("urn:body:" + body.getIndividualUri()));
+			JSONArray jsonTypes = new JSONArray();
+			jsonTypes.set(0, new JSONString("cnt:ContentAsText"));
+			jsonTypes.set(1, new JSONString("dctypes:Text"));
+			jsonBody.put(IRdfsOntology.type, jsonTypes);
+			jsonBody.put("format", new JSONString("text/plain"));
+			jsonBody.put("chars", new JSONString(((MLinearCommentAnnotation) ann).getText()));
+			jsonBodies.set(0, jsonBody);
+			return jsonBodies;		
+		} else return null;
 	}
 	
 	/**

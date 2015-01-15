@@ -26,6 +26,7 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
@@ -65,6 +66,7 @@ public IDomeo _domeo;
 		serializers.put(MAnnotation.class.getName(), new SAnnotationSerializer());
 		serializers.put(MTextQuoteSelector.class.getName(), new STextQuoteSelectorSerializer());
 		serializers.put(MImageInDocumentSelector.class.getName(), new SImageInDocumentSelectorSerializer());
+		serializers.put(MAnnotationSelector.class.getName(), new SAnnotationSelectorSerializer());
 		// Agents
 		serializers.put(IAgent.class.getName(), new SAgentSerializer());
 		serializers.put(MAgentPerson.class.getName(), new SAgentPersonSerializer());
