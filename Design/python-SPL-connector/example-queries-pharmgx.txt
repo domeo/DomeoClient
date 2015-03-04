@@ -60,7 +60,7 @@ CONSTRUCT {
 }
 
 
-FROM <http://purl.org/net/nlprepository/original-pgx-consensus-09162014>
+FROM <http://purl.org/net/nlprepository/original-spl-pgx-annotation-poc>
 WHERE {
 
   ?item a oa:SPLAnnotation;
