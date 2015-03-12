@@ -95,7 +95,7 @@ WHERE {
   ?drug2 rdfs:label ?drug2Lab.
   ?drug2 dailymed:activeMoietyRxCUI ?drug2rxc.
   ?drug2 rdf:type ?drug2Type.
-  ?drug2 sio:SIO_000228 ?drug2Role.
+  ?drug2 sio:SIO_000228 ?drug2Role.FILTER(?drug1Role != ?drug2Role).
 }    
 GROUP BY ?exactText
 ORDER BY DESC(?annot)
