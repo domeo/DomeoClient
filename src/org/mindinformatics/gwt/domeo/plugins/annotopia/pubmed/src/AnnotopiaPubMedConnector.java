@@ -184,20 +184,26 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 							for(int i=0; i<pubmedEntries.length(); i++) {
 								
 								try {
-									JsoPubMedEntry  pubmedEntry = (JsoPubMedEntry) pubmedEntries.get(i);
-									MPublicationArticleReference reference = new MPublicationArticleReference();
-									reference.setUrl(pubmedEntry.getUrl());
-									reference.setDoi(pubmedEntry.getDoi());
-									reference.setPubMedId(pubmedEntry.getPmId());
-									reference.setPubMedCentralId(pubmedEntry.getPmcId());
-									reference.setTitle(pubmedEntry.getTitle());
-									reference.setAuthorNames(pubmedEntry.getPublicationAuthors());
-									reference.setJournalPublicationInfo(pubmedEntry.getPublicationInfo());
-									reference.setPublicationDate(pubmedEntry.getPublicationDate());
-									reference.setSource(EPubMedDatabase.getInstance());
-									reference.setJournalName(pubmedEntry.getJournalName());
-									reference.setJournalIssn(pubmedEntry.getJournalIssn());
-									references.add(reference);;
+									if(pubmedEntries.get(i).equals(APubMedBibliograhyExtractorCommand.UNRECOGNIZED)) {
+										MPublicationArticleReference reference = new MPublicationArticleReference();
+										reference.setUnrecognized(APubMedBibliograhyExtractorCommand.UNRECOGNIZED);
+										references.add(reference);
+									} else if(pubmedEntries.get(i) instanceof Object) {
+										JsoPubMedEntry  pubmedEntry = (JsoPubMedEntry) pubmedEntries.get(i);
+										MPublicationArticleReference reference = new MPublicationArticleReference();
+										reference.setUrl(pubmedEntry.getUrl());
+										reference.setDoi(pubmedEntry.getDoi());
+										reference.setPubMedId(pubmedEntry.getPmId());
+										reference.setPubMedCentralId(pubmedEntry.getPmcId());
+										reference.setTitle(pubmedEntry.getTitle());
+										reference.setAuthorNames(pubmedEntry.getPublicationAuthors());
+										reference.setJournalPublicationInfo(pubmedEntry.getPublicationInfo());
+										reference.setPublicationDate(pubmedEntry.getPublicationDate());
+										reference.setSource(EPubMedDatabase.getInstance());
+										reference.setJournalName(pubmedEntry.getJournalName());
+										reference.setJournalIssn(pubmedEntry.getJournalIssn());
+										references.add(reference);;
+									}
 								} catch(Exception e) {
 									MPublicationArticleReference reference = new MPublicationArticleReference();
 									reference.setUnrecognized(APubMedBibliograhyExtractorCommand.UNRECOGNIZED);
