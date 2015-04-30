@@ -123,5 +123,47 @@ public class Mexpertstudy_pDDIUsage {
 	public void setModality(MLinkedResource modality) {
 		MpDDI.setModality(modality);
 	}
+	
+	//increase Auc fields
+	
+	public MLinkedResource getNumOfparcipitants() {
+		return MpDDI.getNumOfparcipitants();
+	}
+
+	public void setNumOfparcipitants(MLinkedResource numOfparcipitants) {
+		MpDDI.setNumOfparcipitants(numOfparcipitants);
+	}
+	
+	public MLinkedResource getIncreaseAuc() {
+		return MpDDI.getIncreaseAuc();
+	}
+
+	public void setIncreaseAuc(MLinkedResource increaseAuc) {
+		MpDDI.setIncreaseAuc(increaseAuc);
+	}
+	
+	public MLinkedResource getEvidenceType() {
+		return MpDDI.getEvidenceType();
+	}
+
+	public void setEvidenceType(MLinkedResource evidenceType) {
+		MpDDI.setEvidenceType(evidenceType);
+	}
+	
+	public MLinkedResource getObjectDose() {
+		return MpDDI.getObjectDose();
+	}
+	
+	public void setObjectDose(MLinkedResource objectDose) {
+		MpDDI.setObjectDose(objectDose);
+	}
+
+	public MLinkedResource getPreciptDose() {
+		return MpDDI.getPreciptDose();
+	}
+	
+	public void setPreciptDose(MLinkedResource preciptDose) {
+		MpDDI.setPreciptDose(preciptDose);
+	}
 
 }

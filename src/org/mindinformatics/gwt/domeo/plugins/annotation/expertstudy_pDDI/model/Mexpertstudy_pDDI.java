@@ -11,9 +11,62 @@ import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResou
 @SuppressWarnings("serial")
 public class Mexpertstudy_pDDI extends MTrustedResource {
 
+	// basic DDI elements
 	MLinkedResource drug1, drug2, type1, role1, type2, role2, statement,
 			modality;
 	String comment;
+	
+	// increase AUC
+	MLinkedResource numOfparcipitants, objectDose, preciptDose, increaseAuc, evidenceType;
+
+	public MLinkedResource getNumOfparcipitants() {
+		return numOfparcipitants;
+	}
+
+	public void setNumOfparcipitants(MLinkedResource numOfparcipitants) {
+		this.numOfparcipitants = numOfparcipitants;
+	}
+
+	public MLinkedResource getObjectDose() {
+		return objectDose;
+	}
+
+	public void setObjectDose(MLinkedResource objectDose) {
+		this.objectDose = objectDose;
+	}
+
+	public MLinkedResource getPreciptDose() {
+		return preciptDose;
+	}
+
+	public void setPreciptDose(MLinkedResource preciptDose) {
+		this.preciptDose = preciptDose;
+	}
+
+	public MLinkedResource getIncreaseAuc() {
+		return increaseAuc;
+	}
+
+	public void setIncreaseAuc(MLinkedResource increaseAuc) {
+		this.increaseAuc = increaseAuc;
+	}
+
+	public MLinkedResource getEvidenceType() {
+		return evidenceType;
+	}
+
+	public void setEvidenceType(MLinkedResource evidenceType) {
+		this.evidenceType = evidenceType;
+	}
+
+	public static HashMap<String, drugEntity> getDrugEntitiesMap() {
+		return drugEntitiesMap;
+	}
+
+	public static void setDrugEntitiesMap(
+			HashMap<String, drugEntity> drugEntitiesMap) {
+		Mexpertstudy_pDDI.drugEntitiesMap = drugEntitiesMap;
+	}
 
 	/*
 	 * inner class for drug entity
@@ -30,6 +83,7 @@ public class Mexpertstudy_pDDI extends MTrustedResource {
 		private String name;
 		private String rxcui;
 		private String type;
+		
 
 		public String getRxcui() {
 			return rxcui;

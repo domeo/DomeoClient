@@ -29,13 +29,10 @@ import org.mindinformatics.gwt.framework.src.IResizable;
 import org.mindinformatics.gwt.framework.widget.ButtonWithIcon;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -117,6 +114,18 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 	@UiField
 	Label commentlabel;
 
+	// assertion type
+	@UiField
+	ListBox assertType;
+
+	// evidence modality
+	@UiField
+	RadioButton evidenceSpt, evidenceAgt;
+
+	// AUC fields
+	@UiField
+	TextArea numParticipt, objectDose, preciptDose, auc;
+
 	// drug 1 and drug 2
 
 	public MLinkedResource getDrug1() {
@@ -133,9 +142,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 								.get(drug1Str.toLowerCase()).getRxcui();
 			} else
 				drug1Uri = RXNORM_PREFIX;
-
-			// System.out.println("drug1:" + drug1Str + " |URI:" + drug1Uri +
-			// "|");
 
 			return ResourcesFactory.createLinkedResource(drug1Uri, drug1Str,
 					"Referred to the drug in the interaction.");
@@ -160,8 +166,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 			} else
 				drug2Uri = RXNORM_PREFIX;
 
-			// System.out.println("drug2:" + drug2Str + " |URI:" + drug2Uri +
-			// "|");
 			return ResourcesFactory.createLinkedResource(drug2Uri, drug2Str,
 					"Referred to the drug in the interaction.");
 
@@ -293,6 +297,50 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		return null;
 	}
 
+	// increase AUC fields
+	// TextArea numParticipt, objectDose, preciptDose, auc;
+
+	public MLinkedResource getNumOfParticipants() {
+
+		if (!numParticipt.getText().trim().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+					+ "numOfParticipants", numParticipt.getText(),
+					"The number of participants involved in interaction");
+		} else
+			return null;
+	}
+	
+	public MLinkedResource getObjectDose() {
+
+		if (!objectDose.getText().trim().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+					+ "objectDose", objectDose.getText(),
+					"The dose of object drug in interation");
+		} else
+			return null;
+	}
+	
+	public MLinkedResource getPreciptDose() {
+
+		if (!preciptDose.getText().trim().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+					+ "preciptDose", preciptDose.getText(),
+					"The dose of preciptant drug in interation");
+		} else
+			return null;
+	}
+	
+	public MLinkedResource getAuc() {
+
+		if (!auc.getText().trim().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+					+ "auc", auc.getText(),
+					"The maximum increasing Auc in interation");
+		} else
+			return null;
+	}
+
+
 	// NEW annotation
 	public Fexpertstudy_pDDIForm(IDomeo domeo, final AFormsManager manager) {
 		super(domeo);
@@ -325,7 +373,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			}
 		}
-
+		rightColumn.setVisible(false);
 		commentlabel.setVisible(false);
 		comment.setVisible(false);
 
@@ -334,6 +382,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		// highlight drug and preselect type
 		highlightCurrentDrug();
+
+		// switch assertion mode ddi/increase Auc
+		switchAssertType();
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
 				.generalCss().applyButton());
@@ -410,7 +461,9 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 							_domeo.getLogger().debug(this, "DDI annotation 7");
 							expertstudy_pDDIUsage.setDrug2(getDrug2());
 							_domeo.getLogger().debug(this, "DDI annotation 8");
-
+							expertstudy_pDDIUsage
+							_domeo.getLogger().debug(this, "DDI annotation 8");
+							
 							annotation.setMpDDIUsage(expertstudy_pDDIUsage);
 							// annotation.setComment(comment.getText());
 
@@ -438,10 +491,7 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 						}
 					} else {
-						// _item.setType(PostitType.findByName(postitTypes.getItemText(postitTypes.getSelectedIndex())));
-						// _item.setText(getPostItBody());
 						_domeo.getLogger().debug(this, "_item is NOT null...");
-
 						_manager.hideContainer();
 					}
 				} catch (Exception e) {
@@ -474,12 +524,11 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 		commentlabel.setVisible(false);
 		comment.setVisible(false);
+		rightColumn.setVisible(false);
 
 		try {
 			refreshAnnotationSetFilter(annotationSet, annotation);
-
-			// drug1.setSelectedIndex(0);
-			// drug2.setSelectedIndex(0);
+			switchAssertType();
 
 			currentMpDDI = annotation.getMpDDIUsage().getMpDDI();
 
@@ -1030,7 +1079,6 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 
 			// System.out.println("DOM.getElementById('exactmatch') is " + e);
 		}
-
 	}
 
 	/*
@@ -1051,15 +1099,11 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		// + occurrences);
 
 		int currentMatch = html.indexOf(currentDrug);
-
 		while (currentMatch >= 0 && occurrences >= 1) {
-
 			// System.out.println(occurrences + "|" + currentMatch);
-
 			currentMatch = html.indexOf(currentDrug,
 					currentMatch + currentDrug.length());
 			occurrences--;
-
 		}
 
 		return currentMatch;
@@ -1152,4 +1196,26 @@ public class Fexpertstudy_pDDIForm extends AFormComponent implements
 		}
 		return true;
 	}
+
+	/*
+	 * switch assertion type (drug-drug interaction / increaseAuc) type code:
+	 * ddi: 0 , increaseAuc: 1
+	 */
+
+	public void switchAssertType() {
+		assertType.addChangeHandler(new ChangeHandler() {
+
+			@Override
+			public void onChange(ChangeEvent event) {
+				int type = assertType.getSelectedIndex();
+				if (type == 0) {
+					rightColumn.setVisible(false);
+				} else {
+					rightColumn.setVisible(true);
+				}
+			}
+		});
+
+	}
+
 }
