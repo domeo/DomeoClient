@@ -22,6 +22,7 @@ import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.Properties;
 import com.google.gwt.query.client.js.JsUtils;
 import com.google.gwt.query.client.plugins.ajax.Ajax;
+import com.google.gwt.query.client.plugins.ajax.Ajax.Settings;
 import com.google.gwt.user.client.Window;
 
 /**
@@ -29,7 +30,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaPersistenceManager extends APersistenceManager implements IPersistenceManager {
 
-	private static final String API_KEY = "ApiKey";
+	private static final String API_KEY = "annotopia-api-key";
 	private static final String POST = "post", PUT = "put", DELETE = "delete", JSON = "json";
 	private static final String PREFIX = "s/annotationset";
 	
@@ -75,10 +76,13 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	 */
 	private void postAnnotationSet(MAnnotationSet set) {
 		_application.getLogger().debug(this, "Posting new annotation set");
+		
 		try {
 			Ajax.ajax(Ajax.createSettings()
-				.setUrl(URL + PREFIX)
-				.setHeaders(getHeaders()).setDataType(JSON).setType(POST)    
+				.setUrl(URL + PREFIX)	
+				.setHeaders(getHeaders())
+				.setDataType(JSON)
+				.setType(POST)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON(AnnotopiaSerializerManager.getInstance((IDomeo)_application).serialize(set).toString()))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
@@ -121,6 +125,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		    				_application.getProgressPanelContainer().hide();
 		    				_application.getLogger().debug(this, "Completed saving of Annotation Set in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 		    			}
+		    		}
+		        }).setError(new Function(){ // callback to be run if the request success
+		    		public void f() {
+		    			Window.alert("There was an error " + getDataObject());
 		    		}
 		        })
 		    );
@@ -224,7 +232,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	 */
 	private Properties getHeaders() {
 		Properties props = getAnnotopiaOAuthToken();
-		props.set(API_KEY, ApplicationUtils.getAnnotopiaApiKey());
+		props.set("Authorization", "annotopia-api-key " + ApplicationUtils.getAnnotopiaApiKey());
 		return props;
 	}
 	
