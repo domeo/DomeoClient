@@ -6,7 +6,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.search.ISearchComponen
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.MddiAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.model.MSPLsAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 

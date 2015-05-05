@@ -253,7 +253,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 					
 					out.print("{");
 					out.print("\"name\": \"");
-					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI");
+					out.print("org.mindinformatics.gwt.domeo.plugins.annotation.ddi");
 					out.print("\",");
 					out.print("\"status\": \"");
 					out.print("enabled");
@@ -379,7 +379,7 @@ public class JsonProfilesServiceImpl extends HttpServlet {
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.qualifier", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.nif.antibodies", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.spls", MProfile.PLUGIN_ENABLED);
-		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI", MProfile.PLUGIN_ENABLED);
+		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.annotation.ddi", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmedcentral", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.omim", MProfile.PLUGIN_ENABLED);
 		profile.addPluginPreference("org.mindinformatics.gwt.domeo.plugins.resource.pubmed", MProfile.PLUGIN_ENABLED);

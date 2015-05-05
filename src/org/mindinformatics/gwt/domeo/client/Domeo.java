@@ -69,6 +69,11 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.e
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.ui.tile.LinearCommentTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.ui.tile.CurationTileProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.info.ddiPlugin;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.MddiAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.ui.card.ddiCardProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.ui.form.ddiFormProvider;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.ui.tile.ddiTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.info.HighlightPlugin;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.search.HighligthSearchComponent;
@@ -118,11 +123,6 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.card.SPLsCardPro
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.form.SPLsFormProvider;
 import org.mindinformatics.gwt.domeo.plugins.annotation.spls.ui.tile.SPLsTileProvider;
 
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.info.expertstudy_pDDIPlugin;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.card.expertstudy_pDDICardProvider;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.form.expertstudy_pDDIFormProvider;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.ui.tile.expertstudy_pDDITileProvider;
 
 import org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.src.ScienceDirectUrlFilter;
 
@@ -627,24 +627,24 @@ IRetrieveExistingAnnotationSetHandler,
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class
 				.getName(), new CommentTileProvider(this));
 
-		// expertstudy_pDDI
-		pluginsManager.registerPlugin(expertstudy_pDDIPlugin.getInstance(),
+		// ddi
+		pluginsManager.registerPlugin(ddiPlugin.getInstance(),
 				true);
 
 		if (_profileManager.getUserCurrentProfile().isPluginEnabled(
-				expertstudy_pDDIPlugin.getInstance().getPluginName())) {
+				ddiPlugin.getInstance().getPluginName())) {
 
 			annotationFormsManager.registerAnnotationForm(
-					Mexpertstudy_pDDIAnnotation.class.getName(),
-					new expertstudy_pDDIFormProvider(this));
+					MddiAnnotation.class.getName(),
+					new ddiFormProvider(this));
 		}
 
 		annotationTailsManager.registerAnnotationTile(
-				Mexpertstudy_pDDIAnnotation.class.getName(),
-				new expertstudy_pDDITileProvider(this));
+				MddiAnnotation.class.getName(),
+				new ddiTileProvider(this));
 		annotationCardsManager.registerAnnotationCard(
-				Mexpertstudy_pDDIAnnotation.class.getName(),
-				new expertstudy_pDDICardProvider(this));
+				MddiAnnotation.class.getName(),
+				new ddiCardProvider(this));
 
 		// Comments
 		annotationTailsManager.registerAnnotationTile(MCommentAnnotation.class

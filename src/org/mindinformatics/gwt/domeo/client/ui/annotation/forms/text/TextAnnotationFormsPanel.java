@@ -10,7 +10,7 @@ import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.IFormGenerator;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.buffers.HighlightedTextBuffer;
 import org.mindinformatics.gwt.domeo.model.selectors.SelectorUtils;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.MddiAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.src.IContainerPanel;
 import org.mindinformatics.gwt.framework.src.IContentPanel;
@@ -445,8 +445,9 @@ public class TextAnnotationFormsPanel extends ATextFormsManager implements
 	public String highlightDrugMentionsForDDI(MAnnotation annotation,
 			String exactText) {
 
-		if (annotation.getAnnotationType().equals("ao:expertstudyAnnotation")) {
-			Mexpertstudy_pDDIAnnotation annExpert = (Mexpertstudy_pDDIAnnotation) annotation;
+		// if (annotation.getAnnotationType().equals("ao:expertstudyAnnotation")) {
+		if (annotation.getAnnotationType().equals("ao:ddiAnnotation")) {		
+			MddiAnnotation annExpert = (MddiAnnotation) annotation;
 			String drug1 = annExpert.getDrug1().getLabel();
 			String drug2 = annExpert.getDrug2().getLabel();
 

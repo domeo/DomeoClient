@@ -12,10 +12,10 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTargetSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIUsage;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.expertstudy_pDDIFactory;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.expertstudy_pDDIType;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.MddiAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.MddiUsage;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.ddiFactory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.ddiType;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
@@ -895,17 +895,17 @@ public class AnnotationFactory implements IInitializableComponent {
 		return ann;
 	}
 
-	// expertstudy_pDDI
+	// ddi
 	// -----------------------------------------------------------
-	public static Mexpertstudy_pDDIAnnotation cloneexpertstudy_pDDI(
+	public static MddiAnnotation cloneddi(
 			String individualUri, String lineageUri,
 			Date createdOn, Date lastSavedOn, 
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			String versionNumber, String previousVersion,
 			MGenericResource target, ArrayList<MSelector> selectors,
-			String label, MContentAsRdf body, expertstudy_pDDIType type) {
+			String label, MContentAsRdf body, ddiType type) {
 		
-		Mexpertstudy_pDDIAnnotation ann = new Mexpertstudy_pDDIAnnotation();
+		MddiAnnotation ann = new MddiAnnotation();
 		ann.setLocalId(getLocalId());
 		ann.setUuid("");
 		ann.setLineageUri(lineageUri);
@@ -922,8 +922,8 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setHasChanged(false);
 		
 		//TODO: why not just create a constructor for the class? This step here is needed or a null expection will trigger when data is added to the annotation
-		Mexpertstudy_pDDIUsage ddiUsage = expertstudy_pDDIFactory
-				.createexpertstudy_pDDIUsage();
+		MddiUsage ddiUsage = ddiFactory
+				.createddiUsage();
 		ann.setMpDDIUsage(ddiUsage);
 		return ann;
 	}

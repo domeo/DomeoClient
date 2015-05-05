@@ -1,0 +1,421 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style>
+	.outer {
+		height: 30px;
+		padding-left: 0px;
+		padding-top: 0px;
+		width: 800px;
+	}
+	
+	.buttonsPanel {
+		position: absolute;
+		right: 20px;
+		float: right;
+		padding-top: 4px;
+		padding-right: 0px;
+		padding-left: 2px;
+		height: 0px;
+		max-height: 20px;
+		display: block;
+	}
+	
+	.setPanel {
+		padding-left: 5px;
+	}
+	
+	.okButton {
+		vertical-align: middle;
+		float: right;
+	}
+	
+	.rightColumn {
+		padding-top: 20px;
+		padding-bottom: 20px;
+		width: 100%;
+		min-width: 350px;
+		height: 120px;
+		padding-top: 20px;
+		padding-bottom: 10px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	
+	.leftColumn {
+		width: 350px;
+		vertical-align: top;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	
+	.panel {
+		width: 100%;
+		vertical-align: left;
+		padding-top: 10px;
+	}
+	
+	.provenance {
+		backgorund-color: gray;
+		padding-top: 3px;
+		padding-left: 10px;
+		cursor: pointer;
+		cursor: hand;
+	}
+	
+	.commonlabel {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 100px;
+		height: 13px;
+		font-size: 12px;
+	}
+	
+	.subTitle {
+		/*width: 99%;*/
+		background-color: #eee;
+		padding-left: 4px;
+		padding-right: 14px;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		font-weight: bold;
+		border-bottom-right-radius: 10px;
+		border-top-right-radius: 10px;
+	}
+	
+	.subPanel {
+		min-height: 40px;
+	}
+	
+	.newQualifierPanel {
+		min-height: 26px;
+		display: inline;
+	}
+	
+	.inner {
+		padding-top: 3px;
+		padding-bottom: 3px;
+		cursor: pointer;
+		cursor: hand;
+	}
+	
+	.inner2 {
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-left: 3px;
+	}
+	
+	.qualifiersLabel {
+		font-weight: bold;
+		padding-right: 3px;
+	}
+	
+	.titlebar {
+		width: 350px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
+	}
+	
+	.titlebarright {
+		width: 350px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
+	}
+	
+	.commentBody {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 350px;
+		height: 100px;
+		font-size: 12px;
+	}
+	
+	.elementType {
+		padding-right: 2px;
+		display: inline;
+		white-space: nowrap;
+	}
+	
+	.titleLeft {
+		padding-left: 4px;
+	}
+	
+	.listbox {
+		vertical-align: top;
+		padding-left: 1px;
+		padding-right: 12px;
+	}
+	
+	.listbox1 {
+		width: 120px;
+	}
+	
+	.listbox2 {
+		width: 200px;
+	}
+	
+	.textarea {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 80px;
+		height: 13px;
+		font-size: 12px;
+	}
+	</ui:style>
+
+	<!-- <ui:with field='resources' type='org.mindinformatics.gwt.annotator.client.Annotator.Resources' 
+		/> -->
+
+	<g:VerticalPanel ui:field='container' styleName='{style.outer}'>
+
+
+		<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
+			<g:Label ui:field="label1" styleName='{style.qualifiersLabel}'>PDDI Annotation</g:Label>
+			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
+		</g:HorizontalPanel>
+
+
+		<g:HorizontalPanel styleName='{style.panel}'>
+
+			<g:cell>
+
+				<g:VerticalPanel styleName='{style.leftColumn}'>
+
+					<g:HorizontalPanel>
+
+						<g:Label>NER drug mentions: &nbsp; </g:Label>
+						<g:ListBox ui:field="drug1" name="descript"
+							visibleItemCount='1' styleName='{style.listbox1}'>
+							<g:item value="0"></g:item>
+						</g:ListBox>
+					</g:HorizontalPanel>
+
+					<!-- Drug 1 <g:Label ui:field="drug1label" styleName='{style.titleLeft}'>Drug 
+						1:</g:Label> <g:TextArea ui:field='drug1' styleName='{style.commonlabel}'></g:TextArea> -->
+
+					<!-- Type -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="type1" styleName='{style.titleLeft}'>Type (type of mention
+							within the sentence for each drug):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="typeai1" name="typer1"
+							checked="false">Active Ingredient</g:RadioButton>
+						<g:RadioButton ui:field="typemb1" name="typer1"
+							checked="false">Metabolite</g:RadioButton>
+						<g:RadioButton ui:field="typedp1" name="typer1"
+							checked="false">Drug Product</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+					<!-- Role -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="role1" styleName='{style.titleLeft}'>Role (each drug plays
+							within the interaction):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="roleob1" name="roler1"
+							checked="false">Object</g:RadioButton>
+						<g:RadioButton ui:field="rolepp1" name="roler1"
+							checked="false">Precipitant</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+
+					<!-- Drug 2 -->
+					<g:HorizontalPanel>
+
+						<g:Label>NER Drug mentions: &nbsp; </g:Label>
+						<g:ListBox ui:field="drug2" name="descript"
+							visibleItemCount='1' styleName='{style.listbox1}'>
+							<g:item value="0"></g:item>
+						</g:ListBox>
+					</g:HorizontalPanel>
+
+					<!-- Type -->
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="type2" styleName='{style.titleLeft}'>Type (type of mention
+							within the sentence for each drug):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="typeai2" name="typer2"
+							checked="false">Active Ingredient</g:RadioButton>
+						<g:RadioButton ui:field="typemb2" name="typer2"
+							checked="false">Metabolite</g:RadioButton>
+						<g:RadioButton ui:field="typedp2" name="typer2"
+							checked="false">Drug Product</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+					<!-- Role -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="role2" styleName='{style.titleLeft}'>Role (each drug plays
+							within the interaction):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="roleob2" name="roler2"
+							checked="false">Object</g:RadioButton>
+						<g:RadioButton ui:field="rolepp2" name="roler2"
+							checked="false">Precipitant</g:RadioButton>
+					</g:HorizontalPanel>
+
+				</g:VerticalPanel>
+			</g:cell>
+
+
+			<g:cell>
+
+				<g:VerticalPanel ui:field='middleColumn' styleName='{style.rightColumn}'>
+
+					<!-- Statement -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement (data
+							type that is described):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:RadioButton ui:field="statementqu" name="statement"
+							checked="false">quantitative</g:RadioButton>
+						<g:RadioButton ui:field="statementql" name="statement"
+							checked="false">qualitative</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+					<!--Modality: -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="modality" styleName='{style.titleLeft}'>Modality (observed
+							effect that is described):</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header8' styleName='{style.panel}'>
+						<g:RadioButton ui:field="modalitypt" name="modality"
+							checked="false">Positive</g:RadioButton>
+						<g:RadioButton ui:field="modalitynt" name="modality"
+							checked="false">Negative</g:RadioButton>
+					</g:HorizontalPanel>
+
+
+					<!-- extra resource -->
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="commentlabel" styleName='{style.titleLeft}'>Comment:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
+						<g:TextArea ui:field='comment' styleName='{style.commentBody}'></g:TextArea>
+					</g:HorizontalPanel>
+
+
+					<!-- assertion type label -->
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="assertTypeLabel" styleName='{style.titleLeft}'>DIKB
+							Assertion
+							type:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header9' styleName='{style.panel}'>
+						<g:ListBox ui:field='assertType'>
+							<g:item value='0'>Drug Drug Interaction</g:item>
+							<g:item value='1'>Increase Auc</g:item>
+
+						</g:ListBox>
+					</g:HorizontalPanel>
+
+
+					<!-- evidence type -->
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="evidenceTypeLabel" styleName='{style.titleLeft}'>Evidence
+							modality:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header10' styleName='{style.panel}'>
+						<g:RadioButton ui:field="evidenceSpt" name="evidenceType"
+							checked="false">Evidence for</g:RadioButton>
+						<g:RadioButton ui:field="evidenceAgt" name="evidenceType"
+							checked="false">Evidence against</g:RadioButton>
+					</g:HorizontalPanel>
+
+				</g:VerticalPanel>
+			</g:cell>
+
+
+			<g:cell>
+
+				<g:VerticalPanel ui:field='rightColumn' styleName='{style.rightColumn}'>
+
+					<!-- number of participants (only for increase Auc) -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="numParticiptLabel" styleName='{style.titleLeft}'>The number
+							of study participants:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header11' styleName='{style.panel}'>
+						<g:TextArea ui:field='numParticipt' styleName='{style.textarea}'></g:TextArea>
+					</g:HorizontalPanel>
+
+					<!-- object dose (only for increase Auc) -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="objectDoseLabel" styleName='{style.titleLeft}'>The object
+							drugs's dose in gram:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header12' styleName='{style.panel}'>
+						<g:TextArea ui:field='objectDose' styleName='{style.textarea}'></g:TextArea>
+					</g:HorizontalPanel>
+
+
+					<!-- precipitant dose (only for increase Auc) -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="preciptDoseLabel" styleName='{style.titleLeft}'>The
+							preticipant drugs's dose in gram:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header13' styleName='{style.panel}'>
+						<g:TextArea ui:field='preciptDose' styleName='{style.textarea}'></g:TextArea>
+					</g:HorizontalPanel>
+
+					<!-- AUC (only for increase Auc) -->
+
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="aucLabel" styleName='{style.titleLeft}'>AUC_i/AUC:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header14' styleName='{style.panel}'>
+						<g:TextArea ui:field='auc' styleName='{style.textarea}'></g:TextArea>
+					</g:HorizontalPanel>
+
+
+
+
+				</g:VerticalPanel>
+			</g:cell>
+
+		</g:HorizontalPanel>
+
+		<!-- Ok button and annotation type -->
+		<g:HorizontalPanel ui:field='buttonsPanel'
+			styleName='{style.okButton}'>
+			<g:SimplePanel styleName='{style.okButton}'>
+				<g:ListBox ui:field='annotationSet'></g:ListBox>
+			</g:SimplePanel>
+		</g:HorizontalPanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

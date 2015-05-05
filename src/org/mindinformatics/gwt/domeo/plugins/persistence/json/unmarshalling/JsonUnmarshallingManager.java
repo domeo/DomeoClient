@@ -28,8 +28,8 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.mode
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.CurationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.JsAnnotationCuration;
 import org.mindinformatics.gwt.domeo.plugins.annotation.curation.model.MCurationToken;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.Mexpertstudy_pDDIAnnotation;
-import org.mindinformatics.gwt.domeo.plugins.annotation.expertstudy_pDDI.model.expertstudy_pDDIType;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.MddiAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.ddi.model.ddiType;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
@@ -64,7 +64,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotation
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
-import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationexpertstudy_pDDI;
+import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationddi;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsBibliographicSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsPublicationArticleReference;
@@ -1103,22 +1103,40 @@ public class JsonUnmarshallingManager {
 								_domeo.getLogger().debug(this, "unmarshallSPLAnnotation produced annotation. Some tests values:" +
 										" PharmacokineticImpact" + ((MSPLsAnnotation) ann).getPKImpact());																						
 							}
-						} else if (typesSet.contains(Mexpertstudy_pDDIAnnotation.TYPE)){
-							expertstudy_pDDIType ddiType = null;
+						} else if (typesSet.contains(MddiAnnotation.TYPE)){
+							ddiType dditype = null;
 							//if(typesSet.contains(SPLType.PHARMGX)) { //TODO: test with the conditional operational
-							ddiType = expertstudy_pDDIType.DDI_TYPE; //TODO: possibly add multiple types like Post It has (e.g., pharmgx, ddis, ades, etc)
+							dditype = ddiType.DDI_TYPE; //TODO: possibly add multiple types like Post It has (e.g., pharmgx, ddis, ades, etc)
 							//}
-							if(ddiType!=null) {
-								_domeo.getLogger().debug(this, "Calling unmarshallexpertstudy_pDDIAnnotation with selector 0 prefix: " + 
-										((MTextQuoteSelector)selectors.get(0)).getPrefix() + " suffix: " + 
-										((MTextQuoteSelector)selectors.get(0)).getSuffix());
-								ann = unmarshallexpertstudy_pDDIAnnotation((JsAnnotationexpertstudy_pDDI) jsonAnnotations.get(j), "", set, selectors);
+							if(dditype!=null) {
+								
+								//System.out.println("Calling unmarshallddiAnnotation with selector 0 prefix: " + 
+								//		((MTextQuoteSelector)selectors.get(0)).getPrefix() + " suffix: " + 
+								//		((MTextQuoteSelector)selectors.get(0)).getSuffix());
+																
+								ann = unmarshallddiAnnotation((JsAnnotationddi) jsonAnnotations.get(j), "", set, selectors);
 								if(ann == null){
 									_domeo.getLogger().debug(this, "something is wrong, annotation is null");
 								}
-								((Mexpertstudy_pDDIAnnotation) ann).setType(ddiType);
-								_domeo.getLogger().debug(this, "unmarshallexpertstudy_pDDIAnnotation produced annotation. Some tests values:" +
-										" drug 1" + ((Mexpertstudy_pDDIAnnotation) ann).getDrug1());																						
+								
+								//System.out.println("[DEBUG]" + (MddiAnnotation) ann);
+								//System.out.println("[DEBUG]" + dditype);
+								
+								((MddiAnnotation) ann).setType(dditype);
+								System.out.println("unmarshallddiAnnotation produced annotation. Some tests values:" +
+										" drug 1: " + ((MddiAnnotation) ann).getDrug1().getLabel());			
+								
+								System.out.println("Some tests values:" +
+										" numOfParticipants: " + ((MddiAnnotation) ann).getNumOfparcipitants().getLabel());	
+								
+								System.out.println("Some tests values:" +
+										" evidence type: " + ((MddiAnnotation) ann).getEvidenceType());	
+								
+								System.out.println("Some tests values:" +
+										" increase auc: " + ((MddiAnnotation) ann).getIncreaseAuc().getLabel());	
+								
+								System.out.println("Some tests values:" +
+										" assertion type: " + ((MddiAnnotation) ann).getAssertType().getLabel());	
 							}
 						}
 						
@@ -1523,16 +1541,21 @@ public class JsonUnmarshallingManager {
 		}
 	}
 	
-	private Mexpertstudy_pDDIAnnotation unmarshallexpertstudy_pDDIAnnotation(JsAnnotationexpertstudy_pDDI annotationexpertstudy_pDDIInJson, String validation, MAnnotationSet set, 
+	private MddiAnnotation unmarshallddiAnnotation(JsAnnotationddi annotationddiInJson, String validation, MAnnotationSet set, 
 			ArrayList<MSelector> selectors) {
-		_domeo.getLogger().debug(this, "Unmarshalling " + Mexpertstudy_pDDIAnnotation.class.getName() + 
-			" with id " + getObjectId(annotationexpertstudy_pDDIInJson));
+		//System.out.println("Unmarshalling " + MddiAnnotation.class.getName() + 
+		//	" with id " + getObjectId(annotationddiInJson));
+		
+		_domeo.getLogger().debug(this, "Unmarshalling " + MddiAnnotation.class.getName() + 
+			" with id " + getObjectId(annotationddiInJson));
+		
 		IUnmarshaller unmarshaller = null;
 		try {
-			unmarshaller = selectUnmarshaller(Mexpertstudy_pDDIAnnotation.class.getName());
-			return (Mexpertstudy_pDDIAnnotation) unmarshaller.unmarshall(this, annotationexpertstudy_pDDIInJson, validation, set, selectors);
+			unmarshaller = selectUnmarshaller(MddiAnnotation.class.getName());
+			return (MddiAnnotation) unmarshaller.unmarshall(this, annotationddiInJson, validation, set, selectors);
 		} catch(Exception e) {
-			_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
+			//_domeo.getLogger().exception(this, LOGGING_PREFIX, "Exception while deserializing the Annotation Set " + e.getMessage());
+			//System.out.println("Exception while deserializing the Annotation Set " + e.getMessage());
 			return null;
 		}
 	}
@@ -1556,7 +1579,7 @@ public class JsonUnmarshallingManager {
 		unmarshallers.put(MHighlightAnnotation.class.getName(), new HighlightJsonUnmarshaller(_domeo));
 		unmarshallers.put(MPostItAnnotation.class.getName(), new UPostitJsonUnmarshaller(_domeo));
 		unmarshallers.put(MSPLsAnnotation.class.getName(), new USPLJsonUnmarshaller(_domeo));
-		unmarshallers.put(Mexpertstudy_pDDIAnnotation.class.getName(), new Uexpertstudy_pDDIJsonUnmarshaller(_domeo));
+		unmarshallers.put(MddiAnnotation.class.getName(), new UddiJsonUnmarshaller(_domeo));
 		
 	}
 	
