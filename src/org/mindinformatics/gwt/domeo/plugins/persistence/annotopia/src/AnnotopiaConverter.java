@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
@@ -61,6 +60,8 @@ import org.mindinformatics.gwt.utils.src.HtmlUtils;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -146,9 +147,10 @@ public class AnnotopiaConverter {
 					int max = jsSet.isAnnotationsArray() ? jsSet.getAnnotations().length() : (jsSet.hasAnnotation()?1:0);
 					_domeo.getLogger().debug(this, "Detected annotations: " + max);
 					for(int i=0; i<max; i++) {			
-						JavaScriptObject a = null;
-						if(max==1) a = jsSet.getAnnotation();
-						else a = jsSet.getAnnotations().get(i);
+//						JavaScriptObject a = null;
+//						if(max==1) a = jsSet.getAnnotation();
+//						else a = jsSet.getAnnotations().get(i);
+						JavaScriptObject a = jsSet.getAnnotations().get(i);
 						if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
 							// Unmarshall annotatedBy
 							JsAnnotationProvenance annotationProvenance = (JsAnnotationProvenance) a;
@@ -497,9 +499,10 @@ public class AnnotopiaConverter {
 		// Creation of annotation items
 		for(int i=0; i<max; i++) {
 			_domeo.getLogger().debug(this, "Creating annotation: " + i);
-			JavaScriptObject a = null;
-			if(max==1) a = jsSet.getAnnotation();
-			else a = jsSet.getAnnotations().get(i);
+//			JavaScriptObject a = null;
+//			if(max==1) a = jsSet.getAnnotation();
+//			else a = jsSet.getAnnotations().get(i);
+			JavaScriptObject a = jsSet.getAnnotations().get(i);
 			if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
 				JsOpenAnnotation annotation = (JsOpenAnnotation) a;
 				
@@ -624,21 +627,14 @@ public class AnnotopiaConverter {
 							bodyText = body.getChars();
 						}
 					}
-					
-					_domeo.getLogger().debug(this, "Comment 1");
 					MPostItAnnotation postIt = AnnotationFactory.createPostIt(aSet, annotatedBy, 
 							aSet.getCreatedWith(), PostitType.COMMENT_TYPE, bodyText);
 					postIt.setHasChanged(false);
-					//_domeo.getLogger().debug(this, "+++++++"+postIt);
-					//_domeo.getLogger().debug(this, "++++++"+postIt.getCreator());
 					for(MSelector selector: selectors) {
 						postIt.addSelector(selector);
 					}	
-					_domeo.getLogger().debug(this, "Comment 2");
 					postIt.setIndividualUri(annotation.getId());
-					_domeo.getLogger().debug(this, "Comment 3");
 					postIt.setCreatedOn(annotatedAt);
-					_domeo.getLogger().debug(this, "Comment 4");
 					postIt.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
 					if(lastSavedOn!=null) postIt.setLastSavedOn(lastSavedOn); 
 					if(persist) performAnnotation(postIt);

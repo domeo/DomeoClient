@@ -22,7 +22,6 @@ import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.Properties;
 import com.google.gwt.query.client.js.JsUtils;
 import com.google.gwt.query.client.plugins.ajax.Ajax;
-import com.google.gwt.query.client.plugins.ajax.Ajax.Settings;
 import com.google.gwt.user.client.Window;
 
 /**
@@ -122,6 +121,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		    						}
 		    					}
 		    				}
+		    				_application.getLogger().debug(this,  "Matched: " + matched);
 		    				_application.getProgressPanelContainer().hide();
 		    				_application.getLogger().debug(this, "Completed saving of Annotation Set in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 		    			}
@@ -151,6 +151,43 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
+		    			JsAnnotopiaSetResultWrapper wrapper = (JsAnnotopiaSetResultWrapper) parseJson(getDataProperties().toJsonString());
+		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
+		    			
+		    			MAnnotationSet savedSet = unmarshaller.unmarshallAnnotationSet(wrapper.getResult().getSet().get(0), false);	    
+		    			if(savedSet==null) {
+		    				_application.getLogger().exception(this, "Annotation set not updated correctly");
+		    				_application.getProgressPanelContainer().setErrorMessage("Annotation set not updated correctly");
+		    			} else {
+		    				MAnnotationSet currentSet = _domeo.getPersistenceManager().getAnnotationSetById(savedSet.getPreviousVersion());	
+		    				currentSet.setIndividualUri(savedSet.getIndividualUri());
+		    				currentSet.setLastSavedOn(savedSet.getLastSavedOn());
+		    				currentSet.setVersionNumber(savedSet.getVersionNumber());
+		    				currentSet.setPreviousVersion(savedSet.getPreviousVersion());
+		    				currentSet.setHasChanged(false);
+		    				
+		    				_application.getLogger().info(this, "Set updated URI: " +currentSet.getIndividualUri());
+
+		    				int matched = 0;
+		    				for(MAnnotation annotation: savedSet.getAnnotations()) {
+		    					for(MAnnotation currentAnnotation: currentSet.getAnnotations()) {
+		    						if(currentAnnotation.getIndividualUri().equals(annotation.getPreviousVersion())) {		 
+		    							matched++;		    							
+		    							currentAnnotation.setIndividualUri(annotation.getIndividualUri());
+		    							currentAnnotation.setLastSavedOn(annotation.getLastSavedOn());
+		    							currentAnnotation.setVersionNumber(annotation.getVersionNumber());
+		    							currentAnnotation.setPreviousVersion(annotation.getPreviousVersion());
+		    							currentAnnotation.setHasChanged(false);
+		    							// TODO: Assumes one target
+		    							currentAnnotation.getSelector().setUri(annotation.getSelector().getUri());
+		    							break;
+		    						}
+		    					}
+		    				}
+		    				_application.getLogger().debug(this,  "Matched: " + matched);
+		    				_application.getProgressPanelContainer().hide();
+		    				_application.getLogger().debug(this, "Completed saving of Annotation Set in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
+		    			}
 		    		}
 		        })
 		    );
