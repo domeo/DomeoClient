@@ -29,6 +29,8 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.persistence.json.JsonPersistence"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.Annotopia"/>
   
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.persistence.PAnnotopiaPlugin"/>
+  
   <!-- Filters  -->
   <inherits name="org.mindinformatics.gwt.domeo.component.encoders.Encoders"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.ElsevierEncoder"/>
