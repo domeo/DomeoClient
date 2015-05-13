@@ -1126,14 +1126,14 @@ public class JsonUnmarshallingManager {
 								System.out.println("unmarshallddiAnnotation produced annotation. Some tests values:" +
 										" drug 1: " + ((MddiAnnotation) ann).getDrug1().getLabel());			
 								
-								System.out.println("Some tests values:" +
-										" numOfParticipants: " + ((MddiAnnotation) ann).getNumOfparcipitants().getLabel());	
-								
-								System.out.println("Some tests values:" +
-										" evidence type: " + ((MddiAnnotation) ann).getEvidenceType());	
-								
-								System.out.println("Some tests values:" +
-										" increase auc: " + ((MddiAnnotation) ann).getIncreaseAuc().getLabel());	
+//								System.out.println("Some tests values:" +
+//										" numOfParticipants: " + ((MddiAnnotation) ann).getNumOfparcipitants().getLabel());	
+//								
+//								System.out.println("Some tests values:" +
+//										" evidence type: " + ((MddiAnnotation) ann).getEvidenceType());	
+//								
+//								System.out.println("Some tests values:" +
+//										" increase auc: " + ((MddiAnnotation) ann).getIncreaseAuc().getLabel());	
 								
 								System.out.println("Some tests values:" +
 										" assertion type: " + ((MddiAnnotation) ann).getAssertType().getLabel());	
@@ -1141,6 +1141,7 @@ public class JsonUnmarshallingManager {
 						}
 						
 						if(Domeo.verbose) _domeo.getLogger().debug(this, "Lazy binding (" + j + ")");
+						
 						if(ann!=null) {
 							for(int z=0; z<ann.getSelectors().size(); z++) {
 								try {
@@ -1151,12 +1152,18 @@ public class JsonUnmarshallingManager {
 //												((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
 //												HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), "domeo-annotation");
 										
+										_domeo.getLogger().exception(this, "text selector unmashalling, getPrefix: |" + ((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix()+ "|") ;
+										_domeo.getLogger().exception(this, "text selector unmashalling, getExact(): |" + ((MTextQuoteSelector)ann.getSelectors().get(z)).getExact()+ "|");
+										_domeo.getLogger().exception(this, "text selector unmashalling, getSuffix(): |" + ((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix()+ "|");
+										
 										HtmlUtils.performAnnotation(Long.toString(ann.getLocalId())+((ann.getSelectors().size()>1)?(":"+ann.getSelectors().get(z).getLocalId()):""), 
 												((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
 												((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), 
 												((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
 												HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L),
 												_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
+										
+										
 									} else if(ann.getSelectors().get(z) instanceof MImageInDocumentSelector) {
 										// Place the annotation???
 										_domeo.getLogger().info(this, "image;;;" + ((MOnlineImage)((MImageInDocumentSelector)ann.getSelectors().get(z)).getTarget()).getUrl());

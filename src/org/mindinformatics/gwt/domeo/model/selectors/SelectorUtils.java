@@ -2,6 +2,8 @@ package org.mindinformatics.gwt.domeo.model.selectors;
 
 import java.util.ArrayList;
 
+import org.mindinformatics.gwt.domeo.client.IDomeo;
+
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -32,6 +34,8 @@ public class SelectorUtils {
 	}
 	
 	public static String getMatch(ArrayList<MSelector> selectors) {
+		
+
 		int counter = 0;
 		StringBuffer matches = new StringBuffer();
 		for(MSelector selector: selectors) {

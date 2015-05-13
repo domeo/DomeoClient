@@ -18,8 +18,7 @@ import com.google.gwt.json.client.JSONString;
  * 
  * @author Richard Boyce <rdb20@pitt.edu>
  */
-public class JsonddiAnnotationSerializer extends
-		JsonAnnotationSerializer {
+public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 
 	public final String DIKBD2R_PREFIX = "dikbD2R:";
 	public final String PDDI_URN_PREFIX = "urn:pddi:uuid:";
@@ -37,6 +36,21 @@ public class JsonddiAnnotationSerializer extends
 				"Initialized JSON annotation object");
 		// Body creation
 		JSONArray bodies = new JSONArray();
+
+		// add assertion type
+		String assertTypeStr = "";
+		MLinkedResource assertType = ann.getAssertType();
+		if (assertType != null) {
+			assertTypeStr = assertType.getLabel();
+
+			annotation.put(DIKBD2R_PREFIX + "assertionType", new JSONString(
+					assertTypeStr));
+		} else {
+			manager._domeo
+					.getLogger()
+					.debug(this,
+							"ddi annotation serilize error, no assertion type been found");
+		}
 
 		/*
 		 * DDI statement urn
@@ -89,9 +103,13 @@ public class JsonddiAnnotationSerializer extends
 					new JSONString(drug1.getDescription()));
 
 			// dose of drug 1
-			MLinkedResource objectDose = ann.getObjectDose();
-			drug_entity1.put(DIKBD2R_PREFIX + "dose", new JSONString(
-					objectDose.getLabel()));
+
+			if (assertTypeStr.equals("increase-auc")) {
+				MLinkedResource objectDose = ann.getObjectDose();
+				if (objectDose != null)
+					drug_entity1.put(DIKBD2R_PREFIX + "dose", new JSONString(
+							objectDose.getLabel()));
+			}
 
 		}
 
@@ -141,10 +159,13 @@ public class JsonddiAnnotationSerializer extends
 					new JSONString(drug2.getDescription()));
 
 			// dose of drug 1
-			MLinkedResource preciptDose = ann.getPreciptDose();
-			drug_entity2.put(DIKBD2R_PREFIX + "dose", new JSONString(
-					preciptDose.getLabel()));
-
+			if (assertTypeStr.equals("increase-auc")) {
+				MLinkedResource preciptDose = ann.getPreciptDose();
+				if (preciptDose != null) {
+					drug_entity2.put(DIKBD2R_PREFIX + "dose", new JSONString(
+							preciptDose.getLabel()));
+				}
+			}
 		}
 
 		// drug2 has type
@@ -175,12 +196,20 @@ public class JsonddiAnnotationSerializer extends
 		 * increase AUC fields number of participants, increase Auc
 		 */
 
-		MLinkedResource numOfParticipants = ann.getNumOfparcipitants();
-		pkddi.put(DIKBD2R_PREFIX + "numOfParticipants", new JSONString(
-				numOfParticipants.getLabel().trim()));
+		if (assertTypeStr.equals("increase-auc")) {
 
-		MLinkedResource auc = ann.getIncreaseAuc();
-		pkddi.put(DIKBD2R_PREFIX + "auc", new JSONString(auc.getLabel().trim()));
+			MLinkedResource numOfParticipants = ann.getNumOfparcipitants();
+			if (numOfParticipants != null) {
+				pkddi.put(DIKBD2R_PREFIX + "numOfParticipants", new JSONString(
+						numOfParticipants.getLabel().trim()));
+			}
+
+			MLinkedResource auc = ann.getIncreaseAuc();
+			if (auc != null) {
+				pkddi.put(DIKBD2R_PREFIX + "auc", new JSONString(auc.getLabel()
+						.trim()));
+			}
+		}
 
 		// drug participant in pk_ddi
 		if (drugs != null)
@@ -224,11 +253,7 @@ public class JsonddiAnnotationSerializer extends
 		bodies.set(0, sets);
 		annotation.put(IDomeoOntology.content, bodies);
 
-		// add assertion type and evidence type
-
-		MLinkedResource assertType = ann.getAssertType();
-		annotation.put(DIKBD2R_PREFIX + "assertionType", new JSONString(
-				assertType.getLabel()));
+		// add evidence type
 
 		MLinkedResource evidenceType = ann.getEvidenceType();
 		annotation.put(DIKBD2R_PREFIX + "evidenceType", new JSONString(
@@ -240,10 +265,9 @@ public class JsonddiAnnotationSerializer extends
 	/*
 	 * public String findURIbyTerm(String term, String type) { String uri = "";
 	 * if (type.equals("active-ingredient")) { uri =
-	 * Mddi.getActiveIngredient_URI_map().get( term.toUpperCase());
-	 * } else if (type.equals("metabolite")) { uri =
-	 * Mddi.getMetabolite_URI_map().get( term.toUpperCase()); }
-	 * else if (type.equals("drug-product")) { uri =
+	 * Mddi.getActiveIngredient_URI_map().get( term.toUpperCase()); } else if
+	 * (type.equals("metabolite")) { uri = Mddi.getMetabolite_URI_map().get(
+	 * term.toUpperCase()); } else if (type.equals("drug-product")) { uri =
 	 * Mddi.getDrugProduct_URI_map().get( term.toUpperCase()); }
 	 * 
 	 * if (uri.length() > 4) return uri; else { return "fake_uri"; }

@@ -33,9 +33,9 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 	public Object unmarshall(JsonUnmarshallingManager manager,
 			JavaScriptObject json, String validation, MAnnotationSet set,
 			ArrayList<MSelector> selectors) {
-		
+
 		System.out.println("[INFO] unmarshaller for ddi annotation ...");
-		
+
 		validation(json, validation, set, selectors);
 
 		JsAnnotationddi pddi = (JsAnnotationddi) json;
@@ -46,34 +46,51 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 				this,
 				"Calling AnnotationFactory.cloneSPLs with body"
 						+ body.toString());
-		MddiAnnotation ann = AnnotationFactory
-				.cloneddi(
-						pddi.getId(),
-						pddi.getLineageUri(),
-						pddi.getFormattedCreatedOn(),
-						pddi.getFormattedLastSaved(),
-						set,
-						_domeo.getAgentManager().getAgentByUri(
-								pddi.getCreatedBy()),
-						(ISoftware) _domeo.getAgentManager().getAgentByUri(
-								pddi.getCreatedWith()),
-						pddi.getVersionNumber(), pddi.getPreviousVersion(),
-						_domeo.getPersistenceManager().getCurrentResource(),
-						selectors, pddi.getLabel(), body, // TODO: this doesn't
-															// seem to do
-															// anything and
-															// can likely be
-															// removed from the
-															// class
-						null);
-		System.out.println("AnnotationFactory.cloneSPLs done. ann:" + ann.toString());
+		MddiAnnotation ann = AnnotationFactory.cloneddi(pddi.getId(), pddi
+				.getLineageUri(), pddi.getFormattedCreatedOn(), pddi
+				.getFormattedLastSaved(), set, _domeo.getAgentManager()
+				.getAgentByUri(pddi.getCreatedBy()), (ISoftware) _domeo
+				.getAgentManager().getAgentByUri(pddi.getCreatedWith()), pddi
+				.getVersionNumber(), pddi.getPreviousVersion(), _domeo
+				.getPersistenceManager().getCurrentResource(), selectors, pddi
+				.getLabel(), body, // TODO: this doesn't
+									// seem to do
+									// anything and
+									// can likely be
+									// removed from the
+									// class
+				null);
+		System.out.println("AnnotationFactory.cloneSPLs done. ann:"
+				+ ann.toString());
 
 		// unmarshall the SPL specific entities. There should be on body for
 		// each semantic tag
-		System.out.println("Parsing body resources and adding them to the annotation instance");
+		System.out
+				.println("Parsing body resources and adding them to the annotation instance");
 
 		// get body of annotation
 		JsoddiUsage ddibody = pddi.getBodies().get(0).getSets();
+
+		/*
+		 * assertion type
+		 */
+		String assertionTypeScript = pddi.getAssertionType();
+		// System.out.println("assertionTypeScript:" + assertionTypeScript);
+
+		if (assertionTypeScript != null
+				&& !assertionTypeScript.trim().equals("")) {
+			String jsLabel = assertionTypeScript;
+			String jsDescript = "assertion type (DDI or increase AUC).";
+			String jsURI = DIKBD2R_PREFIX + jsLabel;
+
+			MLinkedResource assertionType = ResourcesFactory
+					.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+			// System.out.println("assertionType linked resource created: " +
+			// jsLabel);
+
+			ann.setAssertType(assertionType);
+		}
 
 		// get DDI
 		JsoDDI_PKDDIUsage pkddi = ddibody.getPKDDI().get(0);
@@ -85,28 +102,30 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 		 * drug entities
 		 */
 
-		if (drugs!=null) {
-			
-			//System.out.println("num of drugs: " + drugs.length());
-			
+		if (drugs != null) {
+
+			// System.out.println("num of drugs: " + drugs.length());
+
 			for (int index = 0; index < drugs.length(); index++) {
 
 				JsoDDI_DrugEntityUsage drug = drugs.get(index);
-							
-					//String jsURI = drug.getId(); // NOTE: technically, there is UUID for the drug entity but we use the RxCUI for unmarshalling 
-					String jsURI = drug.getRxcui();
-					
-					if (drug != null) {
-						System.out.println("drug rxcui: " + jsURI);
-					
+
+				// String jsURI = drug.getId(); // NOTE: technically, there is
+				// UUID for the drug entity but we use the RxCUI for
+				// unmarshalling
+				String jsURI = drug.getRxcui();
+
+				if (drug != null) {
+					System.out.println("drug rxcui: " + jsURI);
+
 					String jsLabel = drug.getLabel();
 					String jsDescript = drug.getDescription();
-					
+
 					MLinkedResource drugEntity = ResourcesFactory
 							.createLinkedResource(jsURI, jsLabel, jsDescript);
 
 					System.out.println("drug entity " + (index + 1)
-									+ " linked resource created: " + jsLabel);
+							+ " linked resource created: " + jsLabel);
 
 					if (index == 0) {
 						ann.setDrug1(drugEntity);
@@ -127,9 +146,9 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 						String typeLabel = typeScript.substring(8);
 						String typeDescript = "Referred to the type of the mention within the sentence for drug.";
 
-						System.out.println("type: " + typeLabel + "|" + typeURI + "|");
+						System.out.println("type: " + typeLabel + "|" + typeURI
+								+ "|");
 
-						
 						MLinkedResource type = ResourcesFactory
 								.createLinkedResource(typeURI, typeLabel,
 										typeDescript);
@@ -152,9 +171,9 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 						String roleLabel = roleScript.substring(8);
 						String roleDescript = "Referred to the role that each drug one plays within the interaction.";
 
-						System.out.println("role: " + roleLabel + "|" + roleURI + "|");
+						System.out.println("role: " + roleLabel + "|" + roleURI
+								+ "|");
 
-						
 						MLinkedResource role = ResourcesFactory
 								.createLinkedResource(roleURI, roleLabel,
 										roleDescript);
@@ -163,36 +182,40 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 						} else {
 							ann.setRole2(role);
 						}
-						
-						
+
 						/*
 						 * drug entity has dose
 						 */
-						
-						String doseScript = drug.getDose();
-						
-						//System.out.println("dose: " + doseScript);
 
-						if (doseScript != null && !doseScript.trim().equals("")) {
-							//String doseURI = doseScript.replace("dikbD2R:",DIKBD2R_PREFIX);
-							String doseURI = DIKBD2R_PREFIX + doseScript;		
-							String doseLabel = doseScript;
-							
-							String doseDescript = "Referred to the dose that each drug within the interaction.";
+						if (assertionTypeScript.equals("increase-auc")) {
+							String doseScript = drug.getDose();
 
-							//System.out.println("dose: " + doseLabel + "|" + doseURI + "|");
-							
-							MLinkedResource dose = ResourcesFactory
-									.createLinkedResource(doseURI, doseLabel,
-											doseDescript);
-							if (roleLabel.toLowerCase().contains("object")) {
-								ann.setObjectDose(dose);
-							} else {
-								ann.setPreciptDose(dose);
+							// System.out.println("dose: " + doseScript);
+
+							if (doseScript != null
+									&& !doseScript.trim().equals("")) {
+								// String doseURI =
+								// doseScript.replace("dikbD2R:",DIKBD2R_PREFIX);
+								String doseURI = DIKBD2R_PREFIX + doseScript;
+								String doseLabel = doseScript;
+
+								String doseDescript = "Referred to the dose that each drug within the interaction.";
+
+								// System.out.println("dose: " + doseLabel + "|"
+								// + doseURI + "|");
+
+								MLinkedResource dose = ResourcesFactory
+										.createLinkedResource(doseURI,
+												doseLabel, doseDescript);
+								if (roleLabel.toLowerCase().contains("object")) {
+									ann.setObjectDose(dose);
+								} else {
+									ann.setPreciptDose(dose);
+								}
 							}
+
 						}
 					}
-					
 
 				}
 			}
@@ -227,106 +250,92 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 			String jsDescript = "Referred to extra sources of information that the annotator considers "
 					+ "are helpful to provide evidence for or against the existence of the pDDI.";
 			String jsURI = modalityScript.replace("ncit:", NCIT_PREFIX);
-			
-			//System.out.println("modality: " + jsLabel + "|" + jsURI + "|");
 
+			// System.out.println("modality: " + jsLabel + "|" + jsURI + "|");
 
 			MLinkedResource modality = ResourcesFactory.createLinkedResource(
 					jsURI, jsLabel, jsDescript);
 
-			//System.out.println("modality linked resource created: " + jsLabel);
+			// System.out.println("modality linked resource created: " +
+			// jsLabel);
 
 			ann.setModality(modality);
 		}
-		
-		
+
 		/*
-		 * number of participants
+		 * increase Auc fields
 		 */
-		String numPartScript = pkddi.getNumOfParticipants();
-		
-		//System.out.println("numPartScript:" + numPartScript);
 
-		if (numPartScript != null && !numPartScript.trim().equals("")) {
-			String jsLabel = numPartScript;
-			String jsDescript = "The number of participants involved in interaction.";
-			String jsURI =DIKBD2R_PREFIX + numPartScript;
+		if (assertionTypeScript.equals("increase-auc")) {
 
-			System.out.println("num participants: " + jsLabel + "|" + jsURI + "|");
-			
-			MLinkedResource numParticipt = ResourcesFactory.createLinkedResource(
-					jsURI, jsLabel, jsDescript);
+			/*
+			 * number of participants
+			 */
+			String numPartScript = pkddi.getNumOfParticipants();
 
-			//System.out.println("numParticipt linked resource created: " + jsLabel);
+			// System.out.println("numPartScript:" + numPartScript);
 
-			ann.setNumOfparcipitants(numParticipt);
+			if (numPartScript != null && !numPartScript.trim().equals("")) {
+				String jsLabel = numPartScript;
+				String jsDescript = "The number of participants involved in interaction.";
+				String jsURI = DIKBD2R_PREFIX + numPartScript;
+
+				System.out.println("num participants: " + jsLabel + "|" + jsURI
+						+ "|");
+
+				MLinkedResource numParticipt = ResourcesFactory
+						.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				// System.out.println("numParticipt linked resource created: " +
+				// jsLabel);
+
+				ann.setNumOfparcipitants(numParticipt);
+			}
+
+			/*
+			 * increase AUC
+			 */
+			String aucScript = pkddi.getIncreaseAUC();
+			// System.out.println("aucScript:" + aucScript);
+
+			if (aucScript != null && !aucScript.trim().equals("")) {
+				String jsLabel = aucScript;
+				String jsDescript = "The maximum increasing Auc in interation.";
+				String jsURI = DIKBD2R_PREFIX + aucScript;
+
+				System.out.println("auc: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource auc = ResourcesFactory.createLinkedResource(
+						jsURI, jsLabel, jsDescript);
+
+				// System.out.println("AUC linked resource created: " +
+				// jsLabel);
+
+				ann.setIncreaseAuc(auc);
+			}
 		}
-		
-		/*
-		 * increase AUC
-		 */
-		String aucScript = pkddi.getIncreaseAUC();
-		//System.out.println("aucScript:" + aucScript);
-		
-		if (aucScript != null && !aucScript.trim().equals("")) {
-			String jsLabel = aucScript;
-			String jsDescript = "The maximum increasing Auc in interation.";
-			String jsURI = DIKBD2R_PREFIX + aucScript;
 
-			System.out.println("auc: " + jsLabel + "|" + jsURI + "|");
-
-			MLinkedResource auc = ResourcesFactory.createLinkedResource(
-					jsURI, jsLabel, jsDescript);
-
-			//System.out.println("AUC linked resource created: " + jsLabel);
-
-			ann.setIncreaseAuc(auc);
-		}
-		
-		
 		/*
 		 * evidence type
 		 */
-		
-		
+
 		String evidenceTypeScript = pddi.getEvidenceType();
-		//System.out.println("evidenceTypeScript:" + evidenceTypeScript);
+		// System.out.println("evidenceTypeScript:" + evidenceTypeScript);
 
 		if (evidenceTypeScript != null && !evidenceTypeScript.trim().equals("")) {
 			String jsLabel = evidenceTypeScript;
 			String jsDescript = "evidence that supports or challenges drug-drug interaction assertion.";
 			String jsURI = DIKBD2R_PREFIX + jsLabel;
 
-			MLinkedResource evidenceType = ResourcesFactory.createLinkedResource(
-					jsURI, jsLabel, jsDescript);
+			MLinkedResource evidenceType = ResourcesFactory
+					.createLinkedResource(jsURI, jsLabel, jsDescript);
 
-			//System.out.println("evidenceType linked resource created: " + jsLabel);
+			// System.out.println("evidenceType linked resource created: " +
+			// jsLabel);
 
 			ann.setEvidenceType(evidenceType);
 		}
-		
-		
-		/*
-		 * assertion type
-		 */
-		String assertionTypeScript = pddi.getAssertionType();
-		//System.out.println("assertionTypeScript:" + assertionTypeScript);
 
-		if (assertionTypeScript != null && !assertionTypeScript.trim().equals("")) {
-			String jsLabel = assertionTypeScript;
-			String jsDescript = "assertion type (DDI or increase AUC).";
-			String jsURI = DIKBD2R_PREFIX + jsLabel;
-
-			MLinkedResource assertionType = ResourcesFactory.createLinkedResource(
-					jsURI, jsLabel, jsDescript);
-
-			//System.out.println("assertionType linked resource created: " + jsLabel);
-
-			ann.setAssertType(assertionType);
-		}
-		
-	
-		
 		return ann;
 	}
 

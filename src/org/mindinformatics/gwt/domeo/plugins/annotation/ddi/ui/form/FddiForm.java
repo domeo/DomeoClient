@@ -1265,6 +1265,15 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			requireds.add("modality");
 		}
 
+		if (!(evidenceSpt.getValue() || evidenceAgt.getValue())) {
+			requireds.add("evidence modality");
+		}
+
+//		if (assertType.getSelectedIndex() != 0
+//				&& assertType.getSelectedIndex() != 1) {
+//			requireds.add("assertion type");
+//		}
+
 		if (requireds.size() > 0) {
 
 			String message = "";

@@ -183,7 +183,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 					// If not multiple selections and text selected...
 					else if(_domeo.getContentPanel().getAnnotationFrameWrapper().anchorNode!=null) {
 						
-						//System.out.println("DomeoToolbarPanel-DomeoToolbarPanel():"+_domeo.getContentPanel().getAnnotationFrameWrapper().matchText);
+						System.out.println("DomeoToolbarPanel-DomeoToolbarPanel():"+_domeo.getContentPanel().getAnnotationFrameWrapper().matchText);
 						
 						_domeo.getContentPanel().getAnnotationFrameWrapper().annotate();
 					}
@@ -238,6 +238,8 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 						// TODO Hidious!!!!!
 						IFrameElement iframe = IFrameElement.as(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement());
 						final Document frameDocument = iframe.getContentDocument();
+					
+						
 						_domeo.getContentPanel().getAnnotationFrameWrapper().getSelectionText(_domeo.getContentPanel().getAnnotationFrameWrapper(), frameDocument);
 						
 						if(_domeo.getContentPanel().getAnnotationFrameWrapper().matchText!=null && _domeo.getContentPanel().getAnnotationFrameWrapper().matchText.length()>2) { 
