@@ -22,12 +22,25 @@
 		display: block;
 	}
 	
+	#dialog-button {
+		backgorund-color: gray;
+		float: right;
+		padding-top: 0px;
+		padding-right: 0px;
+		padding-left: 50px;
+		padding-buttom: 5px;
+		height: 0px;
+		max-height: 20px;
+		
+	}
+	
 	.setPanel {
 		padding-left: 5px;
 	}
 	
 	.okButton {
 		vertical-align: middle;
+		padding-right: 100px;
 		float: right;
 	}
 	
@@ -190,7 +203,7 @@
 
 					<g:HorizontalPanel>
 
-						<g:Label>NER drug mentions: &nbsp; </g:Label>
+						<g:Label>drug mentions: &nbsp; </g:Label>
 						<g:ListBox ui:field="drug1" name="descript"
 							visibleItemCount='1' styleName='{style.listbox1}'>
 							<g:item value="0"></g:item>
@@ -236,7 +249,7 @@
 					<!-- Drug 2 -->
 					<g:HorizontalPanel>
 
-						<g:Label>NER Drug mentions: &nbsp; </g:Label>
+						<g:Label>Drug mentions: &nbsp; </g:Label>
 						<g:ListBox ui:field="drug2" name="descript"
 							visibleItemCount='1' styleName='{style.listbox1}'>
 							<g:item value="0"></g:item>
@@ -282,7 +295,7 @@
 				<g:VerticalPanel ui:field='middleColumn' styleName='{style.rightColumn}'>
 
 					<!-- Statement -->
-
+				<!--  
 					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement (data
 							type that is described):</g:Label>
@@ -294,7 +307,7 @@
 						<g:RadioButton ui:field="statementql" name="statement"
 							checked="false">qualitative</g:RadioButton>
 					</g:HorizontalPanel>
-
+				-->
 
 					<!--Modality: -->
 
@@ -373,7 +386,7 @@
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="objectDoseLabel" styleName='{style.titleLeft}'>The object
-							drugs's dose in gram:</g:Label>
+							drugs's dose in grams:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header12' styleName='{style.panel}'>
@@ -385,7 +398,7 @@
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="preciptDoseLabel" styleName='{style.titleLeft}'>The
-							preticipant drugs's dose in gram:</g:Label>
+							precipitant drugs's dose in grams:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header13' styleName='{style.panel}'>
@@ -413,7 +426,7 @@
 		<!-- Ok button and annotation type -->
 		<g:HorizontalPanel ui:field='buttonsPanel'
 			styleName='{style.okButton}'>
-			<g:SimplePanel styleName='{style.okButton}'>
+			<g:SimplePanel>
 				<g:ListBox ui:field='annotationSet'></g:ListBox>
 			</g:SimplePanel>
 		</g:HorizontalPanel>
