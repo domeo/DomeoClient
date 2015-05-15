@@ -386,7 +386,7 @@
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="objectDoseLabel" styleName='{style.titleLeft}'>The object
-							drugs's dose in grams:</g:Label>
+							drugs dose in grams:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header12' styleName='{style.panel}'>
@@ -398,7 +398,7 @@
 
 					<g:HorizontalPanel styleName='{style.titlebar}'>
 						<g:Label ui:field="preciptDoseLabel" styleName='{style.titleLeft}'>The
-							precipitant drugs's dose in grams:</g:Label>
+							precipitant drugs dose in grams:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header13' styleName='{style.panel}'>
