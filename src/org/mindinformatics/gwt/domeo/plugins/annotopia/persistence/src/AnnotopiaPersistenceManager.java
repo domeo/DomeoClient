@@ -33,7 +33,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	private static final String POST = "post", PUT = "put", DELETE = "delete", JSON = "json";
 	private static final String PREFIX = "s/annotationset";
 	
-	public String URL = "http://127.0.0.1:8090/";
+	public String URL = "http://localhost:8090/";
 	
 	/**
 	 * @param domeo		Pointer to main application
@@ -144,7 +144,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		_application.getLogger().debug(this, "Updating annotation set " + set.getUuid());
 		try {
 			Ajax.ajax(Ajax.createSettings()
-				.setUrl(URL + PREFIX + "/" + set.getUuid())
+				.setUrl(set.getIndividualUri())
 				.setHeaders(getHeaders()).setDataType(JSON).setType(PUT)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON(AnnotopiaSerializerManager.getInstance((IDomeo)_application).serialize(set).toString()))
 		        .setTimeout(10000)
