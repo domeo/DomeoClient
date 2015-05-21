@@ -1332,8 +1332,8 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							+ "object dose, precipitant dose and increase AUC ");
 					hp1.add(label);
 					
-					dialog.setPopupPosition(Window.getClientWidth() / 2,
-							Window.getClientHeight() / 2);
+					dialog.setPopupPosition(Window.getClientWidth() / 2 - 150,
+							Window.getClientHeight() / 2 - 70);
 					dialog.setHeight("140px");
 					dialog.setWidth("300px");
 					dialog.show();

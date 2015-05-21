@@ -203,15 +203,13 @@
 
 					<g:HorizontalPanel>
 
-						<g:Label>drug mentions: &nbsp; </g:Label>
+						<g:Label>Drug mentions: &nbsp; </g:Label>
 						<g:ListBox ui:field="drug1" name="descript"
 							visibleItemCount='1' styleName='{style.listbox1}'>
 							<g:item value="0"></g:item>
 						</g:ListBox>
 					</g:HorizontalPanel>
 
-					<!-- Drug 1 <g:Label ui:field="drug1label" styleName='{style.titleLeft}'>Drug 
-						1:</g:Label> <g:TextArea ui:field='drug1' styleName='{style.commonlabel}'></g:TextArea> -->
 
 					<!-- Type -->
 
@@ -244,7 +242,9 @@
 							checked="false">Precipitant</g:RadioButton>
 					</g:HorizontalPanel>
 
-
+        			<g:HorizontalPanel>
+                       <g:Label>&nbsp; </g:Label>
+					</g:HorizontalPanel>
 
 					<!-- Drug 2 -->
 					<g:HorizontalPanel>
