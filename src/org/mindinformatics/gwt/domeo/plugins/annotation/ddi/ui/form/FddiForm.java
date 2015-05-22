@@ -40,7 +40,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -101,8 +104,9 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	RadioButton roleob2, rolepp2;
 
 	// statement
-	@UiField
-	RadioButton statementqu, statementql;
+	// @UiField
+	// RadioButton statementqu, statementql;
+	// quantitative qualitative
 
 	// modality
 	@UiField
@@ -254,21 +258,19 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		return null;
 	}
 
-	// statement
+	// statement default selection (ddi:qualitative; auc: quantitative)
 
 	public MLinkedResource getStatement() {
-
-		if (statementqu.getValue()) {
+		if (assertType.getSelectedIndex() == 1) {
 			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
 					+ "quantitative", "quantitative",
 					"Referred to data type that is described in the sentence.");
-		} else if (statementql.getValue()) {
+		} else if (assertType.getSelectedIndex() == 0) {
 			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
 					+ "qualitative", "Qualitative",
 					"Referred to data type that is described in the sentence.");
-		}
-
-		return null;
+		} else
+			return null;
 	}
 
 	// modality
@@ -629,14 +631,14 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			}
 
 			// check selections of statement
-			if (_item.getStatement() != null) {
-				if (_item.getStatement().getLabel().equals("quantitative")) {
-					statementqu.setValue(true);
-				} else if (_item.getStatement().getLabel()
-						.equals("Qualitative")) {
-					statementql.setValue(true);
-				}
-			}
+			// if (_item.getStatement() != null) {
+			// if (_item.getStatement().getLabel().equals("quantitative")) {
+			// statementqu.setValue(true);
+			// } else if (_item.getStatement().getLabel()
+			// .equals("Qualitative")) {
+			// statementql.setValue(true);
+			// }
+			// }
 
 			// check selections of modality
 			if (_item.getModality() != null) {
@@ -786,6 +788,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 									((TextAnnotationFormsPanel) _manager)
 											.getHighlight().getSuffix());
 
+					_item.setAssertType(getAssertType());
 					_item.setDrug1(getDrug1());
 					_item.setDrug2(getDrug2());
 					_item.setSelector(selector);
@@ -800,7 +803,6 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					_item.setPreciptDose(getPreciptDose());
 					_item.setIncreaseAuc(getAuc());
 					_item.setEvidenceType(getEvidenceType());
-					_item.setAssertType(getAssertType());
 					// _item.setComment(comment.getText());
 
 					_item.getMpDDIUsage().setMpDDI(currentMpDDI);
@@ -870,7 +872,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	}
 
 	/*
-	 * TODO: add drug names from highlight into drop down list box
+	 * add drug names from highlight into drop down list box
 	 */
 	public List<DrugInText> getNERToDrugs() {
 
@@ -1242,37 +1244,52 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		ArrayList<String> requireds = new ArrayList<String>();
 
 		if (drug1.getSelectedIndex() == 0)
-			requireds.add("drug 1");
+			requireds.add("Drug 1");
 		if (drug2.getSelectedIndex() == 0)
-			requireds.add("drug 2");
+			requireds.add("Drug 2");
 
 		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue())) {
-			requireds.add("drug 1 type");
+			requireds.add("Drug 1 type");
 		}
 		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue())) {
-			requireds.add("drug 2 type");
+			requireds.add("Drug 2 type");
 		}
 		if (!(rolepp1.getValue() || roleob1.getValue())) {
-			requireds.add("drug 1 role");
+			requireds.add("Drug 1 role");
 		}
 		if (!(rolepp2.getValue() || roleob2.getValue())) {
-			requireds.add("drug 2 role");
+			requireds.add("Drug 2 role");
 		}
-		if (!(statementqu.getValue() || statementql.getValue())) {
-			requireds.add("statement");
-		}
+
+		// if (!(statementqu.getValue() || statementql.getValue())) {
+		// requireds.add("statement");
+		// }
+
 		if (!(modalitypt.getValue() || modalitynt.getValue())) {
 			requireds.add("modality");
 		}
 
 		if (!(evidenceSpt.getValue() || evidenceAgt.getValue())) {
-			requireds.add("evidence modality");
+			requireds.add("Evidence modality");
 		}
 
-//		if (assertType.getSelectedIndex() != 0
-//				&& assertType.getSelectedIndex() != 1) {
-//			requireds.add("assertion type");
-//		}
+		// validates AUC fields:
+		// numParticipt, objectDose, preciptDose, auc;
+		if (assertType.getSelectedIndex() == 1) {
+			if (numParticipt.getValue().trim().isEmpty()) {
+				requireds.add("Number of participants");
+			}
+			if (objectDose.getValue().trim().isEmpty()) {
+				requireds.add("Object dose");
+			}
+			if (preciptDose.getValue().trim().isEmpty()) {
+				requireds.add("Precipitant dose");
+			}
+			if (auc.getValue().trim().isEmpty()) {
+				requireds.add("Auc");
+			}
+
+		}
 
 		if (requireds.size() > 0) {
 
@@ -1292,21 +1309,83 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	 * switch assertion type (drug-drug interaction / increaseAuc) type code:
 	 * ddi: 0 , increaseAuc: 1
 	 */
+	
 
 	public void switchAssertType() {
+
+
 		assertType.addChangeHandler(new ChangeHandler() {
 
 			@Override
 			public void onChange(ChangeEvent event) {
 				int type = assertType.getSelectedIndex();
 				if (type == 0) {
-					rightColumn.setVisible(false);
+					
+					System.out.println("create confirm dialog...");
+					
+					final DialogBox dialog = new DialogBox();
+					final VerticalPanel panel = new VerticalPanel();
+					final HorizontalPanel hp1 = new HorizontalPanel();
+					final HorizontalPanel hp2 = new HorizontalPanel();
+
+					Label label = new Label("WARNING: Change to drug drug interaction will discard all your inputs in number of participants, "
+							+ "object dose, precipitant dose and increase AUC ");
+					hp1.add(label);
+					
+					dialog.setPopupPosition(Window.getClientWidth() / 2 - 150,
+							Window.getClientHeight() / 2 - 70);
+					dialog.setHeight("140px");
+					dialog.setWidth("300px");
+					dialog.show();
+					
+					Button submit = new Button("Confirm");
+					submit.addClickHandler(new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+
+							dialog.hide();
+							// close increase Auc panel
+							rightColumn.setVisible(false);
+							
+							// erase increase Auc fields
+							numParticipt.setValue("");
+							objectDose.setValue("");
+							preciptDose.setValue("");
+							auc.setValue("");
+						}
+					});
+					hp2.add(submit);
+					
+					Button close = new Button("Cancel");
+					close.addClickHandler(new ClickHandler() {
+						@Override
+						public void onClick(ClickEvent event) {
+							assertType.setSelectedIndex(1);
+							dialog.hide();
+						}
+					});
+					
+					DOM.setElementAttribute(hp2.getElement(), "id", "dialog-button");
+					
+					hp2.add(close);
+					
+					panel.setStylePrimaryName("buttonsPanel");
+								
+					panel.add(hp1);
+					panel.add(hp2);
+					
+					dialog.setWidget(panel);
+					dialog.getElement().getStyle().setZIndex(100);
+					dialog.show();
+					/*
+					 * pop up dialog: confirm to discard AUC fields
+					 */
+
 				} else {
 					rightColumn.setVisible(true);
 				}
 			}
 		});
-
 	}
 
 }

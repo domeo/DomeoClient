@@ -50,7 +50,7 @@ public class CddiCard extends ACardComponent {
 
 	
 	@UiField
-	Label drug1, drug1label, drug2, type, text, role1, type1, role2, type2, statement,
+	Label drug1, drug1label, drug2, type, text, role1, type1, role2, type2,
 			modality, evidenceType, assertType;
 
 	public CddiCard(IDomeo domeo) {
@@ -165,12 +165,12 @@ public class CddiCard extends ACardComponent {
 					type2.setText("");
 				}
 
-				if (dataUsage.getStatement() != null) {
-					String statStr = dataUsage.getStatement().getLabel();
-					statement.setText(statStr);
-				} else {
-					statement.setText("");
-				}
+//				if (dataUsage.getStatement() != null) {
+//					String statStr = dataUsage.getStatement().getLabel();
+//					statement.setText(statStr);
+//				} else {
+//					statement.setText("");
+//				}
 
 				if (dataUsage.getModality() != null) {
 					String modalityStr = dataUsage.getModality().getLabel();
