@@ -20,8 +20,8 @@ cGraph = ConjunctiveGraph(store=store)
 #QUERY_STR = "80808080466465c001466750c6df0025" # expert2
 
 # query examples:
-# python convertJsonLDToRDF.py 80808080466465c00146674fe5190024 devb30 domeo-ddi-annotations-in-rdf-07092014.xml 0
-# python convertJsonLDToRDF.py 80808080466465c00146674fe5190024 annotation domeo-ddi-annotations-in-rdf-07102014.xml 1
+# python convertDDIJsonLDToRDF.py 80808080466465c00146674fe5190024 devb30 domeo-ddi-annotations-in-rdf-07092014.xml 0
+# python convertDDIJsonLDToRDF.py 80808080466465c00146674fe5190024 annotation domeo-ddi-annotations-in-rdf-07102014.xml 1
 
 MAX_RESULTS = 10000
 OUT_FILE = None
@@ -37,7 +37,7 @@ if len(sys.argv) > 4:
     if len(sys.argv) == 6:
         VERBOSE = int(sys.argv[5])
 else:
-	print "Usage: convertJsonLDToRDF <query string> <collection> <output file name> <old version>(1: want old versions, 0: only get last version) <verbose>(optional 1=True, 0=False (default)) )"
+	print "Usage: python convertDDIJsonLDToRDF <query string> <collection> <output file name> <old version>(1: want old versions, 0: only get last version) <verbose>(optional 1=True, 0=False (default)) )"
 	sys.exit(1)
 
 

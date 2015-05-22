@@ -1,0 +1,66 @@
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R:<http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo:<http://www.w3.org/ns/domeo#>
+PREFIX pav:<http://purl.org/pav/>
+PREFIX dailymed:<http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
+
+SELECT ?annot ?assertionType ?evidenceType ?createdOn ?exactText ?modality ?statementType ?drug1Lab ?drug1Type ?drug1Role ?dose1 ?drug2Lab ?drug2Type ?drug2Role ?dose2 ?numOfParticipants ?auc
+FROM <http://purl.org/net/nlprepository/ddi-ac387aa0-3f04-4865-a913-db6ed6f4fdc5-testing>
+WHERE {
+
+  ?annot a oa:ddiAnnotation;
+     dikbD2R:evidenceType ?evidenceType;
+     dikbD2R:assertionType ?assertionType;
+     oa:body ?bn1;
+     pav:versionNumber ?version;
+     oa:context ?context;
+     pav:createdOn ?createdOn.
+     
+     ?context oa:hasSource ?source.
+
+     ?context oa:hasSelector ?selector.
+        
+     ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
+
+      ?bn1 domeo:sets ?statement.
+
+      ?statement a poc:DrugDrugInteractionStatement;
+      dikbD2R:modality ?modality;
+      dikbD2R:statement ?statementType;
+      sio:SIO_000628 ?drugsInvolved.
+
+  OPTIONAL{
+  ?drugsInvolved dikbD2R:numOfParticipants ?numOfParticipants.
+  }
+
+  OPTIONAL{
+  ?drugsInvolved  dikbD2R:auc ?auc.
+  }
+
+  ?drugsInvolved a dikbD2R:PK_DDI;
+     sio:SIO_000132 ?drug1;
+     sio:SIO_000132 ?drug2.FILTER(?drug1 > ?drug2)
+ 
+  ?drug1 rdfs:label ?drug1Lab;
+     dailymed:activeMoietyRxCUI ?drug1rxc;
+     rdf:type ?drug1Type;
+     sio:SIO_000228 ?drug1Role.
+  OPTIONAL {
+  	 ?drug1 dikbD2R:dose ?dose1.
+    }
+
+  ?drug2 rdfs:label ?drug2Lab;
+  	 dailymed:activeMoietyRxCUI ?drug2rxc;
+	 rdf:type ?drug2Type;
+ 	 sio:SIO_000228 ?drug2Role.FILTER(?drug1Role != ?drug2Role).
+  OPTIONAL {
+         ?drug2 dikbD2R:dose ?dose2.
+	 }
+
+}    
+GROUP BY ?exactText
+ORDER BY DESC(?annot)
