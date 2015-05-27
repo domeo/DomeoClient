@@ -1333,9 +1333,12 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 		if(annotation instanceof MSelectionAnnotation) {
 			_domeo.getClipboardManager().removeAnnotation((MSelectionAnnotation)annotation);
 			_domeo.refreshClipboardComponents();
+			_domeo.getLogger().debug(this, "clipboardManager remove selection annotation");
 		} else {
 			_domeo.getAnnotationPersistenceManager().removeAnnotation(annotation, mark);
 			_domeo.refreshAnnotationComponents();
+			_domeo.getLogger().debug(this, "persistence manager remove annotation");
+
 		}
 		
 		_domeo.getLogger().info(LOG_CATEGORY_ANNOTATION_DELETED, this, "Annotation " + annotation.getClass().getName() + "-" + annotation.getLocalId() + " in(ms):"+(System.currentTimeMillis()-start));

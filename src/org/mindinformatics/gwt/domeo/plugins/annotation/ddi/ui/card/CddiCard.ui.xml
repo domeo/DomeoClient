@@ -153,15 +153,7 @@
 				</g:HorizontalPanel>
 			</g:VerticalPanel>
 
-		<!-- 	<g:VerticalPanel>
-				<g:HorizontalPanel >
-					<g:Label ui:field="statementlabel" styleName='{style.tablelabel}'>Statement</g:Label>
-				</g:HorizontalPanel>
-				<g:HorizontalPanel >
-					<g:Label ui:field="statement" styleName='{style.tablevalue}'></g:Label>
-				</g:HorizontalPanel>
-			</g:VerticalPanel>
- 		-->
+		<!-- 	modality  -->
  		
 			<g:VerticalPanel>
 				<g:HorizontalPanel >

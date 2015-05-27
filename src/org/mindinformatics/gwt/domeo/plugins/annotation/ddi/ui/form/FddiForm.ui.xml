@@ -7,7 +7,7 @@
 		height: 30px;
 		padding-left: 0px;
 		padding-top: 0px;
-		width: 800px;
+		width: 1000px;
 	}
 	
 	.buttonsPanel {
@@ -31,7 +31,6 @@
 		padding-buttom: 5px;
 		height: 0px;
 		max-height: 20px;
-		
 	}
 	
 	.setPanel {
@@ -44,21 +43,27 @@
 		float: right;
 	}
 	
-	.rightColumn {
-		padding-top: 20px;
-		padding-bottom: 20px;
-		width: 100%;
-		min-width: 350px;
-		height: 120px;
-		padding-top: 20px;
-		padding-bottom: 10px;
+	.leftColumn {
+		width: 400px;
+		vertical-align: top;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	
+	.middleColumn {
+		width: 300px;
+		vertical-align: top;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
 	
-	.leftColumn {
-		width: 350px;
-		vertical-align: top;
+	.rightColumn {
+		padding-top: 20px;
+		padding-bottom: 20px;
+		min-width: 300px;
+		height: 120px;
+		padding-top: 20px;
+		padding-bottom: 10px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
@@ -127,13 +132,13 @@
 	}
 	
 	.titlebar {
-		width: 350px;
+		width: 400px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
 	
 	.titlebarright {
-		width: 350px;
+		width: 300px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
@@ -143,7 +148,7 @@
 		padding-left: 3px;
 		color: #333;
 		font-style: normal;
-		width: 350px;
+		width: 200px;
 		height: 100px;
 		font-size: 12px;
 	}
@@ -190,7 +195,7 @@
 
 
 		<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
-			<g:Label ui:field="label1" styleName='{style.qualifiersLabel}'>PDDI Annotation</g:Label>
+			<g:Label ui:field="label1" styleName='{style.qualifiersLabel}'>PK PDDI Annotation</g:Label>
 			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
 		</g:HorizontalPanel>
 
@@ -225,6 +230,8 @@
 							checked="false">Metabolite</g:RadioButton>
 						<g:RadioButton ui:field="typedp1" name="typer1"
 							checked="false">Drug Product</g:RadioButton>
+						<g:RadioButton ui:field="typedg1" name="typer1"
+							checked="false">Drug Group</g:RadioButton>
 					</g:HorizontalPanel>
 
 
@@ -242,8 +249,8 @@
 							checked="false">Precipitant</g:RadioButton>
 					</g:HorizontalPanel>
 
-        			<g:HorizontalPanel>
-                       <g:Label>&nbsp; </g:Label>
+					<g:HorizontalPanel>
+						<g:Label>&nbsp; </g:Label>
 					</g:HorizontalPanel>
 
 					<!-- Drug 2 -->
@@ -269,6 +276,8 @@
 							checked="false">Metabolite</g:RadioButton>
 						<g:RadioButton ui:field="typedp2" name="typer2"
 							checked="false">Drug Product</g:RadioButton>
+						<g:RadioButton ui:field="typedg2" name="typer2"
+							checked="false">Drug Group</g:RadioButton>
 					</g:HorizontalPanel>
 
 
@@ -292,26 +301,19 @@
 
 			<g:cell>
 
-				<g:VerticalPanel ui:field='middleColumn' styleName='{style.rightColumn}'>
+				<g:VerticalPanel ui:field='middleColumn' styleName='{style.middleColumn}'>
 
 					<!-- Statement -->
-				<!--  
-					<g:HorizontalPanel styleName='{style.titlebar}'>
-						<g:Label ui:field="statement" styleName='{style.titleLeft}'>Statement (data
-							type that is described):</g:Label>
-					</g:HorizontalPanel>
-
-					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="statementqu" name="statement"
-							checked="false">quantitative</g:RadioButton>
-						<g:RadioButton ui:field="statementql" name="statement"
-							checked="false">qualitative</g:RadioButton>
-					</g:HorizontalPanel>
-				-->
+					<!-- <g:HorizontalPanel styleName='{style.titlebar}'> <g:Label ui:field="statement" 
+						styleName='{style.titleLeft}'>Statement (data type that is described):</g:Label> 
+						</g:HorizontalPanel> <g:HorizontalPanel styleName='{style.panel}'> <g:RadioButton 
+						ui:field="statementqu" name="statement" checked="false">quantitative</g:RadioButton> 
+						<g:RadioButton ui:field="statementql" name="statement" checked="false">qualitative</g:RadioButton> 
+						</g:HorizontalPanel> -->
 
 					<!--Modality: -->
 
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="modality" styleName='{style.titleLeft}'>Modality (observed
 							effect that is described):</g:Label>
 					</g:HorizontalPanel>
@@ -325,17 +327,17 @@
 
 
 					<!-- extra resource -->
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="commentlabel" styleName='{style.titleLeft}'>Comment:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
 						<g:TextArea ui:field='comment' styleName='{style.commentBody}'></g:TextArea>
 					</g:HorizontalPanel>
-
+                   
 
 					<!-- assertion type label -->
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="assertTypeLabel" styleName='{style.titleLeft}'>DIKB
 							Assertion
 							type:</g:Label>
@@ -351,7 +353,7 @@
 
 
 					<!-- evidence type -->
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="evidenceTypeLabel" styleName='{style.titleLeft}'>Evidence
 							modality:</g:Label>
 					</g:HorizontalPanel>
@@ -373,7 +375,7 @@
 
 					<!-- number of participants (only for increase Auc) -->
 
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="numParticiptLabel" styleName='{style.titleLeft}'>The number
 							of study participants:</g:Label>
 					</g:HorizontalPanel>
@@ -384,7 +386,7 @@
 
 					<!-- object dose (only for increase Auc) -->
 
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="objectDoseLabel" styleName='{style.titleLeft}'>The object
 							drugs dose in grams:</g:Label>
 					</g:HorizontalPanel>
@@ -396,7 +398,7 @@
 
 					<!-- precipitant dose (only for increase Auc) -->
 
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="preciptDoseLabel" styleName='{style.titleLeft}'>The
 							precipitant drugs dose in grams:</g:Label>
 					</g:HorizontalPanel>
@@ -407,7 +409,7 @@
 
 					<!-- AUC (only for increase Auc) -->
 
-					<g:HorizontalPanel styleName='{style.titlebar}'>
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="aucLabel" styleName='{style.titleLeft}'>AUC_i/AUC:</g:Label>
 					</g:HorizontalPanel>
 

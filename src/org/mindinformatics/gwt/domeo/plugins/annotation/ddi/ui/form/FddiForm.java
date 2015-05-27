@@ -58,7 +58,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 	private static Logger logger = Logger.getLogger("");
 
-	public static final String LABEL = "DDI";
+	public static final String LABEL = "PK DDI";
 	public static final String LABEL_EDIT = "EDIT ddi ANNOTATION";
 
 	public static final String LOG_CATEGORY_QUALIFIER_CREATE = "CREATING ddi ANNOTATION";
@@ -89,11 +89,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 	// type of drug1
 	@UiField
-	RadioButton typeai1, typemb1, typedp1;
+	RadioButton typeai1, typemb1, typedp1, typedg1;
 
 	// type of drug2
 	@UiField
-	RadioButton typeai2, typemb2, typedp2;
+	RadioButton typeai2, typemb2, typedp2, typedg2;
 
 	// role of drug1
 	@UiField
@@ -232,6 +232,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
 							"drug-product",
 							"Referred to the type of the mention within the sentence for drug.");
+		} else if (typedg1.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "drug-group",
+							"drug-group",
+							"Referred to the type of the mention within the sentence for drug.");
 		}
 
 		return null;
@@ -254,6 +259,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
 							"drug-product",
 							"Referred to the type of the mention within the sentence for drug two.");
+		} else if (typedg2.getValue()) {
+			return ResourcesFactory
+					.createLinkedResource(DIKBD2R_PREFIX + "drug-group",
+							"drug-group",
+							"Referred to the type of the mention within the sentence for drug.");
 		}
 		return null;
 	}
@@ -617,6 +627,8 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					typemb1.setValue(true);
 				} else if (_item.getType1().getLabel().equals("drug-product")) {
 					typedp1.setValue(true);
+				} else if (_item.getType1().getLabel().equals("drug-group")) {
+					typedg1.setValue(true);
 				}
 			}
 
@@ -627,6 +639,8 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					typemb2.setValue(true);
 				} else if (_item.getType2().getLabel().equals("drug-product")) {
 					typedp2.setValue(true);
+				} else if (_item.getType2().getLabel().equals("drug-group")) {
+					typedg2.setValue(true);
 				}
 			}
 
@@ -1248,10 +1262,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		if (drug2.getSelectedIndex() == 0)
 			requireds.add("Drug 2");
 
-		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue())) {
+		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue() || typedg1.getValue())) {
 			requireds.add("Drug 1 type");
 		}
-		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue())) {
+		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue() || typedg2.getValue())) {
 			requireds.add("Drug 2 type");
 		}
 		if (!(rolepp1.getValue() || roleob1.getValue())) {
