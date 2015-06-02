@@ -662,10 +662,19 @@ public class JsonUnmarshallingManager {
 						
 						// Highlight allows only text selectors at the moment
 						for(int z=0; z<ann.getSelectors().size(); z++) {
+							
+							try{
 							HtmlUtils.performHighlight(Long.toString(ann.getLocalId()), ((MTextQuoteSelector)ann.getSelectors().get(z)).getExact(), 
 									((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix(), ((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix(), 
 									HtmlUtils.createSpan(_domeo.getContentPanel().getAnnotationFrameWrapper().getFrame().getElement(), 0L), 
 									_domeo.getCssManager().getStrategy().getObjectStyleClass(ann));
+							} catch(Exception e) {
+								
+								_domeo.getLogger().debug(this, "Highlight annotation prefix/suffix matching failure" +
+										" - PREFIX:" + ((MTextQuoteSelector)ann.getSelectors().get(z)).getPrefix() + 
+										"| EXACT:" + ((MTextQuoteSelector)ann.getSelectors().get(z)).getExact() + 
+										"| SUFFIX:" + ((MTextQuoteSelector)ann.getSelectors().get(z)).getSuffix());
+							}
 						}
 						
 						((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(ann, set);
