@@ -6,19 +6,26 @@ import java.util.List;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.APersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetHandler;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetListHandler;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingBibliographySetHandler;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraph;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetResultWrapper;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AnnotopiaSerializerManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.src.AnnotopiaConverter;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.ui.existingsets.ExistingAnnotationViewerPanel;
+import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.query.client.Function;
+import com.google.gwt.query.client.GQuery;
 import com.google.gwt.query.client.Properties;
 import com.google.gwt.query.client.js.JsUtils;
 import com.google.gwt.query.client.plugins.ajax.Ajax;
@@ -30,7 +37,7 @@ import com.google.gwt.user.client.Window;
 public class AnnotopiaPersistenceManager extends APersistenceManager implements IPersistenceManager {
 
 	private static final String API_KEY = "annotopia-api-key";
-	private static final String POST = "post", PUT = "put", DELETE = "delete", JSON = "json";
+	private static final String POST = "post", PUT = "put", GET = "get", DELETE = "delete", JSON = "json";
 	private static final String PREFIX = "s/annotationset";
 	
 	public String URL = "http://localhost:8090/";
@@ -74,7 +81,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	 * Posts a new Annotation Set
 	 */
 	private void postAnnotationSet(MAnnotationSet set) {
-		_application.getLogger().debug(this, "Posting new annotation set");
+		_application.getLogger().debug(this, "Posting new annotation set (new)");
 		
 		try {
 			Ajax.ajax(Ajax.createSettings()
@@ -87,10 +94,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
-		    			JsAnnotopiaSetResultWrapper wrapper = (JsAnnotopiaSetResultWrapper) parseJson(getDataProperties().toJsonString());
+		    			JavaScriptObject jsSet = parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			
-		    			MAnnotationSet savedSet = unmarshaller.unmarshallAnnotationSet(wrapper.getResult().getSet().get(0), false);	    
+		    			MAnnotationSet savedSet = unmarshaller.unmarshallBasicAnnotationSet(jsSet, false);	    
 		    			if(savedSet==null) {
 		    				_application.getLogger().exception(this, "Annotation set not saved correctly");
 		    				_application.getProgressPanelContainer().setErrorMessage("Annotation set not saved correctly");
@@ -126,10 +133,15 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		    				_application.getLogger().debug(this, "Completed saving of Annotation Set in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
 		    			}
 		    		}
-		        }).setError(new Function(){ // callback to be run if the request success
-		    		public void f() {
-		    			Window.alert("There was an error " + getDataObject());
-		    		}
+		        }).setError(new Function(){ // callback to be run if the request fails
+		        	public void f() {
+		        		 Window.alert("There was an error " + getDataObject());
+
+		        		_application.getLogger().exception(this, 
+		        			"Couldn't complete existing annotation sets list saving");
+		        		_application.getProgressPanelContainer().setErrorMessage(
+							"Couldn't complete existing annotation sets list saving");
+		        	}
 		        })
 		    );
 		} catch (Exception e) {
@@ -151,14 +163,16 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
-		    			JsAnnotopiaSetResultWrapper wrapper = (JsAnnotopiaSetResultWrapper) parseJson(getDataProperties().toJsonString());
+		    			JavaScriptObject jsSet = parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			
-		    			MAnnotationSet savedSet = unmarshaller.unmarshallAnnotationSet(wrapper.getResult().getSet().get(0), false);	    
+		    			MAnnotationSet savedSet = unmarshaller.unmarshallBasicAnnotationSet(jsSet, false);	 
 		    			if(savedSet==null) {
 		    				_application.getLogger().exception(this, "Annotation set not updated correctly");
 		    				_application.getProgressPanelContainer().setErrorMessage("Annotation set not updated correctly");
 		    			} else {
+		    				// As this is a set update, the matching URI is the existing one ???
+		    				
 		    				MAnnotationSet currentSet = _domeo.getPersistenceManager().getAnnotationSetById(savedSet.getPreviousVersion());	
 		    				currentSet.setIndividualUri(savedSet.getIndividualUri());
 		    				currentSet.setLastSavedOn(savedSet.getLastSavedOn());
@@ -245,17 +259,105 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	}
 
 	@Override
-	public void retrieveExistingAnnotationSets(List<String> ids,
-			IRetrieveExistingAnnotationSetHandler handler) {
-		// TODO Auto-generated method stub
-		
+	public void retrieveExistingAnnotationSets(List<String> urls, IRetrieveExistingAnnotationSetHandler handler) {
+		_application.getLogger().debug(this, "Retrieving requested annotation sets...");
+		_application.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation sets from Annotopia...");
+
+		for(String url: urls) {
+			try {
+				Ajax.ajax(Ajax.createSettings()
+					.setUrl(url)
+					.setHeaders(getAnnotopiaOAuthToken( ))
+			        .setDataType("json") // txt, json, jsonp, xml
+			        .setType("get")      // post, get
+			        .setTimeout(10000)
+			        .setSuccess(new Function(){ // callback to be run if the request success
+			    		public void f() {
+			    			IDomeo _domeo = ((IDomeo)_application);
+//			    			JsAnnotopiaAnnotationSetGraph wrapper = 
+//			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
+			    			
+			    			JavaScriptObject jsSet = parseJson(getDataProperties().toJsonString());
+			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
+			    			
+			    			MAnnotationSet set = unmarshaller.unmarshallBasicAnnotationSet(jsSet, true);	    			
+			    			if(set==null) {
+			    				// TODO message no annotation found
+			    				_application.getLogger().info(this, "No annotation set found");
+			    				_application.getProgressPanelContainer().setCompletionMessage("Annotation Set not found");
+			    			} else {	
+			    				((AnnotationPersistenceManager) _domeo.getPersistenceManager()).loadAnnotationSet(set);
+			    				_application.getProgressPanelContainer().hide();
+			    				_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSets() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
+			    				_domeo.refreshAllComponents();
+			    			}
+			    		}
+			        })
+			        .setError(new Function(){ // callback to be run if the request fails
+			        	public void f() {
+			        		_application.getLogger().exception(this, 
+			        			"Couldn't complete existing annotation sets list retrieval process");
+			        		_application.getProgressPanelContainer().setErrorMessage(
+								"Couldn't complete existing annotation sets list retrieval process");
+			        	}
+			        })
+			     );
+			} catch (Exception e) {
+				_application.getLogger().exception(this, "Couldn't complete existing annotation sets list retrieval");
+			}
+		}
 	}
 
 	@Override
-	public void retrieveExistingAnnotationSetList(
-			IRetrieveExistingAnnotationSetListHandler handler) {
-		// TODO Auto-generated method stub
+	public void retrieveExistingAnnotationSetList(IRetrieveExistingAnnotationSetListHandler handler) {
+		_application.getLogger().debug(this, "Retrieving list of existing annotation sets...");
+		_application.getProgressPanelContainer().setProgressMessage("Retrieving list of existing annotation sets from Annotopia...");
 		
+		try {
+			Ajax.ajax(Ajax.createSettings()
+				.setUrl(URL + PREFIX)	
+				.setHeaders(getHeaders())
+				.setDataType(JSON)
+				.setType(GET)    
+		        .setData(new JsUtils.JsUtilsImpl().parseJSON("{\"tgtUrl\":\""+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()+ "\"}"))
+		        .setTimeout(10000)
+		        .setSuccess(new Function(){ // callback to be run if the request success
+		    		public void f() {
+		    			IDomeo _domeo = ((IDomeo)_application);
+		    			JsAnnotopiaSetsResultWrapper wrapper = 
+		    				(JsAnnotopiaSetsResultWrapper) parseJson(getDataProperties().toJsonString());
+		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
+		    			List<MAnnotopiaAnnotationSet> sets = unmarshaller.unmarshallAnnotationSetsList(wrapper);	    			
+		    			_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSetList() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
+
+		    			if(sets.size()==0) {
+		    				// TODO message no annotation found
+		    				_application.getLogger().info(this, "No annotation sets found");
+		    				_application.getProgressPanelContainer().setCompletionMessage("No annotation exist for this document");
+		    			} else {
+		    				_application.getProgressPanelContainer().hide();
+		    				try {
+		    					ExistingAnnotationViewerPanel lwp = new ExistingAnnotationViewerPanel((IDomeo)_application, sets);
+		    					new EnhancedGlassPanel((IDomeo)_application, lwp, lwp.getTitle(), false, false, false);
+		    				} catch (Exception e) {
+		    					_application.getLogger().exception(this, "Exeption in visualizing existing annotation");
+		    				}		
+		    			}
+		    		}
+		        })
+		        .setError(new Function(){ // callback to be run if the request fails
+		        	public void f() {
+		        		_application.getLogger().exception(this, 
+		        			"Couldn't complete existing annotation sets list retrieval process");
+		        		_application.getProgressPanelContainer().setErrorMessage(
+							"Couldn't complete existing annotation sets list retrieval process");
+		        	}
+		        })
+			);
+		    //.setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
+		} catch (Exception e) {
+			_application.getLogger().exception(this, "Couldn't complete existing annotation sets list retrieval");
+		}
 	}
 
 	@Override
@@ -269,7 +371,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	 */
 	private Properties getHeaders() {
 		Properties props = getAnnotopiaOAuthToken();
-		props.set("Authorization", "annotopia-api-key " + ApplicationUtils.getAnnotopiaApiKey());
+		if(!ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set("Authorization", "annotopia-api-key " + ApplicationUtils.getAnnotopiaApiKey());
 		return props;
 	}
 	

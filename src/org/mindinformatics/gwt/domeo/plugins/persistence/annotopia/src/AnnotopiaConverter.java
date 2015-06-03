@@ -60,8 +60,6 @@ import org.mindinformatics.gwt.utils.src.HtmlUtils;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -225,6 +223,154 @@ public class AnnotopiaConverter {
 	}
 	
 	/**
+	 * This is reading the annotation sets and the annotations and caching all the agents.
+	 * @param wrapper		The Annotation Set wrapper
+	 * @param agents		Agent ID is the key while the Agent object is the value
+	 * @param entityAgents  Entity (ann or set) ID is the key while the Agent ID is the value
+	 * @param targets	    Target ID is the key while the Target object is the value
+	 * @param targetSources Annotation ID is the key and the Target object is the value
+	 */
+	private void cacheBasicAgents(JavaScriptObject jsItem, 
+			HashMap<String, JsAnnotopiaAgent> agents, HashMap<String, String> entityAgents, 
+			HashMap<String, JsResource> targets, HashMap<String, String> targetSources, boolean parseAnnotations) 
+	{	
+		_domeo.getLogger().debug(this, "Basic agent caching");
+		
+//		JsArray<JavaScriptObject> graphs = wrapper.getGraphs();
+//		if(graphs.length()==1) {	
+//			JavaScriptObject jsItem = graphs.get(0);
+			
+			// Extract types
+			HashSet<String> typesSet = new HashSet<String>();
+			if(hasMultipleTypes(jsItem)) {
+				JsArrayString types = getObjectTypes(jsItem);
+				for(int k=0; k<types.length(); k++) {
+					typesSet.add(types.get(k));
+				}
+			} else {
+				typesSet.add(getObjectType(jsItem));
+			}
+			
+			try {
+				// ----------------------------------------
+				//  Caching Annotation Sets Agents
+				// ----------------------------------------
+				JsAnnotopiaAnnotationSetSummary jsSet = (JsAnnotopiaAnnotationSetSummary) jsItem;
+				
+				_domeo.getLogger().debug(this, "Caching createdBy");
+				// Annotation Set: createdBy
+				_domeo.getLogger().debug(this, "Caching createdBy " + jsSet.isCreatedByString());
+				if(jsSet.getCreatedBy()!=null && jsSet.isCreatedByString()) {
+					entityAgents.put("createdBy:"+jsSet.getId(), jsSet.getCreatedByAsString());
+					_domeo.getLogger().debug(this, "Caching createdBy [" + "createdBy:"+jsSet.getId() + ":" + jsSet.getCreatedByAsString() + "]");
+				} else if(jsSet.getCreatedBy()!=null && jsSet.isCreatedByObject()) {
+					agents.put(jsSet.getCreatedByAsObject().getId(), jsSet.getCreatedByAsObject());
+					_domeo.getLogger().debug(this, "Caching createdBy [" + "createdBy:"+jsSet.getId() + ":" + jsSet.getCreatedByAsObject().getId() + "]");
+				}
+				
+				_domeo.getLogger().debug(this, "Caching createdWith");
+				// Annotation Set: createdWith
+				if(jsSet.getCreatedWith()!=null && jsSet.isCreatedWithString()) {
+					entityAgents.put("createdWith:"+jsSet.getId(), jsSet.getCreatedWithAsString());
+					_domeo.getLogger().debug(this, "Caching createdWith [" + "createdWith:"+jsSet.getId() + ":" + jsSet.getCreatedWithAsString() + "]");
+				} else if(jsSet.getCreatedWith()!=null && jsSet.isCreatedWithObject()) {
+					agents.put(jsSet.getCreatedWithAsObject().getId(), jsSet.getCreatedWithAsObject());
+				}
+				
+				_domeo.getLogger().debug(this, "Caching lastSavedBy");
+				// Annotation Set: lastSavedBy
+				if(jsSet.getLastSavedBy()!=null && jsSet.isLastSavedByString()) {
+					entityAgents.put("lastSavedBy:"+jsSet.getId(), jsSet.getLastSavedByAsString());
+				} else if(jsSet.getLastSavedBy()!=null && jsSet.isLastSavedByObject()) {
+					agents.put(jsSet.getLastSavedByAsObject().getId(), jsSet.getLastSavedByAsObject());
+				}
+				
+				// ----------------------------------------
+				//  Caching Annotation Agents
+				// ----------------------------------------
+				if(parseAnnotations) {
+					_domeo.getLogger().debug(this, "Caching annotation agents");
+					int max = jsSet.isAnnotationsArray() ? jsSet.getAnnotations().length() : (jsSet.hasAnnotation()?1:0);
+					_domeo.getLogger().debug(this, "Detected annotations: " + max);
+					for(int i=0; i<max; i++) {			
+//						JavaScriptObject a = null;
+//						if(max==1) a = jsSet.getAnnotation();
+//						else a = jsSet.getAnnotations().get(i);
+						JavaScriptObject a = jsSet.getAnnotations().get(i);
+						if(getObjectType(a).equals(IOpenAnnotation.ANNOTATION)) {
+							// Unmarshall annotatedBy
+							JsAnnotationProvenance annotationProvenance = (JsAnnotationProvenance) a;
+							if(annotationProvenance.getAnnotatedBy()!=null && annotationProvenance.isAnnotatedByString()) {
+								entityAgents.put("createdBy:"+annotationProvenance.getId(), annotationProvenance.getAnnotatedByAsString());
+								_domeo.getLogger().debug(this, "PUT: " + annotationProvenance.getId() + "-" +  annotationProvenance.getAnnotatedByAsString());
+							} else if(annotationProvenance.getAnnotatedBy()!=null && annotationProvenance.isAnnotatedByObject()) {
+								agents.put(annotationProvenance.getAnnotatedByAsObject().getId(), annotationProvenance.getAnnotatedByAsObject());
+								_domeo.getLogger().debug(this, "PUT: " + annotationProvenance.getAnnotatedByAsObject().getId() + "-" +  annotationProvenance.getAnnotatedByAsObject().getName());
+							}
+							if(annotationProvenance.getCreatedWith()!=null && annotationProvenance.isCreatedWithString()) {
+								entityAgents.put("createdWith:"+annotationProvenance.getId(), annotationProvenance.getCreatedWithAsString());
+							} else if(annotationProvenance.getCreatedWith()!=null && annotationProvenance.isCreatedWithObject()) {
+								agents.put(annotationProvenance.getCreatedWithAsObject().getId(), annotationProvenance.getCreatedWithAsObject());
+							}
+							if(annotationProvenance.getLastSavedBy()!=null && annotationProvenance.isLastSavedByString()) {
+								entityAgents.put("lastSavedBy:"+annotationProvenance.getId(), annotationProvenance.getLastSavedByAsString());
+							} else if(annotationProvenance.getLastSavedBy()!=null && annotationProvenance.isLastSavedByObject()) {
+								agents.put(annotationProvenance.getLastSavedByAsObject().getId(), annotationProvenance.getLastSavedByAsObject());
+							}
+							
+							JsOpenAnnotation annotation = (JsOpenAnnotation) a;			
+							
+							// Unmarshall targets
+							boolean multipleTargets = annotation.hasMultipleTargets();
+							if(multipleTargets) {
+								JsArray<JavaScriptObject> jsTargets = annotation.getTargets();
+								for(int t=0; t<jsTargets.length(); t++) {
+									JavaScriptObject jsTarget = jsTargets.get(t);
+									if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
+										JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
+										if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+											targetSources.put(jsSpecificResource.getId(), jsSpecificResource.getHasSourceAsString());
+										} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+											targets.put(jsSpecificResource.getHasSourceAsObject().getId(), jsSpecificResource.getHasSourceAsObject());
+										}
+									}
+								}
+							} else {
+								JavaScriptObject jsTarget = annotation.getTarget();
+								if(getObjectType(jsTarget).contains(IOpenAnnotation.SPECIFIC_RESOURCE)) {
+									JsSpecificResource jsSpecificResource = (JsSpecificResource) jsTarget;
+									if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceString()) {
+										targetSources.put(jsSpecificResource.getId(), jsSpecificResource.getHasSourceAsString());
+									} else if(jsSpecificResource.getHasSource()!=null && jsSpecificResource.isHasSourceObject()) {
+										targets.put(jsSpecificResource.getHasSourceAsObject().getId(), jsSpecificResource.getHasSourceAsObject());
+									}
+								}
+							}
+						} else {
+							_domeo.getLogger().warn(this, "Item not qualified as annotation... skipped" + jsSet.getId());
+						}
+					}		
+				}
+				
+				/*
+				Set<String> agentsKeys = agents.keySet();
+				for(String agentsKey: agentsKeys) {
+					_domeo.getLogger().debug(this, "AGENT: " + agentsKey + "-" + agents.get(agentsKey).getName());
+				}
+				Set<String> agentEntityKeys = entityAgents.keySet();
+				for(String agentEntityKey: agentEntityKeys) {
+					_domeo.getLogger().debug(this, "AGENTENTITY: " + agentEntityKey + "-" + entityAgents.get(agentEntityKey));
+				}
+				*/
+			} catch(Exception e) {
+				_domeo.getLogger().exception(this, "unmarshallAnnotationSet(): " + e.getMessage());
+			}
+//		} else {
+//			_domeo.getLogger().exception(this, "Graph issue, unrecognized agents format");
+//		}	
+	}
+	
+	/**
 	 * Unmarshalls the annotation sets list summaries ignoring
 	 * the sets details.
 	 * @return Annotation Sets list summary
@@ -268,6 +414,65 @@ public class AnnotopiaConverter {
 			}			
 		}		
 		return sets;
+	}
+	
+	public MAnnotationSet unmarshallBasicAnnotationSet(JavaScriptObject  annoSet, boolean persist) {		
+		// Cache for lazy binding
+		HashMap<String, JsAnnotopiaAgent> agents = new HashMap<String, JsAnnotopiaAgent>();
+		HashMap<String, String> entityAgents = new HashMap<String, String>();
+		HashMap<String, JsResource> targets = new HashMap<String, JsResource>();
+		HashMap<String, String> targetSources = new HashMap<String, String>();
+
+		// Caching of both sets and annotations
+		cacheBasicAgents(annoSet, agents, entityAgents, targets, targetSources, true);
+		
+		_domeo.getLogger().debug(this, "Unmarshalling set x");
+
+			JavaScriptObject jsItem = annoSet;
+			
+			// Extract types
+			HashSet<String> typesSet = new HashSet<String>();
+			if(hasMultipleTypes(jsItem)) {
+				JsArrayString types = getObjectTypes(jsItem);
+				for(int k=0; k<types.length(); k++) {
+					typesSet.add(types.get(k));
+				}
+			} else {
+				typesSet.add(getObjectType(jsItem));
+			}
+			
+			try {
+				MAnnotopiaAnnotationSet set = unmarshallAnnotationSet(jsItem, typesSet, agents, entityAgents);
+				
+				if(set!=null) {
+					_domeo.getLogger().debug(this, "Unmarshalling createdWith " + set.getCreatedWith());
+					// Translation to the old internal formats
+					MAgentSoftware createdWith = new MAgentSoftware();
+					createdWith.setUri(set.getCreatedWith().getId());
+					createdWith.setName(set.getCreatedWith().getName());
+					
+					_domeo.getLogger().debug(this, "Unmarshalling createdBy " + set.getCreatedBy());
+					MAgentPerson createdBy = new MAgentPerson();
+					createdBy.setUri(set.getCreatedBy().getId());
+					createdBy.setName(set.getCreatedBy().getName());
+					
+					// Annotation Set
+					// Note: currently the lastSavedOn is forcing createdOn
+					MAnnotationSet aSet = AnnotationFactory.createAnnotationSet(set.getId(), set.getId(), set.getLastSavedOn(), set.getVersionNumber(), set.getPreviousVersion(),
+							 _domeo.getPersistenceManager().getCurrentResource(), set.getLabel(), set.getDescription());		
+					aSet.setCreatedWith(createdWith);
+					aSet.setCreatedBy(createdBy);
+					aSet.setCreatedOn(set.getCreatedOn());
+					
+					_domeo.getLogger().debug(this, "Unmarshalling annotations");
+					unmarshallAnnotations(aSet, set, jsItem, agents, entityAgents, targets, targetSources, persist);
+					
+					return aSet;
+				}
+			} catch(Exception e) {
+				_domeo.getLogger().exception(this, "unmarshallAnnotationSet(): " + e.getMessage());
+			}	
+		return null;
 	}
 	
 	public MAnnotationSet unmarshallAnnotationSet(JsAnnotopiaAnnotationSetGraph  wrapper, boolean persist) {		
@@ -334,6 +539,7 @@ public class AnnotopiaConverter {
 		}	
 		return null;
 	}
+	
 	
 	private MAnnotopiaAnnotationSet unmarshallAnnotationSet(JavaScriptObject jsItem, HashSet<String> typesSet,
 			HashMap<String, JsAnnotopiaAgent> agents, HashMap<String, String> entityAgents) 
@@ -524,11 +730,17 @@ public class AnnotopiaConverter {
 					annotatedAt = annotation.getFormattedAnnotatedAt();
 				}
 				
+				_domeo.getLogger().debug(this, "1");
+				
 				Date lastSavedOn = null;
-				if(((JsAnnotationProvenance)a).getLastSavedOn()!=null) {
+				_domeo.getLogger().debug(this, ""+((JsAnnotationProvenance)a));
+				if(((JsAnnotationProvenance)a).getLastSavedOn()!=null && ((JsAnnotationProvenance)a).getLastSavedOn().trim().length()>5) {
+					_domeo.getLogger().debug(this, ""+ ((JsAnnotationProvenance)a).getLastSavedOn());
+					_domeo.getLogger().debug(this, ""+ ((JsAnnotationProvenance)a).getFormattedLastSavedOn());
 					lastSavedOn = ((JsAnnotationProvenance)a).getFormattedLastSavedOn();
 				}
 				
+				_domeo.getLogger().debug(this, "2");
 				
 				// Unmarshall targets
 				ArrayList<MSelector> selectors = new ArrayList<MSelector>();
