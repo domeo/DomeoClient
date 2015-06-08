@@ -778,7 +778,7 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			} else {
 				// Real service
 				if(ApplicationUtils.getIsAnnotopiaEnabled().equals("true")) {
-					return new AnnotopiaPersistenceManager(this, ApplicationUtils.getAnnotopiaLocation(), null);
+					return new org.mindinformatics.gwt.domeo.plugins.annotopia.persistence.src.AnnotopiaPersistenceManager(this, ApplicationUtils.getAnnotopiaLocation(), null);
 				} else return new JsonPersistenceManager(this, null);
 				//throw new RuntimeException("PersistenceManager not implemented for a real situation");
 			}
