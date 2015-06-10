@@ -15,7 +15,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFact
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.GQuery;
@@ -37,30 +36,6 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		_application = application;
 		if(url!=null) URL = url;
 	}
-	
-
-	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-		try {
-			var jsonStr = jsonStr      
-	    		.replace(/[\\]/g, '\\\\')
-	    		.replace(/[\/]/g, '\\/')
-	    		.replace(/[\b]/g, '\\b')
-	    		.replace(/[\f]/g, '\\f')
-	    		.replace(/[\n]/g, '\\n')
-	    		.replace(/[\r]/g, '\\r')
-	    		.replace(/[\t]/g, '\\t')
-	    		.replace(/[\\][\"]/g, '\\\\\"')
-	    		.replace(/\\'/g, "\\'");
-	    	//alert(jsonStr);
-		  	return JSON.parse(jsonStr);
-		} catch (e) {
-			alert("Error while parsing the JSON message: " + e);
-		}
-	}-*/;
-	
-	public static native  String stringify(JavaScriptObject obj) /*-{
-		return JSON.stringify(obj);
-	}-*/;
 
 	@Override
 	public void searchTerm(final IBioPortalItemsRequestCompleted completionCallback,
@@ -74,7 +49,7 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/bioportal/search")
-				.setHeaders(getAnnotopiaOAuthToken( ))
+				/*.setHeaders(getAnnotopiaOAuthToken( ))*/
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
 		        .setData(GQuery.$$(
@@ -83,7 +58,7 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
-		    			JsoBioPortalSearchResultsWrapper bioportalSearchResultsWrapper = (JsoBioPortalSearchResultsWrapper) parseJson(getDataProperties().toJsonString());
+		    			JsoBioPortalSearchResultsWrapper bioportalSearchResultsWrapper = (JsoBioPortalSearchResultsWrapper) ApplicationUtils.parseJson(getDataProperties().toJsonString());
 						JsArray bioportalEntries = bioportalSearchResultsWrapper.getResults();
 						ArrayList<MLinkedResource> terms = new ArrayList<MLinkedResource>();
 						if(bioportalEntries!=null) {
@@ -128,7 +103,7 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/bioportal/search")
-				.setHeaders(getAnnotopiaOAuthToken( ))
+				/*.setHeaders(getAnnotopiaOAuthToken( ))*/
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
 		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + 
@@ -136,7 +111,7 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
-		    			JsoBioPortalSearchResultsWrapper bioportalSearchResultsWrapper = (JsoBioPortalSearchResultsWrapper) parseJson(getDataProperties().toJsonString());
+		    			JsoBioPortalSearchResultsWrapper bioportalSearchResultsWrapper = (JsoBioPortalSearchResultsWrapper) ApplicationUtils.parseJson(getDataProperties().toJsonString());
 						JsArray bioportalEntries = bioportalSearchResultsWrapper.getResults();
 						ArrayList<MLinkedResource> terms = new ArrayList<MLinkedResource>();
 						if(bioportalEntries!=null) {
@@ -189,14 +164,14 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/bioportal/textmine")
-				.setHeaders(getAnnotopiaOAuthToken( ))
+				/*.setHeaders(getAnnotopiaOAuthToken( ))*/
 		        .setDataType("json") // txt, json, jsonp, xml */
 		        .setType("post")      // post, get
 		        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
-		        		JsAnnotationSet set = (JsAnnotationSet) parseJson(getDataProperties().toJsonString());
+		        		JsAnnotationSet set = (JsAnnotationSet) ApplicationUtils.parseJson(getDataProperties().toJsonString());
 		        		_application.getProgressPanelContainer().setCompletionMessage("Text mining completed");
 						completionCallback.returnTextminingResults(set, false);
 		        	}
@@ -257,15 +232,5 @@ public class AnnotopiaBioPortalConnector implements IBioPortalConnector {
 //			completionCallback.textMiningNotCompleted();
 //		}	
 	}	
-	
-	/** Return the user Annotopia OAuth token if it is enabled.
-	 * @return The user Annotopia OAuth token if it is enabled. */
-	private Properties getAnnotopiaOAuthToken( ) {
-		if(ApplicationUtils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
-			return Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken( ));
-		} else {
-			//return Properties.create("Authorization: Bearer none");
-			return Properties.create();
-		}
-	}
+
 }

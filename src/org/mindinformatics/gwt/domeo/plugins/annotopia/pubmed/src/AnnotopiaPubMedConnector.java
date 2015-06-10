@@ -23,7 +23,6 @@ import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -56,39 +55,14 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		if(url!=null) URL = url;
 	}
 	
-//	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-//	  	return eval('('+jsonStr+')');
-//	}-*/;
-	
-	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-	
-		try {
-			var jsonStr = jsonStr      
-	    		.replace(/[\\]/g, '\\\\')
-	    		.replace(/[\/]/g, '\\/')
-	    		.replace(/[\b]/g, '\\b')
-	    		.replace(/[\f]/g, '\\f')
-	    		.replace(/[\n]/g, '\\n')
-	    		.replace(/[\r]/g, '\\r')
-	    		.replace(/[\t]/g, '\\t')
-	    		.replace(/[\\][\"]/g, '\\\\\"')
-	    		.replace(/\\'/g, "\\'");
-	    	//alert(jsonStr);
-		  	return JSON.parse(jsonStr);
-		} catch (e) {
-			alert("Error while parsing the JSON message: " + e);
-		}
-	}-*/;
-	
-	/** Return the user Annotopia OAuth token if it is enabled.
-	 * @return The user Annotopia OAuth token if it is enabled. */
-	private Properties getAnnotopiaOAuthToken( ) {
-		if(ApplicationUtils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
-			return Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken( ));
-		} else {
-			//return Properties.create("Authorization: Bearer none");
-			return Properties.create();
-		}
+	/**
+	 * Get the properties for the HTTP headers
+	 * @return The list of properties for the header
+	 */
+	private Properties getHeaders() {
+		Properties props = ApplicationUtils.getAnnotopiaOAuthToken();
+		if(!ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set("Authorization", "annotopia-api-key " + ApplicationUtils.getAnnotopiaApiKey());
+		return props;
 	}
 	
 	@Override
@@ -102,7 +76,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/pubmed/entry")
-				.setHeaders(getAnnotopiaOAuthToken( ))
+				/*.setHeaders(getHeaders( ))*/
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("post")      // post, get
 		        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
@@ -112,7 +86,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		        		ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
 						
 						try {
-							JsoPubMedEntry pubmedEntry = (JsoPubMedEntry) ((JsArray)parseJson(getDataProperties( ).toJsonString( ))).get(0);
+							JsoPubMedEntry pubmedEntry = (JsoPubMedEntry) ((JsArray)ApplicationUtils.parseJson(getDataProperties( ).toJsonString( ))).get(0);
 	
 							MPublicationArticleReference reference = new MPublicationArticleReference();
 							reference.setUrl(pubmedEntry.getUrl());
@@ -140,7 +114,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 	        	})
 		        .setError(new Function(){ // callback to be run if the request fails
 		        	public void f() {
-		        		 Window.alert("There was an error whilre retrieving the bibliographic object" + getDataObject());
+		        		 Window.alert("There was an error while retrieving the bibliographic object " + getDataObject());
 
 		        		_application.getLogger().exception(this, 
 		        			"Couldn't complete existing annotation sets list saving");
@@ -171,7 +145,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/pubmed/entries")
-				.setHeaders(getAnnotopiaOAuthToken( ))
+				/*.setHeaders(getAnnotopiaOAuthToken( ))*/
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("post")      // post, get
 		        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
@@ -179,7 +153,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
 						try {
-							JsArray pubmedEntries = ((JsArray) parseJson(getDataProperties( ).toJsonString( )));
+							JsArray pubmedEntries = ((JsArray) ApplicationUtils.parseJson(getDataProperties( ).toJsonString( )));
 							ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
 							for(int i=0; i<pubmedEntries.length(); i++) {
 								
@@ -246,7 +220,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/pubmed/search")
-				.setHeaders(getAnnotopiaOAuthToken( ))
+				/*.setHeaders(getAnnotopiaOAuthToken( ))*/
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
 		        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
@@ -254,7 +228,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
 						try {
-							JsoPubmedSearchResultsWrapper pubmedSearchResultsWrapper = (JsoPubmedSearchResultsWrapper) parseJson(getDataProperties( ).toJsonString( ));
+							JsoPubmedSearchResultsWrapper pubmedSearchResultsWrapper = (JsoPubmedSearchResultsWrapper) ApplicationUtils.parseJson(getDataProperties( ).toJsonString( ));
 							JsArray pubmedEntries = pubmedSearchResultsWrapper.getResults();
 							if(pubmedSearchResultsWrapper.getResults().length()>0 && (pubmedSearchResultsWrapper.getException()==null || pubmedSearchResultsWrapper.getException().trim().length()==0)) {
 								ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
@@ -453,7 +427,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 					if (200 == response.getStatusCode()) {
 						try {
 							_application.getLogger().debug(this, response.getText());
-							JsArray responseOnSets = (JsArray) parseJson(response.getText());
+							JsArray responseOnSets = (JsArray) ApplicationUtils.parseJson(response.getText());
 							handler.setExistingBibliographySetList(responseOnSets, true);			
 						} catch(Exception e) {
 							_application.getLogger().exception(this, "Could not parse existing bibliography " + e.getMessage());
@@ -476,11 +450,4 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 			_application.getLogger().exception(this, "Couldn't retrieve annotation");
 		}
 	}
-	
-
-	
-
-	
-
-
 }

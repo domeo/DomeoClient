@@ -2,7 +2,9 @@ package org.mindinformatics.gwt.framework.src;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.query.client.Properties;
 import com.google.gwt.regexp.shared.RegExp;
 
 public class ApplicationUtils {
@@ -162,5 +164,47 @@ public class ApplicationUtils {
 		if(index>0) base = base.substring(0, $wnd.location.toString().indexOf("?"));
 		//return base;
 		$wnd.history.pushState("", "Domeo Annotator", base + "?url=" + encodeURIComponent(url));
+	}-*/;
+
+	// ---------------------------------------------------------------------
+	// Authorization
+	// ---------------------------------------------------------------------	
+	/** 
+	 * Return the user Annotopia OAuth token if it is enabled.
+	 * @return The user Annotopia OAuth token if it is enabled.
+	 */
+	public static Properties getAnnotopiaOAuthToken() {
+		return (ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")? Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken()): Properties.create());
+	}
+	
+	// ---------------------------------------------------------------------
+	// JSON Utils
+	// ---------------------------------------------------------------------	
+	
+	// DOES NOT WORK PROPERLY
+	//	public static native JavaScriptObject parseJson(String jsonStr) /*-{
+	//  	return eval('('+jsonStr+')');
+	//}-*/;
+	// WORKS PROPERLY
+	public static native JavaScriptObject parseJson(String jsonStr) /*-{
+		try {
+			var jsonStr = jsonStr      
+	    		.replace(/[\\]/g, '\\\\')
+	    		.replace(/[\/]/g, '\\/')
+	    		.replace(/[\b]/g, '\\b')
+	    		.replace(/[\f]/g, '\\f')
+	    		.replace(/[\n]/g, '\\n')
+	    		.replace(/[\r]/g, '\\r')
+	    		.replace(/[\t]/g, '\\t')
+	    		.replace(/[\\][\"]/g, '\\\\\"')
+	    		.replace(/\\'/g, "\\'");
+		  	return JSON.parse(jsonStr);
+		} catch (e) {
+			alert("Error while parsing the JSON message: " + e);
+		}
+	}-*/;
+	
+	public static native  String stringify(JavaScriptObject obj) /*-{
+		return JSON.stringify(obj);
 	}-*/;
 }

@@ -94,7 +94,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
-		    			JavaScriptObject jsSet = parseJson(getDataProperties().toJsonString());
+		    			JavaScriptObject jsSet = ApplicationUtils.parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			
 		    			MAnnotationSet savedSet = unmarshaller.unmarshallBasicAnnotationSet(jsSet, false);	    
@@ -163,7 +163,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
-		    			JavaScriptObject jsSet = parseJson(getDataProperties().toJsonString());
+		    			JavaScriptObject jsSet = ApplicationUtils.parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			
 		    			MAnnotationSet savedSet = unmarshaller.unmarshallBasicAnnotationSet(jsSet, false);	 
@@ -267,7 +267,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(url)
-					.setHeaders(getAnnotopiaOAuthToken( ))
+					.setHeaders(getHeaders())
 			        .setDataType("json") // txt, json, jsonp, xml
 			        .setType("get")      // post, get
 			        .setTimeout(10000)
@@ -277,7 +277,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 //			    			JsAnnotopiaAnnotationSetGraph wrapper = 
 //			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
 			    			
-			    			JavaScriptObject jsSet = parseJson(getDataProperties().toJsonString());
+			    			JavaScriptObject jsSet = ApplicationUtils.parseJson(getDataProperties().toJsonString());
 			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 			    			
 			    			MAnnotationSet set = unmarshaller.unmarshallBasicAnnotationSet(jsSet, true);	    			
@@ -325,7 +325,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
 		    			JsAnnotopiaSetsResultWrapper wrapper = 
-		    				(JsAnnotopiaSetsResultWrapper) parseJson(getDataProperties().toJsonString());
+		    				(JsAnnotopiaSetsResultWrapper) ApplicationUtils.parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			List<MAnnotopiaAnnotationSet> sets = unmarshaller.unmarshallAnnotationSetsList(wrapper);	    			
 		    			_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSetList() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
@@ -370,37 +370,10 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	 * @return The list of properties for the header
 	 */
 	private Properties getHeaders() {
-		Properties props = getAnnotopiaOAuthToken();
+		Properties props = ApplicationUtils.getAnnotopiaOAuthToken();
 		if(!ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set("Authorization", "annotopia-api-key " + ApplicationUtils.getAnnotopiaApiKey());
 		return props;
 	}
 	
-	/** Return the user Annotopia OAuth token if it is enabled.
-	 * @return The user Annotopia OAuth token if it is enabled. */
-	private Properties getAnnotopiaOAuthToken() {
-		return (ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")? Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken()): Properties.create());
-	}
-	
-	public static native  String stringify(JavaScriptObject obj) /*-{
-		return JSON.stringify(obj);
-	}-*/;
-	
-	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-		try {
-			var jsonStr = jsonStr      
-	    		.replace(/[\\]/g, '\\\\')
-	    		.replace(/[\/]/g, '\\/')
-	    		.replace(/[\b]/g, '\\b')
-	    		.replace(/[\f]/g, '\\f')
-	    		.replace(/[\n]/g, '\\n')
-	    		.replace(/[\r]/g, '\\r')
-	    		.replace(/[\t]/g, '\\t')
-	    		.replace(/[\\][\"]/g, '\\\\\"')
-	    		.replace(/\\'/g, "\\'");
-	    	//alert(jsonStr);
-		  	return JSON.parse(jsonStr);
-		} catch (e) {
-			alert("Error while parsing the JSON message: " + e);
-		}
-	}-*/;
+
 }

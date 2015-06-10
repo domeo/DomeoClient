@@ -6,7 +6,6 @@ import org.mindinformatics.gwt.domeo.plugins.resource.ebi.service.IEbiConnector;
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.Properties;
 import com.google.gwt.query.client.js.JsUtils;
@@ -31,30 +30,6 @@ public class AnnotopiaEbiConnector implements IEbiConnector {
 		_application = application;
 		if(url!=null) URL = url;
 	}
-	
-
-	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-		try {
-			var jsonStr = jsonStr      
-	    		.replace(/[\\]/g, '\\\\')
-	    		.replace(/[\/]/g, '\\/')
-	    		.replace(/[\b]/g, '\\b')
-	    		.replace(/[\f]/g, '\\f')
-	    		.replace(/[\n]/g, '\\n')
-	    		.replace(/[\r]/g, '\\r')
-	    		.replace(/[\t]/g, '\\t')
-	    		.replace(/[\\][\"]/g, '\\\\\"')
-	    		.replace(/\\'/g, "\\'");
-	    	//alert(jsonStr);
-		  	return JSON.parse(jsonStr);
-		} catch (e) {
-			alert("Error while parsing the JSON message: " + e);
-		}
-	}-*/;
-	
-	public static native  String stringify(JavaScriptObject obj) /*-{
-		return JSON.stringify(obj);
-	}-*/;
 
 	@Override
 	public void textmine(final ITextminingRequestCompleted completionCallback, final String url, String pmcid)
@@ -72,7 +47,7 @@ public class AnnotopiaEbiConnector implements IEbiConnector {
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
-		        		JsAnnotationSet set = (JsAnnotationSet) parseJson(getDataProperties().toJsonString());
+		        		JsAnnotationSet set = (JsAnnotationSet) ApplicationUtils.parseJson(getDataProperties().toJsonString());
 		        		_application.getProgressPanelContainer().setCompletionMessage("Text mining completed");
 						completionCallback.returnTextminingResults(set, false);
 		        	}
