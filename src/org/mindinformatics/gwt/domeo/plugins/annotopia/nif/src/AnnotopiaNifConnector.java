@@ -15,7 +15,6 @@ import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFact
 import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.GQuery;
@@ -29,7 +28,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaNifConnector implements INifConnector {
 	
-	public String URL = "http://127.0.0.1:8090/";
+	public String URL = ApplicationUtils.DEFAULT_URL;
 	
 	private static final String ANTIBODIES_SEARCH = "nif-0000-07730-1";
 	
@@ -42,30 +41,6 @@ public class AnnotopiaNifConnector implements INifConnector {
 		_application = application;
 		if(url!=null) URL = url;
 	}
-	
-
-//	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-//		try {
-//			var jsonStr = jsonStr      
-//	    		.replace(/[\\]/g, '\\\\')
-//	    		.replace(/[\/]/g, '\\/')
-//	    		.replace(/[\b]/g, '\\b')
-//	    		.replace(/[\f]/g, '\\f')
-//	    		.replace(/[\n]/g, '\\n')
-//	    		.replace(/[\r]/g, '\\r')
-//	    		.replace(/[\t]/g, '\\t')
-//	    		.replace(/[\\][\"]/g, '\\\\\"')
-//	    		.replace(/\\'/g, "\\'");
-//	    	//alert(jsonStr);
-//		  	return JSON.parse(jsonStr);
-//		} catch (e) {
-//			alert("Error while parsing the JSON message: " + e);
-//		}
-//	}-*/;
-//	
-//	public static native  String stringify(JavaScriptObject obj) /*-{
-//		return JSON.stringify(obj);
-//	}-*/;
 
 //	@Override
 //	public void searchTerm(final IBioPortalItemsRequestCompleted completionCallback,

@@ -12,8 +12,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IPersist
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetHandler;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingAnnotationSetListHandler;
 import org.mindinformatics.gwt.domeo.plugins.annotation.persistence.src.IRetrieveExistingBibliographySetHandler;
-import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaAnnotationSetGraph;
-import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetResultWrapper;
+import org.mindinformatics.gwt.domeo.plugins.annotopia.base.src.AnnotopiaUtils;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotopiaSetsResultWrapper;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AnnotopiaSerializerManager;
@@ -25,7 +24,6 @@ import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.query.client.Function;
-import com.google.gwt.query.client.GQuery;
 import com.google.gwt.query.client.Properties;
 import com.google.gwt.query.client.js.JsUtils;
 import com.google.gwt.query.client.plugins.ajax.Ajax;
@@ -36,11 +34,9 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaPersistenceManager extends APersistenceManager implements IPersistenceManager {
 
-	private static final String API_KEY = "annotopia-api-key";
-	private static final String POST = "post", PUT = "put", GET = "get", DELETE = "delete", JSON = "json";
 	private static final String PREFIX = "s/annotationset";
 	
-	public String URL = "http://localhost:8090/";
+	public String URL = ApplicationUtils.DEFAULT_URL;
 	
 	/**
 	 * @param domeo		Pointer to main application
@@ -51,6 +47,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		super(domeo, callback);
 		if(url!=null) URL = url;
 	}
+	
+
 
 	@Override
 	public void saveAnnotation() {
@@ -86,9 +84,9 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL + PREFIX)	
-				.setHeaders(getHeaders())
-				.setDataType(JSON)
-				.setType(POST)    
+				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders())
+				.setDataType(ApplicationUtils.JSON)
+				.setType(ApplicationUtils.POST)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON(AnnotopiaSerializerManager.getInstance((IDomeo)_application).serialize(set).toString()))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
@@ -157,7 +155,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(set.getIndividualUri())
-				.setHeaders(getHeaders()).setDataType(JSON).setType(PUT)    
+				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders()).setDataType(ApplicationUtils.JSON).setType(ApplicationUtils.PUT)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON(AnnotopiaSerializerManager.getInstance((IDomeo)_application).serialize(set).toString()))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
@@ -217,7 +215,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL + PREFIX + "/" + set.getUuid())
-				.setHeaders(getHeaders()).setDataType(JSON).setType(DELETE)    
+				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders()).setDataType(ApplicationUtils.JSON).setType(ApplicationUtils.DELETE)    
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
@@ -267,7 +265,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			try {
 				Ajax.ajax(Ajax.createSettings()
 					.setUrl(url)
-					.setHeaders(getHeaders())
+					.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders())
 			        .setDataType("json") // txt, json, jsonp, xml
 			        .setType("get")      // post, get
 			        .setTimeout(10000)
@@ -316,9 +314,9 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL + PREFIX)	
-				.setHeaders(getHeaders())
-				.setDataType(JSON)
-				.setType(GET)    
+				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders())
+				.setDataType(ApplicationUtils.JSON)
+				.setType(ApplicationUtils.GET)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON("{\"tgtUrl\":\""+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()+ "\"}"))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
@@ -365,15 +363,6 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		// TODO Auto-generated method stub		
 	}
 	
-	/**
-	 * Get the properties for the HTTP headers
-	 * @return The list of properties for the header
-	 */
-	private Properties getHeaders() {
-		Properties props = ApplicationUtils.getAnnotopiaOAuthToken();
-		if(!ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set("Authorization", "annotopia-api-key " + ApplicationUtils.getAnnotopiaApiKey());
-		return props;
-	}
-	
+
 
 }

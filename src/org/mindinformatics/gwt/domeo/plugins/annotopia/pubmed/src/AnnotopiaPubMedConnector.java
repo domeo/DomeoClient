@@ -44,7 +44,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaPubMedConnector implements IPubMedConnector {
 
-	public String URL = "http://127.0.0.1:8090/";
+	public String URL = ApplicationUtils.DEFAULT_URL;
 	
 	protected IApplication _application;
 	private IPubMedItemsRequestCompleted _callback;

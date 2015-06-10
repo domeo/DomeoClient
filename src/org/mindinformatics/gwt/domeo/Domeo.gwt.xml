@@ -58,6 +58,7 @@
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.opentrials.OpenTrialsResourcePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.resource.document.GenericDocumentResourcePlugin"/> 
 
+  <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.base.AnnotopiaBasePlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.bioportal.BioPortalAnnotopiaPlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.nif.NifAnnotopiaPlugin"/>
   <inherits name="org.mindinformatics.gwt.domeo.plugins.annotopia.pubmed.PubMedAnnotopiaPlugin"/>

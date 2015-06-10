@@ -17,7 +17,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaEbiConnector implements IEbiConnector {
 	
-	public String URL = "http://127.0.0.1:8090/";
+	public String URL = ApplicationUtils.DEFAULT_URL;
 	
 	private static final String ANTIBODIES_SEARCH = "nif-0000-07730-1";
 	
@@ -40,7 +40,7 @@ public class AnnotopiaEbiConnector implements IEbiConnector {
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/ebi/textmine")
-				.setHeaders(getAnnotopiaOAuthToken( ))
+				.setHeaders(ApplicationUtils.getAnnotopiaOAuthToken( ))
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("post")      // post, get
 		        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
@@ -111,15 +111,4 @@ public class AnnotopiaEbiConnector implements IEbiConnector {
 //			completionCallback.textMiningNotCompleted();
 //		}	
 	}	
-	
-	/** Return the user Annotopia OAuth token if it is enabled.
-	 * @return The user Annotopia OAuth token if it is enabled. */
-	private Properties getAnnotopiaOAuthToken( ) {
-		if(ApplicationUtils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
-			return Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken( ));
-		} else {
-			//return Properties.create("Authorization: Bearer none");
-			return Properties.create();
-		}
-	}
 }

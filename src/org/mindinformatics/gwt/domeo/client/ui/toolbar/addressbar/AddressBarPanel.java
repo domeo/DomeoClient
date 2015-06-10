@@ -216,6 +216,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3308009_v082012.html");
 			
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/EPMC1240580.html");
+			oracle.add(UrlUtils.getUrlAndRoot() + "tests/s4.html");
 			
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC1240580.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC3639628.html");
@@ -228,9 +229,9 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2714656.html");
 			
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/PMC2714656_v062012.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT000001549.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT00368199.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT01136213.html");
+			//oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT000001549.html");
+			//oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT00368199.html");
+			//oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT01136213.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/ImagesTest.html");
 		} else {
 			if(ApplicationUtils.getProvideExamplesUrls()!=null && ApplicationUtils.getProvideExamplesUrls().trim().equals("true")) {

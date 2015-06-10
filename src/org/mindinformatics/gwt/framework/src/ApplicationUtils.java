@@ -9,6 +9,9 @@ import com.google.gwt.regexp.shared.RegExp;
 
 public class ApplicationUtils {
 
+	public static final String DEFAULT_URL = "http://127.0.0.1:8090/";
+	public static final String SPACE = " ", POST = "post", PUT = "put", GET = "get", DELETE = "delete", JSON = "json", AUTHORIZATION = "Authorization";
+	
 	public static DateTimeFormat fullfmt2 = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ssZ"); // "2012-09-24T19:57:13EST"
 	public static DateTimeFormat fullfmt = DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss Z"); // "2012-09-24T19:57:13Z"
 	public static DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy h:mma");
