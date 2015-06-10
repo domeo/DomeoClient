@@ -53,6 +53,7 @@ import com.google.gwt.user.client.Window;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
+@Deprecated
 public class AnnotopiaPersistenceManager extends APersistenceManager implements IPersistenceManager {
 
 	public String URL = "http://127.0.0.1:8090/";
