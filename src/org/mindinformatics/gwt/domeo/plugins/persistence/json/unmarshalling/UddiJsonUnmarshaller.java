@@ -261,6 +261,16 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements
 
 			ann.setModality(modality);
 		}
+		
+		
+		/*
+		 * comment
+		 */
+		String commentScript = ddibody.getComment();
+
+		if (commentScript != null && !commentScript.trim().equals("")) {
+			ann.setComment(commentScript);
+		}
 
 		/*
 		 * increase Auc fields

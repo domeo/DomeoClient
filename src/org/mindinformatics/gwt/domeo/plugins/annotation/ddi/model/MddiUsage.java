@@ -41,14 +41,14 @@ public class MddiUsage {
 	}
 
 	// tags in the ddi model are the object of SIO predicates
-	private String comment;
+	//private String comment;
 
 	public String getComment() {
-		return comment;
+		return MpDDI.getComment();
 	}
 
 	public void setComment(String comment) {
-		this.comment = comment;
+		MpDDI.setComment(comment);
 	}
 
 	// drug 1 and drug 2

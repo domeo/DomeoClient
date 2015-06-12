@@ -51,7 +51,8 @@ public class CddiCard extends ACardComponent {
 	
 	@UiField
 	Label drug1, drug1label, drug2, type, text, role1, type1, role2, type2,
-			modality, evidenceType, assertType;
+			modality, evidenceType, assertType, comment;
+	
 
 	public CddiCard(IDomeo domeo) {
 		super(domeo);
@@ -112,13 +113,10 @@ public class CddiCard extends ACardComponent {
 
 			type.setText("Sentence: " + exact);
 
-			final TextArea comment = new TextArea();
+			//final TextArea comment = new TextArea();
 			// final DialogBox dialog = new DialogBox();
 			final VerticalPanel panel = new VerticalPanel();
 			// final HorizontalPanel hp1 = new HorizontalPanel();
-			comment.setCharacterWidth(50);
-			comment.setVisibleLines(10);
-			panel.add(comment);
 			
 			if (_annotation != null) {
 				MddiUsage dataUsage = _annotation.getMpDDIUsage();
@@ -178,11 +176,18 @@ public class CddiCard extends ACardComponent {
 				} else {
 					modality.setText("");
 				}
+				
+				
+				if (dataUsage.getComment() != null && !dataUsage.getComment().equals("")) {
+					comment.setText(dataUsage.getComment());
+				} else {
+					comment.setText("");
+				}
 
 				if (dataUsage.getAssertType() != null) {
 										
 					String assertText = dataUsage.getAssertType().getLabel();
-					System.out.println("assertion type: " + assertText);
+					//System.out.println("assertion type: " + assertText);
 
 					assertType.setText(assertText);
 

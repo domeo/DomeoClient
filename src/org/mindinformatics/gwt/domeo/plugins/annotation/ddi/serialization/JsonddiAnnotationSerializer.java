@@ -246,6 +246,13 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 			statement.put(DIKBD2R_PREFIX + "modality", new JSONString(
 					NCIT_PREFIX + modality.getLabel()));
 		}
+		
+		
+		// comment
+		String comment = ann.getComment();
+		if (comment != null && !comment.trim().equals("")) {
+			statement.put(DIKBD2R_PREFIX + "comment", new JSONString(comment));
+		}
 
 		// add statement to body
 
@@ -258,6 +265,9 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		MLinkedResource evidenceType = ann.getEvidenceType();
 		annotation.put(DIKBD2R_PREFIX + "evidenceType", new JSONString(
 				evidenceType.getLabel()));
+		
+
+		
 
 		return annotation;
 	}
@@ -274,5 +284,7 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 	 * 
 	 * }
 	 */
+	
+	
 
 }

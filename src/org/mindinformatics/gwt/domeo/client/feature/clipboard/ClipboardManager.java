@@ -15,7 +15,7 @@ public class ClipboardManager implements IInitializableComponent {
 	public boolean addAnnotation(MAnnotation annotation) {
 		buffer.add(annotation);
 		return true;
-	}
+	} 
 	
 	public void removeAnnotation(MAnnotation annotation) {
 		buffer.remove(annotation);

@@ -58,12 +58,10 @@
 	}
 	
 	.rightColumn {
-		padding-top: 20px;
-		padding-bottom: 20px;
+		padding-top: 2px;
+		padding-bottom: 10px;
 		min-width: 300px;
 		height: 120px;
-		padding-top: 20px;
-		padding-bottom: 10px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
@@ -148,8 +146,8 @@
 		padding-left: 3px;
 		color: #333;
 		font-style: normal;
-		width: 200px;
-		height: 100px;
+		width: 150px;
+		height: 26px;
 		font-size: 12px;
 	}
 	
@@ -324,16 +322,6 @@
 						<g:RadioButton ui:field="modalitynt" name="modality"
 							checked="false">Negative</g:RadioButton>
 					</g:HorizontalPanel>
-
-
-					<!-- extra resource -->
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="commentlabel" styleName='{style.titleLeft}'>Comment:</g:Label>
-					</g:HorizontalPanel>
-
-					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
-						<g:TextArea ui:field='comment' styleName='{style.commentBody}'></g:TextArea>
-					</g:HorizontalPanel>
                    
 
 					<!-- assertion type label -->
@@ -363,6 +351,16 @@
 							checked="false">Evidence for</g:RadioButton>
 						<g:RadioButton ui:field="evidenceAgt" name="evidenceType"
 							checked="false">Evidence against</g:RadioButton>
+					</g:HorizontalPanel>
+					
+					
+					<!-- extra resource -->
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:Label ui:field="commentlabel" styleName='{style.titleLeft}'>Comment:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header7' styleName='{style.panel}'>
+						<g:TextArea ui:field='comment' styleName='{style.commentBody}'></g:TextArea>
 					</g:HorizontalPanel>
 
 				</g:VerticalPanel>
@@ -416,8 +414,6 @@
 					<g:HorizontalPanel ui:field='header14' styleName='{style.panel}'>
 						<g:TextArea ui:field='auc' styleName='{style.textarea}'></g:TextArea>
 					</g:HorizontalPanel>
-
-
 
 
 				</g:VerticalPanel>

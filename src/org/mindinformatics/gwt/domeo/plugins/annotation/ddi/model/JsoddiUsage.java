@@ -54,6 +54,10 @@ public class JsoddiUsage extends JavaScriptObject {
 	    return this['dikbD2R:modality'];
 	}-*/;
 	
+	// modality
+	public final native String getComment() /*-{
+	    return this['dikbD2R:comment'];
+	}-*/;
 
 
 }

@@ -18,15 +18,10 @@ public class Test {
 //		String path1 = "/tests/spls/";
 //		String filename1 = "Warfarin";
 //		saveDailymedPages(url1, path1, filename1);
-//
-//		String url2 = "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1086a7b4-b89b-4bee-8120-5f752626c046";
-//		String path2 = "/tests/spls/";
-//		String filename2 = "Clopidogrel";
-//		saveDailymedPages(url2, path2, filename2);
-		
-		String target = "/SPL-annotation/";
-		String source = "source.txt";
-		
+
+		String target = "/DDI-html-labels/";
+		String source = "setids.txt";
+		 
 		try {
 			parseDailymed (source,target);
 			
@@ -44,21 +39,22 @@ public class Test {
 
 		String line;
 		while ((line = br.readLine()) != null) {
-			int index_space= line.indexOf(" ");
-			String name = line.substring(0, index_space);
-			String setid = line.substring(index_space+1);
+			//int index_space= line.indexOf(" ");
+			//String name = line.substring(0, index_space);
+			//String setid = line.substring(index_space+1);
+			String setid = line.trim();
 			
-			System.out.println(name + "|||||||||||" +setid);
+			System.out.println(setid);
 			
-			parse(target, name,  setid);
+			parse(target, setid);
 		}
 		br.close();
 
 	}
 
-	public static void parse(String path, String name, String setid) {
+	public static void parse(String path, String setid) {
 
-		String filename = name + "-" + setid;
+		String filename = setid;
 		String url = "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid="
 				+ setid;
 		saveDailymedPages(url, path, filename);

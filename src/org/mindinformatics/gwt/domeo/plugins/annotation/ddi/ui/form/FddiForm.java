@@ -412,8 +412,6 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			}
 		}
 		rightColumn.setVisible(false);
-		commentlabel.setVisible(false);
-		comment.setVisible(false);
 
 		// automatically select another role when user chosen one of role
 		autoSelectAnotherRole();
@@ -509,9 +507,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							_domeo.getLogger().debug(this, "DDI annotation 13");
 							ddiUsage.setAssertType(getAssertType());
 							_domeo.getLogger().debug(this, "DDI annotation 14");
-
+							
+							System.out.println("set comment:" + comment.getText().trim());
+							ddiUsage.setComment(comment.getText().trim());
 							annotation.setMpDDIUsage(ddiUsage);
-							// annotation.setComment(comment.getText());
+						
 
 							_domeo.getLogger().debug(this, "annotation loaded");
 
@@ -567,9 +567,6 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		_item = annotation;
 
 		initWidget(binder.createAndBindUi(this));
-
-		commentlabel.setVisible(false);
-		comment.setVisible(false);
 
 		rightColumn.setVisible(false);
 
@@ -644,15 +641,12 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				}
 			}
 
-			// check selections of statement
-			// if (_item.getStatement() != null) {
-			// if (_item.getStatement().getLabel().equals("quantitative")) {
-			// statementqu.setValue(true);
-			// } else if (_item.getStatement().getLabel()
-			// .equals("Qualitative")) {
-			// statementql.setValue(true);
-			// }
-			// }
+			// check comment
+			System.out.println("comment in editing: "+_item.getComment());
+			if (_item.getComment() != null && !_item.getComment().isEmpty()) {
+				comment.setText(_item.getComment());
+
+			}
 
 			// check selections of modality
 			if (_item.getModality() != null) {
@@ -744,11 +738,6 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				}
 			}
 
-			// comment
-
-			// if (_item.getComment() != null && !_item.getComment().equals(""))
-			// comment.setText(_item.getComment());
-
 			// highlight drug
 			highlightCurrentDrug();
 
@@ -817,7 +806,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					_item.setPreciptDose(getPreciptDose());
 					_item.setIncreaseAuc(getAuc());
 					_item.setEvidenceType(getEvidenceType());
-					// _item.setComment(comment.getText());
+					_item.setComment(comment.getText());
 
 					_item.getMpDDIUsage().setMpDDI(currentMpDDI);
 
@@ -1262,10 +1251,12 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		if (drug2.getSelectedIndex() == 0)
 			requireds.add("Drug 2");
 
-		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue() || typedg1.getValue())) {
+		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue() || typedg1
+				.getValue())) {
 			requireds.add("Drug 1 type");
 		}
-		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue() || typedg2.getValue())) {
+		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue() || typedg2
+				.getValue())) {
 			requireds.add("Drug 2 type");
 		}
 		if (!(rolepp1.getValue() || roleob1.getValue())) {
@@ -1323,10 +1314,8 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	 * switch assertion type (drug-drug interaction / increaseAuc) type code:
 	 * ddi: 0 , increaseAuc: 1
 	 */
-	
 
 	public void switchAssertType() {
-
 
 		assertType.addChangeHandler(new ChangeHandler() {
 
@@ -1334,24 +1323,25 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			public void onChange(ChangeEvent event) {
 				int type = assertType.getSelectedIndex();
 				if (type == 0) {
-					
+
 					System.out.println("create confirm dialog...");
-					
+
 					final DialogBox dialog = new DialogBox();
 					final VerticalPanel panel = new VerticalPanel();
 					final HorizontalPanel hp1 = new HorizontalPanel();
 					final HorizontalPanel hp2 = new HorizontalPanel();
 
-					Label label = new Label("WARNING: Change to drug drug interaction will discard all your inputs in number of participants, "
-							+ "object dose, precipitant dose and increase AUC ");
+					Label label = new Label(
+							"WARNING: Change to drug drug interaction will discard all your inputs in number of participants, "
+									+ "object dose, precipitant dose and increase AUC ");
 					hp1.add(label);
-					
+
 					dialog.setPopupPosition(Window.getClientWidth() / 2 - 150,
 							Window.getClientHeight() / 2 - 70);
 					dialog.setHeight("140px");
 					dialog.setWidth("300px");
 					dialog.show();
-					
+
 					Button submit = new Button("Confirm");
 					submit.addClickHandler(new ClickHandler() {
 						@Override
@@ -1360,7 +1350,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							dialog.hide();
 							// close increase Auc panel
 							rightColumn.setVisible(false);
-							
+
 							// erase increase Auc fields
 							numParticipt.setValue("");
 							objectDose.setValue("");
@@ -1369,7 +1359,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 						}
 					});
 					hp2.add(submit);
-					
+
 					Button close = new Button("Cancel");
 					close.addClickHandler(new ClickHandler() {
 						@Override
@@ -1378,16 +1368,17 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							dialog.hide();
 						}
 					});
-					
-					DOM.setElementAttribute(hp2.getElement(), "id", "dialog-button");
-					
+
+					DOM.setElementAttribute(hp2.getElement(), "id",
+							"dialog-button");
+
 					hp2.add(close);
-					
+
 					panel.setStylePrimaryName("buttonsPanel");
-								
+
 					panel.add(hp1);
 					panel.add(hp2);
-					
+
 					dialog.setWidget(panel);
 					dialog.getElement().getStyle().setZIndex(100);
 					dialog.show();
