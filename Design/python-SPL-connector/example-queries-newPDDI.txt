@@ -7,8 +7,8 @@ PREFIX domeo:<http://www.w3.org/ns/domeo#>
 PREFIX pav:<http://purl.org/pav/>
 PREFIX dailymed:<http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
 
-SELECT ?annot ?assertionType ?evidenceType ?createdOn ?exactText ?modality ?statementType ?drug1Lab ?drug1Type ?drug1Role ?dose1 ?drug2Lab ?drug2Type ?drug2Role ?dose2 ?numOfParticipants ?auc
-FROM <http://purl.org/net/nlprepository/ddi-ac387aa0-3f04-4865-a913-db6ed6f4fdc5-testing>
+SELECT ?source ?annot ?assertionType ?evidenceType ?createdOn ?exactText ?modality ?statementType ?drug1Lab ?drug1Type ?drug1Role ?dose1 ?drug2Lab ?drug2Type ?drug2Role ?dose2 ?numOfParticipants ?auc
+
 WHERE {
 
   ?annot a oa:ddiAnnotation;
