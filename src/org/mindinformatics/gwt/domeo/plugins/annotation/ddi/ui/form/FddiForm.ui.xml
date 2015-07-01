@@ -72,6 +72,13 @@
 		padding-top: 10px;
 	}
 	
+	.subpanel {
+		width: 100%;
+		vertical-align: left;
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+	
 	.provenance {
 		backgorund-color: gray;
 		padding-top: 3px;
@@ -100,10 +107,6 @@
 		font-weight: bold;
 		border-bottom-right-radius: 10px;
 		border-top-right-radius: 10px;
-	}
-	
-	.subPanel {
-		min-height: 40px;
 	}
 	
 	.newQualifierPanel {
@@ -162,17 +165,33 @@
 	}
 	
 	.listbox {
-		vertical-align: top;
+
 		padding-left: 1px;
 		padding-right: 12px;
+		vertical-align: left;
+		padding-top: 2px;
+		padding-bottom: 2px;
 	}
 	
 	.listbox1 {
 		width: 120px;
+		vertical-align: left;
+		padding-top: 2px;
+		padding-bottom: 2px;
 	}
 	
 	.listbox2 {
 		width: 200px;
+		vertical-align: left;
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+	
+	.listbox3 {
+		width: 70px;
+		vertical-align: left;
+		padding-top: 2px;
+		padding-bottom: 2px;
 	}
 	
 	.textarea {
@@ -181,6 +200,16 @@
 		color: #333;
 		font-style: normal;
 		width: 80px;
+		height: 13px;
+		font-size: 12px;
+	}
+	
+	.textareadose {
+		padding-top: 3px;
+		padding-left: 3px;
+		color: #333;
+		font-style: normal;
+		width: 50px;
 		height: 13px;
 		font-size: 12px;
 	}
@@ -253,7 +282,6 @@
 
 					<!-- Drug 2 -->
 					<g:HorizontalPanel>
-
 						<g:Label>Drug mentions: &nbsp; </g:Label>
 						<g:ListBox ui:field="drug2" name="descript"
 							visibleItemCount='1' styleName='{style.listbox1}'>
@@ -327,14 +355,16 @@
 					<!-- assertion type label -->
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="assertTypeLabel" styleName='{style.titleLeft}'>DIKB
-							Assertion
-							type:</g:Label>
+							Assertion type:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header9' styleName='{style.panel}'>
 						<g:ListBox ui:field='assertType'>
 							<g:item value='0'>Drug Drug Interaction</g:item>
-							<g:item value='1'>Increase Auc</g:item>
+							<!-- <g:item value='1'>Increase Auc</g:item> -->	
+							<g:item value='1'>DDI clinical trial</g:item>
+							<g:item value='2'>Cmax</g:item>
+							<g:item value='3'>T1/2</g:item>
 
 						</g:ListBox>
 					</g:HorizontalPanel>
@@ -382,28 +412,49 @@
 						<g:TextArea ui:field='numParticipt' styleName='{style.textarea}'></g:TextArea>
 					</g:HorizontalPanel>
 
-					<!-- object dose (only for increase Auc) -->
+					<!-- drug dose (only for increase Auc) -->
 
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="objectDoseLabel" styleName='{style.titleLeft}'>The object
-							drugs dose in grams:</g:Label>
+						<g:Label ui:field="DoseLabel" styleName='{style.titleLeft}'>Drugs dose in MG:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header12' styleName='{style.panel}'>
-						<g:TextArea ui:field='objectDose' styleName='{style.textarea}'></g:TextArea>
+					<g:HorizontalPanel ui:field='header12' styleName='{style.subpanel}'>
+					
+						<!-- object dose -->
+
+						<g:Label ui:field="objectDoseLabel" >
+							Object:</g:Label>
+						<g:TextArea ui:field='objectDose' styleName='{style.textareadose}'></g:TextArea>
+						
+						<!-- precipitant dose -->
+						
+						<g:Label ui:field="preciptDoseLabel">
+							Precipitant:</g:Label>		
+						<g:TextArea ui:field='preciptDose' styleName='{style.textareadose}'></g:TextArea>
+						
 					</g:HorizontalPanel>
-
-
-					<!-- precipitant dose (only for increase Auc) -->
-
+					
+					
+					<!-- Dosing regimens -->
+					
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="preciptDoseLabel" styleName='{style.titleLeft}'>The
-							precipitant drugs dose in grams:</g:Label>
+						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>
 					</g:HorizontalPanel>
-
-					<g:HorizontalPanel ui:field='header13' styleName='{style.panel}'>
-						<g:TextArea ui:field='preciptDose' styleName='{style.textarea}'></g:TextArea>
+					
+					<g:HorizontalPanel>
+						<g:ListBox ui:field="doseregimens" name="descript"
+							visibleItemCount='1' styleName='{style.listbox3}'>
+							<g:item value="0">SD</g:item>
+							<g:item value="1">QD</g:item>
+							<g:item value="2">BID</g:item>
+							<g:item value="3">TID</g:item>
+							<g:item value="4">QID</g:item>
+							<g:item value="5">Q12</g:item>
+							<g:item value="6">Q8</g:item>
+							<g:item value="7">Q6</g:item>
+						</g:ListBox>
 					</g:HorizontalPanel>
+					
 
 					<!-- AUC (only for increase Auc) -->
 

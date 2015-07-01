@@ -370,10 +370,18 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					+ "drug-drug-interaction", "drug-drug-interaction",
 					"Drug drug interaction annotation");
 		} else if (assertType.getSelectedIndex() == 1) {
-			return ResourcesFactory.createLinkedResource(MP_PREFIX
-					+ "increase-auc", "increase-auc",
-					"Drug drug interaction annotation for increase auc");
-
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+					+ "EV_CT_DDI", "DDI-clinical-trial",
+					"A study designed to quantify the pharmacokinetic and/or pharmacodynamic effects " +
+					"within study participants of a single drug in the presence of a purported precipitant.");
+		} else if (assertType.getSelectedIndex() == 2) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+					+ "CMAX", "cmax",
+					"cmax description");
+		} else if (assertType.getSelectedIndex() == 3) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+					+ "T12", "t12",
+					"t12 description");
 		} else
 			return null;
 
@@ -581,13 +589,24 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 						+ _item.getAssertType().getLabel());
 
 				if (_item.getAssertType().getLabel().trim()
-						.equals("increase-auc")) {
-					assertType.setSelectedIndex(1);
-					rightColumn.setVisible(true);
-				} else if (_item.getAssertType().getLabel().trim()
 						.equals("drug-drug-interaction")) {
 					assertType.setSelectedIndex(0);
 				}
+				else if (_item.getAssertType().getLabel().trim()
+						.equals("DDI-clinical-trial")) {
+					assertType.setSelectedIndex(1);
+					rightColumn.setVisible(true);
+				} 
+				else if (_item.getAssertType().getLabel().trim()
+						.equals("cmax")) {
+					assertType.setSelectedIndex(2);
+					rightColumn.setVisible(true);
+				} 
+				else if (_item.getAssertType().getLabel().trim()
+						.equals("t12")) {
+					assertType.setSelectedIndex(3);
+					rightColumn.setVisible(true);
+				} 
 
 			} else
 				assertType.setSelectedIndex(0);

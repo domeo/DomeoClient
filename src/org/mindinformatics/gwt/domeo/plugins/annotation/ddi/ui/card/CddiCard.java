@@ -191,7 +191,11 @@ public class CddiCard extends ACardComponent {
 
 					assertType.setText(assertText);
 
-					if (assertText.equals("increase-auc")) {
+					if (assertText.equals("DDI-clinical-trial")) {
+						addIncreaseAUC(dataUsage);
+					} else if (assertText.equals("cmax")) {
+						addIncreaseAUC(dataUsage);
+					} else if (assertText.equals("t12")) {
 						addIncreaseAUC(dataUsage);
 					} 
 
@@ -274,8 +278,6 @@ public class CddiCard extends ACardComponent {
 		VerticalPanel vPanel = new VerticalPanel();
 		HorizontalPanel hPanel1 = new HorizontalPanel();
 		HorizontalPanel hPanel2 = new HorizontalPanel();
-
-		//System.out.println("drug1label style:" + drug1label.getStyleName());
 		
 		Label label1 = new Label(label);
 		label1.setStyleName(drug1label.getStyleName());
