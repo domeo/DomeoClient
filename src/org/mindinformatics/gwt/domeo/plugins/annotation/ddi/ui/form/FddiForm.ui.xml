@@ -188,7 +188,7 @@
 	}
 	
 	.listbox3 {
-		width: 70px;
+		width: 50px;
 		vertical-align: left;
 		padding-top: 2px;
 		padding-bottom: 2px;
@@ -209,7 +209,7 @@
 		padding-left: 3px;
 		color: #333;
 		font-style: normal;
-		width: 50px;
+		width: 40px;
 		height: 13px;
 		font-size: 12px;
 	}
@@ -220,21 +220,24 @@
 
 	<g:VerticalPanel ui:field='container' styleName='{style.outer}'>
 
-
 		<g:HorizontalPanel ui:field='header' styleName='{style.inner}'>
 			<g:Label ui:field="label1" styleName='{style.qualifiersLabel}'>PK PDDI Annotation</g:Label>
 			<g:FlowPanel ui:field="newQualifiers" styleName='{style.newQualifierPanel}'></g:FlowPanel>
+		
 		</g:HorizontalPanel>
-
-
+  		
+		
 		<g:HorizontalPanel styleName='{style.panel}'>
 
 			<g:cell>
 
 				<g:VerticalPanel styleName='{style.leftColumn}'>
 
-					<g:HorizontalPanel>
-
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="drug1Label" styleName='{style.titleLeft}'>Drug 1 in DDI:</g:Label>
+					</g:HorizontalPanel>
+					
+					<g:HorizontalPanel styleName='{style.subpanel}'>
 						<g:Label>Drug mentions: &nbsp; </g:Label>
 						<g:ListBox ui:field="drug1" name="descript"
 							visibleItemCount='1' styleName='{style.listbox1}'>
@@ -269,7 +272,7 @@
 							within the interaction):</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel styleName='{style.panel}'>
+					<g:HorizontalPanel styleName='{style.subpanel}'>
 						<g:RadioButton ui:field="roleob1" name="roler1"
 							checked="false">Object</g:RadioButton>
 						<g:RadioButton ui:field="rolepp1" name="roler1"
@@ -281,7 +284,12 @@
 					</g:HorizontalPanel>
 
 					<!-- Drug 2 -->
-					<g:HorizontalPanel>
+					
+					<g:HorizontalPanel styleName='{style.titlebar}'>
+						<g:Label ui:field="drug2Label" styleName='{style.titleLeft}'>Drug 2 in DDI:</g:Label>
+					</g:HorizontalPanel>
+					
+					<g:HorizontalPanel styleName='{style.subpanel}'>
 						<g:Label>Drug mentions: &nbsp; </g:Label>
 						<g:ListBox ui:field="drug2" name="descript"
 							visibleItemCount='1' styleName='{style.listbox1}'>
@@ -295,7 +303,7 @@
 							within the sentence for each drug):</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel styleName='{style.panel}'>
+					<g:HorizontalPanel styleName='{style.subpanel}'>
 						<g:RadioButton ui:field="typeai2" name="typer2"
 							checked="false">Active Ingredient</g:RadioButton>
 						<g:RadioButton ui:field="typemb2" name="typer2"
@@ -361,11 +369,13 @@
 					<g:HorizontalPanel ui:field='header9' styleName='{style.panel}'>
 						<g:ListBox ui:field='assertType'>
 							<g:item value='0'>Drug Drug Interaction</g:item>
-							<!-- <g:item value='1'>Increase Auc</g:item> -->	
-							<g:item value='1'>DDI clinical trial</g:item>
-							<g:item value='2'>Cmax</g:item>
-							<g:item value='3'>T1/2</g:item>
-
+							<g:item value='1'>DDI clinical trial</g:item>	
+													
+							<!-- <g:item value='1'>Increase Auc</g:item> 
+								 <g:item value='2'>Cmax</g:item>
+								 <g:item value='3'>T1/2</g:item>
+							-->	
+							
 						</g:ListBox>
 					</g:HorizontalPanel>
 
@@ -412,37 +422,19 @@
 						<g:TextArea ui:field='numParticipt' styleName='{style.textarea}'></g:TextArea>
 					</g:HorizontalPanel>
 
-					<!-- drug dose (only for increase Auc) -->
+					<!-- object dose (only for DDI clinical trial) -->
 
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="DoseLabel" styleName='{style.titleLeft}'>Drugs dose in MG:</g:Label>
+						<g:Label ui:field="DoseLabel1" styleName='{style.titleLeft}'>Object drug dosage:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header12' styleName='{style.subpanel}'>
+					<g:HorizontalPanel ui:field='header13' styleName='{style.subpanel}'>
 					
-						<!-- object dose -->
-
-						<g:Label ui:field="objectDoseLabel" >
-							Object:</g:Label>
+						<g:Label ui:field="objectDoseLabel" >Dose in MG:</g:Label>
 						<g:TextArea ui:field='objectDose' styleName='{style.textareadose}'></g:TextArea>
 						
-						<!-- precipitant dose -->
-						
-						<g:Label ui:field="preciptDoseLabel">
-							Precipitant:</g:Label>		
-						<g:TextArea ui:field='preciptDose' styleName='{style.textareadose}'></g:TextArea>
-						
-					</g:HorizontalPanel>
-					
-					
-					<!-- Dosing regimens -->
-					
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>
-					</g:HorizontalPanel>
-					
-					<g:HorizontalPanel>
-						<g:ListBox ui:field="doseregimens" name="descript"
+						<g:Label ui:field="doesregimensLabel1" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>
+						<g:ListBox ui:field="objectregimens" name="descript"
 							visibleItemCount='1' styleName='{style.listbox3}'>
 							<g:item value="0">SD</g:item>
 							<g:item value="1">QD</g:item>
@@ -453,7 +445,34 @@
 							<g:item value="6">Q8</g:item>
 							<g:item value="7">Q6</g:item>
 						</g:ListBox>
+						</g:HorizontalPanel>
+						
+				
+					<!-- preciptant dose (only for DDI clinical trial) -->
+	
+					
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:Label ui:field="DoseLabel2" styleName='{style.titleLeft}'>Preciptant drug dosage:</g:Label>
 					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header12' styleName='{style.subpanel}'>
+
+						<g:Label ui:field="preciptDoseLabel" >Dose in MG:</g:Label>
+						<g:TextArea ui:field='preciptDose' styleName='{style.textareadose}'></g:TextArea>
+						
+						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>						
+						<g:ListBox ui:field="preciptregimens" name="descript"
+							visibleItemCount='1' styleName='{style.listbox3}'>
+							<g:item value="0">SD</g:item>
+							<g:item value="1">QD</g:item>
+							<g:item value="2">BID</g:item>
+							<g:item value="3">TID</g:item>
+							<g:item value="4">QID</g:item>
+							<g:item value="5">Q12</g:item>
+							<g:item value="6">Q8</g:item>
+							<g:item value="7">Q6</g:item>
+						</g:ListBox>
+						</g:HorizontalPanel>
 					
 
 					<!-- AUC (only for increase Auc) -->
@@ -462,10 +481,29 @@
 						<g:Label ui:field="aucLabel" styleName='{style.titleLeft}'>AUC_i/AUC:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header14' styleName='{style.panel}'>
+					<g:HorizontalPanel ui:field='header15' styleName='{style.subpanel}'>
 						<g:TextArea ui:field='auc' styleName='{style.textarea}'></g:TextArea>
 					</g:HorizontalPanel>
+					
+					<!-- CMAX -->
 
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:Label ui:field="cmaxLabel" styleName='{style.titleLeft}'>Cmax:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header16' styleName='{style.subpanel}'>
+						<g:TextArea ui:field='cmax' styleName='{style.textarea}'></g:TextArea>
+					</g:HorizontalPanel>
+
+					<!-- T1/2 -->
+
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:Label ui:field="t12Label" styleName='{style.titleLeft}'>T1/2:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header17' styleName='{style.subpanel}'>
+						<g:TextArea ui:field='t12' styleName='{style.textarea}'></g:TextArea>
+					</g:HorizontalPanel>
 
 				</g:VerticalPanel>
 			</g:cell>
@@ -473,7 +511,7 @@
 		</g:HorizontalPanel>
 
 		<!-- Ok button and annotation type -->
-		<g:HorizontalPanel ui:field='buttonsPanel'
+		 <g:HorizontalPanel ui:field='buttonsPanel'
 			styleName='{style.okButton}'>
 			<g:SimplePanel>
 				<g:ListBox ui:field='annotationSet'></g:ListBox>
