@@ -12,7 +12,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.INifDataReques
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.core.client.JsArray;
@@ -28,7 +28,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaNifConnector implements INifConnector {
 	
-	public String URL = ApplicationUtils.DEFAULT_URL;
+	public String URL = Utils.DEFAULT_URL;
 	
 	private static final String ANTIBODIES_SEARCH = "nif-0000-07730-1";
 	
@@ -49,7 +49,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 //		_application.getLogger().debug(this, "Searching term: " + textQuery);
 //		_application.getProgressPanelContainer().setProgressMessage("Searching term: " + textQuery);
 //		
-//		//Window.alert(URL+"cn/bioportal/search " +  ApplicationUtils.getAnnotopiaApiKey());
+//		//Window.alert(URL+"cn/bioportal/search " +  Utils.getAnnotopiaApiKey());
 //		
 //		try {
 //			Ajax.ajax(Ajax.createSettings()
@@ -57,7 +57,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 //				.setHeaders(getAnnotopiaOAuthToken( ))
 //		        .setDataType("json") // txt, json, jsonp, xml
 //		        .setType("get")      // post, get
-//		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",format:domeo,q:"+textQuery)) // parameters for the query-string
+//		        .setData(GQuery.$$("apiKey: " + Utils.getAnnotopiaApiKey() + ",format:domeo,q:"+textQuery)) // parameters for the query-string
 //		        .setTimeout(10000)
 //		        .setSuccess(new Function(){ // callback to be run if the request success
 //		    		public void f() {
@@ -107,7 +107,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 //				.setHeaders(getAnnotopiaOAuthToken( ))
 //		        .setDataType("json") // txt, json, jsonp, xml
 //		        .setType("get")      // post, get
-//		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + 
+//		        .setData(GQuery.$$("apiKey: " + Utils.getAnnotopiaApiKey() + 
 //		        		",format:domeo,pagenumber:" + pageNumber + ",pagezie:" + pageSize + "q:"+textQuery)) // parameters for the query-string
 //		        .setTimeout(10000)
 //		        .setSuccess(new Function(){ // callback to be run if the request success
@@ -158,7 +158,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 	throws IllegalArgumentException {
 		
 		JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-		Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"text\":\"" + textContent + "\"}");
+		Properties v = utils.parseJSON("{\"apiKey\":\""+ Utils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"text\":\"" + textContent + "\"}");
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/nif/textmine")
@@ -169,7 +169,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
-		        		JsAnnotationSet set = (JsAnnotationSet) ApplicationUtils.parseJson(getDataProperties().toJsonString());
+		        		JsAnnotationSet set = (JsAnnotationSet) Utils.parseJson(getDataProperties().toJsonString());
 		        		_application.getProgressPanelContainer().setCompletionMessage("Text mining completed");
 						completionCallback.returnTextminingResults(set, false);
 		        	}
@@ -196,7 +196,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 //				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 //				"&withSynonyms=" + withSynonyms;
 //		if(!_application.isHostedMode())
-//			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
+//			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
 //				"&ontologies=" + virtualIds + "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
 //				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 //				"&withSynonyms=" + withSynonyms;
@@ -237,8 +237,8 @@ public class AnnotopiaNifConnector implements INifConnector {
 	/** Return the user Annotopia OAuth token if it is enabled.
 	 * @return The user Annotopia OAuth token if it is enabled. */
 	private Properties getAnnotopiaOAuthToken( ) {
-		if(ApplicationUtils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
-			return Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken( ));
+		if(Utils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
+			return Properties.create("Authorization: Bearer " + Utils.getAnnotopiaOauthToken( ));
 		} else {
 			//return Properties.create("Authorization: Bearer none");
 			return Properties.create();
@@ -261,7 +261,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 					.setDataType("json")
 					.setType("get")
 					.setData(GQuery.$$(
-							"apiKey: " + ApplicationUtils.getAnnotopiaApiKey( ) + ","
+							"apiKey: " + Utils.getAnnotopiaApiKey( ) + ","
 							+ "format: domeo,"
 							+ "q: " + textQuery + ","
 							+ "resource: " + resource + ","
@@ -271,7 +271,7 @@ public class AnnotopiaNifConnector implements INifConnector {
 					.setTimeout(10000)
 					.setSuccess(new Function( ) {
 						public void f( ) {
-							JsoNifDataSearchResultsWrapper result = (JsoNifDataSearchResultsWrapper) ApplicationUtils.parseJson(getDataProperties( ).toJsonString( ));
+							JsoNifDataSearchResultsWrapper result = (JsoNifDataSearchResultsWrapper) Utils.parseJson(getDataProperties( ).toJsonString( ));
 							JsArray<JsoNifDataEntry> entries = result.getResults( );
 							ArrayList<MGenericResource> data = new ArrayList<MGenericResource>( );
 							if(entries != null) {

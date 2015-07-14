@@ -22,7 +22,7 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
 import java.util.Date;
 
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -147,19 +147,19 @@ public class JsAnnotopiaAnnotationSetSummary extends JavaScriptObject {
 	}-*/;
 	
 	public final Date getFormattedCreatedOn() {
-		return ApplicationUtils.fullfmt2.parse(getCreatedOn().trim());
+		return Utils.fullfmt2.parse(getCreatedOn().trim());
 	} 
 	
 	public final Date getFormattedLastSavedOn() {
-		return ApplicationUtils.fullfmt2.parse(getLastSavedOn());
+		return Utils.fullfmt2.parse(getLastSavedOn());
 	} 
 	
 	public final Date getFormattedCreatedOn2() {
-		return ApplicationUtils.fullfmt.parse(getCreatedOn().trim());
+		return Utils.fullfmt.parse(getCreatedOn().trim());
 	} 
 	
 	public final Date getFormattedLastSavedOn2() {
-		return ApplicationUtils.fullfmt.parse(getLastSavedOn());
+		return Utils.fullfmt.parse(getLastSavedOn());
 	} 
 	
 	public final native String getVersionNumber() /*-{ 

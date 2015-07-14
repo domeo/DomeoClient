@@ -2,7 +2,7 @@ package org.mindinformatics.gwt.domeo.client.ui.dialog;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.framework.component.ui.dialog.QuestionMessagePanel;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -30,7 +30,7 @@ public class LoadDocumentQuestionDialog extends QuestionMessagePanel  {
 				if(urlfrom.indexOf("?")>0) 
 					urlfrom = url.substring(0, urlfrom.indexOf("?"));
 				
-				String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, urlfrom, url);
+				String finalLink = Utils.getAnnotationToolLink(domeo, urlfrom, url);
 				trackPath(finalLink, domeo.getPersistenceManager().getCurrentResourceUrl(), url, domeo.getUserManager().getUser().getUserName());			}
 		};
 		addButton("Open in new Tab", openInNewTabHandler);

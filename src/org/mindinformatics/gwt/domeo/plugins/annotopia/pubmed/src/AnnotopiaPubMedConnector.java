@@ -19,7 +19,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.IPubMedPagi
 import org.mindinformatics.gwt.framework.component.ui.dialog.ProgressMessagePanel;
 import org.mindinformatics.gwt.framework.component.ui.glass.DialogGlassPanel;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.core.client.GWT;
@@ -44,7 +44,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaPubMedConnector implements IPubMedConnector {
 
-	public String URL = ApplicationUtils.DEFAULT_URL;
+	public String URL = Utils.DEFAULT_URL;
 	
 	protected IApplication _application;
 	private IPubMedItemsRequestCompleted _callback;
@@ -60,8 +60,8 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 	 * @return The list of properties for the header
 	 */
 	private Properties getHeaders() {
-		Properties props = ApplicationUtils.getAnnotopiaOAuthToken();
-		if(!ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set("Authorization", "annotopia-api-key " + ApplicationUtils.getAnnotopiaApiKey());
+		Properties props = Utils.getAnnotopiaOAuthToken();
+		if(!Utils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set("Authorization", "annotopia-api-key " + Utils.getAnnotopiaApiKey());
 		return props;
 	}
 	
@@ -72,7 +72,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 	
 		
 		JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-		Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"typeQuery\":\"" + typeQuery + "\",\"textQuery\":\"" + textQuery + "\"}");
+		Properties v = utils.parseJSON("{\"apiKey\":\""+ Utils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"typeQuery\":\"" + typeQuery + "\",\"textQuery\":\"" + textQuery + "\"}");
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/pubmed/entry")
@@ -86,7 +86,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		        		ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
 						
 						try {
-							JsoPubMedEntry pubmedEntry = (JsoPubMedEntry) ((JsArray)ApplicationUtils.parseJson(getDataProperties( ).toJsonString( ))).get(0);
+							JsoPubMedEntry pubmedEntry = (JsoPubMedEntry) ((JsArray)Utils.parseJson(getDataProperties( ).toJsonString( ))).get(0);
 	
 							MPublicationArticleReference reference = new MPublicationArticleReference();
 							reference.setUrl(pubmedEntry.getUrl());
@@ -141,7 +141,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		}
 		
 		JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-		Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"typeQuery\":\"" + typeQuery + "\",\"textQuery\":\"" + ids.toString() + "\"}");
+		Properties v = utils.parseJSON("{\"apiKey\":\""+ Utils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"typeQuery\":\"" + typeQuery + "\",\"textQuery\":\"" + ids.toString() + "\"}");
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/pubmed/entries")
@@ -153,7 +153,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
 						try {
-							JsArray pubmedEntries = ((JsArray) ApplicationUtils.parseJson(getDataProperties( ).toJsonString( )));
+							JsArray pubmedEntries = ((JsArray) Utils.parseJson(getDataProperties( ).toJsonString( )));
 							ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
 							for(int i=0; i<pubmedEntries.length(); i++) {
 								
@@ -216,7 +216,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 			String textQuery, int maxResults, int offset) throws IllegalArgumentException {
 		
 		JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-		Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"typeQuery\":\"" + typeQuery + "\",\"textQuery\":\"" + textQuery + "\",\"offset\":\"" + offset + "\",\"maxResults\":\"" + maxResults + "\"}");
+		Properties v = utils.parseJSON("{\"apiKey\":\""+ Utils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"typeQuery\":\"" + typeQuery + "\",\"textQuery\":\"" + textQuery + "\",\"offset\":\"" + offset + "\",\"maxResults\":\"" + maxResults + "\"}");
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/pubmed/search")
@@ -228,7 +228,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
 						try {
-							JsoPubmedSearchResultsWrapper pubmedSearchResultsWrapper = (JsoPubmedSearchResultsWrapper) ApplicationUtils.parseJson(getDataProperties( ).toJsonString( ));
+							JsoPubmedSearchResultsWrapper pubmedSearchResultsWrapper = (JsoPubmedSearchResultsWrapper) Utils.parseJson(getDataProperties( ).toJsonString( ));
 							JsArray pubmedEntries = pubmedSearchResultsWrapper.getResults();
 							if(pubmedSearchResultsWrapper.getResults().length()>0 && (pubmedSearchResultsWrapper.getException()==null || pubmedSearchResultsWrapper.getException().trim().length()==0)) {
 								ArrayList<MPublicationArticleReference> references = new ArrayList<MPublicationArticleReference>();
@@ -297,7 +297,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 			handler.setExistingBibliographySetList(f.retrieveBibliographyByDocumentUrl(((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()), true);
 			return;
 		}
-		String requestUrl = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
+		String requestUrl = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
 		handler.bibliographySetListNotCreated("Could not retrieve existing bibliography (not implemented)");
 
 //		try {
@@ -370,7 +370,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 		}
 		
 		
-		String url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
+		String url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
 
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
@@ -427,7 +427,7 @@ public class AnnotopiaPubMedConnector implements IPubMedConnector {
 					if (200 == response.getStatusCode()) {
 						try {
 							_application.getLogger().debug(this, response.getText());
-							JsArray responseOnSets = (JsArray) ApplicationUtils.parseJson(response.getText());
+							JsArray responseOnSets = (JsArray) Utils.parseJson(response.getText());
 							handler.setExistingBibliographySetList(responseOnSets, true);			
 						} catch(Exception e) {
 							_application.getLogger().exception(this, "Could not parse existing bibliography " + e.getMessage());

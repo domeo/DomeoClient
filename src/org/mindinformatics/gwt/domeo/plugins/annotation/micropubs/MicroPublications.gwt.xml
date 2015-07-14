@@ -16,5 +16,6 @@
   <source path='model'/>
   <source path='search'/>
   <source path='ui'/>
+  <source path='annotopia'/>
   <source path='serialization'/>
 </module>

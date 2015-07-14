@@ -12,7 +12,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.nif.service.INifDataReques
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.core.client.GWT;
@@ -51,7 +51,7 @@ public class NifJsonConnector implements INifConnector {
 //		
 //		String url = GWT.getModuleBaseURL() + "bioportal/search?format=json&textQuery=" + textQuery + "&ontologies=" + virtualIds;
 //		if(!_application.isHostedMode())
-//			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/search?format=json&textQuery=" + textQuery + "&ontologies=" + virtualIds;
+//			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/search?format=json&textQuery=" + textQuery + "&ontologies=" + virtualIds;
 //	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 //
 //		try {
@@ -107,7 +107,7 @@ public class NifJsonConnector implements INifConnector {
 //		String url = GWT.getModuleBaseURL() + "bioportal/search?format=json&textQuery=" + textQuery + "&ontologies=" + virtualIds +
 //				"&pagenumber=" + pageNumber + "&pagesize=" + pageSize;
 //		if(!_application.isHostedMode())
-//			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/search?format=json&textQuery=" + textQuery + "&ontologies=" + virtualIds +
+//			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "bioportal/search?format=json&textQuery=" + textQuery + "&ontologies=" + virtualIds +
 //					"&pagenumber=" + pageNumber + "&pagesize=" + pageSize;
 //	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 //
@@ -155,7 +155,7 @@ public class NifJsonConnector implements INifConnector {
 	    
     		String url = GWT.getModuleBaseURL() + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type) + "&vendor=" + URL.encode(vendor);
     		if(!_application.isHostedMode())
-    			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type) + "&vendor=" + URL.encode(vendor);
+    			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type) + "&vendor=" + URL.encode(vendor);
     	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
     	    builder.setTimeoutMillis(10000);
     	    _application.getLogger().debug(this, "Search Data with url" + url);
@@ -210,7 +210,7 @@ public class NifJsonConnector implements INifConnector {
 	   } else if(resource.equals("nlx_144509-1") || resource.equals("nif-0000-08137-1")) {
 	       String url = GWT.getModuleBaseURL() + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type);
            if(!_application.isHostedMode())
-               url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type);
+               url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "nif/data?format=json&resource=" + resource + "&query=" + URL.encode(textQuery) + "&type=" + URL.encode(type);
            RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
            builder.setTimeoutMillis(10000);
            _application.getLogger().debug(this, "Search NIF resources with url" + url);
@@ -273,7 +273,7 @@ public class NifJsonConnector implements INifConnector {
 				"&url=" + source + "&categoriesIn=" + include + "&categoriesOut=" + exclude + "&longestOnly=" + longestOnly + 
 				"&includeAbbrev=" + includeAbbrev + "&includeAcronym=" + includeAcronym + "&includeNumbers=" + includeNumbers;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "nif/annotate?format=json&content=" + URL.encode(textContent) + 
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "nif/annotate?format=json&content=" + URL.encode(textContent) + 
 				"&url=" + source + "&categoriesIn=" + include  + "&categoriesOut=" + exclude + "&longestOnly=" + longestOnly + 
 				"&includeAbbrev=" + includeAbbrev + "&includeAcronym=" + includeAcronym + "&includeNumbers=" + includeNumbers;
 	   

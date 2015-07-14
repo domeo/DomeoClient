@@ -12,7 +12,7 @@ import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPrefer
 import org.mindinformatics.gwt.framework.component.reporting.src.testing.JsonReportManager;
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -195,7 +195,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));	
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, PUBMED_PREFIX + pmid);
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, PUBMED_PREFIX + pmid);
 		
 		String text = (pmid!=null)? 
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + PUBMED_PREFIX + 
@@ -211,7 +211,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));	
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, PUBMED_PREFIX + pmid);
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, PUBMED_PREFIX + pmid);
 		
 		String text = (pmid!=null)? 
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + PUBMED_PREFIX + 
@@ -226,7 +226,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));	
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, PUBMED_PREFIX + pmid);
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, PUBMED_PREFIX + pmid);
 		
 		String text = (pmid!=null)? 
 			"<a target=\"_blank\" href=\"" + PUBMED_PREFIX + 
@@ -241,7 +241,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));	
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, DOI_SYSTEM_PREFIX + doi);
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, DOI_SYSTEM_PREFIX + doi);
 		
 		String text = (doi!=null)? 
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + DOI_SYSTEM_PREFIX + 
@@ -256,7 +256,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));	
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, DOI_SYSTEM_PREFIX + doi);
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, DOI_SYSTEM_PREFIX + doi);
 		
 		String text = (doi!=null)? 
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + DOI_SYSTEM_PREFIX + 
@@ -272,7 +272,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));	
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, DOI_SYSTEM_PREFIX + doi);
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, DOI_SYSTEM_PREFIX + doi);
 		
 		String text = (doi!=null)? 
 			"<a target=\"_blank\" href=\"" + DOI_SYSTEM_PREFIX + 
@@ -287,7 +287,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, PUBMED_CENTRAL_PREFIX + pmcid + "/");
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, PUBMED_CENTRAL_PREFIX + pmcid + "/");
 		
 		String text = (pmcid!=null && pmcid.trim().length()>0)? 
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + PUBMED_CENTRAL_PREFIX + 
@@ -310,7 +310,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));
-		String finalLink = ApplicationUtils.getAnnotationToolLink(domeo, url, PUBMED_CENTRAL_PREFIX + (displayId?pmcid:"") + "/");
+		String finalLink = Utils.getAnnotationToolLink(domeo, url, PUBMED_CENTRAL_PREFIX + (displayId?pmcid:"") + "/");
 		
 		String text = (pmcid!=null && pmcid.trim().length()>0)? 
 			"<img src='" + Domeo.resources.externalLinkIcon().getSafeUri().asString() + "'/> <a target=\"_blank\" href=\"" + PUBMED_CENTRAL_PREFIX + 
@@ -336,7 +336,7 @@ public class PubMedCitationPainter {
 		String url = domeo.getPersistenceManager().getCurrentResourceUrl();
 		if(url.indexOf("?")>0) 
 			url = url.substring(0, url.indexOf("?"));
-		//String finalLink = ApplicationUtils.getAnnotationToolLink(url, PUBMED_CENTRAL_PREFIX + pmcid + "/");
+		//String finalLink = Utils.getAnnotationToolLink(url, PUBMED_CENTRAL_PREFIX + pmcid + "/");
 		
 		String text = (pmcid!=null && pmcid.trim().length()>0)? 
 			" <a target=\"_blank\" href=\"" + PUBMED_CENTRAL_PREFIX + 

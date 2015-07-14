@@ -11,7 +11,7 @@ import org.mindinformatics.gwt.framework.component.users.src.defaults.DefaultUse
 import org.mindinformatics.gwt.framework.component.users.src.defaults.DefaultUsersGroup;
 import org.mindinformatics.gwt.framework.model.users.IUser;
 import org.mindinformatics.gwt.framework.model.users.IUserGroup;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
@@ -31,7 +31,7 @@ public class StandaloneUserManager extends AUserManager {
 		if(username.equals("paolo.ciccarese")) {
 			UsersFactory usersFactory = new UsersFactory(); 
 			user = usersFactory.createUser(username, "http://www.commonsemantics.com/account/paolociccarese", 
-				"Paolo Ciccarese", ApplicationUtils.day.parse("05/20/2011 -0500"));
+				"Paolo Ciccarese", Utils.day.parse("05/20/2011 -0500"));
 			setUser(user);
 			stageCompleted();
 		} else {

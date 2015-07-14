@@ -8,7 +8,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResour
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedTypedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MTypedResource;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
@@ -27,7 +27,7 @@ public class JsonResourcesSerializer {
 		return marshallGenericResource(genericResource.getUrl(), genericResource.getLabel());
 	}
 	private static JSONObject marshallGenericResource(String url, String label) {
-		ApplicationUtils.isValidUrl(url, true);
+		Utils.isValidUrl(url, true);
 		JSONObject resource = new JSONObject();
 		resource.put(IDomeoOntology.generalId, new JSONString(url));
 		if(label!=null && label.trim().length()>0) 

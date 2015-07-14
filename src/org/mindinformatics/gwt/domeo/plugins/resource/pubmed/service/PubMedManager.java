@@ -28,7 +28,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotopia.pubmed.src.AnnotopiaPubMe
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.test.GwtPubMedServiceConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.test.StandalonePubMedConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.src.JsonPubMedConnector;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -51,7 +51,7 @@ public class PubMedManager {
 			_connector = new StandalonePubMedConnector();
 		} else {
 			if(domeo.isAnnotopiaEnabled()) {
-				_connector = new AnnotopiaPubMedConnector(domeo, null, ApplicationUtils.getAnnotopiaLocation());
+				_connector = new AnnotopiaPubMedConnector(domeo, null, Utils.getAnnotopiaLocation());
 			} else if (domeo.isHostedMode()) {
 				_connector = new GwtPubMedServiceConnector();
 			} else {

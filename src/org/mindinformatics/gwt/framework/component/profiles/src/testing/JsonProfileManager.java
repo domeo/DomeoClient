@@ -31,7 +31,7 @@ import org.mindinformatics.gwt.framework.component.profiles.model.JsoProfileEntr
 import org.mindinformatics.gwt.framework.component.profiles.model.MProfile;
 import org.mindinformatics.gwt.framework.component.profiles.src.AProfileManager;
 import org.mindinformatics.gwt.framework.model.agents.IPerson;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
@@ -58,7 +58,7 @@ public class JsonProfileManager extends AProfileManager {
 	public void retrieveUserProfiles() {
 		String url = GWT.getModuleBaseURL() + "profile/"+_application.getUserManager().getUser().getUserName()+"/all?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/all?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/all?format=json";
 		
 		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setHeader("Content-type", "application/json");
@@ -143,7 +143,7 @@ public class JsonProfileManager extends AProfileManager {
 		
 		String url = GWT.getModuleBaseURL() + "profile/"+_application.getUserManager().getUser().getUserName()+"/info?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/info?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/info?format=json";
 		
 		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setHeader("Content-type", "application/json");
@@ -318,7 +318,7 @@ public class JsonProfileManager extends AProfileManager {
 	public void saveCurrentProfile(MProfile currentProfile, final IUpdateProfileCallback callback) {
 		String url = GWT.getModuleBaseURL() + "profile/"+_application.getUserManager().getUser().getUserName()+"/save?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/save?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/save?format=json";
 		
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-type", "application/json");

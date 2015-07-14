@@ -39,7 +39,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnoto
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AnnotopiaSerializerManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.ui.existingsets.ExistingAnnotationViewerPanel;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -97,7 +97,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 				.setHeaders(getAnnotopiaOAuthToken( ))
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("get")      // post, get
-		        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
+		        .setData(GQuery.$$("apiKey: " + Utils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
@@ -149,7 +149,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 					.setHeaders(getAnnotopiaOAuthToken( ))
 			        .setDataType("json") // txt, json, jsonp, xml
 			        .setType("get")      // post, get
-			        .setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame")) // parameters for the query-string
+			        .setData(GQuery.$$("apiKey: " + Utils.getAnnotopiaApiKey() + ",outCmd:frame")) // parameters for the query-string
 			        .setTimeout(10000)
 			        .setSuccess(new Function(){ // callback to be run if the request success
 			    		public void f() {
@@ -206,7 +206,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			final String operation = (annotationSet.getVersionNumber()==null || annotationSet.getVersionNumber().isEmpty())? "post":"put";
 			JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
 			Properties v = utils.parseJSON(
-					"{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  
+					"{\"apiKey\":\""+ Utils.getAnnotopiaApiKey() +  
 					"\",\"outCmd\":\"frame\",\"set\":" + 
 					manager.serialize(annotationSet).toString() + "}");
 			try {
@@ -297,8 +297,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	/** Return the user Annotopia OAuth token if it is enabled.
 	 * @return The user Annotopia OAuth token if it is enabled. */
 	private Properties getAnnotopiaOAuthToken( ) {
-		if(ApplicationUtils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
-			return Properties.create("Authorization: Bearer " + ApplicationUtils.getAnnotopiaOauthToken( ));
+		if(Utils.getAnnotopiaOauthEnabled( ).equalsIgnoreCase("true")) {
+			return Properties.create("Authorization: Bearer " + Utils.getAnnotopiaOauthToken( ));
 		} else {
 			return Properties.create( );
 		}

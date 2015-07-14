@@ -19,12 +19,11 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.A
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.src.AnnotopiaConverter;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.ui.existingsets.ExistingAnnotationViewerPanel;
 import org.mindinformatics.gwt.framework.component.ui.glass.EnhancedGlassPanel;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.query.client.Function;
-import com.google.gwt.query.client.Properties;
 import com.google.gwt.query.client.js.JsUtils;
 import com.google.gwt.query.client.plugins.ajax.Ajax;
 import com.google.gwt.user.client.Window;
@@ -36,7 +35,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 
 	private static final String PREFIX = "s/annotationset";
 	
-	public String URL = ApplicationUtils.DEFAULT_URL;
+	public String URL = Utils.DEFAULT_URL;
 	
 	/**
 	 * @param domeo		Pointer to main application
@@ -47,8 +46,6 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		super(domeo, callback);
 		if(url!=null) URL = url;
 	}
-	
-
 
 	@Override
 	public void saveAnnotation() {
@@ -71,8 +68,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			} else {
 				putAnnotationSet(annotationSet);
 			}
-		}
-		
+		}	
 	}
 	
 	/**
@@ -85,14 +81,14 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL + PREFIX)	
 				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders())
-				.setDataType(ApplicationUtils.JSON)
-				.setType(ApplicationUtils.POST)    
+				.setDataType(Utils.JSON)
+				.setType(Utils.POST)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON(AnnotopiaSerializerManager.getInstance((IDomeo)_application).serialize(set).toString()))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
-		    			JavaScriptObject jsSet = ApplicationUtils.parseJson(getDataProperties().toJsonString());
+		    			JavaScriptObject jsSet = Utils.parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			
 		    			MAnnotationSet savedSet = unmarshaller.unmarshallBasicAnnotationSet(jsSet, false);	    
@@ -155,13 +151,13 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(set.getIndividualUri())
-				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders()).setDataType(ApplicationUtils.JSON).setType(ApplicationUtils.PUT)    
+				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders()).setDataType(Utils.JSON).setType(Utils.PUT)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON(AnnotopiaSerializerManager.getInstance((IDomeo)_application).serialize(set).toString()))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
-		    			JavaScriptObject jsSet = ApplicationUtils.parseJson(getDataProperties().toJsonString());
+		    			JavaScriptObject jsSet = Utils.parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			
 		    			MAnnotationSet savedSet = unmarshaller.unmarshallBasicAnnotationSet(jsSet, false);	 
@@ -214,8 +210,8 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 	private void deleteAnnotationSet(MAnnotationSet set) {
 		try {
 			Ajax.ajax(Ajax.createSettings()
-				.setUrl(URL + PREFIX + "/" + set.getUuid())
-				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders()).setDataType(ApplicationUtils.JSON).setType(ApplicationUtils.DELETE)    
+				.setUrl(URL + PREFIX + Utils.SLASH + set.getUuid())
+				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders()).setDataType(Utils.JSON).setType(Utils.DELETE)    
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
@@ -275,7 +271,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 //			    			JsAnnotopiaAnnotationSetGraph wrapper = 
 //			    				(JsAnnotopiaAnnotationSetGraph) parseJson(getDataProperties().toJsonString());
 			    			
-			    			JavaScriptObject jsSet = ApplicationUtils.parseJson(getDataProperties().toJsonString());
+			    			JavaScriptObject jsSet = Utils.parseJson(getDataProperties().toJsonString());
 			    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 			    			
 			    			MAnnotationSet set = unmarshaller.unmarshallBasicAnnotationSet(jsSet, true);	    			
@@ -315,15 +311,15 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL + PREFIX)	
 				.setHeaders(AnnotopiaUtils.getAnnotopiaHeaders())
-				.setDataType(ApplicationUtils.JSON)
-				.setType(ApplicationUtils.GET)    
+				.setDataType(Utils.JSON)
+				.setType(Utils.GET)    
 		        .setData(new JsUtils.JsUtilsImpl().parseJSON("{\"tgtUrl\":\""+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()+ "\"}"))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		    		public void f() {
 		    			IDomeo _domeo = ((IDomeo)_application);
 		    			JsAnnotopiaSetsResultWrapper wrapper = 
-		    				(JsAnnotopiaSetsResultWrapper) ApplicationUtils.parseJson(getDataProperties().toJsonString());
+		    				(JsAnnotopiaSetsResultWrapper) Utils.parseJson(getDataProperties().toJsonString());
 		    			AnnotopiaConverter unmarshaller = new AnnotopiaConverter(_domeo);
 		    			List<MAnnotopiaAnnotationSet> sets = unmarshaller.unmarshallAnnotationSetsList(wrapper);	    			
 		    			_application.getLogger().debug(this, "Completed Execution of retrieveExistingAnnotationSetList() in " + (System.currentTimeMillis()-((IDomeo)_application).getDocumentPipelineTimer())+ "ms");
@@ -352,7 +348,7 @@ public class AnnotopiaPersistenceManager extends APersistenceManager implements 
 		        	}
 		        })
 			);
-		    //.setData(GQuery.$$("apiKey: " + ApplicationUtils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
+		    //.setData(GQuery.$$("apiKey: " + Utils.getAnnotopiaApiKey() + ",outCmd:frame,tgtUrl:"+((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl())) // parameters for the query-string
 		} catch (Exception e) {
 			_application.getLogger().exception(this, "Couldn't complete existing annotation sets list retrieval");
 		}

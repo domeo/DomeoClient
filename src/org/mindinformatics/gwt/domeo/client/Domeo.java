@@ -111,7 +111,6 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.selection.info.Selection
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.model.MSelectionAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.selection.ui.tile.SelectionTileProvider;
 import org.mindinformatics.gwt.domeo.plugins.encoders.elsevier.src.ScienceDirectUrlFilter;
-import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.src.AnnotopiaPersistenceManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationTarget;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.unmarshalling.JsonUnmarshallingManager;
 import org.mindinformatics.gwt.domeo.plugins.resource.bioportal.digesters.BioPortalTermsDigester;
@@ -164,9 +163,9 @@ import org.mindinformatics.gwt.framework.component.users.src.testing.GwtUserMana
 import org.mindinformatics.gwt.framework.component.users.src.testing.JsonUserManager;
 import org.mindinformatics.gwt.framework.component.users.src.testing.StandaloneUserManager;
 import org.mindinformatics.gwt.framework.src.Application;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.utils.src.HtmlUtils;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -634,23 +633,23 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		componentsManager.addComponent(extractorsManager);
 		
 		/*
-		if(!ApplicationUtils.getUrlParameter("url").isEmpty())
-			Window.alert("Url: " + ApplicationUtils.getUrlParameter("url"));
-		if(!ApplicationUtils.getUrlParameter("setId").isEmpty())
-			Window.alert("Url: " + ApplicationUtils.getUrlParameter("setId"));
-		if(!ApplicationUtils.getUrlParameter("setIds").isEmpty())
-			Window.alert("Url: " + ApplicationUtils.getUrlParameter("setIds"));
+		if(!Utils.getUrlParameter("url").isEmpty())
+			Window.alert("Url: " + Utils.getUrlParameter("url"));
+		if(!Utils.getUrlParameter("setId").isEmpty())
+			Window.alert("Url: " + Utils.getUrlParameter("setId"));
+		if(!Utils.getUrlParameter("setIds").isEmpty())
+			Window.alert("Url: " + Utils.getUrlParameter("setIds"));
 		*/
 		
-		if(!ApplicationUtils.getUrlParameter("url").isEmpty()) {
-			domeoToolbarPanel.getAddressBarPanel().setAddress(ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("url")));
-			this.attemptContentLoading(ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("url")));
+		if(!Utils.getUrlParameter("url").isEmpty()) {
+			domeoToolbarPanel.getAddressBarPanel().setAddress(Utils.decodeURIComponent(Utils.getUrlParameter("url")));
+			this.attemptContentLoading(Utils.decodeURIComponent(Utils.getUrlParameter("url")));
 		}
 		
 		/*
-		if(ApplicationUtils.getDocumentUrl()!=null && ApplicationUtils.getDocumentUrl().trim().length()>13) {
-			domeoToolbarPanel.getAddressBarPanel().setAddress(ApplicationUtils.getDocumentUrl());
-			this.attemptContentLoading(ApplicationUtils.getDocumentUrl());
+		if(Utils.getDocumentUrl()!=null && Utils.getDocumentUrl().trim().length()>13) {
+			domeoToolbarPanel.getAddressBarPanel().setAddress(Utils.getDocumentUrl());
+			this.attemptContentLoading(Utils.getDocumentUrl());
 		}
 		*/
 	}
@@ -768,8 +767,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		} else {
 			if (isHostedMode()) {
 				if(annotopia) {
-					//return new AnnotopiaPersistenceManager(this, ApplicationUtils.getAnnotopiaLocation(), null);
-					return new org.mindinformatics.gwt.domeo.plugins.annotopia.persistence.src.AnnotopiaPersistenceManager(this, ApplicationUtils.getAnnotopiaLocation(), null); 
+					//return new AnnotopiaPersistenceManager(this, Utils.getAnnotopiaLocation(), null);
+					return new org.mindinformatics.gwt.domeo.plugins.annotopia.persistence.src.AnnotopiaPersistenceManager(this, Utils.getAnnotopiaLocation(), null); 
 				} else if(isJsonFormat()) {
 					return new JsonPersistenceManager(this, null);
 				} else {
@@ -777,8 +776,8 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 				}
 			} else {
 				// Real service
-				if(ApplicationUtils.getIsAnnotopiaEnabled().equals("true")) {
-					return new org.mindinformatics.gwt.domeo.plugins.annotopia.persistence.src.AnnotopiaPersistenceManager(this, ApplicationUtils.getAnnotopiaLocation(), null);
+				if(Utils.getIsAnnotopiaEnabled().equals("true")) {
+					return new org.mindinformatics.gwt.domeo.plugins.annotopia.persistence.src.AnnotopiaPersistenceManager(this, Utils.getAnnotopiaLocation(), null);
 				} else return new JsonPersistenceManager(this, null);
 				//throw new RuntimeException("PersistenceManager not implemented for a real situation");
 			}
@@ -883,15 +882,15 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		        
 		        getLogger().info(this, "Proxy URL " + proxyUrl);
 		        
-		        String proxyProtocol = ApplicationUtils.getProxyProtocol();
+		        String proxyProtocol = Utils.getProxyProtocol();
 		        proxyProtocol = (proxyProtocol.trim().equals("http")||proxyProtocol.trim().equals("https"))?proxyProtocol:"http";
 		        if(!url.endsWith(".pdf")) {
-	    			String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+	    			String PROXY = proxyProtocol + "://" +Utils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
 	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PROXY + proxyUrl, url);
 	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
 		        } else {
-		        	String PREFIX = ApplicationUtils.getUrlBase(ApplicationUtils.getUrlString()) + "web/pdf?pdf=";
-		        	String PROXY = proxyProtocol + "://" +ApplicationUtils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
+		        	String PREFIX = Utils.getUrlBase(Utils.getUrlString()) + "web/pdf?pdf=";
+		        	String PROXY = proxyProtocol + "://" +Utils.getHostname(GWT.getHostPageBaseURL()) + "/proxy/";
 	    			getContentPanel().getAnnotationFrameWrapper().setUrl(PREFIX+PROXY + proxyUrl, url);
 	    			getLogger().info(this, "Proxy call " + PROXY + proxyUrl);
 		        }
@@ -1042,25 +1041,25 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 		}
 		
 		this.getLogger().debug(this, "AFTER DOCUMENT", "Completed Execution of endExtraction() in " + (System.currentTimeMillis()-documentPipelineTimer)+ "ms");
-		this.getLogger().debug(this, "AFTER DOCUMENT", "Document url: " + ApplicationUtils.getUrlParameter("url"));
-		this.getLogger().debug(this, "AFTER DOCUMENT", "Annotation set id: " + ApplicationUtils.getUrlParameter("setId"));
+		this.getLogger().debug(this, "AFTER DOCUMENT", "Document url: " + Utils.getUrlParameter("url"));
+		this.getLogger().debug(this, "AFTER DOCUMENT", "Annotation set id: " + Utils.getUrlParameter("setId"));
 
-		if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("lineage").isEmpty()) {
-			Window.alert("Attempting retrieving existing annotation with lineageId " + ApplicationUtils.getUrlParameter("lineage"));
+		if(!Utils.getUrlParameter("url").isEmpty() && Utils.getUrlParameter("url").trim().length()>13 && !Utils.getUrlParameter("lineage").isEmpty()) {
+			Window.alert("Attempting retrieving existing annotation with lineageId " + Utils.getUrlParameter("lineage"));
 			Window.alert("Feature not yet implemented");
 			((ProgressMessagePanel)((DialogGlassPanel)_dialogPanel).getPanel()).setMessage("Attempting retrieving existing annotation");
 			_dialogPanel.hide();
-		} else if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("setId").isEmpty()) {
+		} else if(!Utils.getUrlParameter("url").isEmpty() && Utils.getUrlParameter("url").trim().length()>13 && !Utils.getUrlParameter("setId").isEmpty()) {
 			List<String> uuids = new ArrayList<String>();
-			uuids.add(ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("setId")));
+			uuids.add(Utils.decodeURIComponent(Utils.getUrlParameter("setId")));
 			((DialogGlassPanel)_dialogPanel).hide();
 			this.getProgressPanelContainer().setProgressMessage("Retrieving existing annotation");
 			((DialogGlassPanel)_dialogPanel).hideSoon();
 			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
-			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.encodeUrlComponent(ApplicationUtils.getUrlParameter("url")));
-		} else if(!ApplicationUtils.getUrlParameter("url").isEmpty() && ApplicationUtils.getUrlParameter("url").trim().length()>13 && !ApplicationUtils.getUrlParameter("setIds").isEmpty()) {
+			if(!isLocalResources() && !isHostedMode()) Utils.updateUrl(Utils.encodeUrlComponent(Utils.getUrlParameter("url")));
+		} else if(!Utils.getUrlParameter("url").isEmpty() && Utils.getUrlParameter("url").trim().length()>13 && !Utils.getUrlParameter("setIds").isEmpty()) {
 			List<String> uuids = new ArrayList<String>();
-			String[] st = ApplicationUtils.decodeURIComponent(ApplicationUtils.getUrlParameter("setIds")).split(",");
+			String[] st = Utils.decodeURIComponent(Utils.getUrlParameter("setIds")).split(",");
 			for(int i = 0; i<st.length; i++) {
 				uuids.add(st[i]);
 				this.getLogger().debug(this, "Queuing annotation set with id: " + st[i]);
@@ -1070,20 +1069,20 @@ public class Domeo extends Application implements IDomeo, EntryPoint, /*IRetriev
 			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
 			((DialogGlassPanel)_dialogPanel).hideSoon();
 			this.getAnnotationPersistenceManager().retrieveExistingAnnotationSets(uuids, (IRetrieveExistingAnnotationSetHandler)this);
-			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.encodeUrlComponent(ApplicationUtils.getUrlParameter("url")));
+			if(!isLocalResources() && !isHostedMode()) Utils.updateUrl(Utils.encodeUrlComponent(Utils.getUrlParameter("url")));
 		} else {
-			if(!isLocalResources() && !isHostedMode()) ApplicationUtils.updateUrl(ApplicationUtils.encodeUrlComponent(this.getPersistenceManager().getCurrentResourceUrl()));
+			if(!isLocalResources() && !isHostedMode()) Utils.updateUrl(Utils.encodeUrlComponent(this.getPersistenceManager().getCurrentResourceUrl()));
 			checkForExistingAnnotationSets();
 		}
 		
 		/*
-		if(ApplicationUtils.getDocumentUrl()!=null && ApplicationUtils.getDocumentUrl().trim().length()>13 && ApplicationUtils.getLineageId()!=null && ApplicationUtils.getLineageId().trim().length()>0) {
-			Window.alert("Attempting retrieving existing annotation with lineageId " + ApplicationUtils.getLineageId());
+		if(Utils.getDocumentUrl()!=null && Utils.getDocumentUrl().trim().length()>13 && Utils.getLineageId()!=null && Utils.getLineageId().trim().length()>0) {
+			Window.alert("Attempting retrieving existing annotation with lineageId " + Utils.getLineageId());
 			((ProgressMessagePanel)((DialogGlassPanel)_dialogPanel).getPanel()).setMessage("Attempting retrieving existing annotation");
 			_dialogPanel.hide();
-		} else if (ApplicationUtils.getDocumentUrl()!=null && ApplicationUtils.getDocumentUrl().trim().length()>13 && ApplicationUtils.getAnnotationId()!=null && ApplicationUtils.getAnnotationId().trim().length()>0) {
+		} else if (Utils.getDocumentUrl()!=null && Utils.getDocumentUrl().trim().length()>13 && Utils.getAnnotationId()!=null && Utils.getAnnotationId().trim().length()>0) {
 			List<String> uuids = new ArrayList<String>();
-			uuids.add(ApplicationUtils.getAnnotationId());
+			uuids.add(Utils.getAnnotationId());
 			((DialogGlassPanel)_dialogPanel).hide();
 			this.getProgressPanelContainer().setProgressMessage("Retrieving requested annotation");
 

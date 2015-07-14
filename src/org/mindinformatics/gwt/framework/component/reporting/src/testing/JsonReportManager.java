@@ -3,7 +3,7 @@ package org.mindinformatics.gwt.framework.component.reporting.src.testing;
 import org.mindinformatics.gwt.framework.component.preferences.src.BooleanPreference;
 import org.mindinformatics.gwt.framework.component.reporting.src.AReportsManager;
 import org.mindinformatics.gwt.framework.src.Application;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
@@ -36,7 +36,7 @@ public class JsonReportManager extends AReportsManager {
 		
 		String url = GWT.getModuleBaseURL() + "reporting/email?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "reporting/email?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "reporting/email?format=json";
 
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-type", "application/json");
@@ -103,7 +103,7 @@ public class JsonReportManager extends AReportsManager {
 		
 		String url = GWT.getModuleBaseURL() + "reporting/path?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "reporting/path?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "reporting/path?format=json";
 
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-type", "application/json");

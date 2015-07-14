@@ -19,7 +19,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.service.IPubMedPagi
 import org.mindinformatics.gwt.framework.component.ui.dialog.ProgressMessagePanel;
 import org.mindinformatics.gwt.framework.component.ui.glass.DialogGlassPanel;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.core.client.GWT;
@@ -81,7 +81,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 			handler.setExistingBibliographySetList(f.retrieveBibliographyByDocumentUrl(((IDomeo)_application).getPersistenceManager().getCurrentResource().getUrl()), true);
 			return;
 		}
-		String requestUrl = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
+		String requestUrl = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
 
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, requestUrl);
@@ -153,7 +153,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 		}
 		
 		
-		String url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
+		String url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingBibliographicSets?format=json";
 
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
@@ -241,7 +241,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 	
 		String url = GWT.getModuleBaseURL() + "pubmed/entry?format=json&typeQuery=" + typeQuery + "&textQuery=" + textQuery;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "pubmed/entry?format=json&typeQuery=" + typeQuery + "&textQuery=" + textQuery;
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "pubmed/entry?format=json&typeQuery=" + typeQuery + "&textQuery=" + textQuery;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
 		try {
@@ -316,7 +316,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 		}
 		
 		String url = GWT.getModuleBaseURL() + "pubmed/entries?format=json&typeQuery=" + typeQuery + "&textQuery=" + ids;
-		if(!_application.isHostedMode()) url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "pubmed/entries?format=json&typeQuery=" + typeQuery + "&textQuery=" + ids;
+		if(!_application.isHostedMode()) url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "pubmed/entries?format=json&typeQuery=" + typeQuery + "&textQuery=" + ids;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
 		try {
@@ -382,7 +382,7 @@ public class JsonPubMedConnector implements IPubMedConnector {
 			String textQuery, int maxResults, int offset) throws IllegalArgumentException {
 		
 		String url = GWT.getModuleBaseURL() + "pubmed/search?format=json&typeQuery=" + typeQuery + "&textQuery=" + textQuery + "&maxResults=" + maxResults + "&offset=" + offset;
-		if(!_application.isHostedMode()) url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "pubmed/search?format=json&typeQuery=" + typeQuery + "&textQuery=" + textQuery + "&maxResults=" + maxResults + "&offset=" + offset;
+		if(!_application.isHostedMode()) url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "pubmed/search?format=json&typeQuery=" + typeQuery + "&textQuery=" + textQuery + "&maxResults=" + maxResults + "&offset=" + offset;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
 		try {

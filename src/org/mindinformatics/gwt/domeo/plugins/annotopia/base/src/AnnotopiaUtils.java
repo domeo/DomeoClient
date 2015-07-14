@@ -1,6 +1,6 @@
 package org.mindinformatics.gwt.domeo.plugins.annotopia.base.src;
 
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.query.client.Properties;
 
@@ -16,8 +16,8 @@ public class AnnotopiaUtils {
 	 * @return The list of properties for the header
 	 */
 	public static Properties getAnnotopiaHeaders() {
-		Properties props = ApplicationUtils.getAnnotopiaOAuthToken();
-		if(!ApplicationUtils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set(ApplicationUtils.AUTHORIZATION, AnnotopiaUtils.ANNOTOPIA_API_KEY + ApplicationUtils.SPACE + ApplicationUtils.getAnnotopiaApiKey());
+		Properties props = Utils.getAnnotopiaOAuthToken();
+		if(!Utils.getAnnotopiaOauthEnabled().equalsIgnoreCase("true")) props.set(Utils.AUTHORIZATION, AnnotopiaUtils.ANNOTOPIA_API_KEY + Utils.SPACE + Utils.getAnnotopiaApiKey());
 		return props;
 	}
 }

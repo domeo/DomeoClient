@@ -12,7 +12,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.MTrustedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.core.client.GWT;
@@ -50,7 +50,7 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 		
 		String url = GWT.getModuleBaseURL() + "bioPortal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds;
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
 
@@ -113,7 +113,7 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 		String url = GWT.getModuleBaseURL() + "bioPortal/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds +
 				"&pagenumber=" + pageNumber + "&pagesize=" + pageSize;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds +
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/search?format=json&textQuery=" + URL.encode(textQuery) + "&ontologies=" + virtualIds +
 					"&pagenumber=" + pageNumber + "&pagesize=" + pageSize;
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	    builder.setTimeoutMillis(10000);
@@ -175,7 +175,7 @@ public class JsonBioPortalConnector implements IBioPortalConnector {
 				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 				"&withSynonyms=" + withSynonyms;
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
 				"&ontologies=" + virtualIds + "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
 				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 				"&withSynonyms=" + withSynonyms;

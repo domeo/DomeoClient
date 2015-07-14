@@ -22,7 +22,7 @@ import org.mindinformatics.gwt.framework.component.ui.toolbar.ToolbarSimplePanel
 import org.mindinformatics.gwt.framework.component.users.ui.UserAccountViewerPanel;
 import org.mindinformatics.gwt.framework.src.Application;
 import org.mindinformatics.gwt.framework.src.ApplicationResources;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
@@ -80,7 +80,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 				_domeo, new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						Window.Location.assign(ApplicationUtils.getUrlBase(Window.Location.getHref()));
+						Window.Location.assign(Utils.getUrlBase(Window.Location.getHref()));
 						toolbar.disableToolbarItems();
 					}
 				}, _applicationResources.homeLittleIcon().getSafeUri().asString(), "Homepage");
@@ -390,7 +390,7 @@ public class DomeoToolbarPanel extends Composite implements IInitializableCompon
 				_domeo, new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						ApplicationUtils.openUrl("http://annotationframework.org");
+						Utils.openUrl("http://annotationframework.org");
 					}
 				}, Domeo.resources.domeoLogoIcon().getSafeUri().asString(), "Domeo","Domeo");		
 			toolbar.addToBrandingPanel(domeoButton, "60px");

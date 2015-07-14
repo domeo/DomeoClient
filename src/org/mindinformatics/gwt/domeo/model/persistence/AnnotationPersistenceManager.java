@@ -29,7 +29,7 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.ui.east.ASidePanel;
 import org.mindinformatics.gwt.framework.component.ui.east.ASideTab;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.user.client.Element;
 
@@ -265,7 +265,7 @@ public class AnnotationPersistenceManager extends PersistenceManager {
 	}
 	
 	private void setDefaultAnnotationSetAccessPolicy(MAnnotationSet set) {
-		String defaultSetPrivacy = ApplicationUtils.getDefaultSetPrivacy();
+		String defaultSetPrivacy = Utils.getDefaultSetPrivacy();
 		if(defaultSetPrivacy!=null && defaultSetPrivacy.trim().equals("private"))
 			((IDomeo)_application).getAnnotationAccessManager().setAnnotationSetPrivate(set);
 		else 

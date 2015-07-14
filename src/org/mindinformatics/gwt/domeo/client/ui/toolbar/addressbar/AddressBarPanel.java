@@ -2,7 +2,7 @@ package org.mindinformatics.gwt.domeo.client.ui.toolbar.addressbar;
 
 import org.mindinformatics.gwt.framework.component.ui.toolbar.IToolbarItem;
 import org.mindinformatics.gwt.framework.src.Application;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.utils.src.UrlUtils;
 
@@ -234,7 +234,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 			//oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT01136213.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/ImagesTest.html");
 		} else {
-			if(ApplicationUtils.getProvideExamplesUrls()!=null && ApplicationUtils.getProvideExamplesUrls().trim().equals("true")) {
+			if(Utils.getProvideExamplesUrls()!=null && Utils.getProvideExamplesUrls().trim().equals("true")) {
 				oracle.add("http://en.wikipedia.org/wiki/Amyloid_precursor_protein");
 				oracle.add("http://www.stembook.org/node/514");
 				oracle.add("http://www.jbiomedsem.com/content/3/S1/S1");

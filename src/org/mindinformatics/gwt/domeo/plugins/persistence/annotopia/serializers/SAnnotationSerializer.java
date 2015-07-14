@@ -29,10 +29,12 @@ import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.annotopia.SMicroPublicationSerializer;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
@@ -82,7 +84,7 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 		
 		if(ann.getCreatedOn()!=null) {
 			//jsonAnnotation.put("createdOn", nonNullable(ann.getCreatedOn()));
-			jsonAnnotation.put("annotatedAt", new JSONString(ApplicationUtils.fullfmt2.format(ann.getCreatedOn())));
+			jsonAnnotation.put("annotatedAt", new JSONString(Utils.fullfmt2.format(ann.getCreatedOn())));
 		}
 		
 		//jsonAnnotation.put(IPavOntology.createdWith, new JSONString(ann.getTool()!=null?ann.getTool().getUri():""));
@@ -117,6 +119,9 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			jsonAnnotation.put("hasBody", encodeTags(manager, ann));
 		}
 		if(ann.getAnnotationType().equals("ao:LinearComment")) {
+			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
+		} 
+		if(ann.getAnnotationType().equals("ao:MicroPublicationAnnotation")) {
 			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
 		} 
 		
@@ -171,7 +176,12 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			jsonBody.put("format", new JSONString("text/plain"));
 			jsonBody.put("chars", new JSONString(((MLinearCommentAnnotation) ann).getText()));
 			jsonBodies.set(0, jsonBody);
-			return jsonBodies;		
+			return jsonBodies;
+		} else if(ann instanceof MMicroPublicationAnnotation) {
+			JSONArray jsonBodies = new JSONArray();
+			SMicroPublicationSerializer s = new SMicroPublicationSerializer();
+			jsonBodies.set(0, s.serialize(manager, ann));
+			return jsonBodies;
 		} else return null;
 	}
 	

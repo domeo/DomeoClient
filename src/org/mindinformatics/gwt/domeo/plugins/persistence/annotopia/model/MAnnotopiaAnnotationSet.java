@@ -22,7 +22,7 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
 import java.util.Date;
 
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -91,7 +91,7 @@ public class MAnnotopiaAnnotationSet {
 		this.createdOn = createdOn;
 	}
 	public String getFormattedCreationDate() {
-		return ApplicationUtils.fmt.format(createdOn);
+		return Utils.fmt.format(createdOn);
 	}
 	public Date getLastSavedOn() {
 		return lastSavedOn;
@@ -101,7 +101,7 @@ public class MAnnotopiaAnnotationSet {
 	}
 	public String getFormattedLastSavedDate() {
 		if(lastSavedOn!=null)
-			return ApplicationUtils.fmt.format(lastSavedOn);
+			return Utils.fmt.format(lastSavedOn);
 		return "";
 	}
 	public int getNumberAnnotations() {

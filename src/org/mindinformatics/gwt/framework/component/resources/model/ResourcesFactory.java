@@ -1,6 +1,6 @@
 package org.mindinformatics.gwt.framework.component.resources.model;
 
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -15,7 +15,7 @@ public class ResourcesFactory {
 	 * @return The newly created resource.
 	 */
 	public static MGenericResource createGenericResource(String url, String label) {
-		if(ApplicationUtils.isValidUrl(url, false)) return new MGenericResource(url, label);
+		if(Utils.isValidUrl(url, false)) return new MGenericResource(url, label);
 		throw new RuntimeException(
 			"GenericResource with not valid URL: " + url + " (label: "+label+")");
 	}
@@ -27,7 +27,7 @@ public class ResourcesFactory {
 	 * @return The Linked Resource
 	 */
 	public static MLinkedResource createLinkedResource(String url, String label) {
-		if(ApplicationUtils.isValidUrl(url, true)) return new MLinkedResource(url, label);
+		if(Utils.isValidUrl(url, true)) return new MLinkedResource(url, label);
 		throw new RuntimeException(
 			"LinkedResource with not valid URL: " + url + " (label: "+label+")");
 	}
@@ -40,7 +40,7 @@ public class ResourcesFactory {
 	 * @return The Linked Resource
 	 */
 	public static MLinkedResource createLinkedResource(String url, String label, String description) {
-		if(ApplicationUtils.isValidUrl(url, true)) return new MLinkedResource(url, label, description);
+		if(Utils.isValidUrl(url, true)) return new MLinkedResource(url, label, description);
 		throw new RuntimeException(
 			"LinkedResource with not valid URL: " + url + " (label: "+label+")");
 	}
@@ -53,7 +53,7 @@ public class ResourcesFactory {
 	 * @return The Trusted Resource (a Generic Resource with specified source)
 	 */
 	public static MTrustedResource createTrustedResource(String url, String label, MGenericResource source) {
-		if(ApplicationUtils.isValidUrl(url, true)) return new MTrustedResource(url, label, source);
+		if(Utils.isValidUrl(url, true)) return new MTrustedResource(url, label, source);
 		throw new RuntimeException(
 			"TrustedResource with not valid URL: " + url + " (label: "+label+")");
 	}
@@ -81,7 +81,7 @@ public class ResourcesFactory {
 	 * @returnThe Trusted Resource (a Generic Resource with specified source)
 	 */
 	public static MTrustedResource createTrustedResource(String url, String label, String sourceUrl, String sourceLabel) {
-		if(ApplicationUtils.isValidUrl(sourceUrl, true)) 
+		if(Utils.isValidUrl(sourceUrl, true)) 
 			return createTrustedResource(url, label, createGenericResource(sourceUrl, sourceLabel));
 		throw new RuntimeException(
 			"TrustedResource source with not valid URL: " + url + " (label: "+label+")");
@@ -97,7 +97,7 @@ public class ResourcesFactory {
 	 * @returnThe Trusted Resource (a Generic Resource with specified source)
 	 */
 	public static MTrustedResource createTrustedResource(String url, String label, String description, String sourceUrl, String sourceLabel) {
-		if(ApplicationUtils.isValidUrl(sourceUrl, true)) {
+		if(Utils.isValidUrl(sourceUrl, true)) {
 			return createTrustedResource(url, label, description, createGenericResource(sourceUrl, sourceLabel));
 		}
 		throw new RuntimeException(
@@ -111,7 +111,7 @@ public class ResourcesFactory {
 	 * @returnThe Typed Resource (a Linked Resource with types)
 	 */
 	public static MTypedResource createTypedResource(String url, String label) {
-		if(ApplicationUtils.isValidUrl(url, true)) return new MTypedResource(url, label);
+		if(Utils.isValidUrl(url, true)) return new MTypedResource(url, label);
 		throw new RuntimeException(
 			"TypedResource with not valid URL: " + url + " (label: "+label+")");
 	}
@@ -124,7 +124,7 @@ public class ResourcesFactory {
 	 * @return Trusted Typed Resource (a Trusted Resource with types)
 	 */
 	public static MTrustedTypedResource createTrustedTypedResource(String url, String label, MGenericResource source) {
-		if(ApplicationUtils.isValidUrl(url, true)) return new MTrustedTypedResource(url, label, source);
+		if(Utils.isValidUrl(url, true)) return new MTrustedTypedResource(url, label, source);
 		throw new RuntimeException(
 			"TrustedTypedResource with not valid URL: " + url + " (label: "+label+")");
 	}

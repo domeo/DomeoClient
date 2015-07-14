@@ -4,7 +4,7 @@ import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.popup.CurationPopup;
 import org.mindinformatics.gwt.framework.component.reporting.src.testing.JsonReportManager;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 import org.mindinformatics.gwt.utils.src.UrlUtils;
 
@@ -111,7 +111,7 @@ public class LLinkCard extends Composite implements ICommandCompleted {
 		annotatePageLabel.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				String finalLink = ApplicationUtils.getAnnotationToolLink(jumpLink);
+				String finalLink = Utils.getAnnotationToolLink(jumpLink);
 				Window.alert(finalLink);
 				JsonReportManager mgr = new JsonReportManager(_domeo, _this);
 				mgr.recordPathEntry(_domeo.getPersistenceManager().getCurrentResourceUrl(), finalLink);

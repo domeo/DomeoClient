@@ -3,7 +3,7 @@ package org.mindinformatics.gwt.domeo.plugins.annotopia.ebi.src;
 import org.mindinformatics.gwt.domeo.component.textmining.src.ITextminingRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.resource.ebi.service.IEbiConnector;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 
 import com.google.gwt.query.client.Function;
@@ -17,7 +17,7 @@ import com.google.gwt.user.client.Window;
  */
 public class AnnotopiaEbiConnector implements IEbiConnector {
 	
-	public String URL = ApplicationUtils.DEFAULT_URL;
+	public String URL = Utils.DEFAULT_URL;
 	
 	private static final String ANTIBODIES_SEARCH = "nif-0000-07730-1";
 	
@@ -36,18 +36,18 @@ public class AnnotopiaEbiConnector implements IEbiConnector {
 			throws IllegalArgumentException {
 		
 		JsUtils.JsUtilsImpl utils = new JsUtils.JsUtilsImpl();
-		Properties v = utils.parseJSON("{\"apiKey\":\""+ ApplicationUtils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"pmcid\":\""+pmcid + "\"}");
+		Properties v = utils.parseJSON("{\"apiKey\":\""+ Utils.getAnnotopiaApiKey() +  "\",\"format\":\"domeo\",\"pmcid\":\""+pmcid + "\"}");
 		try {
 			Ajax.ajax(Ajax.createSettings()
 				.setUrl(URL+"cn/ebi/textmine")
-				.setHeaders(ApplicationUtils.getAnnotopiaOAuthToken( ))
+				.setHeaders(Utils.getAnnotopiaOAuthToken( ))
 		        .setDataType("json") // txt, json, jsonp, xml
 		        .setType("post")      // post, get
 		        .setData(v) // parameters for the query-string setData(GQuery.$$("apiKey: testkey, set: " + value))
 		        .setTimeout(10000)
 		        .setSuccess(new Function(){ // callback to be run if the request success
 		        	public void f() {
-		        		JsAnnotationSet set = (JsAnnotationSet) ApplicationUtils.parseJson(getDataProperties().toJsonString());
+		        		JsAnnotationSet set = (JsAnnotationSet) Utils.parseJson(getDataProperties().toJsonString());
 		        		_application.getProgressPanelContainer().setCompletionMessage("Text mining completed");
 						completionCallback.returnTextminingResults(set, false);
 		        	}
@@ -74,7 +74,7 @@ public class AnnotopiaEbiConnector implements IEbiConnector {
 //				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 //				"&withSynonyms=" + withSynonyms;
 //		if(!_application.isHostedMode())
-//			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
+//			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "ncbo/textmine?format=json&textContent=" + URL.encode(textContent) + "&url=" + source + 
 //				"&ontologies=" + virtualIds + "&longestOnly=" + longestOnly + "&wholeWordOnly=" + wholeWordOnly + "&filterNumbers=" + filterNumbers + 
 //				"&withDefaultStopWords=" + withDefaultStopWords + "&isStopWordsCaseSensitive=" + isStopWordsCaseSensitive + "&scored=" + scored + 
 //				"&withSynonyms=" + withSynonyms;

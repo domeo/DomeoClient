@@ -27,7 +27,7 @@ import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.plugins.annotopia.ebi.src.AnnotopiaEbiConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.ebi.service.annotator.FEbiAnnotatorParametrizationForm;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -53,7 +53,7 @@ public class EbiManager implements ITextMiningConnector {
 			//_connector = new StandaloneBioPortalConnector();
 		} else {
 			if(domeo.isAnnotopiaEnabled()) {
-				_connector = new AnnotopiaEbiConnector(domeo, ApplicationUtils.getAnnotopiaLocation());
+				_connector = new AnnotopiaEbiConnector(domeo, Utils.getAnnotopiaLocation());
 			} else if (domeo.isHostedMode()) {
 				//_connector = new GwtBioPortalServiceConnector();
 			} else {

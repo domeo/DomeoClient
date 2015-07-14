@@ -22,9 +22,8 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers;
 
 import java.util.Date;
 
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.json.client.JSONString;
 
 /**
@@ -45,7 +44,7 @@ public class AAnnotopiaSerializer {
 	}
 	
 	public JSONString nonNullable(Date content) {
-		return new JSONString(content!=null?ApplicationUtils.fullfmt2.format(content):"<EXCEPTION NULL:to-be-fixed>");
+		return new JSONString(content!=null?Utils.fullfmt2.format(content):"<EXCEPTION NULL:to-be-fixed>");
 	}
 	
 	public JSONString nonNullable(String content) {
@@ -57,7 +56,7 @@ public class AAnnotopiaSerializer {
 	}
 	
 	public JSONString nullable(Date content) {
-		return new JSONString(content!=null?ApplicationUtils.fullfmt2.format(content):"");
+		return new JSONString(content!=null?Utils.fullfmt2.format(content):"");
 	}
 	
 	public JSONString nullable(Long content) {

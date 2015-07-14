@@ -6,7 +6,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.bibliography.src.connector
 import org.mindinformatics.gwt.domeo.plugins.resource.bibliography.src.connector.IStarringRequestCompleted;
 import org.mindinformatics.gwt.domeo.plugins.resource.document.model.MDocumentResource;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -33,7 +33,7 @@ public class JsonBibliographyConnector implements IBibliographyConnector {
 	public void starResource(MDocumentResource documentResource, final IStarringRequestCompleted completionHandler) {
 		String url = GWT.getModuleBaseURL() + "bibliography/star";
 		if(!_domeo.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/star";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/star";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-Type", "application/json");
 	    builder.setTimeoutMillis(10000);
@@ -99,7 +99,7 @@ public class JsonBibliographyConnector implements IBibliographyConnector {
 			final IStarringRequestCompleted completionHandler) {
 		String url = GWT.getModuleBaseURL() + "bibliography/isStarred";
 		if(!_domeo.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/isStarred";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/isStarred";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-Type", "application/json");
 	    builder.setTimeoutMillis(10000);
@@ -164,7 +164,7 @@ public class JsonBibliographyConnector implements IBibliographyConnector {
 	public void unstarResource(MDocumentResource documentResource, final IStarringRequestCompleted completionHandler) {
 		String url = GWT.getModuleBaseURL() + "bibliography/star";
 		if(!_domeo.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/unstar";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "bibliography/unstar";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-Type", "application/json");
 	    builder.setTimeoutMillis(10000);

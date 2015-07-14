@@ -22,7 +22,7 @@ package org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model;
 
 import java.util.Date;
 
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -43,7 +43,7 @@ public class JsOpenAnnotation extends JavaScriptObject {
 		return this.annotatedAt; 
 	}-*/;
 	public final Date getFormattedAnnotatedAt() {
-		return ApplicationUtils.fullfmt2.parse(getAnnotatedAt().trim());
+		return Utils.fullfmt2.parse(getAnnotatedAt().trim());
 	} 	
 	public final native Object getAnnotatedBy() /*-{ 
 		return this.annotatedBy; 

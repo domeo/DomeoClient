@@ -10,7 +10,7 @@ import org.mindinformatics.gwt.framework.component.users.model.MUserGroup;
 import org.mindinformatics.gwt.framework.component.users.model.MUserRole;
 import org.mindinformatics.gwt.framework.component.users.src.AUserManager;
 import org.mindinformatics.gwt.framework.model.users.IUserGroup;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
@@ -53,7 +53,7 @@ public class JsonUserManager extends AUserManager {
 	public void retrieveUser(String username) {
 		String url = GWT.getModuleBaseURL() + "users/"+username+"/info?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "users/"+username+"/info?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "users/"+username+"/info?format=json";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 
 		try {
@@ -87,7 +87,7 @@ public class JsonUserManager extends AUserManager {
 	public void retrieveUserGroups(String username) { 
 		String url = GWT.getModuleBaseURL() + "users/"+username+"/groups?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "users/"+username+"/groups?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "users/"+username+"/groups?format=json";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 
 		try {

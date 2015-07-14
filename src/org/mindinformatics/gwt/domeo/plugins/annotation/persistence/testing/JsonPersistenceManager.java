@@ -25,7 +25,7 @@ import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.core.client.GWT;
@@ -99,7 +99,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		}
 		
 		JsonSerializerManager jsonSerializerManager = JsonSerializerManager.getInstance(((IDomeo)_application));
-		String url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/saveBibliography?format=json"; 
+		String url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/saveBibliography?format=json"; 
 
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
@@ -351,7 +351,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		}
 		
 		JsonSerializerManager jsonSerializerManager = JsonSerializerManager.getInstance(((IDomeo)_application));
-		String url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/saveAnnotation?format=json";
+		String url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/saveAnnotation?format=json";
 
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
@@ -557,7 +557,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 			return;
 		}
 		
-		String url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingAnotationSets?format=json";
+		String url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingAnotationSets?format=json";
 
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
@@ -637,7 +637,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		}
 		
 		JsonSerializerManager jsonSerializerManager = JsonSerializerManager.getInstance(((IDomeo)_application));
-		String url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingAnotationSetsList?format=json";
+		String url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "persistence/retrieveExistingAnotationSetsList?format=json";
 
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);

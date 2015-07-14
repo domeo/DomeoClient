@@ -5,7 +5,7 @@ import org.mindinformatics.gwt.framework.component.agents.src.AAgentManager;
 import org.mindinformatics.gwt.framework.component.agents.src.AgentsFactory;
 import org.mindinformatics.gwt.framework.model.agents.IPerson;
 import org.mindinformatics.gwt.framework.model.agents.ISoftware;
-import org.mindinformatics.gwt.framework.src.ApplicationUtils;
+import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
@@ -51,7 +51,7 @@ public class JsonAgentManager extends AAgentManager {
 	public void retrieveSoftware(String name, String version) {
 		String url = GWT.getModuleBaseURL() + "agents/"+name.toLowerCase()+"/"+version+"?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL())+ "agents/"+name.toLowerCase()+"/"+version+"?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL())+ "agents/"+name.toLowerCase()+"/"+version+"?format=json";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 
 		try {
@@ -81,7 +81,7 @@ public class JsonAgentManager extends AAgentManager {
 	public void retrievePerson(String userUuid) {
 		String url = GWT.getModuleBaseURL() + "agents/"+userUuid+"/info?format=json";
 		if(!_application.isHostedMode())
-			url = ApplicationUtils.getUrlBase(GWT.getModuleBaseURL()) + "agents/"+userUuid+"/info?format=json";
+			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "agents/"+userUuid+"/info?format=json";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 
 		try {
