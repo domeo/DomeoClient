@@ -13,7 +13,6 @@ import org.mindinformatics.gwt.framework.component.reporting.src.testing.JsonRep
 import org.mindinformatics.gwt.framework.component.ui.buttons.SimpleIconButtonPanel;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.framework.src.Utils;
-import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -151,6 +150,46 @@ public class PubMedCitationPainter {
 		}
 	}
 	
+	public static String getFullCitationString(MPublicationArticleReference reference, IDomeo domeo) {
+		if(reference.getUnrecognized()==null || reference.getUnrecognized().trim().length()==0) {
+			
+			StringBuffer sb = new StringBuffer();
+			if(getPubMedHtmlString(reference.getPubMedId(), domeo)!=null) sb.append(getPubMedHtmlString(reference.getPubMedId(), domeo, false, false) + "&nbsp;");
+			if(getPmcHtmlString(reference.getPubMedCentralId(), domeo)!=null) sb.append(getPmcHtmlString(reference.getPubMedCentralId(), domeo, false, false) + "&nbsp;");
+			if(getDoiHtmlString(reference.getDoi(), domeo)!=null) sb.append(getDoiHtmlString(reference.getDoi(), domeo, false, false) + "<br/>");
+			
+			String citation = 
+				reference.getAuthorNames() + " " +
+				reference.getTitle() + " " +
+				reference.getJournalPublicationInfo()+
+				sb.toString();
+			return citation;
+		}  else {
+			String html = reference.getUnrecognized();
+			return html;
+		}
+	}
+	
+	public static String getFullCitationPlainString(MPublicationArticleReference reference, IDomeo domeo) {
+		if(reference.getUnrecognized()==null || reference.getUnrecognized().trim().length()==0) {
+			
+			StringBuffer sb = new StringBuffer();
+			//if(getPubMedHtmlString(reference.getPubMedId(), domeo)!=null) sb.append(getPubMedHtmlString(reference.getPubMedId(), domeo, false, false) + "&nbsp;");
+			//if(getPmcHtmlString(reference.getPubMedCentralId(), domeo)!=null) sb.append(getPmcHtmlString(reference.getPubMedCentralId(), domeo, false, false) + "&nbsp;");
+			if(getDoiHtmlString(reference.getDoi(), domeo)!=null) sb.append(getDoiString(reference.getDoi()));
+			
+			String citation = 
+				reference.getAuthorNames() + " " +
+				reference.getTitle() + " " +
+				reference.getJournalPublicationInfo()+
+				sb.toString();
+			return citation;
+		}  else {
+			String html = reference.getUnrecognized();
+			return html;
+		}
+	}
+	
 	public static HTML getCitationWithLink(MPublicationArticleReference reference) {
 		if(reference.getUnrecognized()==null || reference.getUnrecognized().trim().length()==0) {
 			HTML html = new HTML(
@@ -265,6 +304,10 @@ public class PubMedCitationPainter {
 			" <a target=\"_blank\" onclick=\"window.open('" + finalLink + "')\" title=\"Edit document in Domeo\"><img src='" + 
 			Domeo.resources.editLittleIcon().getSafeUri().asString() + "' style='border: 0px;' /></a>":""):null;	
 		return text;
+	}
+	
+	public static String getDoiString(String doi) {
+		return (doi!=null)?"doi:"+doi:"";
 	}
 	
 	public static String getDoiHtmlStringWithIcon(String doi, IDomeo domeo) {

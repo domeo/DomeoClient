@@ -134,8 +134,8 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 				supportedBy.put("reif:resource", statement);
 			}
 			
-			if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) support.set(i++, supportedBy);
-			else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challenge.set(c++, supportedBy);
+			if(rel.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) support.set(i++, supportedBy);
+			else if(rel.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) challenge.set(c++, supportedBy);
 		}
 		if(support.size()>0) argues.put("mp:supportedBy", support);
 		if(challenge.size()>0) argues.put("mp:challengedBy", challenge);

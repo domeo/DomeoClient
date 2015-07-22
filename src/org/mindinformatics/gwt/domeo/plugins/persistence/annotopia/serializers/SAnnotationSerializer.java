@@ -39,7 +39,6 @@ import org.mindinformatics.gwt.framework.src.Utils;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.Window;
 
 /**
  * This class serializes Agents to Annotopia JSON format.

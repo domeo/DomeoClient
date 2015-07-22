@@ -110,14 +110,14 @@ public class TMicroPublicationTile extends ATileComponent implements ITileCompon
 			
 			for(MMpRelationship rel:_annotation.getMicroPublication().getEvidence()) {
 				if(rel.getObjectElement() instanceof MMpReference) {
-					if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) refCounter++;
-					else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challengeRefCounter++;
+					if(rel.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) refCounter++;
+					else if(rel.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) challengeRefCounter++;
 				} else if(rel.getObjectElement() instanceof MMpData) {
-					if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) dataCounter++;
-					else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challengeDataCounter++;
+					if(rel.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) dataCounter++;
+					else if(rel.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) challengeDataCounter++;
 				} else if(rel.getObjectElement() instanceof MMpStatement) {
-					if(rel.getName().equals(IMicroPublicationsOntology.supportedBy)) statementsCounter++;
-					else if(rel.getName().equals(IMicroPublicationsOntology.challengedBy)) challengeStatementsCounter++;
+					if(rel.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) statementsCounter++;
+					else if(rel.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) challengeStatementsCounter++;
 				}
 			}
 			_domeo.getLogger().debug(this, "t02 ");

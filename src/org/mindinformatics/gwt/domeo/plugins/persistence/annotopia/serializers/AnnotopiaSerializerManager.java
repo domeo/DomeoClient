@@ -30,6 +30,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.model.agents.IAgent;
@@ -44,7 +45,7 @@ import com.google.gwt.json.client.JSONValue;
  */
 public class AnnotopiaSerializerManager {
 
-public IDomeo _domeo;
+	public IDomeo _domeo;
 	
 	private HashMap<String, IAnnotopiaSerializer> serializers = new HashMap<String, IAnnotopiaSerializer>();
 
@@ -74,40 +75,46 @@ public IDomeo _domeo;
 	}
 	
 	public void serializeExpression(JSONObject source) {
-		_domeo.getLogger().debug(this, "Serializing Expression");
-		
 		if(_domeo.getPersistenceManager().getBibliographicSet()!=null 
 			&& _domeo.getPersistenceManager().getBibliographicSet().getSelfReference()!=null
 			&& ((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()!=null) {
 			
+			serializeExpression(source, (MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference());
+		}
+	}
+	
+	public void serializeExpression(JSONObject source, MPublicationArticleReference reference) {
+		_domeo.getLogger().debug(this, "Serializing Expression");
+		
+		if(reference!=null) {			
 			boolean exists = false;
 			JSONObject expression = new JSONObject();
-			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getDoi()!=null) {
+			if(reference.getDoi()!=null) {
 				exists=true;
 				expression.put("http://prismstandard.org/namespaces/basic/2.0/doi", 
-						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getDoi()));
+						new JSONString(reference.getDoi()));
 			}
-			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedId()!=null) {
+			if(reference.getPubMedId()!=null) {
 				exists=true;
 				expression.put("http://purl.org/spar/fabio#hasPubMedId", 
-						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedId()));
+						new JSONString(reference.getPubMedId()));
 			}
-			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedCentralId()!=null) {
+			if(reference.getPubMedCentralId()!=null) {
 				exists=true;
 				expression.put("http://purl.org/spar/fabio#hasPubMedCentralId", 
-						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPubMedCentralId()));
+						new JSONString(reference.getPubMedCentralId()));
 			}
-			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPublisherItemId()!=null) {
+			if(reference.getPublisherItemId()!=null) {
 				exists=true;
 				expression.put("http://purl.org/spar/fabio#hasPII", 
-						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getPublisherItemId()));
+						new JSONString(reference.getPublisherItemId()));
 			}
 			
 			// Title 
-			if(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getTitle()!=null) {
+			if(reference.getTitle()!=null) {
 				exists=true;
 				expression.put("http://purl.org/dc/terms/title", 
-						new JSONString(((MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()).getTitle()));
+						new JSONString(reference.getTitle()));
 			}
 			
 			if(exists) {

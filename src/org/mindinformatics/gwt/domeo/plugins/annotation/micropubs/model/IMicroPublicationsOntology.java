@@ -28,6 +28,16 @@ public interface IMicroPublicationsOntology {
 	public final String Prefix = "micro-publications";
 	public final String NS = "mp:";
 	
-	public final String supportedBy = NS + "supportedBy";
-	public final String challengedBy = NS + "challengedBy";
+	public final String challengedBy = "challengedBy";
+	public final String supportedBy = "supportedBy";
+	
+	public final String mpReference = NS + "Reference";
+	
+	public final String mpArgues = NS + "argues";
+	public final String mpAsserts = NS + "asserts";
+	public final String mpCitation = NS + "citation";
+	public final String mpStatement = NS + "statement";
+	public final String mpSupportedBy = NS + "supportedBy";
+	public final String mpChallengedBy = NS + challengedBy;
+	public final String mpQualifiedBy = NS + "qualifiedBy";
 }

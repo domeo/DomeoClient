@@ -663,7 +663,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			MImageInDocumentSelector imgSelector = AnnotationFactory.createImageSelector(_domeo, _domeo.getAgentManager().getUserPerson(), _imageResource);
 			MMpDataImage imageData = new MMpDataImage(imgSelector);
 			
-			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), imageData, IMicroPublicationsOntology.supportedBy);
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), imageData, IMicroPublicationsOntology.mpSupportedBy);
 			evidence.add(suportedBy);	
 			hasChanged = true;
 			refreshSupport();
@@ -688,7 +688,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			MMpReference referenceData = new MMpReference();
 			referenceData.setReference(reference);
 			
-			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.mpSupportedBy);
 			
 			evidence.add(suportedBy);
 			hasChanged = true;
@@ -713,7 +713,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			MMpReference referenceData = new MMpReference();
 			referenceData.setReference((MPublicationArticleReference)referenceAnnotation.getReference());
 			
-			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.supportedBy);
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), referenceData, IMicroPublicationsOntology.mpSupportedBy);
 			
 			evidence.add(suportedBy);
 			hasChanged = true;
@@ -739,7 +739,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 		hp1.setWidth("100%");
 		hp1.setStyleName(style.indexWrapper());
 	
-		if(relationship.getName().equals(IMicroPublicationsOntology.supportedBy)) {
+		if(relationship.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) {
 			final Image supportedByIcon = new Image(localResources.supportedBy());
 			supportedByIcon.setTitle("Supported By");
 			supportedByIcon.setStyleName(style.link());
@@ -755,7 +755,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			});					
 			hp1.add(supportedByIcon);
 			hp1.setCellWidth(supportedByIcon, "22px");
-		} else if(relationship.getName().equals(IMicroPublicationsOntology.challengedBy)) {
+		} else if(relationship.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
 			final Image supportedByIcon = new Image(localResources.challengedBy());
 			supportedByIcon.setTitle("Supported By");
 			supportedByIcon.setStyleName(style.link());
@@ -804,7 +804,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 		hp1.setWidth("100%");
 		hp1.setStyleName(style.indexWrapper());
 	
-		if(relationship.getName().equals(IMicroPublicationsOntology.supportedBy)) {
+		if(relationship.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) {
 			final Image supportedByIcon = new Image(localResources.supportedBy());
 			supportedByIcon.setTitle("Supported By");
 			supportedByIcon.setStyleName(style.link());
@@ -820,7 +820,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			});					
 			hp1.add(supportedByIcon);
 			hp1.setCellWidth(supportedByIcon, "22px");
-		} else if(relationship.getName().equals(IMicroPublicationsOntology.challengedBy)) {
+		} else if(relationship.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
 			final Image supportedByIcon = new Image(localResources.challengedBy());
 			supportedByIcon.setTitle("Supported By");
 			supportedByIcon.setStyleName(style.link());
@@ -889,7 +889,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			//VerticalPanel actionsPanel = new VerticalPanel();
 			//actionsPanel.setHeight("100%");
 			
-			if(relationship.getName().equals(IMicroPublicationsOntology.supportedBy)) {
+			if(relationship.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) {
 				final Image supportedByIcon = new Image(localResources.supportedBy());
 				supportedByIcon.setTitle("Supported By");
 				supportedByIcon.setStyleName(style.link());
@@ -905,7 +905,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 				});					
 				main.add(supportedByIcon);
 				main.setCellWidth(supportedByIcon, "22px");
-			} else if(relationship.getName().equals(IMicroPublicationsOntology.challengedBy)) {
+			} else if(relationship.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
 				final Image supportedByIcon = new Image(localResources.challengedBy());
 				supportedByIcon.setTitle("Supported By");
 				supportedByIcon.setStyleName(style.link());
@@ -1067,7 +1067,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 		if(!existing) {
 			MMpQualifier qualifier = new MMpQualifier();
 			qualifier.setQualifier(term);
-			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), qualifier, IMicroPublicationsOntology.supportedBy);
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), qualifier, IMicroPublicationsOntology.mpSupportedBy);
 			qualifiers.add(suportedBy);
 			hasChanged = true;
 			refreshQualifiers();
@@ -1092,7 +1092,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 //		}
 		
 		if(!existing) {
-			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), reference.getMicroPublication().getArgues(), IMicroPublicationsOntology.supportedBy);
+			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), reference.getMicroPublication().getArgues(), IMicroPublicationsOntology.mpSupportedBy);
 			
 			evidence.add(suportedBy);
 			hasChanged = true;

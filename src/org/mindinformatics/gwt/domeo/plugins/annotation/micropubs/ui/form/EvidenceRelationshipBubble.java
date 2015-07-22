@@ -51,8 +51,8 @@ public class EvidenceRelationshipBubble extends PopupPanel {
 	
 //		Window.alert(evidence.getName());
 		
-		supportiveEvidenceRadioButton = new RadioButton(GROUP, IMicroPublicationsOntology.supportedBy);
-		if(evidence.getName().equals(IMicroPublicationsOntology.supportedBy)) {
+		supportiveEvidenceRadioButton = new RadioButton(GROUP, IMicroPublicationsOntology.mpSupportedBy);
+		if(evidence.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) {
 			supportiveEvidenceRadioButton.setValue(true);
 		}
 		supportiveEvidenceRadioButton.addClickHandler(new ClickHandler() {
@@ -61,13 +61,13 @@ public class EvidenceRelationshipBubble extends PopupPanel {
 				if(supportiveEvidenceRadioButton.getValue()) {
 					final MMpElement element = evidence.getObjectElement();
 					if(element instanceof MMpReference) {
-						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.supportedBy);
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.mpSupportedBy);
 						hide();
 					} else if(element instanceof MMpData) {
-						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.supportedBy);
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.mpSupportedBy);
 						hide();
 					} else if(element instanceof MMpStatement) {
-						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.supportedBy);
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.mpSupportedBy);
 						hide();
 					}
 				}			
@@ -77,8 +77,8 @@ public class EvidenceRelationshipBubble extends PopupPanel {
 		supportivePanel.add(new Image(resources.mpSupportiveIcon()));
 		supportivePanel.add(supportiveEvidenceRadioButton);
 		
-		inconsistentEvidenceRadioButton = new RadioButton(GROUP, IMicroPublicationsOntology.challengedBy);
-		if(evidence.getName().equals(IMicroPublicationsOntology.challengedBy)) {
+		inconsistentEvidenceRadioButton = new RadioButton(GROUP, IMicroPublicationsOntology.mpChallengedBy);
+		if(evidence.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
 			inconsistentEvidenceRadioButton.setValue(true);
 		}
 		inconsistentEvidenceRadioButton.addClickHandler(new ClickHandler() {
@@ -87,13 +87,13 @@ public class EvidenceRelationshipBubble extends PopupPanel {
 				if(inconsistentEvidenceRadioButton.getValue()) {
 					final MMpElement element = evidence.getObjectElement();
 					if(element instanceof MMpReference) {
-						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.challengedBy);
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.mpChallengedBy);
 						hide();
 					} else if(element instanceof MMpData) {
-						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.challengedBy);
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.mpChallengedBy);
 						hide();
 					} else if(element instanceof MMpStatement) {
-						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.challengedBy);
+						changeListener.updateEvidence(item, evidence, originalType, IMicroPublicationsOntology.mpChallengedBy);
 						hide();
 					}
 				}			

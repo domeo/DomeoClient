@@ -936,7 +936,7 @@ public class JsonUnmarshallingManager {
 											
 											MMpDataImage di = new MMpDataImage(s);
 											di.setId(dataImage.getId());
-											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.supportedBy);
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.mpSupportedBy);
 											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
 											rr.setId(rel.getId());
 											rr.setCreationDate(rel.getFormattedCreatedOn());
@@ -953,7 +953,7 @@ public class JsonUnmarshallingManager {
 											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
 											di.setId(statement.getId());
 											di.setSelector(sss);
-											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.supportedBy);
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.mpSupportedBy);
 											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
 											rr.setId(rel.getId());
 											rr.setCreationDate(rel.getFormattedCreatedOn());
@@ -978,7 +978,7 @@ public class JsonUnmarshallingManager {
 										MMpReference rrrr = new MMpReference();
 										rrrr.setReference(publicationReference);
 										
-										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.supportedBy);
+										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.mpSupportedBy);
 										rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
 										rr.setId(rel.getId());
 										rr.setCreationDate(rel.getFormattedCreatedOn());
@@ -1007,7 +1007,7 @@ public class JsonUnmarshallingManager {
 											
 											MMpDataImage di = new MMpDataImage(s);
 											di.setId(dataImage.getId());
-											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.challengedBy);
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.mpChallengedBy);
 											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
 											rr.setId(rel.getId());
 											rr.setCreationDate(rel.getFormattedCreatedOn());
@@ -1024,7 +1024,7 @@ public class JsonUnmarshallingManager {
 											MMpStatement di = MicroPublicationFactory.createMicroPublicationStatement();
 											di.setId(statement.getId());
 											di.setSelector(sss);
-											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.challengedBy);
+											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.mpChallengedBy);
 											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
 											rr.setId(rel.getId());
 											rr.setCreationDate(rel.getFormattedCreatedOn());
@@ -1049,7 +1049,7 @@ public class JsonUnmarshallingManager {
 										MMpReference rrrr = new MMpReference();
 										rrrr.setReference(publicationReference);
 										
-										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.supportedBy);
+										MMpRelationship rr = new MMpRelationship(rrrr, IMicroPublicationsOntology.mpSupportedBy);
 										rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
 										rr.setId(rel.getId());
 										rr.setCreationDate(rel.getFormattedCreatedOn());
@@ -1076,7 +1076,7 @@ public class JsonUnmarshallingManager {
 									q.setQualifier(ldr);
 	
 							
-									MMpRelationship rr = new MMpRelationship(q, IMicroPublicationsOntology.supportedBy);
+									MMpRelationship rr = new MMpRelationship(q, IMicroPublicationsOntology.mpSupportedBy);
 									rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
 									rr.setId(rel.getId());
 									rr.setCreationDate(rel.getFormattedCreatedOn());
