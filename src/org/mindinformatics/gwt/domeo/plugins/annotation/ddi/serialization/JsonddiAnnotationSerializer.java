@@ -104,7 +104,7 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 
 			// dose of drug 1
 
-			if (assertTypeStr.equals("increase-auc")) {
+			if (assertTypeStr.equals("DDI-clinical-trial")) {
 				MLinkedResource objectDose = ann.getObjectDose();
 				if (objectDose != null)
 					drug_entity1.put(DIKBD2R_PREFIX + "dose", new JSONString(
@@ -159,7 +159,7 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 					new JSONString(drug2.getDescription()));
 
 			// dose of drug 1
-			if (assertTypeStr.equals("increase-auc")) {
+			if (assertTypeStr.equals("DDI-clinical-trial")) {
 				MLinkedResource preciptDose = ann.getPreciptDose();
 				if (preciptDose != null) {
 					drug_entity2.put(DIKBD2R_PREFIX + "dose", new JSONString(
@@ -193,10 +193,10 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		drugs.set(index_drugs++, drug_entity2);
 
 		/*
-		 * increase AUC fields number of participants, increase Auc
+		 * DDI-clinical-trial fields 
 		 */
 
-		if (assertTypeStr.equals("increase-auc")) {
+		if (assertTypeStr.equals("DDI-clinical-trial")) {
 
 			MLinkedResource numOfParticipants = ann.getNumOfparcipitants();
 			if (numOfParticipants != null) {
@@ -209,6 +209,31 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 				pkddi.put(DIKBD2R_PREFIX + "auc", new JSONString(auc.getLabel()
 						.trim()));
 			}
+			
+			MLinkedResource objectRegimens = ann.getObjectRegimen();
+			if (objectRegimens != null) {
+				pkddi.put(DIKBD2R_PREFIX + "objectRegimens", new JSONString(
+						objectRegimens.getLabel().trim()));
+			}
+			
+			MLinkedResource preciptRegimens = ann.getPreciptRegimen();
+			if (preciptRegimens != null) {
+				pkddi.put(DIKBD2R_PREFIX + "preciptRegimens", new JSONString(
+						preciptRegimens.getLabel().trim()));
+			}
+			
+			MLinkedResource cmax = ann.getCmax();
+			if (cmax != null) {
+				pkddi.put(DIKBD2R_PREFIX + "cmax", new JSONString(
+						cmax.getLabel().trim()));
+			}
+			
+			MLinkedResource t12 = ann.getT12();
+			if (t12 != null) {
+				pkddi.put(DIKBD2R_PREFIX + "t12", new JSONString(
+						t12.getLabel().trim()));
+			}
+			
 		}
 
 		// drug participant in pk_ddi

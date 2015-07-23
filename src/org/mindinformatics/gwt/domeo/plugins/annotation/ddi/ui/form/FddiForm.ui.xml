@@ -436,14 +436,15 @@
 						<g:Label ui:field="doesregimensLabel1" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>
 						<g:ListBox ui:field="objectregimens" name="descript"
 							visibleItemCount='1' styleName='{style.listbox3}'>
-							<g:item value="0">SD</g:item>
-							<g:item value="1">QD</g:item>
-							<g:item value="2">BID</g:item>
-							<g:item value="3">TID</g:item>
-							<g:item value="4">QID</g:item>
-							<g:item value="5">Q12</g:item>
-							<g:item value="6">Q8</g:item>
-							<g:item value="7">Q6</g:item>
+							<g:item value="0"></g:item>
+							<g:item value="1">SD</g:item>
+							<g:item value="2">QD</g:item>
+							<g:item value="3">BID</g:item>
+							<g:item value="4">TID</g:item>
+							<g:item value="5">QID</g:item>
+							<g:item value="6">Q12</g:item>
+							<g:item value="7">Q8</g:item>
+							<g:item value="8">Q6</g:item>
 						</g:ListBox>
 						</g:HorizontalPanel>
 						
@@ -463,14 +464,15 @@
 						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>						
 						<g:ListBox ui:field="preciptregimens" name="descript"
 							visibleItemCount='1' styleName='{style.listbox3}'>
-							<g:item value="0">SD</g:item>
-							<g:item value="1">QD</g:item>
-							<g:item value="2">BID</g:item>
-							<g:item value="3">TID</g:item>
-							<g:item value="4">QID</g:item>
-							<g:item value="5">Q12</g:item>
-							<g:item value="6">Q8</g:item>
-							<g:item value="7">Q6</g:item>
+							<g:item value="0"></g:item>
+							<g:item value="1">SD</g:item>
+							<g:item value="2">QD</g:item>
+							<g:item value="3">BID</g:item>
+							<g:item value="4">TID</g:item>
+							<g:item value="5">QID</g:item>
+							<g:item value="6">Q12</g:item>
+							<g:item value="7">Q8</g:item>
+							<g:item value="8">Q6</g:item>
 						</g:ListBox>
 						</g:HorizontalPanel>
 					

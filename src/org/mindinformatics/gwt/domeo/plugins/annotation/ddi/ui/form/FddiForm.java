@@ -111,23 +111,23 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	// modality
 	@UiField
 	RadioButton modalitypt, modalitynt;
-	@UiField
-	TextArea comment;
 
 	@UiField
 	Label commentlabel;
 
 	// assertion type
 	@UiField
-	ListBox assertType;
+	ListBox assertType, objectregimens, preciptregimens;
 
 	// evidence modality
 	@UiField
 	RadioButton evidenceSpt, evidenceAgt;
 
-	// AUC fields
+	// clinical trail fields
 	@UiField
-	TextArea numParticipt, objectDose, preciptDose, auc;
+	TextArea numParticipt, objectDose, preciptDose, auc, comment, cmax, t12;
+
+	String[] regimensL = { "SD", "QD", "BID", "TID", "QID", "Q12", "Q8", "Q6" };
 
 	// drug 1 and drug 2
 
@@ -140,8 +140,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 			if (Mddi.getDrugEntities().containsKey(drug1Str.toLowerCase())) {
 				drug1Uri = "http://purl.bioontology.org/ontology/RXNORM/"
-						+ Mddi.getDrugEntities().get(drug1Str.toLowerCase())
-								.getRxcui();
+						+ Mddi.getDrugEntities().get(drug1Str.toLowerCase()).getRxcui();
 			} else
 				drug1Uri = RXNORM_PREFIX;
 
@@ -162,8 +161,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 			if (Mddi.getDrugEntities().containsKey(drug2Str.toLowerCase())) {
 				drug2Uri = "http://purl.bioontology.org/ontology/RXNORM/"
-						+ Mddi.getDrugEntities().get(drug2Str.toLowerCase())
-								.getRxcui();
+						+ Mddi.getDrugEntities().get(drug2Str.toLowerCase()).getRxcui();
 			} else
 				drug2Uri = RXNORM_PREFIX;
 
@@ -179,17 +177,13 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getRoleOfDrug1() {
 
 		if (roleob1.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX
-							+ "object-drug-of-interaction",
-							"object-drug-of-interaction",
-							"Referred to the role that each drug one plays within the interaction.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "object-drug-of-interaction",
+					"object-drug-of-interaction",
+					"Referred to the role that each drug one plays within the interaction.");
 		} else if (rolepp1.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX
-							+ "precipitant-drug-of-interaction",
-							"precipitant-drug-of-interaction",
-							"Referred to the role that each drug one plays within the interaction.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "precipitant-drug-of-interaction",
+					"precipitant-drug-of-interaction",
+					"Referred to the role that each drug one plays within the interaction.");
 		}
 
 		return null;
@@ -198,17 +192,13 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getRoleOfDrug2() {
 
 		if (roleob2.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX
-							+ "object-drug-of-interaction",
-							"object-drug-of-interaction",
-							"Referred to the role that each drug two plays within the interaction.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "object-drug-of-interaction",
+					"object-drug-of-interaction",
+					"Referred to the role that each drug two plays within the interaction.");
 		} else if (rolepp2.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX
-							+ "precipitant-drug-of-interaction",
-							"precipitant-drug-of-interaction",
-							"Referred to the role that each drug two plays within the interaction.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "precipitant-drug-of-interaction",
+					"precipitant-drug-of-interaction",
+					"Referred to the role that each drug two plays within the interaction.");
 		}
 		return null;
 	}
@@ -218,25 +208,17 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getTypeOfDrug1() {
 
 		if (typeai1.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient",
-							"active-ingredient",
-							"Referred to the type of the mention within the sentence for drug.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient", "active-ingredient",
+					"Referred to the type of the mention within the sentence for drug.");
 		} else if (typemb1.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "metabolite",
-							"metabolite",
-							"Referred to the type of the mention within the sentence for drug.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "metabolite", "metabolite",
+					"Referred to the type of the mention within the sentence for drug.");
 		} else if (typedp1.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
-							"drug-product",
-							"Referred to the type of the mention within the sentence for drug.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "drug-product", "drug-product",
+					"Referred to the type of the mention within the sentence for drug.");
 		} else if (typedg1.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "drug-group",
-							"drug-group",
-							"Referred to the type of the mention within the sentence for drug.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "drug-group", "drug-group",
+					"Referred to the type of the mention within the sentence for drug.");
 		}
 
 		return null;
@@ -245,25 +227,17 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getTypeOfDrug2() {
 
 		if (typeai2.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient",
-							"active-ingredient",
-							"Referred to the type of the mention within the sentence for drug two.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "active-ingredient", "active-ingredient",
+					"Referred to the type of the mention within the sentence for drug two.");
 		} else if (typemb2.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "metabolite",
-							"metabolite",
-							"Referred to the type of the mention within the sentence for drug two.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "metabolite", "metabolite",
+					"Referred to the type of the mention within the sentence for drug two.");
 		} else if (typedp2.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "drug-product",
-							"drug-product",
-							"Referred to the type of the mention within the sentence for drug two.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "drug-product", "drug-product",
+					"Referred to the type of the mention within the sentence for drug two.");
 		} else if (typedg2.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(DIKBD2R_PREFIX + "drug-group",
-							"drug-group",
-							"Referred to the type of the mention within the sentence for drug.");
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "drug-group", "drug-group",
+					"Referred to the type of the mention within the sentence for drug.");
 		}
 		return null;
 	}
@@ -272,12 +246,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 	public MLinkedResource getStatement() {
 		if (assertType.getSelectedIndex() == 1) {
-			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
-					+ "quantitative", "quantitative",
+			return ResourcesFactory.createLinkedResource(NCIT_PREFIX + "quantitative", "quantitative",
 					"Referred to data type that is described in the sentence.");
 		} else if (assertType.getSelectedIndex() == 0) {
-			return ResourcesFactory.createLinkedResource(NCIT_PREFIX
-					+ "qualitative", "Qualitative",
+			return ResourcesFactory.createLinkedResource(NCIT_PREFIX + "qualitative", "Qualitative",
 					"Referred to data type that is described in the sentence.");
 		} else
 			return null;
@@ -288,19 +260,13 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getModality() {
 
 		if (modalitypt.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(
-							SIO_PREFIX + "positive",
-							"positive",
-							"Referred to extra sources of information that the annotator considers "
-									+ "are helpful to provide evidence for or against the existence of the pDDI.");
+			return ResourcesFactory.createLinkedResource(SIO_PREFIX + "positive", "positive",
+					"Referred to extra sources of information that the annotator considers "
+							+ "are helpful to provide evidence for or against the existence of the pDDI.");
 		} else if (modalitynt.getValue()) {
-			return ResourcesFactory
-					.createLinkedResource(
-							SIO_PREFIX + "negative",
-							"negative",
-							"Referred to extra sources of information that the annotator considers "
-									+ "are helpful to provide evidence for or against the existence of the pDDI.");
+			return ResourcesFactory.createLinkedResource(SIO_PREFIX + "negative", "negative",
+					"Referred to extra sources of information that the annotator considers "
+							+ "are helpful to provide evidence for or against the existence of the pDDI.");
 		}
 
 		return null;
@@ -312,8 +278,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getNumOfParticipants() {
 
 		if (!numParticipt.getText().trim().isEmpty()) {
-			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
-					+ "numOfParticipants", numParticipt.getText(),
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "numOfParticipants", numParticipt.getText(),
 					"The number of participants involved in interaction");
 		} else
 			return null;
@@ -322,8 +287,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getObjectDose() {
 
 		if (!objectDose.getText().trim().isEmpty()) {
-			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
-					+ "objectDose", objectDose.getText(),
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "objectDose", objectDose.getText(),
 					"The dose of object drug in interation");
 		} else
 			return null;
@@ -332,8 +296,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getPreciptDose() {
 
 		if (!preciptDose.getText().trim().isEmpty()) {
-			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
-					+ "preciptDose", preciptDose.getText(),
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "preciptDose", preciptDose.getText(),
 					"The dose of preciptant drug in interation");
 		} else
 			return null;
@@ -342,22 +305,63 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getAuc() {
 
 		if (!auc.getText().trim().isEmpty()) {
-			return ResourcesFactory.createLinkedResource(
-					DIKBD2R_PREFIX + "auc", auc.getText(),
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "auc", auc.getText(),
 					"The maximum increasing Auc in interation");
 		} else
 			return null;
 	}
 
+	public MLinkedResource getCmax() {
+
+		if (!cmax.getText().trim().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "cmax", cmax.getText(),
+					"Cmax in clinical trail");
+		} else
+			return null;
+	}
+
+	public MLinkedResource getT12() {
+
+		if (!t12.getText().trim().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "t12", t12.getText(),
+					"T1/2 in clinical trail");
+		} else
+			return null;
+	}
+
+	public MLinkedResource getObjectRegimens() {
+
+		int indexRegimen = objectregimens.getSelectedIndex();
+
+		if (indexRegimen != 0) {
+			String drugStr = objectregimens.getItemText(indexRegimen);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "objectRegimens", drugStr,
+					"Referred to the drug in the interaction.");
+		}
+		return null;
+	}
+
+	public MLinkedResource getPreciptRegimens() {
+
+		int indexRegimen = preciptregimens.getSelectedIndex();
+
+		if (indexRegimen != 0) {
+			String drugStr = preciptregimens.getItemText(indexRegimen);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "preciptRegimens", drugStr,
+					"Referred to the drug in the interaction.");
+		}
+		return null;
+	}
+
 	public MLinkedResource getEvidenceType() {
 
 		if (evidenceSpt.getValue()) {
-			return ResourcesFactory.createLinkedResource(
-					MP_PREFIX + "supports", "evidence-supports",
+			return ResourcesFactory.createLinkedResource(MP_PREFIX + "supports", "evidence-supports",
 					"evidence that supports drug-drug interaction assertion");
 		} else if (evidenceAgt.getValue()) {
-			return ResourcesFactory.createLinkedResource(MP_PREFIX
-					+ "challenges", "evidence-challenges",
+			return ResourcesFactory.createLinkedResource(MP_PREFIX + "challenges", "evidence-challenges",
 					"evidence that challenges drug-drug interaction assertion");
 		}
 		return null;
@@ -366,23 +370,23 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	public MLinkedResource getAssertType() {
 
 		if (assertType.getSelectedIndex() == 0) {
-			return ResourcesFactory.createLinkedResource(MP_PREFIX
-					+ "drug-drug-interaction", "drug-drug-interaction",
+			return ResourcesFactory.createLinkedResource(MP_PREFIX + "drug-drug-interaction", "drug-drug-interaction",
 					"Drug drug interaction annotation");
 		} else if (assertType.getSelectedIndex() == 1) {
-			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
-					+ "EV_CT_DDI", "DDI-clinical-trial",
-					"A study designed to quantify the pharmacokinetic and/or pharmacodynamic effects " +
-					"within study participants of a single drug in the presence of a purported precipitant.");
-		} else if (assertType.getSelectedIndex() == 2) {
-			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
-					+ "CMAX", "cmax",
-					"cmax description");
-		} else if (assertType.getSelectedIndex() == 3) {
-			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
-					+ "T12", "t12",
-					"t12 description");
-		} else
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "EV_CT_DDI", "DDI-clinical-trial",
+					"A study designed to quantify the pharmacokinetic and/or pharmacodynamic effects "
+							+ "within study participants of a single drug in the presence of a purported precipitant.");
+		}
+		// else if (assertType.getSelectedIndex() == 2) {
+		// return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+		// + "CMAX", "cmax",
+		// "cmax description");
+		// } else if (assertType.getSelectedIndex() == 3) {
+		// return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX
+		// + "T12", "t12",
+		// "t12 description");
+		// }
+		else
 			return null;
 
 	}
@@ -430,8 +434,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		// switch assertion mode ddi/increase Auc
 		switchAssertType();
 
-		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources
-				.generalCss().applyButton());
+		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
 		yesButton.setWidth("78px");
 		yesButton.setHeight("22px");
 		yesButton.setResource(Domeo.resources.acceptLittleIcon());
@@ -446,100 +449,69 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				if (isContentInvalid())
 					return;
 
-				_domeo.getLogger().debug(this,
-						"ddi annotation content validated");
+				_domeo.getLogger().debug(this, "ddi annotation content validated");
 
 				try {
 					if (_item == null) {
 						_domeo.getLogger().debug(this, "_item is null...");
 
 						if (_manager instanceof TextAnnotationFormsPanel) {
-							MTextQuoteSelector selector = AnnotationFactory
-									.createPrefixSuffixTextSelector(
-											_domeo.getAgentManager()
-													.getUserPerson(),
-											_domeo.getPersistenceManager()
-													.getCurrentResource(),
-											((TextAnnotationFormsPanel) _manager)
-													.getHighlight().getExact(),
-											((TextAnnotationFormsPanel) _manager)
-													.getHighlight().getPrefix(),
-											((TextAnnotationFormsPanel) _manager)
-													.getHighlight().getSuffix());
+							MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(
+									_domeo.getAgentManager().getUserPerson(),
+									_domeo.getPersistenceManager().getCurrentResource(),
+									((TextAnnotationFormsPanel) _manager).getHighlight().getExact(),
+									((TextAnnotationFormsPanel) _manager).getHighlight().getPrefix(),
+									((TextAnnotationFormsPanel) _manager).getHighlight().getSuffix());
 
-							_domeo.getLogger().debug(this,
-									"quote selector initialized");
+							_domeo.getLogger().debug(this, "quote selector initialized");
 
 							// TODO Register coordinate of the selection.
-							MddiAnnotation annotation = ddiFactory
-									.createddiAnnotation(
-											((AnnotationPersistenceManager) _domeo
-													.getPersistenceManager())
-													.getCurrentSet(), _domeo
-													.getAgentManager()
-													.getUserPerson(), _domeo
-													.getAgentManager()
-													.getSoftware(), _manager
-													.getResource(), selector);
+							MddiAnnotation annotation = ddiFactory.createddiAnnotation(
+									((AnnotationPersistenceManager) _domeo.getPersistenceManager()).getCurrentSet(),
+									_domeo.getAgentManager().getUserPerson(), _domeo.getAgentManager().getSoftware(),
+									_manager.getResource(), selector);
 
-							_domeo.getLogger().debug(this,
-									"ddi annotation factory initialized");
+							_domeo.getLogger().debug(this, "ddi annotation factory initialized");
 
 							MddiUsage ddiUsage = ddiFactory.createddiUsage();
 
 							ddiUsage.setRole1(getRoleOfDrug1());
-							_domeo.getLogger().debug(this, "DDI annotation 1");
 							ddiUsage.setRole2(getRoleOfDrug2());
-							_domeo.getLogger().debug(this, "DDI annotation 2");
 							ddiUsage.setType1(getTypeOfDrug1());
-							_domeo.getLogger().debug(this, "DDI annotation 3");
 							ddiUsage.setType2(getTypeOfDrug2());
-							_domeo.getLogger().debug(this, "DDI annotation 4");
 							ddiUsage.setStatement(getStatement());
-							_domeo.getLogger().debug(this, "DDI annotation 5");
 							ddiUsage.setModality(getModality());
-							_domeo.getLogger().debug(this, "DDI annotation 6");
 							ddiUsage.setDrug1(getDrug1());
-							_domeo.getLogger().debug(this, "DDI annotation 7");
 							ddiUsage.setDrug2(getDrug2());
-							_domeo.getLogger().debug(this, "DDI annotation 8");
 							ddiUsage.setNumOfparcipitants(getNumOfParticipants());
-							_domeo.getLogger().debug(this, "DDI annotation 9");
 							ddiUsage.setPreciptDose(getPreciptDose());
-							_domeo.getLogger().debug(this, "DDI annotation 10");
 							ddiUsage.setObjectDose(getObjectDose());
-							_domeo.getLogger().debug(this, "DDI annotation 11");
 							ddiUsage.setIncreaseAuc(getAuc());
-							_domeo.getLogger().debug(this, "DDI annotation 12");
 							ddiUsage.setEvidenceType(getEvidenceType());
-							_domeo.getLogger().debug(this, "DDI annotation 13");
 							ddiUsage.setAssertType(getAssertType());
-							_domeo.getLogger().debug(this, "DDI annotation 14");
-							
-							System.out.println("set comment:" + comment.getText().trim());
+							ddiUsage.setCmax(getCmax());
+							ddiUsage.setT12(getT12());
+							ddiUsage.setObjectRegimen(getObjectRegimens());
+							ddiUsage.setPreciptRegimen(getPreciptRegimens());
+
+							_domeo.getLogger().debug(this, "DDI annotation done");
+
 							ddiUsage.setComment(comment.getText().trim());
 							annotation.setMpDDIUsage(ddiUsage);
-						
 
 							_domeo.getLogger().debug(this, "annotation loaded");
 
 							if (getSelectedSet(annotationSet) == null) {
 
-								_domeo.getAnnotationPersistenceManager()
-										.addAnnotation(annotation, true);
+								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation, true);
 							} else {
 
-								_domeo.getAnnotationPersistenceManager()
-										.addAnnotation(annotation,
-												getSelectedSet(annotationSet));
+								_domeo.getAnnotationPersistenceManager().addAnnotation(annotation,
+										getSelectedSet(annotationSet));
 							}
 
-							_domeo.getContentPanel()
-									.getAnnotationFrameWrapper()
-									.performAnnotation(
-											annotation,
-											((TextAnnotationFormsPanel) _manager)
-													.getHighlight());
+							_domeo.getContentPanel().getAnnotationFrameWrapper().performAnnotation(annotation,
+									((TextAnnotationFormsPanel) _manager).getHighlight());
 
 							_manager.hideContainer();
 
@@ -549,8 +521,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 						_manager.hideContainer();
 					}
 				} catch (Exception e) {
-					logger.log(Level.WARNING,
-							"throwing exception " + e.getMessage());
+					logger.log(Level.WARNING, "throwing exception " + e.getMessage());
 					_domeo.getLogger().exception(this, e.getMessage());
 				}
 			}
@@ -568,8 +539,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	// ------------------------
 	// EDITING OF ANNOTATION
 	// ------------------------
-	public FddiForm(IDomeo domeo, final AFormsManager manager,
-			final MddiAnnotation annotation) {
+	public FddiForm(IDomeo domeo, final AFormsManager manager, final MddiAnnotation annotation) {
 		super(domeo);
 		_manager = manager;
 		_item = annotation;
@@ -585,28 +555,14 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 			if (_item.getAssertType() != null) {
 
-				System.out.println("Assertion type:"
-						+ _item.getAssertType().getLabel());
+				System.out.println("Assertion type:" + _item.getAssertType().getLabel());
 
-				if (_item.getAssertType().getLabel().trim()
-						.equals("drug-drug-interaction")) {
+				if (_item.getAssertType().getLabel().trim().equals("drug-drug-interaction")) {
 					assertType.setSelectedIndex(0);
-				}
-				else if (_item.getAssertType().getLabel().trim()
-						.equals("DDI-clinical-trial")) {
+				} else if (_item.getAssertType().getLabel().trim().equals("DDI-clinical-trial")) {
 					assertType.setSelectedIndex(1);
 					rightColumn.setVisible(true);
-				} 
-				else if (_item.getAssertType().getLabel().trim()
-						.equals("cmax")) {
-					assertType.setSelectedIndex(2);
-					rightColumn.setVisible(true);
-				} 
-				else if (_item.getAssertType().getLabel().trim()
-						.equals("t12")) {
-					assertType.setSelectedIndex(3);
-					rightColumn.setVisible(true);
-				} 
+				}
 
 			} else
 				assertType.setSelectedIndex(0);
@@ -616,21 +572,17 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 			// check selections of drug role
 			if (_item.getRole1() != null) {
-				if (_item.getRole1().getLabel()
-						.equals("object-drug-of-interaction")) {
+				if (_item.getRole1().getLabel().equals("object-drug-of-interaction")) {
 					roleob1.setValue(true);
-				} else if (_item.getRole1().getLabel()
-						.equals("precipitant-drug-of-interaction")) {
+				} else if (_item.getRole1().getLabel().equals("precipitant-drug-of-interaction")) {
 					rolepp1.setValue(true);
 				}
 			}
 
 			if (_item.getRole2() != null) {
-				if (_item.getRole2().getLabel()
-						.equals("object-drug-of-interaction")) {
+				if (_item.getRole2().getLabel().equals("object-drug-of-interaction")) {
 					roleob2.setValue(true);
-				} else if (_item.getRole2().getLabel()
-						.equals("precipitant-drug-of-interaction")) {
+				} else if (_item.getRole2().getLabel().equals("precipitant-drug-of-interaction")) {
 					rolepp2.setValue(true);
 				}
 			}
@@ -661,7 +613,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			}
 
 			// check comment
-			System.out.println("comment in editing: "+_item.getComment());
+			// System.out.println("comment in editing: " + _item.getComment());
 			if (_item.getComment() != null && !_item.getComment().isEmpty()) {
 				comment.setText(_item.getComment());
 
@@ -685,10 +637,6 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 					int numberOfOcc = drugList.get(i).getNum();
 					String drugName = drugList.get(i).getDrugname();
-
-					// System.out.println("drugList- name:" + drugName +
-					// "| num:"
-					// + numberOfOcc);
 
 					for (int j = 0; j < numberOfOcc; j++) {
 						drug1.addItem(drugName);
@@ -735,6 +683,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				numParticipt.setText(_item.getNumOfparcipitants().getLabel());
 			}
 
+			if (_item.getIncreaseAuc() != null) {
+				auc.setText(_item.getIncreaseAuc().getLabel());
+			}
+
 			if (_item.getObjectDose() != null) {
 				objectDose.setText(_item.getObjectDose().getLabel());
 			}
@@ -743,16 +695,46 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				preciptDose.setText(_item.getPreciptDose().getLabel());
 			}
 
-			if (_item.getIncreaseAuc() != null) {
-				auc.setText(_item.getIncreaseAuc().getLabel());
+			if (_item.getPreciptDose() != null) {
+				preciptDose.setText(_item.getPreciptDose().getLabel());
+			}
+
+			if (_item.getObjectRegimen() != null) {
+				if (_item.getObjectRegimen().getLabel().equals("")) {
+					objectregimens.setSelectedIndex(0);
+				}
+				String objectregimensStr = _item.getObjectRegimen().getLabel();
+				for (int i = 0; i < regimensL.length; i++) {
+					if (regimensL[i].equals(objectregimensStr)) {
+						objectregimens.setSelectedIndex(i + 1);
+					}
+				}
+			}
+
+			if (_item.getPreciptRegimen() != null) {
+				if (_item.getPreciptRegimen().getLabel().equals("")) {
+					preciptregimens.setSelectedIndex(0);
+				}
+				String preciptregimensStr = _item.getPreciptRegimen().getLabel();
+				for (int i = 0; i < regimensL.length; i++) {
+					if (regimensL[i].equals(preciptregimensStr)) {
+						preciptregimens.setSelectedIndex(i + 1);
+					}
+				}
+			}
+
+			if (_item.getCmax() != null) {
+				cmax.setText(_item.getCmax().getLabel());
+			}
+
+			if (_item.getT12() != null) {
+				t12.setText(_item.getT12().getLabel());
 			}
 
 			if (_item.getEvidenceType() != null) {
-				if (_item.getEvidenceType().getLabel()
-						.equals("evidence-supports")) {
+				if (_item.getEvidenceType().getLabel().equals("evidence-supports")) {
 					evidenceSpt.setValue(true);
-				} else if (_item.getEvidenceType().getLabel()
-						.equals("evidence-challenges")) {
+				} else if (_item.getEvidenceType().getLabel().equals("evidence-challenges")) {
 					evidenceAgt.setValue(true);
 				}
 			}
@@ -763,22 +745,18 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			// automatically select another role when user chosen one of role
 			autoSelectAnotherRole();
 
-			// System.out.println("highlight drug mentions and select type in EDIT..........");
+			// System.out.println("highlight drug mentions and select type in
+			// EDIT..........");
 
 		} catch (Exception e) {
-			_domeo.getLogger().exception(
-					AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION,
-					this,
-					"Failed to display current annotation "
-							+ annotation.getLocalId());
-			displayDialog(
-					"Failed to properly display existing annotation "
-							+ e.getMessage(), true);
+			e.printStackTrace();
+			_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this,
+					"Failed to display current annotation " + annotation.getLocalId());
+			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
 		}
 
 		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
-		sameVersionButton.setStyleName(Domeo.resources.generalCss()
-				.applyButton());
+		sameVersionButton.setStyleName(Domeo.resources.generalCss().applyButton());
 		sameVersionButton.setWidth("78px");
 		sameVersionButton.setHeight("22px");
 		sameVersionButton.setResource(Domeo.resources.acceptLittleIcon());
@@ -798,17 +776,12 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 					}
 
-					MTextQuoteSelector selector = AnnotationFactory
-							.createPrefixSuffixTextSelector(_domeo
-									.getAgentManager().getUserPerson(), _domeo
-									.getPersistenceManager()
-									.getCurrentResource(),
-									((TextAnnotationFormsPanel) _manager)
-											.getHighlight().getExact(),
-									((TextAnnotationFormsPanel) _manager)
-											.getHighlight().getPrefix(),
-									((TextAnnotationFormsPanel) _manager)
-											.getHighlight().getSuffix());
+					MTextQuoteSelector selector = AnnotationFactory.createPrefixSuffixTextSelector(
+							_domeo.getAgentManager().getUserPerson(),
+							_domeo.getPersistenceManager().getCurrentResource(),
+							((TextAnnotationFormsPanel) _manager).getHighlight().getExact(),
+							((TextAnnotationFormsPanel) _manager).getHighlight().getPrefix(),
+							((TextAnnotationFormsPanel) _manager).getHighlight().getSuffix());
 
 					_item.setAssertType(getAssertType());
 					_item.setDrug1(getDrug1());
@@ -824,27 +797,23 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					_item.setObjectDose(getObjectDose());
 					_item.setPreciptDose(getPreciptDose());
 					_item.setIncreaseAuc(getAuc());
+					_item.setObjectRegimen(getObjectRegimens());
+					_item.setPreciptRegimen(getPreciptRegimens());
+					_item.setCmax(getCmax());
+					_item.setT12(getT12());
 					_item.setEvidenceType(getEvidenceType());
 					_item.setComment(comment.getText());
 
 					_item.getMpDDIUsage().setMpDDI(currentMpDDI);
 
-					_domeo.getContentPanel()
-							.getAnnotationFrameWrapper()
-							.updateAnnotation(_item,
-									getSelectedSet(annotationSet));
+					_domeo.getContentPanel().getAnnotationFrameWrapper().updateAnnotation(_item,
+							getSelectedSet(annotationSet));
 
 					_manager.hideContainer();
 				} catch (Exception e) {
-					_domeo.getLogger()
-							.exception(
-									AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION,
-									this,
-									"Failed to apply modified anntoation "
-											+ annotation.getLocalId());
-					displayDialog(
-							"Failed to apply modified annotation "
-									+ e.getMessage(), true);
+					_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this,
+							"Failed to apply modified anntoation " + annotation.getLocalId());
+					displayDialog("Failed to apply modified annotation " + e.getMessage(), true);
 				}
 			}
 		});
@@ -898,15 +867,13 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	 */
 	public List<DrugInText> getNERToDrugs() {
 
-		ArrayList<MAnnotation> annotations = _domeo.getPersistenceManager()
-				.getAllAnnotations();
+		ArrayList<MAnnotation> annotations = _domeo.getPersistenceManager().getAllAnnotations();
 
 		Set<String> checked = new HashSet<String>();
 		List<DrugInText> drugInListBox = new ArrayList<DrugInText>();
 
 		// get expert study selected text
-		HighlightedTextBuffer eselector = ((TextAnnotationFormsPanel) _manager)
-				.getHighlight();
+		HighlightedTextBuffer eselector = ((TextAnnotationFormsPanel) _manager).getHighlight();
 		String sentence = eselector.getExact();
 
 		// filter ao:highlight
@@ -918,8 +885,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 					MHighlightAnnotation highlight = (MHighlightAnnotation) ann;
 
-					MTextQuoteSelector hselector = (MTextQuoteSelector) highlight
-							.getSelector();
+					MTextQuoteSelector hselector = (MTextQuoteSelector) highlight.getSelector();
 
 					String drug = hselector.getExact();
 
@@ -934,23 +900,17 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 						boolean isIncompleteHighlight = false;
 						int index1 = sentence.indexOf(drug);
-						if (index1 != 0
-								&& (index1 + drug.length() < sentence.length())) {
+						if (index1 != 0 && (index1 + drug.length() < sentence.length())) {
 
-							isIncompleteHighlight = Character.isLetter(sentence
-									.charAt(index1 - 1))
-									|| Character.isLetter(sentence
-											.charAt(index1 + drug.length()));
+							isIncompleteHighlight = Character.isLetter(sentence.charAt(index1 - 1))
+									|| Character.isLetter(sentence.charAt(index1 + drug.length()));
 
-						} else if (index1 == 0
-								&& index1 + drug.length() < sentence.length()) {
+						} else if (index1 == 0 && index1 + drug.length() < sentence.length()) {
 
-							isIncompleteHighlight = !(sentence.charAt(index1
-									+ drug.length()) == ' ');
+							isIncompleteHighlight = !(sentence.charAt(index1 + drug.length()) == ' ');
 
 						} else if (index1 + drug.length() == sentence.length()) {
-							isIncompleteHighlight = !(sentence
-									.charAt(index1 - 1) == ' ');
+							isIncompleteHighlight = !(sentence.charAt(index1 - 1) == ' ');
 						}
 
 						if (!checked.contains(drug) && !isIncompleteHighlight) {
@@ -1016,8 +976,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 		if (index >= 0) {
 			num++;
-			num = countOcurrencesInStr(s, str.substring(index + s.length()),
-					num);
+			num = countOcurrencesInStr(s, str.substring(index + s.length()), num);
 		}
 
 		return num;
@@ -1107,53 +1066,39 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		if (e != null) {
 			String html = e.getInnerHTML();
 
-			finalHtml = html.replaceAll(
-					"<span style=\"background-color: #FFFF00\">", "")
-					.replaceAll("</span>", "");
+			finalHtml = html.replaceAll("<span style=\"background-color: #FFFF00\">", "").replaceAll("</span>", "");
 			// System.out.println("html: " + finalHtml);
 
 			int selected1 = drugone.getSelectedIndex();
 			String currentDrug1 = drugone.getItemText(selected1);
 
-			if (finalHtml.contains(currentDrug1) && currentDrug1 != null
-					&& !currentDrug1.trim().equals("")) {
+			if (finalHtml.contains(currentDrug1) && currentDrug1 != null && !currentDrug1.trim().equals("")) {
 
-				int currentMatch1 = getCurrentDrugMatch(finalHtml,
-						currentDrug1, drugone);
+				int currentMatch1 = getCurrentDrugMatch(finalHtml, currentDrug1, drugone);
 
 				// System.out.println("match: " + currentDrug1 + " | at: "
 				// + currentMatch1);
 
-				finalHtml = finalHtml.substring(0, currentMatch1)
-						+ "<span style=\"background-color: #FFFF00\">"
-						+ currentDrug1
-						+ "</span>"
-						+ finalHtml.substring(currentMatch1
-								+ currentDrug1.length());
+				finalHtml = finalHtml.substring(0, currentMatch1) + "<span style=\"background-color: #FFFF00\">"
+						+ currentDrug1 + "</span>" + finalHtml.substring(currentMatch1 + currentDrug1.length());
 
 				int selected2 = drugtwo.getSelectedIndex();
 				String currentDrug2 = drugtwo.getItemText(selected2);
 
 				// System.out.println("post html: " + finalHtml);
 
-				if ((currentDrug2 != null && !currentDrug2.trim().equals(""))
-						&& finalHtml.contains(currentDrug2)) {
+				if ((currentDrug2 != null && !currentDrug2.trim().equals("")) && finalHtml.contains(currentDrug2)) {
 
-					int currentMatch2 = getCurrentDrugMatch(finalHtml,
-							currentDrug2, drugtwo);
+					int currentMatch2 = getCurrentDrugMatch(finalHtml, currentDrug2, drugtwo);
 
 					// System.out.println("match: " + currentDrug2 + " | at: "
 					// + currentMatch2 + " | len: " + finalHtml.length());
 
-					finalHtml = finalHtml.substring(0, currentMatch2)
-							+ "<span style='background-color: #FFFF00'>"
-							+ currentDrug2
-							+ "</span>"
-							+ finalHtml.substring(currentMatch2
-									+ currentDrug2.length());
+					finalHtml = finalHtml.substring(0, currentMatch2) + "<span style='background-color: #FFFF00'>"
+							+ currentDrug2 + "</span>" + finalHtml.substring(currentMatch2 + currentDrug2.length());
 				}
 
-				System.out.println("final html: " + finalHtml);
+				//System.out.println("final html: " + finalHtml);
 
 				e.setInnerHTML(finalHtml);
 			}
@@ -1174,9 +1119,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		if (e != null) {
 			String html = e.getInnerHTML();
 
-			finalHtml = html.replaceAll(
-					"<span style=\"background-color: #FFFF00\">", "")
-					.replaceAll("</span>", "");
+			finalHtml = html.replaceAll("<span style=\"background-color: #FFFF00\">", "").replaceAll("</span>", "");
 			// System.out.println("html: " + finalHtml);
 
 			e.setInnerHTML(finalHtml);
@@ -1207,8 +1150,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		int currentMatch = html.indexOf(currentDrug);
 		while (currentMatch >= 0 && occurrences >= 1) {
 			// System.out.println(occurrences + "|" + currentMatch);
-			currentMatch = html.indexOf(currentDrug,
-					currentMatch + currentDrug.length());
+			currentMatch = html.indexOf(currentDrug, currentMatch + currentDrug.length());
 			occurrences--;
 		}
 
@@ -1227,8 +1169,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			String drugExact = drug.getItemText(selectedIndex).toLowerCase();
 
 			if (Mddi.getDrugEntities().containsKey(drugExact)) {
-				String drugType = Mddi.getDrugEntities().get(drugExact)
-						.getType();
+				String drugType = Mddi.getDrugEntities().get(drugExact).getType();
 				preselectDrugTypeHelper(drugType, whichDrug);
 				// System.out.println("preselect type for drug "+whichDrug +
 				// " as " + drugType);
@@ -1260,7 +1201,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	}
 
 	/*
-	 * drug 1, drug 2 are required fields
+	 * required fields
 	 */
 	public boolean validatesRequiredFields() {
 		ArrayList<String> requireds = new ArrayList<String>();
@@ -1270,12 +1211,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		if (drug2.getSelectedIndex() == 0)
 			requireds.add("Drug 2");
 
-		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue() || typedg1
-				.getValue())) {
+		if (!(typeai1.getValue() || typemb1.getValue() || typedp1.getValue() || typedg1.getValue())) {
 			requireds.add("Drug 1 type");
 		}
-		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue() || typedg2
-				.getValue())) {
+		if (!(typeai2.getValue() || typemb2.getValue() || typedp2.getValue() || typedg2.getValue())) {
 			requireds.add("Drug 2 type");
 		}
 		if (!(rolepp1.getValue() || roleob1.getValue())) {
@@ -1313,6 +1252,18 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				requireds.add("Auc");
 			}
 
+			if (cmax.getValue().trim().isEmpty()) {
+				requireds.add("Cmax");
+			}
+			if (t12.getValue().trim().isEmpty()) {
+				requireds.add("T1/2");
+			}
+			if (objectregimens.getSelectedIndex() == 0) {
+				requireds.add("object regimens");
+			}
+			if (preciptregimens.getSelectedIndex() == 0) {
+				requireds.add("precipitant regimens");
+			}
 		}
 
 		if (requireds.size() > 0) {
@@ -1355,8 +1306,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 									+ "object dose, precipitant dose and increase AUC ");
 					hp1.add(label);
 
-					dialog.setPopupPosition(Window.getClientWidth() / 2 - 150,
-							Window.getClientHeight() / 2 - 70);
+					dialog.setPopupPosition(Window.getClientWidth() / 2 - 150, Window.getClientHeight() / 2 - 70);
 					dialog.setHeight("140px");
 					dialog.setWidth("300px");
 					dialog.show();
@@ -1367,14 +1317,18 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 						public void onClick(ClickEvent event) {
 
 							dialog.hide();
-							// close increase Auc panel
+							// close clinical trail panel
 							rightColumn.setVisible(false);
 
-							// erase increase Auc fields
+							// erase clinical trail fields
 							numParticipt.setValue("");
 							objectDose.setValue("");
 							preciptDose.setValue("");
 							auc.setValue("");
+							cmax.setValue("");
+							t12.setValue("");
+							objectregimens.setSelectedIndex(0);
+							preciptregimens.setSelectedIndex(0);
 						}
 					});
 					hp2.add(submit);
@@ -1388,8 +1342,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 						}
 					});
 
-					DOM.setElementAttribute(hp2.getElement(), "id",
-							"dialog-button");
+					DOM.setElementAttribute(hp2.getElement(), "id", "dialog-button");
 
 					hp2.add(close);
 

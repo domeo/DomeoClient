@@ -163,13 +163,6 @@ public class CddiCard extends ACardComponent {
 					type2.setText("");
 				}
 
-//				if (dataUsage.getStatement() != null) {
-//					String statStr = dataUsage.getStatement().getLabel();
-//					statement.setText(statStr);
-//				} else {
-//					statement.setText("");
-//				}
-
 				if (dataUsage.getModality() != null) {
 					String modalityStr = dataUsage.getModality().getLabel();
 					modality.setText(modalityStr);
@@ -262,9 +255,29 @@ public class CddiCard extends ACardComponent {
 					dataUsage.getPreciptDose().getLabel()));
 		}
 		
+		if (dataUsage.getObjectRegimen() != null) {
+			cardResults.add(createColumnInCard("Object regimens",
+					dataUsage.getObjectRegimen().getLabel()));
+		}
+		
+		if (dataUsage.getPreciptRegimen() != null) {
+			cardResults.add(createColumnInCard("Precipt regimens",
+					dataUsage.getPreciptRegimen().getLabel()));
+		}
+		
 		if (dataUsage.getIncreaseAuc() != null) {
 			cardResults.add(createColumnInCard("AUC",
 					dataUsage.getIncreaseAuc().getLabel()));
+		}
+		
+		if (dataUsage.getCmax() != null) {
+			cardResults.add(createColumnInCard("Cmax",
+					dataUsage.getCmax().getLabel()));
+		}
+		
+		if (dataUsage.getT12() != null) {
+			cardResults.add(createColumnInCard("T1/2",
+					dataUsage.getT12().getLabel()));
 		}
 
 	}

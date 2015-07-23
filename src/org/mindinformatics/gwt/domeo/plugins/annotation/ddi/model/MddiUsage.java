@@ -171,5 +171,38 @@ public class MddiUsage {
 	public void setAssertType(MLinkedResource assertType) {
 		MpDDI.setAssertType(assertType);
 	}
+	
+	public MLinkedResource getT12() {
+		return MpDDI.getT12();
+	}
+
+	public void setT12(MLinkedResource t12) {
+		MpDDI.setT12(t12);
+	}
+
+	public MLinkedResource getCmax() {
+		return MpDDI.getCmax();
+	}
+
+	public void setCmax(MLinkedResource cmax) {
+		MpDDI.setCmax(cmax);
+	}
+
+	public MLinkedResource getObjectRegimen() {
+		return MpDDI.getObjectRegimen();
+	}
+
+	public void setObjectRegimen(MLinkedResource objectRegimen) {
+		MpDDI.setObjectRegimen(objectRegimen);
+	}
+
+	public MLinkedResource getPreciptRegimen() {
+		return MpDDI.getPreciptRegimen();
+	}
+
+	public void setPreciptRegimen(MLinkedResource preciptRegimen) {
+		MpDDI.setPreciptRegimen(preciptRegimen);
+	}
+
 
 }

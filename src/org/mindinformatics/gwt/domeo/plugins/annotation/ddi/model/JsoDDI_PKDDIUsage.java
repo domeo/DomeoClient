@@ -36,10 +36,29 @@ public class JsoDDI_PKDDIUsage extends JavaScriptObject{
 	    return this['dikbD2R:numOfParticipants'];
 	}-*/;
 	
+	// object regimen
+	public final native String getObjectRegimen() /*-{
+	    return this['dikbD2R:objectRegimens'];
+	}-*/;
+	
+	// precipt regimen
+	public final native String getPreciptRegimen() /*-{
+	    return this['dikbD2R:preciptRegimens'];
+	}-*/;
+	
 	// increase AUC
 	public final native String getIncreaseAUC() /*-{
 	    return this['dikbD2R:auc'];
 	}-*/;
 	
+	// cmax
+	public final native String getCmax() /*-{
+	    return this['dikbD2R:cmax'];
+	}-*/;
+	
+	// t1/2
+	public final native String getT12() /*-{
+	    return this['dikbD2R:t12'];
+	}-*/;
 	
 }

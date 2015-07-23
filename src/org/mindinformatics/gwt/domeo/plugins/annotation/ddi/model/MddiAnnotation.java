@@ -174,6 +174,40 @@ public class MddiAnnotation extends MAnnotation implements
 	public void setAssertType(MLinkedResource assertType) {
 		MpDDIUsage.setAssertType(assertType);
 	}
+	
+	
+	public MLinkedResource getT12() {
+		return MpDDIUsage.getT12();
+	}
+
+	public void setT12(MLinkedResource t12) {
+		MpDDIUsage.setT12(t12);
+	}
+
+	public MLinkedResource getCmax() {
+		return MpDDIUsage.getCmax();
+	}
+
+	public void setCmax(MLinkedResource cmax) {
+		MpDDIUsage.setCmax(cmax);
+	}
+
+	public MLinkedResource getObjectRegimen() {
+		return MpDDIUsage.getObjectRegimen();
+	}
+
+	public void setObjectRegimen(MLinkedResource objectRegimen) {
+		MpDDIUsage.setObjectRegimen(objectRegimen);
+	}
+
+	public MLinkedResource getPreciptRegimen() {
+		return MpDDIUsage.getPreciptRegimen();
+	}
+
+	public void setPreciptRegimen(MLinkedResource preciptRegimen) {
+		MpDDIUsage.setPreciptRegimen(preciptRegimen);
+	}
+	
 
 	@Override
 	public String getLabel() {
