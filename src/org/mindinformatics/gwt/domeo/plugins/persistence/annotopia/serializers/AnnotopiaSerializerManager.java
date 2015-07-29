@@ -116,6 +116,16 @@ public class AnnotopiaSerializerManager {
 				expression.put("http://purl.org/dc/terms/title", 
 						new JSONString(reference.getTitle()));
 			}
+			if(reference.getAuthorNames()!=null) {
+				exists=true;
+				expression.put("http://example.org/authorNames", 
+						new JSONString(reference.getAuthorNames()));
+			}			
+			if(reference.getJournalPublicationInfo()!=null) {
+				exists=true;
+				expression.put("http://example.org/publicationInfo", 
+						new JSONString(reference.getJournalPublicationInfo()));
+			}
 			
 			if(exists) {
 				source.put("http://purl.org/vocab/frbr/core#embodimentOf", expression);
