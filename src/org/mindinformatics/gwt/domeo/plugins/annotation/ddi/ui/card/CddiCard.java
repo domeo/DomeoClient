@@ -250,15 +250,27 @@ public class CddiCard extends ACardComponent {
 					dataUsage.getObjectDose().getLabel()));
 		}
 		
-		if (dataUsage.getPreciptDose() != null) {
-			cardResults.add(createColumnInCard("Precipitant dose",
-					dataUsage.getPreciptDose().getLabel()));
+		if (dataUsage.getObjectDuration() != null) {
+			cardResults.add(createColumnInCard("object Duration",
+					dataUsage.getObjectDuration().getLabel()));
 		}
 		
 		if (dataUsage.getObjectRegimen() != null) {
 			cardResults.add(createColumnInCard("Object regimens",
 					dataUsage.getObjectRegimen().getLabel()));
 		}
+		
+		if (dataUsage.getPreciptDose() != null) {
+			cardResults.add(createColumnInCard("Precipitant dose",
+					dataUsage.getPreciptDose().getLabel()));
+		}
+
+		
+		if (dataUsage.getPreciptDuration() != null) {
+			cardResults.add(createColumnInCard("precipt Duration",
+					dataUsage.getPreciptDuration().getLabel()));
+		}
+		
 		
 		if (dataUsage.getPreciptRegimen() != null) {
 			cardResults.add(createColumnInCard("Precipt regimens",
@@ -268,6 +280,32 @@ public class CddiCard extends ACardComponent {
 		if (dataUsage.getIncreaseAuc() != null) {
 			cardResults.add(createColumnInCard("AUC",
 					dataUsage.getIncreaseAuc().getLabel()));
+		}
+		
+		if (dataUsage.getAucDirection() != null) {
+			cardResults.add(createColumnInCard("AUC Direction",
+					dataUsage.getAucDirection().getLabel()));
+		}
+		
+		if (dataUsage.getAucType() != null) {
+			cardResults.add(createColumnInCard("AUC Type",
+					dataUsage.getAucType().getLabel()));
+		}
+		
+		
+		if (dataUsage.getCl() != null) {
+			cardResults.add(createColumnInCard("CL",
+					dataUsage.getCl().getLabel()));
+		}
+		
+		if (dataUsage.getClDirection() != null) {
+			cardResults.add(createColumnInCard("CL Direction",
+					dataUsage.getClDirection().getLabel()));
+		}
+
+		if (dataUsage.getClType() != null) {
+			cardResults.add(createColumnInCard("Cl Type",
+					dataUsage.getClType().getLabel()));
 		}
 		
 		if (dataUsage.getCmax() != null) {

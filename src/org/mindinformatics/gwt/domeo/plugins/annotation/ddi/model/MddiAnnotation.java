@@ -208,6 +208,62 @@ public class MddiAnnotation extends MAnnotation implements
 		MpDDIUsage.setPreciptRegimen(preciptRegimen);
 	}
 	
+	public MLinkedResource getAucDirection() {
+		return MpDDIUsage.getAucDirection();
+	}
+
+	public void setAucDirection(MLinkedResource aucDirection) {
+		MpDDIUsage.setAucDirection(aucDirection);
+	}
+
+	public MLinkedResource getClDirection() {
+		return MpDDIUsage.getClDirection();
+	}
+
+	public void setClDirection(MLinkedResource clDirection) {
+		MpDDIUsage.setClDirection(clDirection);
+	}
+
+	public MLinkedResource getAucType() {
+		return MpDDIUsage.getAucType();
+	}
+
+	public void setAucType(MLinkedResource aucType) {
+		MpDDIUsage.setAucType(aucType);
+	}
+
+	public MLinkedResource getClType() {
+		return MpDDIUsage.getClType();
+	}
+
+	public void setClType(MLinkedResource clType) {
+		MpDDIUsage.setClType(clType);
+	}
+
+	public MLinkedResource getPreciptDuration() {
+		return MpDDIUsage.getPreciptDuration();
+	}
+
+	public void setPreciptDuration(MLinkedResource preciptDuration) {
+		MpDDIUsage.setPreciptDuration(preciptDuration);
+	}
+
+	public MLinkedResource getObjectDuration() {
+		return MpDDIUsage.getObjectDuration();
+	}
+
+	public void setObjectDuration(MLinkedResource objectDuration) {
+		MpDDIUsage.setObjectDuration(objectDuration);
+	}
+
+	public MLinkedResource getCl() {
+		return MpDDIUsage.getCl();
+	}
+
+	public void setCl(MLinkedResource cl) {
+		MpDDIUsage.setCl(cl);
+	}
+	
 
 	@Override
 	public String getLabel() {

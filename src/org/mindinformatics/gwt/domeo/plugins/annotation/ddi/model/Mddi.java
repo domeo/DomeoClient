@@ -15,10 +15,66 @@ public class Mddi extends MTrustedResource {
 	MLinkedResource drug1, drug2, type1, role1, type2, role2, statement, modality;
 	String comment;
 
-	// increase AUC
-	MLinkedResource numOfparcipitants, objectDose, preciptDose, increaseAuc, evidenceType, assertType, t12, cmax,
-			objectRegimen, preciptRegimen;
+	// clinical trail
+	MLinkedResource numOfparcipitants, objectDose, preciptDose, increaseAuc, cl, evidenceType, assertType, t12, cmax,
+			objectRegimen, preciptRegimen, aucDirection, clDirection, aucType, clType, preciptDuration, objectDuration;
 
+	public MLinkedResource getCl() {
+		return cl;
+	}
+
+	public void setCl(MLinkedResource cl) {
+		this.cl = cl;
+	}
+
+	public MLinkedResource getAucDirection() {
+		return aucDirection;
+	}
+
+	public void setAucDirection(MLinkedResource aucDirection) {
+		this.aucDirection = aucDirection;
+	}
+
+	public MLinkedResource getClDirection() {
+		return clDirection;
+	}
+
+	public void setClDirection(MLinkedResource clDirection) {
+		this.clDirection = clDirection;
+	}
+
+	public MLinkedResource getAucType() {
+		return aucType;
+	}
+
+	public void setAucType(MLinkedResource aucType) {
+		this.aucType = aucType;
+	}
+
+	public MLinkedResource getClType() {
+		return clType;
+	}
+
+	public void setClType(MLinkedResource clType) {
+		this.clType = clType;
+	}
+
+	public MLinkedResource getPreciptDuration() {
+		return preciptDuration;
+	}
+
+	public void setPreciptDuration(MLinkedResource preciptDuration) {
+		this.preciptDuration = preciptDuration;
+	}
+
+	public MLinkedResource getObjectDuration() {
+		return objectDuration;
+	}
+
+	public void setObjectDuration(MLinkedResource objectDuration) {
+		this.objectDuration = objectDuration;
+	}
+	
 	public MLinkedResource getT12() {
 		return t12;
 	}

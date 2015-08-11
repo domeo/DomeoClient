@@ -203,6 +203,60 @@ public class MddiUsage {
 	public void setPreciptRegimen(MLinkedResource preciptRegimen) {
 		MpDDI.setPreciptRegimen(preciptRegimen);
 	}
+	
+	public MLinkedResource getAucDirection() {
+		return MpDDI.getAucDirection();
+	}
 
+	public void setAucDirection(MLinkedResource aucDirection) {
+		MpDDI.setAucDirection(aucDirection);
+	}
 
+	public MLinkedResource getClDirection() {
+		return MpDDI.getClDirection();
+	}
+
+	public void setClDirection(MLinkedResource clDirection) {
+		MpDDI.setClDirection(clDirection);
+	}
+
+	public MLinkedResource getAucType() {
+		return MpDDI.getAucType();
+	}
+
+	public void setAucType(MLinkedResource aucType) {
+		MpDDI.setAucType(aucType);
+	}
+
+	public MLinkedResource getClType() {
+		return MpDDI.getClType();
+	}
+
+	public void setClType(MLinkedResource clType) {
+		MpDDI.setClType(clType);
+	}
+
+	public MLinkedResource getPreciptDuration() {
+		return MpDDI.getPreciptDuration();
+	}
+
+	public void setPreciptDuration(MLinkedResource preciptDuration) {
+		MpDDI.setPreciptDuration(preciptDuration);
+	}
+
+	public MLinkedResource getObjectDuration() {
+		return MpDDI.getObjectDuration();
+	}
+
+	public void setObjectDuration(MLinkedResource objectDuration) {
+		MpDDI.setObjectDuration(objectDuration);
+	}
+
+	public MLinkedResource getCl() {
+		return MpDDI.getCl();
+	}
+
+	public void setCl(MLinkedResource cl) {
+		MpDDI.setCl(cl);
+	}
 }

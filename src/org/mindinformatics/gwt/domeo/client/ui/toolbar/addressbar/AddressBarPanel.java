@@ -250,7 +250,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 //			oracle.add(UrlUtils.getUrlAndRoot() + "tests/NCT01136213.html");
 //			oracle.add(UrlUtils.getUrlAndRoot() + "tests/ImagesTest.html");
 			oracle.add(UrlUtils.getUrlAndRoot() + "tests/SPL-annotation/Warfarin-ab047628-67d0-4a64-8d77-36b054969b44.html");
-			oracle.add(UrlUtils.getUrlAndRoot() + "tests/SPL-annotation/Clopidogrel-1086a7b4-b89b-4bee-8120-5f752626c046.html");
+			oracle.add(UrlUtils.getUrlAndRoot() + "tests/DDI-labels/4e338e89-3cf2-48eb-b6e2-a06c608c6513.html");
 						
 		} else {
 			if(ApplicationUtils.getProvideExamplesUrls()!=null && ApplicationUtils.getProvideExamplesUrls().trim().equals("true")) {

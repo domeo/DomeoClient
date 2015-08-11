@@ -46,28 +46,44 @@
 	.leftColumn {
 		width: 400px;
 		vertical-align: top;
-		padding-left: 15px;
-		padding-right: 15px;
+		padding-left: 12px;
+		padding-right: 12px;
 	}
 	
 	.middleColumn {
-		width: 300px;
+		width: 260px;
 		vertical-align: top;
-		padding-left: 20px;
-		padding-right: 20px;
+		padding-left: 12px;
+		padding-right: 12px;
 	}
 	
 	.rightColumn {
-		padding-top: 2px;
-		padding-bottom: 10px;
-		min-width: 300px;
-		height: 120px;
-		padding-left: 20px;
-		padding-right: 20px;
+		width: 350px;
+		vertical-align: top;
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	
+	.titlebar {
+		width: 400px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
+	}
+	
+	
+	.titlebarmiddle {
+		width: 260px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
+	}
+	
+	.titlebarright {
+		width: 350px;
+		background-color: #DDDDDD;
+		border-top: 3px solid white;
 	}
 	
 	.panel {
-		width: 100%;
 		vertical-align: left;
 		padding-top: 10px;
 	}
@@ -77,14 +93,6 @@
 		vertical-align: left;
 		padding-top: 2px;
 		padding-bottom: 2px;
-	}
-	
-	.provenance {
-		backgorund-color: gray;
-		padding-top: 3px;
-		padding-left: 10px;
-		cursor: pointer;
-		cursor: hand;
 	}
 	
 	.commonlabel {
@@ -132,18 +140,6 @@
 		padding-right: 3px;
 	}
 	
-	.titlebar {
-		width: 400px;
-		background-color: #DDDDDD;
-		border-top: 3px solid white;
-	}
-	
-	.titlebarright {
-		width: 300px;
-		background-color: #DDDDDD;
-		border-top: 3px solid white;
-	}
-	
 	.commentBody {
 		padding-top: 3px;
 		padding-left: 3px;
@@ -173,22 +169,36 @@
 		padding-bottom: 2px;
 	}
 	
-	.listbox1 {
+	.listbox120 {
 		width: 120px;
 		vertical-align: left;
 		padding-top: 2px;
 		padding-bottom: 2px;
 	}
 	
-	.listbox2 {
+	.listbox200 {
 		width: 200px;
 		vertical-align: left;
 		padding-top: 2px;
 		padding-bottom: 2px;
 	}
 	
-	.listbox3 {
+	.listbox50 {
 		width: 50px;
+		vertical-align: left;
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+	
+	.listbox70 {
+		width: 70px;
+		vertical-align: left;
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+	
+	.listbox80 {
+		width: 70px;
 		vertical-align: left;
 		padding-top: 2px;
 		padding-bottom: 2px;
@@ -204,7 +214,7 @@
 		font-size: 12px;
 	}
 	
-	.textareadose {
+	.textarea40 {
 		padding-top: 3px;
 		padding-left: 3px;
 		color: #333;
@@ -237,10 +247,10 @@
 						<g:Label ui:field="drug1Label" styleName='{style.titleLeft}'>Drug 1 in DDI:</g:Label>
 					</g:HorizontalPanel>
 					
-					<g:HorizontalPanel styleName='{style.subpanel}'>
-						<g:Label>Drug mentions: &nbsp; </g:Label>
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:Label>Drug mentions: &nbsp;</g:Label>
 						<g:ListBox ui:field="drug1" name="descript"
-							visibleItemCount='1' styleName='{style.listbox1}'>
+							visibleItemCount='1' styleName='{style.listbox120}'>
 							<g:item value="0"></g:item>
 						</g:ListBox>
 					</g:HorizontalPanel>
@@ -273,10 +283,10 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.subpanel}'>
-						<g:RadioButton ui:field="roleob1" name="roler1"
-							checked="false">Object</g:RadioButton>
 						<g:RadioButton ui:field="rolepp1" name="roler1"
 							checked="false">Precipitant</g:RadioButton>
+						<g:RadioButton ui:field="roleob1" name="roler1"
+							checked="false">Object</g:RadioButton>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel>
@@ -289,10 +299,10 @@
 						<g:Label ui:field="drug2Label" styleName='{style.titleLeft}'>Drug 2 in DDI:</g:Label>
 					</g:HorizontalPanel>
 					
-					<g:HorizontalPanel styleName='{style.subpanel}'>
-						<g:Label>Drug mentions: &nbsp; </g:Label>
+					<g:HorizontalPanel styleName='{style.panel}'>
+						<g:Label>Drug mentions: &nbsp;</g:Label>
 						<g:ListBox ui:field="drug2" name="descript"
-							visibleItemCount='1' styleName='{style.listbox1}'>
+							visibleItemCount='1' styleName='{style.listbox120}'>
 							<g:item value="0"></g:item>
 						</g:ListBox>
 					</g:HorizontalPanel>
@@ -303,7 +313,7 @@
 							within the sentence for each drug):</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel styleName='{style.subpanel}'>
+					<g:HorizontalPanel styleName='{style.panel}'>
 						<g:RadioButton ui:field="typeai2" name="typer2"
 							checked="false">Active Ingredient</g:RadioButton>
 						<g:RadioButton ui:field="typemb2" name="typer2"
@@ -323,10 +333,10 @@
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:RadioButton ui:field="roleob2" name="roler2"
-							checked="false">Object</g:RadioButton>
 						<g:RadioButton ui:field="rolepp2" name="roler2"
 							checked="false">Precipitant</g:RadioButton>
+						<g:RadioButton ui:field="roleob2" name="roler2"
+							checked="false">Object</g:RadioButton>
 					</g:HorizontalPanel>
 
 				</g:VerticalPanel>
@@ -337,17 +347,10 @@
 
 				<g:VerticalPanel ui:field='middleColumn' styleName='{style.middleColumn}'>
 
-					<!-- Statement -->
-					<!-- <g:HorizontalPanel styleName='{style.titlebar}'> <g:Label ui:field="statement" 
-						styleName='{style.titleLeft}'>Statement (data type that is described):</g:Label> 
-						</g:HorizontalPanel> <g:HorizontalPanel styleName='{style.panel}'> <g:RadioButton 
-						ui:field="statementqu" name="statement" checked="false">quantitative</g:RadioButton> 
-						<g:RadioButton ui:field="statementql" name="statement" checked="false">qualitative</g:RadioButton> 
-						</g:HorizontalPanel> -->
 
 					<!--Modality: -->
 
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
+					<g:HorizontalPanel styleName='{style.titlebarmiddle}'>
 						<g:Label ui:field="modality" styleName='{style.titleLeft}'>Modality (observed
 							effect that is described):</g:Label>
 					</g:HorizontalPanel>
@@ -361,7 +364,7 @@
                    
 
 					<!-- assertion type label -->
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
+					<g:HorizontalPanel styleName='{style.titlebarmiddle}'>
 						<g:Label ui:field="assertTypeLabel" styleName='{style.titleLeft}'>DIKB
 							Assertion type:</g:Label>
 					</g:HorizontalPanel>
@@ -370,18 +373,13 @@
 						<g:ListBox ui:field='assertType'>
 							<g:item value='0'>Drug Drug Interaction</g:item>
 							<g:item value='1'>DDI clinical trial</g:item>	
-													
-							<!-- <g:item value='1'>Increase Auc</g:item> 
-								 <g:item value='2'>Cmax</g:item>
-								 <g:item value='3'>T1/2</g:item>
-							-->	
-							
+
 						</g:ListBox>
 					</g:HorizontalPanel>
 
 
 					<!-- evidence type -->
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
+					<g:HorizontalPanel styleName='{style.titlebarmiddle}'>
 						<g:Label ui:field="evidenceTypeLabel" styleName='{style.titleLeft}'>Evidence
 							modality:</g:Label>
 					</g:HorizontalPanel>
@@ -395,7 +393,7 @@
 					
 					
 					<!-- extra resource -->
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
+					<g:HorizontalPanel styleName='{style.titlebarmiddle}'>
 						<g:Label ui:field="commentlabel" styleName='{style.titleLeft}'>Comment:</g:Label>
 					</g:HorizontalPanel>
 
@@ -421,34 +419,8 @@
 					<g:HorizontalPanel ui:field='header11' styleName='{style.panel}'>
 						<g:TextArea ui:field='numParticipt' styleName='{style.textarea}'></g:TextArea>
 					</g:HorizontalPanel>
-
-					<!-- object dose (only for DDI clinical trial) -->
-
-					<g:HorizontalPanel styleName='{style.titlebarright}'>
-						<g:Label ui:field="DoseLabel1" styleName='{style.titleLeft}'>Object drug dosage:</g:Label>
-					</g:HorizontalPanel>
-
-					<g:HorizontalPanel ui:field='header13' styleName='{style.subpanel}'>
 					
-						<g:Label ui:field="objectDoseLabel" >Dose in MG:</g:Label>
-						<g:TextArea ui:field='objectDose' styleName='{style.textareadose}'></g:TextArea>
-						
-						<g:Label ui:field="doesregimensLabel1" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>
-						<g:ListBox ui:field="objectregimens" name="descript"
-							visibleItemCount='1' styleName='{style.listbox3}'>
-							<g:item value="0"></g:item>
-							<g:item value="1">SD</g:item>
-							<g:item value="2">QD</g:item>
-							<g:item value="3">BID</g:item>
-							<g:item value="4">TID</g:item>
-							<g:item value="5">QID</g:item>
-							<g:item value="6">Q12</g:item>
-							<g:item value="7">Q8</g:item>
-							<g:item value="8">Q6</g:item>
-						</g:ListBox>
-						</g:HorizontalPanel>
-						
-				
+					
 					<!-- preciptant dose (only for DDI clinical trial) -->
 	
 					
@@ -459,33 +431,120 @@
 					<g:HorizontalPanel ui:field='header12' styleName='{style.subpanel}'>
 
 						<g:Label ui:field="preciptDoseLabel" >Dose in MG:</g:Label>
-						<g:TextArea ui:field='preciptDose' styleName='{style.textareadose}'></g:TextArea>
+						<g:TextArea ui:field='preciptDose' styleName='{style.textarea40}'></g:TextArea>
 						
-						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Dosing regimens:</g:Label>						
+						<g:Label ui:field="preciptDurationLabel" >Duration:</g:Label>
+						<g:TextArea ui:field='preciptDuration' styleName='{style.textarea40}'></g:TextArea>
+	
+						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Regimens:</g:Label>						
 						<g:ListBox ui:field="preciptregimens" name="descript"
-							visibleItemCount='1' styleName='{style.listbox3}'>
+							visibleItemCount='1' styleName='{style.listbox50}'>
 							<g:item value="0"></g:item>
-							<g:item value="1">SD</g:item>
-							<g:item value="2">QD</g:item>
-							<g:item value="3">BID</g:item>
-							<g:item value="4">TID</g:item>
-							<g:item value="5">QID</g:item>
-							<g:item value="6">Q12</g:item>
-							<g:item value="7">Q8</g:item>
-							<g:item value="8">Q6</g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">SD</g:item>
+							<g:item value="3">QD</g:item>
+							<g:item value="4">BID</g:item>
+							<g:item value="5">TID</g:item>
+							<g:item value="6">QID</g:item>
+							<g:item value="7">Q12</g:item>
+							<g:item value="8">Q8</g:item>
+							<g:item value="9">Q6</g:item>
+						</g:ListBox>
+					</g:HorizontalPanel>
+
+					<!-- object dose (only for DDI clinical trial) -->
+
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:Label ui:field="DoseLabel1" styleName='{style.titleLeft}'>Object drug dosage:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header13' styleName='{style.subpanel}'>
+					
+						<g:Label ui:field="objectDoseLabel" >Dose in MG:</g:Label>
+						<g:TextArea ui:field='objectDose' styleName='{style.textarea40}'></g:TextArea>
+						
+						<g:Label ui:field="objectDurationLabel" >Duration:</g:Label>
+						<g:TextArea ui:field='objectDuration' styleName='{style.textarea40}'></g:TextArea>
+						
+						<g:Label ui:field="doesregimensLabel1" styleName='{style.titleLeft}'>Regimens:</g:Label>
+						<g:ListBox ui:field="objectregimens" name="descript"
+							visibleItemCount='1' styleName='{style.listbox50}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">SD</g:item>
+							<g:item value="3">QD</g:item>
+							<g:item value="4">BID</g:item>
+							<g:item value="5">TID</g:item>
+							<g:item value="6">QID</g:item>
+							<g:item value="7">Q12</g:item>
+							<g:item value="8">Q8</g:item>
+							<g:item value="9">Q6</g:item>
 						</g:ListBox>
 						</g:HorizontalPanel>
+						
 					
 
-					<!-- AUC (only for increase Auc) -->
+					<!-- AUC (only for clinical trail) -->
 
 					<g:HorizontalPanel styleName='{style.titlebarright}'>
 						<g:Label ui:field="aucLabel" styleName='{style.titleLeft}'>AUC_i/AUC:</g:Label>
 					</g:HorizontalPanel>
 
 					<g:HorizontalPanel ui:field='header15' styleName='{style.subpanel}'>
-						<g:TextArea ui:field='auc' styleName='{style.textarea}'></g:TextArea>
+						<g:Label ui:field="aucValueLabel" styleName='{style.titleLeft}'>Auc:</g:Label>
+						<g:TextArea ui:field='auc' styleName='{style.textarea40}'></g:TextArea>
+						
+						<g:Label ui:field="aucDirectionLabel" styleName='{style.titleLeft}'>Direction:</g:Label>
+						<g:ListBox ui:field="aucDirection" name="descript"
+							visibleItemCount='1' styleName='{style.listbox80}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Increase</g:item>
+							<g:item value="3">Decrease</g:item>
+						</g:ListBox>
+						
+						<g:Label ui:field="aucTypeLabel" styleName='{style.titleLeft}'>Type:</g:Label>
+						<g:ListBox ui:field="aucType" name="descript"
+							visibleItemCount='1' styleName='{style.listbox70}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Percent</g:item>
+							<g:item value="3">Fold</g:item>
+						</g:ListBox>
+						
 					</g:HorizontalPanel>
+					
+					
+					<!-- CL (only for clinical trail) -->
+
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:Label ui:field="clLabel" styleName='{style.titleLeft}'>CL_i/CL:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header18' styleName='{style.subpanel}'>
+						<g:Label ui:field="clValueLabel" styleName='{style.titleLeft}'>Cl:</g:Label>
+						<g:TextArea ui:field='cl' styleName='{style.textarea40}'></g:TextArea>
+						
+						<g:Label ui:field="clDirectionLabel" styleName='{style.titleLeft}'>Direction:</g:Label>
+						<g:ListBox ui:field="clDirection" name="descript"
+							visibleItemCount='1' styleName='{style.listbox80}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Increase</g:item>
+							<g:item value="3">Decrease</g:item>
+						</g:ListBox>
+						
+						<g:Label ui:field="clTypeLabel" styleName='{style.titleLeft}'>Type:</g:Label>
+						<g:ListBox ui:field="clType" name="descript"
+							visibleItemCount='1' styleName='{style.listbox70}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Percent</g:item>
+							<g:item value="3">Fold</g:item>
+						</g:ListBox>
+						
+					</g:HorizontalPanel>
+					
 					
 					<!-- CMAX -->
 
