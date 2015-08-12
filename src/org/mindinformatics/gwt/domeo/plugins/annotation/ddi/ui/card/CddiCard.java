@@ -245,20 +245,6 @@ public class CddiCard extends ACardComponent {
 					dataUsage.getNumOfparcipitants().getLabel()));
 		}
 		
-		if (dataUsage.getObjectDose() != null) {
-			cardResults.add(createColumnInCard("Object dose",
-					dataUsage.getObjectDose().getLabel()));
-		}
-		
-		if (dataUsage.getObjectDuration() != null) {
-			cardResults.add(createColumnInCard("object Duration",
-					dataUsage.getObjectDuration().getLabel()));
-		}
-		
-		if (dataUsage.getObjectRegimen() != null) {
-			cardResults.add(createColumnInCard("Object regimens",
-					dataUsage.getObjectRegimen().getLabel()));
-		}
 		
 		if (dataUsage.getPreciptDose() != null) {
 			cardResults.add(createColumnInCard("Precipitant dose",
@@ -277,6 +263,22 @@ public class CddiCard extends ACardComponent {
 					dataUsage.getPreciptRegimen().getLabel()));
 		}
 		
+		
+		if (dataUsage.getObjectDose() != null) {
+			cardResults.add(createColumnInCard("Object dose",
+					dataUsage.getObjectDose().getLabel()));
+		}
+		
+		if (dataUsage.getObjectDuration() != null) {
+			cardResults.add(createColumnInCard("object Duration",
+					dataUsage.getObjectDuration().getLabel()));
+		}
+		
+		if (dataUsage.getObjectRegimen() != null) {
+			cardResults.add(createColumnInCard("Object regimens",
+					dataUsage.getObjectRegimen().getLabel()));
+		}
+
 		if (dataUsage.getIncreaseAuc() != null) {
 			cardResults.add(createColumnInCard("AUC",
 					dataUsage.getIncreaseAuc().getLabel()));

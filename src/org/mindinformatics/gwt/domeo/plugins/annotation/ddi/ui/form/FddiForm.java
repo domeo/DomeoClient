@@ -514,7 +514,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		// highlight drug and preselect type
 		highlightCurrentDrug();
 
-		// switch assertion mode ddi/increase Auc
+		// switch assertion mode ddi/clinical trail
 		switchAssertType();
 
 		ButtonWithIcon yesButton = new ButtonWithIcon(Domeo.resources.generalCss().applyButton());
@@ -1495,12 +1495,19 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							// erase clinical trail fields
 							numParticipt.setValue("");
 							objectDose.setValue("");
+							objectDuration.setValue("");
 							preciptDose.setValue("");
-							auc.setValue("");
-							cmax.setValue("");
-							t12.setValue("");
+							preciptDuration.setValue("");
 							objectregimens.setSelectedIndex(0);
 							preciptregimens.setSelectedIndex(0);
+							auc.setValue("");
+							aucDirection.setSelectedIndex(0);
+							aucType.setSelectedIndex(0);
+							cl.setValue("");
+							clDirection.setSelectedIndex(0);
+							clType.setSelectedIndex(0);
+							cmax.setValue("");
+							t12.setValue("");
 						}
 					});
 					hp2.add(submit);

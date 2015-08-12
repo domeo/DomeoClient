@@ -36,9 +36,19 @@ public class JsoDDI_PKDDIUsage extends JavaScriptObject{
 	    return this['dikbD2R:numOfParticipants'];
 	}-*/;
 	
+	// object duration
+	public final native String getObjectDuration() /*-{
+	    return this['dikbD2R:objectDuration'];
+	}-*/;
+	
 	// object regimen
 	public final native String getObjectRegimen() /*-{
 	    return this['dikbD2R:objectRegimens'];
+	}-*/;
+	
+	// precipt duration
+	public final native String getPreciptDuration() /*-{
+	    return this['dikbD2R:preciptDuration'];
 	}-*/;
 	
 	// precipt regimen
@@ -50,6 +60,32 @@ public class JsoDDI_PKDDIUsage extends JavaScriptObject{
 	public final native String getIncreaseAUC() /*-{
 	    return this['dikbD2R:auc'];
 	}-*/;
+	
+	// AUC direction
+	public final native String getAucDirection() /*-{
+	    return this['dikbD2R:aucDirection'];
+	}-*/;
+	
+	// AUC type
+	public final native String getAucType() /*-{
+	    return this['dikbD2R:aucType'];
+	}-*/;
+	
+	// increase cl
+	public final native String getCl() /*-{
+	    return this['dikbD2R:cl'];
+	}-*/;
+	
+	// cl direction
+	public final native String getClDirection() /*-{
+	    return this['dikbD2R:clDirection'];
+	}-*/;
+	
+	// cl type
+	public final native String getClType() /*-{
+	    return this['dikbD2R:clType'];
+	}-*/;
+	
 	
 	// cmax
 	public final native String getCmax() /*-{

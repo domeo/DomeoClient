@@ -203,11 +203,11 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 				pkddi.put(DIKBD2R_PREFIX + "numOfParticipants", new JSONString(
 						numOfParticipants.getLabel().trim()));
 			}
-
-			MLinkedResource auc = ann.getIncreaseAuc();
-			if (auc != null) {
-				pkddi.put(DIKBD2R_PREFIX + "auc", new JSONString(auc.getLabel()
-						.trim()));
+			
+			MLinkedResource objectDuration = ann.getObjectDuration();
+			if (objectDuration != null) {
+				pkddi.put(DIKBD2R_PREFIX + "objectDuration", new JSONString(
+						objectDuration.getLabel().trim()));
 			}
 			
 			MLinkedResource objectRegimens = ann.getObjectRegimen();
@@ -216,10 +216,53 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 						objectRegimens.getLabel().trim()));
 			}
 			
+			MLinkedResource preciptDuration = ann.getPreciptDuration();
+			if (preciptDuration != null) {
+				pkddi.put(DIKBD2R_PREFIX + "preciptDuration", new JSONString(
+						preciptDuration.getLabel().trim()));
+			}
+			
 			MLinkedResource preciptRegimens = ann.getPreciptRegimen();
 			if (preciptRegimens != null) {
 				pkddi.put(DIKBD2R_PREFIX + "preciptRegimens", new JSONString(
 						preciptRegimens.getLabel().trim()));
+			}
+			
+
+			MLinkedResource auc = ann.getIncreaseAuc();
+			if (auc != null) {
+				pkddi.put(DIKBD2R_PREFIX + "auc", new JSONString(auc.getLabel()
+						.trim()));
+			}
+
+			MLinkedResource aucDirection = ann.getAucDirection();
+			if (aucDirection != null) {
+				pkddi.put(DIKBD2R_PREFIX + "aucDirection", new JSONString(aucDirection.getLabel()
+						.trim()));
+			}
+			
+			MLinkedResource aucType = ann.getAucType();
+			if (aucType != null) {
+				pkddi.put(DIKBD2R_PREFIX + "aucType", new JSONString(aucType.getLabel()
+						.trim()));
+			}
+			
+			MLinkedResource cl = ann.getCl();
+			if (cl != null) {
+				pkddi.put(DIKBD2R_PREFIX + "cl", new JSONString(cl.getLabel()
+						.trim()));
+			}			
+			
+			MLinkedResource clDirection = ann.getClDirection();
+			if (clDirection != null) {
+				pkddi.put(DIKBD2R_PREFIX + "clDirection", new JSONString(clDirection.getLabel()
+						.trim()));
+			}
+			
+			MLinkedResource clType = ann.getClType();
+			if (clType != null) {
+				pkddi.put(DIKBD2R_PREFIX + "clType", new JSONString(clType.getLabel()
+						.trim()));
 			}
 			
 			MLinkedResource cmax = ann.getCmax();

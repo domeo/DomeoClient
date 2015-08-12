@@ -269,29 +269,28 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				ann.setNumOfparcipitants(numParticipt);
 			}
 
+			
 			/*
-			 * increase AUC
+			 * object duration
 			 */
-			String aucScript = pkddi.getIncreaseAUC();
-			// System.out.println("aucScript:" + aucScript);
+			String objectDurationScript = pkddi.getObjectDuration();
 
-			if (aucScript != null && !aucScript.trim().equals("")) {
-				String jsLabel = aucScript;
-				String jsDescript = "The maximum increasing Auc in interation.";
-				String jsURI = DIKBD2R_PREFIX + aucScript;
+			if (objectDurationScript != null && !objectDurationScript.trim().equals("")) {
+				String jsLabel = objectDurationScript;
+				String jsDescript = "objectDuration in DDI clinical trail.";
+				String jsURI = DIKBD2R_PREFIX + objectDurationScript;
 
-				System.out.println("auc: " + jsLabel + "|" + jsURI + "|");
+				System.out.println("objectDuration: " + jsLabel + "|" + jsURI + "|");
 
-				MLinkedResource auc = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+				MLinkedResource objectDuration = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
 
-				// System.out.println("AUC linked resource created: " +
-				// jsLabel);
-
-				ann.setIncreaseAuc(auc);
+				ann.setObjectDuration(objectDuration);
 			}
 
+			
+
 			/*
-			 * object regimen
+			 * object regimens
 			 */
 			String objectRegimensScript = pkddi.getObjectRegimen();
 			// System.out.println("objectRegimensScript:" +
@@ -313,8 +312,26 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				ann.setObjectRegimen(objectRegimens);
 			}
 
+			
 			/*
-			 * precipt regimen
+			 * precipt duration
+			 */
+			String preciptDurationScript = pkddi.getPreciptDuration();
+
+			if (preciptDurationScript != null && !preciptDurationScript.trim().equals("")) {
+				String jsLabel = preciptDurationScript;
+				String jsDescript = "preciptDuration in DDI clinical trail.";
+				String jsURI = DIKBD2R_PREFIX + preciptDurationScript;
+
+				System.out.println("preciptDuration: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource preciptDuration = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setPreciptDuration(preciptDuration);
+			}
+			
+			/*
+			 * precipt regimens
 			 */
 			String preciptRegimensScript = pkddi.getPreciptRegimen();
 			// System.out.println("preciptRegimensScript:" +
@@ -335,6 +352,120 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setPreciptRegimen(preciptRegimens);
 			}
+			
+			/*
+			 * AUC
+			 */
+			String aucScript = pkddi.getIncreaseAUC();
+			// System.out.println("aucScript:" + aucScript);
+
+			if (aucScript != null && !aucScript.trim().equals("")) {
+				String jsLabel = aucScript;
+				String jsDescript = "The maximum increasing Auc in interation.";
+				String jsURI = DIKBD2R_PREFIX + aucScript;
+
+				System.out.println("auc: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource auc = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				// System.out.println("AUC linked resource created: " +
+				// jsLabel);
+
+				ann.setIncreaseAuc(auc);
+			}
+			
+			/*
+			 * increase aucDirection
+			 */
+			String aucDirectionScript = pkddi.getAucDirection();
+			// System.out.println("aucDirectionScript:" + aucDirectionScript);
+
+			if (aucDirectionScript != null && !aucDirectionScript.trim().equals("")) {
+				String jsLabel = aucDirectionScript;
+				String jsDescript = "The auc Direction in interation.";
+				String jsURI = DIKBD2R_PREFIX + aucDirectionScript;
+
+				System.out.println("aucDirection: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource aucDirection = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setAucDirection(aucDirection);
+			}
+			
+			/*
+			 * increase aucType
+			 */
+			String aucTypeScript = pkddi.getAucType();
+			// System.out.println("aucTypeScript:" + aucTypeScript);
+
+			if (aucTypeScript != null && !aucTypeScript.trim().equals("")) {
+				String jsLabel = aucTypeScript;
+				String jsDescript = "The auc Type in interation.";
+				String jsURI = DIKBD2R_PREFIX + aucTypeScript;
+
+				System.out.println("aucType: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource aucType = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setAucType(aucType);
+			}
+			
+			
+			
+			/*
+			 *  CL
+			 */
+			String clScript = pkddi.getCl();
+			// System.out.println("clScript:" + clScript);
+
+			if (clScript != null && !clScript.trim().equals("")) {
+				String jsLabel = clScript;
+				String jsDescript = "The maximum increasing cl in interation.";
+				String jsURI = DIKBD2R_PREFIX + clScript;
+
+				System.out.println("cl: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource cl = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+				
+				ann.setCl(cl);
+			}
+			
+			/*
+			 * increase clDirection
+			 */
+			String clDirectionScript = pkddi.getClDirection();
+			// System.out.println("clDirectionScript:" + clDirectionScript);
+
+			if (clDirectionScript != null && !clDirectionScript.trim().equals("")) {
+				String jsLabel = clDirectionScript;
+				String jsDescript = "The cl Direction in interation.";
+				String jsURI = DIKBD2R_PREFIX + clDirectionScript;
+
+				System.out.println("clDirection: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource clDirection = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setClDirection(clDirection);
+			}
+			
+			/*
+			 * increase clType
+			 */
+			String clTypeScript = pkddi.getClType();
+			// System.out.println("clTypeScript:" + clTypeScript);
+
+			if (clTypeScript != null && !clTypeScript.trim().equals("")) {
+				String jsLabel = clTypeScript;
+				String jsDescript = "The cl Type in interation.";
+				String jsURI = DIKBD2R_PREFIX + clTypeScript;
+
+				System.out.println("clType: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource clType = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setClType(clType);
+			}
+			
 
 			/*
 			 * Cmax
