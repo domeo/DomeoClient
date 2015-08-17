@@ -37,6 +37,12 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 		validation(json, validation, set, selectors);
 
 		JsTextQuoteSelector jsonSelector = (JsTextQuoteSelector) json;
+		
+		System.out.println("TextQuoteSelectorJsonUnmarshaller");
+		System.out.println("exact:" + jsonSelector.getMatch() + "|");
+
+		System.out.println("replaced exact:" + jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\"") + "|");
+		
 		MTextQuoteSelector selector = AnnotationFactory.clonePrefixSuffixTextSelector(
 			jsonSelector.getId(), 
 			jsonSelector.getFormattedCreatedOn(), 
@@ -47,17 +53,18 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 			 * handle win new line character \r\n
 			 */
 			
-			jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
-			jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
-			jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""));
+			
+			//jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
+			//jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
+			//jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""));
 		
 			/*
 			 * Original new line character escape
 			 */
 			
-			//jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
-			//jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
-			//jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""));
+			jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""));
 		return selector;
 	}
 

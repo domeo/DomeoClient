@@ -27,9 +27,9 @@ public class JsonTextQuoteSelectorSerializer extends JsonSelectorSerializer {
 		 * handle win new line character \r\n
 		 */
 		
-		selector.put(MTextQuoteSelector.PREFIX, new JSONString(sel.getPrefix().replaceAll("\n", "\\\\\\n").replaceAll("\r", "\\\\\\r").replace("\t", "\\\\\\t")));
-		selector.put(MTextQuoteSelector.EXACT, new JSONString(sel.getExact().replaceAll("\n", "\\\\\\n").replaceAll("\r", "\\\\\\r").replace("\t", "\\\\\\t")));
-		selector.put(MTextQuoteSelector.SUFFIX, new JSONString(sel.getSuffix().replaceAll("\n", "\\\\\\n").replaceAll("\r", "\\\\\\r").replace("\t", "\\\\\\t")));
+		selector.put(MTextQuoteSelector.PREFIX, new JSONString(sel.getPrefix().replaceAll("\n", " ").replaceAll("\r", " ").replace("\t", " ")));
+		selector.put(MTextQuoteSelector.EXACT, new JSONString(sel.getExact().replaceAll("\n", " ").replaceAll("\r", " ").replace("\t", " ")));
+		selector.put(MTextQuoteSelector.SUFFIX, new JSONString(sel.getSuffix().replaceAll("\n", " ").replaceAll("\r", " ").replace("\t", " ")));
 		
 		/*
 		 * original JSON String escape
