@@ -41,9 +41,19 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 			jsonSelector.getId(), 
 			jsonSelector.getFormattedCreatedOn(), 
 			_domeo.getPersistenceManager().getCurrentResource(), 
-			jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
-			jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
-			jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""));
+			
+			
+			/*
+			 * Original new line character escape
+			 */
+			
+			jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\r", "r").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "r").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "r").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""));
+			
+			//jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
+			//jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
+			//jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""));
 		return selector;
 	}
 
