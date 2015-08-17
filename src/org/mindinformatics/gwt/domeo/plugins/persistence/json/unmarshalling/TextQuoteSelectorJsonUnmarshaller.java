@@ -44,12 +44,16 @@ public class TextQuoteSelectorJsonUnmarshaller extends AUnmarshaller implements 
 			
 			
 			/*
-			 * Original new line character escape
+			 * handle win new line character \r\n
 			 */
 			
-			jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\r", "r").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
-			jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "r").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
-			jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "r").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""));
+			jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""), 
+			jsonSelector.getSuffix().replaceAll("\\\\n", "n").replaceAll("\\\\r", "").replaceAll("\\\\t", "t").replaceAll("\\\\\"", "\""));
+		
+			/*
+			 * Original new line character escape
+			 */
 			
 			//jsonSelector.getMatch().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 
 			//jsonSelector.getPrefix().replaceAll("\\\\n", "n").replaceAll("\\\\\"", "\""), 

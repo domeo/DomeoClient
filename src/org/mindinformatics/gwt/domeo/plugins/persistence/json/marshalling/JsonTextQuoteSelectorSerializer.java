@@ -17,24 +17,24 @@ public class JsonTextQuoteSelectorSerializer extends JsonSelectorSerializer {
 		MTextQuoteSelector sel = (MTextQuoteSelector) obj;
 		JSONObject selector = (JSONObject) initializeSelector(sel);
 		
-		System.out.println("JsonTextQuoteSelectorSerializer - serialize");
-		System.out.println("exact:" + sel.getExact() + "|");
+		//System.out.println("JsonTextQuoteSelectorSerializer - serialize");
+		//System.out.println("exact:" + sel.getExact() + "|");
+		//System.out.println("JsonTextQuoteSelectorSerializer - after replace ....");
+		//System.out.println("exact:" + sel.getExact().replaceAll("\n", "\\\\\\n"));
+		//System.out.println("exact:" + new JSONString(sel.getExact().replaceAll("\n", "\\\\\\n")));
 		
-		System.out.println("JsonTextQuoteSelectorSerializer - after replace ....");
-
-		System.out.println("exact:" + sel.getExact().replaceAll("\n", "\\\\\\n"));
-		
-		System.out.println("exact:" + new JSONString(sel.getExact().replaceAll("\n", "\\\\\\n")));
-
+		/*
+		 * handle win new line character \r\n
+		 */
 		
 		selector.put(MTextQuoteSelector.PREFIX, new JSONString(sel.getPrefix().replaceAll("\n", "\\\\\\n").replaceAll("\r", "\\\\\\r").replace("\t", "\\\\\\t")));
 		selector.put(MTextQuoteSelector.EXACT, new JSONString(sel.getExact().replaceAll("\n", "\\\\\\n").replaceAll("\r", "\\\\\\r").replace("\t", "\\\\\\t")));
 		selector.put(MTextQuoteSelector.SUFFIX, new JSONString(sel.getSuffix().replaceAll("\n", "\\\\\\n").replaceAll("\r", "\\\\\\r").replace("\t", "\\\\\\t")));
 		
-		//str.replace(/\n/g, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t");
 		/*
 		 * original JSON String escape
 		 */
+		
 		//selector.put(MTextQuoteSelector.PREFIX, new JSONString(sel.getPrefix().replaceAll("\n", "\\\\\\n")));
 		//selector.put(MTextQuoteSelector.EXACT, new JSONString(sel.getExact().replaceAll("\n", "\\\\\\n")));
 		//selector.put(MTextQuoteSelector.SUFFIX, new JSONString(sel.getSuffix().replaceAll("\n", "\\\\\\n")));
