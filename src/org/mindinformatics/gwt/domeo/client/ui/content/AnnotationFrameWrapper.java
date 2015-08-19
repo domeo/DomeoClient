@@ -148,11 +148,11 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 	
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::isSelectionCollapsed = txt.isCollapsed;
 			
-			//if (!(Pattern.matches("<\d", txt.toString()) && Pattern.matches(">\d", txt.toString()))){
-			//x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::matchText = txt.toString().replace(/(<([^>]+)>)/ig,"");
-			//}
+			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::matchText = txt.toString()
 			
-			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::matchText = txt.toString().replace(/(<([^>]+)>)/ig,"");
+			// original code : replace all <*>
+			//x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::matchText = txt.toString().replace(/(<([^>]+)>)/ig,"");
+			
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::anchorNode = txt.anchorNode;
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::anchorOffset = txt.anchorOffset;
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::focusNode = txt.focusNode;
