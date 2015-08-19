@@ -41,7 +41,7 @@ public class MddiUsage {
 	}
 
 	// tags in the ddi model are the object of SIO predicates
-	//private String comment;
+	// private String comment;
 
 	public String getComment() {
 		return MpDDI.getComment();
@@ -171,7 +171,7 @@ public class MddiUsage {
 	public void setAssertType(MLinkedResource assertType) {
 		MpDDI.setAssertType(assertType);
 	}
-	
+
 	public MLinkedResource getT12() {
 		return MpDDI.getT12();
 	}
@@ -203,7 +203,7 @@ public class MddiUsage {
 	public void setPreciptRegimen(MLinkedResource preciptRegimen) {
 		MpDDI.setPreciptRegimen(preciptRegimen);
 	}
-	
+
 	public MLinkedResource getAucDirection() {
 		return MpDDI.getAucDirection();
 	}
@@ -258,5 +258,53 @@ public class MddiUsage {
 
 	public void setCl(MLinkedResource cl) {
 		MpDDI.setCl(cl);
+	}
+
+	public MLinkedResource getObjectFormu() {
+		return MpDDI.getObjectFormu();
+	}
+
+	public void setObjectFormu(MLinkedResource objectFormu) {
+		MpDDI.setObjectFormu(objectFormu);
+	}
+
+	public MLinkedResource getPreciptFormu() {
+		return MpDDI.getPreciptFormu();
+	}
+
+	public void setPreciptFormu(MLinkedResource preciptFormu) {
+		MpDDI.setPreciptFormu(preciptFormu);
+	}
+
+	public MLinkedResource getCmaxDirection() {
+		return MpDDI.getCmaxDirection();
+	}
+
+	public void setCmaxDirection(MLinkedResource cmaxDirection) {
+		MpDDI.setCmaxDirection(cmaxDirection);
+	}
+
+	public MLinkedResource getCmaxType() {
+		return MpDDI.getCmaxType();
+	}
+
+	public void setCmaxType(MLinkedResource cmaxType) {
+		MpDDI.setCmaxType(cmaxType);
+	}
+
+	public MLinkedResource getT12Direction() {
+		return MpDDI.getT12Direction();
+	}
+
+	public void setT12Direction(MLinkedResource t12Direction) {
+		MpDDI.setT12Direction(t12Direction);
+	}
+
+	public MLinkedResource getT12Type() {
+		return MpDDI.getT12Type();
+	}
+
+	public void setT12Type(MLinkedResource t12Type) {
+		MpDDI.setT12Type(t12Type);
 	}
 }

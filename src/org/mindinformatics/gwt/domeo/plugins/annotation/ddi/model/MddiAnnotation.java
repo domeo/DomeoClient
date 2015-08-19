@@ -264,6 +264,54 @@ public class MddiAnnotation extends MAnnotation implements
 		MpDDIUsage.setCl(cl);
 	}
 	
+	public MLinkedResource getObjectFormu() {
+		return MpDDIUsage.getObjectFormu();
+	}
+
+	public void setObjectFormu(MLinkedResource objectFormu) {
+		MpDDIUsage.setObjectFormu(objectFormu);
+	}
+
+	public MLinkedResource getPreciptFormu() {
+		return MpDDIUsage.getPreciptFormu();
+	}
+
+	public void setPreciptFormu(MLinkedResource preciptFormu) {
+		MpDDIUsage.setPreciptFormu(preciptFormu);
+	}
+
+	public MLinkedResource getCmaxDirection() {
+		return MpDDIUsage.getCmaxDirection();
+	}
+
+	public void setCmaxDirection(MLinkedResource cmaxDirection) {
+		MpDDIUsage.setCmaxDirection(cmaxDirection);
+	}
+
+	public MLinkedResource getCmaxType() {
+		return MpDDIUsage.getCmaxType();
+	}
+
+	public void setCmaxType(MLinkedResource cmaxType) {
+		MpDDIUsage.setCmaxType(cmaxType);
+	}
+
+	public MLinkedResource getT12Direction() {
+		return MpDDIUsage.getT12Direction();
+	}
+
+	public void setT12Direction(MLinkedResource t12Direction) {
+		MpDDIUsage.setT12Direction(t12Direction);
+	}
+
+	public MLinkedResource getT12Type() {
+		return MpDDIUsage.getT12Type();
+	}
+
+	public void setT12Type(MLinkedResource t12Type) {
+		MpDDIUsage.setT12Type(t12Type);
+	}
+	
 
 	@Override
 	public String getLabel() {

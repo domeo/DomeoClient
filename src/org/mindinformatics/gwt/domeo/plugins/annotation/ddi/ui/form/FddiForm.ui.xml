@@ -7,7 +7,7 @@
 		height: 30px;
 		padding-left: 0px;
 		padding-top: 0px;
-		width: 1000px;
+		width: 1200px;
 	}
 	
 	.buttonsPanel {
@@ -51,14 +51,14 @@
 	}
 	
 	.middleColumn {
-		width: 260px;
+		width: 268px;
 		vertical-align: top;
 		padding-left: 12px;
 		padding-right: 12px;
 	}
 	
 	.rightColumn {
-		width: 350px;
+		width: 508px;
 		vertical-align: top;
 		padding-left: 12px;
 		padding-right: 12px;
@@ -72,20 +72,23 @@
 	
 	
 	.titlebarmiddle {
-		width: 260px;
+		width: 268px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
 	
 	.titlebarright {
-		width: 350px;
+		width: 508px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
 	
 	.panel {
 		vertical-align: left;
-		padding-top: 10px;
+		padding-left: 3px;
+		padding-right: 3px;
+		padding-top: 5px;
+		padding-bottom: 5px;
 	}
 	
 	.subpanel {
@@ -161,47 +164,39 @@
 	}
 	
 	.listbox {
-
 		padding-left: 1px;
 		padding-right: 12px;
 		vertical-align: left;
-		padding-top: 2px;
-		padding-bottom: 2px;
 	}
 	
 	.listbox120 {
 		width: 120px;
 		vertical-align: left;
-		padding-top: 2px;
-		padding-bottom: 2px;
 	}
 	
 	.listbox200 {
 		width: 200px;
 		vertical-align: left;
-		padding-top: 2px;
-		padding-bottom: 2px;
 	}
 	
 	.listbox50 {
 		width: 50px;
 		vertical-align: left;
-		padding-top: 2px;
-		padding-bottom: 2px;
 	}
 	
 	.listbox70 {
 		width: 70px;
 		vertical-align: left;
-		padding-top: 2px;
-		padding-bottom: 2px;
 	}
 	
 	.listbox80 {
-		width: 70px;
+		width: 80px;
 		vertical-align: left;
-		padding-top: 2px;
-		padding-bottom: 2px;
+	}
+	
+	.listbox55 {
+		width: 55px;
+		vertical-align: left;
 	}
 	
 	.textarea {
@@ -248,7 +243,7 @@
 					</g:HorizontalPanel>
 					
 					<g:HorizontalPanel styleName='{style.panel}'>
-						<g:Label>Drug mentions: &nbsp;</g:Label>
+						<g:Label>Drug mentions:&nbsp;</g:Label>
 						<g:ListBox ui:field="drug1" name="descript"
 							visibleItemCount='1' styleName='{style.listbox120}'>
 							<g:item value="0"></g:item>
@@ -282,7 +277,7 @@
 							within the interaction):</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel styleName='{style.subpanel}'>
+					<g:HorizontalPanel styleName='{style.panel}'>
 						<g:RadioButton ui:field="rolepp1" name="roler1"
 							checked="false">Precipitant</g:RadioButton>
 						<g:RadioButton ui:field="roleob1" name="roler1"
@@ -338,6 +333,7 @@
 						<g:RadioButton ui:field="roleob2" name="roler2"
 							checked="false">Object</g:RadioButton>
 					</g:HorizontalPanel>
+					
 
 				</g:VerticalPanel>
 			</g:cell>
@@ -428,15 +424,25 @@
 						<g:Label ui:field="DoseLabel2" styleName='{style.titleLeft}'>Preciptant drug dosage:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header12' styleName='{style.subpanel}'>
-
-						<g:Label ui:field="preciptDoseLabel" >Dose in MG:</g:Label>
+					<g:HorizontalPanel styleName='{style.panel}'>
+					
+						<g:Label ui:field="preciptDoseLabel" >Dose in MG:&nbsp;</g:Label>
 						<g:TextArea ui:field='preciptDose' styleName='{style.textarea40}'></g:TextArea>
 						
-						<g:Label ui:field="preciptDurationLabel" >Duration:</g:Label>
+						<g:Label ui:field="preciptFormuLabel" styleName='{style.titleLeft}'>Formulation:&nbsp;</g:Label>
+						<g:ListBox ui:field="preciptFormu" name="formulation"
+							visibleItemCount='1' styleName='{style.listbox55}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">tablet</g:item>
+							<g:item value="3">IV</g:item>
+						</g:ListBox>
+		
+						
+						<g:Label ui:field="preciptDurationLabel" >Duration:&nbsp;</g:Label>
 						<g:TextArea ui:field='preciptDuration' styleName='{style.textarea40}'></g:TextArea>
 	
-						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Regimens:</g:Label>						
+						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Regimens:&nbsp;</g:Label>						
 						<g:ListBox ui:field="preciptregimens" name="descript"
 							visibleItemCount='1' styleName='{style.listbox50}'>
 							<g:item value="0"></g:item>
@@ -449,6 +455,7 @@
 							<g:item value="7">Q12</g:item>
 							<g:item value="8">Q8</g:item>
 							<g:item value="9">Q6</g:item>
+							<g:item value="10">Daily</g:item>
 						</g:ListBox>
 					</g:HorizontalPanel>
 
@@ -458,15 +465,26 @@
 						<g:Label ui:field="DoseLabel1" styleName='{style.titleLeft}'>Object drug dosage:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header13' styleName='{style.subpanel}'>
+					<g:HorizontalPanel ui:field='header13' styleName='{style.panel}'>
 					
-						<g:Label ui:field="objectDoseLabel" >Dose in MG:</g:Label>
+						<g:Label ui:field="objectDoseLabel" >Dose in MG:&nbsp;</g:Label>
 						<g:TextArea ui:field='objectDose' styleName='{style.textarea40}'></g:TextArea>
 						
-						<g:Label ui:field="objectDurationLabel" >Duration:</g:Label>
+						
+						<g:Label ui:field="objectFormuLabel" styleName='{style.titleLeft}'>Formulation:&nbsp;</g:Label>
+						<g:ListBox ui:field="objectFormu" name="formulation"
+							visibleItemCount='1' styleName='{style.listbox55}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">tablet</g:item>
+							<g:item value="3">IV</g:item>
+						</g:ListBox>
+						
+						
+						<g:Label ui:field="objectDurationLabel" >Duration:&nbsp;</g:Label>
 						<g:TextArea ui:field='objectDuration' styleName='{style.textarea40}'></g:TextArea>
 						
-						<g:Label ui:field="doesregimensLabel1" styleName='{style.titleLeft}'>Regimens:</g:Label>
+						<g:Label ui:field="doesregimensLabel1" styleName='{style.titleLeft}'>Regimens:&nbsp;</g:Label>
 						<g:ListBox ui:field="objectregimens" name="descript"
 							visibleItemCount='1' styleName='{style.listbox50}'>
 							<g:item value="0"></g:item>
@@ -479,6 +497,7 @@
 							<g:item value="7">Q12</g:item>
 							<g:item value="8">Q8</g:item>
 							<g:item value="9">Q6</g:item>
+							<g:item value="10">Daily</g:item>
 						</g:ListBox>
 						</g:HorizontalPanel>
 						
@@ -490,26 +509,26 @@
 						<g:Label ui:field="aucLabel" styleName='{style.titleLeft}'>AUC_i/AUC:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header15' styleName='{style.subpanel}'>
-						<g:Label ui:field="aucValueLabel" styleName='{style.titleLeft}'>Auc:</g:Label>
+					<g:HorizontalPanel ui:field='header15' styleName='{style.panel}'>
+						<g:Label ui:field="aucValueLabel" styleName='{style.titleLeft}'>Auc:&nbsp;</g:Label>
 						<g:TextArea ui:field='auc' styleName='{style.textarea40}'></g:TextArea>
 						
-						<g:Label ui:field="aucDirectionLabel" styleName='{style.titleLeft}'>Direction:</g:Label>
-						<g:ListBox ui:field="aucDirection" name="descript"
-							visibleItemCount='1' styleName='{style.listbox80}'>
-							<g:item value="0"></g:item>
-							<g:item value="1">UNK</g:item>
-							<g:item value="2">Increase</g:item>
-							<g:item value="3">Decrease</g:item>
-						</g:ListBox>
-						
-						<g:Label ui:field="aucTypeLabel" styleName='{style.titleLeft}'>Type:</g:Label>
+						<g:Label ui:field="aucTypeLabel" styleName='{style.titleLeft}'>Type:&nbsp;</g:Label>
 						<g:ListBox ui:field="aucType" name="descript"
 							visibleItemCount='1' styleName='{style.listbox70}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">UNK</g:item>
 							<g:item value="2">Percent</g:item>
 							<g:item value="3">Fold</g:item>
+						</g:ListBox>
+						
+						<g:Label ui:field="aucDirectionLabel" styleName='{style.titleLeft}'>Direction:&nbsp;</g:Label>
+						<g:ListBox ui:field="aucDirection" name="descript"
+							visibleItemCount='1' styleName='{style.listbox80}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Increase</g:item>
+							<g:item value="3">Decrease</g:item>
 						</g:ListBox>
 						
 					</g:HorizontalPanel>
@@ -521,11 +540,20 @@
 						<g:Label ui:field="clLabel" styleName='{style.titleLeft}'>CL_i/CL:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header18' styleName='{style.subpanel}'>
-						<g:Label ui:field="clValueLabel" styleName='{style.titleLeft}'>Cl:</g:Label>
+					<g:HorizontalPanel ui:field='header18' styleName='{style.panel}'>
+						<g:Label ui:field="clValueLabel" styleName='{style.titleLeft}'>Cl:&nbsp;</g:Label>
 						<g:TextArea ui:field='cl' styleName='{style.textarea40}'></g:TextArea>
 						
-						<g:Label ui:field="clDirectionLabel" styleName='{style.titleLeft}'>Direction:</g:Label>
+						<g:Label ui:field="clTypeLabel" styleName='{style.titleLeft}'>Type:&nbsp;</g:Label>
+						<g:ListBox ui:field="clType" name="descript"
+							visibleItemCount='1' styleName='{style.listbox70}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Percent</g:item>
+							<g:item value="3">Fold</g:item>
+						</g:ListBox>
+						
+						<g:Label ui:field="clDirectionLabel" styleName='{style.titleLeft}'>Direction:&nbsp;</g:Label>
 						<g:ListBox ui:field="clDirection" name="descript"
 							visibleItemCount='1' styleName='{style.listbox80}'>
 							<g:item value="0"></g:item>
@@ -534,14 +562,6 @@
 							<g:item value="3">Decrease</g:item>
 						</g:ListBox>
 						
-						<g:Label ui:field="clTypeLabel" styleName='{style.titleLeft}'>Type:</g:Label>
-						<g:ListBox ui:field="clType" name="descript"
-							visibleItemCount='1' styleName='{style.listbox70}'>
-							<g:item value="0"></g:item>
-							<g:item value="1">UNK</g:item>
-							<g:item value="2">Percent</g:item>
-							<g:item value="3">Fold</g:item>
-						</g:ListBox>
 						
 					</g:HorizontalPanel>
 					
@@ -552,8 +572,29 @@
 						<g:Label ui:field="cmaxLabel" styleName='{style.titleLeft}'>Cmax:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header16' styleName='{style.subpanel}'>
-						<g:TextArea ui:field='cmax' styleName='{style.textarea}'></g:TextArea>
+					<g:HorizontalPanel ui:field='header16' styleName='{style.panel}'>
+						<g:Label ui:field="cmaxValueLabel" styleName='{style.titleLeft}'>cmax:&nbsp;</g:Label>
+						<g:TextArea ui:field='cmax' styleName='{style.textarea40}'></g:TextArea>
+						
+						<g:Label ui:field="cmaxTypeLabel" styleName='{style.titleLeft}'>Type:&nbsp;</g:Label>
+						<g:ListBox ui:field="cmaxType" name="descript"
+							visibleItemCount='1' styleName='{style.listbox70}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Percent</g:item>
+							<g:item value="3">Fold</g:item>
+						</g:ListBox>
+						
+						<g:Label ui:field="cmaxDirectionLabel" styleName='{style.titleLeft}'>Direction:&nbsp;</g:Label>
+						<g:ListBox ui:field="cmaxDirection" name="descript"
+							visibleItemCount='1' styleName='{style.listbox80}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Increase</g:item>
+							<g:item value="3">Decrease</g:item>
+						</g:ListBox>
+						
+						
 					</g:HorizontalPanel>
 
 					<!-- T1/2 -->
@@ -562,8 +603,29 @@
 						<g:Label ui:field="t12Label" styleName='{style.titleLeft}'>T1/2:</g:Label>
 					</g:HorizontalPanel>
 
-					<g:HorizontalPanel ui:field='header17' styleName='{style.subpanel}'>
-						<g:TextArea ui:field='t12' styleName='{style.textarea}'></g:TextArea>
+					<g:HorizontalPanel ui:field='header17' styleName='{style.panel}'>
+						<g:Label ui:field="t12ValueLabel" styleName='{style.titleLeft}'>t12:&nbsp;</g:Label>
+						<g:TextArea ui:field='t12' styleName='{style.textarea40}'></g:TextArea>
+						
+						<g:Label ui:field="t12TypeLabel" styleName='{style.titleLeft}'>Type:&nbsp;</g:Label>
+						<g:ListBox ui:field="t12Type" name="descript"
+							visibleItemCount='1' styleName='{style.listbox70}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Percent</g:item>
+							<g:item value="3">Fold</g:item>
+							<g:item value="4">Hours</g:item>
+						</g:ListBox>
+						
+						<g:Label ui:field="t12DirectionLabel" styleName='{style.titleLeft}'>Direction:&nbsp;</g:Label>
+						<g:ListBox ui:field="t12Direction" name="descript"
+							visibleItemCount='1' styleName='{style.listbox80}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Increase</g:item>
+							<g:item value="3">Decrease</g:item>
+						</g:ListBox>
+						
 					</g:HorizontalPanel>
 
 				</g:VerticalPanel>

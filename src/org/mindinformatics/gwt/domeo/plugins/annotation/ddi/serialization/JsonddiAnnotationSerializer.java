@@ -210,10 +210,22 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 						objectDuration.getLabel().trim()));
 			}
 			
+			MLinkedResource objectFormu = ann.getObjectFormu();
+			if (objectFormu != null) {
+				pkddi.put(DIKBD2R_PREFIX + "objectFormulation", new JSONString(
+						objectFormu.getLabel().trim()));
+			}
+			
 			MLinkedResource objectRegimens = ann.getObjectRegimen();
 			if (objectRegimens != null) {
 				pkddi.put(DIKBD2R_PREFIX + "objectRegimens", new JSONString(
 						objectRegimens.getLabel().trim()));
+			}
+			
+			MLinkedResource preciptFormu = ann.getPreciptFormu();
+			if (preciptFormu != null) {
+				pkddi.put(DIKBD2R_PREFIX + "preciptFormulation", new JSONString(
+						preciptFormu.getLabel().trim()));
 			}
 			
 			MLinkedResource preciptDuration = ann.getPreciptDuration();
@@ -271,10 +283,34 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 						cmax.getLabel().trim()));
 			}
 			
+			MLinkedResource cmaxDirection = ann.getCmaxDirection();
+			if (cmaxDirection != null) {
+				pkddi.put(DIKBD2R_PREFIX + "cmaxDirection", new JSONString(cmaxDirection.getLabel()
+						.trim()));
+			}
+			
+			MLinkedResource cmaxType = ann.getCmaxType();
+			if (cmaxType != null) {
+				pkddi.put(DIKBD2R_PREFIX + "cmaxType", new JSONString(cmaxType.getLabel()
+						.trim()));
+			}
+			
 			MLinkedResource t12 = ann.getT12();
 			if (t12 != null) {
 				pkddi.put(DIKBD2R_PREFIX + "t12", new JSONString(
 						t12.getLabel().trim()));
+			}
+			
+			MLinkedResource t12Direction = ann.getT12Direction();
+			if (t12Direction != null) {
+				pkddi.put(DIKBD2R_PREFIX + "t12Direction", new JSONString(t12Direction.getLabel()
+						.trim()));
+			}
+			
+			MLinkedResource t12Type = ann.getT12Type();
+			if (t12Type != null) {
+				pkddi.put(DIKBD2R_PREFIX + "t12Type", new JSONString(t12Type.getLabel()
+						.trim()));
 			}
 			
 		}

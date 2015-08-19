@@ -17,7 +17,56 @@ public class Mddi extends MTrustedResource {
 
 	// clinical trail
 	MLinkedResource numOfparcipitants, objectDose, preciptDose, increaseAuc, cl, evidenceType, assertType, t12, cmax,
-			objectRegimen, preciptRegimen, aucDirection, clDirection, aucType, clType, preciptDuration, objectDuration;
+			objectRegimen, preciptRegimen, aucDirection, clDirection, aucType, clType, preciptDuration,objectDuration,
+			objectFormu, preciptFormu, cmaxDirection, cmaxType, t12Direction, t12Type;
+
+	public MLinkedResource getObjectFormu() {
+		return objectFormu;
+	}
+
+	public void setObjectFormu(MLinkedResource objectFormu) {
+		this.objectFormu = objectFormu;
+	}
+
+	public MLinkedResource getPreciptFormu() {
+		return preciptFormu;
+	}
+
+	public void setPreciptFormu(MLinkedResource preciptFormu) {
+		this.preciptFormu = preciptFormu;
+	}
+
+	public MLinkedResource getCmaxDirection() {
+		return cmaxDirection;
+	}
+
+	public void setCmaxDirection(MLinkedResource cmaxDirection) {
+		this.cmaxDirection = cmaxDirection;
+	}
+
+	public MLinkedResource getCmaxType() {
+		return cmaxType;
+	}
+
+	public void setCmaxType(MLinkedResource cmaxType) {
+		this.cmaxType = cmaxType;
+	}
+
+	public MLinkedResource getT12Direction() {
+		return t12Direction;
+	}
+
+	public void setT12Direction(MLinkedResource t12Direction) {
+		this.t12Direction = t12Direction;
+	}
+
+	public MLinkedResource getT12Type() {
+		return t12Type;
+	}
+
+	public void setT12Type(MLinkedResource t12Type) {
+		this.t12Type = t12Type;
+	}
 
 	public MLinkedResource getCl() {
 		return cl;

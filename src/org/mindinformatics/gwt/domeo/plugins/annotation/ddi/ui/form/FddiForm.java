@@ -123,11 +123,13 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	TextArea numParticipt, objectDose, preciptDose, auc, cl, comment, cmax, t12, preciptDuration, objectDuration;
 	
 	@UiField
-	ListBox objectregimens, preciptregimens, aucDirection, clDirection, aucType, clType;
+	ListBox preciptFormu, objectFormu, objectregimens, preciptregimens, 
+	aucDirection, clDirection, aucType, clType,cmaxDirection,cmaxType,t12Direction,t12Type;
 
-	String[] regimensL = { "UNK", "SD", "QD", "BID", "TID", "QID", "Q12", "Q8", "Q6" };
+	String[] regimensL = { "UNK", "SD", "QD", "BID", "TID", "QID", "Q12", "Q8", "Q6", "Daily" };
 	String[] directionL = {"UNK", "Increase", "Decrease"};
-	String[] typeL = {"UNK", "Percent", "Fold"};
+	String[] typeL = {"UNK", "Percent", "Fold","Hours"};
+	String[] formulationL = {"UNK", "tablet", "IV"};
 
 	// drug 1 and drug 2
 
@@ -318,6 +320,19 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			return null;
 	}
 	
+	public MLinkedResource getObjectFormulation() {
+
+		int indexFormu = objectFormu.getSelectedIndex();
+
+		if (indexFormu != 0) {
+			String objectFormuStr = objectFormu.getItemText(indexFormu);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "objectFormulation", objectFormuStr,
+					"Referred to the object drug formulation.");
+		}
+		return null;
+	}
+	
 	public MLinkedResource getObjectRegimens() {
 
 		int indexRegimen = objectregimens.getSelectedIndex();
@@ -327,6 +342,19 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "objectRegimens", drugStr,
 					"Referred to the drug in the interaction.");
+		}
+		return null;
+	}
+	
+	public MLinkedResource getPreciptFormulation() {
+
+		int indexFormu = preciptFormu.getSelectedIndex();
+
+		if (indexFormu != 0) {
+			String preciptFormuStr = preciptFormu.getItemText(indexFormu);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "preciptFormulation", preciptFormuStr,
+					"Referred to the preciptant drug formulation.");
 		}
 		return null;
 	}
@@ -343,6 +371,8 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		}
 		return null;
 	}
+	
+	
 	
 	/*
 	 * AUC
@@ -427,6 +457,9 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		return null;
 	}
 	
+	/*
+	 * cmax
+	 */
 	
 	public MLinkedResource getCmax() {
 
@@ -436,6 +469,37 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		} else
 			return null;
 	}
+	
+	public MLinkedResource getCmaxDirection() {
+
+		int indexDirection = cmaxDirection.getSelectedIndex();
+
+		if (indexDirection != 0) {
+			String directionStr = cmaxDirection.getItemText(indexDirection);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "cmaxDirection", directionStr,
+					"Referred to the cmax increase or decrease in the interaction.");
+		}
+		return null;
+	}
+	
+
+	public MLinkedResource getCmaxType() {
+
+		int indexType = cmaxType.getSelectedIndex();
+
+		if (indexType != 0) {
+			String typeStr = cmaxType.getItemText(indexType);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "cmaxType", typeStr,
+					"Referred to the cmax type in the interaction.");
+		}
+		return null;
+	}
+	
+	/*
+	 * t12
+	 */
 
 	public MLinkedResource getT12() {
 
@@ -444,6 +508,33 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					"T1/2 in clinical trail");
 		} else
 			return null;
+	}
+	
+	public MLinkedResource getT12Direction() {
+
+		int indexDirection = t12Direction.getSelectedIndex();
+
+		if (indexDirection != 0) {
+			String directionStr = t12Direction.getItemText(indexDirection);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "t12Direction", directionStr,
+					"Referred to the t12 increase or decrease in the interaction.");
+		}
+		return null;
+	}
+	
+
+	public MLinkedResource getT12Type() {
+
+		int indexType = t12Type.getSelectedIndex();
+
+		if (indexType != 0) {
+			String typeStr = t12Type.getItemText(indexType);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "t12Type", typeStr,
+					"Referred to the t12 type in the interaction.");
+		}
+		return null;
 	}
 
 
@@ -568,12 +659,18 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							ddiUsage.setDrug2(getDrug2());
 							ddiUsage.setNumOfparcipitants(getNumOfParticipants());
 							ddiUsage.setPreciptDose(getPreciptDose());
+							ddiUsage.setPreciptFormu(getPreciptFormulation());
 							ddiUsage.setObjectDose(getObjectDose());
+							ddiUsage.setObjectFormu(getObjectFormulation());
 							ddiUsage.setIncreaseAuc(getAuc());
 							ddiUsage.setEvidenceType(getEvidenceType());
 							ddiUsage.setAssertType(getAssertType());
 							ddiUsage.setCmax(getCmax());
+							ddiUsage.setCmaxDirection(getCmaxDirection());
+							ddiUsage.setCmaxType(getCmaxType());
 							ddiUsage.setT12(getT12());
+							ddiUsage.setT12Direction(getT12Direction());
+							ddiUsage.setT12Type(getT12Type());
 							ddiUsage.setObjectRegimen(getObjectRegimens());
 							ddiUsage.setPreciptRegimen(getPreciptRegimens());
 							ddiUsage.setObjectDuration(getObjectDoseDuration());
@@ -773,23 +870,29 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			if (_item.getNumOfparcipitants() != null) {
 				numParticipt.setText(_item.getNumOfparcipitants().getLabel());
 			}
+			
+			/*
+			 * object dosage
+			 */
 
 			if (_item.getObjectDose() != null) {
 				objectDose.setText(_item.getObjectDose().getLabel());
 			}
 			
+			if (_item.getObjectFormu() != null) {
+
+				String ObjectFormusStr = _item.getObjectFormu().getLabel();
+				for (int i = 0; i < formulationL.length; i++) {
+					if (formulationL[i].equals(ObjectFormusStr)) {
+						objectFormu.setSelectedIndex(i + 1);
+					}
+				}
+			}
+			
 			if (_item.getObjectDuration() != null) {
 				objectDuration.setText(_item.getObjectDuration().getLabel());
 			}
-
-			if (_item.getPreciptDose() != null) {
-				preciptDose.setText(_item.getPreciptDose().getLabel());
-			}
-
-			if (_item.getPreciptDuration() != null) {
-				preciptDuration.setText(_item.getPreciptDuration().getLabel());
-			}
-
+			
 			if (_item.getObjectRegimen() != null) {
 
 				String objectregimensStr = _item.getObjectRegimen().getLabel();
@@ -798,6 +901,28 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 						objectregimens.setSelectedIndex(i + 1);
 					}
 				}
+			}
+
+			/*
+			 * precipt dosage
+			 */
+			
+			if (_item.getPreciptDose() != null) {
+				preciptDose.setText(_item.getPreciptDose().getLabel());
+			}
+			
+			if (_item.getPreciptFormu() != null) {
+
+				String preciptFormusStr = _item.getPreciptFormu().getLabel();
+				for (int i = 0; i < formulationL.length; i++) {
+					if (formulationL[i].equals(preciptFormusStr)) {
+						preciptFormu.setSelectedIndex(i + 1);
+					}
+				}
+			}
+
+			if (_item.getPreciptDuration() != null) {
+				preciptDuration.setText(_item.getPreciptDuration().getLabel());
 			}
 
 			if (_item.getPreciptRegimen() != null) {
@@ -809,6 +934,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					}
 				}
 			}
+			
+			/*
+			 * auc
+			 */
 			
 			if (_item.getIncreaseAuc() != null) {
 				auc.setText(_item.getIncreaseAuc().getLabel());
@@ -832,8 +961,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				}
 			}
 			
-			
-			
+			/*
+			 * cl
+			 */
+
 			if (_item.getCl() != null) {
 				cl.setText(_item.getCl().getLabel());
 			}
@@ -856,14 +987,61 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				}
 			}
 			
-
+			/*
+ 	 		  cmax
+			 */
+			
 			if (_item.getCmax() != null) {
 				cmax.setText(_item.getCmax().getLabel());
 			}
+			
+			if (_item.getCmaxDirection() != null) {
+				String CmaxDirectionStr = _item.getCmaxDirection().getLabel();
+				for (int i = 0; i < directionL.length; i++) {
+					if (directionL[i].equals(CmaxDirectionStr)) {
+						cmaxDirection.setSelectedIndex(i + 1);
+					}
+				}
+			}
+			
+			if (_item.getCmaxType() != null) {
+				String CmaxTypeStr = _item.getCmaxType().getLabel();
+				for (int i = 0; i < typeL.length; i++) {
+					if (typeL[i].equals(CmaxTypeStr)) {
+						cmaxType.setSelectedIndex(i + 1);
+					}
+				}
+			}
+			
+			/*
+			 * t12
+			 */
 
 			if (_item.getT12() != null) {
 				t12.setText(_item.getT12().getLabel());
 			}
+			
+			if (_item.getT12Direction() != null) {
+				String T12DirectionStr = _item.getT12Direction().getLabel();
+				for (int i = 0; i < directionL.length; i++) {
+					if (directionL[i].equals(T12DirectionStr)) {
+						t12Direction.setSelectedIndex(i + 1);
+					}
+				}
+			}
+			
+			if (_item.getT12Type() != null) {
+				String T12TypeStr = _item.getT12Type().getLabel();
+				for (int i = 0; i < typeL.length; i++) {
+					if (typeL[i].equals(T12TypeStr)) {
+						t12Type.setSelectedIndex(i + 1);
+					}
+				}
+			}
+			
+			/*
+			 * evidence type
+			 */
 
 			if (_item.getEvidenceType() != null) {
 				if (_item.getEvidenceType().getLabel().equals("evidence-supports")) {
@@ -930,6 +1108,8 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					_item.setNumOfparcipitants(getNumOfParticipants());
 					_item.setObjectDose(getObjectDose());
 					_item.setPreciptDose(getPreciptDose());
+					_item.setObjectFormu(getObjectFormulation());
+					_item.setPreciptFormu(getPreciptFormulation());
 					_item.setObjectDuration(getObjectDoseDuration());
 					_item.setPreciptDuration(getPreciptDoseDuration());
 					_item.setIncreaseAuc(getAuc());
@@ -941,7 +1121,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					_item.setObjectRegimen(getObjectRegimens());
 					_item.setPreciptRegimen(getPreciptRegimens());
 					_item.setCmax(getCmax());
+					_item.setCmaxType(getCmaxType());
+					_item.setCmaxDirection(getCmaxDirection());
 					_item.setT12(getT12());
+					_item.setT12Type(getT12Type());
+					_item.setT12Direction(getT12Direction());
 					_item.setEvidenceType(getEvidenceType());
 					_item.setComment(comment.getText());
 
@@ -1433,8 +1617,25 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			if (cmax.getValue().trim().isEmpty()) {
 				requireds.add("Cmax");
 			}
+			
+			if (cmaxDirection.getSelectedIndex() == 0){
+				requireds.add("cmax direction");
+			}
+			
+			if (cmaxType.getSelectedIndex() == 0){
+				requireds.add("cmax type");
+			}
+			
 			if (t12.getValue().trim().isEmpty()) {
 				requireds.add("T1/2");
+			}
+			
+			if (t12Direction.getSelectedIndex() == 0){
+				requireds.add("T1/2 direction");
+			}
+			
+			if (t12Type.getSelectedIndex() == 0){
+				requireds.add("T1/2 type");
 			}
 		}
 
@@ -1495,8 +1696,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							// erase clinical trail fields
 							numParticipt.setValue("");
 							objectDose.setValue("");
+							objectFormu.setSelectedIndex(0);
 							objectDuration.setValue("");
 							preciptDose.setValue("");
+							preciptFormu.setSelectedIndex(0);
 							preciptDuration.setValue("");
 							objectregimens.setSelectedIndex(0);
 							preciptregimens.setSelectedIndex(0);
@@ -1507,7 +1710,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							clDirection.setSelectedIndex(0);
 							clType.setSelectedIndex(0);
 							cmax.setValue("");
+							cmaxDirection.setSelectedIndex(0);
+							cmaxType.setSelectedIndex(0);
 							t12.setValue("");
+							t12Direction.setSelectedIndex(0);
+							t12Type.setSelectedIndex(0);
 						}
 					});
 					hp2.add(submit);

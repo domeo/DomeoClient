@@ -1,6 +1,7 @@
 package org.mindinformatics.gwt.domeo.client.ui.content;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,6 +55,7 @@ import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+
 
 /**
  * 
@@ -145,6 +147,11 @@ public class AnnotationFrameWrapper implements IAnnotationEditListener {
 			} 
 	
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::isSelectionCollapsed = txt.isCollapsed;
+			
+			//if (!(Pattern.matches("<\d", txt.toString()) && Pattern.matches(">\d", txt.toString()))){
+			//x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::matchText = txt.toString().replace(/(<([^>]+)>)/ig,"");
+			//}
+			
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::matchText = txt.toString().replace(/(<([^>]+)>)/ig,"");
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::anchorNode = txt.anchorNode;
 			x.@org.mindinformatics.gwt.domeo.client.ui.content.AnnotationFrameWrapper::anchorOffset = txt.anchorOffset;

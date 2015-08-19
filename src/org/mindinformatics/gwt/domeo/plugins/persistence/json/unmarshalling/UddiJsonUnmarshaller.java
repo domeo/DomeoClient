@@ -269,7 +269,23 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				ann.setNumOfparcipitants(numParticipt);
 			}
 
-			
+			/*
+			 * object Formu
+			 */
+			String objectFormuScript = pkddi.getObjectFormulation();
+
+			if (objectFormuScript != null && !objectFormuScript.trim().equals("")) {
+				String jsLabel = objectFormuScript;
+				String jsDescript = "object drug Formulation in DDI clinical trail.";
+				String jsURI = DIKBD2R_PREFIX + objectFormuScript;
+
+				System.out.println("objectFormulation: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource objectFormu = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setObjectFormu(objectFormu);
+			}
+
 			/*
 			 * object duration
 			 */
@@ -286,8 +302,6 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setObjectDuration(objectDuration);
 			}
-
-			
 
 			/*
 			 * object regimens
@@ -312,7 +326,23 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				ann.setObjectRegimen(objectRegimens);
 			}
 
-			
+			/*
+			 * precipt Formu
+			 */
+			String preciptFormuScript = pkddi.getPreciptFormulation();
+
+			if (preciptFormuScript != null && !preciptFormuScript.trim().equals("")) {
+				String jsLabel = preciptFormuScript;
+				String jsDescript = "preciptitant drug Formulation in DDI clinical trail.";
+				String jsURI = DIKBD2R_PREFIX + preciptFormuScript;
+
+				System.out.println("preciptFormulation: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource preciptFormu = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setPreciptFormu(preciptFormu);
+			}
+
 			/*
 			 * precipt duration
 			 */
@@ -329,7 +359,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setPreciptDuration(preciptDuration);
 			}
-			
+
 			/*
 			 * precipt regimens
 			 */
@@ -352,7 +382,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setPreciptRegimen(preciptRegimens);
 			}
-			
+
 			/*
 			 * AUC
 			 */
@@ -373,7 +403,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setIncreaseAuc(auc);
 			}
-			
+
 			/*
 			 * increase aucDirection
 			 */
@@ -391,7 +421,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setAucDirection(aucDirection);
 			}
-			
+
 			/*
 			 * increase aucType
 			 */
@@ -409,11 +439,9 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setAucType(aucType);
 			}
-			
-			
-			
+
 			/*
-			 *  CL
+			 * CL
 			 */
 			String clScript = pkddi.getCl();
 			// System.out.println("clScript:" + clScript);
@@ -426,12 +454,12 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				System.out.println("cl: " + jsLabel + "|" + jsURI + "|");
 
 				MLinkedResource cl = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
-				
+
 				ann.setCl(cl);
 			}
-			
+
 			/*
-			 * increase clDirection
+			 * clDirection
 			 */
 			String clDirectionScript = pkddi.getClDirection();
 			// System.out.println("clDirectionScript:" + clDirectionScript);
@@ -447,9 +475,9 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setClDirection(clDirection);
 			}
-			
+
 			/*
-			 * increase clType
+			 * clType
 			 */
 			String clTypeScript = pkddi.getClType();
 			// System.out.println("clTypeScript:" + clTypeScript);
@@ -465,7 +493,6 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setClType(clType);
 			}
-			
 
 			/*
 			 * Cmax
@@ -489,6 +516,41 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			}
 
 			/*
+			 * CmaxDirection
+			 */
+			String CmaxDirectionScript = pkddi.getCmaxDirection();
+
+			if (CmaxDirectionScript != null && !CmaxDirectionScript.trim().equals("")) {
+				String jsLabel = CmaxDirectionScript;
+				String jsDescript = "The Cmax Direction in interation.";
+				String jsURI = DIKBD2R_PREFIX + CmaxDirectionScript;
+
+				System.out.println("CmaxDirection: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource CmaxDirection = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setCmaxDirection(CmaxDirection);
+			}
+
+			/*
+			 * CmaxType
+			 */
+			String CmaxTypeScript = pkddi.getCmaxType();
+			// System.out.println("CmaxTypeScript:" + CmaxTypeScript);
+
+			if (CmaxTypeScript != null && !CmaxTypeScript.trim().equals("")) {
+				String jsLabel = CmaxTypeScript;
+				String jsDescript = "The Cmax Type in interation.";
+				String jsURI = DIKBD2R_PREFIX + CmaxTypeScript;
+
+				System.out.println("CmaxType: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource CmaxType = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setCmaxType(CmaxType);
+			}
+
+			/*
 			 * T1/2
 			 */
 			String t12Script = pkddi.getT12();
@@ -507,6 +569,42 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				// jsLabel);
 
 				ann.setT12(t12);
+			}
+
+			/*
+			 * T12Direction
+			 */
+			String T12DirectionScript = pkddi.getT12Direction();
+			// System.out.println("T12DirectionScript:" + T12DirectionScript);
+
+			if (T12DirectionScript != null && !T12DirectionScript.trim().equals("")) {
+				String jsLabel = T12DirectionScript;
+				String jsDescript = "The T12 Direction in interation.";
+				String jsURI = DIKBD2R_PREFIX + T12DirectionScript;
+
+				System.out.println("T12Direction: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource T12Direction = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setT12Direction(T12Direction);
+			}
+
+			/*
+			 * T12Type
+			 */
+			String T12TypeScript = pkddi.getT12Type();
+			// System.out.println("T12TypeScript:" + T12TypeScript);
+
+			if (T12TypeScript != null && !T12TypeScript.trim().equals("")) {
+				String jsLabel = T12TypeScript;
+				String jsDescript = "The T12 Type in interation.";
+				String jsURI = DIKBD2R_PREFIX + T12TypeScript;
+
+				System.out.println("T12Type: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource T12Type = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setT12Type(T12Type);
 			}
 
 		}

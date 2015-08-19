@@ -247,10 +247,14 @@ public class CddiCard extends ACardComponent {
 		
 		
 		if (dataUsage.getPreciptDose() != null) {
-			cardResults.add(createColumnInCard("Precipitant dose",
+			cardResults.add(createColumnInCard("Precipt dose",
 					dataUsage.getPreciptDose().getLabel()));
 		}
-
+		
+		if (dataUsage.getPreciptFormu() != null) {
+			cardResults.add(createColumnInCard("Precipt Formulation",
+					dataUsage.getPreciptFormu().getLabel()));
+		}
 		
 		if (dataUsage.getPreciptDuration() != null) {
 			cardResults.add(createColumnInCard("precipt Duration",
@@ -267,6 +271,11 @@ public class CddiCard extends ACardComponent {
 		if (dataUsage.getObjectDose() != null) {
 			cardResults.add(createColumnInCard("Object dose",
 					dataUsage.getObjectDose().getLabel()));
+		}
+		
+		if (dataUsage.getObjectFormu() != null) {
+			cardResults.add(createColumnInCard("Object Formulation",
+					dataUsage.getObjectFormu().getLabel()));
 		}
 		
 		if (dataUsage.getObjectDuration() != null) {
@@ -315,9 +324,29 @@ public class CddiCard extends ACardComponent {
 					dataUsage.getCmax().getLabel()));
 		}
 		
+		if (dataUsage.getCmaxDirection() != null) {
+			cardResults.add(createColumnInCard("Cmax Direction",
+					dataUsage.getCmaxDirection().getLabel()));
+		}
+
+		if (dataUsage.getCmaxType() != null) {
+			cardResults.add(createColumnInCard("Cmax Type",
+					dataUsage.getCmaxType().getLabel()));
+		}
+		
 		if (dataUsage.getT12() != null) {
 			cardResults.add(createColumnInCard("T1/2",
 					dataUsage.getT12().getLabel()));
+		}
+		
+		if (dataUsage.getT12Direction() != null) {
+			cardResults.add(createColumnInCard("T12 Direction",
+					dataUsage.getT12Direction().getLabel()));
+		}
+
+		if (dataUsage.getT12Type() != null) {
+			cardResults.add(createColumnInCard("T12 Type",
+					dataUsage.getT12Type().getLabel()));
 		}
 
 	}
