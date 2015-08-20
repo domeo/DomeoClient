@@ -4,13 +4,14 @@ import org.mindinformatics.gwt.framework.component.pipelines.src.APipeline;
 import org.mindinformatics.gwt.framework.component.pipelines.src.IStage;
 import org.mindinformatics.gwt.framework.component.pipelines.src.Stage;
 import org.mindinformatics.gwt.framework.src.IApplication;
-import org.mindinformatics.gwt.framework.src.commands.InitAvailableProfilesCommand;
+import org.mindinformatics.gwt.framework.src.commands.InitAllAvailableProfilesCommand;
 import org.mindinformatics.gwt.framework.src.commands.InitReportCommand;
 import org.mindinformatics.gwt.framework.src.commands.InitSoftwareCommand;
+import org.mindinformatics.gwt.framework.src.commands.InitUserAvailableProfilesCommand;
+import org.mindinformatics.gwt.framework.src.commands.InitUserCurrentProfileCommand;
 import org.mindinformatics.gwt.framework.src.commands.InitUserGroupsCommand;
 import org.mindinformatics.gwt.framework.src.commands.InitUserInfoCommand;
 import org.mindinformatics.gwt.framework.src.commands.InitUserPersonCommand;
-import org.mindinformatics.gwt.framework.src.commands.InitUserProfileCommand;
 
 import com.google.gwt.user.client.Window;
 
@@ -37,11 +38,14 @@ public class InitializationPipeline extends APipeline {
 			IStage reportStage = new Stage(new InitReportCommand(application, application, this));
 			_stages.add(reportStage);
 			
-			IStage profileStage = new Stage(new InitUserProfileCommand(application, application, this));
+			IStage profileStage = new Stage(new InitUserCurrentProfileCommand(application, application, this));
 			_stages.add(profileStage);
 			
-			IStage profilesStage = new Stage(new InitAvailableProfilesCommand(application, application, this));
+			IStage profilesStage = new Stage(new InitUserAvailableProfilesCommand(application, application, this));
 			_stages.add(profilesStage);
+			
+			IStage allProfilesStage = new Stage(new InitAllAvailableProfilesCommand(application, application, this));
+			_stages.add(allProfilesStage);
 		} catch (Exception e) {
 			Window.alert("InitializationPipeline " + e.getMessage());
 		}

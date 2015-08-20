@@ -7,51 +7,53 @@ import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 /**
+ * Provides a basic implementation of the profile manager. Every user
+ * has access to a list of predefined profiles. 
+ * 
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */ 
 public abstract class AProfileManager implements IProfileManager {
 
-	/**
-	 * List of logs
-	 */
-	private ArrayList<MProfile> profiles = new ArrayList<MProfile>();
-	private MProfile currentProfile;
-	
-	protected IApplication _application;
+	protected IApplication _app;
 	private ICommandCompleted _callback;
 	
+	/**
+	 * All the profiles available to the current user
+	 */
+	private ArrayList<MProfile> userProfiles = new ArrayList<MProfile>();
+	/**
+	 * Current profile for the current user
+	 */
+	private MProfile currentProfile;
+	
 	public AProfileManager(IApplication application, ICommandCompleted callback) {
-		_application = application;
+		_app = application;
 		_callback = callback;
 	}
-	
-	/**
-	 * Returns the list of messages in the trace list
-	 * @return	The list of trace messages
-	 */
+
+	@Override
 	public ArrayList<MProfile> getUserProfiles() {
-		return profiles;
+		return userProfiles;
 	}
 	
+	@Override
+	public void setProfiles(ArrayList<MProfile> profiles) {
+		_app.getInitializer().addCompletionMessage("Agent Available Profiles [" + profiles.size() + "] initialization... ");
+		userProfiles = profiles;
+	}
+
+	@Override
 	public MProfile getUserCurrentProfile() {
 		return currentProfile;
 	}
 
-	public void setCurrentProfile(MProfile currentProfile) {
-		_application.getInitializer().addCompletionMessage("Agent Profile initialization... ");
-		this.currentProfile = currentProfile;
-	}
-	
-	public ArrayList<MProfile> getProfiles() {
-		return profiles;
+	@Override
+	public void setCurrentProfile(MProfile profile) {
+		_app.getInitializer().addCompletionMessage("Current  Profile [" + profile.getName() + "] initialization... ");
+		currentProfile = profile;
 	}
 
-	public void setProfiles(ArrayList<MProfile> profiles) {
-		_application.getInitializer().addCompletionMessage("Agent Available Profiles initialization... ");
-		this.profiles = profiles;
-	}
-
-	public void stageCompleted() {
+	protected void notifyActionCompletion() {
 		_callback.notifyStageCompletion();
 	}
 }

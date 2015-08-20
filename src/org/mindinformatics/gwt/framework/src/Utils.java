@@ -103,6 +103,10 @@ public class Utils {
 		return $wnd.annotopiaContextPath;
 	}-*/;
 	
+	public native static String getAllProfilesAvailable() /*-{
+		return $wnd.allProfilesAvailable;
+	}-*/;
+	
 //  Deprecated
 //	public native static String getDocumentUrl() /*-{
 //		return $wnd.documentUrl;

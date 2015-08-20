@@ -31,9 +31,9 @@ import org.mindinformatics.gwt.framework.component.profiles.model.JsoProfileEntr
 import org.mindinformatics.gwt.framework.component.profiles.model.MProfile;
 import org.mindinformatics.gwt.framework.component.profiles.src.AProfileManager;
 import org.mindinformatics.gwt.framework.model.agents.IPerson;
-import org.mindinformatics.gwt.framework.src.Utils;
 import org.mindinformatics.gwt.framework.src.IApplication;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
+import org.mindinformatics.gwt.framework.src.Utils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -50,29 +50,25 @@ import com.google.gwt.i18n.client.DateTimeFormat;
  */
 public class JsonProfileManager extends AProfileManager {
 
+	private static final String PROFILE = "profile/";
+	
 	public JsonProfileManager(IApplication application, ICommandCompleted callbackCompleted) {
 		super(application, callbackCompleted);
 	}	
 
 	@Override
-	public void retrieveUserProfiles() {
-		String url = GWT.getModuleBaseURL() + "profile/"+_application.getUserManager().getUser().getUserName()+"/all?format=json";
-		if(!_application.isHostedMode())
-			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/all?format=json";
-		
-		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
-	    builder.setHeader("Content-type", "application/json");
-
+	public void retrieveAndCacheUserAvailableProfiles() {
 		try {
-			Request request = builder.sendRequest(null, new RequestCallback() {
+			String url = getBase() + PROFILE +_app.getUserManager().getUser().getUserName() + "/all?format=json";
+			new RequestBuilder(RequestBuilder.GET, url).sendRequest(null, new RequestCallback() {
 				public void onError(Request request, Throwable exception) {
-					_application.getInitializer().addException("Couldn't retrieve User Profiles JSON");
+					_app.getInitializer().addException("Couldn't retrieve User Profiles JSON");
 				}
 
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						ArrayList<MProfile> userProfiles = new ArrayList<MProfile>();
- 						JsArray profiles = (JsArray) parseJson(response.getText());
+ 						JsArray profiles = (JsArray) Utils.parseJson(response.getText());
 						for(int j=0; j<profiles.length(); j++) {
 							JsoProfile jsoProfile = (JsoProfile)profiles.get(j);
 							
@@ -105,15 +101,15 @@ public class JsonProfileManager extends AProfileManager {
 						}
 
 						setProfiles(userProfiles);
-						stageCompleted();
+						notifyActionCompletion();
 					} else {
-						_application.getInitializer().addException("Couldn't retrieve User Profiles JSON ("
+						_app.getInitializer().addException("Couldn't retrieve User Profiles JSON ("
 								+ response.getStatusText() + ")");
 					}
 				}
 			});
 		} catch (RequestException e) {
-			_application.getInitializer().addException("Couldn't retrieve User Profiles JSON");
+			_app.getInitializer().addException("Couldn't retrieve User Profiles JSON");
 		}
 	}
 	
@@ -121,84 +117,121 @@ public class JsonProfileManager extends AProfileManager {
 		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType]; 
 	}-*/;
 
-	public static native JavaScriptObject parseJson(String jsonStr) /*-{
-		try {
-			var jsonStr = jsonStr      
-	    		.replace(/[\\]/g, '\\\\')
-	    		.replace(/[\/]/g, '\\/')
-	    		.replace(/[\b]/g, '\\b')
-	    		.replace(/[\f]/g, '\\f')
-	    		.replace(/[\n]/g, '\\n')
-	    		.replace(/[\r]/g, '\\r')
-	    		.replace(/[\t]/g, '\\t')
-	    		.replace(/\\'/g, "\\'");
-		  	return JSON.parse(jsonStr);
-		} catch (e) {
-			alert("Error while parsing the JSON message: " + e);
-		}
-	}-*/;
-
+	private String getBase() {
+		return _app.isHostedMode() ? GWT.getModuleBaseURL() : Utils.getUrlBase(GWT.getModuleBaseURL());
+	}
+	
 	@Override
-	public void retrieveUserCurrentProfile() {
-		
-		String url = GWT.getModuleBaseURL() + "profile/"+_application.getUserManager().getUser().getUserName()+"/info?format=json";
-		if(!_application.isHostedMode())
-			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/info?format=json";
-		
-		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
-	    builder.setHeader("Content-type", "application/json");
-
+	public void retrieveAndCacheUserCurrentProfile() {
 		try {
-			Request request = builder.sendRequest(null, new RequestCallback() {
+			String url = getBase() + PROFILE +_app.getUserManager().getUser().getUserName()+"/info?format=json";			
+			new RequestBuilder(RequestBuilder.GET, url).sendRequest(null, new RequestCallback() {
 				public void onError(Request request, Throwable exception) {
-					_application.getInitializer().addException("Couldn't retrieve User Profile JSON");
+					_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
 				}
 
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
-						JsoProfile jsoProfile = (JsoProfile)((JsArray) parseJson(response.getText())).get(0);
-						
+						JsoProfile jsoProfile = (JsoProfile)((JsArray) Utils.parseJson(response.getText())).get(0);
+
 						MProfile profile = new MProfile();
 						profile.setUuid(jsoProfile.getUuid());
 						profile.setName(jsoProfile.getName());
 						profile.setDescription(jsoProfile.getDescription());
 						profile.setLastSavedOn(jsoProfile.getCreatedOn());
-						
+
 						AgentsFactory factory = new AgentsFactory();
 						JsArray<JavaScriptObject> creators = jsoProfile.getCreatedBy();
 						if(getObjectType(creators.get(0)).equals(IPerson.TYPE)) {
 							JsoAgent person = (JsoAgent) creators.get(0);
 							profile.setLastSavedBy((IPerson) factory.createAgent(person));
 						}
-						
+
 						JsArray<JsoProfileEntry> plugins = jsoProfile.getStatusPlugins();
 						for(int i=0; i<plugins.length(); i++) {
 							JsoProfileEntry entry = plugins.get(i);
 							profile.getPlugins().put(entry.getName(), entry.getStatus());
 						}
-						
+
 						JsArray<JsoProfileEntry> features = jsoProfile.getStatusFeatures();
 						for(int i=0; i<features.length(); i++) {
 							JsoProfileEntry entry = features.get(i);
 							profile.getFeatures().put(entry.getName(), entry.getStatus());
 						}
-						
+
 						setCurrentProfile(profile);
-						stageCompleted();
+						notifyActionCompletion();
 					} else {
-						_application.getInitializer().addException("Couldn't retrieve User Profile JSON ("
+						_app.getInitializer().addException("Couldn't retrieve User Profile JSON ("
 								+ response.getStatusText() + ")");
 					}
 				}
 			});
 		} catch (RequestException e) {
-			_application.getInitializer().addException("Couldn't retrieve User Profile JSON");
+			_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
+		}
+	}
+	
+	@Override
+	public void retrieveAndCacheAllProfiles() {
+		try {
+			String url = getBase() + PROFILE + "all/info?format=json";
+			new RequestBuilder(RequestBuilder.GET, url).sendRequest(null, new RequestCallback() {
+				public void onError(Request request, Throwable exception) {
+					_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
+				}
+
+				public void onResponseReceived(Request request, Response response) {
+					if (200 == response.getStatusCode()) {
+						ArrayList<MProfile> userProfiles = new ArrayList<MProfile>();
+ 						JsArray profiles = (JsArray) Utils.parseJson(response.getText());
+						for(int j=0; j<profiles.length(); j++) {
+							JsoProfile jsoProfile = (JsoProfile)profiles.get(j);
+							
+							MProfile profile = new MProfile();
+							profile.setUuid(jsoProfile.getUuid());
+							profile.setName(jsoProfile.getName());
+							profile.setDescription(jsoProfile.getDescription());
+							profile.setLastSavedOn(jsoProfile.getCreatedOn());
+							
+							JsArray<JavaScriptObject> creators = jsoProfile.getCreatedBy();
+							if(getObjectType(creators.get(0)).equals(IPerson.TYPE)) {
+								AgentsFactory factory = new AgentsFactory();
+								JsoAgent jperson = (JsoAgent) creators.get(0);
+								profile.setLastSavedBy((IPerson)factory.createAgent(jperson));
+							}
+							
+							JsArray<JsoProfileEntry> plugins = jsoProfile.getStatusPlugins();
+							for(int i=0; i<plugins.length(); i++) {
+								JsoProfileEntry entry = plugins.get(i);
+								profile.getPlugins().put(entry.getName(), entry.getStatus());
+							}
+							
+							JsArray<JsoProfileEntry> features = jsoProfile.getStatusFeatures();
+							for(int i=0; i<features.length(); i++) {
+								JsoProfileEntry entry = features.get(i);
+								profile.getFeatures().put(entry.getName(), entry.getStatus());
+							}
+							
+							userProfiles.add(profile);
+						}
+
+						setProfiles(userProfiles);
+						notifyActionCompletion();
+					} else {
+						_app.getInitializer().addException("Couldn't retrieve User Profile JSON ("
+								+ response.getStatusText() + ")");
+					}
+				}
+			});
+		} catch (RequestException e) {
+			_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
 		}
 	}
 
 	@Override
 	public MProfile saveUserProfile(MProfile newProfile, final IUpdateProfileCallback callback) {
-		String url = GWT.getModuleBaseURL() + "profile/"+_application.getUserManager().getUser().getUserName()+"/info?format=json";
+		String url = getBase() + PROFILE +_app.getUserManager().getUser().getUserName()+"/info?format=json";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-type", "application/json");
 
@@ -224,13 +257,13 @@ public class JsonProfileManager extends AProfileManager {
 		postData.append("    \"createdby\": [");
 		postData.append("      {");
 		postData.append("        \"@id\": \"");
-		postData.append(_application.getAgentManager().getUserPerson().getUri());
+		postData.append(_app.getAgentManager().getUserPerson().getUri());
 		postData.append("\",");
 		postData.append("        \"@type\": \"");
 		postData.append("foafx:Person");
 		postData.append("\",");
 		postData.append("        \"foafx:name\": \"");
-		postData.append(_application.getAgentManager().getUserPerson().getName());
+		postData.append(_app.getAgentManager().getUserPerson().getName());
 		postData.append("\"");
 		postData.append("      }");
 		postData.append("     ],");
@@ -267,13 +300,13 @@ public class JsonProfileManager extends AProfileManager {
 		try {
 			Request request = builder.sendRequest(postData.toString(), new RequestCallback() {
 				public void onError(Request request, Throwable exception) {
-					_application.getInitializer().addException("Couldn't retrieve User Profile JSON");
+					_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
 				}
 
 				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 
-						JsoProfile jsoProfile = (JsoProfile)((JsArray) parseJson(response.getText())).get(0);
+						JsoProfile jsoProfile = (JsoProfile)((JsArray) Utils.parseJson(response.getText())).get(0);
 						
 						MProfile profile = new MProfile();
 						profile.setUuid(jsoProfile.getUuid());
@@ -303,23 +336,20 @@ public class JsonProfileManager extends AProfileManager {
 						setCurrentProfile(profile);
 						callback.updateCurrentProfile();
 					} else {
-						_application.getInitializer().addException("Couldn't retrieve User Profile JSON ("
+						_app.getInitializer().addException("Couldn't retrieve User Profile JSON ("
 								+ response.getStatusText() + ")");
 					}
 				}
 			});
 		} catch (RequestException e) {
-			_application.getInitializer().addException("Couldn't retrieve User Profile JSON");
+			_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
 		}
 		return newProfile;
 	}
 
 	@Override
 	public void saveCurrentProfile(MProfile currentProfile, final IUpdateProfileCallback callback) {
-		String url = GWT.getModuleBaseURL() + "profile/"+_application.getUserManager().getUser().getUserName()+"/save?format=json";
-		if(!_application.isHostedMode())
-			url = Utils.getUrlBase(GWT.getModuleBaseURL()) + "profile/"+_application.getUserManager().getUser().getUserName()+"/save?format=json";
-		
+		String url = getBase() + PROFILE +_app.getUserManager().getUser().getUserName()+"/save?format=json";
 	    RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	    builder.setHeader("Content-type", "application/json");
 	    
@@ -389,7 +419,7 @@ public class JsonProfileManager extends AProfileManager {
 	    try {
 			Request request = builder.sendRequest(postData.toString(), new RequestCallback() {
 				public void onError(Request request, Throwable exception) {
-					_application.getInitializer().addException("Couldn't retrieve User Profile JSON");
+					_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
 				}
 
 				public void onResponseReceived(Request request, Response response) {
@@ -422,13 +452,13 @@ public class JsonProfileManager extends AProfileManager {
 						
 						callback.updateCurrentProfile();
 					} else {
-						_application.getInitializer().addException("Couldn't retrieve User Profile JSON ("
+						_app.getInitializer().addException("Couldn't retrieve User Profile JSON ("
 								+ response.getStatusText() + ")");
 					}
 				}
 			});
 		} catch (RequestException e) {
-			_application.getInitializer().addException("Couldn't retrieve User Profile JSON");
+			_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
 			callback.updateCurrentProfile();
 		}
 	}

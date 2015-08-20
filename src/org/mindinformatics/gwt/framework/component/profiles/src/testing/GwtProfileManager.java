@@ -24,7 +24,7 @@ public class GwtProfileManager extends AProfileManager {
 	}
 
 	@Override
-	public void retrieveUserProfiles() {
+	public void retrieveAndCacheUserAvailableProfiles() {
 		final AsyncCallback<ArrayList<MProfile>> userServiceCallback = new AsyncCallback<ArrayList<MProfile>>() {
 			public void onFailure(Throwable caught) {
 				Window.alert("Failed to get response from server" + caught.getMessage());
@@ -32,17 +32,17 @@ public class GwtProfileManager extends AProfileManager {
 
 			public void onSuccess(ArrayList<MProfile> userProfiles) {
 				setProfiles(userProfiles);
-				stageCompleted();
+				notifyActionCompletion();
 			}
 		};
 
 		final ProfilesServiceAsync profileService = GWT.create(ProfilesService.class);
 		((ServiceDefTarget) profileService).setServiceEntryPoint(GWT.getModuleBaseURL() + "profiles");
-		profileService.getUserAvailableProfiles(_application.getAgentManager().getUserPerson().getEmail(), userServiceCallback);
+		profileService.getUserAvailableProfiles(_app.getAgentManager().getUserPerson().getEmail(), userServiceCallback);
 	}
 
 	@Override
-	public void retrieveUserCurrentProfile() {
+	public void retrieveAndCacheUserCurrentProfile() {
 		final AsyncCallback<MProfile> userServiceCallback = new AsyncCallback<MProfile>() {
 			public void onFailure(Throwable caught) {
 				Window.alert("Failed to get response from server" + caught.getMessage());
@@ -50,13 +50,13 @@ public class GwtProfileManager extends AProfileManager {
 
 			public void onSuccess(MProfile userProfile) {
 				setCurrentProfile(userProfile);
-				stageCompleted();
+				notifyActionCompletion();
 			}
 		};
 
 		final ProfilesServiceAsync profileService = GWT.create(ProfilesService.class);
 		((ServiceDefTarget) profileService).setServiceEntryPoint(GWT.getModuleBaseURL() + "profiles");
-		profileService.getUserCurrentProfile(_application.getAgentManager().getUserPerson().getEmail(), userServiceCallback);
+		profileService.getUserCurrentProfile(_app.getAgentManager().getUserPerson().getEmail(), userServiceCallback);
 	}
 
 	@Override
@@ -69,6 +69,11 @@ public class GwtProfileManager extends AProfileManager {
 	@Override
 	public void saveCurrentProfile(MProfile currentProfile,
 			IUpdateProfileCallback callback) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void retrieveAndCacheAllProfiles() {
 		// TODO Auto-generated method stub
 	}
 

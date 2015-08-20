@@ -19,18 +19,18 @@ public class StandaloneProfileManager extends AProfileManager {
 	}
 
 	@Override
-	public void retrieveUserProfiles() {
+	public void retrieveAndCacheUserAvailableProfiles() {
 		ArrayList<MProfile> profiles = new ArrayList<MProfile>();
 		profiles.add(getProfileOne());
 		profiles.add(getProfileTwo());
 		setProfiles(profiles);
-		stageCompleted();
+		notifyActionCompletion();
 	}
 
 	@Override
-	public void retrieveUserCurrentProfile() {
+	public void retrieveAndCacheUserCurrentProfile() {
 		setCurrentProfile(getProfileOne());
-		stageCompleted();
+		notifyActionCompletion();
 	}
 	
 	private MProfile getProfileOne() {
@@ -83,5 +83,8 @@ public class StandaloneProfileManager extends AProfileManager {
 		// TODO Auto-generated method stub
 	}
 
-
+	@Override
+	public void retrieveAndCacheAllProfiles() {
+		// TODO Auto-generated method stub		
+	}
 }
