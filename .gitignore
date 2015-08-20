@@ -1,2 +1,6 @@
 war/WEB-INF/classes
 .settings
+war/domeo
+war/tests
+gwt-unitCache
+tomcat
