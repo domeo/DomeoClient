@@ -6,42 +6,37 @@ import org.mindinformatics.gwt.framework.src.ICommand;
 import org.mindinformatics.gwt.framework.src.ICommandCompleted;
 
 /**
+ * However if the global
+ * variable 'allProfilesAvailable' is set as true in the page loading
+ * Domeo, all the available profiles will be made available to the user.
+ * 
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class InitUserProfileCommand implements ICommand {
+public class InitUserAvailableProfilesCommand implements ICommand {
 
 	IApplication _application;
 	InitProfileManagerCommandCallback _callback;
 	ICommandCompleted _completionCallback;
 	
-	public InitUserProfileCommand(IApplication application, InitProfileManagerCommandCallback callback,  
+	public InitUserAvailableProfilesCommand(IApplication application, InitProfileManagerCommandCallback callback,  
 			ICommandCompleted completionCallback) {
 		_completionCallback = completionCallback;
 		_application = application;
-		_callback = callback;
-		
+		_callback = callback;		
 	}
 	
 	@Override
 	public void execute() {
 		_application.getInitializer()
-			.updateMessage("Initializing user profile info...");
+			.updateMessage("Initializing user available profiles info...");
 		_application.getLogger().debug(this.getClass().getName(), 
-			"Initializing user profile info...");
+			"Initializing user available profiles info...");
 		
 		IProfileManager profileManager = _callback.selectProfileManager(_completionCallback);
 		if(profileManager!=null) {
-			profileManager.retrieveUserCurrentProfile();
-			// Stage completion notified by asynchronous service
+			profileManager.retrieveAndCacheUserAvailableProfiles();
 		} else {
-			/*
-			_application.getLogger().debug(this.getClass().getName(), 
-			"No user manager found, loading default user manager");
-			profileManager = new DefaultUserManager(_application, _completionCallback);
-			_callback.setUserManager(profileManager);
-			profileManager.retrieveUser("");
-			profileManager.stageCompleted(); // Necessary as synchronous
-			*/
+			_application.getInitializer().addException("Profile manager not initialized!");
 		}
 	}
 }

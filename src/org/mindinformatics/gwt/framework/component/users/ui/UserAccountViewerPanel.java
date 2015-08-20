@@ -92,12 +92,12 @@ public class UserAccountViewerPanel extends Composite implements IContentPanel, 
 		initWidget(binder.createAndBindUi(this)); 
 		this.setWidth((Window.getClientWidth() - 140) + "px");
 
-		if(_application.getAgentManager().getUserPerson().getPicture()!=null) {
-			picturePanel.add(ResourcesUtils.getImage(_application.getLogger(), _application.getAgentManager().getUserPerson().getPicture(), 
-					Domeo.resources.unknownPersonIcon()));
-		} else {
+//		if(_application.getAgentManager().getUserPerson().getPicture()!=null) {
+//			picturePanel.add(ResourcesUtils.getImage(_application.getLogger(), _application.getAgentManager().getUserPerson().getPicture(), 
+//					Domeo.resources.unknownPersonIcon()));
+//		} else {
 			picturePanel.add(new Image(Domeo.resources.unknownPersonIcon()));
-		}
+		//}
 		
 		titlePanel.setText(_application.getAgentManager().getUserPerson().getTitle());
 		firstnamePanel.setText(_application.getAgentManager().getUserPerson().getFirstName());
