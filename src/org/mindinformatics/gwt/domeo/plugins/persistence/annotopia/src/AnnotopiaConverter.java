@@ -34,6 +34,12 @@ import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceMana
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.JsMicroPublication;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.JsMpAssertion;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
@@ -60,6 +66,7 @@ import org.mindinformatics.gwt.utils.src.HtmlUtils;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -872,6 +879,51 @@ public class AnnotopiaConverter {
 					
 					if(persist)  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(highlight, aSet);
 					else aSet.addAnnotation(highlight);
+					
+					aSet.setHasChanged(false);
+				} else if(getMotivation(annotation).equals(IMicroPublicationsOntology.micropublishing)) {
+					_domeo.getLogger().debug(this, "Microublication");
+					
+					JsMicroPublication body = null;
+					boolean multipleBodies = annotation.hasMultipleBodies();
+					if(!multipleBodies) {
+						if(getObjectType(annotation.getBody()).toString().contains(IMicroPublicationsOntology.mpMicropublication)) {
+							_domeo.getLogger().debug(this, "Comment c");
+							body = (JsMicroPublication) annotation.getBody();
+							//bodyText = body.getChars();
+						}
+					}
+					_domeo.getLogger().debug(this, "Comment c1 " + body.getArgues().getClass().getName());
+					String argues = body.getArgues().toString();
+					_domeo.getLogger().debug(this, "Comment c2");
+					JsArray<JsMpAssertion> assertions = body.getAsserts();
+					_domeo.getLogger().debug(this, "Comment d");
+					MMicroPublicationAnnotation mpAnnotation = AnnotationFactory.createMicroPublication(aSet, annotatedBy, 
+							aSet.getCreatedWith(), null);
+					_domeo.getLogger().debug(this, "Comment e");
+					MMicroPublication mp = MicroPublicationFactory.createMicroPublication((MTextQuoteSelector)selectors.get(0));
+					
+					Window.alert(assertions.get(0).getType());
+					if(assertions.get(0).getType().equals(IMicroPublicationsOntology.mpClaim)) {
+						mp.setType(MMicroPublication.CLAIM);
+					} else if(assertions.get(0).getType().equals(IMicroPublicationsOntology.mpHypothesis)) {
+						mp.setType(MMicroPublication.HYPOTHESIS);
+					}
+					
+					mpAnnotation.setMicroPublication(mp);
+					
+					mpAnnotation.setHasChanged(false);
+					for(MSelector selector: selectors) {
+						mpAnnotation.addSelector(selector);
+					}	
+					mpAnnotation.setIndividualUri(annotation.getId());
+					mpAnnotation.setCreatedOn(annotatedAt);
+					mpAnnotation.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
+					if(lastSavedOn!=null) mpAnnotation.setLastSavedOn(lastSavedOn); 
+					if(persist) performAnnotation(mpAnnotation);
+					
+					if(persist) ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(mpAnnotation, aSet);
+					else aSet.addAnnotation(mpAnnotation);
 					
 					aSet.setHasChanged(false);
 				}

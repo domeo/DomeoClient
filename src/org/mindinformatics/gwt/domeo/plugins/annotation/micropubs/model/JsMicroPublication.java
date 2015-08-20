@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Massachusetts General Hospital
+ * Copyright 2014 Massachusetts General Hospital
  * 
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -20,31 +20,24 @@
  */
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public interface IMicroPublicationsOntology {
+public class JsMicroPublication extends JavaScriptObject {
 
-	public final String Prefix = "micro-publications";
-	public final String NS = "mp:";
+	protected JsMicroPublication() {}
 	
-	public final String challengedBy = "challengedBy";
-	public final String supportedBy = "supportedBy";
+	public final native String getId() /*-{ return this['@id'];  }-*/;
+	public final native String getType() /*-{ return this['@type']; }-*/;
 	
-	public final String mpReference = NS + "Reference";
-	public final String mpClaim = NS + "Claim";
-	public final String mpHypothesis = NS + "Hypothesis";
-	public final String mpMicropublication = NS + "Micropublication";
+	public final native String getArgues() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpArgues]; 
+	}-*/;
 	
-	public final String mpArgues = NS + "argues";
-	public final String mpAsserts = NS + "asserts";
-	public final String mpCitation = NS + "citation";
-	public final String mpStatement = NS + "statement";
-	public final String mpSupportedBy = NS + "supportedBy";
-	public final String mpChallengedBy = NS + challengedBy;
-	public final String mpQualifiedBy = NS + "qualifiedBy";
-	
-	
-	
-	public final String micropublishing = NS + "micropublishing";
+	public final native  JsArray<JsMpAssertion>  getAsserts() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts]; 
+	}-*/;
 }

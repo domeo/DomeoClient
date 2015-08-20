@@ -43,7 +43,7 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	{
 		MMicroPublicationAnnotation ann = new MMicroPublicationAnnotation();
 		ann.setLocalId(getLocalId());
-		ann.setUuid(getUuid());
+		ann.setUuid("urn:" + getUuid());
 		ann.setIndividualUri(getUrn(ann.getUuid()));
 		ann.setCreator(creator);
 		ann.setCreatedOn(new Date());
@@ -56,13 +56,13 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	
 	public static MMicroPublication createMicroPublication(MTextQuoteSelector selector) {
 		MMicroPublication mp = new MMicroPublication(selector);
-		mp.setId(getUuid());
+		mp.setId("urn:" + getUuid());
 		return mp;
 	}	
 	
 	public static MMpRelationship createMicroPublicationRelationship(IAgent creator, MMpElement element, String relationship) {
 		MMpRelationship rel = new MMpRelationship(element, relationship);
-		rel.setId(getUuid());
+		rel.setId("urn:" + getUuid());
 		rel.setCreator(creator);
 		rel.setCreationDate(new Date());
 		return rel;
@@ -94,7 +94,7 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	
 	public static MMpStatement createMicroPublicationStatement() {
 		MMpStatement statement = new MMpStatement();
-		statement.setId(getUuid());
+		statement.setId("urn:" + getUuid());
 		return statement;
 	}
 	

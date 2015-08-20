@@ -36,8 +36,10 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifi
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.src.Utils;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
 
 /**
@@ -67,6 +69,8 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			jsonAnnotation.put("motivatedBy", new JSONString("oa:tagging"));
 		} else if(ann.getAnnotationType().equals("ao:LinearComment")) {
 			jsonAnnotation.put("motivatedBy", new JSONString("oa:commenting"));
+		} else if(ann.getAnnotationType().equals("ao:MicroPublicationAnnotation")) {
+			jsonAnnotation.put("motivatedBy", new JSONString("mp:micropublishing"));
 		}
 		
 		jsonAnnotation.put(IRdfsOntology.id, nonNullable(ann.getIndividualUri()));
@@ -121,7 +125,14 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
 		} 
 		if(ann.getAnnotationType().equals("ao:MicroPublicationAnnotation")) {
-			jsonAnnotation.put("hasBody", encodeBodies(manager, ann));
+			
+			JSONObject body = (JSONObject) encodeBodies(manager, ann).get(0);
+			String context = "{\"mp\":\"http://purl.org/mp/\",\"ex\":\"http://www.example.com/micropublication/ex1/\",\"dct\":\"http://purl.org/dc/terms/\",\"rdf\":\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\",\"rdfg\":\"http://www.w3.org/2004/03/trix/rdfg-1/\",\"xsd\":\"http://www.w3.org/2001/XMLSchema#\",\"rdfs\":\"http://www.w3.org/2000/01/rdf-schema#\",\"prov\":\"http://www.w3.org/ns/prov#\",\"obo\":\"http://purl.obolibrary.org/obo#\",\"foaf\":\"http://xmlns.com/foaf/spec/0.98#\",\"mp:asserts\":{\"@type\":\"@id\"},\"mp:challengedBy\":{\"@type\":\"@id\"},\"mp:argues\":{\"@type\":\"@id\"},\"mp:hasAttribution\":{\"@type\":\"@id\"},\"mp:attributionOfAgent\":{\"@type\":\"@id\"},\"mp:qualifiedBy\":{\"@type\":\"@id\"},\"mp:supportedBy\":{\"@type\":\"@id\"},\"mp:quotes\":{\"@type\":\"@id\"},\"mp:represents\":{\"@type\":\"@id\"},\"mp:atTime\":{\"@type\":\"xsd:dateTime\"}}";
+			body.put("@context", JSONParser.parseStrict(context));	
+			
+			JSONArray a = new JSONArray();
+			a.set(0, body);
+			jsonAnnotation.put("hasBody", body);
 		} 
 		
 		jsonAnnotation.put("hasTarget", encodeSelectors(manager, ann));

@@ -13,6 +13,7 @@ import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.comment.model.MCommentAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.contentasrdf.model.MContentAsRdf;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
@@ -819,6 +820,24 @@ public class AnnotationFactory implements IInitializableComponent {
 		ann.setCreator(creator);
 		ann.setCreatedOn(new Date());
 		ann.setText(text);
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+	
+	//  MICROPUBLICATIONS ------------------------------------------------------------
+	// -----------------------------------------------------------------------
+	public static MMicroPublicationAnnotation createMicroPublication(
+			MAnnotationSet set, IAgent creator, ISoftware tool, 
+			String body) 
+	{
+		MMicroPublicationAnnotation ann = new MMicroPublicationAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		//ann.setBody(createContentAsRdf(body));
 		ann.setNewVersion(true);
 		ann.setTool(tool);
 		return ann;

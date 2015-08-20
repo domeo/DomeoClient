@@ -15,7 +15,6 @@ import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitati
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.Window;
 
 public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements IAnnotopiaSerializer {
 
@@ -31,9 +30,9 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 		JSONObject discourseElement = new JSONObject();
 		discourseElement.put(IRdfsOntology.id, new JSONString(annotation.getMicroPublication().getArgues().getId()));
 		if(annotation.getMicroPublication().getType().equals(MMicroPublication.HYPOTHESIS)) {
-			discourseElement.put(IRdfsOntology.type, new JSONString(MMicroPublication.HYPOTHESIS));
+			discourseElement.put(IRdfsOntology.type, new JSONString(IMicroPublicationsOntology.mpHypothesis));
 		} else {
-			discourseElement.put(IRdfsOntology.type, new JSONString(MMicroPublication.CLAIM));
+			discourseElement.put(IRdfsOntology.type, new JSONString(IMicroPublicationsOntology.mpClaim));
 		}
 		discourseElement.put(IMicroPublicationsOntology.mpStatement, new JSONString(annotation.getMicroPublication().getArgues().getText()));
 		
@@ -52,17 +51,10 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 			}
 			discourseElement.put(IMicroPublicationsOntology.mpQualifiedBy, qualifiedBy);
 		}
-		
-		JSONArray asserts = new JSONArray();
-		asserts.set(0, discourseElement);
-
-		body.put(IMicroPublicationsOntology.mpArgues, new JSONString(annotation.getMicroPublication().getArgues().getId()));
-		body.put(IMicroPublicationsOntology.mpAsserts, asserts);
 
 		if(!annotation.getMicroPublication().getEvidence().isEmpty()) {
 			JSONArray supportedBy = new JSONArray();
 			JSONArray challengedBy = new JSONArray();
-			int counter = 0;
 			for(MMpRelationship rel: annotation.getMicroPublication().getEvidence()) {
 				if(rel.getName().equals(IMicroPublicationsOntology.mpSupportedBy)) {
 					if(rel.getObjectElement()  instanceof MMpReference) {
@@ -71,7 +63,7 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 						reference.put(IRdfsOntology.type, new JSONString(IMicroPublicationsOntology.mpReference));
 						reference.put(IMicroPublicationsOntology.mpCitation, new JSONString(PubMedCitationPainter.getFullCitationPlainString(mMpReference.getReference(), manager._domeo)));
 						manager.serializeExpression(reference, mMpReference.getReference());
-						supportedBy.set(counter++, reference);
+						supportedBy.set(supportedBy.size(), reference);
 					}
 				} else if(rel.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
 					if(rel.getObjectElement()  instanceof MMpReference) {
@@ -80,16 +72,22 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 						reference.put(IRdfsOntology.type, new JSONString(IMicroPublicationsOntology.mpReference));
 						reference.put(IMicroPublicationsOntology.mpCitation, new JSONString(PubMedCitationPainter.getFullCitationPlainString(mMpReference.getReference(), manager._domeo)));
 						manager.serializeExpression(reference, mMpReference.getReference());
-						challengedBy.set(counter++, reference);
+						challengedBy.set(challengedBy.size(), reference);
 					}
 				}
 			}
 			
+			JSONArray asserts = new JSONArray();
+			asserts.set(0, discourseElement);
+
+			body.put(IMicroPublicationsOntology.mpArgues, new JSONString(annotation.getMicroPublication().getArgues().getId()));
+			body.put(IMicroPublicationsOntology.mpAsserts, asserts);
+			
 			if(supportedBy.size()>0) {
-				body.put(IMicroPublicationsOntology.mpSupportedBy, supportedBy);
+				discourseElement.put(IMicroPublicationsOntology.mpSupportedBy, supportedBy);
 			}
 			if(challengedBy.size()>0) {
-				body.put(IMicroPublicationsOntology.mpChallengedBy, supportedBy);
+				discourseElement.put(IMicroPublicationsOntology.mpChallengedBy, supportedBy);
 			}
 		}
 		
