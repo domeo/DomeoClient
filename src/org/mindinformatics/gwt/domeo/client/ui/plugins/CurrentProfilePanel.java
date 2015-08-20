@@ -131,6 +131,21 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 		refresh(false);
 	}
 	
+	public void failedSavingCurrentProfile() {
+		refresh(false);
+		progressIconPanel.clear();
+  	  	saveButton.setEnabled(false);
+  	  	saveAsButton.setEnabled(false);
+  	    saveAsCurrentButton.setEnabled(false);
+		footerMessage.setText("EXCEPTION: could not save profile.");
+		Timer t = new Timer() {
+			public void run() {
+				refreshMessagePanel(false);
+			}
+		};
+		t.schedule(1500);
+	}
+	
 	public void refresh(boolean change) {
 		
 		if(change) {
@@ -357,8 +372,6 @@ public class CurrentProfilePanel extends Composite implements IContentPanel, IRe
 			}
 		};
 		t.schedule(1500);
-		
-		
 	}
 
 	@Override

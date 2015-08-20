@@ -5,6 +5,7 @@ import java.util.HashMap;
 public interface IUpdateProfileCallback {
 
 	public void updateCurrentProfile();
+	public void failedSavingCurrentProfile();
 	public HashMap<String, String> getPluginsStatus();
 	public HashMap<String, String> getFeaturesStatus();
 }

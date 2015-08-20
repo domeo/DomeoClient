@@ -423,43 +423,17 @@ public class JsonProfileManager extends AProfileManager {
 				}
 
 				public void onResponseReceived(Request request, Response response) {
-					if (200 == response.getStatusCode()) {
-
-						/*
-						JsoProfile jsoProfile = (JsoProfile)((JsArray) parseJson(response.getText())).get(0);
-						
-						MProfile profile = new MProfile();
-						profile.setUuid(jsoProfile.getUuid());
-						profile.setName(jsoProfile.getName());
-						profile.setDescription(jsoProfile.getDescription());
-						profile.setLastSavedOn(jsoProfile.getCreatedOn());
-						
-						AgentsFactory factory = new AgentsFactory();
-						JsArray<JavaScriptObject> creators = jsoProfile.getCreatedBy();
-						if(getObjectType(creators.get(0)).equals(IPerson.TYPE)) {
-							JsoAgent person = (JsoAgent) creators.get(0);
-							profile.setLastSavedBy((IPerson) factory.createAgent(person));
-						}
-						
-						JsArray<JsoProfileEntry> plugins = jsoProfile.getStatusPlugins();
-						for(int i=0; i<plugins.length(); i++) {
-							JsoProfileEntry entry = plugins.get(i);
-							profile.getPlugins().put(entry.getName(), entry.getStatus());
-						}
-						
-						setCurrentProfile(profile);
-						*/
-						
+					if (200 == response.getStatusCode()) {						
 						callback.updateCurrentProfile();
 					} else {
-						_app.getInitializer().addException("Couldn't retrieve User Profile JSON ("
-								+ response.getStatusText() + ")");
+						_app.getLogger().exception(this, "Couldn't save User Profile JSON");
+						callback.failedSavingCurrentProfile();
 					}
 				}
 			});
 		} catch (RequestException e) {
-			_app.getInitializer().addException("Couldn't retrieve User Profile JSON");
-			callback.updateCurrentProfile();
+			_app.getInitializer().addException("Couldn't save the User Profile JSON");
+			callback.failedSavingCurrentProfile();
 		}
 	}
 }
