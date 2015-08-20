@@ -248,7 +248,7 @@ public class AddressBarPanel extends Composite implements IToolbarItem,
 				oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/17561409");
 				oracle.add("http://www.ncbi.nlm.nih.gov/pubmed/7758106");
 				// Many citations (about 300)
-				oracle.add("http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2714656/");
+				oracle.add("https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2714656/");
 			}
 			/*
 			if(_application.isStandaloneMode()) {
