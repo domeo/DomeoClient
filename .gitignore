@@ -4,3 +4,4 @@ war/domeo
 war/tests
 gwt-unitCache
 tomcat
+war/WEB-INF/deploy
