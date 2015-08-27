@@ -1212,7 +1212,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 					MTextQuoteSelector hselector = (MTextQuoteSelector) highlight.getSelector();
 
-					String drug = hselector.getExact();
+					String drug = hselector.getExact().trim();
 
 					if (sentence.contains(drug) && drug.length() > 1) {
 

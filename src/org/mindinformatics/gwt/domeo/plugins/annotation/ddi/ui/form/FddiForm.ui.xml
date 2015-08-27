@@ -58,7 +58,7 @@
 	}
 	
 	.rightColumn {
-		width: 508px;
+		width: 540px;
 		vertical-align: top;
 		padding-left: 12px;
 		padding-right: 12px;
@@ -78,7 +78,7 @@
 	}
 	
 	.titlebarright {
-		width: 508px;
+		width: 540px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
@@ -439,7 +439,7 @@
 						</g:ListBox>
 		
 						
-						<g:Label ui:field="preciptDurationLabel" >Duration:&nbsp;</g:Label>
+						<g:Label ui:field="preciptDurationLabel" >Duration (days):&nbsp;</g:Label>
 						<g:TextArea ui:field='preciptDuration' styleName='{style.textarea40}'></g:TextArea>
 	
 						<g:Label ui:field="doesregimensLabel" styleName='{style.titleLeft}'>Regimens:&nbsp;</g:Label>						
@@ -481,7 +481,7 @@
 						</g:ListBox>
 						
 						
-						<g:Label ui:field="objectDurationLabel" >Duration:&nbsp;</g:Label>
+						<g:Label ui:field="objectDurationLabel" >Duration (days):&nbsp;</g:Label>
 						<g:TextArea ui:field='objectDuration' styleName='{style.textarea40}'></g:TextArea>
 						
 						<g:Label ui:field="doesregimensLabel1" styleName='{style.titleLeft}'>Regimens:&nbsp;</g:Label>
