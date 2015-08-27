@@ -434,7 +434,7 @@
 							visibleItemCount='1' styleName='{style.listbox55}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">UNK</g:item>
-							<g:item value="2">tablet</g:item>
+							<g:item value="2">Oral</g:item>
 							<g:item value="3">IV</g:item>
 						</g:ListBox>
 		
@@ -476,7 +476,7 @@
 							visibleItemCount='1' styleName='{style.listbox55}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">UNK</g:item>
-							<g:item value="2">tablet</g:item>
+							<g:item value="2">Oral</g:item>
 							<g:item value="3">IV</g:item>
 						</g:ListBox>
 						
