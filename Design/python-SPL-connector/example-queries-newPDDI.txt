@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------------------
+get all pk ddi (ddi and clinicaltrial)
+--------------------------------------------------------------------------------------------
+
 PREFIX oa:<http://www.w3.org/ns/oa#>
 PREFIX sio: <http://semanticscience.org/resource/>
 PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
@@ -7,8 +11,9 @@ PREFIX domeo:<http://www.w3.org/ns/domeo#>
 PREFIX pav:<http://purl.org/pav/>
 PREFIX dailymed:<http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
 
-SELECT ?source ?annot ?assertionType ?evidenceType ?createdOn ?exactText ?modality ?statementType ?drug1Lab ?drug1Type ?drug1Role ?dose1 ?drug2Lab ?drug2Type ?drug2Role ?dose2 ?numOfParticipants ?auc
+SELECT ?source ?date ?assertionType ?evidenceType ?exactText ?modality ?statementType ?drug1Lab ?drug1Type ?drug1Role ?dose1 ?drug2Lab ?drug2Type ?drug2Role ?dose2 ?objectRegimens ?objectFormulation ?objectDuration ?preciptRegimens ?preciptFormulation ?preciptDuration ?numOfParticipants ?auc ?aucType ?aucDirection ?cl ?clType ?clDirection ?cmax ?cmaxType ?cmaxDirection ?t12 ?t12Type ?t12Direction
 
+FROM <http://purl.org/net/nlprepository/pkddi-katrina-09162015>
 WHERE {
 
   ?annot a oa:ddiAnnotation;
@@ -16,11 +21,11 @@ WHERE {
      dikbD2R:assertionType ?assertionType;
      oa:body ?bn1;
      pav:versionNumber ?version;
+     pav:lastSavedOn ?date;
      oa:context ?context;
      pav:createdOn ?createdOn.
      
      ?context oa:hasSource ?source.
-
      ?context oa:hasSelector ?selector.
         
      ?selector a oa:PrefixSuffixTextSelector;
@@ -33,13 +38,152 @@ WHERE {
       dikbD2R:statement ?statementType;
       sio:SIO_000628 ?drugsInvolved.
 
-  OPTIONAL{
-  ?drugsInvolved dikbD2R:numOfParticipants ?numOfParticipants.
-  }
 
-  OPTIONAL{
-  ?drugsInvolved  dikbD2R:auc ?auc.
-  }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:numOfParticipants ?numOfParticipants.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:clDirection ?clDirection.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:clType ?clType.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:preciptDuration ?preciptDuration.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:auc ?auc.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:objectRegimens ?objectRegimens.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:cmax ?cmax.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:objectFormulation ?objectFormulation.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:cmaxType ?cmaxType.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:preciptRegimens ?preciptRegimens.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:cl ?cl. 
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:cmaxDirection ?cmaxDirection.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:t12 ?t12.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:t12Type ?t12Type.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:t12Direction ?t12Direction.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:aucType ?aucType.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:objectDuration ?objectDuration.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:preciptFormulation ?preciptFormulation.
+    }
+  OPTIONAL {
+    ?drugsInvolved dikbD2R:aucDirection ?aucDirection.
+    }
+
+  ?drugsInvolved a dikbD2R:PK_DDI;
+     sio:SIO_000132 ?drug1;
+     sio:SIO_000132 ?drug2.FILTER(?drug1 > ?drug2)
+ 
+  ?drug1 rdfs:label ?drug1Lab;
+     dailymed:activeMoietyRxCUI ?drug1rxc;
+     rdf:type ?drug1Type;
+     sio:SIO_000228 ?drug1Role.
+  OPTIONAL {
+  	 ?drug1 dikbD2R:dose ?dose1.
+    }
+
+  ?drug2 rdfs:label ?drug2Lab;
+  	 dailymed:activeMoietyRxCUI ?drug2rxc;
+	 rdf:type ?drug2Type;
+ 	 sio:SIO_000228 ?drug2Role.FILTER(?drug1Role != ?drug2Role).
+  OPTIONAL {
+         ?drug2 dikbD2R:dose ?dose2.
+	 }
+
+}    
+GROUP BY ?exactText
+ORDER BY DESC(?annot)
+
+
+
+
+
+--------------------------------------------------------------------------------------------
+query clinical trail only
+--------------------------------------------------------------------------------------------
+
+PREFIX oa:<http://www.w3.org/ns/oa#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX poc: <http://purl.org/net/nlprepository/spl-pharmgx-annotation-poc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dikbD2R:<http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/>
+PREFIX domeo:<http://www.w3.org/ns/domeo#>
+PREFIX pav:<http://purl.org/pav/>
+PREFIX dailymed:<http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/vocab/resource/>
+
+SELECT ?source ?date ?assertionType ?evidenceType ?exactText ?modality ?statementType ?drug1Lab ?drug1Type ?drug1Role ?dose1 ?drug2Lab ?drug2Type ?drug2Role ?dose2 ?objectRegimens ?objectFormulation ?objectDuration ?preciptRegimens ?preciptFormulation ?preciptDuration ?numOfParticipants ?auc ?aucType ?aucDirection ?cl ?clType ?clDirection ?cmax ?cmaxType ?cmaxDirection ?t12 ?t12Type ?t12Direction
+
+FROM <http://purl.org/net/nlprepository/pkddi-katrina-09162015>
+WHERE {
+
+  ?annot a oa:ddiAnnotation;
+     dikbD2R:evidenceType ?evidenceType;
+     dikbD2R:assertionType ?assertionType;
+     oa:body ?bn1;
+     pav:versionNumber ?version;
+     pav:lastSavedOn ?date;
+     oa:context ?context;
+     pav:createdOn ?createdOn.
+     
+     ?context oa:hasSource ?source.
+     ?context oa:hasSelector ?selector.
+        
+     ?selector a oa:PrefixSuffixTextSelector;
+      oa:exact ?exactText.
+
+      ?bn1 domeo:sets ?statement.
+
+      ?statement a poc:DrugDrugInteractionStatement;
+      dikbD2R:modality ?modality;
+      dikbD2R:statement ?statementType;
+      sio:SIO_000628 ?drugsInvolved.
+
+  ?drugsInvolved dikbD2R:numOfParticipants ?numOfParticipants.
+  ?drugsInvolved dikbD2R:clDirection ?clDirection.
+  ?drugsInvolved dikbD2R:clType ?clType.
+  ?drugsInvolved dikbD2R:preciptDuration ?preciptDuration.
+  ?drugsInvolved dikbD2R:auc ?auc.
+  ?drugsInvolved dikbD2R:objectRegimens ?objectRegimens.
+  ?drugsInvolved dikbD2R:cmax ?cmax.
+  ?drugsInvolved dikbD2R:objectFormulation ?objectFormulation.
+  ?drugsInvolved dikbD2R:cmaxType ?cmaxType.
+  ?drugsInvolved dikbD2R:preciptRegimens ?preciptRegimens.
+  ?drugsInvolved dikbD2R:cl ?cl. 
+  ?drugsInvolved dikbD2R:cmaxDirection ?cmaxDirection.
+  ?drugsInvolved dikbD2R:t12 ?t12.
+  ?drugsInvolved dikbD2R:t12Type ?t12Type.
+  ?drugsInvolved dikbD2R:t12Direction ?t12Direction.
+  ?drugsInvolved dikbD2R:aucType ?aucType.
+  ?drugsInvolved dikbD2R:objectDuration ?objectDuration.
+  ?drugsInvolved dikbD2R:preciptFormulation ?preciptFormulation.
+  ?drugsInvolved dikbD2R:aucDirection ?aucDirection.
 
   ?drugsInvolved a dikbD2R:PK_DDI;
      sio:SIO_000132 ?drug1;
