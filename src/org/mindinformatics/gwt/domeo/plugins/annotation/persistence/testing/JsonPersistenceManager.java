@@ -551,7 +551,7 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 		
 		_application.getLogger().debug(this, "Beginning retrieving annotation sets...");
 		if(_application.getProgressPanelContainer()!=null) 
-			_application.getProgressPanelContainer().setProgressMessage("Retrieving existing annotation...");
+			_application.getProgressPanelContainer().setProgressMessage("[INFO] Retrieving existing annotation...");
 
 		if(_application.isHostedMode()) {
 			AnnotationPersistenceServiceFacade f = new AnnotationPersistenceServiceFacade();
@@ -623,6 +623,8 @@ public class JsonPersistenceManager extends APersistenceManager implements IPers
 			});
 			builder.send();
 		} catch (RequestException e) {
+			_application.getProgressPanelContainer().setProgressMessage("[INFO] Retrieving existing annotation:" + e.getStackTrace());
+			
 			_application.getLogger().exception(this, "Couldn't load the annotation");
 		}
 	}
