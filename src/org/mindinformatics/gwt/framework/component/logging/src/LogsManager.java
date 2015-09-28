@@ -27,8 +27,7 @@ public class LogsManager {
 	}
 	
 	public boolean doesLogEntryDisplays(LogLevel level, LogItem item) {
-		if(priority.get(item.getType())>=priority.get(level)) return true;
-		return false;
+		return priority.get(item.getType())>=priority.get(level);
 	}
 	
 	/**

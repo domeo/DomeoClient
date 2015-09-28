@@ -26,6 +26,7 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationReference;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MAnnotationSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
@@ -78,16 +79,21 @@ public class AnnotopiaSerializerManager {
 			&& _domeo.getPersistenceManager().getBibliographicSet().getSelfReference()!=null
 			&& ((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference()!=null) {
 			
-			serializeExpression(source, (MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference());
+			serializeExpression(source, null, (MPublicationArticleReference)((MAnnotationReference)_domeo.getPersistenceManager().getBibliographicSet().getSelfReference()).getReference());
 		}
 	}
 	
-	public void serializeExpression(JSONObject source, MPublicationArticleReference reference) {
+	public void serializeExpression(JSONObject source, JSONString id, MPublicationArticleReference reference) {
 		_domeo.getLogger().debug(this, "Serializing Expression");
 		
 		if(reference!=null) {			
 			boolean exists = false;
 			JSONObject expression = new JSONObject();
+			
+			if(id!=null) {
+				expression.put(IRdfsOntology.id, id);
+			}
+			
 			if(reference.getDoi()!=null) {
 				exists=true;
 				expression.put("http://prismstandard.org/namespaces/basic/2.0/doi", 

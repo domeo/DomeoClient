@@ -33,11 +33,37 @@ public class JsMicroPublication extends JavaScriptObject {
 	public final native String getId() /*-{ return this['@id'];  }-*/;
 	public final native String getType() /*-{ return this['@type']; }-*/;
 	
-	public final native String getArgues() /*-{ 
+	public final native String getArguesAsString() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpArgues]; 
 	}-*/;
-	
-	public final native  JsArray<JsMpAssertion>  getAsserts() /*-{ 
+	public final native boolean isArguesString() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpArgues].constructor === String;
+	}-*/;
+	public final native JsMpAssertion getArguesAsObject() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpArgues]; 
+	}-*/;
+	public final native boolean isArguesObject() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpArgues].constructor === Object;
+	}-*/;
+	public final native boolean isAssertString() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts].constructor === String;
+	}-*/;
+	public final native boolean isAssertObject() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts].constructor === Object;
+	}-*/;
+	public final native JsMpAssertion getAssertAsObject() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts]; 
+	}-*/;
+	public final native String getAssertAsString() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts]; 
+	}-*/;
+	public final native JsArray<JsMpAssertion>  getAsserts() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts]; 
+	}-*/;
+	public final native JsArray<JavaScriptObject>  getAssertsAsObject() /*-{ 
+		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts]; 
+	}-*/;
+	public final native Object  getAssertsAsObject2() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology::mpAsserts]; 
 	}-*/;
 }

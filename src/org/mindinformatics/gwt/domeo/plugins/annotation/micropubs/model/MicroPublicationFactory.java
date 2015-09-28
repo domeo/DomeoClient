@@ -60,6 +60,11 @@ public class MicroPublicationFactory extends AnnotationFactory {
 		return mp;
 	}	
 	
+	public static MMicroPublication loadMicroPublication(MTextQuoteSelector selector) {
+		MMicroPublication mp = new MMicroPublication(selector);
+		return mp;
+	}	
+	
 	public static MMpRelationship createMicroPublicationRelationship(IAgent creator, MMpElement element, String relationship) {
 		MMpRelationship rel = new MMpRelationship(element, relationship);
 		rel.setId("urn:" + getUuid());

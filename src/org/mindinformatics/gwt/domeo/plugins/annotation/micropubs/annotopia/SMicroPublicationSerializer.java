@@ -51,6 +51,9 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 			}
 			discourseElement.put(IMicroPublicationsOntology.mpQualifiedBy, qualifiedBy);
 		}
+		
+		JSONArray asserts = new JSONArray();
+		asserts.set(asserts.size(), discourseElement);
 
 		if(!annotation.getMicroPublication().getEvidence().isEmpty()) {
 			JSONArray supportedBy = new JSONArray();
@@ -60,25 +63,30 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 					if(rel.getObjectElement()  instanceof MMpReference) {
 						MMpReference mMpReference = (MMpReference) rel.getObjectElement();
 						JSONObject reference = new JSONObject();
+						if(!mMpReference.getReference().getPubMedId().isEmpty()) {
+							reference.put(IRdfsOntology.id, new JSONString("urn:pubmed:" + mMpReference.getReference().getPubMedId()));
+						}
 						reference.put(IRdfsOntology.type, new JSONString(IMicroPublicationsOntology.mpReference));
 						reference.put(IMicroPublicationsOntology.mpCitation, new JSONString(PubMedCitationPainter.getFullCitationPlainString(mMpReference.getReference(), manager._domeo)));
-						manager.serializeExpression(reference, mMpReference.getReference());
+						manager.serializeExpression(reference, new JSONString("urn:pubmed:" + mMpReference.getReference().getPubMedId() + ":expr"), mMpReference.getReference());
 						supportedBy.set(supportedBy.size(), reference);
+						asserts.set(asserts.size(), reference);
 					}
 				} else if(rel.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
 					if(rel.getObjectElement()  instanceof MMpReference) {
 						MMpReference mMpReference = (MMpReference) rel.getObjectElement();
 						JSONObject reference = new JSONObject();
+						if(!mMpReference.getReference().getPubMedId().isEmpty()) {
+							reference.put(IRdfsOntology.id, new JSONString("urn:pubmed:" + mMpReference.getReference().getPubMedId()));
+						}
 						reference.put(IRdfsOntology.type, new JSONString(IMicroPublicationsOntology.mpReference));
 						reference.put(IMicroPublicationsOntology.mpCitation, new JSONString(PubMedCitationPainter.getFullCitationPlainString(mMpReference.getReference(), manager._domeo)));
-						manager.serializeExpression(reference, mMpReference.getReference());
+						manager.serializeExpression(reference, new JSONString("urn:pubmed:" + mMpReference.getReference().getPubMedId() + ":expr"), mMpReference.getReference());
 						challengedBy.set(challengedBy.size(), reference);
+						asserts.set(asserts.size(), reference);
 					}
 				}
-			}
-			
-			JSONArray asserts = new JSONArray();
-			asserts.set(0, discourseElement);
+			}	
 
 			body.put(IMicroPublicationsOntology.mpArgues, new JSONString(annotation.getMicroPublication().getArgues().getId()));
 			body.put(IMicroPublicationsOntology.mpAsserts, asserts);

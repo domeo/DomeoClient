@@ -47,4 +47,5 @@ public interface IMicroPublicationsOntology {
 	
 	
 	public final String micropublishing = NS + "micropublishing";
+	public final String statement = NS + "statement";
 }

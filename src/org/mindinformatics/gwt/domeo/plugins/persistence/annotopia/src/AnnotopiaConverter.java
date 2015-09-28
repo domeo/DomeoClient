@@ -25,12 +25,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
@@ -39,6 +41,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.JsMicroP
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.JsMpAssertion;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpStatement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
@@ -66,7 +69,9 @@ import org.mindinformatics.gwt.utils.src.HtmlUtils;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONValue;
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -882,36 +887,74 @@ public class AnnotopiaConverter {
 					
 					aSet.setHasChanged(false);
 				} else if(getMotivation(annotation).equals(IMicroPublicationsOntology.micropublishing)) {
-					_domeo.getLogger().debug(this, "Microublication");
+					_domeo.getLogger().debug(this, "--------------------------------");
+					_domeo.getLogger().debug(this, "MICROPUBLICATION");
 					
 					JsMicroPublication body = null;
 					boolean multipleBodies = annotation.hasMultipleBodies();
 					if(!multipleBodies) {
 						if(getObjectType(annotation.getBody()).toString().contains(IMicroPublicationsOntology.mpMicropublication)) {
-							_domeo.getLogger().debug(this, "Comment c");
 							body = (JsMicroPublication) annotation.getBody();
-							//bodyText = body.getChars();
+							_domeo.getLogger().debug(this, "---- Caching");
+							cachingMpArgues(body);
+							cachingMpElements(body);
 						}
 					}
-					_domeo.getLogger().debug(this, "Comment c1 " + body.getArgues().getClass().getName());
-					String argues = body.getArgues().toString();
-					_domeo.getLogger().debug(this, "Comment c2");
-					JsArray<JsMpAssertion> assertions = body.getAsserts();
-					_domeo.getLogger().debug(this, "Comment d");
-					MMicroPublicationAnnotation mpAnnotation = AnnotationFactory.createMicroPublication(aSet, annotatedBy, 
-							aSet.getCreatedWith(), null);
-					_domeo.getLogger().debug(this, "Comment e");
-					MMicroPublication mp = MicroPublicationFactory.createMicroPublication((MTextQuoteSelector)selectors.get(0));
 					
-					Window.alert(assertions.get(0).getType());
-					if(assertions.get(0).getType().equals(IMicroPublicationsOntology.mpClaim)) {
-						mp.setType(MMicroPublication.CLAIM);
-					} else if(assertions.get(0).getType().equals(IMicroPublicationsOntology.mpHypothesis)) {
-						mp.setType(MMicroPublication.HYPOTHESIS);
+					_domeo.getLogger().debug(this, "Caching completed with " + assertionsCache.size() + " items");
+					
+					_domeo.getLogger().debug(this, "---- Unmarshalling");
+					MMicroPublicationAnnotation mpAnnotation = AnnotationFactory.createMicroPublication(aSet, annotatedBy, aSet.getCreatedWith(), null);
+					MMicroPublication mp = MicroPublicationFactory.loadMicroPublication((MTextQuoteSelector)selectors.get(0));
+					mp.setId(body.getId());
+					
+					// Parse argues type
+					_domeo.getLogger().debug(this, "Parse argues type");
+					JsMpAssertion argument = null;
+					if(body.isArguesString()) {
+						argument = (JsMpAssertion) asserts.get(body.getArguesAsString());
+					} else if(body.isArguesObject()) {
+						argument = body.getArguesAsObject();
 					}
+					if(argument.getType().equals(IMicroPublicationsOntology.mpClaim)) {
+						_domeo.getLogger().debug(this, "Claim");
+						mp.setType(MMicroPublication.CLAIM);
+					} else if(argument.getType().equals(IMicroPublicationsOntology.mpHypothesis)) {
+						_domeo.getLogger().debug(this, "Hypothesis");
+						mp.setType(MMicroPublication.HYPOTHESIS);
+					}			
 					
-					mpAnnotation.setMicroPublication(mp);
+					//Unmarshall argues
+					MMpStatement argues = new MMpStatement();
+					argues.setId(argument.getId());
+					argues.setText(argument.getStatement());
+					mp.setArgues(argues);
 					
+					// Unmarshall asserts
+					if(body.isAssertString()) {
+						_domeo.getLogger().debug(this, "Found Asserts String...");
+						if(!body.getAssertAsString().equals(argues.getId())) {
+							
+						}						
+					} else if(body.isAssertObject()) {
+						_domeo.getLogger().debug(this, "Found Asserts Object...");
+						//argues.put(body.getAssertAsObject().getId(), body.getArguesAsObject());
+					} else {
+						JsArray<JavaScriptObject> asrts = body.getAssertsAsObject();
+						JSONArray arr = new JSONArray(asrts);
+						for(int x = 0; x<arr.size(); x++ ) {
+							if(arr.get(x).getClass().getName().endsWith("JsonString")) {
+								_domeo.getLogger().debug(this, "Found assert id [" + "assert:"+ arr.get(x).toString() + "]");
+							} else {
+								_domeo.getLogger().debug(this, "Unmarshalling Argues from Asserts List Object...");
+								
+								
+								//asserts.put(((JsMpAssertion)asserts.get(x)).getId(), asserts.get(x));
+							}		
+						}
+					}	
+					
+					mpAnnotation.setMicroPublication(mp);				
 					mpAnnotation.setHasChanged(false);
 					for(MSelector selector: selectors) {
 						mpAnnotation.addSelector(selector);
@@ -928,6 +971,121 @@ public class AnnotopiaConverter {
 					aSet.setHasChanged(false);
 				}
 			}
+		}
+	}
+	
+	private Map<String, JavaScriptObject> asserts = new HashMap<String, JavaScriptObject>();
+	private String arguesId;
+	
+	private void cachingMpArgues(JsMicroPublication mp) {
+		_domeo.getLogger().debug(this, "Caching Argues...");
+		String arguesStringId = "";
+		if(mp.isArguesString()) {
+			_domeo.getLogger().debug(this, "Found argues id [" + "argues:"+ mp.getArguesAsString() + "]");
+			arguesStringId =  mp.getArguesAsString();
+		} else if(mp.isArguesObject()) {
+			cacheMpAssertion(new JSONObject(mp.getArguesAsObject()));
+			_domeo.getLogger().debug(this, "Caching argues obj [" + "argues:"+ mp.getArguesAsObject().getId() + "]");
+			arguesId = mp.getArguesAsObject().getId();
+			asserts.put(mp.getArguesAsObject().getId(), mp.getArguesAsObject());
+			return;
+		}
+		
+		_domeo.getLogger().debug(this, "Caching Argues within Asserts...");
+		if(mp.isAssertString()) {
+			_domeo.getLogger().debug(this, "Skipping Asserts String...");
+		} else if(mp.isAssertObject()) {
+			if(mp.getAssertAsObject().getId().equals(arguesStringId)) {
+				_domeo.getLogger().debug(this, "Caching Argues from Asserts Object...");
+				asserts.put(mp.getAssertAsObject().getId(), mp.getArguesAsObject());
+				return;
+			}
+		} else {
+			_domeo.getLogger().debug(this, "Caching Argues within Asserts List...");
+			JsArray<JavaScriptObject> asrts = mp.getAssertsAsObject();
+			JSONArray arr = new JSONArray(asrts);
+			for(int x = 0; x<arr.size(); x++ ) {
+				if(!arr.get(x).getClass().getName().endsWith("JsonString")) {
+					_domeo.getLogger().debug(this, "Caching Argues from Asserts List Object...");
+					asserts.put(((JsMpAssertion)asserts.get(x)).getId(), asserts.get(x));
+				}		
+			}
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	//  ARGUES MICROPUBLICATIONS CACHING
+	// ------------------------------------------------------------------------
+	private void cacheMpArgues(JsMicroPublication mp) {
+		_domeo.getLogger().debug(this, "Caching Argues...");
+		if(mp.isArguesString()) {
+			_domeo.getLogger().debug(this, "* skipping: " + mp.getArguesAsString());
+		} else if(mp.isArguesObject()) {
+			cacheMpAssertion(new JSONObject(mp.getArguesAsObject()));
+		}
+	}	
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	
+	// ------------------------------------------------------------------------
+	//  ASSERTS MICROPUBLICATIONS CACHING
+	// ------------------------------------------------------------------------
+	private void cacheMpAsserts(JsMicroPublication mp) {
+		_domeo.getLogger().debug(this, "Caching Asserts...");
+		if(mp.isAssertString()) {
+			_domeo.getLogger().debug(this, "* skipping: " + mp.getAssertAsString());
+		} else if(mp.isAssertObject()) {
+			cacheMpAssertion(new JSONObject(mp.getAssertAsObject()));
+		} else {
+			_domeo.getLogger().debug(this, "Caching Asserts as list");
+			cacheMpAssertions(new JSONArray(mp.getAssertsAsObject()));			
+		}
+	}
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	
+	
+	// ------------------------------------------------------------------------
+	//  GENERIC MICROPUBLICATIONS CACHING
+	// ------------------------------------------------------------------------
+	private Map<String, JSONObject> assertionsCache = new HashMap<String, JSONObject>();
+	
+	private void cacheMpAssertion(JSONObject assertion) {
+		_domeo.getLogger().debug(this, "* caching: " + assertion.get(IRdfsOntology.id) + " of type " + assertion.get(IRdfsOntology.type));
+		assertionsCache.put(assertion.get(IRdfsOntology.id).toString(), assertion);
+		if(assertion.get(IMicroPublicationsOntology.mpSupportedBy)!=null) 
+			cacheMpAssertions(assertion.get(IMicroPublicationsOntology.mpSupportedBy));
+		if(assertion.get(IMicroPublicationsOntology.mpChallengedBy)!=null) 
+			cacheMpAssertions(assertion.get(IMicroPublicationsOntology.mpChallengedBy));
+	}
+	
+	private void cacheMpAssertions(JSONValue assertions) {
+		if(assertions.isObject()!=null) {
+			cacheMpAssertion(assertions.isObject());
+		} else if(assertions.isArray()!=null) {
+			cacheMpAssertion(assertions.isArray());
+		}
+	}
+	
+	private void cacheMpAssertion(JSONArray assertions) {
+		for(int x = 0; x<assertions.size(); x++ ) {
+			if(assertions.get(x).isObject()!=null) {
+				cacheMpAssertion(assertions.get(x).isObject());
+			} else {
+				_domeo.getLogger().debug(this, "* skipping: " + assertions.get(x).getClass().getName());
+			}
+		}
+	}
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	
+	private void cachingMpElements(JsMicroPublication mp) {
+		_domeo.getLogger().debug(this, "Caching Asserts...");
+		if(mp.isAssertString()) {
+			_domeo.getLogger().debug(this, "Skipping Assert String...");
+		} else if(mp.isAssertObject()) {
+			_domeo.getLogger().debug(this, "Caching Assert as Object");
+			asserts.put(mp.getAssertAsObject().getId(), mp.getAssertAsObject());
+		} else {
+			_domeo.getLogger().debug(this, "Caching Asserts as list");
+			cacheMpAssertions(new JSONArray(mp.getAssertsAsObject()));			
 		}
 	}
 	
@@ -996,5 +1154,9 @@ public class AnnotopiaConverter {
 	// ------------------------------------------------------------------------
 	private final native String getMotivation(Object obj) /*-{ 
 		return obj.motivatedBy; 
+	}-*/;
+	
+	private final native boolean isObjectString(Object obj) /*-{ 
+		return obj[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalType].constructor === String; 
 	}-*/;
 }
