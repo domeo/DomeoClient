@@ -77,7 +77,7 @@ public abstract class ATileComponent extends Composite {
 			
 			if(!SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) content.add(showIcon);
 			content.add(editIcon);
-			content.add(deleteIcon);
+			//content.add(deleteIcon);
 		}
 	}
 	
@@ -170,7 +170,7 @@ public abstract class ATileComponent extends Composite {
 						} 
 
 							
-							provenance.add(deleteIcon);
+							//provenance.add(deleteIcon);
 							provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_LEFT);
 							provenance.setCellWidth(deleteIcon, "22px");
 					} else {
@@ -205,7 +205,7 @@ public abstract class ATileComponent extends Composite {
 					provenance.setCellWidth(commentIcon, "22px");
 					if(!SelectorUtils.isOnMultipleTargets(annotation.getSelectors())) provenance.add(showIcon);
 					provenance.add(editIcon);
-					provenance.add(deleteIcon);
+					//provenance.add(deleteIcon);
 				}
 			} else {
 				provenance.setVisible(false);

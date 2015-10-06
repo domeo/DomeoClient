@@ -111,7 +111,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 				}
 				
 				content.add(editIcon);
-				content.add(deleteIcon);
+				//content.add(deleteIcon);
 			}
 		} catch (Exception e) {
 			_domeo.getLogger().exception(this,"injectButtons: " + e.getMessage());
@@ -192,7 +192,8 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 						provenance.add(editIcon);
 						provenance.setCellHorizontalAlignment(editIcon, HasHorizontalAlignment.ALIGN_CENTER);
 						provenance.setCellWidth(editIcon, "22px");
-						provenance.add(deleteIcon);
+						
+						//provenance.add(deleteIcon);
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_CENTER);
 						provenance.setCellWidth(deleteIcon, "22px");
 					} else {
@@ -223,7 +224,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 					if(((BooleanPreference)_domeo.getPreferences().getPreferenceItem(Domeo.class.getName(), 
 							Domeo.PREF_ALLOW_COMMENTING)).getValue()) provenance.add(commentIcon);
 					provenance.add(editIcon);
-					provenance.add(deleteIcon);
+					//provenance.add(deleteIcon);
 				}
 			} else {
 				provenance.setVisible(false);
@@ -315,7 +316,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 							provenance.setCellWidth(editIcon, "20px");
 							provenance.setCellHorizontalAlignment(editIcon, HasHorizontalAlignment.ALIGN_RIGHT);
 						}
-						provenance.add(deleteIcon);
+						//provenance.add(deleteIcon);
 						provenance.setCellWidth(deleteIcon, "20px");
 						provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_RIGHT);
 					} else {
@@ -354,7 +355,7 @@ public abstract class ACardComponent extends Composite implements ICardComponent
 					provenance.add(editIcon);
 					provenance.setCellWidth(editIcon, "20px");
 					provenance.setCellHorizontalAlignment(editIcon, HasHorizontalAlignment.ALIGN_RIGHT);
-					provenance.add(deleteIcon);
+					//provenance.add(deleteIcon);
 					provenance.setCellWidth(deleteIcon, "20px");
 					provenance.setCellHorizontalAlignment(deleteIcon, HasHorizontalAlignment.ALIGN_RIGHT);
 				}

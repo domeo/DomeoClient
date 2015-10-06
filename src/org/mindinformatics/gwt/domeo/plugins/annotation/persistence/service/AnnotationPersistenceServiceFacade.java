@@ -378,7 +378,7 @@ public class AnnotationPersistenceServiceFacade {
 		+ "\"dikbD2R:clType\":\"UNK\","
 		+ "\"dikbD2R:cmax\":\"8\", "
 		+ "\"dikbD2R:t12\":\"9\","
-		+ "\"dikbD2R:preciptFormulation\":\"tablet\","
+		+ "\"dikbD2R:preciptFormulation\":\"Oral\","
 		+ "\"dikbD2R:objectFormulation\":\"IV\","
 		+ "\"dikbD2R:t12Direction\":\"Decrease\","
 		+ "\"dikbD2R:t12Type\":\"Hours\","
