@@ -32,8 +32,7 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 
 		MddiAnnotation ann = (MddiAnnotation) obj;
 		JSONObject annotation = initializeAnnotation(manager, ann);
-		manager._domeo.getLogger().debug(this,
-				"Initialized JSON annotation object");
+		manager._domeo.getLogger().debug(this, "Initialized JSON annotation object");
 		// Body creation
 		JSONArray bodies = new JSONArray();
 
@@ -43,13 +42,9 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		if (assertType != null) {
 			assertTypeStr = assertType.getLabel();
 
-			annotation.put(DIKBD2R_PREFIX + "assertionType", new JSONString(
-					assertTypeStr));
+			annotation.put(DIKBD2R_PREFIX + "assertionType", new JSONString(assertTypeStr));
 		} else {
-			manager._domeo
-					.getLogger()
-					.debug(this,
-							"ddi annotation serilize error, no assertion type been found");
+			manager._domeo.getLogger().debug(this, "ddi annotation serilize error, no assertion type been found");
 		}
 
 		/*
@@ -60,8 +55,7 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		JSONObject statement = new JSONObject();
 		String statementUUID = UUID.uuid();
 		statement.put("@id", new JSONString(PDDI_URN_PREFIX + statementUUID));
-		statement.put("@type", new JSONString(POC_PREFIX
-				+ "DrugDrugInteractionStatement"));
+		statement.put("@type", new JSONString(POC_PREFIX + "DrugDrugInteractionStatement"));
 
 		/*
 		 * PK DDI urn
@@ -95,39 +89,49 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 			String drugUri1 = drug1.getUrl();
 			String drug_entity1_UUID = UUID.uuid();
 			drug_entity1.put("@id", new JSONString(drug_entity1_UUID));
-			drug_entity1.put(DAILYMED_PREFIX + "activeMoietyRxCUI",
-					new JSONString(drugUri1));
-			drug_entity1.put(IRdfsOntology.label,
-					new JSONString(drug1.getLabel()));
-			drug_entity1.put(IDublinCoreTerms.description,
-					new JSONString(drug1.getDescription()));
-
-			// dose of drug 1
-
-			if (assertTypeStr.equals("DDI-clinical-trial")) {
-				MLinkedResource objectDose = ann.getObjectDose();
-				if (objectDose != null)
-					drug_entity1.put(DIKBD2R_PREFIX + "dose", new JSONString(
-							objectDose.getLabel()));
-			}
+			drug_entity1.put(DAILYMED_PREFIX + "activeMoietyRxCUI", new JSONString(drugUri1));
+			drug_entity1.put(IRdfsOntology.label, new JSONString(drug1.getLabel()));
+			drug_entity1.put(IDublinCoreTerms.description, new JSONString(drug1.getDescription()));
 
 		}
 
 		// drug1 has type1
 		MLinkedResource type1 = ann.getType1();
 		if (type1 != null) {
-			drug_entity1.put("@type",
-					new JSONString(DIKBD2R_PREFIX + type1.getLabel()));
+			drug_entity1.put("@type", new JSONString(DIKBD2R_PREFIX + type1.getLabel()));
 		}
 
 		MLinkedResource role1 = ann.getRole1();
 		if (role1 != null) {
 			// drug1 has role1
 			if (role1 != null) {
-				drug_entity1.put(SIO_PREFIX + "SIO_000228", new JSONString(
-						DIKBD2R_PREFIX + role1.getLabel()));
-				// drug_entity1.put(DIKBD2R_PREFIX + role1.getLabel(), new
-				// JSONString(role1.getUrl()));
+				drug_entity1.put(SIO_PREFIX + "SIO_000228", new JSONString(DIKBD2R_PREFIX + role1.getLabel()));
+
+				// dose of drug 1, depends on drug role
+
+				if (assertTypeStr.equals("DDI-clinical-trial")) {
+					
+					String doseLabel = "";
+
+					if (role1.getLabel().toLowerCase().contains("object")) {
+
+						MLinkedResource objectDose = ann.getObjectDose();
+						if (objectDose != null){
+							doseLabel = objectDose.getLabel();
+						}
+					}
+					else if (role1.getLabel().toLowerCase().contains("precip")){
+						MLinkedResource preciptDose = ann.getPreciptDose();
+						if (preciptDose !=null){
+							doseLabel = preciptDose.getLabel();
+						}
+						
+					}
+					
+					drug_entity1.put(DIKBD2R_PREFIX + "dose", new JSONString(doseLabel));
+
+				}
+
 			}
 		}
 
@@ -151,19 +155,14 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 			String drugUri2 = drug2.getUrl();
 			String drug_entity2_UUID = UUID.uuid();
 			drug_entity2.put("@id", new JSONString(drug_entity2_UUID));
-			drug_entity2.put(DAILYMED_PREFIX + "activeMoietyRxCUI",
-					new JSONString(drugUri2));
-			drug_entity2.put(IRdfsOntology.label,
-					new JSONString(drug2.getLabel()));
-			drug_entity2.put(IDublinCoreTerms.description,
-					new JSONString(drug2.getDescription()));
+			drug_entity2.put(DAILYMED_PREFIX + "activeMoietyRxCUI", new JSONString(drugUri2));
+			drug_entity2.put(IRdfsOntology.label, new JSONString(drug2.getLabel()));
+			drug_entity2.put(IDublinCoreTerms.description, new JSONString(drug2.getDescription()));
 
 			// dose of drug 1
 			if (assertTypeStr.equals("DDI-clinical-trial")) {
 				MLinkedResource preciptDose = ann.getPreciptDose();
 				if (preciptDose != null) {
-					drug_entity2.put(DIKBD2R_PREFIX + "dose", new JSONString(
-							preciptDose.getLabel()));
 				}
 			}
 		}
@@ -171,15 +170,33 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		// drug2 has type
 		MLinkedResource type2 = ann.getType2();
 		if (type2 != null) {
-			drug_entity2.put("@type",
-					new JSONString(DIKBD2R_PREFIX + type2.getLabel()));
+			drug_entity2.put("@type", new JSONString(DIKBD2R_PREFIX + type2.getLabel()));
 		}
 
 		// drug2 has role2
 		MLinkedResource role2 = ann.getRole2();
 		if (role2 != null) {
-			drug_entity2.put(SIO_PREFIX + "SIO_000228", new JSONString(
-					DIKBD2R_PREFIX + role2.getLabel()));
+			drug_entity2.put(SIO_PREFIX + "SIO_000228", new JSONString(DIKBD2R_PREFIX + role2.getLabel()));
+			
+			String doseLabel = "";
+
+			
+			if (role2.getLabel().toLowerCase().contains("object")) {
+
+				MLinkedResource objectDose = ann.getObjectDose();
+				if (objectDose != null){
+					doseLabel = objectDose.getLabel();
+				}
+			}
+			else if (role2.getLabel().toLowerCase().contains("precip")){
+				MLinkedResource preciptDose = ann.getPreciptDose();
+				if (preciptDose !=null){
+					doseLabel = preciptDose.getLabel();
+				}
+				
+			}
+			drug_entity2.put(DIKBD2R_PREFIX + "dose", new JSONString(doseLabel));
+
 		}
 
 		/*
@@ -193,126 +210,106 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		drugs.set(index_drugs++, drug_entity2);
 
 		/*
-		 * DDI-clinical-trial fields 
+		 * DDI-clinical-trial fields
 		 */
 
 		if (assertTypeStr.equals("DDI-clinical-trial")) {
 
 			MLinkedResource numOfParticipants = ann.getNumOfparcipitants();
 			if (numOfParticipants != null) {
-				pkddi.put(DIKBD2R_PREFIX + "numOfParticipants", new JSONString(
-						numOfParticipants.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "numOfParticipants", new JSONString(numOfParticipants.getLabel().trim()));
 			}
-			
+
 			MLinkedResource objectDuration = ann.getObjectDuration();
 			if (objectDuration != null) {
-				pkddi.put(DIKBD2R_PREFIX + "objectDuration", new JSONString(
-						objectDuration.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "objectDuration", new JSONString(objectDuration.getLabel().trim()));
 			}
-			
+
 			MLinkedResource objectFormu = ann.getObjectFormu();
 			if (objectFormu != null) {
-				pkddi.put(DIKBD2R_PREFIX + "objectFormulation", new JSONString(
-						objectFormu.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "objectFormulation", new JSONString(objectFormu.getLabel().trim()));
 			}
-			
+
 			MLinkedResource objectRegimens = ann.getObjectRegimen();
 			if (objectRegimens != null) {
-				pkddi.put(DIKBD2R_PREFIX + "objectRegimens", new JSONString(
-						objectRegimens.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "objectRegimens", new JSONString(objectRegimens.getLabel().trim()));
 			}
-			
+
 			MLinkedResource preciptFormu = ann.getPreciptFormu();
 			if (preciptFormu != null) {
-				pkddi.put(DIKBD2R_PREFIX + "preciptFormulation", new JSONString(
-						preciptFormu.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "preciptFormulation", new JSONString(preciptFormu.getLabel().trim()));
 			}
-			
+
 			MLinkedResource preciptDuration = ann.getPreciptDuration();
 			if (preciptDuration != null) {
-				pkddi.put(DIKBD2R_PREFIX + "preciptDuration", new JSONString(
-						preciptDuration.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "preciptDuration", new JSONString(preciptDuration.getLabel().trim()));
 			}
-			
+
 			MLinkedResource preciptRegimens = ann.getPreciptRegimen();
 			if (preciptRegimens != null) {
-				pkddi.put(DIKBD2R_PREFIX + "preciptRegimens", new JSONString(
-						preciptRegimens.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "preciptRegimens", new JSONString(preciptRegimens.getLabel().trim()));
 			}
-			
 
 			MLinkedResource auc = ann.getIncreaseAuc();
 			if (auc != null) {
-				pkddi.put(DIKBD2R_PREFIX + "auc", new JSONString(auc.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "auc", new JSONString(auc.getLabel().trim()));
 			}
 
 			MLinkedResource aucDirection = ann.getAucDirection();
 			if (aucDirection != null) {
-				pkddi.put(DIKBD2R_PREFIX + "aucDirection", new JSONString(aucDirection.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "aucDirection", new JSONString(aucDirection.getLabel().trim()));
 			}
-			
+
 			MLinkedResource aucType = ann.getAucType();
 			if (aucType != null) {
-				pkddi.put(DIKBD2R_PREFIX + "aucType", new JSONString(aucType.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "aucType", new JSONString(aucType.getLabel().trim()));
 			}
-			
+
 			MLinkedResource cl = ann.getCl();
 			if (cl != null) {
-				pkddi.put(DIKBD2R_PREFIX + "cl", new JSONString(cl.getLabel()
-						.trim()));
-			}			
-			
+				pkddi.put(DIKBD2R_PREFIX + "cl", new JSONString(cl.getLabel().trim()));
+			}
+
 			MLinkedResource clDirection = ann.getClDirection();
 			if (clDirection != null) {
-				pkddi.put(DIKBD2R_PREFIX + "clDirection", new JSONString(clDirection.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "clDirection", new JSONString(clDirection.getLabel().trim()));
 			}
-			
+
 			MLinkedResource clType = ann.getClType();
 			if (clType != null) {
-				pkddi.put(DIKBD2R_PREFIX + "clType", new JSONString(clType.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "clType", new JSONString(clType.getLabel().trim()));
 			}
-			
+
 			MLinkedResource cmax = ann.getCmax();
 			if (cmax != null) {
-				pkddi.put(DIKBD2R_PREFIX + "cmax", new JSONString(
-						cmax.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "cmax", new JSONString(cmax.getLabel().trim()));
 			}
-			
+
 			MLinkedResource cmaxDirection = ann.getCmaxDirection();
 			if (cmaxDirection != null) {
-				pkddi.put(DIKBD2R_PREFIX + "cmaxDirection", new JSONString(cmaxDirection.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "cmaxDirection", new JSONString(cmaxDirection.getLabel().trim()));
 			}
-			
+
 			MLinkedResource cmaxType = ann.getCmaxType();
 			if (cmaxType != null) {
-				pkddi.put(DIKBD2R_PREFIX + "cmaxType", new JSONString(cmaxType.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "cmaxType", new JSONString(cmaxType.getLabel().trim()));
 			}
-			
+
 			MLinkedResource t12 = ann.getT12();
 			if (t12 != null) {
-				pkddi.put(DIKBD2R_PREFIX + "t12", new JSONString(
-						t12.getLabel().trim()));
+				pkddi.put(DIKBD2R_PREFIX + "t12", new JSONString(t12.getLabel().trim()));
 			}
-			
+
 			MLinkedResource t12Direction = ann.getT12Direction();
 			if (t12Direction != null) {
-				pkddi.put(DIKBD2R_PREFIX + "t12Direction", new JSONString(t12Direction.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "t12Direction", new JSONString(t12Direction.getLabel().trim()));
 			}
-			
+
 			MLinkedResource t12Type = ann.getT12Type();
 			if (t12Type != null) {
-				pkddi.put(DIKBD2R_PREFIX + "t12Type", new JSONString(t12Type.getLabel()
-						.trim()));
+				pkddi.put(DIKBD2R_PREFIX + "t12Type", new JSONString(t12Type.getLabel().trim()));
 			}
-			
+
 		}
 
 		// drug participant in pk_ddi
@@ -332,10 +329,8 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		MLinkedResource statemt = ann.getStatement();
 		if (statemt != null) {
 			// DDI statement is represented by statement
-			statement.put(SIO_PREFIX + "SIO_000205", new JSONString(
-					DIKBD2R_PREFIX + "statement"));
-			statement.put(DIKBD2R_PREFIX + "statement", new JSONString(
-					NCIT_PREFIX + statemt.getLabel()));
+			statement.put(SIO_PREFIX + "SIO_000205", new JSONString(DIKBD2R_PREFIX + "statement"));
+			statement.put(DIKBD2R_PREFIX + "statement", new JSONString(NCIT_PREFIX + statemt.getLabel()));
 		}
 
 		/*
@@ -345,13 +340,10 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		if (modality != null) {
 
 			// modality describes DDI statement
-			statement.put(SIO_PREFIX + "SIO_000563", new JSONString(
-					DIKBD2R_PREFIX + "modality"));
-			statement.put(DIKBD2R_PREFIX + "modality", new JSONString(
-					NCIT_PREFIX + modality.getLabel()));
+			statement.put(SIO_PREFIX + "SIO_000563", new JSONString(DIKBD2R_PREFIX + "modality"));
+			statement.put(DIKBD2R_PREFIX + "modality", new JSONString(NCIT_PREFIX + modality.getLabel()));
 		}
-		
-		
+
 		// comment
 		String comment = ann.getComment();
 		if (comment != null && !comment.trim().equals("")) {
@@ -367,11 +359,7 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		// add evidence type
 
 		MLinkedResource evidenceType = ann.getEvidenceType();
-		annotation.put(DIKBD2R_PREFIX + "evidenceType", new JSONString(
-				evidenceType.getLabel()));
-		
-
-		
+		annotation.put(DIKBD2R_PREFIX + "evidenceType", new JSONString(evidenceType.getLabel()));
 
 		return annotation;
 	}
@@ -388,7 +376,5 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 	 * 
 	 * }
 	 */
-	
-	
 
 }
