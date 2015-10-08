@@ -46,22 +46,22 @@
 	.leftColumn {
 		width: 400px;
 		vertical-align: top;
-		padding-left: 12px;
-		padding-right: 12px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 	
 	.middleColumn {
 		width: 268px;
 		vertical-align: top;
-		padding-left: 12px;
-		padding-right: 12px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 	
 	.rightColumn {
-		width: 540px;
+		width: 570px;
 		vertical-align: top;
-		padding-left: 12px;
-		padding-right: 12px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 	
 	.titlebar {
@@ -78,7 +78,7 @@
 	}
 	
 	.titlebarright {
-		width: 540px;
+		width: 570px;
 		background-color: #DDDDDD;
 		border-top: 3px solid white;
 	}
@@ -191,6 +191,11 @@
 	
 	.listbox80 {
 		width: 80px;
+		vertical-align: left;
+	}
+	
+	.listbox90 {
+		width: 90px;
 		vertical-align: left;
 	}
 	
@@ -431,11 +436,12 @@
 						
 						<g:Label ui:field="preciptFormuLabel" styleName='{style.titleLeft}'>Formulation:&nbsp;</g:Label>
 						<g:ListBox ui:field="preciptFormu" name="formulation"
-							visibleItemCount='1' styleName='{style.listbox55}'>
+							visibleItemCount='1' styleName='{style.listbox90}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">UNK</g:item>
 							<g:item value="2">Oral</g:item>
 							<g:item value="3">IV</g:item>
+							<g:item value="4">transdermal</g:item>
 						</g:ListBox>
 		
 						
@@ -473,11 +479,12 @@
 						
 						<g:Label ui:field="objectFormuLabel" styleName='{style.titleLeft}'>Formulation:&nbsp;</g:Label>
 						<g:ListBox ui:field="objectFormu" name="formulation"
-							visibleItemCount='1' styleName='{style.listbox55}'>
+							visibleItemCount='1' styleName='{style.listbox90}'>
 							<g:item value="0"></g:item>
 							<g:item value="1">UNK</g:item>
 							<g:item value="2">Oral</g:item>
 							<g:item value="3">IV</g:item>
+							<g:item value="4">transdermal</g:item>
 						</g:ListBox>
 						
 						

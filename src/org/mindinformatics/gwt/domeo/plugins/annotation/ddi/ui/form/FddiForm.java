@@ -129,7 +129,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 	String[] regimensL = { "UNK", "SD", "QD", "BID", "TID", "QID", "Q12", "Q8", "Q6", "Daily" };
 	String[] directionL = {"UNK", "Increase", "Decrease"};
 	String[] typeL = {"UNK", "Percent", "Fold","Hours"};
-	String[] formulationL = {"UNK", "Oral", "IV"};
+	String[] formulationL = {"UNK", "Oral", "IV", "transdermal"};
 
 	// drug 1 and drug 2
 

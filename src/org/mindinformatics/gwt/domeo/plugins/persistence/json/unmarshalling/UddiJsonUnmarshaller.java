@@ -93,8 +93,6 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 		if (drugs != null) {
 
-			// System.out.println("num of drugs: " + drugs.length());
-
 			for (int index = 0; index < drugs.length(); index++) {
 
 				JsoDDI_DrugEntityUsage drug = drugs.get(index);
@@ -105,14 +103,13 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				String jsURI = drug.getRxcui();
 
 				if (drug != null) {
-					System.out.println("drug rxcui: " + jsURI);
 
 					String jsLabel = drug.getLabel();
 					String jsDescript = drug.getDescription();
 
 					MLinkedResource drugEntity = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
 
-					System.out.println("drug entity " + (index + 1) + " linked resource created: " + jsLabel);
+					// System.out.println("drug entity " + (index + 1) + " linked resource created: " + jsLabel);
 
 					if (index == 0) {
 						ann.setDrug1(drugEntity);
@@ -132,7 +129,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 						String typeLabel = typeScript.substring(8);
 						String typeDescript = "Referred to the type of the mention within the sentence for drug.";
 
-						System.out.println("type: " + typeLabel + "|" + typeURI + "|");
+						// System.out.println("type: " + typeLabel + "|" + typeURI + "|");
 
 						MLinkedResource type = ResourcesFactory.createLinkedResource(typeURI, typeLabel, typeDescript);
 
@@ -153,7 +150,6 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 						String roleLabel = roleScript.substring(8);
 						String roleDescript = "Referred to the role that each drug one plays within the interaction.";
 
-						System.out.println("role: " + roleLabel + "|" + roleURI + "|");
 
 						MLinkedResource role = ResourcesFactory.createLinkedResource(roleURI, roleLabel, roleDescript);
 						if (index == 0) {
@@ -181,10 +177,16 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 								MLinkedResource dose = ResourcesFactory.createLinkedResource(doseURI, doseLabel,
 										doseDescript);
 								if (roleLabel.toLowerCase().contains("object")) {
+									System.out.println("drug entity " + (index + 1) + " | drug label: " + drug.getLabel() + " | role: " + roleLabel + " | doseage: objectDose " + dose.getLabel());
 									ann.setObjectDose(dose);
 								} else {
+									System.out.println("drug entity " + (index + 1) + " | drug label: " + drug.getLabel() + " | role: " + roleLabel + " | doseage: preciptDose " + dose.getLabel());
 									ann.setPreciptDose(dose);
 								}
+								
+
+								
+								
 							}
 
 						}
@@ -582,7 +584,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				String jsDescript = "The T12 Direction in interation.";
 				String jsURI = DIKBD2R_PREFIX + T12DirectionScript;
 
-				System.out.println("T12Direction: " + jsLabel + "|" + jsURI + "|");
+				//System.out.println("T12Direction: " + jsLabel + "|" + jsURI + "|");
 
 				MLinkedResource T12Direction = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
 
@@ -599,8 +601,6 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 				String jsLabel = T12TypeScript;
 				String jsDescript = "The T12 Type in interation.";
 				String jsURI = DIKBD2R_PREFIX + T12TypeScript;
-
-				System.out.println("T12Type: " + jsLabel + "|" + jsURI + "|");
 
 				MLinkedResource T12Type = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
 

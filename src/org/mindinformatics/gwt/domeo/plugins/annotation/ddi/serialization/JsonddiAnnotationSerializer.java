@@ -110,24 +110,23 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 				// dose of drug 1, depends on drug role
 
 				if (assertTypeStr.equals("DDI-clinical-trial")) {
-					
+
 					String doseLabel = "";
 
 					if (role1.getLabel().toLowerCase().contains("object")) {
 
 						MLinkedResource objectDose = ann.getObjectDose();
-						if (objectDose != null){
+						if (objectDose != null) {
 							doseLabel = objectDose.getLabel();
 						}
-					}
-					else if (role1.getLabel().toLowerCase().contains("precip")){
+					} else if (role1.getLabel().toLowerCase().contains("precip")) {
 						MLinkedResource preciptDose = ann.getPreciptDose();
-						if (preciptDose !=null){
+						if (preciptDose != null) {
 							doseLabel = preciptDose.getLabel();
 						}
-						
+
 					}
-					
+
 					drug_entity1.put(DIKBD2R_PREFIX + "dose", new JSONString(doseLabel));
 
 				}
@@ -159,12 +158,6 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 			drug_entity2.put(IRdfsOntology.label, new JSONString(drug2.getLabel()));
 			drug_entity2.put(IDublinCoreTerms.description, new JSONString(drug2.getDescription()));
 
-			// dose of drug 1
-			if (assertTypeStr.equals("DDI-clinical-trial")) {
-				MLinkedResource preciptDose = ann.getPreciptDose();
-				if (preciptDose != null) {
-				}
-			}
 		}
 
 		// drug2 has type
@@ -177,24 +170,25 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 		MLinkedResource role2 = ann.getRole2();
 		if (role2 != null) {
 			drug_entity2.put(SIO_PREFIX + "SIO_000228", new JSONString(DIKBD2R_PREFIX + role2.getLabel()));
-			
+
 			String doseLabel = "";
 
-			
-			if (role2.getLabel().toLowerCase().contains("object")) {
+			// dose of drug 2, depends on drug role 2
+			if (assertTypeStr.equals("DDI-clinical-trial")) {
 
-				MLinkedResource objectDose = ann.getObjectDose();
-				if (objectDose != null){
-					doseLabel = objectDose.getLabel();
+				if (role2.getLabel().toLowerCase().contains("object")) {
+					MLinkedResource objectDose = ann.getObjectDose();
+					if (objectDose != null) {
+						doseLabel = objectDose.getLabel();
+					}
+				} else if (role2.getLabel().toLowerCase().contains("precip")) {
+					MLinkedResource preciptDose = ann.getPreciptDose();
+					if (preciptDose != null) {
+						doseLabel = preciptDose.getLabel();
+					}
 				}
 			}
-			else if (role2.getLabel().toLowerCase().contains("precip")){
-				MLinkedResource preciptDose = ann.getPreciptDose();
-				if (preciptDose !=null){
-					doseLabel = preciptDose.getLabel();
-				}
-				
-			}
+			
 			drug_entity2.put(DIKBD2R_PREFIX + "dose", new JSONString(doseLabel));
 
 		}
