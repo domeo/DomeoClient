@@ -86,6 +86,11 @@ public class MMicroPublication implements IMpSupportingElement {
 	public void setEvidence(ArrayList<MMpRelationship> evidence) {
 		this.evidence = evidence;
 	}
+	
+	public void addEvidence(MMpRelationship evidence) {
+		if(this.evidence==null) this.evidence = new ArrayList<MMpRelationship>();
+		this.evidence.add(evidence);
+	}
 
 	public ArrayList<MMpRelationship> getQualifiers() {
 		return qualifiers;
