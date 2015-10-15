@@ -40,6 +40,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPu
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.JsMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpDataImage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpElement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
@@ -1043,9 +1044,17 @@ public class AnnotopiaConverter {
 			if(json.get(IRdfsOntology.type).isString().stringValue().equals(IMicroPublicationsOntology.mpReference)) {
 				_domeo.getLogger().debug(this, "Parsing Reference");
 				return getReference(json);
+			} else if(json.get(IRdfsOntology.type).isString().stringValue().equals(IMicroPublicationsOntology.mpDataImage)) {
+				_domeo.getLogger().debug(this, "Parsing Data Image");
+				return getDataImage(json);
 			}
+			// Paolo
 		} 
 		throw new IllegalArgumentException("Micropublication statement type not detected " + json);
+	}
+	
+	private MMpDataImage getDataImage(JSONObject j) {
+		return null;
 	}
 	
 	private MMpReference getReference(JSONObject j) {

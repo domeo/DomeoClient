@@ -934,7 +934,7 @@ public class JsonUnmarshallingManager {
 											s.getTarget().setUrl(getSelectorTargetUrl(target));
 											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
 											
-											MMpDataImage di = new MMpDataImage(s);
+											MMpDataImage di = MicroPublicationFactory.createMicroPublicationDataImage(s);
 											di.setId(dataImage.getId());
 											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.mpSupportedBy);
 											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
@@ -1005,7 +1005,7 @@ public class JsonUnmarshallingManager {
 											s.getTarget().setUrl(getSelectorTargetUrl(target));
 											((MOnlineImage)s.getTarget()).setDisplayUrl(getImageDisplayUrl(target));
 											
-											MMpDataImage di = new MMpDataImage(s);
+											MMpDataImage di = MicroPublicationFactory.createMicroPublicationDataImage(s);
 											di.setId(dataImage.getId());
 											MMpRelationship rr = new MMpRelationship(di, IMicroPublicationsOntology.mpChallengedBy);
 											rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));

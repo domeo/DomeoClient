@@ -30,6 +30,8 @@ public interface IOpenAnnotation {
 	public static final String SPECIFIC_RESOURCE = "oa:SpecificResource";
 	public static final String TEXT_QUOTE_SELECTOR = "oa:TextQuoteSelector";
 	
+	public static final String HAS_TARGET = "hasTarget";
+	
 	public static final String MOTIVATION_COMMENTING = "oa:commenting";
 	public static final String MOTIVATION_HIGHLIGHTED = "oa:highlighting";
 }

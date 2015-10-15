@@ -661,7 +661,7 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			_imageResource.setXPath(HtmlUtils.getElementXPath((Element) image.getImage()));
 			
 			MImageInDocumentSelector imgSelector = AnnotationFactory.createImageSelector(_domeo, _domeo.getAgentManager().getUserPerson(), _imageResource);
-			MMpDataImage imageData = new MMpDataImage(imgSelector);
+			MMpDataImage imageData = MicroPublicationFactory.createMicroPublicationDataImage(imgSelector);
 			
 			MMpRelationship suportedBy = MicroPublicationFactory.createMicroPublicationRelationship(_domeo.getAgentManager().getUserPerson(), imageData, IMicroPublicationsOntology.mpSupportedBy);
 			evidence.add(suportedBy);	

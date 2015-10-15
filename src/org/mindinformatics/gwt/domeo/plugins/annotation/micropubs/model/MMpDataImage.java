@@ -29,8 +29,9 @@ public class MMpDataImage extends MMpData implements IMpSupportingElement {
 
 	private String id;
 	
-	public MMpDataImage(MImageInDocumentSelector selector) {
+	public MMpDataImage(String id, MImageInDocumentSelector selector) {
 		super(selector);
+		this.id = id;
 	}
 	
 	public String getId() {

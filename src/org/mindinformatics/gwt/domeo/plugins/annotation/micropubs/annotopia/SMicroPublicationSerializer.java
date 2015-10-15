@@ -1,12 +1,15 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.annotopia;
 
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpDataImage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
+import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IOpenAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AAnnotopiaSerializer;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.AnnotopiaSerializerManager;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.serializers.IAnnotopiaSerializer;
@@ -15,6 +18,7 @@ import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitati
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.json.client.JSONValue;
 
 public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements IAnnotopiaSerializer {
 
@@ -71,6 +75,17 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 						manager.serializeExpression(reference, new JSONString("urn:pubmed:" + mMpReference.getReference().getPubMedId() + ":expr"), mMpReference.getReference());
 						supportedBy.set(supportedBy.size(), reference);
 						asserts.set(asserts.size(), reference);
+					} else if(rel.getObjectElement()  instanceof MMpDataImage) {
+						MMpDataImage mMpDataImage = (MMpDataImage) rel.getObjectElement();
+						JSONObject imageData = new JSONObject();
+						imageData.put(IDomeoOntology.generalId,  new JSONString(mMpDataImage.getId()));
+						imageData.put(IDomeoOntology.generalType, new JSONString("mp:DataImage"));
+						JSONValue v = manager.serialize(mMpDataImage.getSelector());
+						manager._domeo.getLogger().info(this, "---+++++++++++++++++" + mMpDataImage.getId());
+						imageData.put(IOpenAnnotation.HAS_TARGET, v);
+						
+						supportedBy.set(challengedBy.size(), imageData);
+						asserts.set(asserts.size(), imageData);
 					}
 				} else if(rel.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
 					if(rel.getObjectElement()  instanceof MMpReference) {
@@ -84,6 +99,16 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 						manager.serializeExpression(reference, new JSONString("urn:pubmed:" + mMpReference.getReference().getPubMedId() + ":expr"), mMpReference.getReference());
 						challengedBy.set(challengedBy.size(), reference);
 						asserts.set(asserts.size(), reference);
+					} else if(rel.getObjectElement()  instanceof MMpDataImage) {
+						MMpDataImage mMpDataImage = (MMpDataImage) rel.getObjectElement();
+						JSONObject imageData = new JSONObject();
+						imageData.put(IDomeoOntology.generalId,  new JSONString(mMpDataImage.getId()));
+						imageData.put(IDomeoOntology.generalType, new JSONString("mp:DataImage"));
+						JSONValue v = manager.serialize(mMpDataImage.getSelector());
+						imageData.put(IOpenAnnotation.HAS_TARGET, v);
+						
+						challengedBy.set(challengedBy.size(), imageData);
+						asserts.set(asserts.size(), imageData);
 					}
 				}
 			}	

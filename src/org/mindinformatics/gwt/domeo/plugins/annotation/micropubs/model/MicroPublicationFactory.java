@@ -25,6 +25,7 @@ import java.util.Date;
 
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
@@ -64,6 +65,11 @@ public class MicroPublicationFactory extends AnnotationFactory {
 		MMicroPublication mp = new MMicroPublication(selector);
 		return mp;
 	}	
+	
+	public static MMpDataImage createMicroPublicationDataImage(MImageInDocumentSelector imageSelector) {
+		MMpDataImage img = new MMpDataImage("urn:" + getUuid(), imageSelector);
+		return img;
+	}
 	
 	public static MMpRelationship createMicroPublicationRelationship(IAgent creator, MMpElement element, String relationship) {
 		MMpRelationship rel = new MMpRelationship(element, relationship);
