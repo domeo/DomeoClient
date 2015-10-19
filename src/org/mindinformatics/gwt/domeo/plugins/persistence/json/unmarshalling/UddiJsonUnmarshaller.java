@@ -185,8 +185,6 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 								}
 								
 
-								
-								
 							}
 
 						}
