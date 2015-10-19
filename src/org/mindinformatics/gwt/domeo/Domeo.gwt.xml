@@ -16,6 +16,12 @@
   
   <inherits name="org.mindinformatics.gwt.framework.Framework"/> 
   
+  <!-- debug -->
+  <inherits name="com.google.gwt.logging.Logging"/>
+	<set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+	<set-property name="compiler.stackMode" value="emulated" />
+	<set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true" />
+  
   
   <!-- Components -->
   <inherits name="org.mindinformatics.gwt.domeo.component.bibliography.Bibliography"/>

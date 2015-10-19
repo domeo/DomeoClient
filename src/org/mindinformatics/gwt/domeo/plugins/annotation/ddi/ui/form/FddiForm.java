@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.client.ui.annotation.forms.AFormComponent;
@@ -1061,9 +1062,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				for (Object line : stackTrace) {
 					output.append(line);
 				}
-
+				
 				excepStr = excepStr + output.toString();
 			}
+			
+			logger.log(Level.SEVERE, "log" + excepStr, e);
 
 			_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this,
 					"Failed to display current annotation " + annotation.getLocalId());
@@ -1753,5 +1756,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			}
 		});
 	}
+	
+
 
 }
