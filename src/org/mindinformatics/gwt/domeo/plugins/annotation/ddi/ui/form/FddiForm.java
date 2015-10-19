@@ -1054,10 +1054,6 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			// StringWriter sw = new StringWriter();
-			// e.printStackTrace(new PrintWriter(sw));
-			// String excepStr = sw.toString();
-
 			String excepStr = "None";
 			Object[] stackTrace = e.getStackTrace();
 			if (stackTrace != null) {
