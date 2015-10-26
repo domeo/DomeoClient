@@ -6,6 +6,13 @@ Created 06/25/2014
 
 ---------------------------------------------------------------------------------
 
+(0) Mysql DB config file - Domeo-DB-config.txt
+
+USERNAME=<USERNAME>;
+PASSWORD=<PASSWORD>;
+
+---------------------------------------------------------------------------------
+
 (1) load NLP DDI data sets:
 
 $ load-NLP-JSON-LD <nlp username> <collection> <local ip> <port>
@@ -25,13 +32,6 @@ TODO: Ensure new loading task won't mess up existing data sets.
 
 ---------------------------------------------------------------------------------
 
-(0) Mysql DB config file - Domeo-DB-config.txt
-
-USERNAME=<USERNAME>;
-PASSWORD=<PASSWORD>;
-
----------------------------------------------------------------------------------
-
 (2) load NER highlight data sets:
 
 $ python load-NER-JSON-LD <ner username> <collection> <local ip> <port>
@@ -48,6 +48,22 @@ NOTE: Please set a valid user account as annotation creator at top of script
 ex: NER_USERNAME = "annostudy"
 
 TODO: Please check it to ensure new loading task won't mess up existing data sets.
+
+---------------------------------------------------------------------------------
+
+(3) load PK DDI annotation sets:
+
+pre-process if data set comes from export program
+
+replace "nodeID://XXXX" to ""
+replace "xsd:String" to ""
+replace "http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/" to "dikbD2R:"
+
+rename ANNOT_CSV in "load-PKDDI-JSON-LD.py"
+
+$ python load-PKDDI-JSON-LD <ner username> <collection> <local ip> <port>
+
+ex. $ python load-PKDDI-JSON-LD.py admin annotation dbmi-icode-01.dbmi.pitt.edu 80
 
 ---------------------------------------------------------------------------------
 

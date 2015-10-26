@@ -25,8 +25,7 @@ sys.setdefaultencoding('UTF8')
 
 DB_CONFIG = "Domeo-DB-config.txt"
 SAMPLE_DOMEO = "PKDDI/Sample-PKDDI-10222015.json"
-#ANNOT_CSV = "PKDDI/pkddi-katrina-auto-10202015.csv"
-ANNOT_CSV = "PKDDI/debug-1.csv"
+ANNOT_CSV = "PKDDI/pkddi-katrina-auto-10202015.csv"
 
 DB_USER = None
 DB_PWD = None
