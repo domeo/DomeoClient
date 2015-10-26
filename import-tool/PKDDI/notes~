@@ -1,0 +1,19 @@
+
+post process csv from sparql query
+
+replace "nodeID://XXXX" to ""
+replace "xsd:String" to ""
+replace "http://dbmi-icode-01.dbmi.pitt.edu:2020/vocab/resource/" to "dikbD2R":
+
+remove problematic sets:
+http://dbmi-icode-01.dbmi.pitt.edu:80/DDI-labels/38642D80-AAA6-4196-A033-3977FF35B48A.html
+
+research problems
+http://dbmi-icode-01.dbmi.pitt.edu:80/DDI-labels/829a4f51-c882-4b64-81f3-abfb03a52ebe.html
+
+cause:
+clinical trial
+dose contains white space 
+may use the value of dose for build URI
+6th
+

@@ -1,0 +1,79 @@
+Created 06/25/2014
+
+@authors: Yifan Ning
+
+@summary: The pupose of this program is to load NLP drug-drug interactions data sets and NER drug mentions data sets into tghe Elasticsearch and Mysql databases that the Domeo annotation tool uses to store annotations. 
+
+---------------------------------------------------------------------------------
+
+(1) load NLP DDI data sets:
+
+$ load-NLP-JSON-LD <nlp username> <collection> <local ip> <port>
+
+$ python load-NLP-JSON-LD.py yin2 devb30 130.49.206.86 8080 
+
+Inputs: all input file in ./NLP. These files are created by the convertSPL_DDIs_2_ODA.py script in (https://swat-4-med-safety.googlecode.com/svn/trunk/u-of-pitt-spl-ddi-v2.0/PK-DDI-NLP-pipeline/AnnotationStudyAndresH/ConversionScripts). That script takes the output of the NER and NLP components of the SPL DDI NLP pipeline and produces NLP annotations in Open Data Annotation format. The load script then reshapes this output into JSON-LD and loads the annotations into Elastic search. Certain meta-data is loaded into the SQL database. Sample data is available (NLP/Sample-NLP-devb30.json)
+
+Output: NLP/NLP-outputs.json -- DDI data sets in a json array
+
+Tips: if you want load portions of data, such as for labels 11 - 20, please go to function loadNlpOutputs(anndir) to uncomment if statement and comment current one if necessary.
+
+NOTE: please set a valid Domeo user account as annotation creator at top of script
+ex: NLP_USERNAME = "expert1" 
+
+TODO: Ensure new loading task won't mess up existing data sets.
+
+---------------------------------------------------------------------------------
+
+(0) Mysql DB config file - Domeo-DB-config.txt
+
+USERNAME=<USERNAME>;
+PASSWORD=<PASSWORD>;
+
+---------------------------------------------------------------------------------
+
+(2) load NER highlight data sets:
+
+$ python load-NER-JSON-LD <ner username> <collection> <local ip> <port>
+
+$ python load-NER-JSON-LD.py yin2 devb30 130.49.206.86 8080
+
+Inputs: all inputs files in ./NER. These files are created by the convertSPL_NER_2_ODA.py script in (https://swat-4-med-safety.googlecode.com/svn/trunk/u-of-pitt-spl-ddi-v2.0/PK-DDI-NLP-pipeline/AnnotationStudyAndresH/ConversionScripts). That script takes the output of the NER component of the SPL DDI NLP pipeline and produces Highlight annotations in Open Data Annotation format. The load script then reshapes this output into JSON-LD and loads the annotations into Elastic search. Certain meta-data is loaded into the SQL database. Sample data is available (NER/Highlight-Sample-NER-devb30.json)
+
+Output: NER/NER-outputs.json -- NER data sets in a json array
+
+Tips: if you want load portions of data, such as for labels 11 - 20, please go to function loadNerOutputs(anndir): to uncomment if statement and comment current one if necessary.
+
+NOTE: Please set a valid user account as annotation creator at top of script
+ex: NER_USERNAME = "annostudy"
+
+TODO: Please check it to ensure new loading task won't mess up existing data sets.
+
+---------------------------------------------------------------------------------
+
+(3) clean up existing data sets in elasticsearch and Mysql
+
+$ python deleteAnnotationByURI <collection> <local ip> <port>
+
+$ python deleteAnnotationByURI.py devb30 130.49.206.86 8080 
+
+This script can deletes all DDI and Drug mentions annotation in elasticsearch and correspondingly tracking information in Mysql
+
+Tips: To delete annotations in portion of labels, please go to function clearAllAnnotations() to changes the index initial value
+
+ex: index = 21, the script will delete annotations from 21 to 208
+
+---------------------------------------------------------------------------------
+
+(4) to clean the whole index in elasticsearch:
+
+Ex: for index devb30 and devb301
+
+curl -XDELETE 'http://localhost:9200/domeo/devb30/'
+
+curl -XDELETE 'http://localhost:9200/domeo/devb301/'
+
+
+
+
+

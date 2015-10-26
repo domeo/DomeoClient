@@ -1,0 +1,175 @@
+{
+        "pav_!DOMEO_NS!_versionNumber": 2,
+        "pav_!DOMEO_NS!_lineageUri": "urn:domeoserver:annotationset:301FD6D7-E733-41C8-BF14-AF6EBA2B6193",
+        "domeo_!DOMEO_NS!_resources": [
+            {
+                "label": "DailyMed - PAROXETINE - paroxetine hydrochloride hemihydrate tablet, film coated",
+                "url": "http://dbmi-icode-01.dbmi.pitt.edu:80/DDI-labels/326e8ab0-6886-4749-9544-885b37070051.html"
+            }
+        ],
+        "@type": "ao:AnnotationSet",
+        "pav_!DOMEO_NS!_createdWith": "urn:domeo:software:id:Domeo-2.0alpha-040",
+        "pav_!DOMEO_NS!_createdBy": "urn:person:uuid:ff808181508ae86901508ae930ec0000",
+        "domeo_!DOMEO_NS!_agents": [
+            {
+                "rdfs_!DOMEO_NS!_label": "Dr. Boyce",
+                "foafx_!DOMEO_NS!_name": "Dr. Boyce",
+                "foafx_!DOMEO_NS!_title": "",
+                "foafx_!DOMEO_NS!_lastname": "Boyce",
+                "foafx_!DOMEO_NS!_middlename": "",
+                "@type": "foafx:Person",
+                "@id": "urn:person:uuid:ff808181508ae86901508ae930ec0000",
+                "foafx_!DOMEO_NS!_firstname": "Richard",
+                "foafx_!DOMEO_NS!_email": "admin@commonsemantics.org",
+                "foafx_!DOMEO_NS!_picture": "http://www.hcklab.org/images/me/paolo%20ciccarese-boston.jpg",
+                "foafx_!DOMEO_NS!_homepage": ""
+            }
+            ,
+            {
+                "rdfs_!DOMEO_NS!_label": "Domeo Annotation Toolkit",
+                "foafx_!DOMEO_NS!_name": "Domeo Annotation Toolkit",
+                "foafx_!DOMEO_NS!_version": "2.0alpha",
+                "@type": "foafx:Software",
+                "@id": "urn:domeo:software:id:Domeo-2.0alpha-040",
+                "foafx_!DOMEO_NS!_build": "040",
+                "foafx_!DOMEO_NS!_homepage": ""
+            }
+        ],
+        "rdfs_!DOMEO_NS!_label": "Default Set",
+        "permissions_!DOMEO_NS!_permissions": {
+            "permissions_!DOMEO_NS!_isLocked": "false",
+            "permissions_!DOMEO_NS!_accessType": "urn:domeo:access:public"
+        },
+        "ao_!DOMEO_NS!_item": [
+            {
+                "ao_!DOMEO_NS!_context": [
+                    {
+                        "ao_!DOMEO_NS!_hasSource": "http://dbmi-icode-01.dbmi.pitt.edu:80/DDI-labels/326e8ab0-6886-4749-9544-885b37070051.html",
+                        "ao_!DOMEO_NS!_hasSelector": {
+                            "ao_!DOMEO_NS!_suffix": " inhibits CYP2D6. Clinical drug interaction studies have been performed with substrates of CYP2D6 and show that paroxetine can inhibit the metabolism of drugs metabolized by CYP2D6 including desipramine, risperidone, and atomoxetine (see ",
+                            "ao_!DOMEO_NS!_exact": "paroxetine",
+                            "pav_!DOMEO_NS!_createdOn": "2015-10-23 11:28:31 -0400",
+                            "@type": "ao:PrefixSuffixTextSelector",
+                            "@id": "urn:domeoclient:uuid:9808AECE-C0FF-4C23-8A31-0024418AC9DB",
+                            "domeo_!DOMEO_NS!_uuid": "9808AECE-C0FF-4C23-8A31-0024418AC9DB",
+                            "domeo_temp_localId": "2",
+                            "ao_!DOMEO_NS!_prefix": " drug interaction studies reveal that "
+                        },
+                        "@type": "ao:SpecificResource",
+                        "@id": "urn:domeoclient:uuid:9808AECE-C0FF-4C23-8A31-0024418AC9DB",
+                        "domeo_temp_localId": "2"
+                    }
+                ],
+                "rdfs_!DOMEO_NS!_label": "Highlight",
+                "pav_!DOMEO_NS!_versionNumber": 1,
+                "domeo_!DOMEO_NS!_belongsToSet": "urn:domeoserver:annotationset:954BB25E-CCA7-4EB5-8AEF-1C9634E9A297",
+                "pav_!DOMEO_NS!_lineageUri": "urn:domeoserver:annotationset:301FD6D7-E733-41C8-BF14-AF6EBA2B6193",
+                "pav_!DOMEO_NS!_createdOn": "2015-10-23 11:28:31 -0400",
+                "@type": "ao:Highlight",
+                "pav_!DOMEO_NS!_createdWith": "urn:domeo:software:id:Domeo-2.0alpha-040",
+                "pav_!DOMEO_NS!_previousVersion": "",
+                "pav_!DOMEO_NS!_createdBy": "urn:person:uuid:ff808181508ae86901508ae930ec0000",
+                "@id": "urn:domeoclient:uuid:F4BD36FB-1712-4B4E-A24F-BECFE6F015CF",
+                "pav_!DOMEO_NS!_lastSavedOn": "2015-10-23 11:28:40 -0400"
+            }
+            ,
+            {
+                "ao_!DOMEO_NS!_context": [
+                    {
+                        "ao_!DOMEO_NS!_hasSource": "http://dbmi-icode-01.dbmi.pitt.edu:80/DDI-labels/326e8ab0-6886-4749-9544-885b37070051.html",
+                        "ao_!DOMEO_NS!_hasSelector": {
+                            "ao_!DOMEO_NS!_suffix": "",
+                            "ao_!DOMEO_NS!_exact": "In vitro drug interaction studies reveal that paroxetine inhibits CYP2D6. Clinical drug interaction studies have been performed with substrates of CYP2D6 and show that paroxetine can inhibit the metabolism of drugs metabolized by CYP2D6 including desipramine, risperidone, and atomoxetine (see PRECAUTIONS: Drug Interactions).",
+                            "pav_!DOMEO_NS!_createdOn": "2015-10-23 11:30:32 -0400",
+                            "@type": "ao:PrefixSuffixTextSelector",
+                            "@id": "urn:domeoclient:uuid:1076AE7A-E3DE-4984-B075-4EED98F9E883",
+                            "domeo_!DOMEO_NS!_uuid": "1076AE7A-E3DE-4984-B075-4EED98F9E883",
+                            "domeo_temp_localId": "4",
+                            "ao_!DOMEO_NS!_prefix": "DOSAGE AND ADMINISTRATION ). Drug-Drug Interactions  "
+                        },
+                        "@type": "ao:SpecificResource",
+                        "@id": "urn:domeoclient:uuid:1076AE7A-E3DE-4984-B075-4EED98F9E883",
+                        "domeo_temp_localId": "4"
+                    }
+                ],
+                "dikbD2R_!DOMEO_NS!_assertionType": "DDI-clinical-trial",
+                "pav_!DOMEO_NS!_versionNumber": 1,
+                "pav_!DOMEO_NS!_lineageUri": "urn:domeoserver:annotation:A75CB7D4-E5B8-4539-83FD-1C6CB5D31FB8",
+                "@type": "ao:ddiAnnotation",
+                "pav_!DOMEO_NS!_createdWith": "urn:domeo:software:id:Domeo-2.0alpha-040",
+                "pav_!DOMEO_NS!_createdBy": "urn:person:uuid:ff808181508ae86901508ae930ec0000",
+                "ao_!DOMEO_NS!_body": [
+                    {
+                        "sets": {
+                            "sio_!DOMEO_NS!_SIO_000628": [
+                                {
+                                    "dikbD2R_!DOMEO_NS!_cmaxDirection": "Decrease",
+                                    "dikbD2R_!DOMEO_NS!_t12Type": "Fold",
+                                    "dikbD2R_!DOMEO_NS!_objectDuration": "unk1",
+                                    "dikbD2R_!DOMEO_NS!_t12": "unk1",
+                                    "@type": "dikbD2R:PK_DDI",
+                                    "dikbD2R_!DOMEO_NS!_preciptDuration": "unk1",
+                                    "dikbD2R_!DOMEO_NS!_cmax": "unk1",
+                                    "dikbD2R_!DOMEO_NS!_preciptFormulation": "transdermal",
+                                    "dikbD2R_!DOMEO_NS!_aucDirection": "Decrease",
+                                    "dikbD2R_!DOMEO_NS!_preciptRegimens": "UNK",
+                                    "dikbD2R_!DOMEO_NS!_t12Direction": "Decrease",
+                                    "sio_!DOMEO_NS!_SIO_000132": [
+                                        {
+                                            "rdfs_!DOMEO_NS!_label": "paroxetine",
+                                            "@type": "dikbD2R:active-ingredient",
+                                            "sio_!DOMEO_NS!_SIO_000228": "dikbD2R:object-drug-of-interaction",
+                                            "@id": "08078AA3-E124-4BF3-A2F7-0708AB5FCC0A",
+                                            "dct_!DOMEO_NS!_description": "Referred to the drug in the interaction.",
+                                            "dailymed_!DOMEO_NS!_activeMoietyRxCUI": "http://purl.bioontology.org/ontology/RXNORM/32937",
+                                            "dikbD2R_!DOMEO_NS!_dose": "doseo"
+                                        }
+                                        ,
+                                        {
+                                            "rdfs_!DOMEO_NS!_label": "paroxetine",
+                                            "@type": "dikbD2R:active-ingredient",
+                                            "sio_!DOMEO_NS!_SIO_000228": "dikbD2R:precipitant-drug-of-interaction",
+                                            "@id": "0ADE416D-A4EB-4E23-853A-593AA2EA1B85",
+                                            "dct_!DOMEO_NS!_description": "Referred to the drug in the interaction.",
+                                            "dailymed_!DOMEO_NS!_activeMoietyRxCUI": "http://purl.bioontology.org/ontology/RXNORM/32937",
+                                            "dikbD2R_!DOMEO_NS!_dose": "dosep"
+                                        }
+                                    ],
+                                    "dikbD2R_!DOMEO_NS!_cl": "unk1",
+                                    "dikbD2R_!DOMEO_NS!_objectRegimens": "UNK",
+                                    "dikbD2R_!DOMEO_NS!_clDirection": "Decrease",
+                                    "dikbD2R_!DOMEO_NS!_objectFormulation": "transdermal",
+                                    "dikbD2R_!DOMEO_NS!_cmaxType": "Fold",
+                                    "dikbD2R_!DOMEO_NS!_aucType": "Fold",
+                                    "dikbD2R_!DOMEO_NS!_auc": "unk1",
+                                    "@id": "urn:pddi:uuid:11D0D07C-7074-40CA-AA9B-9B39AD3733BA",
+                                    "dikbD2R_!DOMEO_NS!_clType": "Fold",
+                                    "dikbD2R_!DOMEO_NS!_numOfParticipants": "num"
+                                }
+                            ],
+                            "sio_!DOMEO_NS!_SIO_000205": "dikbD2R:statement",
+                            "dikbD2R_!DOMEO_NS!_statement": "ncit:quantitative",
+                            "@type": "poc:DrugDrugInteractionStatement",
+                            "sio_!DOMEO_NS!_SIO_000563": "dikbD2R:modality",
+                            "@id": "urn:pddi:uuid:0FB3BB9F-9836-4A1E-B34E-71DE6981CCE4",
+                            "dikbD2R_!DOMEO_NS!_modality": "ncit:positive"
+                        }
+                    }
+                ],
+                "rdfs_!DOMEO_NS!_label": "ddi Annotation",
+                "domeo_!DOMEO_NS!_belongsToSet": "urn:domeoserver:annotationset:954BB25E-CCA7-4EB5-8AEF-1C9634E9A297",
+                "pav_!DOMEO_NS!_createdOn": "2015-10-23 11:30:32 -0400",
+                "dikbD2R_!DOMEO_NS!_evidenceType": "evidence-challenges",
+                "pav_!DOMEO_NS!_previousVersion": "",
+                "@id": "urn:domeoclient:uuid:905547BD-F8A0-4185-BAB5-4E3C5143DD8B",
+                "pav_!DOMEO_NS!_lastSavedOn": "2015-10-23 11:30:34 -0400"
+            }
+        ],
+        "pav_!DOMEO_NS!_createdOn": "2015-10-23 11:28:19 -0400",
+        "domeo_!DOMEO_NS!_deleted": "false",
+        "pav_!DOMEO_NS!_previousVersion": "urn:domeoclient:uuid:F5307257-D84B-4C3E-973B-289ABAAE53DE",
+        "ao_!DOMEO_NS!_annotatesResource": "http://dbmi-icode-01.dbmi.pitt.edu:80/DDI-labels/326e8ab0-6886-4749-9544-885b37070051.html",
+        "@id": "urn:domeoserver:annotationset:954BB25E-CCA7-4EB5-8AEF-1C9634E9A297",
+        "dct_!DOMEO_NS!_description": "The default set is created automatically by Domeo when no other set is existing.",
+        "pav_!DOMEO_NS!_lastSavedOn": "2015-10-23 11:30:34 -0400"
+    }

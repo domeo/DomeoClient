@@ -1,0 +1,144 @@
+{
+        "pav_!DOMEO_NS!_versionNumber": 1,
+        "pav_!DOMEO_NS!_lineageUri": "urn:domeoserver:annotationset:4946671B-EF00-420A-B1D6-9193E86BE4D8",
+        "domeo_!DOMEO_NS!_resources": [
+            {
+                "label": "",
+                "url": ""
+            }
+        ],
+        "@type": "ao:AnnotationSet",
+        "pav_!DOMEO_NS!_createdWith": "urn:domeo:software:id:Domeo-2.0alpha-040",
+        "pav_!DOMEO_NS!_createdBy": "",
+        "domeo_!DOMEO_NS!_agents": [
+            {
+                "rdfs_!DOMEO_NS!_label": "",
+                "foafx_!DOMEO_NS!_name": "",
+                "foafx_!DOMEO_NS!_title": "",
+                "foafx_!DOMEO_NS!_lastname": "",
+                "foafx_!DOMEO_NS!_middlename": "",
+                "@type": "foafx:Person",
+                "@id": "urn:person:uuid:ff808181508ae86901508ae930ec0000",
+                "foafx_!DOMEO_NS!_firstname": "",
+                "foafx_!DOMEO_NS!_email": "",
+                "foafx_!DOMEO_NS!_picture": "",
+                "foafx_!DOMEO_NS!_homepage": ""
+            }
+            ,
+            {
+                "rdfs_!DOMEO_NS!_label": "Domeo Annotation Toolkit",
+                "foafx_!DOMEO_NS!_name": "Domeo Annotation Toolkit",
+                "foafx_!DOMEO_NS!_version": "2.0alpha",
+                "@type": "foafx:Software",
+                "@id": "urn:domeo:software:id:Domeo-2.0alpha-040",
+                "foafx_!DOMEO_NS!_build": "040",
+                "foafx_!DOMEO_NS!_homepage": ""
+            }
+        ],
+        "rdfs_!DOMEO_NS!_label": "Default Set",
+        "permissions_!DOMEO_NS!_permissions": {
+            "permissions_!DOMEO_NS!_isLocked": "false",
+            "permissions_!DOMEO_NS!_accessType": "urn:domeo:access:public"
+        },
+        "ao_!DOMEO_NS!_item": [
+            {
+                "ao_!DOMEO_NS!_context": [
+                    {
+                        "ao_!DOMEO_NS!_hasSource": "",
+                        "ao_!DOMEO_NS!_hasSelector": {
+                            "ao_!DOMEO_NS!_suffix": "",
+                            "ao_!DOMEO_NS!_exact": "",
+                            "pav_!DOMEO_NS!_createdOn": "",
+                            "@type": "ao:PrefixSuffixTextSelector",
+                            "@id": "urn:domeoclient:uuid:AD22F86C-03B1-4056-8CC8-F251D985A57F",
+                            "domeo_!DOMEO_NS!_uuid": "AD22F86C-03B1-4056-8CC8-F251D985A57F",
+                            "domeo_temp_localId": "1",
+                            "ao_!DOMEO_NS!_prefix": ""
+                        },
+                        "@type": "ao:SpecificResource",
+                        "@id": "urn:domeoclient:uuid:AD22F86C-03B1-4056-8CC8-F251D985A57F",
+                        "domeo_temp_localId": "6"
+                    }
+                ],
+                "dikbD2R_!DOMEO_NS!_assertionType": "DDI-clinical-trial",
+                "pav_!DOMEO_NS!_versionNumber": 1,
+                "pav_!DOMEO_NS!_lineageUri": "urn:domeoserver:annotation:3E97B7AE-8F83-4A28-B069-0C2825BD836A",
+                "@type": "ao:ddiAnnotation",
+                "pav_!DOMEO_NS!_createdWith": "urn:domeo:software:id:Domeo-2.0alpha-040",
+                "pav_!DOMEO_NS!_createdBy": "urn:person:uuid:ff808181508ae86901508ae930ec0000",
+                "ao_!DOMEO_NS!_body": [
+                    {
+                        "sets": {
+                            "sio_!DOMEO_NS!_SIO_000628": [
+                                {
+                                    "dikbD2R_!DOMEO_NS!_cmaxDirection": "",
+                                    "dikbD2R_!DOMEO_NS!_t12Type": "",
+                                    "dikbD2R_!DOMEO_NS!_objectDuration": "oduration",
+                                    "dikbD2R_!DOMEO_NS!_t12": "t12",
+                                    "@type": "dikbD2R:PK_DDI",
+                                    "dikbD2R_!DOMEO_NS!_preciptDuration": "pduration",
+                                    "dikbD2R_!DOMEO_NS!_cmax": "cmax",
+                                    "dikbD2R_!DOMEO_NS!_preciptFormulation": "Oral",
+                                    "dikbD2R_!DOMEO_NS!_aucDirection": "Decrease",
+                                    "dikbD2R_!DOMEO_NS!_preciptRegimens": "SD",
+                                    "dikbD2R_!DOMEO_NS!_t12Direction": "Decrease",
+                                    "sio_!DOMEO_NS!_SIO_000132": [
+                                        {
+                                            "rdfs_!DOMEO_NS!_label": "maintain",
+                                            "@type": "dikbD2R:active-ingredient",
+                                            "sio_!DOMEO_NS!_SIO_000228": "dikbD2R:precipitant-drug-of-interaction",
+                                            "@id": "F7C2DBD5-D8ED-44D8-9CD2-866C8A52906C",
+                                            "dct_!DOMEO_NS!_description": "Referred to the drug in the interaction.",
+                                            "dailymed_!DOMEO_NS!_activeMoietyRxCUI": "http://purl.bioontology.org/ontology/RXNORM/",
+                                            "dikbD2R_!DOMEO_NS!_dose": "pdose"
+                                        }
+                                        ,
+                                        {
+                                            "rdfs_!DOMEO_NS!_label": "",
+                                            "@type": "",
+                                            "sio_!DOMEO_NS!_SIO_000228": "dikbD2R:object-drug-of-interaction",
+                                            "@id": "B321CD2C-8EA5-4C95-9900-55DC04AFD473",
+                                            "dct_!DOMEO_NS!_description": "Referred to the drug in the interaction.",
+                                            "dailymed_!DOMEO_NS!_activeMoietyRxCUI": "http://purl.bioontology.org/ontology/RXNORM/9384",
+                                            "dikbD2R_!DOMEO_NS!_dose": "odose"
+                                        }
+                                    ],
+                                    "dikbD2R_!DOMEO_NS!_cl": "cl",
+                                    "dikbD2R_!DOMEO_NS!_objectRegimens": "QD",
+                                    "dikbD2R_!DOMEO_NS!_clDirection": "Decrease",
+                                    "dikbD2R_!DOMEO_NS!_objectFormulation": "IV",
+                                    "dikbD2R_!DOMEO_NS!_cmaxType": "Percent",
+                                    "dikbD2R_!DOMEO_NS!_aucType": "Percent",
+                                    "dikbD2R_!DOMEO_NS!_auc": "auc",
+                                    "@id": "urn:pddi:uuid:4BCD11E0-FAD1-4CE5-A46B-AE7630F0E1FB",
+                                    "dikbD2R_!DOMEO_NS!_clType": "Percent",
+                                    "dikbD2R_!DOMEO_NS!_numOfParticipants": "num"
+                                }
+                            ],
+                            "sio_!DOMEO_NS!_SIO_000205": "dikbD2R:statement",
+                            "dikbD2R_!DOMEO_NS!_statement": "",
+                            "@type": "poc:DrugDrugInteractionStatement",
+                            "sio_!DOMEO_NS!_SIO_000563": "dikbD2R:modality",
+                            "@id": "urn:pddi:uuid:6D0EE8BF-341A-4FD9-973C-B2B1F5393D0E",
+                            "dikbD2R_!DOMEO_NS!_modality": ""
+                        }
+                    }
+                ],
+                "rdfs_!DOMEO_NS!_label": "ddi Annotation",
+                "domeo_!DOMEO_NS!_belongsToSet": 
+                "urn:domeoserver:annotationset:9DDA02AC-1080-4561-BC2C-DBF93DC2454B",
+                "pav_!DOMEO_NS!_createdOn": "2015-10-22 08:56:29 -0400",
+                "dikbD2R_!DOMEO_NS!_evidenceType": "evidence-challenges",
+                "pav_!DOMEO_NS!_previousVersion": "",
+                "@id": "urn:domeoclient:uuid:F0F75203-811E-44A3-AF96-BD04278F6D9D",
+                "pav_!DOMEO_NS!_lastSavedOn": "2015-10-22 08:56:32 -0400"
+            }
+        ],
+        "pav_!DOMEO_NS!_createdOn": "2015-10-21 20:53:28 -0400",
+        "domeo_!DOMEO_NS!_deleted": "false",
+        "pav_!DOMEO_NS!_previousVersion": "urn:domeoclient:uuid:BD72A052-AFED-434C-83C7-26B1B932FF25",
+        "ao_!DOMEO_NS!_annotatesResource": "http://dbmi-icode-01.dbmi.pitt.edu:80/DDI-labels/55816042-946d-4bec-9461-bd998628ff45.html",
+        "@id": "urn:domeoserver:annotationset:9DDA02AC-1080-4561-BC2C-DBF93DC2454B",
+        "dct_!DOMEO_NS!_description": "The default set is created automatically by Domeo when no other set is existing.",
+        "pav_!DOMEO_NS!_lastSavedOn": "2015-10-22 08:56:31 -0400"
+    }
