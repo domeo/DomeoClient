@@ -1,2 +1,5 @@
 .*
 !/.gitignore
+/bin/
+/bin/
+*.class
