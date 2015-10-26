@@ -73,6 +73,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			String jsDescript = "assertion type (DDI or clinical trail).";
 			String jsURI = DIKBD2R_PREFIX + jsLabel;
 
+
 			MLinkedResource assertionType = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
 
 			// System.out.println("assertionType linked resource created: " +
@@ -169,7 +170,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 							if (doseScript != null && !doseScript.trim().equals("")) {
 
-								String doseURI = DIKBD2R_PREFIX + doseScript;
+								String doseURI = DIKBD2R_PREFIX + "dose";
 								String doseLabel = doseScript;
 
 								String doseDescript = "Referred to the dose that each drug within the interaction.";
@@ -177,10 +178,10 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 								MLinkedResource dose = ResourcesFactory.createLinkedResource(doseURI, doseLabel,
 										doseDescript);
 								if (roleLabel.toLowerCase().contains("object")) {
-									System.out.println("drug entity " + (index + 1) + " | drug label: " + drug.getLabel() + " | role: " + roleLabel + " | doseage: objectDose " + dose.getLabel());
+									//System.out.println("drug entity " + (index + 1) + " | drug label: " + drug.getLabel() + " | role: " + roleLabel + " | doseage: objectDose " + dose.getLabel());
 									ann.setObjectDose(dose);
 								} else {
-									System.out.println("drug entity " + (index + 1) + " | drug label: " + drug.getLabel() + " | role: " + roleLabel + " | doseage: preciptDose " + dose.getLabel());
+									//System.out.println("drug entity " + (index + 1) + " | drug label: " + drug.getLabel() + " | role: " + roleLabel + " | doseage: preciptDose " + dose.getLabel());
 									ann.setPreciptDose(dose);
 								}
 								
@@ -257,8 +258,9 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			if (numPartScript != null && !numPartScript.trim().equals("")) {
 				String jsLabel = numPartScript;
 				String jsDescript = "The number of participants involved in interaction.";
-				String jsURI = DIKBD2R_PREFIX + numPartScript;
-
+				//String jsURI = DIKBD2R_PREFIX + numPartScript;
+				String jsURI = DIKBD2R_PREFIX + "numOfParticipants";
+				
 				System.out.println("num participants: " + jsLabel + "|" + jsURI + "|");
 
 				MLinkedResource numParticipt = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
@@ -294,9 +296,10 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			if (objectDurationScript != null && !objectDurationScript.trim().equals("")) {
 				String jsLabel = objectDurationScript;
 				String jsDescript = "objectDuration in DDI clinical trail.";
-				String jsURI = DIKBD2R_PREFIX + objectDurationScript;
-
-				System.out.println("objectDuration: " + jsLabel + "|" + jsURI + "|");
+				//String jsURI = DIKBD2R_PREFIX + objectDurationScript;
+				String jsURI = DIKBD2R_PREFIX + "objectDuration";
+				
+				//System.out.println("objectDuration: " + jsLabel + "|" + jsURI + "|");
 
 				MLinkedResource objectDuration = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
 
@@ -351,7 +354,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			if (preciptDurationScript != null && !preciptDurationScript.trim().equals("")) {
 				String jsLabel = preciptDurationScript;
 				String jsDescript = "preciptDuration in DDI clinical trail.";
-				String jsURI = DIKBD2R_PREFIX + preciptDurationScript;
+				String jsURI = DIKBD2R_PREFIX + "preciptDuration";
 
 				System.out.println("preciptDuration: " + jsLabel + "|" + jsURI + "|");
 
@@ -392,14 +395,11 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			if (aucScript != null && !aucScript.trim().equals("")) {
 				String jsLabel = aucScript;
 				String jsDescript = "The maximum increasing Auc in interation.";
-				String jsURI = DIKBD2R_PREFIX + aucScript;
+				//String jsURI = DIKBD2R_PREFIX + aucScript;
+				String jsURI = DIKBD2R_PREFIX + "auc";
 
-				System.out.println("auc: " + jsLabel + "|" + jsURI + "|");
-
+				//System.out.println("auc: " + jsLabel + "|" + jsURI + "|");
 				MLinkedResource auc = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
-
-				// System.out.println("AUC linked resource created: " +
-				// jsLabel);
 
 				ann.setIncreaseAuc(auc);
 			}
@@ -449,7 +449,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			if (clScript != null && !clScript.trim().equals("")) {
 				String jsLabel = clScript;
 				String jsDescript = "The maximum increasing cl in interation.";
-				String jsURI = DIKBD2R_PREFIX + clScript;
+				String jsURI = DIKBD2R_PREFIX + "cl";
 
 				System.out.println("cl: " + jsLabel + "|" + jsURI + "|");
 
@@ -503,7 +503,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			if (cmaxScript != null && !cmaxScript.trim().equals("")) {
 				String jsLabel = cmaxScript;
 				String jsDescript = "cmax in DDI clinical trail.";
-				String jsURI = DIKBD2R_PREFIX + cmaxScript;
+				String jsURI = DIKBD2R_PREFIX + "cmax";
 
 				System.out.println("cmax: " + jsLabel + "|" + jsURI + "|");
 
@@ -559,7 +559,7 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 			if (t12Script != null && !t12Script.trim().equals("")) {
 				String jsLabel = t12Script;
 				String jsDescript = "t12 in DDI clinical trail.";
-				String jsURI = DIKBD2R_PREFIX + t12Script;
+				String jsURI = DIKBD2R_PREFIX + "t12";
 
 				System.out.println("t12: " + jsLabel + "|" + jsURI + "|");
 

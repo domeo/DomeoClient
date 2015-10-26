@@ -1132,8 +1132,8 @@ public class JsonUnmarshallingManager {
 								//System.out.println("[DEBUG]" + dditype);
 								
 								((MddiAnnotation) ann).setType(dditype);
-								System.out.println("unmarshallddiAnnotation produced annotation. Some tests values:" +
-										" drug 1: " + ((MddiAnnotation) ann).getDrug1().getLabel());			
+								//System.out.println("unmarshallddiAnnotation produced annotation. Some tests values:" +
+								//		" drug 1: " + ((MddiAnnotation) ann).getDrug1().getLabel());			
 								
 //								System.out.println("Some tests values:" +
 //										" numOfParticipants: " + ((MddiAnnotation) ann).getNumOfparcipitants().getLabel());	
