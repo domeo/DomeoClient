@@ -730,6 +730,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 		try {
 			refreshAnnotationSetFilter(annotationSet, annotation);
+			
+			if (_item == null){
+				displayDialog("current annotation is null", true);
+				
+			}
 
 			// preselect assertion type
 
@@ -748,6 +753,7 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				assertType.setSelectedIndex(0);
 
 			switchAssertType();
+			
 			currentMpDDI = annotation.getMpDDIUsage().getMpDDI();
 
 			// check selections of drug role
@@ -1066,12 +1072,10 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 				excepStr = excepStr + output.toString();
 			}
 			
-			logger.log(Level.SEVERE, "log" + excepStr, e);
-
 			_domeo.getLogger().exception(AnnotationFrameWrapper.LOG_CATEGORY_EDIT_ANNOTATION, this,
 					"Failed to display current annotation " + annotation.getLocalId());
-			displayDialog("Failed to properly display existing annotation " + e.getMessage() + " | [DEBUG] stackTrace: "
-					+ excepStr, true);
+			
+			displayDialog("Failed to properly display existing annotation " + e.getMessage(), true);
 		}
 
 		ButtonWithIcon sameVersionButton = new ButtonWithIcon();
