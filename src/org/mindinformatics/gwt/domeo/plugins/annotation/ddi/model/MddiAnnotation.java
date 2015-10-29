@@ -191,6 +191,14 @@ public class MddiAnnotation extends MAnnotation implements
 	public void setCmax(MLinkedResource cmax) {
 		MpDDIUsage.setCmax(cmax);
 	}
+	
+	public MLinkedResource getCmin() {
+		return MpDDIUsage.getCmin();
+	}
+
+	public void setCmin(MLinkedResource cmin) {
+		MpDDIUsage.setCmin(cmin);
+	}
 
 	public MLinkedResource getObjectRegimen() {
 		return MpDDIUsage.getObjectRegimen();
@@ -296,6 +304,23 @@ public class MddiAnnotation extends MAnnotation implements
 		MpDDIUsage.setCmaxType(cmaxType);
 	}
 
+	public MLinkedResource getCminDirection() {
+		return MpDDIUsage.getCminDirection();
+	}
+
+	public void setCminDirection(MLinkedResource cminDirection) {
+		MpDDIUsage.setCminDirection(cminDirection);
+	}
+
+	public MLinkedResource getCminType() {
+		return MpDDIUsage.getCminType();
+	}
+
+	public void setCminType(MLinkedResource cminType) {
+		MpDDIUsage.setCminType(cminType);
+	}
+
+	
 	public MLinkedResource getT12Direction() {
 		return MpDDIUsage.getT12Direction();
 	}

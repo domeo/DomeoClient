@@ -604,8 +604,39 @@
 							<g:item value="3">Decrease</g:item>
 						</g:ListBox>
 						
+					</g:HorizontalPanel>
+					
+					<!-- CMIN -->
+
+					<g:HorizontalPanel styleName='{style.titlebarright}'>
+						<g:Label ui:field="cminLabel" styleName='{style.titleLeft}'>Cmin:</g:Label>
+					</g:HorizontalPanel>
+
+					<g:HorizontalPanel ui:field='header22' styleName='{style.panel}'>
+						<g:Label ui:field="cminValueLabel" styleName='{style.titleLeft}'>cmin:&nbsp;</g:Label>
+						<g:TextArea ui:field='cmin' styleName='{style.textarea40}'></g:TextArea>
+						
+						<g:Label ui:field="cminTypeLabel" styleName='{style.titleLeft}'>Type:&nbsp;</g:Label>
+						<g:ListBox ui:field="cminType" name="descript"
+							visibleItemCount='1' styleName='{style.listbox70}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Percent</g:item>
+							<g:item value="3">Fold</g:item>
+						</g:ListBox>
+						
+						<g:Label ui:field="cminDirectionLabel" styleName='{style.titleLeft}'>Direction:&nbsp;</g:Label>
+						<g:ListBox ui:field="cminDirection" name="descript"
+							visibleItemCount='1' styleName='{style.listbox80}'>
+							<g:item value="0"></g:item>
+							<g:item value="1">UNK</g:item>
+							<g:item value="2">Increase</g:item>
+							<g:item value="3">Decrease</g:item>
+						</g:ListBox>
+						
 						
 					</g:HorizontalPanel>
+					
 
 					<!-- T1/2 -->
 

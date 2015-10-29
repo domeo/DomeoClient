@@ -186,10 +186,6 @@ public class CddiCard extends ACardComponent {
 
 					if (assertText.equals("DDI-clinical-trial")) {
 						addIncreaseAUC(dataUsage);
-					} else if (assertText.equals("cmax")) {
-						addIncreaseAUC(dataUsage);
-					} else if (assertText.equals("t12")) {
-						addIncreaseAUC(dataUsage);
 					} 
 
 				} else {
@@ -332,6 +328,21 @@ public class CddiCard extends ACardComponent {
 		if (dataUsage.getCmaxType() != null) {
 			cardResults.add(createColumnInCard("Cmax Type",
 					dataUsage.getCmaxType().getLabel()));
+		}
+		
+		if (dataUsage.getCmin() != null) {
+			cardResults.add(createColumnInCard("Cmin",
+					dataUsage.getCmin().getLabel()));
+		}
+		
+		if (dataUsage.getCminDirection() != null) {
+			cardResults.add(createColumnInCard("Cmin Direction",
+					dataUsage.getCminDirection().getLabel()));
+		}
+
+		if (dataUsage.getCminType() != null) {
+			cardResults.add(createColumnInCard("Cmin Type",
+					dataUsage.getCminType().getLabel()));
 		}
 		
 		if (dataUsage.getT12() != null) {

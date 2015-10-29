@@ -288,6 +288,21 @@ public class JsonddiAnnotationSerializer extends JsonAnnotationSerializer {
 			if (cmaxType != null) {
 				pkddi.put(DIKBD2R_PREFIX + "cmaxType", new JSONString(cmaxType.getLabel().trim()));
 			}
+			
+			MLinkedResource cmin = ann.getCmin();
+			if (cmin != null) {
+				pkddi.put(DIKBD2R_PREFIX + "cmin", new JSONString(cmin.getLabel().trim()));
+			}
+
+			MLinkedResource cminDirection = ann.getCminDirection();
+			if (cminDirection != null) {
+				pkddi.put(DIKBD2R_PREFIX + "cminDirection", new JSONString(cminDirection.getLabel().trim()));
+			}
+
+			MLinkedResource cminType = ann.getCminType();
+			if (cminType != null) {
+				pkddi.put(DIKBD2R_PREFIX + "cminType", new JSONString(cminType.getLabel().trim()));
+			}
 
 			MLinkedResource t12 = ann.getT12();
 			if (t12 != null) {

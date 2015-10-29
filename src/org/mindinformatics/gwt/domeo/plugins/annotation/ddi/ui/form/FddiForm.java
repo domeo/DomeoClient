@@ -124,11 +124,11 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 
 	// clinical trail fields
 	@UiField
-	TextArea numParticipt, objectDose, preciptDose, auc, cl, comment, cmax, t12, preciptDuration, objectDuration;
+	TextArea numParticipt, objectDose, preciptDose, auc, cl, comment, cmax, cmin, t12, preciptDuration, objectDuration;
 
 	@UiField
 	ListBox preciptFormu, objectFormu, objectregimens, preciptregimens, aucDirection, clDirection, aucType, clType,
-			cmaxDirection, cmaxType, t12Direction, t12Type;
+			cmaxDirection, cmaxType, cminDirection, cminType, t12Direction, t12Type;
 
 	String[] regimensL = { "UNK", "SD", "QD", "BID", "TID", "QID", "Q12", "Q8", "Q6", "Daily" };
 	String[] directionL = { "UNK", "Increase", "Decrease" };
@@ -492,6 +492,48 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 		}
 		return null;
 	}
+	
+	
+	/*
+	 * cmin
+	 */
+
+	public MLinkedResource getCmin() {
+
+		if (!cmin.getText().trim().isEmpty()) {
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "cmin", cmin.getText(),
+					"Cmin in clinical trail");
+		} else
+			return null;
+	}
+
+	public MLinkedResource getCminDirection() {
+
+		int indexDirection = cminDirection.getSelectedIndex();
+
+		if (indexDirection != 0) {
+			String directionStr = cminDirection.getItemText(indexDirection);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "cminDirection", directionStr,
+					"Referred to the cmin increase or decrease in the interaction.");
+		}
+		return null;
+	}
+
+	public MLinkedResource getCminType() {
+
+		int indexType = cminType.getSelectedIndex();
+
+		if (indexType != 0) {
+			String typeStr = cminType.getItemText(indexType);
+
+			return ResourcesFactory.createLinkedResource(DIKBD2R_PREFIX + "cminType", typeStr,
+					"Referred to the cmin type in the interaction.");
+		}
+		return null;
+	}
+
+	
 
 	/*
 	 * t12
@@ -661,6 +703,9 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							ddiUsage.setCmax(getCmax());
 							ddiUsage.setCmaxDirection(getCmaxDirection());
 							ddiUsage.setCmaxType(getCmaxType());
+							ddiUsage.setCmin(getCmin());
+							ddiUsage.setCminDirection(getCminDirection());
+							ddiUsage.setCminType(getCminType());
 							ddiUsage.setT12(getT12());
 							ddiUsage.setT12Direction(getT12Direction());
 							ddiUsage.setT12Type(getT12Type());
@@ -1010,6 +1055,32 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					}
 				}
 			}
+			
+			/*
+			 * cmin
+			 */
+
+			if (_item.getCmin() != null) {
+				cmin.setText(_item.getCmin().getLabel());
+			}
+
+			if (_item.getCminDirection() != null) {
+				String CminDirectionStr = _item.getCminDirection().getLabel();
+				for (int i = 0; i < directionL.length; i++) {
+					if (directionL[i].equals(CminDirectionStr)) {
+						cminDirection.setSelectedIndex(i + 1);
+					}
+				}
+			}
+
+			if (_item.getCminType() != null) {
+				String CminTypeStr = _item.getCminType().getLabel();
+				for (int i = 0; i < typeL.length; i++) {
+					if (typeL[i].equals(CminTypeStr)) {
+						cminType.setSelectedIndex(i + 1);
+					}
+				}
+			}
 
 			/*
 			 * t12
@@ -1134,6 +1205,9 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 					_item.setCmax(getCmax());
 					_item.setCmaxType(getCmaxType());
 					_item.setCmaxDirection(getCmaxDirection());
+					_item.setCmin(getCmin());
+					_item.setCminType(getCminType());
+					_item.setCminDirection(getCminDirection());
 					_item.setT12(getT12());
 					_item.setT12Type(getT12Type());
 					_item.setT12Direction(getT12Direction());
@@ -1635,6 +1709,19 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 			if (cmaxType.getSelectedIndex() == 0) {
 				requireds.add("cmax type");
 			}
+			
+			if (cmin.getValue().trim().isEmpty()) {
+				requireds.add("Cmin");
+			}
+
+			if (cminDirection.getSelectedIndex() == 0) {
+				requireds.add("cmin direction");
+			}
+
+			if (cminType.getSelectedIndex() == 0) {
+				requireds.add("cmin type");
+			}
+
 
 			if (t12.getValue().trim().isEmpty()) {
 				requireds.add("T1/2");
@@ -1722,6 +1809,9 @@ public class FddiForm extends AFormComponent implements IResizable, Iddi {
 							cmax.setValue("");
 							cmaxDirection.setSelectedIndex(0);
 							cmaxType.setSelectedIndex(0);
+							cmin.setValue("");
+							cminDirection.setSelectedIndex(0);
+							cminType.setSelectedIndex(0);
 							t12.setValue("");
 							t12Direction.setSelectedIndex(0);
 							t12Type.setSelectedIndex(0);

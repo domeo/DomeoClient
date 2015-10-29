@@ -187,6 +187,14 @@ public class MddiUsage {
 	public void setCmax(MLinkedResource cmax) {
 		MpDDI.setCmax(cmax);
 	}
+	
+	public MLinkedResource getCmin() {
+		return MpDDI.getCmin();
+	}
+
+	public void setCmin(MLinkedResource cmin) {
+		MpDDI.setCmin(cmin);
+	}
 
 	public MLinkedResource getObjectRegimen() {
 		return MpDDI.getObjectRegimen();
@@ -290,6 +298,22 @@ public class MddiUsage {
 
 	public void setCmaxType(MLinkedResource cmaxType) {
 		MpDDI.setCmaxType(cmaxType);
+	}
+	
+	public MLinkedResource getCminDirection() {
+		return MpDDI.getCminDirection();
+	}
+
+	public void setCminDirection(MLinkedResource cminDirection) {
+		MpDDI.setCminDirection(cminDirection);
+	}
+
+	public MLinkedResource getCminType() {
+		return MpDDI.getCminType();
+	}
+
+	public void setCminType(MLinkedResource cminType) {
+		MpDDI.setCminType(cminType);
 	}
 
 	public MLinkedResource getT12Direction() {

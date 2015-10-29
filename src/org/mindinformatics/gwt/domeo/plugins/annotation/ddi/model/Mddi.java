@@ -16,9 +16,9 @@ public class Mddi extends MTrustedResource {
 	String comment;
 
 	// clinical trail
-	MLinkedResource numOfparcipitants, objectDose, preciptDose, increaseAuc, cl, evidenceType, assertType, t12, cmax,
+	MLinkedResource numOfparcipitants, objectDose, preciptDose, increaseAuc, cl, evidenceType, assertType, t12, cmax, cmin,
 			objectRegimen, preciptRegimen, aucDirection, clDirection, aucType, clType, preciptDuration,objectDuration,
-			objectFormu, preciptFormu, cmaxDirection, cmaxType, t12Direction, t12Type;
+			objectFormu, preciptFormu, cmaxDirection, cmaxType, cminDirection, cminType, t12Direction, t12Type;
 
 	public MLinkedResource getObjectFormu() {
 		return objectFormu;
@@ -30,6 +30,30 @@ public class Mddi extends MTrustedResource {
 
 	public MLinkedResource getPreciptFormu() {
 		return preciptFormu;
+	}
+
+	public MLinkedResource getCmin() {
+		return cmin;
+	}
+
+	public void setCmin(MLinkedResource cmin) {
+		this.cmin = cmin;
+	}
+
+	public MLinkedResource getCminDirection() {
+		return cminDirection;
+	}
+
+	public void setCminDirection(MLinkedResource cminDirection) {
+		this.cminDirection = cminDirection;
+	}
+
+	public MLinkedResource getCminType() {
+		return cminType;
+	}
+
+	public void setCminType(MLinkedResource cminType) {
+		this.cminType = cminType;
 	}
 
 	public void setPreciptFormu(MLinkedResource preciptFormu) {

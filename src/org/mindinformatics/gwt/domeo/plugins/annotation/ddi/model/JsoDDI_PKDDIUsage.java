@@ -112,6 +112,21 @@ public class JsoDDI_PKDDIUsage extends JavaScriptObject{
 	    return this['dikbD2R:cmaxType'];
 	}-*/;
 	
+	// cmin
+	public final native String getCmin() /*-{
+	    return this['dikbD2R:cmin'];
+	}-*/;
+	
+	// cmin direction
+	public final native String getCminDirection() /*-{
+	    return this['dikbD2R:cminDirection'];
+	}-*/;
+	
+	// cmin type
+	public final native String getCminType() /*-{
+	    return this['dikbD2R:cminType'];
+	}-*/;
+	
 	// t1/2
 	public final native String getT12() /*-{
 	    return this['dikbD2R:t12'];

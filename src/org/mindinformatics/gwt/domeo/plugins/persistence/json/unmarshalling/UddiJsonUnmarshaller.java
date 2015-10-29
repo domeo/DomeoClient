@@ -549,6 +549,66 @@ public class UddiJsonUnmarshaller extends AUnmarshaller implements IUnmarshaller
 
 				ann.setCmaxType(CmaxType);
 			}
+			
+
+			/*
+			 * Cmin
+			 */
+			String cminScript = pkddi.getCmin();
+			// System.out.println("cminScript:" + cminScript);
+
+			if (cminScript != null && !cminScript.trim().equals("")) {
+				String jsLabel = cminScript;
+				String jsDescript = "cmin in DDI clinical trail.";
+				String jsURI = DIKBD2R_PREFIX + "cmin";
+
+				System.out.println("cmin: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource cmin = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				// System.out.println("cmin linked resource created: " +
+				// jsLabel);
+
+				ann.setCmin(cmin);
+			}
+
+			/*
+			 * CminDirection
+			 */
+			String CminDirectionScript = pkddi.getCminDirection();
+
+			if (CminDirectionScript != null && !CminDirectionScript.trim().equals("")) {
+				String jsLabel = CminDirectionScript;
+				String jsDescript = "The Cmin Direction in interation.";
+				String jsURI = DIKBD2R_PREFIX + CminDirectionScript;
+
+				System.out.println("CminDirection: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource CminDirection = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setCminDirection(CminDirection);
+			}
+
+			/*
+			 * CminType
+			 */
+			String CminTypeScript = pkddi.getCminType();
+			// System.out.println("CminTypeScript:" + CminTypeScript);
+
+			if (CminTypeScript != null && !CminTypeScript.trim().equals("")) {
+				String jsLabel = CminTypeScript;
+				String jsDescript = "The Cmin Type in interation.";
+				String jsURI = DIKBD2R_PREFIX + CminTypeScript;
+
+				System.out.println("CminType: " + jsLabel + "|" + jsURI + "|");
+
+				MLinkedResource CminType = ResourcesFactory.createLinkedResource(jsURI, jsLabel, jsDescript);
+
+				ann.setCminType(CminType);
+			}
+
+			
+			
 
 			/*
 			 * T1/2
