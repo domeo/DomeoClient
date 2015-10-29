@@ -31,8 +31,10 @@ import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
+import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
+import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MTextQuoteSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.highlight.model.MHighlightAnnotation;
@@ -63,6 +65,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsTextQ
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaPerson;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaSoftware;
+import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
@@ -1048,13 +1051,42 @@ public class AnnotopiaConverter {
 				_domeo.getLogger().debug(this, "Parsing Data Image");
 				return getDataImage(json);
 			}
-			// Paolo
 		} 
 		throw new IllegalArgumentException("Micropublication statement type not detected " + json);
 	}
 	
 	private MMpDataImage getDataImage(JSONObject j) {
-		return null;
+		MImageInDocumentSelector selector = new MImageInDocumentSelector();
+		_domeo.getLogger().debug(this, "Parsing Data Image 1 " + j);
+		selector.setLocalId(0L);
+		selector.setUuid("");
+		_domeo.getLogger().debug(this, "Parsing Data Image 2");
+		selector.setUri(((JSONObject)j.get("hasTarget")).get(IRdfsOntology.id).isString().stringValue());
+		//sel.setCreatedOn(createdOn);
+		
+		_domeo.getLogger().debug(this, "Parsing Data Image 3");
+		
+		MOnlineImage oi = new MOnlineImage();
+		_domeo.getLogger().debug(this, "Parsing Data Image 3 " + ((JSONObject)((JSONObject)j.get("hasTarget")).get("hasSource")).get(IRdfsOntology.id).toString());
+		oi.setUrl(((JSONObject)((JSONObject)j.get("hasTarget")).get("hasSource")).get(IRdfsOntology.id).isString().stringValue());
+		oi.setDisplayUrl(((JSONObject)((JSONObject)j.get("hasTarget")).get("hasSource")).get(IRdfsOntology.id).isString().stringValue());
+		_domeo.getLogger().debug(this, "Parsing Data Image 3b");
+		selector.setTarget(oi);
+		_domeo.getLogger().debug(this, "Parsing Data Image 4 " + ((JSONObject)j.get("hasTarget")).get("hasScope").toString());
+		
+		String scope = null;
+		if(((JSONObject)j.get("hasTarget")).get("hasScope").isString()!=null) {
+			scope = ((JSONObject)j.get("hasTarget")).get("hasScope").isString().stringValue();
+		} else if(((JSONObject)j.get("hasTarget")).get("hasScope").isObject()!=null) {
+			scope = ((JSONObject)j.get("hasTarget")).get("hasScope").isObject().get("@id").isString().stringValue();
+		}
+		
+		MGenericResource gr = new MGenericResource();
+		gr.setUrl(scope);
+		gr.setLabel(scope);
+		selector.setContext(gr);
+		_domeo.getLogger().debug(this, "Parsing Data Image 5");
+		return new MMpDataImage(j.get(IRdfsOntology.id).isString().stringValue(), selector);
 	}
 	
 	private MMpReference getReference(JSONObject j) {
@@ -1096,8 +1128,8 @@ public class AnnotopiaConverter {
 	private MMpStatement getStatement(JSONObject json) {
 		if(json.containsKey(IRdfsOntology.id) && json.containsKey(IMicroPublicationsOntology.mpStatement)) {
 			MMpStatement argues = new MMpStatement();
-			argues.setId(json.get(IRdfsOntology.id).toString());
-			argues.setText(json.get(IMicroPublicationsOntology.mpStatement).toString());
+			argues.setId(json.get(IRdfsOntology.id).isString().stringValue());
+			argues.setText(json.get(IMicroPublicationsOntology.mpStatement).isString().stringValue());
 			return argues;
 		} else {
 			boolean flag = false;

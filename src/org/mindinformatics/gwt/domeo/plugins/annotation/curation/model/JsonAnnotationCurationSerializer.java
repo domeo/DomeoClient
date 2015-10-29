@@ -21,7 +21,7 @@ public class JsonAnnotationCurationSerializer extends JsonAnnotationSerializer {
 
 		JSONArray bodies = new JSONArray();
 		JSONObject body = new JSONObject();
-		body.put(IRdfsOntology.value, new JSONString(ann.getStatus()));
+		body.put(IRdfsOntology.rdfValue, new JSONString(ann.getStatus()));
 		body.put(IDublinCoreTerms.description, nullable(ann.getDescription()));
 
 		bodies.set(0, body); 

@@ -12,6 +12,7 @@ public interface IRdfsOntology {
 	// of the ':' for separating the namespace
 	public static final String id = "@id";
 	public static final String type = "@type";
-	public static final String value = "rdf:value";
+	public static final String value = "value";
+	public static final String rdfValue = "rdf:" + value;
 	public static final String label = "rdfs:label";
 }

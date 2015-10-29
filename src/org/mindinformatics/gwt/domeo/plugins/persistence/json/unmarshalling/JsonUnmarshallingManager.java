@@ -87,6 +87,7 @@ import com.google.gwt.user.client.Window;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */ 
+@Deprecated
 public class JsonUnmarshallingManager {
 
 	public static final String LOGGING_PREFIX = "JSON UNMARSHALLING";

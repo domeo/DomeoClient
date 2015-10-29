@@ -75,15 +75,16 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 						manager.serializeExpression(reference, new JSONString("urn:pubmed:" + mMpReference.getReference().getPubMedId() + ":expr"), mMpReference.getReference());
 						supportedBy.set(supportedBy.size(), reference);
 						asserts.set(asserts.size(), reference);
-					} else if(rel.getObjectElement()  instanceof MMpDataImage) {
+					} else if(rel.getObjectElement()  instanceof MMpDataImage) {					
 						MMpDataImage mMpDataImage = (MMpDataImage) rel.getObjectElement();
+						manager._domeo.getLogger().info(this, "Serializing Image Data " + mMpDataImage.getId());
 						JSONObject imageData = new JSONObject();
 						imageData.put(IDomeoOntology.generalId,  new JSONString(mMpDataImage.getId()));
-						imageData.put(IDomeoOntology.generalType, new JSONString("mp:DataImage"));
+						imageData.put(IDomeoOntology.generalType, new JSONString(IMicroPublicationsOntology.mpDataImage));
+						//imageData.put(IRdfsOntology.label, new JSONString("caption"));
+						imageData.put(IRdfsOntology.rdfValue, new JSONString(mMpDataImage.getSelector().getTarget().getUrl()));
 						JSONValue v = manager.serialize(mMpDataImage.getSelector());
-						manager._domeo.getLogger().info(this, "---+++++++++++++++++" + mMpDataImage.getId());
 						imageData.put(IOpenAnnotation.HAS_TARGET, v);
-						
 						supportedBy.set(challengedBy.size(), imageData);
 						asserts.set(asserts.size(), imageData);
 					}

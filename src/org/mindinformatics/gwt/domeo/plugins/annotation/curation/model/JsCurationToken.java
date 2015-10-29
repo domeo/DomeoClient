@@ -7,7 +7,7 @@ public class JsCurationToken extends JavaScriptObject {
 	protected JsCurationToken() {}
 	
 	public final native String getValue() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::value]; 
+		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::rdfValue]; 
 	}-*/;
 	public final native String getDescription() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms::description]; 

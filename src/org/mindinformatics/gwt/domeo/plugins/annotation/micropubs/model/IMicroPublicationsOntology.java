@@ -31,7 +31,7 @@ public interface IMicroPublicationsOntology {
 	public final String challengedBy = "challengedBy";
 	public final String supportedBy = "supportedBy";
 	
-	public final String mpDataImage = NS + "DataImage";
+	public final String mpDataImage = NS + "ImageData";
 	public final String mpReference = NS + "Reference";
 	public final String mpClaim = NS + "Claim";
 	public final String mpHypothesis = NS + "Hypothesis";
