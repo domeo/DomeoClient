@@ -637,6 +637,21 @@ public class AnnotationFactory implements IInitializableComponent {
 	}
 	
 	public static MQualifierAnnotation createQualifier(
+			MAnnotationSet set, IAgent creator, ISoftware tool) 
+	{
+		MQualifierAnnotation ann = new MQualifierAnnotation();
+		ann.setLocalId(getLocalId());
+		ann.setUuid(getUuid());
+		ann.setIndividualUri(getUrn(ann.getUuid()));
+		//ann.setTarget(target);
+		ann.setCreator(creator);
+		ann.setCreatedOn(new Date());
+		ann.setNewVersion(true);
+		ann.setTool(tool);
+		return ann;
+	}
+	
+	public static MQualifierAnnotation createQualifier(
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target, MSelector selector) 
 	{

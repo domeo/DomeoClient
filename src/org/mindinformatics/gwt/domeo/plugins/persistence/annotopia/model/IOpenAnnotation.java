@@ -33,5 +33,6 @@ public interface IOpenAnnotation {
 	public static final String HAS_TARGET = "hasTarget";
 	
 	public static final String MOTIVATION_COMMENTING = "oa:commenting";
+	public static final String MOTIVATION_TAGGING = "oa:tagging";
 	public static final String MOTIVATION_HIGHLIGHTED = "oa:highlighting";
 }

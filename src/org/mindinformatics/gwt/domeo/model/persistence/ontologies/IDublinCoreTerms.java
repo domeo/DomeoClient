@@ -13,3 +13,4 @@ public interface IDublinCoreTerms {
 	public static final String format = "dct:format";
 	public static final String description = "dct:description";
 }
+	

@@ -54,6 +54,7 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPub
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsoMpRelationship;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
+import org.mindinformatics.gwt.domeo.plugins.annotation.qualifier.model.MQualifierAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IOpenAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsAnnotationProvenance;
@@ -69,6 +70,7 @@ import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.JsTextQ
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaAnnotationSet;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaPerson;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.MAnnotopiaSoftware;
+import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsAnnotationPostIt;
 import org.mindinformatics.gwt.domeo.plugins.persistence.json.model.JsImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.lenses.PubMedCitationPainter;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
@@ -78,6 +80,8 @@ import org.mindinformatics.gwt.framework.component.resources.model.MGenericResou
 import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
 import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
 import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
+import org.mindinformatics.gwt.framework.model.agents.IAgent;
+import org.mindinformatics.gwt.framework.model.agents.ISoftware;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.utils.src.HtmlUtils;
 
@@ -884,14 +888,58 @@ public class AnnotopiaConverter {
 					else aSet.addAnnotation(postIt);
 					
 					aSet.setHasChanged(false);
+				} else if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_TAGGING)) {
+					_domeo.getLogger().debug(this, "--------------------------------");
+					_domeo.getLogger().debug(this, "QUALIFIER");	
+					
+					MQualifierAnnotation qualifier = AnnotationFactory.createQualifier(aSet, annotatedBy, aSet.getCreatedWith());
+					qualifier.setHasChanged(false);
+					for(MSelector selector: selectors) {
+						qualifier.addSelector(selector);
+					}	
+					qualifier.setIndividualUri(annotation.getId());
+					qualifier.setCreatedOn(annotatedAt);
+					qualifier.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
+					if(lastSavedOn!=null) qualifier.setLastSavedOn(lastSavedOn); 
+					
+					boolean multipleBodies = annotation.hasMultipleBodies();
+					if(!multipleBodies) {
+						JSONObject tag = new JSONObject(annotation.getBody());
+						JSONObject gr = (JSONObject) tag.get(IDublinCoreTerms.source);
+						MGenericResource r = ResourcesFactory.createGenericResource(gr.get(IRdfsOntology.id).isString().stringValue(), getRdfLabel(gr));
+						MLinkedResource ldr = ResourcesFactory.createTrustedResource(tag.get(IRdfsOntology.id).isString().stringValue(), getRdfLabel(tag), r);
+						qualifier.addTerm(ldr);
+					} else {
+//						dsfsfsd
+//						// TODO Fix multiple qualifiers reload with JSON objects
+//						_domeo.getLogger().debug(this, "QUALIFIER D");
+//						JsArray<JavaScriptObject> tags = annotation.getBodies();
+//						_domeo.getLogger().debug(this, "QUALIFIER E");
+//						for(int k=0; k<tags.length(); k++) {
+//							_domeo.getLogger().debug(this, "QUALIFIER F");
+//							JsonGenericResource gr = ((JsoLinkedDataResource)tags.get(k)).getSource();
+//							_domeo.getLogger().debug(this, "QUALIFIER G");
+//							MGenericResource r = ResourcesFactory.createGenericResource(gr.getUrl(), gr.getLabel());
+//							
+//							MLinkedResource ldr = ResourcesFactory.createTrustedResource(((JsoLinkedDataResource)tags.get(k)).getUrl(), 
+//									((JsoLinkedDataResource)tags.get(k)).getLabel(), r);
+//							ldr.setDescription(((JsoLinkedDataResource)tags.get(k)).getDescription());
+//							//ldr.setSynonyms(tags.get(k).getSynonyms()!=null? tags.get(k).getSynonyms():"");
+//							qualifier.addTerm(ldr);
+//						}
+					}
+					
+					if(persist) performAnnotation(qualifier);
+					if(persist)  ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(qualifier, aSet);
+					else aSet.addAnnotation(qualifier);
+
+					
 				} else if(getMotivation(annotation).equals(IOpenAnnotation.MOTIVATION_HIGHLIGHTED)) {
 					_domeo.getLogger().debug(this, "--------------------------------");
 					_domeo.getLogger().debug(this, "HIGHLIGHT");
 
 					MHighlightAnnotation highlight = AnnotationFactory.createHighlight(aSet, annotatedBy, aSet.getCreatedWith());
 					highlight.setHasChanged(false);
-					//_domeo.getLogger().debug(this, "+++++++"+highlight);
-					//_domeo.getLogger().debug(this, "+++++++"+highlight.getCreator());
 					for(MSelector selector: selectors) {
 						highlight.addSelector(selector);
 					}	

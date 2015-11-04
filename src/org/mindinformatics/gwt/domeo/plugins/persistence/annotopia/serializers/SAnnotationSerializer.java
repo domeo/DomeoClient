@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
 import org.mindinformatics.gwt.domeo.plugins.annotation.commentaries.linear.model.MLinearCommentAnnotation;
@@ -215,7 +216,7 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			JSONObject source = new JSONObject();
 			source.put(IRdfsOntology.id, nonNullable(term.getSource().getUrl()));
 			source.put(IRdfsOntology.rdfLabel, nonNullable(term.getSource().getLabel()));
-			jsonBody.put("at:source", source);
+			jsonBody.put(IDublinCoreTerms.source, source);
 			
 			jsonBodies.set(counter++, jsonBody);
 		}
