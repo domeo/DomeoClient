@@ -28,7 +28,7 @@ public class JsonPostItAnnotationSerializer extends JsonAnnotationSerializer {
 		types.set(0, new JSONString(ann.getAnnotationType()));
 		types.set(1, new JSONString(PostitType.typeByName(ann.getType().getName())));
 		annotation.put(IRdfsOntology.type, types);
-		annotation.put(IRdfsOntology.label, new JSONString(PostitType.findByName(ann.getType().getName()).getName()));
+		annotation.put(IRdfsOntology.rdfLabel, new JSONString(PostitType.findByName(ann.getType().getName()).getName()));
 		
 		// Body creation
 		JSONArray bodies = new JSONArray();

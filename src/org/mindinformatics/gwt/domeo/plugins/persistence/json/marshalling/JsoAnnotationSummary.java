@@ -23,7 +23,7 @@ public class JsoAnnotationSummary extends JavaScriptObject {
 	//  General (RDFS and Dublin Core Terms
 	// ------------------------------------------------------------------------
 	public final native String getLabel() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::label]; 
+		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::rdfLabel]; 
 	}-*/;
 	
 	// ------------------------------------------------------------------------

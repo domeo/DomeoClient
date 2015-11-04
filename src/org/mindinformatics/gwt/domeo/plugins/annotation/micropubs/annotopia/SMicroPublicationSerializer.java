@@ -1,6 +1,7 @@
 package org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.annotopia;
 
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology;
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.IMicroPublicationsOntology;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
@@ -28,7 +29,7 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 		JSONObject body = new JSONObject();
 		body.put(IRdfsOntology.id, new JSONString(annotation.getMicroPublication().getId()));
 		body.put(IRdfsOntology.type, new JSONString("mp:Micropublication"));
-		body.put(IRdfsOntology.label, new JSONString(annotation.getMicroPublication().getArgues().getText()));
+		body.put(IRdfsOntology.rdfLabel, new JSONString(annotation.getMicroPublication().getArgues().getText()));
 
 		// Claim or hypothesis
 		JSONObject discourseElement = new JSONObject();
@@ -47,10 +48,13 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 				if(rel.getObject() instanceof MMpQualifier) {
 					JSONObject q = new JSONObject();
 					q.put(IRdfsOntology.id, new JSONString(((MMpQualifier)rel.getObject()).getQualifier().getUrl()));
-					q.put(IRdfsOntology.label, new JSONString(((MMpQualifier)rel.getObject()).getQualifier().getLabel()));
+					q.put(IRdfsOntology.rdfLabel, new JSONString(((MMpQualifier)rel.getObject()).getQualifier().getLabel()));
+					
+					JSONObject s = new JSONObject();
+					s.put(IRdfsOntology.id, new JSONString(((MMpQualifier)rel.getObject()).getQualifier().getSource().getUrl()));
+					s.put(IRdfsOntology.rdfLabel, new JSONString(((MMpQualifier)rel.getObject()).getQualifier().getSource().getLabel()));
+					q.put(IDublinCoreTerms.source, s);
 					qualifiedBy.set(counter++, q);
-					// TODO source?
-					//((MMpQualifier)rel.getObject()).getQualifier().getSource()
 				}
 			}
 			discourseElement.put(IMicroPublicationsOntology.mpQualifiedBy, qualifiedBy);

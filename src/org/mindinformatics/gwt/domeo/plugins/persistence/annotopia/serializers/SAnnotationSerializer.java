@@ -210,11 +210,11 @@ public class SAnnotationSerializer extends AAnnotopiaSerializer implements IAnno
 			JSONObject jsonBody = new JSONObject();
 			jsonBody.put(IRdfsOntology.id, nonNullable(term.getUrl()));
 			jsonBody.put(IRdfsOntology.type, nonNullable("oa:SemanticTag"));
-			jsonBody.put(IRdfsOntology.label, nonNullable(term.getLabel()));
+			jsonBody.put(IRdfsOntology.rdfLabel, nonNullable(term.getLabel()));
 			
 			JSONObject source = new JSONObject();
 			source.put(IRdfsOntology.id, nonNullable(term.getSource().getUrl()));
-			source.put(IRdfsOntology.label, nonNullable(term.getSource().getLabel()));
+			source.put(IRdfsOntology.rdfLabel, nonNullable(term.getSource().getLabel()));
 			jsonBody.put("at:source", source);
 			
 			jsonBodies.set(counter++, jsonBody);

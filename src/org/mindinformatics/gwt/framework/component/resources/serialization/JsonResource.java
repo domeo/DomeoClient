@@ -15,7 +15,7 @@ public class JsonResource extends JavaScriptObject {
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDomeoOntology::generalId];
 	}-*/;
 	public final native String getLabel() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::label];
+		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::rdfLabel];
 	}-*/;
 	public final native String getDescription() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms::description];

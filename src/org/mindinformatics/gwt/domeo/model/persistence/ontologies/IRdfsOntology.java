@@ -14,5 +14,6 @@ public interface IRdfsOntology {
 	public static final String type = "@type";
 	public static final String value = "value";
 	public static final String rdfValue = "rdf:" + value;
-	public static final String label = "rdfs:label";
+	public static final String label = "label";
+	public static final String rdfLabel = "rdfs:" + label;
 }

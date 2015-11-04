@@ -21,7 +21,7 @@ public class JsonUserGroupSerializer extends ASerializer implements ISerializer 
 		JSONObject jo = new JSONObject();
 		jo.put("@type", new JSONString("foafx:Group"));
 		jo.put("@id", new JSONString(group.getUri()!=null?group.getUri():""));
-		jo.put(IRdfsOntology.label, new JSONString(group.getName()!=null?group.getName():""));	
+		jo.put(IRdfsOntology.rdfLabel, new JSONString(group.getName()!=null?group.getName():""));	
 		jo.put("name", new JSONString(group.getName()!=null?group.getName():""));	
 		jo.put("description", new JSONString(group.getDescription()!=null?group.getDescription():""));	
 		

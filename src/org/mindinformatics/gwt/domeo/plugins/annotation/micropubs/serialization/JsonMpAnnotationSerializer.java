@@ -155,7 +155,7 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 			
 			JSONObject term = new JSONObject();
 			term.put(IDomeoOntology.generalId, new JSONString(r.getUrl()));
-			term.put(IRdfsOntology.label, new JSONString(r.getLabel()));
+			term.put(IRdfsOntology.rdfLabel, new JSONString(r.getLabel()));
 			if(r.getDescription()!=null) 
 				term.put(IDublinCoreTerms.description, new JSONString(r.getDescription()));
 			if(r.getSynonyms()!=null) 
@@ -165,7 +165,7 @@ public class JsonMpAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject resource = new JSONObject();
 			MGenericResource res = r.getSource();
 			resource.put(IDomeoOntology.generalId, new JSONString(res.getUrl()));
-			resource.put(IRdfsOntology.label, new JSONString(res.getLabel()));
+			resource.put(IRdfsOntology.rdfLabel, new JSONString(res.getLabel()));
 			term.put(IDublinCoreTerms.source, resource);
 			
 			qualifiedBy.put("reif:resource", term);

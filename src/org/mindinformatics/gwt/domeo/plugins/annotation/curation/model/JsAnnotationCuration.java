@@ -23,7 +23,7 @@ public class JsAnnotationCuration extends JavaScriptObject {
 	//  General (RDFS and Dublin Core Terms
 	// ------------------------------------------------------------------------
 	public final native String getLabel() /*-{ 
-		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::label]; 
+		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology::rdfLabel]; 
 	}-*/;
 	public final native String getTitle() /*-{ 
 		return this[@org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms::title]; 

@@ -28,11 +28,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.mindinformatics.gwt.domeo.client.IDomeo;
+import org.mindinformatics.gwt.domeo.component.linkeddata.model.JsoLinkedDataResource;
 import org.mindinformatics.gwt.domeo.model.AnnotationFactory;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
 import org.mindinformatics.gwt.domeo.model.MAnnotationSet;
 import org.mindinformatics.gwt.domeo.model.MOnlineImage;
 import org.mindinformatics.gwt.domeo.model.persistence.AnnotationPersistenceManager;
+import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IDublinCoreTerms;
 import org.mindinformatics.gwt.domeo.model.persistence.ontologies.IRdfsOntology;
 import org.mindinformatics.gwt.domeo.model.selectors.MImageInDocumentSelector;
 import org.mindinformatics.gwt.domeo.model.selectors.MSelector;
@@ -44,10 +46,12 @@ import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPu
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpDataImage;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpElement;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpQualifier;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpReference;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpRelationship;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMpStatement;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MicroPublicationFactory;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.serialization.JsoMpRelationship;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.MPostItAnnotation;
 import org.mindinformatics.gwt.domeo.plugins.annotation.postit.model.PostitType;
 import org.mindinformatics.gwt.domeo.plugins.persistence.annotopia.model.IAnnotopia;
@@ -71,6 +75,9 @@ import org.mindinformatics.gwt.framework.component.agents.model.MAgentPerson;
 import org.mindinformatics.gwt.framework.component.agents.model.MAgentSoftware;
 import org.mindinformatics.gwt.framework.component.agents.src.AgentsFactory;
 import org.mindinformatics.gwt.framework.component.resources.model.MGenericResource;
+import org.mindinformatics.gwt.framework.component.resources.model.MLinkedResource;
+import org.mindinformatics.gwt.framework.component.resources.model.ResourcesFactory;
+import org.mindinformatics.gwt.framework.component.resources.serialization.JsonGenericResource;
 import org.mindinformatics.gwt.framework.model.references.MPublicationArticleReference;
 import org.mindinformatics.gwt.utils.src.HtmlUtils;
 
@@ -953,53 +960,23 @@ public class AnnotopiaConverter {
 					} catch(Exception e) {
 						_domeo.getLogger().exception(this, e.getMessage());
 					}
-					
-					
-//					// Unmarshall asserts
-//					if(body.isAssertString()) {
-//						_domeo.getLogger().debug(this, "Found Asserts String...");
-//						if(!body.getAssertAsString().equals(argues.getId())) {
-//							
-//						}						
-//					} else if(body.isAssertObject()) {
-//						_domeo.getLogger().debug(this, "Found Asserts Object...");
-//						//argues.put(body.getAssertAsObject().getId(), body.getArguesAsObject());
-//					} else {
-//						JsArray<JavaScriptObject> asrts = body.getAssertsAsObject();
-//						JSONArray arr = new JSONArray(asrts);
-//						for(int x = 0; x<arr.size(); x++ ) {
-//							if(arr.get(x).getClass().getName().endsWith("JsonString")) {
-//								_domeo.getLogger().debug(this, "Found assert id [" + "assert:"+ arr.get(x).toString() + "]");
-//							} else {
-//								_domeo.getLogger().debug(this, "Unmarshalling Argues from Asserts List Object...");
-//								
-//								
-//								//asserts.put(((JsMpAssertion)asserts.get(x)).getId(), asserts.get(x));
-//							}		
-//						}
-//					}	
-//					
-//					mpAnnotation.setMicroPublication(mp);				
-//					mpAnnotation.setHasChanged(false);
-//					for(MSelector selector: selectors) {
-//						mpAnnotation.addSelector(selector);
-//					}	
-//					mpAnnotation.setIndividualUri(annotation.getId());
-//					mpAnnotation.setCreatedOn(annotatedAt);
-//					mpAnnotation.setPreviousVersion(((JsAnnotationProvenance) a).getPreviousVersion());
-//					if(lastSavedOn!=null) mpAnnotation.setLastSavedOn(lastSavedOn); 
-//					if(persist) performAnnotation(mpAnnotation);
-//					
-//					if(persist) ((AnnotationPersistenceManager)_domeo.getPersistenceManager()).addAnnotation(mpAnnotation, aSet);
-//					else aSet.addAnnotation(mpAnnotation);
-//					
-//					aSet.setHasChanged(false);
 				}
 			}
 		}
 	}
 	
 	private void getArguments(MMicroPublication mp, JSONObject json) {
+		if(json.containsKey(IMicroPublicationsOntology.mpQualifiedBy)) {
+			_domeo.getLogger().debug(this, "Detected Qualifier");
+			if(json.get(IMicroPublicationsOntology.mpQualifiedBy).isArray()!=null) {
+				JSONArray array = json.get(IMicroPublicationsOntology.mpQualifiedBy).isArray();
+				for(int i=0; i<array.size(); i++) {
+					getQualifiers(mp, array.get(i));
+				}
+			} else {
+				getQualifiers(mp, json.get(IMicroPublicationsOntology.mpQualifiedBy));
+			}
+		}
 		if(json.containsKey(IMicroPublicationsOntology.mpSupportedBy)) {
 			_domeo.getLogger().debug(this, "Detected Support");
 			if(json.get(IMicroPublicationsOntology.mpSupportedBy).isArray()!=null) {
@@ -1022,6 +999,44 @@ public class AnnotopiaConverter {
 				getArgument(false, mp, json.get(IMicroPublicationsOntology.mpSupportedBy));
 			}
 		}
+	}
+	
+	private void getQualifiers(MMicroPublication mp, JSONValue json) {
+		_domeo.getLogger().debug(this, "Parsing Qualifier " + json.getClass().getName());
+		if(json instanceof JSONString) {
+			getQualifier(mp, assertionsCache.get(json.toString()));
+		} else if(json instanceof JSONObject) {
+			getQualifier(mp, (JSONObject) json);
+		}
+	}
+	
+	private void getQualifier(MMicroPublication mp, JSONValue json) {
+		_domeo.getLogger().debug(this, "Parsing Qualifier " + json.toString());
+		MGenericResource source = ResourcesFactory.createGenericResource(
+				((JSONObject)((JSONObject)json).get(IDublinCoreTerms.source)).get(IRdfsOntology.id).isString().stringValue(), 
+				getRdfLabel(((JSONObject)((JSONObject)json).get(IDublinCoreTerms.source))));
+		_domeo.getLogger().debug(this, "getQualifier 1" );
+		MLinkedResource ldr = ResourcesFactory.createTrustedResource(((JSONObject)json).get(IRdfsOntology.id).isString().stringValue(), getRdfLabel((JSONObject)json), source);
+		ldr.setDescription(getRdfLabel((JSONObject)json));
+		_domeo.getLogger().debug(this, "getQualifier 2" );
+		MMpQualifier q = new MMpQualifier();
+		q.setQualifier(ldr);
+
+
+		MMpRelationship rr = new MMpRelationship(q, IMicroPublicationsOntology.mpQualifiedBy);
+		//rr.setCreator(_domeo.getAgentManager().getAgentByUri(rel.getCreatedBy()));
+		//rr.setId(rel.getId());
+		//rr.setCreationDate(rel.getFormattedCreatedOn());
+		mp.getQualifiers().add(rr);
+	}
+	
+	private String getRdfLabel(JSONObject json) {
+		if(((JSONObject)json).get(IRdfsOntology.rdfLabel)!=null && ((JSONObject)json).get(IRdfsOntology.rdfLabel).isString()!=null) {
+			return ((JSONObject)json).get(IRdfsOntology.rdfLabel).isString().stringValue();
+		} else if(((JSONObject)json).get(IRdfsOntology.label)!=null && ((JSONObject)json).get(IRdfsOntology.label).isString()!=null) {
+			return ((JSONObject)json).get(IRdfsOntology.label).isString().stringValue();
+		} 
+		return null;
 	}
 	
 	private void getArgument(boolean support, MMicroPublication mp, JSONValue json) {

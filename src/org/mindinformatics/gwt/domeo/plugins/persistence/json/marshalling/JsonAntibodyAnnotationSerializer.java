@@ -40,7 +40,7 @@ public class JsonAntibodyAnnotationSerializer extends JsonAnnotationSerializer {
 		_domeo.getLogger().debug(this, "2a");
 		term.put(IDomeoOntology.generalType, new JSONString(ann.getAntibodyUsage().getAntibody().getType()));
 		_domeo.getLogger().debug(this, "2b");
-		term.put(IRdfsOntology.label, new JSONString(ann.getAntibodyUsage().getAntibody().getLabel()));
+		term.put(IRdfsOntology.rdfLabel, new JSONString(ann.getAntibodyUsage().getAntibody().getLabel()));
 		_domeo.getLogger().debug(this, "2c");
 		if(ann.getAntibodyUsage().getAntibody().getDescription()!=null) 
 			term.put(IDublinCoreTerms.description, new JSONString(ann.getAntibodyUsage().getAntibody().getDescription()));
@@ -63,7 +63,7 @@ public class JsonAntibodyAnnotationSerializer extends JsonAnnotationSerializer {
 		if(res!=null) {
 			JSONObject resource = new JSONObject();
 			resource.put(IDomeoOntology.generalId, new JSONString(res.getUrl()));
-			resource.put(IRdfsOntology.label, new JSONString(res.getLabel()));
+			resource.put(IRdfsOntology.rdfLabel, new JSONString(res.getLabel()));
 			term.put(IPavOntology.importedFrom, resource);
 		}
 		
@@ -81,7 +81,7 @@ public class JsonAntibodyAnnotationSerializer extends JsonAnnotationSerializer {
 			JSONObject species = new JSONObject();
 			species.put(IDomeoOntology.generalId, new JSONString(ann.getSubject().getUrl()));
 			//species.put(IDomeoOntology.generalType, new JSONString(ann.getSubject().getType()));
-			species.put(IRdfsOntology.label, new JSONString(ann.getSubject().getLabel()));
+			species.put(IRdfsOntology.rdfLabel, new JSONString(ann.getSubject().getLabel()));
 			
 //			JSONObject rs = new JSONObject();
 //			rs.put(IDomeoOntology.generalId, new JSONString(ann.getSubject().getSource().getUrl()));
@@ -100,7 +100,7 @@ public class JsonAntibodyAnnotationSerializer extends JsonAnnotationSerializer {
 				JSONObject protocol = new JSONObject();
 				protocol.put(IDomeoOntology.generalId, new JSONString(prot.getUrl()));
 				//species.put(IDomeoOntology.generalType, new JSONString(ann.getSubject().getType()));
-				protocol.put(IRdfsOntology.label, new JSONString(prot.getLabel()));
+				protocol.put(IRdfsOntology.rdfLabel, new JSONString(prot.getLabel()));
 				protocols.set(counter, protocol);
 				counter++;
 			}

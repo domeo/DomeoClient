@@ -31,7 +31,7 @@ public class JsonResourcesSerializer {
 		JSONObject resource = new JSONObject();
 		resource.put(IDomeoOntology.generalId, new JSONString(url));
 		if(label!=null && label.trim().length()>0) 
-			resource.put(IRdfsOntology.label, new JSONString(label));
+			resource.put(IRdfsOntology.rdfLabel, new JSONString(label));
 		return resource;
 	}
 	

@@ -66,7 +66,7 @@ public class JsonAnnotationSerializer extends ASerializer implements ISerializer
 		//annotationJson.put(IPavOntology.createdWith, new JSONString(ann.getTool()!=null?ann.getTool().getUri():""));
 		
 		// These translate null values into blank strings
-		jsonAnnotation.put(IRdfsOntology.label, nullable(ann.getLabel()));	
+		jsonAnnotation.put(IRdfsOntology.rdfLabel, nullable(ann.getLabel()));	
 		jsonAnnotation.put(IPavOntology.lineageUri, nullable(ann.getLineageUri()));
 		jsonAnnotation.put(IPavOntology.versionNumber, nullable(ann.getVersionNumber()));
 		jsonAnnotation.put(IPavOntology.previousVersion, nullable(ann.getPreviousVersion()));

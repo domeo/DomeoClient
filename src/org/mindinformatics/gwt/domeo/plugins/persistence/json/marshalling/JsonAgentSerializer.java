@@ -29,7 +29,7 @@ public class JsonAgentSerializer extends ASerializer implements ISerializer {
 		jsonAgent.put(IDomeoOntology.generalType, new JSONString(agent.getAgentType()));
 		//jsonAgent.put(IDomeoOntology.uuid, nonNullable(agent.getUuid())); // Used???
 		
-		jsonAgent.put(IRdfsOntology.label, nullable(agent.getName()));	
+		jsonAgent.put(IRdfsOntology.rdfLabel, nullable(agent.getName()));	
 		jsonAgent.put(IFoafxOntology.name, nullable(agent.getName()));	
 		jsonAgent.put(IFoafxOntology.homepage, nullable(agent.getHomepage()));	
 		return jsonAgent;

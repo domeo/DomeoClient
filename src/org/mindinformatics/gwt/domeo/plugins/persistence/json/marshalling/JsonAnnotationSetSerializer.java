@@ -85,7 +85,7 @@ public class JsonAnnotationSetSerializer extends ASerializer implements ISeriali
 			annotationSetJson.put(IPavOntology.importedOn, new JSONString(dateFormatter.format(annotationSet.getImportedOn())));
 		}
 		// These translate null values into blank strings
-		annotationSetJson.put(IRdfsOntology.label, nullable(annotationSet.getLabel()));
+		annotationSetJson.put(IRdfsOntology.rdfLabel, nullable(annotationSet.getLabel()));
 		annotationSetJson.put(IDublinCoreTerms.description, nullable(annotationSet.getDescription()));
 		annotationSetJson.put(IPavOntology.lineageUri, nullable(annotationSet.getLineageUri()));
 		annotationSetJson.put(IPavOntology.versionNumber, nullable(annotationSet.getVersionNumber()));

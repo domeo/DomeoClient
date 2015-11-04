@@ -25,7 +25,7 @@ public class JsonQualifierAnnotationSerializer extends JsonAnnotationSerializer 
 		for(int i=0; i<ann.getTerms().size(); i++) {
 			JSONObject term = new JSONObject();
 			term.put(IDomeoOntology.generalId, new JSONString(ann.getTerms().get(i).getUrl()));
-			term.put(IRdfsOntology.label, new JSONString(ann.getTerms().get(i).getLabel()));
+			term.put(IRdfsOntology.rdfLabel, new JSONString(ann.getTerms().get(i).getLabel()));
 			if(ann.getTerms().get(i).getDescription()!=null) 
 				term.put(IDublinCoreTerms.description, new JSONString(ann.getTerms().get(i).getDescription()));
 			if(ann.getTerms().get(i).getSynonyms()!=null) 
@@ -35,7 +35,7 @@ public class JsonQualifierAnnotationSerializer extends JsonAnnotationSerializer 
 			JSONObject resource = new JSONObject();
 			MGenericResource res = ann.getTerms().get(i).getSource();
 			resource.put(IDomeoOntology.generalId, new JSONString(res.getUrl()));
-			resource.put(IRdfsOntology.label, new JSONString(res.getLabel()));
+			resource.put(IRdfsOntology.rdfLabel, new JSONString(res.getLabel()));
 			term.put(IDublinCoreTerms.source, resource);
 			semanticTags.set(i, term);
 		}
