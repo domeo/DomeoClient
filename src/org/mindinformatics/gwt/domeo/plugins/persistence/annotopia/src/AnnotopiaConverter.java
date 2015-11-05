@@ -910,23 +910,14 @@ public class AnnotopiaConverter {
 						MLinkedResource ldr = ResourcesFactory.createTrustedResource(tag.get(IRdfsOntology.id).isString().stringValue(), getRdfLabel(tag), r);
 						qualifier.addTerm(ldr);
 					} else {
-//						dsfsfsd
-//						// TODO Fix multiple qualifiers reload with JSON objects
-//						_domeo.getLogger().debug(this, "QUALIFIER D");
-//						JsArray<JavaScriptObject> tags = annotation.getBodies();
-//						_domeo.getLogger().debug(this, "QUALIFIER E");
-//						for(int k=0; k<tags.length(); k++) {
-//							_domeo.getLogger().debug(this, "QUALIFIER F");
-//							JsonGenericResource gr = ((JsoLinkedDataResource)tags.get(k)).getSource();
-//							_domeo.getLogger().debug(this, "QUALIFIER G");
-//							MGenericResource r = ResourcesFactory.createGenericResource(gr.getUrl(), gr.getLabel());
-//							
-//							MLinkedResource ldr = ResourcesFactory.createTrustedResource(((JsoLinkedDataResource)tags.get(k)).getUrl(), 
-//									((JsoLinkedDataResource)tags.get(k)).getLabel(), r);
-//							ldr.setDescription(((JsoLinkedDataResource)tags.get(k)).getDescription());
-//							//ldr.setSynonyms(tags.get(k).getSynonyms()!=null? tags.get(k).getSynonyms():"");
-//							qualifier.addTerm(ldr);
-//						}
+						JSONArray tags = new JSONArray(annotation.getBodies());
+						for(int k=0; k<tags.size(); k++) {
+							JSONObject tag = (JSONObject) tags.get(k);
+							JSONObject gr = (JSONObject) tag.get(IDublinCoreTerms.source);
+							MGenericResource r = ResourcesFactory.createGenericResource(gr.get(IRdfsOntology.id).isString().stringValue(), getRdfLabel(gr));
+							MLinkedResource ldr = ResourcesFactory.createTrustedResource(tag.get(IRdfsOntology.id).isString().stringValue(), getRdfLabel(tag), r);
+							qualifier.addTerm(ldr);
+						}
 					}
 					
 					if(persist) performAnnotation(qualifier);
