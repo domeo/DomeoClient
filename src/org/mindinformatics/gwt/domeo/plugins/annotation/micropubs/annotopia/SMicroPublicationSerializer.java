@@ -20,6 +20,7 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONValue;
+import com.google.gwt.user.client.Window;
 
 public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements IAnnotopiaSerializer {
 
@@ -117,9 +118,6 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 					}
 				}
 			}	
-
-			body.put(IMicroPublicationsOntology.mpArgues, new JSONString(annotation.getMicroPublication().getArgues().getId()));
-			body.put(IMicroPublicationsOntology.mpAsserts, asserts);
 			
 			if(supportedBy.size()>0) {
 				discourseElement.put(IMicroPublicationsOntology.mpSupportedBy, supportedBy);
@@ -128,6 +126,9 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 				discourseElement.put(IMicroPublicationsOntology.mpChallengedBy, supportedBy);
 			}
 		}
+		
+		body.put(IMicroPublicationsOntology.mpArgues, new JSONString(annotation.getMicroPublication().getArgues().getId()));
+		body.put(IMicroPublicationsOntology.mpAsserts, asserts);
 		
 
 		return body;
