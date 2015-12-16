@@ -123,7 +123,7 @@ public class SMicroPublicationSerializer extends AAnnotopiaSerializer implements
 				discourseElement.put(IMicroPublicationsOntology.mpSupportedBy, supportedBy);
 			}
 			if(challengedBy.size()>0) {
-				discourseElement.put(IMicroPublicationsOntology.mpChallengedBy, supportedBy);
+				discourseElement.put(IMicroPublicationsOntology.mpChallengedBy, challengedBy);
 			}
 		}
 		
