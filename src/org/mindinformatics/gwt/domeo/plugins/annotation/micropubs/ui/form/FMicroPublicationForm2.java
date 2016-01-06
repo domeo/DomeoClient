@@ -756,21 +756,21 @@ public class FMicroPublicationForm2 extends AFormComponent implements IResizable
 			hp1.add(supportedByIcon);
 			hp1.setCellWidth(supportedByIcon, "22px");
 		} else if(relationship.getName().equals(IMicroPublicationsOntology.mpChallengedBy)) {
-			final Image supportedByIcon = new Image(localResources.challengedBy());
-			supportedByIcon.setTitle("Supported By");
-			supportedByIcon.setStyleName(style.link());
-			supportedByIcon.addClickHandler(new ClickHandler() {
+			final Image challengedByIcon = new Image(localResources.challengedBy());
+			challengedByIcon.setTitle("Challenged By");
+			challengedByIcon.setStyleName(style.link());
+			challengedByIcon.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
 					EvidenceRelationshipBubble bubble = new EvidenceRelationshipBubble(
 							_this, _domeo, _item, relationship, "");
-					int x = supportedByIcon.getAbsoluteLeft();
-					int y = supportedByIcon.getAbsoluteTop();
+					int x = challengedByIcon.getAbsoluteLeft();
+					int y = challengedByIcon.getAbsoluteTop();
 					bubble.show(x, y);
 				}
 			});					
-			hp1.add(supportedByIcon);
-			hp1.setCellWidth(supportedByIcon, "22px");
+			hp1.add(challengedByIcon);
+			hp1.setCellWidth(challengedByIcon, "22px");
 		}
 		
 		hp1.add(PubMedCitationPainter.getFullCitation(((MMpReference)relationship.getObjectElement()).getReference(), _domeo));

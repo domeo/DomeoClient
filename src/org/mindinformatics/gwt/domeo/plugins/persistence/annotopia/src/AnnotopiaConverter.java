@@ -1035,7 +1035,7 @@ public class AnnotopiaConverter {
 					getArgument(false, mp, array.get(i));
 				}
 			} else {
-				getArgument(false, mp, json.get(IMicroPublicationsOntology.mpSupportedBy));
+				getArgument(false, mp, json.get(IMicroPublicationsOntology.mpChallengedBy));
 			}
 		}
 	}
@@ -1079,7 +1079,7 @@ public class AnnotopiaConverter {
 	}
 	
 	private void getArgument(boolean support, MMicroPublication mp, JSONValue json) {
-		_domeo.getLogger().debug(this, "Parsing Support " + json.getClass().getName());
+		_domeo.getLogger().debug(this, "Parsing Argument");
 		if(json instanceof JSONString) {
 			mp.addEvidence(getRelationship(support, assertionsCache.get(json.toString())));
 		} else if(json instanceof JSONObject) {
@@ -1148,28 +1148,28 @@ public class AnnotopiaConverter {
 		if(j.containsKey("http://purl.org/vocab/frbr/core#embodimentOf")) {
 			JSONObject json = (JSONObject) j.get("http://purl.org/vocab/frbr/core#embodimentOf");
 			if(json.containsKey(IRdfsOntology.id))
-				publicationReference.setId(json.get(IRdfsOntology.id).toString());
+				publicationReference.setId(json.get(IRdfsOntology.id).isString().stringValue());
 			if(json.containsKey("http://purl.org/spar/fabio#hasPubMedId"))
-				publicationReference.setPubMedId(json.get("http://purl.org/spar/fabio#hasPubMedId").toString());
+				publicationReference.setPubMedId(json.get("http://purl.org/spar/fabio#hasPubMedId").isString().stringValue());
 			if(json.containsKey("http://purl.org/spar/fabio#hasPubMedCentralId"))
-				publicationReference.setPubMedCentralId(json.get("http://purl.org/spar/fabio#hasPubMedCentralId").toString());
+				publicationReference.setPubMedCentralId(json.get("http://purl.org/spar/fabio#hasPubMedCentralId").isString().stringValue());
 			if(json.containsKey("http://prismstandard.org/namespaces/basic/2.0/doi"))
-				publicationReference.setDoi(json.get("http://prismstandard.org/namespaces/basic/2.0/doi").toString());	
+				publicationReference.setDoi(json.get("http://prismstandard.org/namespaces/basic/2.0/doi").isString().stringValue());	
 			if(json.containsKey("http://purl.org/spar/fabio#hasPII"))
-				publicationReference.setPublisherItemId(json.get("http://purl.org/spar/fabio#hasPII").toString());
+				publicationReference.setPublisherItemId(json.get("http://purl.org/spar/fabio#hasPII").isString().stringValue());
 			if(json.containsKey("http://purl.org/dc/terms/title")) {
-				publicationReference.setTitle(json.get("http://purl.org/dc/terms/title").toString());
+				publicationReference.setTitle(json.get("http://purl.org/dc/terms/title").isString().stringValue());
 			}
 			if(json.containsKey("dcterms:title")) {
-				publicationReference.setTitle(json.get("dcterms:title").toString());
+				publicationReference.setTitle(json.get("dcterms:title").isString().stringValue());
 			}
 			if(json.containsKey("http://example.org/authorNames"))
-				publicationReference.setAuthorNames(json.get("http://example.org/authorNames").toString());
+				publicationReference.setAuthorNames(json.get("http://example.org/authorNames").isString().stringValue());
 			if(json.containsKey("http://example.org/publicationInfo"))
-				publicationReference.setJournalPublicationInfo(json.get("http://example.org/publicationInfo").toString());
+				publicationReference.setJournalPublicationInfo(json.get("http://example.org/publicationInfo").isString().stringValue());
 		} else {
 			if(j.containsKey(IMicroPublicationsOntology.mpCitation)) {
-				publicationReference.setUnrecognized(j.get(IMicroPublicationsOntology.mpCitation).toString());
+				publicationReference.setUnrecognized(j.get(IMicroPublicationsOntology.mpCitation).isString().stringValue());
 			}
 		}
 		_domeo.getLogger().debug(this, "Parsed" + COLUMN + PubMedCitationPainter.getFullCitationPlainString(publicationReference, _domeo));
