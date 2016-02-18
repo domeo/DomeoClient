@@ -55,6 +55,8 @@
 			-webkit-transform:rotate(90deg);
 			-moz-transform:rotate(90deg);
 			-o-transform: rotate(90deg);
+			transform: rotate(0deg);
+			transform-origin: left top 0;
 			white-space:nowrap;
 			display:block;
 			bottom:0;
