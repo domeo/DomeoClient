@@ -37,6 +37,8 @@ import org.mindinformatics.gwt.framework.model.agents.ISoftware;
  */
 public class MicroPublicationFactory extends AnnotationFactory {
 
+	private static final String URN_PREFIX = "urn:uuid:";
+	
 	public static MMicroPublicationAnnotation createMicroPublicationAnnotation(
 			MAnnotationSet set, IAgent creator, ISoftware tool, 
 			MGenericResource target, MSelector selector,
@@ -44,7 +46,7 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	{
 		MMicroPublicationAnnotation ann = new MMicroPublicationAnnotation();
 		ann.setLocalId(getLocalId());
-		ann.setUuid("urn:" + getUuid());
+		ann.setUuid(URN_PREFIX + getUuid());
 		ann.setIndividualUri(getUrn(ann.getUuid()));
 		ann.setCreator(creator);
 		ann.setCreatedOn(new Date());
@@ -57,7 +59,7 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	
 	public static MMicroPublication createMicroPublication(MTextQuoteSelector selector) {
 		MMicroPublication mp = new MMicroPublication(selector);
-		mp.setId("urn:" + getUuid());
+		mp.setId(URN_PREFIX + getUuid());
 		return mp;
 	}	
 	
@@ -67,13 +69,13 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	}	
 	
 	public static MMpDataImage createMicroPublicationDataImage(MImageInDocumentSelector imageSelector) {
-		MMpDataImage img = new MMpDataImage("urn:" + getUuid(), imageSelector);
+		MMpDataImage img = new MMpDataImage(URN_PREFIX + getUuid(), imageSelector);
 		return img;
 	}
 	
 	public static MMpRelationship createMicroPublicationRelationship(IAgent creator, MMpElement element, String relationship) {
 		MMpRelationship rel = new MMpRelationship(element, relationship);
-		rel.setId("urn:" + getUuid());
+		rel.setId(URN_PREFIX + getUuid());
 		rel.setCreator(creator);
 		rel.setCreationDate(new Date());
 		return rel;
@@ -105,7 +107,7 @@ public class MicroPublicationFactory extends AnnotationFactory {
 	
 	public static MMpStatement createMicroPublicationStatement() {
 		MMpStatement statement = new MMpStatement();
-		statement.setId("urn:" + getUuid());
+		statement.setId(URN_PREFIX + getUuid());
 		return statement;
 	}
 	

@@ -11,12 +11,9 @@
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
+
   <!-- Specify the paths for translatable code                    -->
   <source path='info'/>
-  <source path='model'/>
-  <source path='service'/>
-  <source path='search'/>
-  <source path='ui'/>
-  <source path='annotopia'/>
-  <source path='serialization'/>
+  <source path='textmine'/>
+  <source path='src'/>
 </module>

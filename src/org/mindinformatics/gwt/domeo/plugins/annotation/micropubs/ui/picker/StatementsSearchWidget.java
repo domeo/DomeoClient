@@ -27,7 +27,11 @@ import org.mindinformatics.gwt.domeo.client.Domeo;
 import org.mindinformatics.gwt.domeo.client.IDomeo;
 import org.mindinformatics.gwt.domeo.model.ICache;
 import org.mindinformatics.gwt.domeo.model.MAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublication;
 import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.model.MMicroPublicationAnnotation;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.service.IMicroPublicationsConnector;
+import org.mindinformatics.gwt.domeo.plugins.annotation.micropubs.service.IRetrieveMicropublicationsHandler;
+import org.mindinformatics.gwt.domeo.plugins.annotopia.micropubs.src.AnnotopiaMicropubsConnector;
 import org.mindinformatics.gwt.domeo.plugins.resource.pubmed.extractors.PubMedDocumentPipeline;
 
 import com.google.gwt.core.client.GWT;
@@ -45,7 +49,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
-public class StatementsSearchWidget extends Composite implements IStatementPaginatedItemsRequestCompleted, IStatementItemsRequestCompleted {
+public class StatementsSearchWidget extends Composite implements IStatementPaginatedItemsRequestCompleted, IStatementItemsRequestCompleted, IRetrieveMicropublicationsHandler {
 
 	public static final String WIDGET_TITLE = "PubMed Search";
 	
@@ -110,7 +114,8 @@ public class StatementsSearchWidget extends Composite implements IStatementPagin
 				}
 				returnMicroPublicationObject(a);
 			} else {
-				Window.alert(typeQuery);
+				IMicroPublicationsConnector micropubsConnector = new AnnotopiaMicropubsConnector(_domeo);
+				micropubsConnector.searchMicropublications(this, typeQuery, textQuery, maxResults, offset);
 				//PubMedManager pubMedManager = PubMedManager.getInstance();
 				//pubMedManager.selectPubMedConnector(_domeo, this);
 				//pubMedManager.searchBibliographicObjects(this, typeQuery, textQuery, maxResults, offset);
@@ -268,5 +273,35 @@ public class StatementsSearchWidget extends Composite implements IStatementPagin
 	public void microPublicationSearchNotCompleted(String message) {
 		resultsContainerPanel.clear();
 		resultsContainerPanel.add(new HTML(message));
+	}
+
+	@Override
+	public void emptyResultSet() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void returnResources(ArrayList<MMicroPublication> microPublications) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void returnResource(MMicroPublication microPublication) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resourceNotFound(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exception(String message) {
+		// TODO Auto-generated method stub
+		
 	}
 }
